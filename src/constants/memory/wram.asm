@@ -409,16 +409,34 @@ wActiveProjectileCount::
 wHasPlacedBomb::
   ds 1 ; C14E
 
-; TODO comment
+; Whether the inventory screen (window) is currently in the process
+; of appearing. (In the original DMG version, this is set to 1 when
+; the window is scrolling either in or out, but in the DX version it's
+; only 1 when the inventory screen is fading in, not out.)
+;
+; Possible values:
+; 0 = Regular interactive handling
+; 1 = Inventory screen is appearing (DMG only: or disappearing)
 wInventoryAppearing::
   ds 1 ; C14F
 
-; Unlabeled
-wC150::
+; Inventory screen (window) scroll direction and scroll increment
+; (remnant from the original DMG game, as the inventory screen
+; doesn't scroll in DX)
+;
+; Contains a signed byte saying how much to increment wWindowY by
+; when wInventoryAppearing is true. Or you could think of it as
+; bit 7 (the sign bit) saying whether it should scroll up (1) or down (0),
+; and the remaining bits containing the increment value.
+;
+; Possible values:
+; $F8 = Scroll up by 8 pixels each frame
+; $08 = Scroll down by 8 pixels each frame
+wSubscreenScrollIncrement::
   ds 1 ; C150
 
 ; Unlabeled
-wC151::
+wInventoryShouldScroll::
   ds 1 ; C151
 
 ; Unlabeled

@@ -2063,7 +2063,7 @@ UpdateBGRegionOrigin::
     ld   [wRoomTransitionState], a                ; $55C6: $EA $24 $C1
     ret                                           ; $55C9: $C9
 
-func_020_55CA::
+FadeOutMusic::
     ldh  a, [hMusicFadeOutTimer]                  ; $55CA: $F0 $A8
     and  a                                        ; $55CC: $A7
     jr   z, .jr_55F0                              ; $55CD: $28 $21
@@ -2357,7 +2357,7 @@ jr_020_58EA:
 
 jr_020_58EC:
     inc  c                                        ; $58EC: $0C
-    jr   z, ret_020_5903                          ; $58ED: $28 $14
+    jr   z, .return                               ; $58ED: $28 $14
 
     inc  e                                        ; $58EF: $1C
     ld   a, e                                     ; $58F0: $7B
@@ -2376,56 +2376,68 @@ jr_020_58EC:
 .jr_5901
     jr   jr_020_58B3                              ; $5901: $18 $B0
 
-ret_020_5903:
+.return:
     ret                                           ; $5903: $C9
 
 InventoryEntryPoint::
     ld   a, [wGameplaySubtype]                    ; $5904: $FA $96 $DB
     JP_TABLE                                      ; $5907
-._00 dw InventoryInitialHandler
-._01 dw InventoryMapFadeOutHandler
-._02 dw InventoryLoad1Handler
-._03 dw InventoryLoad2Handler
-._04 dw InventoryLoad3Handler
-._05 dw InventoryLoad4Handler
-._06 dw InventoryLoad5Handler
-._07 dw InventoryFadeInHandler
-._08 dw InventoryInteractiveHandler
-._09 dw InventoryStatusInHandler
-._0A dw InventoryStatusHandler
-._0B dw InventoryStatusOutHandler
-._0C dw InventoryFadeOutHandler
+._00 dw InventoryInitialHandler     ; GAMEPLAY_INVENTORY_INITIAL
+._01 dw InventoryMapFadeOutHandler  ; GAMEPLAY_INVENTORY_MAP_FADE_OUT 
+._02 dw InventoryLoad1Handler       ; GAMEPLAY_INVENTORY_DELAY1
+._03 dw InventoryLoad2Handler       ; GAMEPLAY_INVENTORY_DELAY2
+._04 dw InventoryLoad3Handler       ; GAMEPLAY_INVENTORY_DELAY3
+._05 dw InventoryLoad4Handler       ; GAMEPLAY_INVENTORY_DELAY4
+._06 dw InventoryLoad5Handler       ; GAMEPLAY_INVENTORY_DELAY5
+._07 dw InventoryFadeInHandler      ; GAMEPLAY_INVENTORY_FADE_IN
+._08 dw InventoryInteractiveHandler ; GAMEPLAY_INVENTORY_INTERACTIVE
+._09 dw InventoryStatusInHandler    ; GAMEPLAY_INVENTORY_STATUS_IN
+._0A dw InventoryStatusHandler      ; GAMEPLAY_INVENTORY_STATUS
+._0B dw InventoryStatusOutHandler   ; GAMEPLAY_INVENTORY_STATUS_OUT
+._0C dw InventoryFadeOutHandler     ; GAMEPLAY_INVENTORY_FADE_OUT
 
 InventoryInitialHandler::
     ldh  a, [hIsGBC]
     and  a
-    jr   z, jr_020_5940                           ; $5925: $28 $19
+    jr   z, .notGBC                               ; $5925: $28 $19
 
+    ; If GBC, store current background and OAM
+    ; palettes in WRAM bank 3
     ld   hl, wBGPal1                              ; $5927: $21 $10 $DC
-    ld   c, $80                                   ; $592A: $0E $80
+    ld   c, $80 ; counter, copy 128 palette bytes ; $592A: $0E $80
+    ; Disable interrupts
     di                                            ; $592C: $F3
 
-.loop_592D
+.copyPalettes
+    ; Select WRAM bank 1
     xor  a                                        ; $592D: $AF
     ldh  [rSVBK], a                               ; $592E: $E0 $70
+    ; Load palette into b
     ld   b, [hl]                                  ; $5930: $46
-    ld   a, $03                                   ; $5931: $3E $03
+    ; Select WRAM bank 3
+    ld   a, 3                                     ; $5931: $3E $03
     ldh  [rSVBK], a                               ; $5933: $E0 $70
+    ; Store palette in WRAM bank 3
     ld   [hl], b                                  ; $5935: $70
+    ; Select next palette and decrease counter
     inc  hl                                       ; $5936: $23
     dec  c                                        ; $5937: $0D
     ld   a, c                                     ; $5938: $79
     and  a                                        ; $5939: $A7
-    jr   nz, .loop_592D                           ; $593A: $20 $F1
+    jr   nz, .copyPalettes                        ; $593A: $20 $F1
 
+    ; Select WRAM bank 1 and enable interrupts
     xor  a                                        ; $593C: $AF
     ldh  [rSVBK], a                               ; $593D: $E0 $70
     ei                                            ; $593F: $FB
 
-jr_020_5940:
+.notGBC:
     call IncrementGameplaySubtype_20              ; $5940: $CD $83 $66
+    ; Fall through and handle next gameplay
+    ; subtype directly this frame
 
 InventoryMapFadeOutHandler::
+    ; Fade to white and fade out music
     call func_1A22                                ; $5943: $CD $22 $1A
     ld   a, [wTransitionSequenceCounter]          ; $5946: $FA $6B $C1
     cp   $04                                      ; $5949: $FE $04
@@ -2434,6 +2446,7 @@ InventoryMapFadeOutHandler::
 
     xor  a                                        ; $594D: $AF
     ld   [wInventoryAppearing], a                 ; $594E: $EA $4F $C1
+    ; Set volume for "inventory appearing" sfx?
     ld   a, $03                                   ; $5951: $3E $03
     ldh  [hVolumeRight], a                        ; $5953: $E0 $A9
     ld   a, $30                                   ; $5955: $3E $30
@@ -2473,7 +2486,7 @@ data_020_5994::
     db   $00
 
 data_020_59C7::
-    ; These are actually indexes in the precious table of bytes that need to be set to 7F to hide items.
+    ; These are actually indexes in the previous table of bytes that need to be set to 7F to hide items.
     ; It uses this offset to write 2x7F byte when an item is not available
     db   $03, $0A, $11, $22, $05, $0C, $13, $1D, $27 ; $59CF
 
@@ -2494,7 +2507,7 @@ InventoryLoad1Handler::
 
     ldh  a, [hIsGBC]                              ; $59DE: $F0 $FE
     and  a                                        ; $59E0: $A7
-    jr   z, inventoryDisplayEntryPoint            ; $59E1: $28 $40
+    jr   z, .inventoryDisplayEntryPoint           ; $59E1: $28 $40
 
 ; GBC Exclusive code
 ; Load 32 bytes from 596A into DC91
@@ -2516,7 +2529,7 @@ InventoryLoad1Handler::
     ld   a, [wIsIndoor]                           ; $59F6: $FA $A5 $DB
     and  a                                        ; $59F9: $A7
     ; start building the inventory
-    jr   z, inventoryDisplayEntryPoint            ; $59FA: $28 $27
+    jr   z, .inventoryDisplayEntryPoint           ; $59FA: $28 $27
 
     ;
     ; Dungeon inventory
@@ -2529,7 +2542,7 @@ InventoryLoad1Handler::
 
     ; Jump ahead if map is greater than MAP_CAVE_B
     cp   MAP_CAVE_B                               ; $5A02: $FE $0A
-    jr   nc, inventoryDisplayEntryPoint           ; $5A04: $30 $1D
+    jr   nc, .inventoryDisplayEntryPoint          ; $5A04: $30 $1D
 .colorDungeonEnd
 
 ; Set BC and E to point to the end of the "Palette Data?" (12 bytes) above
@@ -2554,11 +2567,11 @@ InventoryLoad1Handler::
     ld   [wDrawCommandsAltSize], a                ; $5A20: $EA $90 $DC
 
 ; Palette loading complete, start building inventory
-inventoryDisplayEntryPoint:
+.inventoryDisplayEntryPoint:
     ld   de, wHasFlippers                         ; $5A23: $11 $0C $DB
     ld   bc, $00                                  ; $5A26: $01 $00 $00
 
-inventoryDisplayLoop:
+.inventoryDisplayLoop:
     ; c is the counted
     ld   a, c                                     ; $5A29: $79
     cp   $02                                      ; $5A2A: $FE $02
@@ -2567,39 +2580,39 @@ inventoryDisplayLoop:
     ; Only executed for Trade Sequence items
     ld   a, [wExchangingTradeSequenceItem]        ; $5A2E: $FA $7F $DB
     and  a                                        ; $5A31: $A7
-    jr   nz, overwriteInventoryDisplaySprite      ; $5A32: $20 $23
+    jr   nz, .overwriteInventoryDisplaySprite     ; $5A32: $20 $23
 .tradeSequenceItemEnd
 
     ld   a, c                                     ; $5A34: $79
     cp   $04                                      ; $5A35: $FE $04
-    jr   nz, jr_020_5A4F                          ; $5A37: $20 $16
+    jr   nz, .jr_020_5A4F                         ; $5A37: $20 $16
 
     ; Only executed for dungeon keys
     ld   de, wHasTailKey                          ; $5A39: $11 $11 $DB
     ld   a, [wIsIndoor]                           ; $5A3C: $FA $A5 $DB
     and  a                                        ; $5A3F: $A7
-    jr   z, jr_020_5A4F                           ; $5A40: $28 $0D
+    jr   z, .jr_020_5A4F                          ; $5A40: $28 $0D
 
     ldh  a, [hMapId]                              ; $5A42: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $5A44: $FE $FF
     jr   z, .jr_5A4C                              ; $5A46: $28 $04
 
     cp   $0A                                      ; $5A48: $FE $0A
-    jr   nc, jr_020_5A4F                          ; $5A4A: $30 $03
+    jr   nc, .jr_020_5A4F                         ; $5A4A: $30 $03
 
 .jr_5A4C
     ld   de, wCurrentDungeonItemFlags             ; $5A4C: $11 $CC $DB
 
-jr_020_5A4F:
+.jr_020_5A4F:
     ; Load current inventory display item memory
     ld   a, [de]                                  ; $5A4F: $1A
     cp   $FF                                      ; $5A50: $FE $FF
-    jr   z, overwriteInventoryDisplaySprite       ; $5A52: $28 $03
+    jr   z, .overwriteInventoryDisplaySprite      ; $5A52: $28 $03
 
     and  a                                        ; $5A54: $A7
-    jr   nz, incrementInventoryDisplay            ; $5A55: $20 $1E
+    jr   nz, .incrementInventoryDisplay           ; $5A55: $20 $1E
 
-overwriteInventoryDisplaySprite:
+.overwriteInventoryDisplaySprite:
     ; Push current inventory item to the stack
     push de                                       ; $5A57: $D5
 
@@ -2631,14 +2644,14 @@ overwriteInventoryDisplaySprite:
     pop  de                                       ; $5A74: $D1
 
 ; Increment inventory memory pointer to display next item
-incrementInventoryDisplay:
+.incrementInventoryDisplay:
     inc  de                                       ; $5A75: $13
     inc  c                                        ; $5A76: $0C
 
     ; Loop until all 8 items are handled
     ld   a, c                                     ; $5A77: $79
     cp   $09                                      ; $5A78: $FE $09
-    jr   nz, inventoryDisplayLoop                 ; $5A7A: $20 $AD
+    jr   nz, .inventoryDisplayLoop                ; $5A7A: $20 $AD
 
 
     ld   hl, wDrawCommand                         ; $5A7C: $21 $01 $D6
@@ -2665,19 +2678,19 @@ incrementInventoryDisplay:
     add  hl, de                                   ; $5A9D: $19
     ld   a, [wIsIndoor]                           ; $5A9E: $FA $A5 $DB
     and  a                                        ; $5AA1: $A7
-    jr   z, jr_020_5AD1                           ; $5AA2: $28 $2D
+    jr   z, .jr_020_5AD1                          ; $5AA2: $28 $2D
 
     ldh  a, [hMapId]                              ; $5AA4: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $5AA6: $FE $FF
     jr   z, .jr_5AAE                              ; $5AA8: $28 $04
 
     cp   $0A                                      ; $5AAA: $FE $0A
-    jr   nc, jr_020_5AD1                          ; $5AAC: $30 $23
+    jr   nc, .jr_020_5AD1                         ; $5AAC: $30 $23
 
 .jr_5AAE
     ld   a, [wSmallKeysCount]                     ; $5AAE: $FA $D0 $DB
     and  a                                        ; $5AB1: $A7
-    jr   z, jr_020_5ADE                           ; $5AB2: $28 $2A
+    jr   z, .jr_020_5ADE                          ; $5AB2: $28 $2A
 
     push af                                       ; $5AB4: $F5
     push hl                                       ; $5AB5: $E5
@@ -2697,22 +2710,22 @@ incrementInventoryDisplay:
     ld   [hl], $01                                ; $5ACB: $36 $01
     pop  hl                                       ; $5ACD: $E1
     pop  af                                       ; $5ACE: $F1
-    jr   DrawKeyCounter                           ; $5ACF: $18 $0A
+    jr   .drawKeyCounter                          ; $5ACF: $18 $0A
 
-jr_020_5AD1:
+.jr_020_5AD1:
     ld   a, [wGoldenLeavesCount]                  ; $5AD1: $FA $15 $DB
     ; if no golden leaves
     and  a                                        ; $5AD4: $A7
-    jr   z, jr_020_5ADE                           ; $5AD5: $28 $07
+    jr   z, .jr_020_5ADE                          ; $5AD5: $28 $07
     ; if not slime key
     cp   SLIME_KEY                                ; $5AD7: $FE $06
-    jr   nc, jr_020_5ADE                          ; $5AD9: $30 $03
+    jr   nc, .jr_020_5ADE                         ; $5AD9: $30 $03
 
-DrawKeyCounter:
+.drawKeyCounter:
     add  $B0                                      ; $5ADB: $C6 $B0
     ld   [hl], a                                  ; $5ADD: $77
 
-jr_020_5ADE:
+.jr_020_5ADE:
     ld   a, $32                                   ; $5ADE: $3E $32
     ld   [wDrawCommandsSize], a                   ; $5AE0: $EA $00 $D6
     ld   a, $03                                   ; $5AE3: $3E $03
@@ -2721,7 +2734,7 @@ jr_020_5ADE:
     ldh  [hVolumeLeft], a                         ; $5AE9: $E0 $AA
     jp   label_020_5D34                           ; $5AEB: $C3 $34 $5D
 
-tradingItemPaletteIndexes:
+TradingItemPaletteIndexes:
     db $00  ; TRADING_ITEM_NONE
     db $05  ; TRADING_ITEM_YOSHI_DOLL
     db $02  ; TRADING_ITEM_RIBBON
@@ -2738,6 +2751,7 @@ tradingItemPaletteIndexes:
     db $02  ; TRADING_ITEM_SCALE
     db $05  ; TRADING_ITEM_MAGNIFYING_LENS
 
+; Continue building display of inventory
 InventoryLoad2Handler::
     ldh  a, [hIsGBC]                              ; $5AFD: $F0 $FE
     and  a                                        ; $5AFF: $A7
@@ -2746,7 +2760,7 @@ InventoryLoad2Handler::
     ld   b, $00                                   ; $5B02: $06 $00
     ld   a, [wTradeSequenceItem]                  ; $5B04: $FA $0E $DB
     ld   c, a                                     ; $5B07: $4F
-    ld   hl, tradingItemPaletteIndexes            ; $5B08: $21 $EE $5A
+    ld   hl, TradingItemPaletteIndexes            ; $5B08: $21 $EE $5A
     add  hl, bc                                   ; $5B0B: $09
     ld   a, [hl]                                  ; $5B0C: $7E
     ldh  [hMultiPurpose0], a                      ; $5B0D: $E0 $D7
@@ -2875,7 +2889,7 @@ func_020_5BA8::
     ld   [hl+], a                                 ; $5BB7: $22
     ret                                           ; $5BB8: $C9
 
-; Configure request for loading inventory plette
+; Configure request for loading inventory palette
 func_020_5BB9::
     push bc                                       ; $5BB9: $C5
     ld   a, [wDrawCommandsAltSize]                ; $5BBA: $FA $90 $DC
@@ -2918,7 +2932,7 @@ func_020_5BB9::
     ld   a, $02                                   ; $5BF3: $3E $02
     ld   [hl+], a                                 ; $5BF5: $22
     ld   [hl+], a                                 ; $5BF6: $22
-    jr   jr_020_5C10                              ; $5BF7: $18 $17
+    jr   .jr_020_5C10                             ; $5BF7: $18 $17
 
 .jr_5BF9
     cp   $18                                      ; $5BF9: $FE $18
@@ -2932,7 +2946,7 @@ func_020_5BB9::
     ld   [hl+], a                                 ; $5C05: $22
     ld   a, $03                                   ; $5C06: $3E $03
     ld   [hl+], a                                 ; $5C08: $22
-    jr   jr_020_5C10                              ; $5C09: $18 $05
+    jr   .jr_020_5C10                             ; $5C09: $18 $05
 
 .jr_5C0B
     ld   a, [de]                                  ; $5C0B: $1A
@@ -2941,7 +2955,7 @@ func_020_5BB9::
     ld   a, [de]                                  ; $5C0E: $1A
     ld   [hl+], a                                 ; $5C0F: $22
 
-jr_020_5C10:
+.jr_020_5C10:
     xor  a                                        ; $5C10: $AF
     ld   [hl], a                                  ; $5C11: $77
     pop  bc                                       ; $5C12: $C1
@@ -3161,6 +3175,7 @@ label_020_5D34:
 InventoryLoad4Handler::
     call LCDOff                                   ; $5D52: $CD $CF $28
     call ReloadColorDungeonNpcTiles               ; $5D55: $CD $D1 $3F
+    ; Turn on LCD
     ld   a, [wLCDControl]                         ; $5D58: $FA $FD $D6
     ldh  [rLCDC], a                               ; $5D5B: $E0 $40
     call IncrementGameplaySubtype_20              ; $5D5D: $CD $83 $66
@@ -3232,7 +3247,7 @@ InventoryLoad5Handler::
     ld   [wPaletteUnknownE], a                    ; $5E20: $EA $D5 $DD
     ldh  a, [hIsGBC]                              ; $5E23: $F0 $FE
     and  a                                        ; $5E25: $A7
-    jr   z, jr_020_5E6D                           ; $5E26: $28 $45
+    jr   z, .jr_020_5E6D                          ; $5E26: $28 $45
 
     ld   bc, InventoryPalettes                    ; $5E28: $01 $61 $5D
     ld   hl, wBGPal1                              ; $5E2B: $21 $10 $DC
@@ -3258,7 +3273,7 @@ InventoryLoad5Handler::
     add  hl, de                                   ; $5E48: $19
     ld   a, [hl]                                  ; $5E49: $7E
     and  a                                        ; $5E4A: $A7
-    jr   z, jr_020_5E6D                           ; $5E4B: $28 $20
+    jr   z, .jr_020_5E6D                          ; $5E4B: $28 $20
 
     sla  a                                        ; $5E4D: $CB $27
     ld   e, a                                     ; $5E4F: $5F
@@ -3286,7 +3301,7 @@ InventoryLoad5Handler::
     ldh  [rSVBK], a                               ; $5E6A: $E0 $70
     ei                                            ; $5E6C: $FB
 
-jr_020_5E6D:
+.jr_020_5E6D
     xor  a                                        ; $5E6D: $AF
     ld   [wTransitionSequenceCounter], a          ; $5E6E: $EA $6B $C1
     call IncrementGameplaySubtype_20              ; $5E71: $CD $83 $66
@@ -4081,7 +4096,8 @@ jr_020_63A2:
     and  a                                        ; $63A5: $A7
     jr   z, .jr_63AB                              ; $63A6: $28 $03
 
-    ld   hl, wDynamicOAMBuffer+$6C                ; $63A8: $21 $9C $C0
+    ; Look at the last entry in wDynamicOAMBuffer
+    ld   hl, wDynamicOAMBuffer + (27 * sizeof_OAM_ATTRS) ; $63A8: $21 $9C $C0
 
 .jr_63AB
     ld   a, [wWindowY]                            ; $63AB: $FA $9A $DB
@@ -4472,7 +4488,7 @@ jr_020_6628:
     ld   a, $07                                   ; $663D: $3E $07
     ld   [rWX], a                                 ; $663F: $E0 $4B
     ld   a, $08                                   ; $6641: $3E $08
-    ld   [wC150], a                               ; $6643: $EA $50 $C1
+    ld   [wSubscreenScrollIncrement], a           ; $6643: $EA $50 $C1
     ld   a, $07                                   ; $6646: $3E $07
     ldh  [hVolumeRight], a                        ; $6648: $E0 $A9
     ld   a, $70                                   ; $664A: $3E $70
@@ -4676,7 +4692,7 @@ Data_020_6A28::
 func_020_6A30::
     ldh  a, [hIsGBC]                              ; $6A30: $F0 $FE
     and  a                                        ; $6A32: $A7
-    jp   z, label_020_6B81                        ; $6A33: $CA $81 $6B
+    jp   z, IgnorePaletteChange_DMG               ; $6A33: $CA $81 $6B
 
     ld   a, e                                     ; $6A36: $7B
     cp   $03                                      ; $6A37: $FE $03
@@ -4782,7 +4798,7 @@ func_020_6A68::
 func_020_6AC1::
     ldh  a, [hIsGBC]                              ; $6AC1: $F0 $FE
     and  a                                        ; $6AC3: $A7
-    jp   z, label_020_6B81                        ; $6AC4: $CA $81 $6B
+    jp   z, IgnorePaletteChange_DMG               ; $6AC4: $CA $81 $6B
 
     ld   a, e                                     ; $6AC7: $7B
     cp   $06                                      ; $6AC8: $FE $06
@@ -4930,7 +4946,7 @@ jr_020_6B5C:
     ld   [wPaletteDataFlags], a                   ; $6B7E: $EA $D1 $DD
 
 ; Jumped to when running on DMG: don't do anything with palettes
-label_020_6B81:
+IgnorePaletteChange_DMG:
     xor  a                                        ; $6B81: $AF
     ld   [wPaletteUnknownE], a                    ; $6B82: $EA $D5 $DD
     ret                                           ; $6B85: $C9
@@ -4991,7 +5007,7 @@ IntroColorModifierTable::
 UpdateIntroSeaBGPalettes::
     ldh  a, [hIsGBC]                              ; $6BA4: $F0 $FE
     and  a                                        ; $6BA6: $A7
-    jp   z, label_020_6B81                        ; $6BA7: $CA $81 $6B
+    jp   z, IgnorePaletteChange_DMG               ; $6BA7: $CA $81 $6B
 
     ld   a, [wIntroSubTimer]                      ; $6BAA: $FA $02 $D0
     and  a                                        ; $6BAD: $A7
@@ -5066,7 +5082,7 @@ func_020_6BDC::
 LoadFileMenuBG::
     ldh  a, [hIsGBC]                              ; $6C00: $F0 $FE
     and  a                                        ; $6C02: $A7
-    jp   z, label_020_6B81                        ; $6C03: $CA $81 $6B
+    jp   z, IgnorePaletteChange_DMG               ; $6C03: $CA $81 $6B
 
     ld   c, $80                                   ; $6C06: $0E $80
     ld   hl, wBGPal1                              ; $6C08: $21 $10 $DC
@@ -5134,7 +5150,7 @@ CopyLinkTunicPalette::
 func_020_6C4F::
     ldh  a, [hIsGBC]                              ; $6C4F: $F0 $FE
     and  a                                        ; $6C51: $A7
-    jp   z, label_020_6B81                        ; $6C52: $CA $81 $6B
+    jp   z, IgnorePaletteChange_DMG               ; $6C52: $CA $81 $6B
 
     ld   a, [wC16C]                               ; $6C55: $FA $6C $C1
     and  $01                                      ; $6C58: $E6 $01
@@ -5162,7 +5178,7 @@ jr_020_6C76:
 func_020_6C7A::
     ldh  a, [hIsGBC]                              ; $6C7A: $F0 $FE
     and  a                                        ; $6C7C: $A7
-    jp   z, label_020_6B81                        ; $6C7D: $CA $81 $6B
+    jp   z, IgnorePaletteChange_DMG               ; $6C7D: $CA $81 $6B
 
     ld   a, [wC16C]                               ; $6C80: $FA $6C $C1
     and  $01                                      ; $6C83: $E6 $01

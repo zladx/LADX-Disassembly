@@ -3979,7 +3979,7 @@ Data_002_5937::
 
 ; Execute active room events, and do some other stuff
 label_002_593B:
-    ; If not dialog, no inventory, no map transition, return
+    ; If not dialog, no subscreen, no map transition, return
     ld   hl, wDialogState                         ; $593B: $21 $9F $C1
     ld   a, [wRoomTransitionState]                ; $593E: $FA $24 $C1
     or   [hl]                                     ; $5941: $B6
@@ -4638,21 +4638,24 @@ func_002_60E0::
 
     ld   a, [wDialogState]                        ; $60FB: $FA $9F $C1
     and  a                                        ; $60FE: $A7
-    jp   nz, label_002_61F5                       ; $60FF: $C2 $F5 $61
+    jp   nz, label_002_61E7.inventoryFullyClosed2 ; $60FF: $C2 $F5 $61
 
     ld   a, [wRoomTransitionState]                ; $6102: $FA $24 $C1
     and  a                                        ; $6105: $A7
     ret  nz                                       ; $6106: $C0
 
-    ld   a, [wInventoryAppearing]                 ; Handles subscreen transition state?
+    ; Handles subscreen transition state
+    ld   a, [wInventoryAppearing]
     and  a                                        ; $610A: $A7
-    jp   nz, label_002_61A9                       ; $610B: $C2 $A9 $61
+    jp   nz, .scrollSubscreen                     ; $610B: $C2 $A9 $61
 
-    ldh  a, [hPressedButtonsMask]                 ; Checks if map should be opened?
+    ; Checks if map should be opened
+    ldh  a, [hPressedButtonsMask]
     and  J_SELECT                                 ; $6110: $E6 $40
     jp   nz, label_002_61E7                       ; $6112: $C2 $E7 $61
 
-    ldh  a, [hJoypadState]                        ; Checks if subscreen should be opened?
+    ; Checks if subscreen should be opened?
+    ldh  a, [hJoypadState]
     and  J_START                                  ; $6117: $E6 $80
     jp   z, label_002_61E7                        ; $6119: $CA $E7 $61
 
@@ -4690,52 +4693,69 @@ ENDC
 
     ld   a, $01                                   ; $614B: $3E $01
     ld   [wInventoryAppearing], a                 ; $614D: $EA $4F $C1
-    ld   [wC151], a                               ; $6150: $EA $51 $C1
+    ld   [wInventoryShouldScroll], a              ; $6150: $EA $51 $C1
     ld   a, JINGLE_CLOSE_INVENTORY                ; $6153: $3E $12
     ldh  [hJingle], a                             ; $6155: $E0 $F2
-    ld   a, [wC150]                               ; $6157: $FA $50 $C1
+    ld   a, [wSubscreenScrollIncrement]           ; $6157: $FA $50 $C1
+    ; Two's complement; flip wSubscreenScrollIncrement
+    ; from 8 ($08) to -8 ($F8) or vice versa
     cpl                                           ; $615A: $2F
     inc  a                                        ; $615B: $3C
-    ld   [wC150], a                               ; $615C: $EA $50 $C1
+    ld   [wSubscreenScrollIncrement], a           ; $615C: $EA $50 $C1
+    ; Check if wSubscreenScrollIncrement is now positive, ie. the subscreen
+    ; should scroll down (ie. it should close). This will never
+    ; be true in DX, because when the subscreen is open
+    ; we will never be at this point! Instead, it sets wGameplayType
+    ; here and handles the rest of the subscreen with 
+    ; InventoryHandler.
     and  $80                                      ; POI: Zeroing this restores the scroll up/down subscreen????
-    jr   z, jr_002_619F                           ; $6161: $28 $3C
+    jr   z, .subscreenClosing                     ; $6161: $28 $3C
 
+    ; Subscreen should open
     xor  a                                        ; $6163: $AF
     ld   [wTransitionSequenceCounter], a          ; $6164: $EA $6B $C1
     ld   [wC16C], a                               ; $6167: $EA $6C $C1
     ldh  [hPressedButtonsMask], a                 ; $616A: $E0 $CB
     ldh  [hJoypadState], a                        ; $616C: $E0 $CC
+    ; Set wGameplaySubtype to GAMEPLAY_INVENTORY_INITIAL
+    ; which means that after this subroutine returns,
+    ; InventoryHandler will take care of the rest of the
+    ; steps needed to open the subscreen
     ld   [wGameplaySubtype], a                    ; $616E: $EA $96 $DB
     ld   a, GAMEPLAY_INVENTORY                    ; $6171: $3E $0C
     ld   [wGameplayType], a                       ; $6173: $EA $95 $DB
     ld   a, JINGLE_OPEN_INVENTORY                 ; $6176: $3E $11
     ldh  [hJingle], a                             ; $6178: $E0 $F2
     xor  a                                        ; $617A: $AF
-    ld   [wC151], a                               ; $617B: $EA $51 $C1
+    ld   [wInventoryShouldScroll], a              ; $617B: $EA $51 $C1
     ld   a, $0B                                   ; $617E: $3E $0B
     ld   [wC154], a                               ; $6180: $EA $54 $C1
     ld   a, [wIsIndoor]                           ; $6183: $FA $A5 $DB
     and  a                                        ; $6186: $A7
     ld   a, TILESET_LOAD_INVENTORY                ; $6187: $3E $07
-    jr   z, jr_002_619C                           ; Partially determines if subscreen dungeon map should be drawn
+    ; Partially determines if subscreen dungeon map should be drawn
+    jr   z, .loadTileSet
 
     ldh  a, [hMapId]                              ; $618B: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $618D: $FE $FF
-    jr   z, .jr_6197                              ; $618F: $28 $06
+    jr   z, .loadMiniMap                          ; $618F: $28 $06
 
     cp   MAP_WINDFISHS_EGG                        ; $6191: $FE $08
     ld   a, TILESET_LOAD_INVENTORY                ; $6193: $3E $07
-    jr   nc, jr_002_619C                          ; $6195: $30 $05
+    jr   nc, .loadTileSet                         ; $6195: $30 $05
 
-.jr_6197
+.loadMiniMap
     call LoadMinimap                              ; $6197: $CD $09 $67
     ld   a, TILESET_LOAD_DUNGEON_MINIMAP          ; $619A: $3E $02
 
-jr_002_619C:
+.loadTileSet
     ldh  [hNeedsUpdatingBGTiles], a               ; $619C: $E0 $90
     ret                                           ; $619E: $C9
 
-jr_002_619F:
+.subscreenClosing:
+    ; Subscreen should close
+    ; This code is never executed on DX, handled by
+    ; InventoryHandler instead
     ld   a, $07                                   ; $619F: $3E $07
     ldh  [hVolumeRight], a                        ; $61A1: $E0 $A9
     ld   a, $70                                   ; $61A3: $3E $70
@@ -4743,8 +4763,9 @@ jr_002_619F:
     pop  af                                       ; $61A7: $F1
     ret                                           ; $61A8: $C9
 
-label_002_61A9:
-    ld   a, [wC151]                               ; $61A9: $FA $51 $C1
+; Actually scroll the subscreen
+.scrollSubscreen:
+    ld   a, [wInventoryShouldScroll]              ; $61A9: $FA $51 $C1
     and  a                                        ; $61AC: $A7
     jr   nz, jr_002_61C6                          ; $61AD: $20 $17
 
@@ -4752,7 +4773,7 @@ label_002_61A9:
     and  a                                        ; $61B2: $A7
     jr   nz, .jr_61B9                             ; $61B3: $20 $04
 
-    ld   hl, wC151                                ; $61B5: $21 $51 $C1
+    ld   hl, wInventoryShouldScroll               ; $61B5: $21 $51 $C1
     inc  [hl]                                     ; $61B8: $34
 
 .jr_61B9
@@ -4765,42 +4786,48 @@ func_002_61BA::
     jp   AnimateEntitiesAndRestoreBank02          ; $61C3: $C3 $05 $0F
 
 jr_002_61C6:
-    ld   a, [wC150]                               ; $61C6: $FA $50 $C1
+    ; Get the increment value for the scrolling subscreen
+    ; and apply it to wWindowY
+    ld   a, [wSubscreenScrollIncrement]           ; $61C6: $FA $50 $C1
     ld   hl, wWindowY                             ; $61C9: $21 $9A $DB
     add  [hl]                                     ; $61CC: $86
     ld   [hl], a                                  ; $61CD: $77
+    ; Is the window/subscreen now at the bottom of the screen?
     cp   $80                                      ; $61CE: $FE $80
-    jr   z, .jr_61DE                              ; $61D0: $28 $0C
+    jr   z, .subscreenClosed                      ; $61D0: $28 $0C
 
+    ; Is the window/subscreen now at the top of the screen?
     cp   $00                                      ; $61D2: $FE $00
-    jr   nz, jr_002_61E4                          ; $61D4: $20 $0E
+    jr   nz, .subscreenScrolling                  ; $61D4: $20 $0E
 
+    ; Subscreen fully open:
     ld   a, $03                                   ; $61D6: $3E $03
     ldh  [hVolumeRight], a                        ; $61D8: $E0 $A9
     ld   a, $30                                   ; $61DA: $3E $30
     ldh  [hVolumeLeft], a                         ; $61DC: $E0 $AA
 
-.jr_61DE
+.subscreenClosed
     xor  a                                        ; $61DE: $AF
     ld   [wInventoryAppearing], a                 ; $61DF: $EA $4F $C1
-    jr   label_002_61E7                           ; $61E2: $18 $03
+    jr   label_002_61E7                      ; .inventoryNotScrolling                           ; $61E2: $18 $03
 
-jr_002_61E4:
+.subscreenScrolling:
     call func_002_61BA                            ; $61E4: $CD $BA $61
 
+;.inventoryNotScrolling:
 label_002_61E7:
     ld   a, [wWindowY]                            ; $61E7: $FA $9A $DB
     cp   $80                                      ; $61EA: $FE $80
-    jr   z, label_002_61F5                        ; $61EC: $28 $07
+    jr   z, .inventoryFullyClosed2                ; $61EC: $28 $07
 
     ld   a, [wInventoryAppearing]                 ; $61EE: $FA $4F $C1
     and  a                                        ; $61F1: $A7
-    jr   nz, .jr_61F4                             ; $61F2: $20 $00
+    jr   nz, .inventoryScrolling2                 ; $61F2: $20 $00
 
-.jr_61F4
+.inventoryScrolling2
     pop  af                                       ; $61F4: $F1
 
-label_002_61F5:
+.inventoryFullyClosed2:
     ld   a, [wDialogState]                        ; $61F5: $FA $9F $C1
     and  ~DIALOG_BOX_BOTTOM_FLAG                  ; $61F8: $E6 $7F
     jr   z, .dialogClosed                         ; $61FA: $28 $07

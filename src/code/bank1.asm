@@ -824,13 +824,17 @@ func_001_5888::
     cp   $0C                                      ; $5891: $FE $0C
     jr   nz, .loop_588D                           ; $5893: $20 $F8
 
-func_001_5895::
+InitializeInventoryBar::
+    ; Set the window to the bottom of the screen
     ld   a, $80                                   ; $5895: $3E $80
     ld   [wWindowY], a                            ; $5897: $EA $9A $DB
     ld   a, $07                                   ; $589A: $3E $07
     ld   [rWX], a                                 ; $589C: $E0 $4B
+    ; Set wSubscreenScrollIncrement to be $08 (closing/closed), so it's
+    ; ready to be flipped to $F8 if inventory is opened
     ld   a, $08                                   ; $589E: $3E $08
-    ld   [wC150], a                               ; $58A0: $EA $50 $C1
+    ld   [wSubscreenScrollIncrement], a           ; $58A0: $EA $50 $C1
+    ; Inventory is not currently appearing
     xor  a                                        ; $58A3: $AF
     ld   [wInventoryAppearing], a                 ; $58A4: $EA $4F $C1
 

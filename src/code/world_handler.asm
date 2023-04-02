@@ -333,7 +333,7 @@ GameplayWorldLoad6Handler::
     ; Load audio track
     ;
 
-    call func_001_5895                            ; $4507: $CD $95 $58
+    call InitializeInventoryBar                   ; $4507: $CD $95 $58
 
     ;
     ; Finish preparations

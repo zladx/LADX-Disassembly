@@ -3041,7 +3041,8 @@ ENDC
 
 func_1A22::
     callsb func_020_6C4F                          ; $1A22: $3E $20 $EA $00 $21 $CD $4F $6C
-    callsb func_020_55CA                          ; $1A2A: $3E $20 $EA $00 $21 $CD $CA $55
+    callsb FadeOutMusic                           ; $1A2A: $3E $20 $EA $00 $21 $CD $CA $55
+    ; Return to previous ROM bank callsite
     ld   a, [wCurrentBank]                        ; $1A32: $FA $AF $DB
     ld   [rSelectROMBank], a                      ; $1A35: $EA $00 $21
     ret                                           ; $1A38: $C9

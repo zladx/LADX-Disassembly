@@ -519,8 +519,8 @@ FileCreationInit1Handler::
     ld   [wTilesetToLoad], a                      ; $4A16: $EA $FE $D6
     xor  a                                        ; $4A19: $AF
     ld   [wDBA8], a                               ; $4A1A: $EA $A8 $DB
-    ld   [wDBA9], a                               ; $4A1D: $EA $A9 $DB
-    ld   [wDBAA], a                               ; $4A20: $EA $AA $DB
+    ld   [wNameEntryCurrentChar], a               ; $4A1D: $EA $A9 $DB
+    ld   [wSaveSlotNameCharIndex], a              ; $4A20: $EA $AA $DB
     ret                                           ; $4A23: $C9
 
 FileCreationInit2Handler::
@@ -790,7 +790,7 @@ jr_001_4C21::
     call MoveSelect.playMoveSelectionJingle       ; $4C21: $CD $AE $6B
     bit  1, a                                     ; $4C24: $CB $4F
     jr   nz, .jr_4C34                             ; $4C26: $20 $0C
-    ld   a, [wDBA9]                               ; $4C28: $FA $A9 $DB
+    ld   a, [wNameEntryCurrentChar]               ; $4C28: $FA $A9 $DB
     add  a, $01                                   ; $4C2B: $C6 $01
     cp   NameEntryCharacterTableSize              ; $4C2D: $FE $40
     jr   c, jr_001_4C5E                           ; $4C2F: $38 $2D
@@ -798,7 +798,7 @@ jr_001_4C21::
     jr   jr_001_4C5E                              ; $4C32: $18 $2A
 
 .jr_4C34::
-    ld   a, [wDBA9]                               ; $4C34: $FA $A9 $DB
+    ld   a, [wNameEntryCurrentChar]               ; $4C34: $FA $A9 $DB
     sub  a, $01                                   ; $4C37: $D6 $01
     cp   $FF                                      ; $4C39: $FE $FF
     jr   nz, jr_001_4C5E                          ; $4C3B: $20 $21
@@ -809,31 +809,31 @@ jr_001_4C41::
     call MoveSelect.playMoveSelectionJingle       ; $4C41: $CD $AE $6B
     bit  2, a                                     ; $4C44: $CB $57
     jr   z, .jr_4C53                              ; $4C46: $28 $0B
-    ld   a, [wDBA9]                               ; $4C48: $FA $A9 $DB
+    ld   a, [wNameEntryCurrentChar]               ; $4C48: $FA $A9 $DB
     sub  a, $10                                   ; $4C4B: $D6 $10
     jr   nc, jr_001_4C5E                          ; $4C4D: $30 $0F
     add  a, NameEntryCharacterTableSize           ; $4C4F: $C6 $40
     jr   jr_001_4C5E                              ; $4C51: $18 $0B
 
 .jr_4C53::
-    ld   a, [wDBA9]                               ; $4C53: $FA $A9 $DB
+    ld   a, [wNameEntryCurrentChar]               ; $4C53: $FA $A9 $DB
     add  a, $10                                   ; $4C56: $C6 $10
     cp   NameEntryCharacterTableSize              ; $4C58: $FE $40
     jr   c, jr_001_4C5E                           ; $4C5A: $38 $02
     sub  a, NameEntryCharacterTableSize           ; $4C5C: $D6 $40
 
 jr_001_4C5E::
-    ld   [wDBA9], a                               ; $4C5E: $EA $A9 $DB
+    ld   [wNameEntryCurrentChar], a               ; $4C5E: $EA $A9 $DB
     jr   jr_001_4C63                              ; $4C61: $18 $00
 
 jr_001_4C63::
-    ld   a, [wDBA9]                               ; $4C63: $FA $A9 $DB
+    ld   a, [wNameEntryCurrentChar]               ; $4C63: $FA $A9 $DB
     ld   hl, Data_001_4B70                        ; $4C66: $21 $70 $4B
     ld   c, a                                     ; $4C69: $4F
     ld   b, $00                                   ; $4C6A: $06 $00
     add  hl, bc                                   ; $4C6C: $09
     ld   e, [hl]                                  ; $4C6D: $5E
-    ld   a, [wDBA9]                               ; $4C6E: $FA $A9 $DB
+    ld   a, [wNameEntryCurrentChar]               ; $4C6E: $FA $A9 $DB
     ld   hl, Data_001_4B30                        ; $4C71: $21 $30 $4B
     ld   c, a                                     ; $4C74: $4F
     ld   b, $00                                   ; $4C75: $06 $00
@@ -852,17 +852,17 @@ jr_001_4C63::
     ld   [hl], a                                  ; $4C88: $77
     ret                                           ; $4C89: $C9
 
-func_001_4C8A::                            ; "Enter Name" screen
-    ldh  a, [hJoypadState]              ; Check inputs... ; $4C8A: $F0 $CC
-    and  J_A | J_B                      ; Was A or B pushed? ; $4C8C: $E6 $30
-    jr   z, jr_001_4CB7                  ; If no, bail ; $4C8E: $28 $27
-    bit  5, a                           ; Was B pushed? ; $4C90: $CB $6F
-    jr   nz, .jr_4CA7                 ; If yes, backspace ; $4C92: $20 $13
-    call PlayValidationJingle           ; Otherwise, A was pushed ; $4C94: $CD $BE $49
-    call func_001_4CDA                     ; so add the current letter ; $4C97: $CD $DA $4C
-    ld   a, [wDBAA]                               ; $4C9A: $FA $AA $DB
+func_001_4C8A:: ; "Enter Name" screen
+    ldh  a, [hJoypadState] ; Check inputs...      ; $4C8A: $F0 $CC
+    and  J_A | J_B ; Was A or B pushed?           ; $4C8C: $E6 $30
+    jr   z, jr_001_4CB7 ; If no, bail             ; $4C8E: $28 $27
+    bit  J_BIT_B, a ; Was B pushed?               ; $4C90: $CB $6F
+    jr   nz, .jr_4CA7 ; If yes, backspace         ; $4C92: $20 $13
+    call PlayValidationJingle ; Otherwise, A was pushed ; $4C94: $CD $BE $49
+    call func_001_4CDA ; so add the current letter ; $4C97: $CD $DA $4C
+    ld   a, [wSaveSlotNameCharIndex]              ; $4C9A: $FA $AA $DB
     add  a, $01                                   ; $4C9D: $C6 $01
-    cp   $05                            ; Prevent cursor from going > 5th place ; $4C9F: $FE $05
+    cp   NAME_LENGTH ; Prevent cursor from going > 5th place ; $4C9F: $FE $05
     jr   c, jr_001_4CB4                           ; $4CA1: $38 $11
     ld   a, $04                                   ; $4CA3: $3E $04
     jr   jr_001_4CB4                              ; $4CA5: $18 $0D
@@ -870,17 +870,17 @@ func_001_4C8A::                            ; "Enter Name" screen
 .jr_4CA7::
     ; B button when inputting filename
     call PlayValidationJingle                     ; $4CA7: $CD $BE $49
-    ld   a, [wDBAA]                               ; $4CAA: $FA $AA $DB
+    ld   a, [wSaveSlotNameCharIndex]              ; $4CAA: $FA $AA $DB
     sub  a, $01                                   ; $4CAD: $D6 $01
     cp   $FF                                      ; $4CAF: $FE $FF
     jr   nz, jr_001_4CB4                          ; $4CB1: $20 $01
-    xor  a                              ; Prevent cursor from going < 1st place ; $4CB3: $AF
+    xor  a ; Prevent cursor from going < 1st place ; $4CB3: $AF
 
 jr_001_4CB4::
-    ld   [wDBAA], a                               ; $4CB4: $EA $AA $DB
+    ld   [wSaveSlotNameCharIndex], a              ; $4CB4: $EA $AA $DB
 
 jr_001_4CB7::
-    ld   a, [wDBAA]                               ; $4CB7: $FA $AA $DB
+    ld   a, [wSaveSlotNameCharIndex]              ; $4CB7: $FA $AA $DB
     ld   hl, Data_001_4BB0                        ; $4CBA: $21 $B0 $4B
     ld   c, a                                     ; $4CBD: $4F
     ld   b, $00                                   ; $4CBE: $06 $00
@@ -905,7 +905,7 @@ jr_001_4CB7::
     ret                                           ; $4CD9: $C9
 
 func_001_4CDA::
-    ld   a, [wDBA9]                               ; $4CDA: $FA $A9 $DB
+    ld   a, [wNameEntryCurrentChar]               ; $4CDA: $FA $A9 $DB
     ld   c, a                                     ; $4CDD: $4F
     ld   b, $00                                   ; $4CDE: $06 $00
     ld   hl, NameEntryCharacterTable              ; $4CE0: $21 $B5 $4B
@@ -920,7 +920,7 @@ func_001_4CDA::
     ld   c, a                                     ; $4CEF: $4F
     ld   hl, wSaveSlot1Name                       ; $4CF0: $21 $80 $DB
     add  hl, bc                                   ; $4CF3: $09
-    ld   a, [wDBAA]                               ; $4CF4: $FA $AA $DB
+    ld   a, [wSaveSlotNameCharIndex]              ; $4CF4: $FA $AA $DB
     ld   c, a                                     ; $4CF7: $4F
     add  hl, bc                                   ; $4CF8: $09
     ld   [hl], e                                  ; $4CF9: $73
@@ -936,9 +936,9 @@ func_001_4CDA::
 
 
 FileDeletionEntryPoint::
-    call func_5DC0                                ; $4CFB: $CD $C0 $5D ; $4CFB: $CD $C0 $5D
-    ld   a, [wGameplaySubtype]                    ; $4CFE: $FA $96 $DB ; $4CFE: $FA $96 $DB
-    JP_TABLE                                      ; $4D01 ; $4D01: $C7
+    call func_5DC0                                ; $4CFB: $CD $C0 $5D
+    ld   a, [wGameplaySubtype]                    ; $4CFE: $FA $96 $DB
+    JP_TABLE                                      ; $4D01: $C7
 ._00 dw FileDeletionState0Handler                 ; $4D02
 ._01 dw FileDeletionState1Handler                 ; $4D04
 ._02 dw FileDeletionState2Handler                 ; $4D06
@@ -1222,16 +1222,16 @@ ELSE
 ENDC
 
 .loop
-    ld   a, [de]                                  ; $4E5D: $1A ; $4E5D: $1A
-    inc  de                                       ; $4E5E: $13 ; $4E5E: $13
-    ld   [hl+], a                                 ; $4E5F: $22 ; $4E5F: $22
-    dec  c                                        ; $4E60: $0D ; $4E60: $0D
+    ld   a, [de]                                  ; $4E5D: $1A
+    inc  de                                       ; $4E5E: $13
+    ld   [hl+], a                                 ; $4E5F: $22
+    dec  c                                        ; $4E60: $0D
 IF LANG_EN
-    ld   a, c                                     ; $4E61: $79 ; $4E61: $79
-    cp   -1                                       ; $4E62: $FE $FF ; $4E62: $FE $FF
+    ld   a, c                                     ; $4E61: $79
+    cp   -1                                       ; $4E62: $FE $FF
 ENDC
-    jr   nz, .loop                                ; $4E64: $20 $F7 ; $4E64: $20 $F7
-    ret                                           ; $4E66: $C9 ; $4E66: $C9
+    jr   nz, .loop                                ; $4E64: $20 $F7
+    ret                                           ; $4E66: $C9
 ENDC
 
 jr_001_4E67::

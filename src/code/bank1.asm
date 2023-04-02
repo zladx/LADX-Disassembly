@@ -2385,7 +2385,7 @@ func_001_6162::
     ld   [rOBP1], a                               ; $6179: $E0 $49
     ldh  [hBaseScrollY], a                        ; $617B: $E0 $97
     ldh  [hBaseScrollX], a                        ; $617D: $E0 $96
-    ld   [hSwitchBlocksState], a                  ; $617F: $EA $FB $D6
+    ld   [wSwitchBlocksState], a                  ; $617F: $EA $FB $D6
     ld   [wSwitchableObjectAnimationStage], a     ; $6182: $EA $F8 $D6
     ld   a, $18                                   ; $6185: $3E $18
     ldh  [hButtonsInactiveDelay], a               ; $6187: $E0 $B5

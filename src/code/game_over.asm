@@ -191,7 +191,7 @@ jr_001_42F5::
     ldh  [rOBP1], a                               ; $4307: $E0 $49 ; $4307: $E0 $49
     ld   [wBGPalette], a                          ; $4309: $EA $97 $DB ; $4309: $EA $97 $DB
     ldh  [rBGP], a                                ; $430C: $E0 $47 ; $430C: $E0 $47
-    ld   [hSwitchBlocksState], a                  ; $430E: $EA $FB $D6 ; $430E: $EA $FB $D6
+    ld   [wSwitchBlocksState], a                  ; $430E: $EA $FB $D6 ; $430E: $EA $FB $D6
     ld   [wD475], a                               ; $4311: $EA $75 $D4 ; $4311: $EA $75 $D4
     ldh  a, [hLinkPositionX]                      ; $4314: $F0 $98 ; $4314: $F0 $98
     ld   [wMapEntrancePositionX], a               ; $4316: $EA $9D $DB ; $4316: $EA $9D $DB

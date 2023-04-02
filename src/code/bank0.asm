@@ -2892,7 +2892,7 @@ LinkMotionMapFadeOutHandler::
     ld   a, $30                                   ; $1963: $3E $30
     ldh  [hDungeonTitleMessageCountdown], a       ; $1965: $E0 $B4
     xor  a                                        ; $1967: $AF
-    ld   [hSwitchBlocksState], a                  ; $1968: $EA $FB $D6
+    ld   [wSwitchBlocksState], a                  ; $1968: $EA $FB $D6
     ld   [wSwitchableObjectAnimationStage], a     ; $196B: $EA $F8 $D6
 
 .label_196E
@@ -3308,8 +3308,8 @@ UpdateSwitchBlockTiles::
     ld   hl, hLinkInteractiveMotionBlocked        ; $1EE1: $21 $A1 $FF
     ld   [hl], $01                                ; $1EE4: $36 $01
 
-    ; de = [hSwitchBlocksState]
-    ld   hl, hSwitchBlocksState                   ; $1EE6: $21 $FB $D6
+    ; de = [wSwitchBlocksState]
+    ld   hl, wSwitchBlocksState                   ; $1EE6: $21 $FB $D6
     ld   e, [hl]                                  ; $1EE9: $5E
     ld   d, $00                                   ; $1EEA: $16 $00
     inc  a                                        ; $1EEC: $3C
@@ -3317,11 +3317,11 @@ UpdateSwitchBlockTiles::
     ; On stage 3…
     cp   03                                       ; $1EED: $FE $03
     jr   nz, .stage3End                           ; $1EEF: $20 $0A
-    ; Invert second bit of hSwitchBlocksState (toggle between 0 and 2)
+    ; Invert second bit of wSwitchBlocksState (toggle between 0 and 2)
     push af                                       ; $1EF1: $F5
-    ld   a, [hSwitchBlocksState]                  ; $1EF2: $FA $FB $D6
+    ld   a, [wSwitchBlocksState]                  ; $1EF2: $FA $FB $D6
     xor  $02                                      ; $1EF5: $EE $02
-    ld   [hSwitchBlocksState], a                  ; $1EF7: $EA $FB $D6
+    ld   [wSwitchBlocksState], a                  ; $1EF7: $EA $FB $D6
     pop  af                                       ; $1EFA: $F1
 .stage3End
 

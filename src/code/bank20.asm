@@ -173,7 +173,7 @@ GetColorDungeonTilesAddress::
     jr   nz, jr_020_4640                          ; $461E: $20 $20
 
 .jr_4620
-    ld   a, [hSwitchBlocksState]                  ; $4620: $FA $FB $D6
+    ld   a, [wSwitchBlocksState]                  ; $4620: $FA $FB $D6
     and  a                                        ; $4623: $A7
     jr   z, jr_020_4640                           ; $4624: $28 $1A
 
@@ -188,7 +188,7 @@ GetColorDungeonTilesAddress::
     xor  $C0                                      ; $462F: $EE $C0
     ld   l, a                                     ; $4631: $6F
     ld   h, $5E                                   ; $4632: $26 $5E
-    ld   a, [hSwitchBlocksState]                  ; $4634: $FA $FB $D6
+    ld   a, [wSwitchBlocksState]                  ; $4634: $FA $FB $D6
     ldh  [hSwitchBlockNeedingUpdate], a           ; $4637: $E0 $BB
     ld   [wRoomSwitchableObject], a               ; $4639: $EA $FA $D6
     pop  de                                       ; $463C: $D1

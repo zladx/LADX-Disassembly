@@ -1102,9 +1102,9 @@ wEntitiesPhysicsFlagsTable::
   ds $10 ; C340 - C34F
 
 ; Type of hitbox (plus maybe other flags):
-; bit 0-4: hitbox type (see HitboxPositions),
-; bit 5: TODO ???,
-; bit 6: TODO ???,
+; bit 0: TODO ???,
+; bit 1: TODO ???,
+; bit 2-6: hitbox type (see HitboxPositions),
 ; bit 7: force collision (for some entities only)
 wEntitiesHitboxFlagsTable::
   ds $10 ; C350 - C35F

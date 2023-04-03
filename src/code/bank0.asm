@@ -114,7 +114,7 @@ PlayAudioStep::
     ; If a wave SFX is playing, return early
     ldh  a, [hWaveSfx]                            ; $08AC: $F0 $F3
     and  a                                        ; $08AE: $A7
-    jr   nz, .return                              ; $08AF: $20 $25
+    ret nz
 
     ; If wMusicTrackTiming != 0…
     ld   a, [wMusicTrackTiming]                   ; $08B1: $FA $0B $C1
@@ -127,7 +127,7 @@ PlayAudioStep::
     ; Otherwise, play the audio step only on odd frames (half speed)
     ldh  a, [hFrameCounter]                       ; $08BB: $F0 $E7
     and  $01                                      ; $08BD: $E6 $01
-    jr   nz, .return                              ; $08BF: $20 $15
+    ret nz
 
     jr   .doAudioStep                             ; $08C1: $18 $03
 
@@ -466,8 +466,7 @@ func_036_705A_trampoline::
 
 RestoreStackedBank::
     pop  af                                       ; $0AB0: $F1
-    call SwitchBank                               ; $0AB1: $CD $0C $08
-    ret                                           ; $0AB4: $C9
+    jp SwitchBank                               ; $0AB1: $CD $0C $08
 
 func_AB5::
     push af                                       ; $0AB5: $F5
@@ -4952,8 +4951,7 @@ LoadIndoorTiles::
     ; Replace Magic Powder tile by Toadstool if needed
     ld   a, [wHasToadstool]                       ; $2CFE: $FA $4B $DB
     and  a                                        ; $2D01: $A7
-    jr   z, .noToadstoolEnd                       ; $2D02: $28 $03
-    call ReplaceMagicPowderTilesByToadstool       ; $2D04: $CD $2B $1E
+    call nz, ReplaceMagicPowderTilesByToadstool       ; $2D04: $CD $2B $1E
 .noToadstoolEnd
 
     ; Replace Slime Key tile by Golden Leaf if needed
@@ -4968,14 +4966,13 @@ LoadIndoorTiles::
 .jr_2D17
     ld   a, [wGoldenLeavesCount]                  ; $2D17: $FA $15 $DB
     cp   SLIME_KEY                                ; $2D1A: $FE $06
-    jr   c, .goldenLeafEnd                        ; $2D1C: $38 $03
-    call ReplaceSlimeKeyTilesByGoldenLeaf         ; $2D1E: $CD $A1 $1E
+    call nc, ReplaceSlimeKeyTilesByGoldenLeaf         ; $2D1E: $CD $A1 $1E
 .goldenLeafEnd
 
     ; Update the trading sequence item tile if needed
     ld   a, [wTradeSequenceItem]                  ; $2D21: $FA $0E $DB
     cp   TRADING_ITEM_RIBBON                      ; $2D24: $FE $02
-    jr   c, .return                               ; $2D26: $38 $04
+    ret c
     ld   a, REPLACE_TILES_TRADING_ITEM            ; $2D28: $3E $0D
     ldh  [hReplaceTiles], a                       ; $2D2A: $E0 $A5
 
@@ -5030,8 +5027,7 @@ func_2D50::
     ld   hl, LinkCharacterTiles + $200            ; $2D6C: $21 $00 $42
     ld   de, vTiles0 + $200                       ; $2D6F: $11 $00 $82
     ld   bc, TILE_SIZE * $10                      ; $2D72: $01 $00 $01
-    call CopyData                                 ; $2D75: $CD $14 $29
-    ret                                           ; $2D78: $C9
+    jp CopyData                                 ; $2D75: $CD $14 $29
 
 ; Copy opening sequence tiles to tiles memory
 LoadIntroSequenceTiles::
@@ -5280,8 +5276,8 @@ LoadRoomSpecificTiles::
     add  hl, de                                   ; $2EEA: $19
     ld   a, [hl]                                  ; $2EEB: $7E
     and  a                                        ; $2EEC: $A7
-    jr   z, .bankAdjustmentEnd                    ; $2EED: $28 $03
-    call AdjustBankNumberForGBC                   ; $2EEF: $CD $0B $0B
+    ;jr   z, .bankAdjustmentEnd                    ; $2EED: $28 $03
+    call nz, AdjustBankNumberForGBC                   ; $2EEF: $CD $0B $0B
 .bankAdjustmentEnd
 
     ; Do the actual copy to OAM tiles
@@ -5350,8 +5346,7 @@ LoadRoomSpecificTiles::
     ; Copy sideview tiles to the BG tiles
     ld   de, vTiles2                              ; $2F41: $11 $00 $90
     ld   bc, TILE_SIZE * $80                      ; $2F44: $01 $00 $08
-    call CopyData                                 ; $2F47: $CD $14 $29
-    ret                                           ; $2F4A: $C9
+    jp CopyData                                 ; $2F47: $CD $14 $29
 
 .loadTopViewTiles
     ;
@@ -5389,8 +5384,7 @@ LoadRoomSpecificTiles::
     ld   hl, CameraShopIndoorTiles                ; $2F7A: $21 $00 $66
     ld   de, vTiles1 + $700                       ; $2F7D: $11 $00 $8F
     ld   bc, TILE_SIZE * $20                      ; $2F80: $01 $00 $02
-    call CopyData                                 ; $2F83: $CD $14 $29
-    ret                                           ; $2F86: $C9
+    jp CopyData                                 ; $2F83: $CD $14 $29
 .cameraShopEnd
 
     ; Hack: on GBC, load 2 tiles to a specific location
@@ -5414,8 +5408,7 @@ LoadRoomSpecificTiles::
     ld   hl, PhotoAlbumTiles + $610               ; $2FA0: $21 $10 $6E
     ld   de, vTiles2 + $790                       ; $2FA3: $11 $90 $97
     ld   bc, TILE_SIZE                            ; $2FA6: $01 $10 $00
-    call CopyData                                 ; $2FA9: $CD $14 $29
-    ret                                           ; $2FAC: $C9
+    jp CopyData                                 ; $2FA9: $CD $14 $29
 
 .loadOverworldBGTiles
     ;
@@ -5428,7 +5421,7 @@ LoadRoomSpecificTiles::
     ; If the tileset is W_TILESET_KEEP, do nothing.
     ldh  a, [hWorldTileset]                       ; $2FB5: $F0 $94
     cp   W_TILESET_KEEP                           ; $2FB7: $FE $0F
-    jr   z, .return                               ; $2FB9: $28 $0B
+    ret  z
 
     ; hl = ($40 + hWorldTileset) * $100
     add  a, $40                                   ; $2FBB: $C6 $40

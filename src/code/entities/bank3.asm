@@ -2832,10 +2832,9 @@ func_003_5A2E::
     ret                                           ; $5A4C: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-HeartPieceSpriteVariants::
-.variant0
-    db $AC, $02
-    db $AC, $22
+HeartPieceEntitySprite::
+    db $AC, OAM_GBC_PAL_2
+    db $AC, OAM_GBC_PAL_2 | OAMF_XFLIP
 
 HeartPieceEntityHandler::
     ldh  a, [hRoomStatus]                         ; $5A51: $F0 $F8
@@ -2882,9 +2881,9 @@ HeartPieceState4Handler::
 
 HeartPieceState5Handler::
     call HoldEntityAboveLink                      ; $5A98: $CD $17 $5A
-    ld   de, HeartPieceSpriteVariants             ; $5A9B: $11 $4D $5A
+    ld   de, HeartPieceEntitySprite               ; $5A9B: $11 $4D $5A
     call RenderActiveEntitySpritesPair            ; $5A9E: $CD $C0 $3B
-    call func_003_5B2B                            ; $5AA1: $CD $2B $5B
+    call DrawHeartPiecesInDialog                  ; $5AA1: $CD $2B $5B
     ld   hl, wEntitiesInertiaTable                ; $5AA4: $21 $D0 $C3
     add  hl, bc                                   ; $5AA7: $09
     inc  [hl]                                     ; $5AA8: $34
@@ -2904,11 +2903,11 @@ HeartPieceState5Handler::
 
 HeartPieceState6Handler::
     call HoldEntityAboveLink                      ; $5ABB: $CD $17 $5A
-    ld   de, HeartPieceSpriteVariants             ; $5ABE: $11 $4D $5A
+    ld   de, HeartPieceEntitySprite               ; $5ABE: $11 $4D $5A
     call RenderActiveEntitySpritesPair            ; $5AC1: $CD $C0 $3B
     xor  a                                        ; $5AC4: $AF
     ld   [wC1AB], a                               ; $5AC5: $EA $AB $C1
-    call func_003_5B2B                            ; $5AC8: $CD $2B $5B
+    call DrawHeartPiecesInDialog                  ; $5AC8: $CD $2B $5B
     ld   a, [wDialogState]                        ; $5ACB: $FA $9F $C1
     and  a                                        ; $5ACE: $A7
     ret  nz                                       ; $5ACF: $C0
@@ -2937,7 +2936,7 @@ HeartPieceState6Handler::
 
 HeartPieceState7Handler::
     call HoldEntityAboveLink                      ; $5AF0: $CD $17 $5A
-    ld   de, HeartPieceSpriteVariants             ; $5AF3: $11 $4D $5A
+    ld   de, HeartPieceEntitySprite               ; $5AF3: $11 $4D $5A
     call RenderActiveEntitySpritesPair            ; $5AF6: $CD $C0 $3B
     ld   a, [wDialogState]                        ; $5AF9: $FA $9F $C1
     and  a                                        ; $5AFC: $A7
@@ -2958,24 +2957,24 @@ HeartPieceState8Handler::
     jp   MarkRoomCompleted                        ; $5B14: $C3 $2A $51
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-Unknown021SpriteVariants::
+HeartPieceSpriteVariants::
 .variant0
-    db $9A, $02
-    db $9A, $22
+    db $9A, OAM_GBC_PAL_2 
+    db $9A, OAM_GBC_PAL_2 | OAMF_XFLIP
 .variant1
-    db $9C, $02
-    db $9A, $22
+    db $9C, OAM_GBC_PAL_2 
+    db $9A, OAM_GBC_PAL_2 | OAMF_XFLIP
 .variant2
-    db $9E, $02
-    db $9A, $22
+    db $9E, OAM_GBC_PAL_2 
+    db $9A, OAM_GBC_PAL_2 | OAMF_XFLIP
 .variant3
-    db $9E, $02
-    db $9C, $22
+    db $9E, OAM_GBC_PAL_2 
+    db $9C, OAM_GBC_PAL_2 | OAMF_XFLIP
 .variant4
-    db $9E, $02
-    db $9E, $22
+    db $9E, OAM_GBC_PAL_2 
+    db $9E, OAM_GBC_PAL_2 | OAMF_XFLIP
 
-func_003_5B2B::
+DrawHeartPiecesInDialog::
     ld   a, [wDialogState]                        ; $5B2B: $FA $9F $C1
     and  a                                        ; $5B2E: $A7
     ret  z                                        ; $5B2F: $C8
@@ -2987,21 +2986,21 @@ func_003_5B2B::
     ld   a, [wDialogState]                        ; $5B36: $FA $9F $C1
     and  DIALOG_BOX_BOTTOM_FLAG                   ; $5B39: $E6 $80
     ld   a, $23                                   ; $5B3B: $3E $23
-    jr   z, .jr_5B41                              ; $5B3D: $28 $02
+    jr   z, .positionSprite                       ; $5B3D: $28 $02
 
     ld   a, $6B                                   ; $5B3F: $3E $6B
 
-.jr_5B41
+.positionSprite
     ldh  [hActiveEntityVisualPosY], a             ; $5B41: $E0 $EC
     ld   a, [wHeartPiecesCount]                   ; $5B43: $FA $5C $DB
     ldh  [hActiveEntitySpriteVariant], a          ; $5B46: $E0 $F1
     ld   a, $8E                                   ; $5B48: $3E $8E
     ldh  [hActiveEntityPosX], a                   ; $5B4A: $E0 $EE
-    ld   de, Unknown021SpriteVariants             ; $5B4C: $11 $17 $5B
+    ld   de, HeartPieceSpriteVariants             ; $5B4C: $11 $17 $5B
     jp   RenderActiveEntitySpritesPair            ; $5B4F: $C3 $C0 $3B
 
 HeartPieceState0Handler::
-    ld   de, HeartPieceSpriteVariants             ; $5B52: $11 $4D $5A
+    ld   de, HeartPieceEntitySprite               ; $5B52: $11 $4D $5A
     call RenderActiveEntitySpritesPair            ; $5B55: $CD $C0 $3B
     jp   label_003_60AA                           ; $5B58: $C3 $AA $60
 

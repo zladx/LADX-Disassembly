@@ -2933,7 +2933,7 @@ wRoomSwitchableObject::
 ; Values:
 ;  0  blocks of kind A lowered, blocks of kind B raised
 ;  2  blocks of kind A raised, blocks of kind B lowered
-hSwitchBlocksState::
+wSwitchBlocksState::
   ds 1 ; D6FB
 
 ; TODO comment

@@ -126,7 +126,7 @@ func_004_6848::
     ld   [wC198], a                               ; $68C7: $EA $98 $C1
     ld   a, $FF                                   ; $68CA: $3E $FF
     ld   [wDBCB], a                               ; $68CC: $EA $CB $DB
-    ld   a, WAVE_SFX_LINK_FALLS                   ; $68CF: $3E $0C
+    ld   a, WAVE_SFX_LINK_FALL                    ; $68CF: $3E $0C
     ldh  [hWaveSfx], a                            ; $68D1: $E0 $F3
     ret                                           ; $68D3: $C9
 

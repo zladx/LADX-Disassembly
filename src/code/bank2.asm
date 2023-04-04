@@ -7841,7 +7841,7 @@ ApplyLinkGroundPhysics_part2::
     ld   a, [wLinkGroundVfx]                      ; $76B5: $FA $81 $C1
     ld   [wDBCB], a                               ; $76B8: $EA $CB $DB
 
-    ld   a, WAVE_SFX_LINK_FALLS                   ; $76BB: $3E $0C
+    ld   a, WAVE_SFX_LINK_FALL                    ; $76BB: $3E $0C
     ldh  [hWaveSfx], a                            ; $76BD: $E0 $F3
 
 .return

@@ -3,7 +3,7 @@
 ; Values for wMusicTrackToPlay
 
 MUSIC_NONE                              equ $00 ; Unclear usage, needs looking into
-MUSIC_TITLE_SCREEN_INTRO                equ $01
+MUSIC_TITLE_SCREEN                      equ $01 ; Plays after watching title cutscene
 MUSIC_MINIGAME                          equ $02 ; Trendy Game, Fishing, Camera Shop
 MUSIC_GAME_OVER                         equ $03
 MUSIC_MABE_VILLAGE                      equ $04
@@ -15,7 +15,7 @@ MUSIC_MYSTERIOUS_FOREST                 equ $09
 MUSIC_TOWN_HOUSE                        equ $0A
 MUSIC_ANIMAL_VILLAGE                    equ $0B
 MUSIC_FAIRY_FOUNTAIN                    equ $0C
-MUSIC_TITLE_SCREEN                      equ $0D ; If intro skipped with Start
+MUSIC_TITLE_SCREEN_NO_INTRO             equ $0D ; If title cutscene is skipped with Start
 MUSIC_BOWWOW_KIDNAPPED                  equ $0E
 MUSIC_OBTAIN_SWORD                      equ $0F
 MUSIC_OBTAIN_ITEM                       equ $10
@@ -28,7 +28,7 @@ MUSIC_KEY_CAVERN                        equ $16
 MUSIC_ANGLERS_TUNNEL                    equ $17
 MUSIC_AFTER_BOSS                        equ $18
 MUSIC_BOSS                              equ $19
-MUSIC_INTRO_CUTSCENE                    equ $1A
+MUSIC_TITLE_CUTSCENE                    equ $1A
 MUSIC_OBTAIN_INSTRUMENT                 equ $1B
 MUSIC_INTRO_WAKE_UP                     equ $1C ; Marin & Tarin's House when starting a new game
 MUSIC_OVERWORLD_SWORDLESS               equ $1D
@@ -109,7 +109,7 @@ JINGLE_PUZZLE_SOLVED                    equ $02
 JINGLE_ENEMY_HIT                        equ $03
 JINGLE_CHARGING_SWORD                   equ $04
 JINGLE_POWDER                           equ $05
-JINGLE_GENIE_APPEAR                     equ $06 ; Also Mad Batter
+JINGLE_GENIE_APPEAR                     equ $06 ; Mad Batter
 JINGLE_SWORD_POKING                     equ $07
 JINGLE_FALL_DOWN                        equ $08 ; Jumping from ledge, Slime Eye
 JINGLE_BUMP                             equ $09
@@ -154,7 +154,7 @@ JINGLE_POOF                             equ $2F ; Pokey, Face Shrine opening, D8
 JINGLE_EAGLE_SKID                       equ $30
 JINGLE_GRIM_CREEPER_BATS                equ $31
 JINGLE_HOT_HEAD_SPLASH                  equ $32
-JINGLE_LINK_DAZED                       equ $33 ; Blaino's fast wind up punch
+JINGLE_LINK_DAZED                       equ $33 ; Used when hit by Blaino's fast wind up punch
 JINGLE_INSTRUMENTS_APPEAR               equ $34 ; Wind Fish cutscene
 JINGLE_SHADOW_MOVE                      equ $35
 JINGLE_SHADOW_AGAHNIM_DEFEAT            equ $36
@@ -183,7 +183,7 @@ WAVE_SFX_LINK_DIES                      equ $08
 WAVE_SFX_OCARINA_BALLAD                 equ $09
 WAVE_SFX_OCARINA_FROG                   equ $0A
 WAVE_SFX_OCARINA_MAMBO                  equ $0B
-WAVE_SFX_LINK_FALLS                     equ $0C
+WAVE_SFX_LINK_FALL                      equ $0C
 WAVE_SFX_ANGLER_DASH                    equ $0D ; D4 Boss attack
 WAVE_SFX_FLOOR_SWITCH                   equ $0E ; Also when stomping Goombas
 WAVE_SFX_TEXT_PRINT                     equ $0F
@@ -203,7 +203,7 @@ WAVE_SFX_ROVER_CRY                      equ $1C ; D6 Miniboss
 WAVE_SFX_UNKNOWN_1D                     equ $1D ; Unused?
 WAVE_SFX_L2_SWORD_APPEAR                equ $1E
 WAVE_SFX_WIND_FISH_MORPH                equ $1F
-WAVE_SFX_FLYING_WITH_SPOUT              equ $20
+WAVE_SFX_FLYING_WITH_SPOUT              equ $20 ; Wind Fish cutscene
 WAVE_SFX_SHADOW_DISPERSE                equ $21
 WAVE_SFX_AGAHNIM_CHARGE                 equ $22
 WAVE_SFX_SHADOW_CHANGE_FORM             equ $23
@@ -221,7 +221,7 @@ NOISE_SFX_BEAMOS_LASER                  equ $08 ; Deflecting Shadow Agahnim's ba
 NOISE_SFX_POT_SMASHED                   equ $09
 NOISE_SFX_WHOOSH                        equ $0A ; Blade Trap, Arrow shot, Blaino's jabs
 NOISE_SFX_HOOKSHOT                      equ $0B
-NOISE_SFX_EXPLOSION                     equ $0C ; Bombs, Intro lightning, Slime Eye fall, Mad Batter
+NOISE_SFX_EXPLOSION                     equ $0C ; Bombs, intro lightning, big Slime Eye hitting ground, Mad Batter
 NOISE_SFX_MAGIC_ROD                     equ $0D ; Vire
 NOISE_SFX_SHOWEL_DIG                    equ $0E
 NOISE_SFX_SEA_WAVES                     equ $0F
@@ -273,7 +273,7 @@ NOISE_SFX_UNKNOWN_3C                    equ $3C ; Unused?
 NOISE_SFX_FINAL_BOSS_EXPLOSION          equ $3D
 NOISE_SFX_SLIME_EEL_FLOOR_BREAK         equ $3E
 NOISE_SFX_MINIBOSS_FLEE                 equ $3F ; Master Stalfos, Grim Creeper
-NOISE_SFX_PHOTO                         equ $40
+NOISE_SFX_PHOTO                         equ $40 ; Photographer taking photo
 
 ; values for wOcarinaSongFlags
 FROGS_SONG_OF_THE_SOUL_FLAG       equ 1

@@ -138,7 +138,7 @@ wDialogIndexHi:
 wEnemyWasKilled:
   ds 1 ; C113
 
-; Delay for repeatin the NOISE_SFX_SEA_WAVES sound effect
+; Delay for repeating the NOISE_SFX_SEA_WAVES sound effect
 ; Plays when reaching $A0
 wNoiseSfxSeaWavesCounter::
   ds 1 ; C114
@@ -369,7 +369,7 @@ wIsLinkPushing:: ; C144
 wC145::
   ds 1 ; C145
 
-; Is Link in the air (jumping with the feather, flying with roaster, etc)?
+; Is Link in the air (jumping with the feather, flying with rooster, etc)?
 ; Possible values:
 ; 0 = not in the air
 ; 1 = ?
@@ -2891,8 +2891,8 @@ wDrawCommand::
 .destinationLow
   ds 1 ; D602
 ; Request data length and mode.
-; bits 0-6: data length,
-; bits 7-8: copy mode (see DC_* constants)
+; bits 0-5: data length,
+; bits 6-7: copy mode (see DC_* constants)
 .length
   ds 1 ; D603
 ; Request data
@@ -2960,7 +2960,7 @@ wBGMapToLoad::
 ; When loading a new room, room data is read and decoded into this
 ; area.
 ;
-; Notes on wram hiftability:
+; Notes on wram shiftability:
 ; - This area is also used in RAM bank 2, where it contains the object attributes.
 ; - wRoomObjectsArea must be $10-bytes aligned (otherwise various copy loops break)
 ;
@@ -3041,7 +3041,7 @@ wGoldenLeavesCount::
   ds 1 ; DB15
 
 ; Beginning of dungeon item flags.
-; 5 bytes fo each dungeon.
+; 5 bytes for each dungeon.
 ; For each dungeon:
 ; byte 0 = has map?,
 ; byte 1 = has compass?

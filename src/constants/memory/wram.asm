@@ -3105,7 +3105,8 @@ wBombCount::
 wSwordLevel::
   ds 1 ; DB4E
 
-; default value is 5
+; The player's name
+; Name is padded with $00 (spaces) to the max length (default length is 5) 
 wName::
   ds NAME_LENGTH ; DB4F - DB53
 
@@ -3442,17 +3443,21 @@ wSaveSlot::
 wSaveFilesCount::
   ds 1 ; DBA7
 
-; Unlabeled
+; Unused
 wDBA8::
   ds 1 ; DBA8
 
-; Unlabeled
-wDBA9::
+; The currently selected character in the name entry menu
+wNameEntryCurrentChar::
   ds 1 ; DBA9
 
-; Unlabeled
-wDBAA::
-  ds 2 ; DBAA - DBAB
+; The current character in the save slot name
+wSaveSlotNameCharIndex::
+  ds 1 ; DBAA
+
+; Unused
+wDBAB::
+  ds 1 ; DBAB
 
 ; Unlabeled
 wDBAC::

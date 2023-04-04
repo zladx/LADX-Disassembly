@@ -84,7 +84,7 @@ ExecuteDrawCommands::
 ; Inputs:
 ;   de: data copy source address
 ;   hl: data copy destination address
-;   a:  data length (bits 0-6) and copy mode (bits 7-8)
+;   a:  data length (bits 0-5) and copy mode (bits 6-7)
 DrawCommandToVRAM::
     ; Save the six lowest bits (actual data length) of the data length to b
     push af                                       ; $2941: $F5

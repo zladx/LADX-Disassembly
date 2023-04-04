@@ -10,7 +10,7 @@ ClearLetterPixels::
     add  hl, de                                   ; $4A00: $19
     ld   a, [hl]                                  ; $4A01: $7E
 
-ld   hl, wDrawCommandsSize                        ; $4A02: $21 $00 $D6
+    ld   hl, wDrawCommandsSize                    ; $4A02: $21 $00 $D6
     add  hl, bc                                   ; $4A05: $09
     ldi  [hl], a ; wDrawCommand.destinationHigh   ; $4A06: $22
 

@@ -380,7 +380,7 @@ func_005_6534::
 
     jr   nz, .jr_6544                             ; $653B: $20 $07
 
-    ld   a, NOISE_SFX_UNKNOWN_29                  ; $653D: $3E $29
+    ld   a, NOISE_SFX_BREAK                       ; $653D: $3E $29
     ldh  [hNoiseSfx], a                           ; $653F: $E0 $F4
     call func_005_657F                            ; $6541: $CD $7F $65
 

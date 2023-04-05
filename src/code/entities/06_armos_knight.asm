@@ -198,7 +198,7 @@ jr_006_53F9:
     ld   [hl], 4 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $5406: $36 $C4
     ld   a, TRANSCIENT_VFX_POOF                   ; $5408: $3E $02
     call AddTranscientVfx                         ; $540A: $CD $C7 $0C
-    ld   a, NOISE_SFX_UNKNOWN_29                  ; $540D: $3E $29
+    ld   a, NOISE_SFX_BREAK                       ; $540D: $3E $29
     ldh  [hNoiseSfx], a                           ; $540F: $E0 $F4
 
 label_006_5411:
@@ -356,7 +356,7 @@ ArmosKnightState6Handler::
     ld   [wC157], a                               ; $54F6: $EA $57 $C1
     ld   a, $04                                   ; $54F9: $3E $04
     ld   [wC158], a                               ; $54FB: $EA $58 $C1
-    ld   a, JINGLE_BUMP                           ; $54FE: $3E $0B
+    ld   a, JINGLE_STRONG_BUMP                    ; $54FE: $3E $0B
     ldh  [hJingle], a                             ; $5500: $E0 $F2
     call GetEntityTransitionCountdown             ; $5502: $CD $05 $0C
     ld   [hl], $30                                ; $5505: $36 $30

@@ -5882,7 +5882,7 @@ jr_002_6BEB:
     and  DIRECTION_VERTICAL_MASK                  ; $6C23: $E6 $02
     sla  a                                        ; $6C25: $CB $27
     ld   [wC158], a                               ; $6C27: $EA $58 $C1
-    ld   a, JINGLE_BUMP                           ; $6C2A: $3E $0B
+    ld   a, JINGLE_STRONG_BUMP                    ; $6C2A: $3E $0B
     ldh  [hJingle], a                             ; $6C2C: $E0 $F2
     ret                                           ; $6C2E: $C9
 
@@ -7496,7 +7496,7 @@ label_002_74AD:
     and  $02                                      ; $74F0: $E6 $02
     sla  a                                        ; $74F2: $CB $27
     ld   [wC158], a                               ; $74F4: $EA $58 $C1
-    ld   a, JINGLE_BUMP                           ; $74F7: $3E $0B
+    ld   a, JINGLE_STRONG_BUMP                    ; $74F7: $3E $0B
     ldh  [hJingle], a                             ; $74F9: $E0 $F2
     jp   func_1828                                ; $74FB: $C3 $28 $18
 

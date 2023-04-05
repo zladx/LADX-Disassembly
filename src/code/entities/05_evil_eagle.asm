@@ -72,7 +72,7 @@ ENDC
 
     ld   a, $02                                   ; $5A73: $3E $02
     ld   [wD205], a                               ; $5A75: $EA $05 $D2
-    ld   a, MUSIC_GRIM_CREEPER_DIALOG             ; $5A78: $3E $5C
+    ld   a, MUSIC_EAGLE_BOSS_LOOP                 ; $5A78: $3E $5C
     ld   [wMusicTrackToPlay], a                   ; $5A7A: $EA $68 $D3
 
 Data_005_5A7D::

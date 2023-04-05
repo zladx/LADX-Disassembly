@@ -693,7 +693,7 @@ func_004_4EEB::
 
     ld   a, $18                                   ; $4F2E: $3E $18
     ld   [wC157], a                               ; $4F30: $EA $57 $C1
-    ld   a, JINGLE_BUMP                           ; $4F33: $3E $0B
+    ld   a, JINGLE_STRONG_BUMP                    ; $4F33: $3E $0B
     ldh  [hJingle], a                             ; $4F35: $E0 $F2
     ld   a, [wIsLinkInTheAir]                     ; $4F37: $FA $46 $C1
     and  a                                        ; $4F3A: $A7

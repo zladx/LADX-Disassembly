@@ -6844,7 +6844,7 @@ ENDC
     ld   [hl], TRUE                               ; $7187: $36 $01
 
     ; Play the power recoil SFX
-    ld   a, WAFE_SFX_POWER_HIT                    ; $7189: $3E $11
+    ld   a, WAVE_SFX_POWER_HIT                    ; $7189: $3E $11
     ldh  [hWaveSfx], a                            ; $718B: $E0 $F3
 
     ld   hl, wEntitiesStatusTable                 ; $718D: $21 $80 $C2
@@ -7596,7 +7596,7 @@ jr_003_7571:
     ldh  [hLinkSpeedY], a                         ; $758E: $E0 $9B
     ld   a, $30                                   ; $7590: $3E $30
     ldh  [hLinkVelocityZ], a                      ; $7592: $E0 $A3
-    ld   a, JINGLE_BUMP                           ; $7594: $3E $0B
+    ld   a, JINGLE_STRONG_BUMP                    ; $7594: $3E $0B
     ldh  [hJingle], a                             ; $7596: $E0 $F2
     ret                                           ; $7598: $C9
 

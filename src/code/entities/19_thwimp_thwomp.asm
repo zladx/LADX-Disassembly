@@ -59,7 +59,7 @@ ThwompRammableState0Handler::
     ld   [hl], $20                                ; $55CF: $36 $20
     ld   a, $01                                   ; $55D1: $3E $01
     call SetEntitySpriteVariant                   ; $55D3: $CD $0C $3B
-    ld   a, JINGLE_BUMP                           ; $55D6: $3E $0B
+    ld   a, JINGLE_STRONG_BUMP                    ; $55D6: $3E $0B
     ldh  [hJingle], a                             ; $55D8: $E0 $F2
     jp   IncrementEntityState                     ; $55DA: $C3 $12 $3B
 

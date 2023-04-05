@@ -58,7 +58,7 @@ func_019_5D7D::
     ; … then teleport Link
     ld   a, $01                                   ; $5D82: $3E $01
     ldh  [hLinkPhysicsModifier], a                ; $5D84: $E0 $9C
-    ld   a, JINGLE_OVERWORLD_WARP                 ; $5D86: $3E $25
+    ld   a, JINGLE_OVERWORLD_WARP_HOLE            ; $5D86: $3E $25
     ldh  [hJingle], a                             ; $5D88: $E0 $F2
 
 .return

@@ -321,7 +321,7 @@ func_007_618F::
     call func_007_6142                            ; $61AE: $CD $42 $61
     ld   a, NOISE_SFX_D7_PILLAR_COLLAPSE          ; $61B1: $3E $25
     ldh  [hNoiseSfx], a                           ; $61B3: $E0 $F4
-    ld   a, JINGLE_BUMP                           ; $61B5: $3E $0B
+    ld   a, JINGLE_STRONG_BUMP                    ; $61B5: $3E $0B
     ldh  [hJingle], a                             ; $61B7: $E0 $F2
     call GetEntityTransitionCountdown             ; $61B9: $CD $05 $0C
     ld   [hl], $10                                ; $61BC: $36 $10

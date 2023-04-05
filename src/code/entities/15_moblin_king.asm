@@ -304,7 +304,7 @@ func_015_4873::
     ld   [wC158], a                               ; $4888: $EA $58 $C1
     ld   a, $20                                   ; $488B: $3E $20
     ld   [wC157], a                               ; $488D: $EA $57 $C1
-    ld   a, JINGLE_BUMP                           ; $4890: $3E $0B
+    ld   a, JINGLE_STRONG_BUMP                    ; $4890: $3E $0B
     ldh  [hJingle], a                             ; $4892: $E0 $F2
     ld   hl, wEntitiesSpeedXTable                 ; $4894: $21 $40 $C2
     add  hl, bc                                   ; $4897: $09
@@ -493,7 +493,7 @@ func_015_499C::
     ld   a, [wSubtractHealthBuffer]               ; $49B5: $FA $94 $DB
     add  $08                                      ; $49B8: $C6 $08
     ld   [wSubtractHealthBuffer], a               ; $49BA: $EA $94 $DB
-    ld   a, JINGLE_BUMP                           ; $49BD: $3E $0B
+    ld   a, JINGLE_STRONG_BUMP                    ; $49BD: $3E $0B
     ldh  [hJingle], a                             ; $49BF: $E0 $F2
     ret                                           ; $49C1: $C9
 

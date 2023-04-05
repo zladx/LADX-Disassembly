@@ -48,7 +48,7 @@ GenieState0Handler::
     add  hl, de                                   ; $4043: $19
     ld   [hl], $08                                ; $4044: $36 $08
     call label_3E34                               ; $4046: $CD $34 $3E
-    ld   a, NOISE_SFX_UNKNOWN_29                  ; $4049: $3E $29
+    ld   a, NOISE_SFX_BREAK                       ; $4049: $3E $29
     ldh  [hNoiseSfx], a                           ; $404B: $E0 $F4
     ret                                           ; $404D: $C9
 

@@ -12,7 +12,7 @@ MUSIC_TAL_TAL_RANGE                     equ $06
 MUSIC_SHOP                              equ $07 ; Town Shop, Witch's Hut
 MUSIC_RAFT_RIDE_RAPIDS                  equ $08
 MUSIC_MYSTERIOUS_FOREST                 equ $09
-MUSIC_TOWN_HOUSE                        equ $0A
+MUSIC_INSIDE_BUILDING                   equ $0A ; Most residences, Village Library, Seashell Mansion
 MUSIC_ANIMAL_VILLAGE                    equ $0B
 MUSIC_FAIRY_FOUNTAIN                    equ $0C
 MUSIC_TITLE_SCREEN_NO_INTRO             equ $0D ; If title cutscene is skipped with Start
@@ -112,9 +112,9 @@ JINGLE_POWDER                           equ $05
 JINGLE_GENIE_APPEAR                     equ $06 ; Mad Batter
 JINGLE_SWORD_POKING                     equ $07
 JINGLE_FALL_DOWN                        equ $08 ; Jumping from ledge, Slime Eye
-JINGLE_BUMP                             equ $09
+JINGLE_BUMP                             equ $09 ; Some things hitting the ground, walls or Link's shield
 JINGLE_MOVE_SELECTION                   equ $0A ; File Select, Map Screen
-JINGLE_BUMP                             equ $0B ; Spike bar, Boots wall bonk, Slime Eye, Blaino
+JINGLE_STRONG_BUMP                      equ $0B ; Spike bar, Boots wall bonk, Slime Eye, Blaino
 JINGLE_REVOLVING_DOOR                   equ $0C
 JINGLE_FEATHER_JUMP                     equ $0D
 JINGLE_WATER_SPLASH                     equ $0E
@@ -223,7 +223,7 @@ NOISE_SFX_WHOOSH                        equ $0A ; Blade Trap, Arrow shot, Blaino
 NOISE_SFX_HOOKSHOT                      equ $0B
 NOISE_SFX_EXPLOSION                     equ $0C ; Bombs, intro lightning, big Slime Eye hitting ground, Mad Batter
 NOISE_SFX_MAGIC_ROD                     equ $0D ; Vire
-NOISE_SFX_SHOWEL_DIG                    equ $0E
+NOISE_SFX_SHOVEL_DIG                    equ $0E
 NOISE_SFX_SEA_WAVES                     equ $0F
 NOISE_SFX_DOOR_CLOSED                   equ $10
 NOISE_SFX_RUMBLE                        equ $11 ; Block push, Walrus falls

@@ -272,7 +272,7 @@ jr_018_5A8C::
 
 jr_018_5B3B:
     ld   hl, hJingle                              ; $5B3B: $21 $F2 $FF
-    ld   [hl], JINGLE_BUMP                        ; $5B3E: $36 $0B
+    ld   [hl], JINGLE_STRONG_BUMP                 ; $5B3E: $36 $0B
     ld   hl, hWaveSfx                             ; $5B40: $21 $F3 $FF
     ld   [hl], WAVE_SFX_LINK_HURT                 ; $5B43: $36 $03
     ld   hl, wC157                                ; $5B45: $21 $57 $C1

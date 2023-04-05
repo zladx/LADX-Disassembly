@@ -639,7 +639,7 @@ func_015_53E1::
     ld   [hl], $05                                ; $542C: $36 $05
 
 func_015_542E::
-    ld   a, NOISE_SFX_SHADOW_DISINTEGRATE         ; $542E: $3E $37
+    ld   a, NOISE_SFX_SHADOW_DISPERSE             ; $542E: $3E $37
     ldh  [hNoiseSfx], a                           ; $5430: $E0 $F4
     jp   func_015_5383                            ; $5432: $C3 $83 $53
 

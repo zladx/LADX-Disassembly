@@ -3598,7 +3598,7 @@ func_015_6D9C::
     cp   $01                                      ; $6DAB: $FE $01
     jr   nz, .jr_6DB8                             ; $6DAD: $20 $09
 
-    ld   a, NOISE_SFX_BREAK                       ; $6DAF: $3E $28
+    ld   a, NOISE_SFX_GENIE_FIREBALL              ; $6DAF: $3E $28
     ldh  [hNoiseSfx], a                           ; $6DB1: $E0 $F4
     ld   a, $30                                   ; $6DB3: $3E $30
     call ApplyVectorTowardsLink_trampoline        ; $6DB5: $CD $AA $3B

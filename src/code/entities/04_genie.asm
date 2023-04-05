@@ -724,7 +724,7 @@ jr_004_4438:
     ld   hl, wEntitiesPrivateCountdown2Table      ; $447D: $21 $00 $C3
     add  hl, bc                                   ; $4480: $09
     ld   [hl], $10                                ; $4481: $36 $10
-    ld   a, NOISE_SFX_BREAK                       ; $4483: $3E $28
+    ld   a, NOISE_SFX_GENIE_FIREBALL              ; $4483: $3E $28
     ldh  [hNoiseSfx], a                           ; $4485: $E0 $F4
 
 .jr_4487
@@ -958,7 +958,7 @@ func_004_4575::
     ld   a, $1F                                   ; $45E6: $3E $1F
     call ApplyVectorTowardsLink_trampoline        ; $45E8: $CD $AA $3B
     pop  bc                                       ; $45EB: $C1
-    ld   a, NOISE_SFX_BREAK                       ; $45EC: $3E $28
+    ld   a, NOISE_SFX_GENIE_FIREBALL              ; $45EC: $3E $28
     ldh  [hNoiseSfx], a                           ; $45EE: $E0 $F4
 
 .ret_45F0

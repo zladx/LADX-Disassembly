@@ -2907,7 +2907,7 @@ func_017_5A66::
     ld   a, $50                                   ; $5AAF: $3E $50
     ldh  [hLinkPositionX], a                      ; $5AB1: $E0 $98
     ld   hl, wLCDControl                          ; $5AB3: $21 $FD $D6
-    set  3, [hl]                                  ; $5AB6: $CB $DE
+    set  LCDCB_BG9C00, [hl]                       ; $5AB6: $CB $DE
     ld   a, $A0                                   ; $5AB8: $3E $A0
     ld   [wD006], a                               ; $5ABA: $EA $06 $D0
     ld   a, $FF                                   ; $5ABD: $3E $FF
@@ -3339,7 +3339,7 @@ CreditsWaterNoiseFadingOutHandler::
     ld   a, $80                                   ; $6037: $3E $80
     ld   [wD466], a                               ; $6039: $EA $66 $D4
     ld   hl, wLCDControl                          ; $603C: $21 $FD $D6
-    res  3, [hl]                                  ; $603F: $CB $9E
+    res  LCDCB_BG9C00, [hl]                       ; $603F: $CB $9E
     ld   hl, wGameplaySubtype                     ; $6041: $21 $96 $DB
     inc  [hl]                                     ; $6044: $34
 
@@ -3764,7 +3764,7 @@ func_017_629E::
     add  hl, de                                   ; $6341: $19
     ld   [hl], $11                                ; $6342: $36 $11
     ld   hl, wLCDControl                          ; $6344: $21 $FD $D6
-    res  2, [hl]                                  ; $6347: $CB $96
+    res  LCDCB_OBJ16, [hl]                        ; $6347: $CB $96
     jp   IncrementCreditsSubscene                 ; $6349: $C3 $D9 $4C
 
 Data_017_634C::
@@ -3986,7 +3986,7 @@ TransitionToNextEndingScene::
 
     ; Set OAM size to 8x16
     ld   hl, wLCDControl                          ; $650D: $21 $FD $D6
-    set  2, [hl]                                  ; $6510: $CB $D6
+    set  LCDCB_OBJ16, [hl]                        ; $6510: $CB $D6
 
     ld   hl, wGameplaySubtype                     ; $6512: $21 $96 $DB
     inc  [hl]                                     ; $6515: $34
@@ -4877,7 +4877,7 @@ CreditsRollLoadHandler::
     ld   a, $01                                   ; $6E96: $3E $01
     ld   [wPaletteUnknownE], a                    ; $6E98: $EA $D5 $DD
     ld   hl, wLCDControl                          ; $6E9B: $21 $FD $D6
-    res  2, [hl]                                  ; $6E9E: $CB $96
+    res  LCDCB_OBJ16, [hl]                        ; $6E9E: $CB $96
     jp   IncrementCreditsSubscene                 ; $6EA0: $C3 $D9 $4C
 
 CreditsRoll1Handler::

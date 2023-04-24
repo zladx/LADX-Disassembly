@@ -4989,11 +4989,11 @@ IntroCopyAndBlendColor::
     dec  bc                                       ; $6B92: $0B
     dec  hl                                       ; $6B93: $2B
 
-    ; Switch back to RAM bank 0
+    ; Switch back to RAM bank 1
     xor  a                                        ; $6B94: $AF
     ldh  [rSVBK], a                               ; $6B95: $E0 $70
 
-    ; Copy two bytes from de to [hl] in RAM0
+    ; Copy two bytes from de to [hl] in RAM1
     ld   [hl], e                                  ; $6B97: $73
     inc  hl                                       ; $6B98: $23
     ld   [hl], d                                  ; $6B99: $72

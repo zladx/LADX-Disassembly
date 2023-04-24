@@ -617,11 +617,11 @@ CopyBGMapFromBank::
     ; hl += $168
     ld   de, $168                                 ; $0B72: $11 $68 $01
     add  hl, de                                   ; $0B75: $19
-    ; Switch to RAM bank 1
+    ; Switch to VRAM bank 1
     ld   a, $01                                   ; $0B76: $3E $01
     ld   [rVBK], a                                ; $0B78: $E0 $4F
     call CopyToBGMap0                             ; $0B7A: $CD $96 $0B
-    ; Switch back to RAM bank 0
+    ; Switch back to VRAM bank 0
     xor  a                                        ; $0B7D: $AF
     ld   [rVBK], a                                ; $0B7E: $E0 $4F
 .gbcEnd

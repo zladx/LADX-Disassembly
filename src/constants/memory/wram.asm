@@ -261,11 +261,11 @@ wRoomTransitionTargetScrollX::
 wRoomTransitionTargetScrollY::
   ds 1 ; C12D
 
-; Position of the first visible background tile (high byte)
+; Position of the first visible background tile (high byte) (Y = 00 or 02)
 wBGOriginHigh::
   ds 1 ; C12E
 
-; Position of the first visible background tile (low byte)
+; Position of the first visible background tile (low byte) (X = 00 or 14)
 wBGOriginLow::
   ds 1 ; C12F
 

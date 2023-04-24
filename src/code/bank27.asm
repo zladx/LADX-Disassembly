@@ -450,7 +450,7 @@ func_027_7854::
 
 func_027_7860::
     ld   hl, wLCDControl                          ; $7860: $21 $FD $D6
-    set  2, [hl]                                  ; $7863: $CB $D6
+    set  LCDCB_OBJ16, [hl]                        ; $7863: $CB $D6
     ld   hl, wEntitiesPosXTable                   ; $7865: $21 $00 $C2
     add  hl, bc                                   ; $7868: $09
     ld   a, $50                                   ; $7869: $3E $50

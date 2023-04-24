@@ -1733,10 +1733,13 @@ func_002_4C14::
     jr   z, .jr_4C64                              ; $4C39: $28 $29
 
     ld   a, $04                                   ; $4C3B: $3E $04
+    or   a, $20
     ld   [hl+], a                                 ; $4C3D: $22
     ld   a, $06                                   ; $4C3E: $3E $06
+    or   a, $20
     ld   [hl+], a                                 ; $4C40: $22
     ld   a, $05                                   ; $4C41: $3E $05
+    or   a, $20
     ld   [de], a                                  ; $4C43: $12
     inc  de                                       ; $4C44: $13
     ld   [de], a                                  ; $4C45: $12
@@ -1755,13 +1758,16 @@ func_002_4C14::
     ld   [de], a                                  ; $4C55: $12
     inc  de                                       ; $4C56: $13
     ld   a, $05                                   ; $4C57: $3E $05
+    or   a, $20
     ld   [hl+], a                                 ; $4C59: $22
     ld   a, $05                                   ; $4C5A: $3E $05
+    or   a, $20
     ld   [de], a                                  ; $4C5C: $12
     inc  de                                       ; $4C5D: $13
     ld   [de], a                                  ; $4C5E: $12
     inc  de                                       ; $4C5F: $13
     ld   a, $07                                   ; $4C60: $3E $07
+    or   a, $20
     jr   jr_002_4C8B                              ; $4C62: $18 $27
 
 .jr_4C64

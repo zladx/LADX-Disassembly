@@ -34,6 +34,20 @@ TreeMacroHandler::
 
     ld   a, e                                     ; $75A5: $7B
     sub  $10                                      ; $75A6: $D6 $10
+
+    push bc
+    and  a, $0F
+    ld b, a
+    ld a, $0A
+    sub a, b
+    ld d, a
+    pop bc
+    ld a, [bc]
+    and a, $F0
+    or a, d
+
+
+
     ld   e, a                                     ; $75A8: $5F
 
 .jr_75A9

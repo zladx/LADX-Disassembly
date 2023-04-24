@@ -16,6 +16,35 @@ CopyDataFromBank::
 ;   bc : number of bytes to copy
 ;   de : destination address
 ;   hl : source address
+CopyDataMirror::
+    push hl
+
+    push de
+    pop hl
+
+    add hl, bc
+    dec hl
+
+    push hl
+    pop de
+
+    pop hl
+
+.loop
+    ld   a, [hli]                                 ; $2914: $2A
+    ld   [de], a                                  ; $2915: $12
+    dec  de                                       ; $2916: $13
+    dec  bc                                       ; $2917: $0B
+    ld   a, b                                     ; $2918: $78
+    or   c                                        ; $2919: $B1
+    jr   nz, .loop                             ; $291A: $20 $F8
+    ret                                           ; $291C: $C9
+
+; Copy data
+; Inputs:
+;   bc : number of bytes to copy
+;   de : destination address
+;   hl : source address
 CopyData::
     ld   a, [hli]                                 ; $2914: $2A
     ld   [de], a                                  ; $2915: $12

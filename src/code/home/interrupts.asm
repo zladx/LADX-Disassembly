@@ -15,7 +15,7 @@ IntroBeachScreenSections::
 ;
 ; InterruptLCDStatus
 ;
-; Manipulate the Background's scrollX and scrollY value during mode 2,
+; Manipulate the Background's scrollX and scrollY value during mode 2 (Searching OAM-RAM),
 ; to create various effects like differential scrolling.
 ;
 

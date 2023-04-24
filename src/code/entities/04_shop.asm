@@ -186,7 +186,7 @@ jr_004_7839:
 .jr_7845
     push bc                                       ; $7845: $C5
     ld   hl, wInventoryItems.BButtonSlot          ; $7846: $21 $00 $DB
-    ld   c, INVENTORY_SLOT_COUNT -1               ; $7849: $0E $0B
+    ld   c, INVENTORY_SLOT_COUNT - 1              ; $7849: $0E $0B
 
 jr_004_784B:
     ld   a, [wBoomerangTradedItem]                ; $784B: $FA $7D $DB
@@ -207,7 +207,7 @@ jr_004_7859:
     jr   nz, jr_004_784B                          ; $785D: $20 $EC
 
     ld   hl, wInventoryItems.BButtonSlot          ; $785F: $21 $00 $DB
-    ld   c, INVENTORY_SLOT_COUNT -1               ; $7862: $0E $0B
+    ld   c, INVENTORY_SLOT_COUNT - 1              ; $7862: $0E $0B
 
 jr_004_7864:
     ld   a, [wBoomerangTradedItem]                ; $7864: $FA $7D $DB

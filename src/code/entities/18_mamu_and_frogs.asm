@@ -56,7 +56,7 @@ MamuAndFrogsState0Handler::
     ldh  [hLinkPositionY], a                      ; $4052: $E0 $99
     call ClearLinkPositionIncrement               ; $4054: $CD $8E $17
     call ResetSpinAttack                          ; $4057: $CD $AF $0C
-    ld   e, INVENTORY_SLOT_COUNT -1               ; $405A: $1E $0B
+    ld   e, INVENTORY_SLOT_COUNT - 1              ; $405A: $1E $0B
     ld   hl, wInventoryItems.BButtonSlot          ; $405C: $21 $00 $DB
 
 .loop_405F

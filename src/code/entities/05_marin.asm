@@ -268,7 +268,7 @@ func_005_4F64::
     jp_open_dialog Dialog195                      ; $4F90
 
 .jr_005_4F95
-    ld   e, INVENTORY_SLOT_COUNT -1               ; $4F95: $1E $0B
+    ld   e, INVENTORY_SLOT_COUNT - 1              ; $4F95: $1E $0B
     ld   hl, wInventoryItems.BButtonSlot          ; $4F97: $21 $00 $DB
 
 .loop_4F9A
@@ -313,7 +313,7 @@ func_005_4F64::
 
 .jr_4FD0
     push bc                                       ; $4FD0: $C5
-    ld   c, INVENTORY_SLOT_COUNT -1               ; $4FD1: $0E $0B
+    ld   c, INVENTORY_SLOT_COUNT - 1              ; $4FD1: $0E $0B
     ld   hl, wInventoryItems.BButtonSlot          ; $4FD3: $21 $00 $DB
 
 .jr_005_4FD6

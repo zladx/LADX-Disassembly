@@ -7126,7 +7126,7 @@ jr_002_72D1:
     jr   nz, jr_002_72FA                          ; $72D3: $20 $25
 
     ld   a, [wInventoryItems.AButtonSlot]         ; $72D5: $FA $01 $DB
-    cp   $03                                      ; $72D8: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $72D8: $FE $03
     jr   z, jr_002_72FA                           ; $72DA: $28 $1E
 
     ld   a, [wInventoryItems.BButtonSlot]         ; $72DC: $FA $00 $DB

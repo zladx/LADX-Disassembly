@@ -172,7 +172,7 @@ jr_007_60DD:
     and  a                                        ; $60E5: $A7
     jr   nz, ret_007_6133                         ; $60E6: $20 $4B
 
-    ld   a, [wBButtonSlot]                        ; $60E8: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $60E8: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $60EB: $FE $03
     jr   nz, .jr_60F7                             ; $60ED: $20 $08
 
@@ -183,7 +183,7 @@ jr_007_60DD:
     jr   ret_007_6133                             ; $60F5: $18 $3C
 
 .jr_60F7
-    ld   a, [wAButtonSlot]                        ; $60F7: $FA $01 $DB
+    ld   a, [wInventoryItems.AButtonSlot]         ; $60F7: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $60FA: $FE $03
     jr   nz, ret_007_6133                         ; $60FC: $20 $35
 

@@ -648,7 +648,7 @@ func_015_5435::
     and  a                                        ; $5438: $A7
     jr   z, jr_015_5465                           ; $5439: $28 $2A
 
-    ld   a, [wBButtonSlot]                        ; $543B: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $543B: $FA $00 $DB
     cp   INVENTORY_MAGIC_POWDER                   ; $543E: $FE $0C
     jr   nz, .jr_5450                             ; $5440: $20 $0E
 
@@ -661,8 +661,8 @@ func_015_5435::
     jp   label_015_54A2                           ; $544D: $C3 $A2 $54
 
 .jr_5450
-    ld   a, [wAButtonSlot]                        ; $5450: $FA $01 $DB
-    cp   $0C                                      ; $5453: $FE $0C
+    ld   a, [wInventoryItems.AButtonSlot]         ; $5450: $FA $01 $DB
+    cp   INVENTORY_MAGIC_POWDER                   ; $5453: $FE $0C
     jr   nz, jr_015_5465                          ; $5455: $20 $0E
 
     ldh  a, [hJoypadState]                        ; $5457: $F0 $CC

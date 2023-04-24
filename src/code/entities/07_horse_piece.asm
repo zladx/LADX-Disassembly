@@ -249,7 +249,7 @@ HorsePieceCheckForPickup:
     and  a                                        ; $773B: $A7
     jr   nz, .ret                                 ; $773C: $20 $45
 
-    ld   a, [wBButtonSlot]                        ; $773E: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $773E: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $7741: $FE $03
     jr   nz, .noBraceletB                         ; $7743: $20 $08
 
@@ -260,7 +260,7 @@ HorsePieceCheckForPickup:
     jr   .ret                                     ; $774B: $18 $36
 
 .noBraceletB
-    ld   a, [wAButtonSlot]                        ; $774D: $FA $01 $DB
+    ld   a, [wInventoryItems.AButtonSlot]         ; $774D: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $7750: $FE $03
     jr   nz, .ret                                 ; $7752: $20 $2F
 

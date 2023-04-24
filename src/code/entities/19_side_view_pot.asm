@@ -61,7 +61,7 @@ jr_019_5922:
     and  a                                        ; $5935: $A7
     ret  nz                                       ; $5936: $C0
 
-    ld   a, [wBButtonSlot]                        ; $5937: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $5937: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $593A: $FE $03
     jr   nz, .jr_5945                             ; $593C: $20 $07
 
@@ -72,7 +72,7 @@ jr_019_5922:
     ret                                           ; $5944: $C9
 
 .jr_5945
-    ld   a, [wAButtonSlot]                        ; $5945: $FA $01 $DB
+    ld   a, [wInventoryItems.AButtonSlot]         ; $5945: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $5948: $FE $03
     ret  nz                                       ; $594A: $C0
 

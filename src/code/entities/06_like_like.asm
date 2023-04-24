@@ -67,7 +67,7 @@ LikeLikeState1Handler::
     and  a                                        ; $7E30: $A7
     jr   nz, jr_006_7E55                          ; $7E31: $20 $22
 
-    ld   hl, wBButtonSlot                         ; $7E33: $21 $00 $DB
+    ld   hl, wInventoryItems.BButtonSlot          ; $7E33: $21 $00 $DB
     ld   e, b                                     ; $7E36: $58
 
 jr_006_7E37:

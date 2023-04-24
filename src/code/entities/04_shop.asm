@@ -185,7 +185,7 @@ jr_004_7839:
 
 .jr_7845
     push bc                                       ; $7845: $C5
-    ld   hl, wBButtonSlot                         ; $7846: $21 $00 $DB
+    ld   hl, wInventoryItems.BButtonSlot          ; $7846: $21 $00 $DB
     ld   c, INVENTORY_SLOT_COUNT -1               ; $7849: $0E $0B
 
 jr_004_784B:
@@ -206,7 +206,7 @@ jr_004_7859:
     cp   $FF                                      ; $785B: $FE $FF
     jr   nz, jr_004_784B                          ; $785D: $20 $EC
 
-    ld   hl, wBButtonSlot                         ; $785F: $21 $00 $DB
+    ld   hl, wInventoryItems.BButtonSlot          ; $785F: $21 $00 $DB
     ld   c, INVENTORY_SLOT_COUNT -1               ; $7862: $0E $0B
 
 jr_004_7864:
@@ -476,7 +476,7 @@ jr_004_79AB:
     cp   $04                                      ; $79BB: $FE $04
     jr   nz, jr_004_79D9                          ; $79BD: $20 $1A
 
-    ld   hl, wBButtonSlot                         ; $79BF: $21 $00 $DB
+    ld   hl, wInventoryItems.BButtonSlot          ; $79BF: $21 $00 $DB
     ld   d, INVENTORY_SLOT_COUNT                  ; $79C2: $16 $0C
 
 .loop_79C4
@@ -501,7 +501,7 @@ jr_004_79D9:
     cp   $06                                      ; $79D9: $FE $06
     jr   nz, jr_004_79F7                          ; $79DB: $20 $1A
 
-    ld   hl, wBButtonSlot                         ; $79DD: $21 $00 $DB
+    ld   hl, wInventoryItems.BButtonSlot          ; $79DD: $21 $00 $DB
     ld   d, INVENTORY_SLOT_COUNT                  ; $79E0: $16 $0C
 
 .loop_79E2
@@ -526,7 +526,7 @@ jr_004_79F7:
     cp   $03                                      ; $79F7: $FE $03
     jr   nz, jr_004_7A0C                          ; $79F9: $20 $11
 
-    ld   hl, wBButtonSlot                         ; $79FB: $21 $00 $DB
+    ld   hl, wInventoryItems.BButtonSlot          ; $79FB: $21 $00 $DB
     ld   d, INVENTORY_SLOT_COUNT                  ; $79FE: $16 $0C
 
 jr_004_7A00:

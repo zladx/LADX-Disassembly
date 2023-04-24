@@ -1174,11 +1174,11 @@ IF __PATCH_0__
     ;
     ; But as both conditions will never be true, it results in bomb arrows
     ;  not working when firing the arrow first and place the bomb second.
-    ld   a, [wAButtonSlot]
+    ld   a, [wInventoryItems.AButtonSlot]
     cp   INVENTORY_BOW
     ret  nz
 
-    ld   a, [wBButtonSlot]
+    ld   a, [wInventoryItems.BButtonSlot]
     cp   INVENTORY_BOW
     ret  nz
 ENDC
@@ -1335,7 +1335,7 @@ SprinkleMagicPowder::
     ; if powder is left update entities positions
     jr   nz, .updateEntitiesPositions             ; $4C59: $20 $12
     ; powder is empty, so empty button slot
-    ld   hl, wBButtonSlot                         ; $4C5B: $21 $00 $DB
+    ld   hl, wInventoryItems.BButtonSlot          ; $4C5B: $21 $00 $DB
     ld   a, [hl]                                  ; $4C5E: $7E
     cp   INVENTORY_MAGIC_POWDER                   ; $4C5F: $FE $0C
     ; powder not in B slot, so check A slot
@@ -1344,7 +1344,7 @@ SprinkleMagicPowder::
     ld   [hl], INVENTORY_EMPTY                    ; $4C63: $36 $00
 
 .checkAButtonSlot:
-    ; hl = wAButtonSlot
+    ; hl = wInventoryItems.AButtonSlot
     inc  hl                                       ; $4C65: $23
     ld   a, [hl]                                  ; $4C66: $7E
     cp   INVENTORY_MAGIC_POWDER                   ; $4C67: $FE $0C
@@ -2732,7 +2732,7 @@ InventoryLoad1Handler::
     ldh  [hVolumeRight], a                        ; $5AE5: $E0 $A9
     ld   a, $30                                   ; $5AE7: $3E $30
     ldh  [hVolumeLeft], a                         ; $5AE9: $E0 $AA
-    jp   label_020_5D34                           ; $5AEB: $C3 $34 $5D
+    jp   InventoryLoad3Handler.changeBGColumnPaletteAndExecuteDrawCommands ; $5AEB: $C3 $34 $5D
 
 TradingItemPaletteIndexes:
     db $00  ; TRADING_ITEM_NONE
@@ -3022,11 +3022,22 @@ InventoryTileMapPositions::
     db  HIGH(vBGMap1 + $100), $81,   HIGH(vBGMap1 + $100), $85  ;  [   ] [   ]
     db  HIGH(vBGMap1 + $100), $E1,   HIGH(vBGMap1 + $100), $E5  ;  [   ] [   ]
 
-; Draw a and B button slot in the inventory bar
-func_020_5C9C::
+; Build wDrawCommand to draw inventory slots
+;
+; Starts at the slot number in bc, counting from the bottom of the inventory
+; and up, ie. from the highest slot number, and up until (but not including)
+; the slot number in e. This numbering starts at wInventoryItems.BButtonSlot as index 0,
+; wInventoryItems.AButtonSlot as index 1, and then the remaining wInventoryItems.
+;
+; If this were Python, it could be described as: range(bc, e, -1)
+;
+; bc = The bottom-most inventory slot to draw
+; e = One less than the top-most inventory slot to draw
+;     ($FF draws all the way to the top, including the A and B slots)
+DrawInventorySlots::
     push de                                       ; $5C9C: $D5
     push bc                                       ; $5C9D: $C5
-    ld   hl, wBButtonSlot                         ; $5C9E: $21 $00 $DB
+    ld   hl, wInventoryItems                      ; $5C9E: $21 $00 $DB
     add  hl, bc                                   ; $5CA1: $09
     ld   a, [hl]                                  ; $5CA2: $7E
     ldh  [hMultiPurpose1], a                      ; $5CA3: $E0 $D8
@@ -3145,24 +3156,25 @@ func_020_5C9C::
     dec  c                                        ; $5D1E: $0D
     ld   a, c                                     ; $5D1F: $79
     cp   e                                        ; $5D20: $BB
-    jp   nz, func_020_5C9C                        ; $5D21: $C2 $9C $5C
+    jp   nz, DrawInventorySlots                   ; $5D21: $C2 $9C $5C
 
     ret                                           ; $5D24: $C9
 
+; Draws the inventory slots
 InventoryLoad3Handler::
     ld   a, [wC154]                               ; $5D25: $FA $54 $C1
     ld   c, a                                     ; $5D28: $4F
     ld   b, $00                                   ; $5D29: $06 $00
     ld   e, $FF                                   ; $5D2B: $1E $FF
-    call func_020_5C9C                            ; $5D2D: $CD $9C $5C
+    call DrawInventorySlots                       ; $5D2D: $CD $9C $5C
     xor  a                                        ; $5D30: $AF
     ld   [wC154], a                               ; $5D31: $EA $54 $C1
 
-label_020_5D34:
+.changeBGColumnPaletteAndExecuteDrawCommands                                 :
     call IncrementGameplaySubtype_20              ; $5D34: $CD $83 $66
     call LCDOff                                   ; $5D37: $CD $CF $28
     ld   a, $20                                   ; $5D3A: $3E $20
-    call func_AB5                                 ; $5D3C: $CD $B5 $0A
+    call ChangeBGColumnPaletteAndExecuteDrawCommands ; $5D3C: $CD $B5 $0A
     xor  a                                        ; $5D3F: $AF
     ld   [wDrawCommandsSize], a                   ; $5D40: $EA $00 $D6
     ld   [wDrawCommand]               , a         ; $5D43: $EA $01 $D6
@@ -3482,7 +3494,7 @@ jr_020_5F59:
     ld   [hl], JINGLE_MOVE_SELECTION              ; $5F91: $36 $0A
     ld   e, a                                     ; $5F93: $5F
     ld   d, $00                                   ; $5F94: $16 $00
-    ld   hl, wInventoryItems                      ; $5F96: $21 $02 $DB
+    ld   hl, wInventoryItems.subscreen            ; $5F96: $21 $02 $DB
     add  hl, de                                   ; $5F99: $19
     ld   a, [hl]                                  ; $5F9A: $7E
     cp   INVENTORY_OCARINA                        ; $5F9B: $FE $09
@@ -3521,9 +3533,9 @@ jr_020_5FC1:
     and  J_A                                      ; $5FCD: $E6 $10
     jr   z, jr_020_5FED                           ; $5FCF: $28 $1C
 
-    ld   a, [wAButtonSlot]                        ; $5FD1: $FA $01 $DB
+    ld   a, [wInventoryItems.AButtonSlot]         ; $5FD1: $FA $01 $DB
     push af                                       ; $5FD4: $F5
-    ld   hl, wInventoryItems                      ; $5FD5: $21 $02 $DB
+    ld   hl, wInventoryItems.subscreen            ; $5FD5: $21 $02 $DB
     ld   a, [wInventorySelection]                 ; $5FD8: $FA $A3 $DB
 
 label_020_5FDB:
@@ -3531,7 +3543,7 @@ label_020_5FDB:
     ld   b, $00                                   ; $5FDC: $06 $00
     add  hl, bc                                   ; $5FDE: $09
     ld   a, [hl]                                  ; $5FDF: $7E
-    ld   [wAButtonSlot], a                        ; $5FE0: $EA $01 $DB
+    ld   [wInventoryItems.AButtonSlot], a         ; $5FE0: $EA $01 $DB
     pop  af                                       ; $5FE3: $F1
     ld   [hl], a                                  ; $5FE4: $77
     ld   c, $01                                   ; $5FE5: $0E $01
@@ -3544,15 +3556,15 @@ jr_020_5FED:
     and  J_B                                      ; $5FEF: $E6 $20
     jr   z, ret_020_604A                          ; $5FF1: $28 $57
 
-    ld   a, [wBButtonSlot]                        ; $5FF3: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $5FF3: $FA $00 $DB
     push af                                       ; $5FF6: $F5
-    ld   hl, wInventoryItems                      ; $5FF7: $21 $02 $DB
+    ld   hl, wInventoryItems.subscreen            ; $5FF7: $21 $02 $DB
     ld   a, [wInventorySelection]                 ; $5FFA: $FA $A3 $DB
     ld   c, a                                     ; $5FFD: $4F
     ld   b, $00                                   ; $5FFE: $06 $00
     add  hl, bc                                   ; $6000: $09
     ld   a, [hl]                                  ; $6001: $7E
-    ld   [wBButtonSlot], a                        ; $6002: $EA $00 $DB
+    ld   [wInventoryItems.BButtonSlot], a         ; $6002: $EA $00 $DB
     pop  af                                       ; $6005: $F1
     ld   [hl], a                                  ; $6006: $77
     ld   c, $00                                   ; $6007: $0E $00
@@ -3586,7 +3598,7 @@ jr_020_600D:
     ld   [wOcarinaMenuClosing], a                 ; $6033: $EA $B9 $C1
 
 jr_020_6036:
-    call func_020_5C9C                            ; $6036: $CD $9C $5C
+    call DrawInventorySlots                       ; $6036: $CD $9C $5C
 
 func_020_6039:
     ld   a, JINGLE_VALIDATE                       ; $6039: $3E $13
@@ -3597,7 +3609,7 @@ func_020_6039:
     ld   b, $00                                   ; $6043: $06 $00
     dec  a                                        ; $6045: $3D
     ld   e, a                                     ; $6046: $5F
-    call func_020_5C9C                            ; $6047: $CD $9C $5C
+    call DrawInventorySlots                       ; $6047: $CD $9C $5C
 
 ret_020_604A:
     ret                                           ; $604A: $C9
@@ -4043,7 +4055,7 @@ func_020_635C::
     ld   d, $0C                                   ; $635C: $16 $0C
 
 jr_020_635E:
-    ld   hl, wBButtonSlot                         ; $635E: $21 $00 $DB
+    ld   hl, wInventoryItems.BButtonSlot          ; $635E: $21 $00 $DB
     ld   e, $00                                   ; $6361: $1E $00
 
 .loop_6363

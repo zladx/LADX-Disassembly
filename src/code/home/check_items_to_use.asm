@@ -15,16 +15,16 @@ CheckItemsToUse::
     and  a                                        ; $1186: $A7
     jr   z, .notRunning                           ; $1187: $28 $33
 
-    ld   a, [wAButtonSlot]                        ; $1189: $FA $01 $DB
+    ld   a, [wInventoryItems.AButtonSlot]         ; $1189: $FA $01 $DB
     cp   INVENTORY_SWORD                          ; $118C: $FE $01
     jr   z, .swordEquipped                        ; $118E: $28 $1A
-    ld   a, [wBButtonSlot]                        ; $1190: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $1190: $FA $00 $DB
     cp   INVENTORY_SWORD                          ; $1193: $FE $01
     jr   z, .swordEquipped                        ; $1195: $28 $13
-    ld   a, [wAButtonSlot]                        ; $1197: $FA $01 $DB
+    ld   a, [wInventoryItems.AButtonSlot]         ; $1197: $FA $01 $DB
     cp   INVENTORY_SHIELD                         ; $119A: $FE $04
     jr   z, .shieldEquipped                       ; $119C: $28 $07
-    ld   a, [wBButtonSlot]                        ; $119E: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $119E: $FA $00 $DB
     cp   INVENTORY_SHIELD                         ; $11A1: $FE $04
     jr   nz, .shieldEnd                           ; $11A3: $20 $15
 
@@ -75,7 +75,7 @@ CheckItemsToUse::
 
 .pegasusBootsB
     ; if Pegasus boots are not equipped in slot B check slot A
-    ld   a, [wBButtonSlot]                        ; $11E8: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $11E8: $FA $00 $DB
     cp   INVENTORY_PEGASUS_BOOTS                  ; $11EB: $FE $08
     jr   nz, .pegasusBootsA                       ; $11ED: $20 $0F
     ; reset boots if button not longer pressed down
@@ -93,7 +93,7 @@ CheckItemsToUse::
 
 .pegasusBootsA
     ; if Pegasus boots are not equipped in slot A check slot A for shield
-    ld   a, [wAButtonSlot]                        ; $11FE: $FA $01 $DB
+    ld   a, [wInventoryItems.AButtonSlot]         ; $11FE: $FA $01 $DB
     cp   INVENTORY_PEGASUS_BOOTS                  ; $1201: $FE $08
     jr   nz, .shieldA                             ; $1203: $20 $0F
     ; reset boots if button not longer pressed down
@@ -111,7 +111,7 @@ CheckItemsToUse::
 
 .shieldA
     ; if shield is not equipped in slot A
-    ld   a, [wAButtonSlot]                        ; $1214: $FA $01 $DB
+    ld   a, [wInventoryItems.AButtonSlot]         ; $1214: $FA $01 $DB
     cp   INVENTORY_SHIELD                         ; $1217: $FE $04
     jr   nz, .shieldB                             ; $1219: $20 $1A
     ; update shield status
@@ -138,7 +138,7 @@ CheckItemsToUse::
 
 .shieldB
     ; if shield is not equipped in slot B
-    ld   a, [wBButtonSlot]                        ; $1235: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $1235: $FA $00 $DB
     cp   INVENTORY_SHIELD                         ; $1238: $FE $04
     jr   nz, .nextItemB                           ; $123A: $20 $0F
     ; update shield status
@@ -169,7 +169,7 @@ CheckItemsToUse::
     jr   z, .nextItemA                            ; $1256: $28 $06
 
     ; Use item in B slot
-    ld   a, [wBButtonSlot]                        ; $1258: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $1258: $FA $00 $DB
     call UseItem                                  ; $125B: $CD $9C $12
 
 .nextItemA
@@ -183,7 +183,7 @@ CheckItemsToUse::
     jr   z, .swordB                               ; $126D: $28 $06
 
     ; Use item in A slot
-    ld   a, [wAButtonSlot]                        ; $126F: $FA $01 $DB
+    ld   a, [wInventoryItems.AButtonSlot]         ; $126F: $FA $01 $DB
     call UseItem                                  ; $1272: $CD $9C $12
 
 .swordB
@@ -191,14 +191,14 @@ CheckItemsToUse::
     ldh  a, [hPressedButtonsMask]                 ; $1275: $F0 $CB
     and  J_B                                      ; $1277: $E6 $20
     jr   z, .swordA                               ; $1279: $28 $06
-    ld   a, [wBButtonSlot]                        ; $127B: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $127B: $FA $00 $DB
     call label_1321                               ; $127E: $CD $21 $13
 
 .swordA
     ldh  a, [hPressedButtonsMask]                 ; $1281: $F0 $CB
     and  J_A                                      ; $1283: $E6 $10
     jr   z, .jr_128D                              ; $1285: $28 $06
-    ld   a, [wAButtonSlot]                        ; $1287: $FA $01 $DB
+    ld   a, [wInventoryItems.AButtonSlot]         ; $1287: $FA $01 $DB
     call label_1321                               ; $128A: $CD $21 $13
 
 .jr_128D

@@ -3412,7 +3412,7 @@ func_036_54B0::
     and  a                                        ; $54B8: $A7
     ret  z                                        ; $54B9: $C8
 
-    ld   a, [wBButtonSlot]                        ; $54BA: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $54BA: $FA $00 $DB
     cp   INVENTORY_MAGIC_POWDER                   ; $54BD: $FE $0C
     jr   nz, .jr_54C8                             ; $54BF: $20 $07
 
@@ -3423,7 +3423,7 @@ func_036_54B0::
     jr   jr_036_54D3                              ; $54C6: $18 $0B
 
 .jr_54C8
-    ld   a, [wAButtonSlot]                        ; $54C8: $FA $01 $DB
+    ld   a, [wInventoryItems.AButtonSlot]         ; $54C8: $FA $01 $DB
     cp   INVENTORY_MAGIC_POWDER                   ; $54CB: $FE $0C
     ret  nz                                       ; $54CD: $C0
 
@@ -8355,7 +8355,7 @@ label_036_71AD:
     and  $20                                      ; $71B0: $E6 $20
     jp   nz, IsInteractiveMotionAllowed.allow     ; $71B2: $C2 $88 $72
 
-    ld   hl, wBButtonSlot                         ; $71B5: $21 $00 $DB
+    ld   hl, wInventoryItems.BButtonSlot          ; $71B5: $21 $00 $DB
     ld   e, INVENTORY_SLOT_COUNT                  ; $71B8: $1E $0C
 
 .loop_71BA

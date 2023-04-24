@@ -183,7 +183,7 @@ label_007_5721:
     cp   $40                                      ; $5737: $FE $40
     jr   nc, jr_007_5777                          ; $5739: $30 $3C
 
-    ld   a, [wBButtonSlot]                        ; $573B: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $573B: $FA $00 $DB
     cp   INVENTORY_SWORD                          ; $573E: $FE $01
     jr   nz, .jr_574A                             ; $5740: $20 $08
 
@@ -194,7 +194,7 @@ label_007_5721:
     jr   jr_007_5777                              ; $5748: $18 $2D
 
 .jr_574A
-    ld   a, [wAButtonSlot]                        ; $574A: $FA $01 $DB
+    ld   a, [wInventoryItems.AButtonSlot]         ; $574A: $FA $01 $DB
     cp   INVENTORY_SWORD                          ; $574D: $FE $01
     jr   nz, jr_007_5777                          ; $574F: $20 $26
 

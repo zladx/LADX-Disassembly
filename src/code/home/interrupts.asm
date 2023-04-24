@@ -393,7 +393,7 @@ InterruptVBlank::
     and  a                                        ; $052D: $A7
     jr   z, .gbcEnd                               ; $052E: $28 $08
     ; Change BG column palette
-    callsb func_024_5C1A                          ; $0530: $3E $24 $EA $00 $21 $CD $1A $5C
+    callsb ChangeBGColumnPalette                  ; $0530: $3E $24 $EA $00 $21 $CD $1A $5C
 .gbcEnd
 
     ld   de, wDrawCommand                         ; $0538: $11 $01 $D6
@@ -450,7 +450,7 @@ PhotoAlbumVBlankHandler::
     and  a                                        ; $0585: $A7
     jr   z, .gbcEnd                               ; $0586: $28 $10
     callsw CopyPalettesToVRAM                     ; $0588: $3E $21 $CD $0C $08 $CD $00 $40
-    callsw func_024_5C1A                          ; $0590: $3E $24 $CD $0C $08 $CD $1A $5C
+    callsw ChangeBGColumnPalette                  ; $0590: $3E $24 $CD $0C $08 $CD $1A $5C
 .gbcEnd
 
     ld   de, wDrawCommand                         ; $0598: $11 $01 $D6

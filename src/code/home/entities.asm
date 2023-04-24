@@ -975,13 +975,16 @@ label_3E4D::
     ld   a, $03                                   ; $3E55: $3E $03
     jp   SwitchBank                               ; $3E57: $C3 $0C $08
 
-label_3E5A::
+; Draw the items in the A and B button slots
+; Actually a trampoline to DrawInventorySlots
+DrawABButtonSlots::
     ld   hl, rSelectROMBank                       ; $3E5A: $21 $00 $21
-    ld   [hl], BANK(func_020_5C9C)                ; $3E5D: $36 $20
+    ld   [hl], BANK(DrawInventorySlots)           ; $3E5D: $36 $20
+    ; Set bc to $01, which only draws wInventoryItems.BButtonSlot and wInventoryItems.AButtonSlot
     ld   c, $01                                   ; $3E5F: $0E $01
     ld   b, $00                                   ; $3E61: $06 $00
     ld   e, $FF                                   ; $3E63: $1E $FF
-    call func_020_5C9C                            ; $3E65: $CD $9C $5C
+    call DrawInventorySlots                       ; $3E65: $CD $9C $5C
     jp   ReloadSavedBank                          ; $3E68: $C3 $1D $08
 
 GiveInventoryItem_trampoline::                ; @TODO Give player item in reg d

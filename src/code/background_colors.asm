@@ -25,15 +25,17 @@ FillBGMapAttributesWhite::
     ret                                           ; $5C19: $C9
 
 ; Change BG column palette during v-blank
-func_024_5C1A::
+ChangeBGColumnPalette::
     ldh  a, [hIsGBC]                              ; $5C1A: $F0 $FE
     and  a                                        ; $5C1C: $A7
     ret  z                                        ; $5C1D: $C8
 
-    ld   a, $01                                   ; $5C1E: $3E $01
+    ; Select VRAM bank 1 (CGB tile attributes)
+    ld   a, 1                                     ; $5C1E: $3E $01
     ldh  [rVBK], a                                ; $5C20: $E0 $4F
     ld   de, wDrawCommandAlt                      ; $5C22: $11 $91 $DC
     call ExecuteDrawCommands                      ; $5C25: $CD $27 $29
+    ; Select VRAM bank 0
     xor  a                                        ; $5C28: $AF
     ldh  [rVBK], a                                ; $5C29: $E0 $4F
     ret                                           ; $5C2B: $C9

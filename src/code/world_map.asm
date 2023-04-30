@@ -101,7 +101,7 @@ WorldMapState1Handler::
     ld   hl, wOverworldRoomStatus                 ; $56CC: $21 $00 $D8
     add  hl, de                                   ; $56CF: $19
     ld   a, [hl]                                  ; $56D0: $7E
-    and  $20                                      ; $56D1: $E6 $20
+    and  OW_ROOM_STATUS_OWL_TALKED                ; $56D1: $E6 $20
     ld   a, $00                                   ; $56D3: $3E $00
     jr   z, .jr_56D9                              ; $56D5: $28 $02
     ld   a, $01                                   ; $56D7: $3E $01
@@ -192,7 +192,7 @@ ENDC
     add  hl, de                                   ; $575F: $19
     pop  de                                       ; $5760: $D1
     ld   a, [hl]                                  ; $5761: $7E
-    and  $20                                      ; $5762: $E6 $20
+    and  OW_ROOM_STATUS_OWL_TALKED                ; $5762: $E6 $20
     jr   z, jr_001_576F                           ; $5764: $28 $09
 
 .jr_5766::

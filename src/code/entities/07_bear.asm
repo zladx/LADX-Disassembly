@@ -80,7 +80,7 @@ func_007_4C16::
 
     ld_dialog_low e, Dialog1D3                    ; $4C1A: $1E $D3
     ld   a, [wOverworldRoomStatus + $FD]          ; $4C1C: $FA $FD $D8
-    and  $30                                      ; $4C1F: $E6 $30
+    and  OW_ROOM_STATUS_CHANGED | OW_ROOM_STATUS_OWL_TALKED ; $4C1F: $E6 $30
     jr   nz, func_007_4C43.openDialog             ; $4C21: $20 $22
 
     ld   a, [wTradeSequenceItem]                  ; $4C23: $FA $0E $DB

@@ -76,7 +76,7 @@ TurtleRockHeadEntityHandler::
     jr   nz, .ret_737D                            ; $7372: $20 $09
 
     ld   hl, wOverworldRoomStatus + $10           ; $7374: $21 $10 $D8
-    set  5, [hl]                                  ; $7377: $CB $EE
+    set  OW_ROOM_STATUS_FLAG_OWL_TALKED, [hl]     ; $7377: $CB $EE
     ld   a, JINGLE_PUZZLE_SOLVED                  ; $7379: $3E $02
     ldh  [hJingle], a                             ; $737B: $E0 $F2
 

@@ -57,7 +57,7 @@ func_006_6230::
     jr   nz, .jr_6277                             ; $6269: $20 $0C
 
     ld   a, [wOverworldRoomStatus + $FD]          ; $626B: $FA $FD $D8
-    and  $30                                      ; $626E: $E6 $30
+    and  OW_ROOM_STATUS_CHANGED | OW_ROOM_STATUS_OWL_TALKED ; $626E: $E6 $30
     jr   nz, .jr_6277                             ; $6270: $20 $05
 
     jp_open_dialog Dialog120                      ; $6272

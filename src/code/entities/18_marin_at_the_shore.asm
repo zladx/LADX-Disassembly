@@ -8,7 +8,7 @@ MarinAtTheShoreEntityHandler::
     ret  nz                                       ; $6195: $C0
 
     ld   a, [wOverworldRoomStatus + $FD]          ; $6196: $FA $FD $D8
-    and  $20                                      ; $6199: $E6 $20
+    and  OW_ROOM_STATUS_OWL_TALKED                ; $6199: $E6 $20
     jp   nz, ClearEntityStatusBank18              ; $619B: $C2 $08 $7F
 
     ld   a, [wTradeSequenceItem]                  ; $619E: $FA $0E $DB

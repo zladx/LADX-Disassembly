@@ -336,7 +336,15 @@ OW_ROOM_STATUS_UNVISITED    equ $00
 OW_ROOM_STATUS_OPENED       equ $04 ; door or bombable entrance opened
 OW_ROOM_STATUS_CHANGED      equ $10 ; e.g. sword taken on the beach
 OW_ROOM_STATUS_OWL_TALKED   equ $20
+OW_ROOM_STATUS_UNKNOWN      equ $40
 OW_ROOM_STATUS_VISITED      equ $80
+
+OW_ROOM_STATUS_FLAG_UNVISITED    equ 0
+OW_ROOM_STATUS_FLAG_OPENED       equ 2 ; door or bombable entrance opened
+OW_ROOM_STATUS_FLAG_CHANGED      equ 4 ; e.g. sword taken on the beach
+OW_ROOM_STATUS_FLAG_OWL_TALKED   equ 5
+OW_ROOM_STATUS_FLAG_UNKNOWN_6    equ 6
+OW_ROOM_STATUS_FLAG_VISITED      equ 7
 
 ; Values for hStaircase
 STAIRCASE_NONE     equ $00 ; no staircase in the room

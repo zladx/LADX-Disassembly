@@ -2290,7 +2290,7 @@ jr_020_58B3:
     ld   hl, wOverworldRoomStatus                 ; $58C0: $21 $00 $D8
     add  hl, bc                                   ; $58C3: $09
     ld   a, [hl]                                  ; $58C4: $7E
-    and  $80                                      ; $58C5: $E6 $80
+    and  OW_ROOM_STATUS_VISITED                   ; $58C5: $E6 $80
     ld   a, $2C ; Unvisited location tile         ; $58C7: $3E $2C
     jr   z, jr_020_58D3                           ; $58C9: $28 $08
 

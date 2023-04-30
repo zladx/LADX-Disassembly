@@ -3230,7 +3230,7 @@ KeyDropPointEntityHandler::
     ; If dropped in the quicksand mark the angler key
     ; as available in the quicksand cave by setting the room flags.
     ld   hl, wOverworldRoomStatus + ROOM_OW_YARNA_LANMOLA ; $5C8E: $21 $CE $D8
-    set  4, [hl]                                  ; $5C91: $CB $E6
+    set  OW_ROOM_STATUS_FLAG_CHANGED, [hl]        ; $5C91: $CB $E6
     ld   hl, wIndoorARoomStatus + ROOM_INDOOR_A_QUICKSAND_CAVE ; $5C93: $21 $F8 $D9
     set  5, [hl]                                  ; $5C96: $CB $EE
     ret                                           ; $5C98: $C9
@@ -5189,7 +5189,7 @@ jr_003_6865:
     ld   d, $00                                   ; $686C: $16 $00
     add  hl, de                                   ; $686E: $19
     ld   a, [hl]                                  ; $686F: $7E
-    or   ROOM_STATUS_DOOR_OPEN_UP                 ; $6870: $F6 $04
+    or   OW_ROOM_STATUS_OPENED                    ; $6870: $F6 $04
     ld   [hl], a                                  ; $6872: $77
     ldh  [hRoomStatus], a                         ; $6873: $E0 $F8
     jp   label_003_51F5                           ; $6875: $C3 $F5 $51

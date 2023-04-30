@@ -89,7 +89,7 @@ TradingItemEntityHandler::
 
 .jr_007_5528
     ld   a, [wOverworldRoomStatus + MOUNTAIN_CAVE_ROOM_2] ; $5528: $FA $7B $D8
-    and  $10                                      ; $552B: $E6 $10
+    and  OW_ROOM_STATUS_CHANGED                   ; $552B: $E6 $10
     ret  z                                        ; $552D: $C8
 
 .jr_007_552E

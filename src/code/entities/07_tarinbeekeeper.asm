@@ -107,7 +107,7 @@ func_007_4F1F::
     ld   a, $02                                   ; $4F2E: $3E $02
     ld   [wExchangingTradeSequenceItem], a        ; $4F30: $EA $7F $DB
     ld   hl, wOverworldRoomStatus + $87           ; $4F33: $21 $87 $D8
-    set  6, [hl]                                  ; $4F36: $CB $F6
+    set  OW_ROOM_STATUS_FLAG_UNKNOWN_6, [hl]      ; $4F36: $CB $F6
     call GetEntityTransitionCountdown             ; $4F38: $CD $05 $0C
     ld   [hl], $A0                                ; $4F3B: $36 $A0
     ld   a, JINGLE_TREASURE_FOUND                 ; $4F3D: $3E $01

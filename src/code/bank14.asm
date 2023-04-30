@@ -1842,7 +1842,7 @@ label_014_5743:
     ld   d, $00                                   ; $575E: $16 $00
     ld   hl, wOverworldRoomStatus                 ; $5760: $21 $00 $D8
     add  hl, de                                   ; $5763: $19
-    set  4, [hl]                                  ; $5764: $CB $E6
+    set  OW_ROOM_STATUS_FLAG_CHANGED, [hl]        ; $5764: $CB $E6
     pop  hl                                       ; $5766: $E1
 
 label_014_5767:

@@ -157,7 +157,7 @@ TelephoneEntityHandler::
 .jr_6B7C
     ld_dialog_low e, Dialog14F                    ; $6B7C: $1E $4F
     ld   a, [wOverworldRoomStatus + $10]          ; $6B7E: $FA $10 $D8
-    and  $30                                      ; $6B81: $E6 $30
+    and  OW_ROOM_STATUS_CHANGED | OW_ROOM_STATUS_OWL_TALKED ; $6B81: $E6 $30
     jr   z, .openDialogInTable1                   ; $6B83: $28 $28
 
     ld_dialog_low e, Dialog248                    ; $6B85: $1E $48
@@ -167,12 +167,12 @@ TelephoneEntityHandler::
 
     ld_dialog_low e, Dialog242                    ; $6B8E: $1E $42
     ld   a, [wOverworldRoomStatus + $06]          ; $6B90: $FA $06 $D8
-    and  $30                                      ; $6B93: $E6 $30
+    and  OW_ROOM_STATUS_CHANGED | OW_ROOM_STATUS_OWL_TALKED ; $6B93: $E6 $30
     jr   z, .openDialogInTable2                   ; $6B95: $28 $1C
 
     ld_dialog_low e, Dialog243                    ; $6B97: $1E $43
     ld   a, [wIndoorBRoomStatus + $74]            ; $6B99: $FA $74 $DA
-    and  $40                                      ; $6B9C: $E6 $40
+    and  OW_ROOM_STATUS_UNKNOWN                   ; $6B9C: $E6 $40
     jr   z, .openDialogInTable2                   ; $6B9E: $28 $13
 
     ld_dialog_low e, Dialog247                    ; $6BA0: $1E $47

@@ -8147,7 +8147,7 @@ ApplyLinkGroundPhysics_Default::
     cp   ROOM_INDOOR_B_KANALET_GATE_SWITCH        ; $782A: $FE $C3
     jr   nz, .kanaletGateEnd                      ; $782C: $20 $05
     ld   hl, wOverworldRoomStatus + ROOM_OW_KANALET_GATE ; $782E: $21 $79 $D8
-    set  4, [hl]                                  ; $7831: $CB $E6
+    set  OW_ROOM_STATUS_FLAG_CHANGED, [hl]        ; $7831: $CB $E6
 .kanaletGateEnd
 
     ld   a, [wC13B]                               ; $7833: $FA $3B $C1

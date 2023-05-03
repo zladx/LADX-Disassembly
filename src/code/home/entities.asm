@@ -62,7 +62,7 @@ AnimateEntities::
     jr   z, .bossAgonyEnd                         ; $3992: $28 $07
     dec  [hl]                                     ; $3994: $35
     jr   nz, .bossAgonyEnd                        ; $3995: $20 $04
-    ld   a, WAVE_SFX_BOSS_AGONY                   ; $3997: $3E $10
+    ld   a, WAVE_SFX_BOSS_DEATH_CRY               ; $3997: $3E $10
     ldh  [hWaveSfx], a                            ; $3999: $E0 $F3
 .bossAgonyEnd
 
@@ -1114,7 +1114,7 @@ BossIntro::
     add  hl, bc                                   ; $3F07: $09
     ld   a, [hl]                                  ; $3F08: $7E
     and  $04                                      ; $3F09: $E6 $04
-    ld   a, MUSIC_BOSS_BATTLE                     ; $3F0B: $3E $19
+    ld   a, MUSIC_BOSS                            ; $3F0B: $3E $19
 
     jr   z, .endIf                                ; $3F0D: $28 $02
     ld   a, MUSIC_MINIBOSS                        ; $3F0F: $3E $50

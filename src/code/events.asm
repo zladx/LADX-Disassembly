@@ -225,7 +225,7 @@ OpenLockedDoorsEffectHandler::
 jr_002_5E63:
     add  hl, de                                   ; $5E63: $19
     set  5, [hl]                                  ; $5E64: $CB $EE
-    ld   a, JINGLE_CLEAR_MIDBOSS                  ; $5E66: $3E $1B
+    ld   a, JINGLE_DUNGEON_WARP_APPEAR            ; $5E66: $3E $1B
     ldh  [hJingle], a                             ; $5E68: $E0 $F2
 
 jr_002_5E6A:
@@ -259,7 +259,7 @@ func_002_5E7B::
     ld   [wC190], a                               ; $5E96: $EA $90 $C1
     ld   a, $04                                   ; $5E99: $3E $04
     ld   [wC111], a                               ; $5E9B: $EA $11 $C1
-    ld   a, WAVE_SFX_BOSS_AGONY                   ; $5E9E: $3E $10
+    ld   a, WAVE_SFX_BOSS_DEATH_CRY               ; $5E9E: $3E $10
     ldh  [hNoiseSfx], a                           ; $5EA0: $E0 $F4
 
 .return

@@ -1212,7 +1212,7 @@ label_017_4C22:
     res  LCDCB_BG9C00, [hl]                       ; $4C43: $CB $9E
     call ResetCreditsSceneVariables               ; $4C45: $CD $A5 $4D
     call IncrementCreditsGameplaySubtype          ; $4C48: $CD $5B $4C
-    ld   a, MUSIC_MEETING_WINDFISH                ; $4C4B: $3E $59
+    ld   a, MUSIC_WIND_FISH                       ; $4C4B: $3E $59
     ld   [wMusicTrackToPlay], a                   ; $4C4D: $EA $68 $D3
     ld   a, $40                                   ; $4C50: $3E $40
     ld   [wD006], a                               ; $4C52: $EA $06 $D0
@@ -1645,7 +1645,7 @@ CreditsWindFishPrepare3Handler::
     ld   [wTransitionGfx], a                      ; $50EC: $EA $7F $C1
     ld   a, $09                                   ; $50EF: $3E $09
     ld   [wCreditsSubscene], a                    ; $50F1: $EA $0E $D0
-    ld   a, WAVE_SFX_UNKNOWN_1F                   ; $50F4: $3E $1F
+    ld   a, WAVE_SFX_WIND_FISH_MORPH              ; $50F4: $3E $1F
     ldh  [hWaveSfx], a                            ; $50F6: $E0 $F3
     ret                                           ; $50F8: $C9
 
@@ -1864,7 +1864,7 @@ CreditsWindFishFloatingHandler::
 
 CreditsOpenWindFishDialog::
     call CreditsOpenDialog                        ; $53EB: $CD $F0 $7C
-    ld   a, WAVE_SFX_WIND_FISH                    ; $53EE: $3E $17
+    ld   a, WAVE_SFX_WIND_FISH_CRY                ; $53EE: $3E $17
     ldh  [hWaveSfx], a                            ; $53F0: $E0 $F3
 
 ret_017_53F2:
@@ -1893,7 +1893,7 @@ CreditsWindFishPrepareDisapparitionHandler::
     ld   [wD005], a                               ; $540E: $EA $05 $D0
     ld   a, $50                                   ; $5411: $3E $50
     ld   [wD006], a                               ; $5413: $EA $06 $D0
-    ld   a, WAVE_SFX_UNKNOWN_1F                   ; $5416: $3E $1F
+    ld   a, WAVE_SFX_WIND_FISH_MORPH              ; $5416: $3E $1F
     ldh  [hWaveSfx], a                            ; $5418: $E0 $F3
     call IncrementCreditsSubscene                 ; $541A: $CD $D9 $4C
 
@@ -1980,7 +1980,7 @@ CreditsWindFishDisappearedHandler::
     cp   $0A                                      ; $54C4: $FE $0A
     jr   nz, .jr_54D5                             ; $54C6: $20 $0D
 
-    ; Open the "Play the intruments!" dialog
+    ; Open the "Play the instruments!" dialog
     ld_dialog_low a, Dialog0D2                    ; $54C8: $3E $D2
     call CreditsOpenWindFishDialog                ; $54CA: $CD $EB $53
     ld   a, $27                                   ; $54CD: $3E $27
@@ -2093,7 +2093,7 @@ CreditsLinkPreparesToPlayHandler::
 
     ld   a, LINK_ANIMATION_STATE_STANDING_UP      ; $5571: $3E $04
     ldh  [hLinkAnimationState], a                 ; $5573: $E0 $9D
-    ld   a, MUSIC_WIND_FISH_AWAKENS               ; $5575: $3E $3F
+    ld   a, MUSIC_ISLAND_DISAPPEAR                ; $5575: $3E $3F
     ld   [wMusicTrackToPlay], a                   ; $5577: $EA $68 $D3
 
 jr_017_557A:
@@ -2170,7 +2170,7 @@ CreditsLinkShowsInstrumentsHandler::
     jr   nz, .jr_55F6                             ; $55EF: $20 $05
 
     ld   hl, hJingle                              ; $55F1: $21 $F2 $FF
-    ld   [hl], JINGLE_SHOW_INSTRUMENTS            ; $55F4: $36 $34
+    ld   [hl], JINGLE_INSTRUMENTS_APPEAR          ; $55F4: $36 $34
 
 .jr_55F6
     and  a                                        ; $55F6: $A7
@@ -2678,7 +2678,7 @@ func_017_590B::
     jr   nz, .jr_5917                             ; $5910: $20 $05
 
     ld   hl, hNoiseSfx                            ; $5912: $21 $F4 $FF
-    ld   [hl], NOISE_SFX_UNKNOWN_35               ; $5915: $36 $35
+    ld   [hl], NOISE_SFX_ISLAND_DISAPPEAR         ; $5915: $36 $35
 
 .jr_5917
     and  a                                        ; $5917: $A7
@@ -2914,7 +2914,7 @@ func_017_5A66::
     ld   [wBGPalette], a                          ; $5ABF: $EA $97 $DB
     ld   a, $5C                                   ; $5AC2: $3E $5C
     ldh  [hLinkPositionY], a                      ; $5AC4: $E0 $99
-    ld   a, NOISE_SFX_UNKNOWN_34                  ; $5AC6: $3E $34
+    ld   a, NOISE_SFX_WATERSPOUT                  ; $5AC6: $3E $34
     ldh  [hNoiseSfx], a                           ; $5AC8: $E0 $F4
 
     jp   IncrementD000AndReturn                   ; $5ACA: $C3 $25 $56
@@ -5604,7 +5604,7 @@ func_017_75AA::
 .jr_75D7
     ld   [hl], $C0                                ; $75D7: $36 $C0
     call IncrementEntityState                     ; $75D9: $CD $12 $3B
-    ld   a, WAVE_SFX_WIND_FISH                    ; $75DC: $3E $17
+    ld   a, WAVE_SFX_WIND_FISH_CRY                ; $75DC: $3E $17
     ldh  [hWaveSfx], a                            ; $75DE: $E0 $F3
 
 ret_017_75E0:

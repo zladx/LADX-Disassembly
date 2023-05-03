@@ -6,7 +6,7 @@ OverworldMusicTracks::
     db   $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06
     db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05 ; $04 MUSIC_MABE_VILLAGE
     db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05 ; $05 MUSIC_OVERWORLD
-    db   $09, $09, $09, $09, $05, $05, $05, $05, $05, $05, $05, $05, $08, $08, $08, $08 ; $06 MUSIC_MT_TAMARANCH
+    db   $09, $09, $09, $09, $05, $05, $05, $05, $05, $05, $05, $05, $08, $08, $08, $08 ; $06 MUSIC_TAL_TAL_RANGE
     db   $09, $09, $09, $09, $05, $05, $05, $05, $05, $05, $05, $05, $08, $08, $08, $08 ; $08 MUSIC_RAFT_RIDE_RAPIDS
     db   $09, $09, $09, $09, $05, $05, $05, $05, $05, $05, $05, $05, $08, $08, $08, $08 ; $09 MUSIC_MYSTERIOUS_FOREST
     db   $09, $09, $09, $09, $05, $05, $05, $05, $05, $05, $05, $05, $08, $08, $08, $08 ; $0B MUSIC_ANIMAL_VILLAGE
@@ -21,8 +21,8 @@ OverworldMusicTracks::
 
 ; Music tracks for inside houses, indexed by map index
 HouseMusicTracks::
-    db   MUSIC_TAIL_CAVE, MUSIC_BOTTLE_GROTTO, MUSIC_KEY_CAVERN, MUSIC_ANGLERS_TUNNEL, MUSIC_CATFISH_MAW, MUSIC_FACE_SHRINE, MUSIC_EAGLE_TOWER, MUSIC_TURTLE_ROCK, MUSIC_EGG_MAZE, MUSIC_COLOR_DUNGEON, MUSIC_COMMON_CAVE, MUSIC_COMMON_CAVE, MUSIC_COMMON_CAVE, MUSIC_COMMON_CAVE, MUSIC_WITCH_HUT, MUSIC_MINIGAME
-    db   MUSIC_HOUSE, MUSIC_COMMON_CAVE, MUSIC_HOUSE, MUSIC_DREAM_SHRINE, MUSIC_KANALET_CASTLE, MUSIC_BOWWOW_KIDNAPPED_INTRODUCTION, MUSIC_SOUTHERN_SHRINE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_HOUSE, MUSIC_GHOST_HOUSE, MUSIC_COMMON_CAVE
+    db   MUSIC_TAIL_CAVE, MUSIC_BOTTLE_GROTTO, MUSIC_KEY_CAVERN, MUSIC_ANGLERS_TUNNEL, MUSIC_CATFISHS_MAW, MUSIC_FACE_SHRINE, MUSIC_EAGLES_TOWER, MUSIC_TURTLE_ROCK, MUSIC_EGG_MAZE, MUSIC_COLOR_DUNGEON, MUSIC_CAVE, MUSIC_CAVE, MUSIC_CAVE, MUSIC_CAVE, MUSIC_SHOP, MUSIC_MINIGAME
+    db   MUSIC_INSIDE_BUILDING, MUSIC_CAVE, MUSIC_INSIDE_BUILDING, MUSIC_DREAM_SHRINE_DREAM, MUSIC_KANALET_CASTLE, MUSIC_MOBLIN_HIDEOUT, MUSIC_SOUTHERN_SHRINE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_INSIDE_BUILDING, MUSIC_GHOST_HOUSE, MUSIC_CAVE
 
 ; Whether a music track has precedence over the Power-Up music, indexed by track id
 MusicOverridesPowerUpTrack::
@@ -42,7 +42,7 @@ SelectMusicTrackAfterTransition::
 .startNewMusicTrack
 
     ; If wSwordLevel == 0 (Link doesn’t have its sword yet), use adventure start music
-    ld   d, MUSIC_SWORD_SEARCH                    ; $414F: $16 $1D
+    ld   d, MUSIC_OVERWORLD_SWORDLESS             ; $414F: $16 $1D
     ld   a, [wSwordLevel]                         ; $4151: $FA $4E $DB
     and  a                                        ; $4154: $A7
     jp   z, .clearEventFlagsAndLoadSoundtrack     ; $4155: $CA $A2 $41
@@ -67,7 +67,7 @@ SelectMusicTrackAfterTransition::
     jr   z, .clearEventFlagsAndLoadSoundtrack     ; $416A: $28 $36
 
     ; If a boss was just defeated, load specific music
-    ld   d, MUSIC_BOSS_DEFEATED                   ; $416C: $16 $18
+    ld   d, MUSIC_AFTER_BOSS                      ; $416C: $16 $18
     ld   a, [wBossDefeated]                       ; $416E: $FA $6C $D4
     and  a                                        ; $4171: $A7
     jr   nz, .loadSoundtrack                      ; $4172: $20 $32

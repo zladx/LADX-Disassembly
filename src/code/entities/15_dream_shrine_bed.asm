@@ -42,7 +42,7 @@ func_015_7D01::
     ldh  [hLinkDirection], a                      ; $7D3C: $E0 $9E
     ld   a, $01                                   ; $7D3E: $3E $01
     ld   [wC10A], a                               ; $7D40: $EA $0A $C1
-    ld   a, MUSIC_DREAMING                        ; $7D43: $3E $1E
+    ld   a, MUSIC_DREAM_SHRINE_SLEEP              ; $7D43: $3E $1E
     ld   [wMusicTrackToPlay], a                   ; $7D45: $EA $68 $D3
     xor  a                                        ; $7D48: $AF
     ld   [wTransitionSequenceCounter], a          ; $7D49: $EA $6B $C1

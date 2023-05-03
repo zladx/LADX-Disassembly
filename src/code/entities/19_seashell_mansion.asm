@@ -182,7 +182,7 @@ SeashellMansionState3Handler::
     ld   hl, wEntitiesPrivateState2Table          ; $72B4: $21 $C0 $C2
     add  hl, bc                                   ; $72B7: $09
     ld   [hl], $01                                ; $72B8: $36 $01
-    ld   a, MUSIC_SEASHELL_MANSION_SPIRIT         ; $72BA: $3E $56
+    ld   a, MUSIC_L2_SWORD                        ; $72BA: $3E $56
     ld   [wMusicTrackToPlay], a                   ; $72BC: $EA $68 $D3
 
 label_019_72BF:
@@ -469,7 +469,7 @@ func_019_7511::
     jr   nz, func_019_7526                        ; $751B: $20 $09
 
     ld   [hl], $FF                                ; $751D: $36 $FF
-    ld   a, WAVE_SFX_UNKNOWN_1E                   ; $751F: $3E $1E
+    ld   a, WAVE_SFX_L2_SWORD_APPEAR              ; $751F: $3E $1E
     ldh  [hWaveSfx], a                            ; $7521: $E0 $F3
     call IncrementEntityState                     ; $7523: $CD $12 $3B
 
@@ -490,7 +490,7 @@ func_019_7526::
     and  $07                                      ; $7537: $E6 $07
     jr   nz, .jr_7547                             ; $7539: $20 $0C
 
-    ld   a, NOISE_SFX_UNKNOWN_33                  ; $753B: $3E $33
+    ld   a, NOISE_SFX_L2_SWORD_SPARKS             ; $753B: $3E $33
     ldh  [hNoiseSfx], a                           ; $753D: $E0 $F4
     call GetRandomByte                            ; $753F: $CD $0D $28
     and  $03                                      ; $7542: $E6 $03
@@ -628,7 +628,7 @@ func_019_767B::
     jr   c, .ret_76B0                             ; $7699: $38 $15
 
     ld   [hl], $70                                ; $769B: $36 $70
-    ld   a, NOISE_SFX_UNKNOWN_17                  ; $769D: $3E $17
+    ld   a, NOISE_SFX_CLINK                       ; $769D: $3E $17
     ldh  [hNoiseSfx], a                           ; $769F: $E0 $F4
     ld   hl, wEntitiesSpeedYTable                 ; $76A1: $21 $50 $C2
     add  hl, bc                                   ; $76A4: $09
@@ -652,7 +652,7 @@ func_019_76B1::
     jr   nc, .ret_76CA                            ; $76BB: $30 $0D
 
     call IncrementEntityState                     ; $76BD: $CD $12 $3B
-    ld   a, MUSIC_SWORD_ACQUIRED                  ; $76C0: $3E $0F
+    ld   a, MUSIC_OBTAIN_SWORD                    ; $76C0: $3E $0F
     ld   [wMusicTrackToPlay], a                   ; $76C2: $EA $68 $D3
     call GetEntityTransitionCountdown             ; $76C5: $CD $05 $0C
     ld   [hl], $FF                                ; $76C8: $36 $FF
@@ -676,7 +676,7 @@ func_019_76CB::
     jr   nz, .jr_7709                             ; $76DD: $20 $2A
 
     ld   [hl], $20                                ; $76DF: $36 $20
-    ld   a, MUSIC_TOOL_ACQUIRED                   ; $76E1: $3E $10
+    ld   a, MUSIC_OBTAIN_ITEM                     ; $76E1: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $76E3: $EA $68 $D3
     call_open_dialog Dialog09F                    ; $76E6
     ld   a, [wIndoorBRoomStatus + $E9]            ; $76EB: $FA $E9 $DA

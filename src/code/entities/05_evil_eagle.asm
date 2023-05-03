@@ -72,7 +72,7 @@ ENDC
 
     ld   a, $02                                   ; $5A73: $3E $02
     ld   [wD205], a                               ; $5A75: $EA $05 $D2
-    ld   a, MUSIC_GRIM_CREEPER_DIALOG             ; $5A78: $3E $5C
+    ld   a, MUSIC_EAGLE_BOSS_LOOP                 ; $5A78: $3E $5C
     ld   [wMusicTrackToPlay], a                   ; $5A7A: $EA $68 $D3
 
 Data_005_5A7D::
@@ -168,7 +168,7 @@ IF __PATCH_0__
     xor  a
     ld   [wDE0B], a
 ENDC
-    ld   a, MUSIC_EAGLES_TOWER_BOSS_CUTSCENE      ; $5AFE: $3E $54
+    ld   a, MUSIC_EAGLE_BOSS_TRANSITION           ; $5AFE: $3E $54
 IF __PATCH_0__
     jr   jr_005_5b15
 ENDC
@@ -180,7 +180,7 @@ IF __PATCH_0__
     jr   z, func_005_5B03
     xor  a
     ld   [wDE0B], a
-    ld   a, MUSIC_BOSS_BATTLE
+    ld   a, MUSIC_BOSS
 ENDC
 
 jr_005_5b15:
@@ -366,7 +366,7 @@ func_005_5BEC::
     ld   [hl], $80                                ; $5C1E: $36 $80
 
 func_005_5C20::
-    ld   a, NOISE_SFX_UNKNOWN_22                  ; $5C20: $3E $22
+    ld   a, NOISE_SFX_EVIL_EAGLE_FLY              ; $5C20: $3E $22
     ldh  [hNoiseSfx], a                           ; $5C22: $E0 $F4
 
 ret_005_5C24:
@@ -376,7 +376,7 @@ jr_005_5C25:
     call IncrementEntityState                     ; $5C25: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $5C28: $CD $05 $0C
     ld   [hl], $30                                ; $5C2B: $36 $30
-    ld   a, NOISE_SFX_EAGLE_TOUCHDOWN             ; $5C2D: $3E $30
+    ld   a, NOISE_SFX_EAGLE_LANDING               ; $5C2D: $3E $30
     ldh  [hNoiseSfx], a                           ; $5C2F: $E0 $F4
     ret                                           ; $5C31: $C9
 
@@ -389,7 +389,7 @@ func_005_5C32::
     jr   nz, .jr_5C41                             ; $5C3A: $20 $05
 
     ld   hl, hJingle                              ; $5C3C: $21 $F2 $FF
-    ld   [hl], JINGLE_EVIL_EAGLE                  ; $5C3F: $36 $30
+    ld   [hl], JINGLE_EAGLE_SKID                  ; $5C3F: $36 $30
 
 .jr_5C41
     and  a                                        ; $5C41: $A7
@@ -828,7 +828,7 @@ jr_005_5EA3:
     cp   $22                                      ; $5EA7: $FE $22
     jr   c, .jr_5EB0                              ; $5EA9: $38 $05
 
-    ld   a, NOISE_SFX_UNKNOWN_32                  ; $5EAB: $3E $32
+    ld   a, NOISE_SFX_EAGLE_FEATHERS              ; $5EAB: $3E $32
     ldh  [hNoiseSfx], a                           ; $5EAD: $E0 $F4
     xor  a                                        ; $5EAF: $AF
 

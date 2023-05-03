@@ -2282,7 +2282,7 @@ CreateFollowingNpcEntity::
     ldh  a, [hMapId]                              ; $60E4: $F0 $F7
     cp   MAP_CAVE_C                               ; $60E6: $FE $11
     jr   nz, .marinFallEnd                        ; $60E8: $20 $0D
-    ld   a, JINGLE_JUMP_DOWN                      ; $60EA: $3E $08
+    ld   a, JINGLE_FALL_DOWN                      ; $60EA: $3E $08
     ldh  [hJingle], a                             ; $60EC: $E0 $F2
     ld   [wC167], a                               ; $60EE: $EA $67 $C1
     ld   hl, wEntitiesPrivateCountdown2Table      ; $60F1: $21 $00 $C3

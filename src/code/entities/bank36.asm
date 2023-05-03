@@ -250,7 +250,7 @@ func_036_4153::
 
 func_036_4161::
     call func_036_4365                            ; $4161: $CD $65 $43
-    ld   a, NOISE_SFX_UNKNOWN_40                  ; $4164: $3E $40
+    ld   a, NOISE_SFX_PHOTO                       ; $4164: $3E $40
     ldh  [hNoiseSfx], a                           ; $4166: $E0 $F4
     ld   a, GAMEPLAY_PHOTO_BRIDGE                 ; $4168: $3E $1A
     ld   [wGameplayType], a                       ; $416A: $EA $95 $DB
@@ -1093,7 +1093,7 @@ func_036_467F::
     and  a                                        ; $4688: $A7
     jr   nz, .jr_469A                             ; $4689: $20 $0F
 
-    ld   a, NOISE_SFX_UNKNOWN_40                  ; $468B: $3E $40
+    ld   a, NOISE_SFX_PHOTO                       ; $468B: $3E $40
     ldh  [hNoiseSfx], a                           ; $468D: $E0 $F4
     ld   hl, wBGPalette                           ; $468F: $21 $97 $DB
     xor  a                                        ; $4692: $AF
@@ -1419,7 +1419,7 @@ func_036_4830::
     jp   IncrementEntityState                     ; $4863: $C3 $12 $3B
 
 func_036_4866::
-    ld   a, NOISE_SFX_UNKNOWN_40                  ; $4866: $3E $40
+    ld   a, NOISE_SFX_PHOTO                       ; $4866: $3E $40
     ldh  [hNoiseSfx], a                           ; $4868: $E0 $F4
     ld   a, GAMEPLAY_PHOTO_ULRIRA                 ; $486A: $3E $13
     ld   [wGameplayType], a                       ; $486C: $EA $95 $DB
@@ -2056,7 +2056,7 @@ func_036_4BCF::
     and  a                                        ; $4BD2: $A7
     ret  nz                                       ; $4BD3: $C0
 
-    ld   a, NOISE_SFX_UNKNOWN_40                  ; $4BD4: $3E $40
+    ld   a, NOISE_SFX_PHOTO                       ; $4BD4: $3E $40
     ldh  [hNoiseSfx], a                           ; $4BD6: $E0 $F4
     ld   a, GAMEPLAY_PHOTO_ZORA                   ; $4BD8: $3E $17
     ld   [wGameplayType], a                       ; $4BDA: $EA $95 $DB
@@ -4619,7 +4619,7 @@ BouncingBoulderEntityHandler::
     ld   a, [hl]                                  ; $5BDF: $7E
     call PointHLToEntitySpeedZ                    ; $5BE0: $CD $F8 $6B
     ld   [hl], a                                  ; $5BE3: $77
-    ld   a, JINGLE_BIG_BUMP                       ; $5BE4: $3E $20
+    ld   a, JINGLE_BOUNCE                         ; $5BE4: $3E $20
     ldh  [hJingle], a                             ; $5BE6: $E0 $F2
 
 label_036_5BE8:
@@ -4721,7 +4721,7 @@ func_036_5C69::
     ret                                           ; $5C71: $C9
 
 .jr_5C72
-    ld   a, NOISE_SFX_1A                          ; $5C72: $3E $1A
+    ld   a, NOISE_SFX_BOSS_EXPLOSION              ; $5C72: $3E $1A
     ldh  [hNoiseSfx], a                           ; $5C74: $E0 $F4
     call label_27DD                               ; $5C76: $CD $DD $27
     call DidKillEnemy                             ; $5C79: $CD $50 $3F

@@ -251,7 +251,7 @@ Data_007_4E0D::
     db   $20, $28, $F0, $E8, $E8, $E0, $E0, $D8
 
 func_007_4E25::
-    ld   a, JINGLE_HONEYCOMB                      ; $4E25: $3E $22
+    ld   a, JINGLE_TARIN_BEE_BUZZ                 ; $4E25: $3E $22
     ldh  [hJingle], a                             ; $4E27: $E0 $F2
     ld   a, [wD204]                               ; $4E29: $FA $04 $D2
     ld   e, a                                     ; $4E2C: $5F

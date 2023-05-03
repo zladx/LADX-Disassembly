@@ -1451,7 +1451,7 @@ wC5A5::
 wC5A6::
   ds 1 ; C5A6
 
-; When reaching zero, play the WAVE_SFX_BOSS_AGONY sound effect
+; When reaching zero, play the WAVE_SFX_BOSS_DEATH_CRY sound effect
 wBossAgonySFXCountdown::
   ds 1 ; C5A7
 

@@ -59,7 +59,7 @@ ArmosKnightPrivateState2Handler::
     call GetEntityTransitionCountdown             ; $5333: $CD $05 $0C
     jr   nz, jr_006_535D                          ; $5336: $20 $25
 
-    ld   a, NOISE_SFX_1A                          ; $5338: $3E $1A
+    ld   a, NOISE_SFX_BOSS_EXPLOSION              ; $5338: $3E $1A
     ldh  [hNoiseSfx], a                           ; $533A: $E0 $F4
     call label_27DD                               ; $533C: $CD $DD $27
     call DidKillEnemy                             ; $533F: $CD $50 $3F
@@ -198,7 +198,7 @@ jr_006_53F9:
     ld   [hl], 4 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $5406: $36 $C4
     ld   a, TRANSCIENT_VFX_POOF                   ; $5408: $3E $02
     call AddTranscientVfx                         ; $540A: $CD $C7 $0C
-    ld   a, NOISE_SFX_UNKNOWN_29                  ; $540D: $3E $29
+    ld   a, NOISE_SFX_BREAK                       ; $540D: $3E $29
     ldh  [hNoiseSfx], a                           ; $540F: $E0 $F4
 
 label_006_5411:
@@ -309,7 +309,7 @@ ArmosKnightState3Handler::
 
 .jr_54B4
     call ApplyVectorTowardsLink_trampoline        ; $54B4: $CD $AA $3B
-    ld   a, JINGLE_BIG_BUMP                       ; $54B7: $3E $20
+    ld   a, JINGLE_BOUNCE                         ; $54B7: $3E $20
     ldh  [hJingle], a                             ; $54B9: $E0 $F2
 
 jr_006_54BB:
@@ -356,7 +356,7 @@ ArmosKnightState6Handler::
     ld   [wC157], a                               ; $54F6: $EA $57 $C1
     ld   a, $04                                   ; $54F9: $3E $04
     ld   [wC158], a                               ; $54FB: $EA $58 $C1
-    ld   a, JINGLE_HUGE_BUMP                      ; $54FE: $3E $0B
+    ld   a, JINGLE_STRONG_BUMP                    ; $54FE: $3E $0B
     ldh  [hJingle], a                             ; $5500: $E0 $F2
     call GetEntityTransitionCountdown             ; $5502: $CD $05 $0C
     ld   [hl], $30                                ; $5505: $36 $30

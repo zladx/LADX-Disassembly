@@ -334,7 +334,7 @@ jr_005_7DA8:
     ld   hl, wEntitiesSpeedYTable                 ; $7DBF: $21 $50 $C2
     add  hl, bc                                   ; $7DC2: $09
     ld   [hl], $F0                                ; $7DC3: $36 $F0
-    ld   a, WAVE_SFX_BOSS_HIT                     ; $7DC5: $3E $16
+    ld   a, WAVE_SFX_BOSS_GROWL                   ; $7DC5: $3E $16
     ldh  [hWaveSfx], a                            ; $7DC7: $E0 $F3
     jp   label_005_7DF0                           ; $7DC9: $C3 $F0 $7D
 
@@ -488,7 +488,7 @@ func_005_7E98::
     jr   nz, jr_005_7ED4                          ; $7E9B: $20 $37
 
 label_005_7E9D:
-    ld   a, NOISE_SFX_1A                          ; $7E9D: $3E $1A
+    ld   a, NOISE_SFX_BOSS_EXPLOSION              ; $7E9D: $3E $1A
     ldh  [hNoiseSfx], a                           ; $7E9F: $E0 $F4
     ldh  a, [hActiveEntityType]                   ; $7EA1: $F0 $EB
     cp   ENTITY_EVIL_EAGLE                        ; $7EA3: $FE $63

@@ -98,7 +98,7 @@ jr_015_4EEE:
     call SpawnNewEntity_trampoline                ; $4F10: $CD $86 $3B
     ret  c                                        ; $4F13: $D8
 
-    ld   a, NOISE_SFX_SHOOT_ARROW                 ; $4F14: $3E $0A
+    ld   a, NOISE_SFX_WHOOSH                      ; $4F14: $3E $0A
     ldh  [hNoiseSfx], a                           ; $4F16: $E0 $F4
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $4F18: $21 $10 $C4
     add  hl, de                                   ; $4F1B: $19

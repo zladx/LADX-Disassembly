@@ -761,7 +761,7 @@ shallowWaterVfx:
     ldh  [hMultiPurpose1], a                      ; $45AF: $E0 $D8
     ldh  a, [hLinkPositionX]                      ; $45B1: $F0 $98
     ldh  [hMultiPurpose0], a                      ; $45B3: $E0 $D7
-    ld   a, JINGLE_WATER_DIVE                     ; $45B5: $3E $0E
+    ld   a, JINGLE_WATER_SPLASH                   ; $45B5: $3E $0E
     ldh  [hJingle], a                             ; $45B7: $E0 $F2
     ld   a, TRANSCIENT_VFX_PEGASUS_SPLASH         ; $45B9: $3E $0C
     jp   AddTranscientVfx                         ; $45BB: $C3 $C7 $0C
@@ -2320,7 +2320,7 @@ label_002_4F6D:
     and  J_A                                      ; $4F94: $E6 $10
     jr   z, jr_002_4FA1                           ; $4F96: $28 $09
 
-    ld   a, JINGLE_WATER_SWIM                     ; $4F98: $3E $0F
+    ld   a, JINGLE_SWIM                           ; $4F98: $3E $0F
     ldh  [hJingle], a                             ; $4F9A: $E0 $F2
     ld   a, $20                                   ; $4F9C: $3E $20
     ld   [wC183], a                               ; $4F9E: $EA $83 $C1
@@ -3548,7 +3548,7 @@ RenderTranscientRumble::
     jr   nz, .jr_566D                             ; $5666: $20 $05
 
     ld   hl, hNoiseSfx                            ; $5668: $21 $F4 $FF
-    ld   [hl], NOISE_SFX_DOOR_RUMBLE              ; $566B: $36 $2A
+    ld   [hl], NOISE_SFX_OPEN_KEY_CAVERN          ; $566B: $36 $2A
 
 .jr_566D
     cp   $0A                                      ; $566D: $FE $0A
@@ -3969,7 +3969,7 @@ func_002_5928::
     ldh  [hMultiPurpose1], a                      ; $5928: $E0 $D8
     ldh  a, [hLinkPositionX]                      ; $592A: $F0 $98
     ldh  [hMultiPurpose0], a                      ; $592C: $E0 $D7
-    ld   a, JINGLE_WATER_DIVE                     ; $592E: $3E $0E
+    ld   a, JINGLE_WATER_SPLASH                   ; $592E: $3E $0E
     ldh  [hJingle], a                             ; $5930: $E0 $F2
     ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $5932: $3E $01
     jp   AddTranscientVfx                         ; $5934: $C3 $C7 $0C
@@ -5909,7 +5909,7 @@ jr_002_6BEB:
     and  DIRECTION_VERTICAL_MASK                  ; $6C23: $E6 $02
     sla  a                                        ; $6C25: $CB $27
     ld   [wC158], a                               ; $6C27: $EA $58 $C1
-    ld   a, JINGLE_HUGE_BUMP                      ; $6C2A: $3E $0B
+    ld   a, JINGLE_STRONG_BUMP                    ; $6C2A: $3E $0B
     ldh  [hJingle], a                             ; $6C2C: $E0 $F2
     ret                                           ; $6C2E: $C9
 
@@ -6397,12 +6397,12 @@ CheckForLedgeJumpAndReturn::
     cp   LINK_MOTION_UNSTUCKING                   ; $6E9F: $FE $02
     jr   z, jr_002_6EDD                           ; $6EA1: $28 $3A
 
-    ld   a, JINGLE_JUMP_DOWN                      ; $6EA3: $3E $08
+    ld   a, JINGLE_FALL_DOWN                      ; $6EA3: $3E $08
     ldh  [hJingle], a                             ; $6EA5: $E0 $F2
     jr   jr_002_6EB5                              ; $6EA7: $18 $0C
 
 func_002_6EA9::
-    ld   a, JINGLE_JUMP_DOWN                      ; $6EA9: $3E $08
+    ld   a, JINGLE_FALL_DOWN                      ; $6EA9: $3E $08
     ldh  [hJingle], a                             ; $6EAB: $E0 $F2
 
 func_002_6EAD::
@@ -6777,7 +6777,7 @@ ENDC
     ld   [wIsLinkInTheAir], a                     ; $70CC: $EA $46 $C1
     ld   a, $01                                   ; $70CF: $3E $01
     ld   [wC10A], a                               ; $70D1: $EA $0A $C1
-    ld   a, JINGLE_JUMP_DOWN                      ; $70D4: $3E $08
+    ld   a, JINGLE_FALL_DOWN                      ; $70D4: $3E $08
     ldh  [hJingle], a                             ; $70D6: $E0 $F2
 
 label_002_70D8:
@@ -7523,7 +7523,7 @@ label_002_74AD:
     and  $02                                      ; $74F0: $E6 $02
     sla  a                                        ; $74F2: $CB $27
     ld   [wC158], a                               ; $74F4: $EA $58 $C1
-    ld   a, JINGLE_HUGE_BUMP                      ; $74F7: $3E $0B
+    ld   a, JINGLE_STRONG_BUMP                    ; $74F7: $3E $0B
     ldh  [hJingle], a                             ; $74F9: $E0 $F2
     jp   func_1828                                ; $74FB: $C3 $28 $18
 
@@ -7868,7 +7868,7 @@ ApplyLinkGroundPhysics_part2::
     ld   a, [wLinkGroundVfx]                      ; $76B5: $FA $81 $C1
     ld   [wDBCB], a                               ; $76B8: $EA $CB $DB
 
-    ld   a, WAVE_SFX_LINK_FALLS                   ; $76BB: $3E $0C
+    ld   a, WAVE_SFX_LINK_FALL                    ; $76BB: $3E $0C
     ldh  [hWaveSfx], a                            ; $76BD: $E0 $F3
 
 .return
@@ -8042,7 +8042,7 @@ IF __PATCH_0__
     jr   z, .jr_779A
 ENDC
 
-    ld   a, JINGLE_WATER_DIVE                     ; $7796: $3E $0E
+    ld   a, JINGLE_WATER_SPLASH                   ; $7796: $3E $0E
     ldh  [hJingle], a                             ; $7798: $E0 $F2
 
 .jr_779A
@@ -8136,7 +8136,7 @@ ApplyLinkGroundPhysics_Default::
     ld   a, $60                                   ; $781B: $3E $60
     ld   [wSwitchButtonPressed], a                ; $781D: $EA $CB $C1
 
-    ld   a, WAVE_SFX_SWITCH_BUTTON                ; $7820: $3E $0E
+    ld   a, WAVE_SFX_FLOOR_SWITCH                 ; $7820: $3E $0E
     ldh  [hWaveSfx], a                            ; $7822: $E0 $F3
 
     ld   a, REPLACE_TILES_BUTTON_PRESSED          ; $7824: $3E $03
@@ -8183,7 +8183,7 @@ ApplyLinkGroundPhysics_Default::
     cp   $28                                      ; $7861: $FE $28
     jr   c, .return                               ; $7863: $38 $09
 
-    ld   a, NOISE_SFX_ROCK_RUMBLE                 ; $7865: $3E $2B
+    ld   a, NOISE_SFX_RUMBLE2                     ; $7865: $3E $2B
     ldh  [hNoiseSfx], a                           ; $7867: $E0 $F4
     jp   label_002_4D97                           ; $7869: $C3 $97 $4D
 

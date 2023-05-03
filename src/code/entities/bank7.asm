@@ -548,5 +548,5 @@ label_007_7F36:
 jr_007_7F76:
     call ClearEntityStatus_07                     ; $7F76: $CD $A4 $7E
     ld   hl, hNoiseSfx                            ; $7F79: $21 $F4 $FF
-    ld   [hl], NOISE_SFX_1A                       ; $7F7C: $36 $1A
+    ld   [hl], NOISE_SFX_BOSS_EXPLOSION           ; $7F7C: $36 $1A
     ret                                           ; $7F7E: $C9

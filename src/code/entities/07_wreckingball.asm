@@ -91,7 +91,7 @@ jr_007_602A:
     jr   c, .jr_6082                              ; $6078: $38 $08
 
     push af                                       ; $607A: $F5
-    ld   a, NOISE_SFX_UNKNOWN_17                  ; $607B: $3E $17
+    ld   a, NOISE_SFX_CLINK                       ; $607B: $3E $17
     ldh  [hNoiseSfx], a                           ; $607D: $E0 $F4
     pop  af                                       ; $607F: $F1
     jr   jr_007_6083                              ; $6080: $18 $01
@@ -221,7 +221,7 @@ ENDC
     call GetEntityTransitionCountdown             ; $6129: $CD $05 $0C
     ld   [hl], $02                                ; $612C: $36 $02
     ld   hl, hWaveSfx                             ; $612E: $21 $F3 $FF
-    ld   [hl], WAVE_SFX_ZIP                       ; $6131: $36 $02
+    ld   [hl], WAVE_SFX_LIFT_UP                   ; $6131: $36 $02
 
 ret_007_6133:
     ret                                           ; $6133: $C9
@@ -319,9 +319,9 @@ func_007_618F::
     jr   nc, .ret_61CD                            ; $61AC: $30 $1F
 
     call func_007_6142                            ; $61AE: $CD $42 $61
-    ld   a, NOISE_SFX_UNKNOWN_25                  ; $61B1: $3E $25
+    ld   a, NOISE_SFX_D7_PILLAR_COLLAPSE          ; $61B1: $3E $25
     ldh  [hNoiseSfx], a                           ; $61B3: $E0 $F4
-    ld   a, JINGLE_HUGE_BUMP                      ; $61B5: $3E $0B
+    ld   a, JINGLE_STRONG_BUMP                    ; $61B5: $3E $0B
     ldh  [hJingle], a                             ; $61B7: $E0 $F2
     call GetEntityTransitionCountdown             ; $61B9: $CD $05 $0C
     ld   [hl], $10                                ; $61BC: $36 $10

@@ -93,7 +93,7 @@ SlimeEyeState0Handler::
     jr   nz, .jr_49FB                             ; $49F2: $20 $07
 
     call IncrementEntityState                     ; $49F4: $CD $12 $3B
-    ld   a, JINGLE_JUMP_DOWN                      ; $49F7: $3E $08
+    ld   a, JINGLE_FALL_DOWN                      ; $49F7: $3E $08
     ldh  [hJingle], a                             ; $49F9: $E0 $F2
 
 .jr_49FB
@@ -693,7 +693,7 @@ func_004_4EEB::
 
     ld   a, $18                                   ; $4F2E: $3E $18
     ld   [wC157], a                               ; $4F30: $EA $57 $C1
-    ld   a, JINGLE_HUGE_BUMP                      ; $4F33: $3E $0B
+    ld   a, JINGLE_STRONG_BUMP                    ; $4F33: $3E $0B
     ldh  [hJingle], a                             ; $4F35: $E0 $F2
     ld   a, [wIsLinkInTheAir]                     ; $4F37: $FA $46 $C1
     and  a                                        ; $4F3A: $A7
@@ -714,7 +714,7 @@ func_004_4EEB::
     cp   $F2                                      ; $4F4F: $FE $F2
     jr   nc, jr_004_4F57                          ; $4F51: $30 $04
 
-    ld   a, JINGLE_BIG_BUMP                       ; $4F53: $3E $20
+    ld   a, JINGLE_BOUNCE                         ; $4F53: $3E $20
     ldh  [hJingle], a                             ; $4F55: $E0 $F2
 
 jr_004_4F57:
@@ -765,7 +765,7 @@ func_004_4F7E::
     ld   hl, wEntitiesPosYTable                   ; $4FA4: $21 $10 $C2
     add  hl, bc                                   ; $4FA7: $09
     ld   [hl], a                                  ; $4FA8: $77
-    ld   a, JINGLE_JUMP_DOWN                      ; $4FA9: $3E $08
+    ld   a, JINGLE_FALL_DOWN                      ; $4FA9: $3E $08
     ldh  [hJingle], a                             ; $4FAB: $E0 $F2
 
 .ret_4FAD

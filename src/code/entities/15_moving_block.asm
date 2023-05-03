@@ -45,7 +45,7 @@ MovingBlockLeftTopState1Handler::
     jr   c, .ret_414C                             ; $4138: $38 $12
 
     ld   [hl], b                                  ; $413A: $70
-    ld   a, NOISE_SFX_BLOCK_RUMBLE                ; $413B: $3E $11
+    ld   a, NOISE_SFX_RUMBLE                      ; $413B: $3E $11
     ldh  [hNoiseSfx], a                           ; $413D: $E0 $F4
     ld   hl, wEntitiesPrivateState2Table          ; $413F: $21 $C0 $C2
     add  hl, bc                                   ; $4142: $09
@@ -196,7 +196,7 @@ MovingBlockLeftBottomState1Handler::
     jr   c, .ret_4216                             ; $4202: $38 $12
 
     ld   [hl], b                                  ; $4204: $70
-    ld   a, NOISE_SFX_BLOCK_RUMBLE                ; $4205: $3E $11
+    ld   a, NOISE_SFX_RUMBLE                      ; $4205: $3E $11
     ldh  [hNoiseSfx], a                           ; $4207: $E0 $F4
     ld   hl, wEntitiesPrivateState2Table          ; $4209: $21 $C0 $C2
     add  hl, bc                                   ; $420C: $09
@@ -281,7 +281,7 @@ MovingBlockBottomLeftState1Handler::
     jr   c, .ret_4288                             ; $4274: $38 $12
 
     ld   [hl], b                                  ; $4276: $70
-    ld   a, NOISE_SFX_BLOCK_RUMBLE                ; $4277: $3E $11
+    ld   a, NOISE_SFX_RUMBLE                      ; $4277: $3E $11
     ldh  [hNoiseSfx], a                           ; $4279: $E0 $F4
     ld   hl, wEntitiesPrivateState2Table          ; $427B: $21 $C0 $C2
     add  hl, bc                                   ; $427E: $09
@@ -366,7 +366,7 @@ MovingBlockBottomRightState1Handler::
     jr   c, .ret_42FA                             ; $42E6: $38 $12
 
     ld   [hl], b                                  ; $42E8: $70
-    ld   a, NOISE_SFX_BLOCK_RUMBLE                ; $42E9: $3E $11
+    ld   a, NOISE_SFX_RUMBLE                      ; $42E9: $3E $11
     ldh  [hNoiseSfx], a                           ; $42EB: $E0 $F4
     ld   hl, wEntitiesPrivateState2Table          ; $42ED: $21 $C0 $C2
     add  hl, bc                                   ; $42F0: $09

@@ -80,7 +80,7 @@ IF __PATCH_0__
     ret  nz
 ENDC
 
-    ld   a, MUSIC_FINAL_BOSS_DIALOG               ; $50C7: $3E $5D
+    ld   a, MUSIC_FINAL_BOSS_INTRO                ; $50C7: $3E $5D
     ld   [wMusicTrackToPlay], a                   ; $50C9: $EA $68 $D3
     ld   hl, wIndoorBRoomStatus + $74             ; $50CC: $21 $74 $DA
     set  6, [hl]                                  ; $50CF: $CB $F6
@@ -134,7 +134,7 @@ func_015_511D::
     call IncrementEntityState                     ; $5125: $CD $12 $3B
 
 func_015_5128::
-    ld   a, JINGLE_SHADOW_NEXT                    ; $5128: $3E $35
+    ld   a, JINGLE_SHADOW_MOVE                    ; $5128: $3E $35
     ldh  [hJingle], a                             ; $512A: $E0 $F2
     ret                                           ; $512C: $C9
 
@@ -347,7 +347,7 @@ func_015_522C::
     jr   jr_015_527A                              ; $526C: $18 $0C
 
 .jr_526E
-    ld   a, JINGLE_BIG_BUMP                       ; $526E: $3E $20
+    ld   a, JINGLE_BOUNCE                         ; $526E: $3E $20
     ldh  [hJingle], a                             ; $5270: $E0 $F2
     call GetEntityTransitionCountdown             ; $5272: $CD $05 $0C
     ld   [hl], $30                                ; $5275: $36 $30
@@ -393,7 +393,7 @@ func_015_52AA::
     jp   label_015_5335                           ; $52AE: $C3 $35 $53
 
 func_015_52B1::
-    ld   a, WAVE_SFX_UNKNOWN_23                   ; $52B1: $3E $23
+    ld   a, WAVE_SFX_SHADOW_CHANGE_FORM           ; $52B1: $3E $23
     ldh  [hWaveSfx], a                            ; $52B3: $E0 $F3
     ret                                           ; $52B5: $C9
 
@@ -442,7 +442,7 @@ jr_015_52FF:
     jr   nz, .jr_530B                             ; $5304: $20 $05
 
     ld   hl, hJingle                              ; $5306: $21 $F2 $FF
-    ld   [hl], JINGLE_SHADOW_NEXT                 ; $5309: $36 $35
+    ld   [hl], JINGLE_SHADOW_MOVE                 ; $5309: $36 $35
 
 .jr_530B
     rra                                           ; $530B: $1F
@@ -519,7 +519,7 @@ func_015_5370::
     ld   [hl], $80                                ; $5378: $36 $80
     call IncrementEntityState                     ; $537A: $CD $12 $3B
     ld   [hl], $04                                ; $537D: $36 $04
-    ld   a, WAVE_SFX_UNKNOWN_21                   ; $537F: $3E $21
+    ld   a, WAVE_SFX_SHADOW_DISPERSE              ; $537F: $3E $21
     ldh  [hWaveSfx], a                            ; $5381: $E0 $F3
 
 func_015_5383::
@@ -639,7 +639,7 @@ func_015_53E1::
     ld   [hl], $05                                ; $542C: $36 $05
 
 func_015_542E::
-    ld   a, NOISE_SFX_UNKNOWN_37                  ; $542E: $3E $37
+    ld   a, NOISE_SFX_SHADOW_DISPERSE             ; $542E: $3E $37
     ldh  [hNoiseSfx], a                           ; $5430: $E0 $F4
     jp   func_015_5383                            ; $5432: $C3 $83 $53
 
@@ -719,9 +719,9 @@ label_015_54A2:
     ld   hl, wEntitiesFlashCountdownTable         ; $54A2: $21 $20 $C4
     add  hl, bc                                   ; $54A5: $09
     ld   [hl], $14                                ; $54A6: $36 $14
-    ld   a, WAVE_SFX_BOSS_GRAWL                   ; $54A8: $3E $07
+    ld   a, WAVE_SFX_BOSS_HURT                    ; $54A8: $3E $07
     ldh  [hWaveSfx], a                            ; $54AA: $E0 $F3
-    ld   a, JINGLE_SHADOW_1_HURT                  ; $54AC: $3E $37
+    ld   a, JINGLE_SHADOW_ZOL_HURT                ; $54AC: $3E $37
     ldh  [hJingle], a                             ; $54AE: $E0 $F2
     call IncrementEntityState                     ; $54B0: $CD $12 $3B
     ld   [hl], $07                                ; $54B3: $36 $07
@@ -1055,7 +1055,7 @@ func_015_580B::
     call GetEntityTransitionCountdown             ; $580B: $CD $05 $0C
     jr   nz, func_015_5819                        ; $580E: $20 $09
 
-    ld   a, WAVE_SFX_UNKNOWN_22                   ; $5810: $3E $22
+    ld   a, WAVE_SFX_AGAHNIM_CHARGE               ; $5810: $3E $22
     ldh  [hWaveSfx], a                            ; $5812: $E0 $F3
     ld   [hl], $C0                                ; $5814: $36 $C0
     jp   IncrementEntityState                     ; $5816: $C3 $12 $3B
@@ -1127,7 +1127,7 @@ func_015_5854::
     ld   hl, wEntitiesHitboxFlagsTable            ; $588B: $21 $50 $C3
     add  hl, de                                   ; $588E: $19
     ld   [hl], d                                  ; $588F: $72
-    ld   a, NOISE_SFX_UNKNOWN_38                  ; $5890: $3E $38
+    ld   a, NOISE_SFX_AGAHNIM_BALL                ; $5890: $3E $38
     ldh  [hNoiseSfx], a                           ; $5892: $E0 $F4
     ld   a, [wD220]                               ; $5894: $FA $20 $D2
     cp   $02                                      ; $5897: $FE $02
@@ -1145,7 +1145,7 @@ func_015_5854::
     ld   hl, wEntitiesTransitionCountdownTable    ; $58AB: $21 $E0 $C2
     add  hl, de                                   ; $58AE: $19
     ld   [hl], $1C                                ; $58AF: $36 $1C
-    ld   a, NOISE_SFX_UNKNOWN_39                  ; $58B1: $3E $39
+    ld   a, NOISE_SFX_AGAHNIM_FAKE_BALL           ; $58B1: $3E $39
     ldh  [hNoiseSfx], a                           ; $58B3: $E0 $F4
 
 .jr_58B5
@@ -1190,7 +1190,7 @@ func_015_58ED::
     jr   nz, .jr_5908                             ; $58F0: $20 $16
 
     ld   [hl], $27                                ; $58F2: $36 $27
-    ld   a, JINGLE_SHADOW_NEXT                    ; $58F4: $3E $35
+    ld   a, JINGLE_SHADOW_MOVE                    ; $58F4: $3E $35
     ldh  [hJingle], a                             ; $58F6: $E0 $F2
     ld   hl, wEntitiesPosYTable                   ; $58F8: $21 $10 $C2
     add  hl, bc                                   ; $58FB: $09
@@ -1779,7 +1779,7 @@ func_015_5E38::
     ret                                           ; $5E84: $C9
 
 func_015_5E85::
-    ld   a, NOISE_SFX_UNKNOWN_08                  ; $5E85: $3E $08
+    ld   a, NOISE_SFX_BEAMOS_LASER                ; $5E85: $3E $08
     ldh  [hNoiseSfx], a                           ; $5E87: $E0 $F4
     ld   a, $18                                   ; $5E89: $3E $18
     call GetVectorTowardsLink_trampoline          ; $5E8B: $CD $B5 $3B
@@ -1858,14 +1858,14 @@ func_015_5EAC::
     ld   hl, wEntitiesTransitionCountdownTable    ; $5F05: $21 $E0 $C2
     add  hl, de                                   ; $5F08: $19
     ld   [hl], $C0                                ; $5F09: $36 $C0
-    ld   a, JINGLE_SHADOW_2_DEFEAT                ; $5F0B: $3E $36
+    ld   a, JINGLE_SHADOW_AGAHNIM_DEFEAT          ; $5F0B: $3E $36
     ldh  [hJingle], a                             ; $5F0D: $E0 $F2
 
 jr_015_5F0F:
     ld   hl, wEntitiesFlashCountdownTable         ; $5F0F: $21 $20 $C4
     add  hl, de                                   ; $5F12: $19
     ld   [hl], $14                                ; $5F13: $36 $14
-    ld   a, WAVE_SFX_BOSS_GRAWL                   ; $5F15: $3E $07
+    ld   a, WAVE_SFX_BOSS_HURT                    ; $5F15: $3E $07
     ldh  [hWaveSfx], a                            ; $5F17: $E0 $F3
 
 ret_015_5F19:
@@ -1904,7 +1904,7 @@ jr_015_5F3F:
     and  a                                        ; $5F44: $A7
     jr   z, ret_015_5F99                          ; $5F45: $28 $52
 
-    ld   a, NOISE_SFX_UNKNOWN_36                  ; $5F47: $3E $36
+    ld   a, NOISE_SFX_AGAHNIM_FAKE_BALL_EXPLODE   ; $5F47: $3E $36
     ldh  [hNoiseSfx], a                           ; $5F49: $E0 $F4
     xor  a                                        ; $5F4B: $AF
 
@@ -2127,7 +2127,7 @@ func_015_60D4::
     jr   c, jr_015_6109                           ; $6102: $38 $05
 
     ld   [hl], b                                  ; $6104: $70
-    ld   a, JINGLE_SHADOW_3_BG                    ; $6105: $3E $38
+    ld   a, JINGLE_SHADOW_MOLDORM_ROAM            ; $6105: $3E $38
     ldh  [hJingle], a                             ; $6107: $E0 $F2
 
 jr_015_6109:
@@ -2492,7 +2492,7 @@ jr_015_63F5:
     ld   [hl], $09                                ; $6410: $36 $09
     ld   a, $09                                   ; $6412: $3E $09
     ldh  [hActiveEntityState], a                  ; $6414: $E0 $F0
-    ld   a, WAVE_SFX_BOSS_AGONY                   ; $6416: $3E $10
+    ld   a, WAVE_SFX_BOSS_DEATH_CRY               ; $6416: $3E $10
     ldh  [hWaveSfx], a                            ; $6418: $E0 $F3
     call GetEntityTransitionCountdown             ; $641A: $CD $05 $0C
     ld   [hl], $80                                ; $641D: $36 $80
@@ -2654,14 +2654,14 @@ func_015_65A6::
     jr   nz, .jr_65C4                             ; $65BD: $20 $05
 
     ld   hl, hNoiseSfx                            ; $65BF: $21 $F4 $FF
-    ld   [hl], NOISE_SFX_TITLE_APPEARS            ; $65C2: $36 $19
+    ld   [hl], NOISE_SFX_PING                     ; $65C2: $36 $19
 
 .jr_65C4
     cp   $58                                      ; $65C4: $FE $58
     jr   nz, .jr_65CD                             ; $65C6: $20 $05
 
     ld   hl, hJingle                              ; $65C8: $21 $F2 $FF
-    ld   [hl], JINGLE_SHADOW_4_INTRO              ; $65CB: $36 $39
+    ld   [hl], JINGLE_GANON_TRIDENT_APPEAR        ; $65CB: $36 $39
 
 .jr_65CD
     rra                                           ; $65CD: $1F
@@ -2901,7 +2901,7 @@ func_015_66CC::
     call ApplyVectorTowardsLink_trampoline        ; $6741: $CD $AA $3B
     call GetEntityTransitionCountdown             ; $6744: $CD $05 $0C
     ld   [hl], $30                                ; $6747: $36 $30
-    ld   a, NOISE_SFX_UNKNOWN_27                  ; $6749: $3E $27
+    ld   a, NOISE_SFX_WEAPON_SWING                ; $6749: $3E $27
     ldh  [hNoiseSfx], a                           ; $674B: $E0 $F4
     pop  bc                                       ; $674D: $C1
 
@@ -3073,7 +3073,7 @@ jr_015_683F:
     call GetEntityTransitionCountdown             ; $684D: $CD $05 $0C
     ld   [hl], $80                                ; $6850: $36 $80
     call label_27F2                               ; $6852: $CD $F2 $27
-    ld   a, WAVE_SFX_BOSS_AGONY                   ; $6855: $3E $10
+    ld   a, WAVE_SFX_BOSS_DEATH_CRY               ; $6855: $3E $10
     ldh  [hWaveSfx], a                            ; $6857: $E0 $F3
     call func_015_5383                            ; $6859: $CD $83 $53
     jp   IncrementEntityState                     ; $685C: $C3 $12 $3B
@@ -3411,7 +3411,7 @@ label_015_6C61:
     and  $0F                                      ; $6CA3: $E6 $0F
     jr   nz, .jr_6CAB                             ; $6CA5: $20 $04
 
-    ld   a, NOISE_SFX_UNKNOWN_3A                  ; $6CA7: $3E $3A
+    ld   a, NOISE_SFX_GANON_FLYING_TRIDENT        ; $6CA7: $3E $3A
     ldh  [hNoiseSfx], a                           ; $6CA9: $E0 $F4
 
 .jr_6CAB
@@ -3598,7 +3598,7 @@ func_015_6D9C::
     cp   $01                                      ; $6DAB: $FE $01
     jr   nz, .jr_6DB8                             ; $6DAD: $20 $09
 
-    ld   a, NOISE_SFX_UNKNOWN_28                  ; $6DAF: $3E $28
+    ld   a, NOISE_SFX_GENIE_FIREBALL              ; $6DAF: $3E $28
     ldh  [hNoiseSfx], a                           ; $6DB1: $E0 $F4
     ld   a, $30                                   ; $6DB3: $3E $30
     call ApplyVectorTowardsLink_trampoline        ; $6DB5: $CD $AA $3B
@@ -3707,7 +3707,7 @@ func_015_6E66::
     ld   a, $03                                   ; $6E6F: $3E $03
     ld   [wBossAgonySFXCountdown], a              ; $6E71: $EA $A7 $C5
     call_open_dialog Dialog0F6                    ; $6E74
-    ld   a, MUSIC_BOSS_WARNING                    ; $6E79: $3E $5E
+    ld   a, MUSIC_BOSS_DEFEAT                     ; $6E79: $3E $5E
     ld   [wMusicTrackToPlay], a                   ; $6E7B: $EA $68 $D3
     call GetEntityTransitionCountdown             ; $6E7E: $CD $05 $0C
     ld   [hl], $80                                ; $6E81: $36 $80
@@ -3774,7 +3774,7 @@ func_015_6E66::
     cp   [hl]                                     ; $6EE2: $BE
     jr   c, .jr_6EEA                              ; $6EE3: $38 $05
 
-    ld   a, JINGLE_SHADOW_6_BG                    ; $6EE5: $3E $3D
+    ld   a, JINGLE_DETHI_HANDS                    ; $6EE5: $3E $3D
     ldh  [hJingle], a                             ; $6EE7: $E0 $F2
     xor  a                                        ; $6EE9: $AF
 
@@ -3911,16 +3911,16 @@ func_015_6FA1::
     jr   nz, .jr_6FAD                             ; $6FA6: $20 $05
 
     ld   hl, wMusicTrackToPlay                    ; $6FA8: $21 $68 $D3
-    ld   [hl], MUSIC_FINAL_BOSS_DEFEATED          ; $6FAB: $36 $5F
+    ld   [hl], MUSIC_FINAL_BOSS_DEFEAT            ; $6FAB: $36 $5F
 
 .jr_6FAD
     and  a                                        ; $6FAD: $A7
     ret  nz                                       ; $6FAE: $C0
 
     ld   [hl], $80                                ; $6FAF: $36 $80
-    ld   a, NOISE_SFX_UNKNOWN_3D                  ; $6FB1: $3E $3D
+    ld   a, NOISE_SFX_FINAL_BOSS_EXPLOSION        ; $6FB1: $3E $3D
     ldh  [hNoiseSfx], a                           ; $6FB3: $E0 $F4
-    ld   a, WAVE_SFX_BOSS_AGONY                   ; $6FB5: $3E $10
+    ld   a, WAVE_SFX_BOSS_DEATH_CRY               ; $6FB5: $3E $10
     ldh  [hWaveSfx], a                            ; $6FB7: $E0 $F3
     jp   IncrementEntityState                     ; $6FB9: $C3 $12 $3B
 

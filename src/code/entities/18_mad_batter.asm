@@ -50,7 +50,7 @@ MadBatterState1Handler::
     ldh  [hMultiPurpose1], a                      ; $4F29: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $4F2B: $3E $02
     call AddTranscientVfx                         ; $4F2D: $CD $C7 $0C
-    ld   a, JINGLE_ENEMY_MORPH_IN                 ; $4F30: $3E $06
+    ld   a, JINGLE_GENIE_APPEAR                   ; $4F30: $3E $06
     ldh  [hJingle], a                             ; $4F32: $E0 $F2
     jp   IncrementEntityState                     ; $4F34: $C3 $12 $3B
 
@@ -165,7 +165,7 @@ MadBatterState6Handler::
 
     ld   a, ENTITY_MAD_BATTER                     ; $4FD8: $3E $CA
     call SpawnNewEntity_trampoline                ; $4FDA: $CD $86 $3B
-    ld   a, NOISE_SFX_UNKNOWN_26                  ; $4FDD: $3E $26
+    ld   a, NOISE_SFX_ELECTRIC_BEAM               ; $4FDD: $3E $26
     ldh  [hNoiseSfx], a                           ; $4FDF: $E0 $F4
     ldh  a, [hMultiPurpose0]                      ; $4FE1: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $4FE3: $21 $00 $C2

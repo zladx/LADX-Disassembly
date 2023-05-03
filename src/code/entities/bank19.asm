@@ -58,7 +58,7 @@ func_019_5D7D::
     ; … then teleport Link
     ld   a, $01                                   ; $5D82: $3E $01
     ldh  [hLinkPhysicsModifier], a                ; $5D84: $E0 $9C
-    ld   a, JINGLE_OVERWORLD_WARP                 ; $5D86: $3E $25
+    ld   a, JINGLE_OVERWORLD_WARP_HOLE            ; $5D86: $3E $25
     ldh  [hJingle], a                             ; $5D88: $E0 $F2
 
 .return
@@ -1085,7 +1085,7 @@ label_019_7EC4:
 jr_019_7F05:
     call ClearEntityStatus_19                     ; $7F05: $CD $61 $7E
     ld   hl, hNoiseSfx                            ; $7F08: $21 $F4 $FF
-    ld   [hl], NOISE_SFX_1A                       ; $7F0B: $36 $1A
+    ld   [hl], NOISE_SFX_BOSS_EXPLOSION           ; $7F0B: $36 $1A
     ret                                           ; $7F0D: $C9
 
 func_019_7F0E::

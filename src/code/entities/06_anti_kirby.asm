@@ -49,7 +49,7 @@ AntiKirbyState0Handler::
     ld   [hl], $02                                ; $4288: $36 $02
     call GetEntityTransitionCountdown             ; $428A: $CD $05 $0C
     ld   [hl], $FF                                ; $428D: $36 $FF
-    ld   a, NOISE_SFX_UNKNOWN_3B                  ; $428F: $3E $3B
+    ld   a, NOISE_SFX_KIRBY_INHALE                ; $428F: $3E $3B
     ldh  [hNoiseSfx], a                           ; $4291: $E0 $F4
     ret                                           ; $4293: $C9
 
@@ -313,7 +313,7 @@ jr_006_43F5:
     ld   [wIsLinkInTheAir], a                     ; $4419: $EA $46 $C1
     ld   a, $02                                   ; $441C: $3E $02
     ld   [wSubtractHealthBuffer], a               ; $441E: $EA $94 $DB
-    ld   a, JINGLE_JUMP_DOWN                      ; $4421: $3E $08
+    ld   a, JINGLE_FALL_DOWN                      ; $4421: $3E $08
     ldh  [hJingle], a                             ; $4423: $E0 $F2
     jp   IncrementEntityState                     ; $4425: $C3 $12 $3B
 

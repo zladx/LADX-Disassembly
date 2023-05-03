@@ -59,7 +59,7 @@ ThwompRammableState0Handler::
     ld   [hl], $20                                ; $55CF: $36 $20
     ld   a, $01                                   ; $55D1: $3E $01
     call SetEntitySpriteVariant                   ; $55D3: $CD $0C $3B
-    ld   a, JINGLE_HUGE_BUMP                      ; $55D6: $3E $0B
+    ld   a, JINGLE_STRONG_BUMP                    ; $55D6: $3E $0B
     ldh  [hJingle], a                             ; $55D8: $E0 $F2
     jp   IncrementEntityState                     ; $55DA: $C3 $12 $3B
 
@@ -70,7 +70,7 @@ ThwompRammableState1Handler::
     jr   nz, .jr_55EC                             ; $55E5: $20 $05
 
     ld   hl, hJingle                              ; $55E7: $21 $F2 $FF
-    ld   [hl], JINGLE_JUMP_DOWN                   ; $55EA: $36 $08
+    ld   [hl], JINGLE_FALL_DOWN                   ; $55EA: $36 $08
 
 .jr_55EC
     and  a                                        ; $55EC: $A7
@@ -250,7 +250,7 @@ ThwimpState2Handler::
     jr   nz, .jr_5721                             ; $571A: $20 $05
 
     ld   hl, hJingle                              ; $571C: $21 $F2 $FF
-    ld   [hl], JINGLE_JUMP_DOWN                   ; $571F: $36 $08
+    ld   [hl], JINGLE_FALL_DOWN                   ; $571F: $36 $08
 
 .jr_5721
     and  a                                        ; $5721: $A7
@@ -390,7 +390,7 @@ ThwompState1Handler::
     jr   nc, .jr_581D                             ; $580C: $30 $0F
 
     call ClearEntitySpeed                         ; $580E: $CD $7F $3D
-    ld   a, JINGLE_JUMP_DOWN                      ; $5811: $3E $08
+    ld   a, JINGLE_FALL_DOWN                      ; $5811: $3E $08
     ldh  [hJingle], a                             ; $5813: $E0 $F2
     ld   a, $00                                   ; $5815: $3E $00
     call SetEntitySpriteVariant                   ; $5817: $CD $0C $3B

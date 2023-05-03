@@ -177,7 +177,7 @@ jr_006_50BA:
     and  $0F                                      ; $50C2: $E6 $0F
     jr   nz, .ret_50CA                            ; $50C4: $20 $04
 
-    ld   a, JINGLE_BIG_BUMP                       ; $50C6: $3E $20
+    ld   a, JINGLE_BOUNCE                         ; $50C6: $3E $20
     ldh  [hJingle], a                             ; $50C8: $E0 $F2
 
 .ret_50CA
@@ -211,7 +211,7 @@ HinoxState3Handler::
     call IncrementEntityState                     ; $50F6: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $50F9: $CD $05 $0C
     ld   [hl], $4F                                ; $50FC: $36 $4F
-    ld   a, WAVE_SFX_BOSS_HIT                     ; $50FE: $3E $16
+    ld   a, WAVE_SFX_BOSS_GROWL                   ; $50FE: $3E $16
     ldh  [hWaveSfx], a                            ; $5100: $E0 $F3
 
 .jr_5102
@@ -266,7 +266,7 @@ HinoxState4Handler::
     ldh  [hLinkVelocityZ], a                      ; $515B: $E0 $A3
     ld   a, $02                                   ; $515D: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $515F: $EA $46 $C1
-    ld   a, JINGLE_JUMP_DOWN                      ; $5162: $3E $08
+    ld   a, JINGLE_FALL_DOWN                      ; $5162: $3E $08
     ldh  [hJingle], a                             ; $5164: $E0 $F2
     ld   a, $08                                   ; $5166: $3E $08
     ld   [wSubtractHealthBuffer], a               ; $5168: $EA $94 $DB

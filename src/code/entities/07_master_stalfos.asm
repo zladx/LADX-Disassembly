@@ -31,12 +31,12 @@ func_007_698A::
     ret  nz                                       ; $698D: $C0
 
 .jr_698E
-    ld   a, MUSIC_WATERFALL_DRAIN                 ; $698E: $3E $4C
+    ld   a, MUSIC_OPEN_ANGLERS_TUNNEL             ; $698E: $3E $4C
     ld   [wMusicTrackToPlay], a                   ; $6990: $EA $68 $D3
     jp   IncrementEntityState                     ; $6993: $C3 $12 $3B
 
 func_007_6996::
-    ld   a, NOISE_SFX_UNKNOWN_1D                  ; $6996: $3E $1D
+    ld   a, NOISE_SFX_OPEN_D4_D7                  ; $6996: $3E $1D
     ldh  [hNoiseSfx], a                           ; $6998: $E0 $F4
     call GetEntityTransitionCountdown             ; $699A: $CD $05 $0C
     ld   [hl], $80                                ; $699D: $36 $80
@@ -282,7 +282,7 @@ func_007_6AF5::
     cp   $01                                      ; $6AFA: $FE $01
     jr   nz, .jr_6B02                             ; $6AFC: $20 $04
 
-    ld   a, JINGLE_JUMP_DOWN                      ; $6AFE: $3E $08
+    ld   a, JINGLE_FALL_DOWN                      ; $6AFE: $3E $08
     ldh  [hJingle], a                             ; $6B00: $E0 $F2
 
 .jr_6B02
@@ -525,7 +525,7 @@ jr_007_6C55:
     cp   $17                                      ; $6C7B: $FE $17
     jr   nz, .jr_6C89                             ; $6C7D: $20 $0A
 
-    ld   a, NOISE_SFX_UNKNOWN_27                  ; $6C7F: $3E $27
+    ld   a, NOISE_SFX_WEAPON_SWING                ; $6C7F: $3E $27
     ldh  [hNoiseSfx], a                           ; $6C81: $E0 $F4
     ld   hl, wEntitiesPrivateCountdown2Table      ; $6C83: $21 $00 $C3
     add  hl, bc                                   ; $6C86: $09
@@ -578,7 +578,7 @@ jr_007_6CB8:
     cp   $17                                      ; $6CDB: $FE $17
     jr   nz, .jr_6CE9                             ; $6CDD: $20 $0A
 
-    ld   a, NOISE_SFX_UNKNOWN_27                  ; $6CDF: $3E $27
+    ld   a, NOISE_SFX_WEAPON_SWING                ; $6CDF: $3E $27
     ldh  [hNoiseSfx], a                           ; $6CE1: $E0 $F4
     ld   hl, wEntitiesPrivateCountdown2Table      ; $6CE3: $21 $00 $C3
     add  hl, bc                                   ; $6CE6: $09
@@ -684,7 +684,7 @@ func_007_6D7F::
     ld   hl, wEntitiesOptions1Table               ; $6D92: $21 $30 $C4
     add  hl, bc                                   ; $6D95: $09
     set  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $6D96: $CB $F6
-    ld   a, JINGLE_MASTER_STALFOS                 ; $6D98: $3E $28
+    ld   a, JINGLE_STALFOS_COLLAPSE               ; $6D98: $3E $28
     ldh  [hJingle], a                             ; $6D9A: $E0 $F2
 
 .jr_6D9C
@@ -849,7 +849,7 @@ func_007_6E58::
     dec  a                                        ; $6E60: $3D
     jr   nz, .jr_6E67                             ; $6E61: $20 $04
 
-    ld   a, NOISE_SFX_UNKNOWN_3F                  ; $6E63: $3E $3F
+    ld   a, NOISE_SFX_MINIBOSS_FLEE               ; $6E63: $3E $3F
     ldh  [hNoiseSfx], a                           ; $6E65: $E0 $F4
 
 .jr_6E67

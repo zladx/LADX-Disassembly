@@ -48,7 +48,7 @@ GenieState0Handler::
     add  hl, de                                   ; $4043: $19
     ld   [hl], $08                                ; $4044: $36 $08
     call label_3E34                               ; $4046: $CD $34 $3E
-    ld   a, NOISE_SFX_UNKNOWN_29                  ; $4049: $3E $29
+    ld   a, NOISE_SFX_BREAK                       ; $4049: $3E $29
     ldh  [hNoiseSfx], a                           ; $404B: $E0 $F4
     ret                                           ; $404D: $C9
 
@@ -139,7 +139,7 @@ func_004_40A3::
     ld   hl, wEntitiesSpeedZTable                 ; $40D5: $21 $20 $C3
     add  hl, bc                                   ; $40D8: $09
     ld   [hl], $10                                ; $40D9: $36 $10
-    ld   a, JINGLE_BIG_BUMP                       ; $40DB: $3E $20
+    ld   a, JINGLE_BOUNCE                         ; $40DB: $3E $20
     ldh  [hJingle], a                             ; $40DD: $E0 $F2
 
 .jr_40DF
@@ -200,7 +200,7 @@ jr_004_4118:
     ld   hl, wEntitiesTransitionCountdownTable    ; $413A: $21 $E0 $C2
     add  hl, de                                   ; $413D: $19
     ld   [hl], $47                                ; $413E: $36 $47
-    ld   a, JINGLE_ENEMY_MORPH_IN                 ; $4140: $3E $06
+    ld   a, JINGLE_GENIE_APPEAR                   ; $4140: $3E $06
     ldh  [hJingle], a                             ; $4142: $E0 $F2
 
 label_004_4144:
@@ -334,7 +334,7 @@ jr_004_41EC:
     ldh  a, [hLinkDirection]                      ; $4201: $F0 $9E
     ld   [wC15D], a                               ; $4203: $EA $5D $C1
     ld   hl, hWaveSfx                             ; $4206: $21 $F3 $FF
-    ld   [hl], WAVE_SFX_ZIP                       ; $4209: $36 $02
+    ld   [hl], WAVE_SFX_LIFT_UP                   ; $4209: $36 $02
     call GetEntityTransitionCountdown             ; $420B: $CD $05 $0C
     ld   [hl], $08                                ; $420E: $36 $08
 
@@ -395,7 +395,7 @@ func_004_4214::
     ld   hl, wEntitiesSpeedZTable                 ; $4269: $21 $20 $C3
     add  hl, bc                                   ; $426C: $09
     ld   [hl], $10                                ; $426D: $36 $10
-    ld   a, JINGLE_BIG_BUMP                       ; $426F: $3E $20
+    ld   a, JINGLE_BOUNCE                         ; $426F: $3E $20
     ldh  [hJingle], a                             ; $4271: $E0 $F2
     ld   a, $0C                                   ; $4273: $3E $0C
     call ApplyVectorTowardsLink_trampoline        ; $4275: $CD $AA $3B
@@ -724,7 +724,7 @@ jr_004_4438:
     ld   hl, wEntitiesPrivateCountdown2Table      ; $447D: $21 $00 $C3
     add  hl, bc                                   ; $4480: $09
     ld   [hl], $10                                ; $4481: $36 $10
-    ld   a, NOISE_SFX_UNKNOWN_28                  ; $4483: $3E $28
+    ld   a, NOISE_SFX_GENIE_FIREBALL              ; $4483: $3E $28
     ldh  [hNoiseSfx], a                           ; $4485: $E0 $F4
 
 .jr_4487
@@ -817,7 +817,7 @@ func_004_44E9::
     ld   hl, wEntitiesTransitionCountdownTable    ; $450C: $21 $E0 $C2
     add  hl, de                                   ; $450F: $19
     ld   [hl], $C7                                ; $4510: $36 $C7
-    ld   a, JINGLE_ENEMY_MORPH_OUT                ; $4512: $3E $1F
+    ld   a, JINGLE_GENIE_DISAPPEAR                ; $4512: $3E $1F
     ldh  [hJingle], a                             ; $4514: $E0 $F2
 
 .ret_4516
@@ -958,7 +958,7 @@ func_004_4575::
     ld   a, $1F                                   ; $45E6: $3E $1F
     call ApplyVectorTowardsLink_trampoline        ; $45E8: $CD $AA $3B
     pop  bc                                       ; $45EB: $C1
-    ld   a, NOISE_SFX_UNKNOWN_28                  ; $45EC: $3E $28
+    ld   a, NOISE_SFX_GENIE_FIREBALL              ; $45EC: $3E $28
     ldh  [hNoiseSfx], a                           ; $45EE: $E0 $F4
 
 .ret_45F0

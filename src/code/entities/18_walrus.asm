@@ -128,7 +128,7 @@ WalrusWakingUpHandler::
     and  a                                        ; $55C7: $A7
     jr   nz, .jr_55D8                             ; $55C8: $20 $0E
 
-    ld   a, MUSIC_MARIN_SINGING                   ; $55CA: $3E $2F
+    ld   a, MUSIC_MARIN_SING                      ; $55CA: $3E $2F
     ld   [wMusicTrackToPlay], a                   ; $55CC: $EA $68 $D3
     ld   [wIsMarinSinging], a                     ; $55CF: $EA $C8 $C3
     call GetEntityDropTimer                       ; $55D2: $CD $FB $0B
@@ -196,7 +196,7 @@ WalrusState3Handler::
     jr   nz, .jr_5698                             ; $5682: $20 $14
 
     ld   [wIsMarinSinging], a                     ; $5684: $EA $C8 $C3
-    ld   a, NOISE_SFX_BLOCK_RUMBLE                ; $5687: $3E $11
+    ld   a, NOISE_SFX_RUMBLE                      ; $5687: $3E $11
     ldh  [hNoiseSfx], a                           ; $5689: $E0 $F4
     call GetEntityTransitionCountdown             ; $568B: $CD $05 $0C
     ld   [hl], $08                                ; $568E: $36 $08
@@ -294,7 +294,7 @@ WalrusState4Handler::
     ld   a, [hl]                                  ; $5710: $7E
     add  $18                                      ; $5711: $C6 $18
     ld   [hl], a                                  ; $5713: $77
-    ld   a, JINGLE_JUMP_DOWN                      ; $5714: $3E $08
+    ld   a, JINGLE_FALL_DOWN                      ; $5714: $3E $08
     ldh  [hJingle], a                             ; $5716: $E0 $F2
     jp   IncrementEntityState                     ; $5718: $C3 $12 $3B
 
@@ -313,7 +313,7 @@ WalrusState5Handler::
 
 ; Walrus splash VFX
 func_018_572E::
-    ld   a, NOISE_SFX_UNKNOWN_24                  ; $572E: $3E $24
+    ld   a, NOISE_SFX_WALRUS_SPLASH               ; $572E: $3E $24
     ldh  [hNoiseSfx], a                           ; $5730: $E0 $F4
     ldh  a, [hActiveEntityPosX]                   ; $5732: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $5734: $E0 $D7

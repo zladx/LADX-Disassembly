@@ -166,7 +166,7 @@ func_007_4F56::
     call GetEntityTransitionCountdown             ; $4F91: $CD $05 $0C
     jr   nz, .jr_4FA5                             ; $4F94: $20 $0F
 
-    ld   a, MUSIC_TARIN_BEEHIVE                   ; $4F96: $3E $34
+    ld   a, MUSIC_TARIN_BEES                      ; $4F96: $3E $34
     ld   [wMusicTrackToPlay], a                   ; $4F98: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $4F9B: $E0 $B0
     call GetEntityTransitionCountdown             ; $4F9D: $CD $05 $0C

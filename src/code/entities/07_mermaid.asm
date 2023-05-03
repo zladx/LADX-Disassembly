@@ -276,7 +276,7 @@ func_007_480A::
     ldh  [hMultiPurpose1], a                      ; $4828: $E0 $D8
     ldh  a, [hLinkPositionX]                      ; $482A: $F0 $98
     ldh  [hMultiPurpose0], a                      ; $482C: $E0 $D7
-    ld   a, JINGLE_WATER_DIVE                     ; $482E: $3E $0E
+    ld   a, JINGLE_WATER_SPLASH                   ; $482E: $3E $0E
     ldh  [hJingle], a                             ; $4830: $E0 $F2
     ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $4832: $3E $01
     call AddTranscientVfx                         ; $4834: $CD $C7 $0C
@@ -420,7 +420,7 @@ func_007_48FD::
     ldh  [hMultiPurpose0], a                      ; $4903: $E0 $D7
     ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $4905: $3E $01
     call AddTranscientVfx                         ; $4907: $CD $C7 $0C
-    ld   a, JINGLE_WATER_DIVE                     ; $490A: $3E $0E
+    ld   a, JINGLE_WATER_SPLASH                   ; $490A: $3E $0E
     ldh  [hJingle], a                             ; $490C: $E0 $F2
     ret                                           ; $490E: $C9
 

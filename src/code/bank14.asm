@@ -1187,7 +1187,7 @@ jr_014_5391:
     add  hl, bc                                   ; $539C: $09
     ld   [hl], a                                  ; $539D: $77
     ld   hl, hJingle                              ; $539E: $21 $F2 $FF
-    ld   [hl], JINGLE_JUMP_DOWN                   ; $53A1: $36 $08
+    ld   [hl], JINGLE_FALL_DOWN                   ; $53A1: $36 $08
 
 func_014_53A3::
     ld   hl, wEntitiesStatusTable                 ; $53A3: $21 $80 $C2

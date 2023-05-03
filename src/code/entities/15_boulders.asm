@@ -130,7 +130,7 @@ label_015_43CA:
     ld   hl, wEntitiesSpeedZTable                 ; $4427: $21 $20 $C3
     add  hl, bc                                   ; $442A: $09
     ld   [hl], a                                  ; $442B: $77
-    ld   a, JINGLE_BIG_BUMP                       ; $442C: $3E $20
+    ld   a, JINGLE_BOUNCE                         ; $442C: $3E $20
     ldh  [hJingle], a                             ; $442E: $E0 $F2
 
 jr_015_4430:

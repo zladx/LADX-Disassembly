@@ -76,7 +76,7 @@ func_015_4500::
     sla  [hl]                                     ; $451B: $CB $26
 
 func_015_451D::
-    ld   a, JINGLE_WATER_DIVE                     ; $451D: $3E $0E
+    ld   a, JINGLE_WATER_SPLASH                   ; $451D: $3E $0E
     ldh  [hJingle], a                             ; $451F: $E0 $F2
     ldh  a, [hActiveEntityPosX]                   ; $4521: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $4523: $E0 $D7

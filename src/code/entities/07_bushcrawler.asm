@@ -245,7 +245,7 @@ jr_007_415A:
     call GetEntityTransitionCountdown             ; $417E: $CD $05 $0C
     ld   [hl], $02                                ; $4181: $36 $02
     ld   hl, hWaveSfx                             ; $4183: $21 $F3 $FF
-    ld   [hl], WAVE_SFX_ZIP                       ; $4186: $36 $02
+    ld   [hl], WAVE_SFX_LIFT_UP                   ; $4186: $36 $02
     ld   hl, wEntitiesTypeTable                   ; $4188: $21 $A0 $C3
     add  hl, bc                                   ; $418B: $09
     ld   [hl], $05                                ; $418C: $36 $05

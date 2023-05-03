@@ -165,7 +165,7 @@ func_019_4B6E::
     call SpawnNewEntity_trampoline                ; $4B7D: $CD $86 $3B
     ret  c                                        ; $4B80: $D8
 
-    ld   a, NOISE_SFX_ROCK_RUMBLE                 ; $4B81: $3E $2B
+    ld   a, NOISE_SFX_RUMBLE2                     ; $4B81: $3E $2B
     ldh  [hNoiseSfx], a                           ; $4B83: $E0 $F4
     push bc                                       ; $4B85: $C5
     ldh  a, [hMultiPurposeG]                      ; $4B86: $F0 $E8

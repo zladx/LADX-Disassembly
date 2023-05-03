@@ -288,7 +288,7 @@ HorsePieceCheckForPickup:
     call GetEntityTransitionCountdown             ; $7779: $CD $05 $0C
     ld   [hl], $02                                ; $777C: $36 $02
     ld   hl, hWaveSfx                             ; $777E: $21 $F3 $FF
-    ld   [hl], WAVE_SFX_ZIP                       ; $7781: $36 $02
+    ld   [hl], WAVE_SFX_LIFT_UP                   ; $7781: $36 $02
 
 .ret
     ret                                           ; $7783: $C9

@@ -103,7 +103,7 @@ ret_006_7599:
     ret                                           ; $7599: $C9
 
 jr_006_759A:
-    ld   a, NOISE_SFX_SHOOT_ARROW                 ; $759A: $3E $0A
+    ld   a, NOISE_SFX_WHOOSH                      ; $759A: $3E $0A
     ldh  [hNoiseSfx], a                           ; $759C: $E0 $F4
     jp   IncrementEntityState                     ; $759E: $C3 $12 $3B
 

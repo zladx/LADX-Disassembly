@@ -210,7 +210,7 @@ jr_019_5AC4:
     call GetEntityTransitionCountdown             ; $5AE1: $CD $05 $0C
     ld   [hl], $02                                ; $5AE4: $36 $02
     ld   hl, hWaveSfx                             ; $5AE6: $21 $F3 $FF
-    ld   [hl], WAVE_SFX_ZIP                       ; $5AE9: $36 $02
+    ld   [hl], WAVE_SFX_LIFT_UP                   ; $5AE9: $36 $02
     call IncrementEntityState                     ; $5AEB: $CD $12 $3B
     ld   [hl], $01                                ; $5AEE: $36 $01
     ld   a, $02                                   ; $5AF0: $3E $02

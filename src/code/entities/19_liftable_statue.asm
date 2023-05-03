@@ -151,7 +151,7 @@ jr_019_40AD:
     call GetEntityTransitionCountdown             ; $4112: $CD $05 $0C
     ld   [hl], $02                                ; $4115: $36 $02
     ld   hl, hWaveSfx                             ; $4117: $21 $F3 $FF
-    ld   [hl], WAVE_SFX_ZIP                       ; $411A: $36 $02
+    ld   [hl], WAVE_SFX_LIFT_UP                   ; $411A: $36 $02
 
 label_019_411C:
     ld   hl, wEntitiesInertiaTable                ; $411C: $21 $D0 $C3
@@ -285,7 +285,7 @@ jr_019_4185:
     jr   nz, jr_019_4185                          ; $41E0: $20 $A3
 
 jr_019_41E2:
-    ld   a, NOISE_SFX_UNKNOWN_29                  ; $41E2: $3E $29
+    ld   a, NOISE_SFX_BREAK                       ; $41E2: $3E $29
     ldh  [hNoiseSfx], a                           ; $41E4: $E0 $F4
     ldh  a, [hActiveEntityPosX]                   ; $41E6: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $41E8: $E0 $D7

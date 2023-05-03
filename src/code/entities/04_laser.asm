@@ -51,7 +51,7 @@ LaserEntityHandler::
     call SpawnNewEntity_trampoline                ; $6C81: $CD $86 $3B
     jr   c, .ret_6CB3                             ; $6C84: $38 $2D
 
-    ld   a, NOISE_SFX_UNKNOWN_08                  ; $6C86: $3E $08
+    ld   a, NOISE_SFX_BEAMOS_LASER                ; $6C86: $3E $08
     ldh  [hNoiseSfx], a                           ; $6C88: $E0 $F4
     ldh  a, [hMultiPurpose0]                      ; $6C8A: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $6C8C: $21 $00 $C2

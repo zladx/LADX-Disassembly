@@ -111,7 +111,7 @@ jr_018_5A3F:
     inc  [hl]                                     ; $5A4E: $34
     call GetEntityTransitionCountdown             ; $5A4F: $CD $05 $0C
     ld   [hl], $70                                ; $5A52: $36 $70
-    ld   a, MUSIC_TOOL_ACQUIRED                   ; $5A54: $3E $10
+    ld   a, MUSIC_OBTAIN_ITEM                     ; $5A54: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $5A56: $EA $68 $D3
     ; Makes it so that no music plays after the 'item found' fanfare
     ld   a, MUSIC_SILENCE                         ; $5A59: $3E $FF
@@ -272,7 +272,7 @@ jr_018_5A8C::
 
 jr_018_5B3B:
     ld   hl, hJingle                              ; $5B3B: $21 $F2 $FF
-    ld   [hl], JINGLE_HUGE_BUMP                   ; $5B3E: $36 $0B
+    ld   [hl], JINGLE_STRONG_BUMP                 ; $5B3E: $36 $0B
     ld   hl, hWaveSfx                             ; $5B40: $21 $F3 $FF
     ld   [hl], WAVE_SFX_LINK_HURT                 ; $5B43: $36 $03
     ld   hl, wC157                                ; $5B45: $21 $57 $C1
@@ -629,7 +629,7 @@ jr_018_5CEF:
     ldh  [hMultiPurpose1], a                      ; $5D60: $E0 $D8
     ldh  a, [hActiveEntityPosX]                   ; $5D62: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $5D64: $E0 $D7
-    ld   a, JINGLE_WATER_DIVE                     ; $5D66: $3E $0E
+    ld   a, JINGLE_WATER_SPLASH                   ; $5D66: $3E $0E
     ldh  [hJingle], a                             ; $5D68: $E0 $F2
     ld   a, TRANSCIENT_VFX_PEGASUS_SPLASH         ; $5D6A: $3E $0C
     jp   AddTranscientVfx                         ; $5D6C: $C3 $C7 $0C
@@ -637,7 +637,7 @@ jr_018_5CEF:
 jr_018_5D6F:
     ld   a, e                                     ; $5D6F: $7B
     cp   $08                                      ; $5D70: $FE $08
-    ld   a, JINGLE_JUMP_DOWN                      ; $5D72: $3E $08
+    ld   a, JINGLE_FALL_DOWN                      ; $5D72: $3E $08
     jr   nc, .jr_5D78                             ; $5D74: $30 $02
 
     ld   a, JINGLE_JUMP                           ; $5D76: $3E $24

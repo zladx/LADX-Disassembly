@@ -143,7 +143,7 @@ func_005_63A8::
     ld   hl, wEntitiesSpeedZTable                 ; $63DB: $21 $20 $C3
     add  hl, bc                                   ; $63DE: $09
     ld   [hl], $18                                ; $63DF: $36 $18
-    ld   a, WAVE_SFX_BOSS_HIT                     ; $63E1: $3E $16
+    ld   a, WAVE_SFX_BOSS_GROWL                   ; $63E1: $3E $16
     ldh  [hWaveSfx], a                            ; $63E3: $E0 $F3
     call func_005_65D9                            ; $63E5: $CD $D9 $65
     jp   IncrementEntityState                     ; $63E8: $C3 $12 $3B
@@ -380,7 +380,7 @@ func_005_6534::
 
     jr   nz, .jr_6544                             ; $653B: $20 $07
 
-    ld   a, NOISE_SFX_UNKNOWN_29                  ; $653D: $3E $29
+    ld   a, NOISE_SFX_BREAK                       ; $653D: $3E $29
     ldh  [hNoiseSfx], a                           ; $653F: $E0 $F4
     call func_005_657F                            ; $6541: $CD $7F $65
 

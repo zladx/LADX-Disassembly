@@ -2841,7 +2841,7 @@ Data_021_74F0::
     dw Data_021_75B6
     dw 0
     dw Data_021_7536
-    dw Data_021_786E
+    dw WorldMapPalette
     dw Data_021_7536
     dw Data_021_75B6
     dw 0
@@ -2991,7 +2991,7 @@ Data_021_776E:
     rgb   #F8F888, #20B048, #084828, #000000
     rgb   #F8F888, #9878A0, #381850, #000000
 
-Data_021_786E:
+WorldMapPalette:
     rgb   #F8F888, #20B048, #282828, #000000
     rgb   #F8F888, #9878A0, #282828, #000000
     rgb   #F8F888, #B80028, #282828, #000000
@@ -3005,8 +3005,12 @@ Data_021_786E:
     rgb   #F8F888, #000000, #F87808, #F8B888
     rgb   #F8F8F8, #000000, #F80828, #F8B898
 IF __PATCH_0__
+    ; Palette used by the blinking "you are here"
+    ; map marker (alternates with OAM palette 0)
     rgb   #F8F8F8, #F8B030, #D80000, #000000
 ELSE
+    ; Bug: In early revisions, the map marker only
+    ; blinks on DMG, and this palette is unused
     rgb   #F8F8F8, #F8F8F8, #F8F8F8, #F8F8F8
 ENDC
     rgb   #F8F888, #606000, #10A840, #000000

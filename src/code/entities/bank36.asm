@@ -7857,7 +7857,7 @@ jr_036_6E3F:
 
     ld   hl, wEntitiesInertiaTable                ; $6E57: $21 $D0 $C3
     add  hl, bc                                   ; $6E5A: $09
-    ldh  a, [hTileGlintAnimation]                 ; $6E5B: $F0 $B9
+    ldh  a, [hTileGlintSequence]                  ; $6E5B: $F0 $B9
     ld   e, a                                     ; $6E5D: $5F
     sla  a                                        ; $6E5E: $CB $27
     sla  a                                        ; $6E60: $CB $27

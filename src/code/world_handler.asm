@@ -152,7 +152,7 @@ ENDC
     ld   hl, hFrameCounter                        ; $441C: $21 $E7 $FF
     or   [hl]                                     ; $441F: $B6
     and  $03                                      ; $4420: $E6 $03
-    ldh  [hTileGlintAnimation], a                 ; $4422: $E0 $B9
+    ldh  [hTileGlintSequence], a                  ; $4422: $E0 $B9
 
     ret                                           ; $4424: $C9
 

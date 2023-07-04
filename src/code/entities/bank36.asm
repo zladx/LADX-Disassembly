@@ -7798,9 +7798,13 @@ TileGlintSpriteVariants::
     db $3C, $00
     db $3C, $20
 
-Data_036_6DB7::
-    db   $58, $78, $78, $28, $28, $28, $78, $58, $28, $78, $28, $78, $28, $78, $58, $58
-    db   $28, $78, $28, $78
+; All 4 differents glint puzzles
+; (indexed by hTileGlintSequence)
+TileGlintSequenceTable::
+    db   $58, $78, $78, $28, $28,
+    db   $28, $78, $58, $28, $78,
+    db   $28, $78, $28, $78, $58,
+    db   $58, $28, $78, $28, $78
 
 Data_036_6DCB::
     db   $40, $30, $50, $50, $30, $30, $50, $40, $50, $30, $50, $50, $30, $30, $40, $40
@@ -7842,10 +7846,12 @@ TileGlintShownEntityHandler::
 
 jr_036_6E3F:
     call ReturnIfNonInteractive_36                ; $6E3F: $CD $40 $6A
+
     ldh  a, [hActiveEntityType]                   ; $6E42: $F0 $EB
     cp   ENTITY_TILE_GLINT_SHOWN                  ; $6E44: $FE $8A
-    jr   nz, .tileGlintShownEnd                   ; $6E46: $20 $0F
+    jr   nz, .tileGlintShown                      ; $6E46: $20 $0F
 
+    ; Render the glint tile without visible sparkle
     ldh  a, [hFrameCounter]                       ; $6E48: $F0 $E7
     rra                                           ; $6E4A: $1F
     rra                                           ; $6E4B: $1F
@@ -7853,10 +7859,16 @@ jr_036_6E3F:
     call SetEntitySpriteVariant                   ; $6E4E: $CD $0C $3B
     ld   de, TileGlintSpriteVariants              ; $6E51: $11 $A7 $6D
     call RenderActiveEntitySpritesPair            ; $6E54: $CD $C0 $3B
-.tileGlintShownEnd
 
+.tileGlintShown
+    ; Render the glint tile with the sparkle
+
+    ; wEntitiesInertiaTable stores the current index of the puzzle sequence
     ld   hl, wEntitiesInertiaTable                ; $6E57: $21 $D0 $C3
     add  hl, bc                                   ; $6E5A: $09
+
+    ; Lookup where is the glinting tile (from the active puzzle sequence)
+    ; a = TileGlintSequenceTable[hTileGlintSequence * 5 + sequence index]
     ldh  a, [hTileGlintSequence]                  ; $6E5B: $F0 $B9
     ld   e, a                                     ; $6E5D: $5F
     sla  a                                        ; $6E5E: $CB $27
@@ -7865,9 +7877,11 @@ jr_036_6E3F:
     add  [hl]                                     ; $6E63: $86
     ld   e, a                                     ; $6E64: $5F
     ld   d, b                                     ; $6E65: $50
-    ld   hl, Data_036_6DB7                        ; $6E66: $21 $B7 $6D
+    ld   hl, TileGlintSequenceTable               ; $6E66: $21 $B7 $6D
     add  hl, de                                   ; $6E69: $19
     ld   a, [hl]                                  ; $6E6A: $7E
+
+    ; Position the sparkle
     ld   hl, wEntitiesPosXTable                   ; $6E6B: $21 $00 $C2
     add  hl, bc                                   ; $6E6E: $09
     ld   [hl], a                                  ; $6E6F: $77
@@ -7882,28 +7896,35 @@ jr_036_6E3F:
     add  hl, bc                                   ; $6E80: $09
     ldh  a, [hObjectUnderLink]                    ; $6E81: $F0 $B8
     cp   [hl]                                     ; $6E83: $BE
-    jr   z, jr_036_6ECD                           ; $6E84: $28 $47
+    jr   z, .done                                 ; $6E84: $28 $47
 
     cp   $8D                                      ; $6E86: $FE $8D
-    jr   nz, jr_036_6ECD                          ; $6E88: $20 $43
+    jr   nz, .done                                ; $6E88: $20 $43
 
     call CheckLinkCollisionWithEnemy_trampoline   ; $6E8A: $CD $5A $3B
-    jr   nc, jr_036_6EC8                          ; $6E8D: $30 $39
+    jr   nc, .resetPuzzle                         ; $6E8D: $30 $39
 
+    ; If the puzzle sequence progression reaches the end of the sequence,
+    ; mark the puzzle as resolved.
     ld   hl, wEntitiesInertiaTable                ; $6E8F: $21 $D0 $C3
     add  hl, bc                                   ; $6E92: $09
     ld   a, [hl]                                  ; $6E93: $7E
     cp   $04                                      ; $6E94: $FE $04
-    jr   nz, .jr_6EA0                             ; $6E96: $20 $08
+    jr   nz, .puzzleSolvedEnd                     ; $6E96: $20 $08
 
     call func_036_6C89                            ; $6E98: $CD $89 $6C
     call MarkTriggerAsResolved                    ; $6E9B: $CD $60 $0C
-    jr   jr_036_6ECD                              ; $6E9E: $18 $2D
+    jr   .done                                    ; $6E9E: $18 $2D
+.puzzleSolvedEnd
 
-.jr_6EA0
+    ; Otherwise, progress in the sequence, by incrementing wEntitiesInertiaTable…
     inc  [hl]                                     ; $6EA0: $34
+
+    ; play a sound cue…
     ld   a, JINGLE_VALIDATE                       ; $6EA1: $3E $13
     ldh  [hJingle], a                             ; $6EA3: $E0 $F2
+
+    ; …and spawn a new glint.
     ld   a, ENTITY_TILE_GLINT_SHOWN               ; $6EA5: $3E $8A
     call SpawnNewEntity_trampoline                ; $6EA7: $CD $86 $3B
     jr   c, .jr_6EC6                              ; $6EAA: $38 $1A
@@ -7925,14 +7946,14 @@ jr_036_6E3F:
     pop  bc                                       ; $6EC5: $C1
 
 .jr_6EC6
-    jr   jr_036_6ECD                              ; $6EC6: $18 $05
+    jr   .done                                    ; $6EC6: $18 $05
 
-jr_036_6EC8:
+.resetPuzzle
     ld   hl, wEntitiesInertiaTable                ; $6EC8: $21 $D0 $C3
     add  hl, bc                                   ; $6ECB: $09
     ld   [hl], b                                  ; $6ECC: $70
 
-jr_036_6ECD:
+.done
     ldh  a, [hObjectUnderLink]                    ; $6ECD: $F0 $B8
     ld   hl, wEntitiesPrivateState1Table          ; $6ECF: $21 $B0 $C2
     add  hl, bc                                   ; $6ED2: $09

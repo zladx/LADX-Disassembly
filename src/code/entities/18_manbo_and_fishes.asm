@@ -107,7 +107,7 @@ ManboAndFishesSingHandler::
     and  a                                        ; $4595: $A7
     jr   nz, ret_018_45B6                         ; $4596: $20 $1E
 
-    ld   a, MUSIC_MANBOS_MAMBO                     ; $4598: $3E $30
+    ld   a, MUSIC_MANBOS_MAMBO                    ; $4598: $3E $30
     ld   [wMusicTrackToPlay], a                   ; $459A: $EA $68 $D3
     call IncrementEntityState                     ; $459D: $CD $12 $3B
 

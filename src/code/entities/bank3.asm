@@ -7150,7 +7150,7 @@ jr_003_7304:
 .openBossDefeatedDialog
     ld   a, e                                     ; $7325: $7B
     call OpenDialogInTable0                       ; $7326: $CD $85 $23
-    ld   a, MUSIC_BOSS_DEFEAT                    ; $7329: $3E $5E
+    ld   a, MUSIC_BOSS_DEFEAT                     ; $7329: $3E $5E
     ld   [wMusicTrackToPlay], a                   ; $732B: $EA $68 $D3
     jr   jr_003_733E                              ; $732E: $18 $0E
 

@@ -2600,7 +2600,7 @@ DisplayTransientVfxForLinkRunning::
     cp   GROUND_VFX_SHALLOW_WATER                 ; $176E: $FE $05
     jr   z, .shallowWater                         ; $1770: $28 $0F
 
-    ld   a, NOISE_SFX_FOOTSTEP                        ; $1772: $3E $07
+    ld   a, NOISE_SFX_FOOTSTEP                    ; $1772: $3E $07
     ldh  [hNoiseSfx], a                           ; $1774: $E0 $F4
     ldh  a, [hLinkPositionY]                      ; $1776: $F0 $99
     add  a, $06                                   ; $1778: $C6 $06

@@ -249,8 +249,9 @@ hLinkCountdown::
 hObjectUnderLink::
   ds 1 ; FFB8
 
-; Animation frame of the glinting tiles in D4?
-hTileGlintAnimation::
+; There are 4 different sequences in D4 that the tile glint puzzle can take,
+; this variable indicates which one is active.
+hTileGlintSequence::
   ds 1 ; FFB9
 
 ; State of a pull switch used to move blocks

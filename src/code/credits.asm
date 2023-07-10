@@ -6677,10 +6677,11 @@ func_017_7D34::
     ld   [hl], a                                  ; $7D78: $77
     ret                                           ; $7D79: $C9
 
-Data_017_7D7A::
-    db   $37, $7F
+DialogArrowOAMYTable::
+    db   $37 ; top
+    db   $7F ; bottom
 
-func_017_7D7C::
+DrawDialogArrow::
     ldh  a, [hFrameCounter]                       ; $7D7C: $F0 $E7
     and  $10                                      ; $7D7E: $E6 $10
     ret  nz                                       ; $7D80: $C0
@@ -6688,87 +6689,90 @@ func_017_7D7C::
     ld   e, $00                                   ; $7D81: $1E $00
     ld   a, [wDialogState]                        ; $7D83: $FA $9F $C1
     and  DIALOG_BOX_BOTTOM_FLAG                   ; $7D86: $E6 $80
-    jr   z, .jr_7D8B                              ; $7D88: $28 $01
+    jr   z, .doneSettingY                         ; $7D88: $28 $01
 
     inc  e                                        ; $7D8A: $1C
 
-.jr_7D8B
+.doneSettingY
     ld   d, $00                                   ; $7D8B: $16 $00
     ld   a, [wGameplayType]                       ; $7D8D: $FA $95 $DB
     cp   GAMEPLAY_CREDITS                         ; $7D90: $FE $01
-    jr   z, .jr_7DAC                              ; $7D92: $28 $18
+    jr   z, .credits                              ; $7D92: $28 $18
 
-    ld   hl, Data_017_7D7A                        ; $7D94: $21 $7A $7D
+    ld   hl, DialogArrowOAMYTable                      ; $7D94: $21 $7A $7D
     add  hl, de                                   ; $7D97: $19
     ld   a, [hl]                                  ; $7D98: $7E
     ld   [wOAMBuffer+$18], a                      ; $7D99: $EA $18 $C0
-    ld   a, $97                                   ; $7D9C: $3E $97
+    ld   a, $97 ; X position                      ; $7D9C: $3E $97
     ld   [wOAMBuffer+$19], a                      ; $7D9E: $EA $19 $C0
-    ld   a, $A2                                   ; $7DA1: $3E $A2
+    ld   a, $A2 ; Arrow tile                      ; $7DA1: $3E $A2
     ld   [wOAMBuffer+$1A], a                      ; $7DA3: $EA $1A $C0
-    ld   a, $42                                   ; $7DA6: $3E $42
+    ld   a, OAMF_YFLIP | OAM_GBC_PAL_2            ; $7DA6: $3E $42
     ld   [wOAMBuffer+$1B], a                      ; $7DA8: $EA $1B $C0
     ret                                           ; $7DAB: $C9
 
-.jr_7DAC
-    ld   hl, Data_017_7D7A                        ; $7DAC: $21 $7A $7D
+.credits
+    ld   hl, DialogArrowOAMYTable                      ; $7DAC: $21 $7A $7D
     add  hl, de                                   ; $7DAF: $19
     ld   a, [hl]                                  ; $7DB0: $7E
     ld   hl, hBaseScrollY                         ; $7DB1: $21 $97 $FF
     sub  [hl]                                     ; $7DB4: $96
     ld   [wOAMBuffer], a                          ; $7DB5: $EA $00 $C0
-    ld   a, $97                                   ; $7DB8: $3E $97
+    ld   a, $97 ; X position                      ; $7DB8: $3E $97
     ld   [wOAMBuffer+1], a                        ; $7DBA: $EA $01 $C0
-    ld   a, $FE                                   ; $7DBD: $3E $FE
+    ld   a, $FE ; Arrow tile                      ; $7DBD: $3E $FE
     ld   [wOAMBuffer+2], a                        ; $7DBF: $EA $02 $C0
-    ld   a, $40                                   ; $7DC2: $3E $40
+    ld   a, OAMF_YFLIP                            ; $7DC2: $3E $40
     ld   [wOAMBuffer+3], a                        ; $7DC4: $EA $03 $C0
     ret                                           ; $7DC7: $C9
 
-Data_017_7DC8::
-    db   $30, $78
+ChoiceSelectionMarkerYTable::
+    db   $30 ; top
+    db   $78 ; bottom
 
-Data_017_7DCA::
-    db   $30, $58
+ChoiceSelectionMarkerXTable::
+    db   $30 ; top
+    db   $58 ; bottom
 
-func_017_7DCC::
+DrawDialogChoiceMarker::
     ld   e, $00                                   ; $7DCC: $1E $00
     ld   a, [wDialogState]                        ; $7DCE: $FA $9F $C1
     and  DIALOG_BOX_BOTTOM_FLAG                   ; $7DD1: $E6 $80
-    jr   z, .jr_7DD6                              ; $7DD3: $28 $01
+    jr   z, .doneSettingY                         ; $7DD3: $28 $01
 
     inc  e                                        ; $7DD5: $1C
 
-.jr_7DD6
+.doneSettingY
     ld   d, $00                                   ; $7DD6: $16 $00
     ld   a, [wGameplayType]                       ; $7DD8: $FA $95 $DB
     cp   GAMEPLAY_CREDITS                         ; $7DDB: $FE $01
-    jr   z, jr_017_7E04                           ; $7DDD: $28 $25
+    jr   z, .credits                              ; $7DDD: $28 $25
 
-    ld   hl, Data_017_7DC8                        ; $7DDF: $21 $C8 $7D
+    ld   hl, ChoiceSelectionMarkerYTable          ; $7DDF: $21 $C8 $7D
     add  hl, de                                   ; $7DE2: $19
     ld   a, [hl]                                  ; $7DE3: $7E
     ld   [wOAMBuffer+$18], a                      ; $7DE4: $EA $18 $C0
     ld   e, $00                                   ; $7DE7: $1E $00
     ld   a, [wDialogAskSelectionIndex]            ; $7DE9: $FA $77 $C1
     and  $01                                      ; $7DEC: $E6 $01
-    jr   z, .jr_7DF1                              ; $7DEE: $28 $01
+    jr   z, .doneSettingX                         ; $7DEE: $28 $01
 
     inc  e                                        ; $7DF0: $1C
 
-.jr_7DF1
-    ld   hl, Data_017_7DCA                        ; $7DF1: $21 $CA $7D
+.doneSettingX
+    ld   hl, ChoiceSelectionMarkerXTable          ; $7DF1: $21 $CA $7D
     add  hl, de                                   ; $7DF4: $19
     ld   a, [hl]                                  ; $7DF5: $7E
     ld   [wOAMBuffer+$19], a                      ; $7DF6: $EA $19 $C0
-    ld   a, $3E                                   ; $7DF9: $3E $3E
+    ld   a, $3E ; Marker tile                     ; $7DF9: $3E $3E
     ld   [wOAMBuffer+$1A], a                      ; $7DFB: $EA $1A $C0
     ld   a, $00                                   ; $7DFE: $3E $00
     ld   [wOAMBuffer+$1B], a                      ; $7E00: $EA $1B $C0
     ret                                           ; $7E03: $C9
 
-jr_017_7E04:
-    ld   hl, Data_017_7DC8                        ; $7E04: $21 $C8 $7D
+; Dead code? The credits don't contain any dialog with choices
+.credits:
+    ld   hl, ChoiceSelectionMarkerYTable          ; $7E04: $21 $C8 $7D
     add  hl, de                                   ; $7E07: $19
     ld   a, [hl]                                  ; $7E08: $7E
     ld   hl, hBaseScrollY                         ; $7E09: $21 $97 $FF
@@ -6782,13 +6786,11 @@ jr_017_7E04:
     inc  e                                        ; $7E19: $1C
 
 .jr_7E1A
-    ld   hl, Data_017_7DCA                        ; $7E1A: $21 $CA $7D
+    ld   hl, ChoiceSelectionMarkerXTable          ; $7E1A: $21 $CA $7D
     add  hl, de                                   ; $7E1D: $19
     ld   a, [hl]                                  ; $7E1E: $7E
     ld   [wOAMBuffer+1], a                        ; $7E1F: $EA $01 $C0
-    ld   a, $9E                                   ; $7E22: $3E $9E
-
-.jr_7E24
+    ld   a, $9E ; Marker tile                     ; $7E22: $3E $9E
     ld   [wOAMBuffer+2], a                        ; $7E24: $EA $02 $C0
     ld   a, $00                                   ; $7E27: $3E $00
     ld   [wOAMBuffer+3], a                        ; $7E29: $EA $03 $C0

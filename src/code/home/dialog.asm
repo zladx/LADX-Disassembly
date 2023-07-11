@@ -701,7 +701,7 @@ DialogBoxOrigin::
 ; printed, so it only triggers on even-numbered lines. Dialog ending
 ; on an odd-numbered line will still print an empty line at the end.
 DialogBreakHandler::
-    ; Bug: This check should be done after the next two
+    ; @bug: This check should be done after the next two
     ; checks for terminators to trigger on odd-numbered lines as well.
     ld   a, [wDialogCharacterIndex]               ; $2695: $FA $70 $C1
     and  $1F                                      ; $2698: $E6 $1F

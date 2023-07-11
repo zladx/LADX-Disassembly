@@ -65,7 +65,7 @@ func_018_5E5D::
     call IncrementEntityState                     ; $5E70: $CD $12 $3B
     ld   [hl], b                                  ; $5E73: $70
     ld   hl, wOverworldRoomStatus + $AC           ; $5E74: $21 $AC $D8
-    set  4, [hl]                                  ; $5E77: $CB $E6
+    set  OW_ROOM_STATUS_FLAG_CHANGED, [hl]        ; $5E77: $CB $E6
 
 .ret_5E79
     ret                                           ; $5E79: $C9

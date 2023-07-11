@@ -270,7 +270,7 @@ func_007_5997::
     ld   a, JINGLE_PUZZLE_SOLVED                  ; $59A3: $3E $02
     ldh  [hJingle], a                             ; $59A5: $E0 $F2
     ld   a, [wOverworldRoomStatus + $7B]          ; $59A7: $FA $7B $D8
-    or   $10                                      ; $59AA: $F6 $10
+    or   OW_ROOM_STATUS_CHANGED                   ; $59AA: $F6 $10
     ld   [wOverworldRoomStatus + $7B], a          ; $59AC: $EA $7B $D8
     ld   a, $01                                   ; $59AF: $3E $01
     ld   [wExchangingTradeSequenceItem], a        ; $59B1: $EA $7F $DB

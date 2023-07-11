@@ -8423,7 +8423,7 @@ label_036_71AD:
 
 label_036_71FA:
     ld   a, [wOverworldRoomStatus + $79]          ; $71FA: $FA $79 $D8
-    and  $10                                      ; $71FD: $E6 $10
+    and  OW_ROOM_STATUS_CHANGED                   ; $71FD: $E6 $10
     jp   nz, IsInteractiveMotionAllowed.allow     ; $71FF: $C2 $88 $72
 
     ld   a, [wPhotos2]                            ; $7202: $FA $0D $DC

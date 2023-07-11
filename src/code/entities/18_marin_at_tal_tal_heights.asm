@@ -317,7 +317,7 @@ IF __PATCH_0__
     ld   [wIsMarinInAnimalVillage], a
 ENDC
     ld   hl, wOverworldRoomStatus + $08           ; $60BC: $21 $08 $D8
-    set  4, [hl]                                  ; $60BF: $CB $E6
+    set  OW_ROOM_STATUS_FLAG_CHANGED, [hl]        ; $60BF: $CB $E6
     ld   a, [hl]                                  ; $60C1: $7E
     ldh  [hRoomStatus], a                         ; $60C2: $E0 $F8
     jp   ClearEntityStatusBank18                  ; $60C4: $C3 $08 $7F

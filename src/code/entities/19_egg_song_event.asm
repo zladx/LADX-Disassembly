@@ -426,7 +426,7 @@ label_019_4CFF:
 
 .jr_4D1A
     ld   hl, wOverworldRoomStatus + $06           ; $4D1A: $21 $06 $D8
-    set  4, [hl]                                  ; $4D1D: $CB $E6
+    set  OW_ROOM_STATUS_FLAG_CHANGED, [hl]        ; $4D1D: $CB $E6
     ld   a, [hl]                                  ; $4D1F: $7E
     ldh  [hRoomStatus], a                         ; $4D20: $E0 $F8
     jp   ClearEntityStatus_19                     ; $4D22: $C3 $61 $7E

@@ -12,7 +12,7 @@ WalrusEntityHandler::
     jp   nz, label_018_54BD                       ; $5507: $C2 $BD $54
 
     ld   a, [wOverworldRoomStatus + $FD]          ; $550A: $FA $FD $D8
-    and  $20                                      ; $550D: $E6 $20
+    and  OW_ROOM_STATUS_OWL_TALKED                ; $550D: $E6 $20
     jp   nz, label_018_589A                       ; $550F: $C2 $9A $58
 
     call func_018_586B                            ; $5512: $CD $6B $58

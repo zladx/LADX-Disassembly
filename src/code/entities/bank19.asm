@@ -110,7 +110,7 @@ func_019_5DAC::
     ld   hl, wOverworldRoomStatus                 ; $5DC6: $21 $00 $D8
     add  hl, de                                   ; $5DC9: $19
     ld   a, [hl]                                  ; $5DCA: $7E
-    and  $80                                      ; $5DCB: $E6 $80
+    and  OW_ROOM_STATUS_VISITED                   ; $5DCB: $E6 $80
     jr   z, .loop                                 ; $5DCD: $28 $F2
 
     ; Warp Link

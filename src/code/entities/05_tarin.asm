@@ -267,7 +267,7 @@ jr_005_4A46:
     ld   hl, wOverworldRoomStatus                 ; $4A90: $21 $00 $D8
     add  hl, de                                   ; $4A93: $19
     ld   a, [hl]                                  ; $4A94: $7E
-    or   $10                                      ; $4A95: $F6 $10
+    or   OW_ROOM_STATUS_CHANGED                   ; $4A95: $F6 $10
     ld   [hl], a                                  ; $4A97: $77
     ld   a, $01                                   ; $4A98: $3E $01
     ld   [wDB48], a                               ; $4A9A: $EA $48 $DB

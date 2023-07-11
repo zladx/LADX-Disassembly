@@ -165,5 +165,5 @@ RevealMamuCave::
     ld   d, $00                                   ; $6374: $16 $00
     ld   hl, wOverworldRoomStatus                 ; $6376: $21 $00 $D8
     add  hl, de                                   ; $6379: $19
-    set  ROOM_STATUS_DOOR_OPEN_UP, [hl]           ; $637A: $CB $E6
+    set  OW_ROOM_STATUS_FLAG_CHANGED, [hl]        ; $637A: $CB $E6
     ret                                           ; $637C: $C9

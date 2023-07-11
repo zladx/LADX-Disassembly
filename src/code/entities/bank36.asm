@@ -8172,7 +8172,7 @@ func_036_705A::
     ld   b, $00                                   ; $705D: $06 $00
 
 jr_036_705F:
-    ld   a, ENTITY_ENTITY_LIFTABLE_ROCK           ; $705F: $3E $05
+    ld   a, ENTITY_LIFTABLE_ROCK                  ; $705F: $3E $05
     call SpawnNewEntity_trampoline                ; $7061: $CD $86 $3B
     jr   c, jr_036_708E                           ; $7064: $38 $28
 

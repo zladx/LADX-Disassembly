@@ -166,6 +166,7 @@ OBJECT_CLIFF_TOP            equ $4D
 OBJECT_BUSH                 equ $5C
 OBJECT_WEATHER_VANE_BASE    equ $5E
 OBJECT_WELL                 equ $61
+OBJECT_HURT_TILE            equ $69 ; overworld: cactus
 OBJECT_ROUNDED_BLOCK        equ $6E
 OBJECT_OWL_STATUE           equ $6F
 OBJECT_WEATHER_VANE_TOP     equ $91
@@ -207,7 +208,11 @@ OBJECT_HIDDEN_BOMBABLE_WALL_BOTTOM equ $48
 OBJECT_HIDDEN_BOMBABLE_WALL_LEFT   equ $49
 OBJECT_HIDDEN_BOMBABLE_WALL_RIGHT  equ $4A
 OBJECT_SIDE_VIEW_SPIKES            equ $4C
+OBJECT_DASHABLE_ROCK_1             equ $4E
+OBJECT_DASHABLE_ROCK_2             equ $4F
+;OBJECT_HURT_TILE                  equ $69 ; same ID as overworld. indoors: spikes
 OBJECT_POT_WITH_SWITCH             equ $8E
+OBJECT_DASHABLE_ROCK_3             equ $88
 OBJECT_CHEST_CLOSED                equ $A0
 OBJECT_CHEST_OPEN                  equ $A1
 OBJECT_PUSHABLE_BLOCK              equ $A7

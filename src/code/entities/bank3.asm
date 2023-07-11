@@ -1750,7 +1750,7 @@ ENDC
     cp   $02                                      ; $5104: $FE $02
     jr   z, .powerBraceletEnd                     ; $5106: $28 $04
 
-    ; increment the Power bracelet lebel.
+    ; increment the Power bracelet level.
     ld   hl, wPowerBraceletLevel                  ; $5108: $21 $43 $DB
     inc  [hl]                                     ; $510B: $34
 .powerBraceletEnd
@@ -2065,7 +2065,7 @@ ret_003_5406:
     ret                                           ; $5406: $C9
 
 SmashRock::
-    ld   a, ENTITY_ENTITY_LIFTABLE_ROCK           ; $5407: $3E $05
+    ld   a, ENTITY_LIFTABLE_ROCK                  ; $5407: $3E $05
     call SpawnNewEntity                           ; $5409: $CD $CA $64
     ret  c                                        ; $540C: $D8
 
@@ -5363,7 +5363,7 @@ func_003_68F8::
 .jr_003_6964
     call func_014_5526_trampoline                 ; $6964: $CD $78 $21
 
-    ld   a, ENTITY_ENTITY_LIFTABLE_ROCK           ; $6967: $3E $05
+    ld   a, ENTITY_LIFTABLE_ROCK                  ; $6967: $3E $05
     call SpawnNewEntity                           ; $6969: $CD $CA $64
     jr   c, .return                               ; $696C: $38 $32
 
@@ -7904,7 +7904,7 @@ jr_003_7737:
     cp   ENTITY_HOOKSHOT_CHAIN                    ; $7741: $FE $03
     jr   z, jr_003_779A                           ; $7743: $28 $55
 
-    cp   ENTITY_ENTITY_LIFTABLE_ROCK              ; $7745: $FE $05
+    cp   ENTITY_LIFTABLE_ROCK                     ; $7745: $FE $05
     jr   nz, .jr_7751                             ; $7747: $20 $08
 
     push de                                       ; $7749: $D5
@@ -8528,7 +8528,7 @@ ApplyEntityPhysics::
     cp   ENTITY_WRECKING_BALL                     ; $7AF1: $FE $A8
     jr   z, .jr_7AF9                              ; $7AF3: $28 $04
 
-    cp   ENTITY_ENTITY_LIFTABLE_ROCK              ; $7AF5: $FE $05
+    cp   ENTITY_LIFTABLE_ROCK                     ; $7AF5: $FE $05
     jr   nz, jr_003_7B0E                          ; $7AF7: $20 $15
 
 .jr_7AF9
@@ -8788,7 +8788,7 @@ jr_003_7C2B:
     cp   ENTITY_HOOKSHOT_CHAIN                    ; $7C4F: $FE $03
     jr   nz, .jr_7C5A                             ; $7C51: $20 $07
 
-    ld   a, [wD6F9]                               ; $7C53: $FA $F9 $D6
+    ld   a, [wLinkStandingOnSwitchBlock]          ; $7C53: $FA $F9 $D6
     and  a                                        ; $7C56: $A7
     jp   nz, setCarryFlagAndReturn                ; $7C57: $C2 $A7 $7C
 

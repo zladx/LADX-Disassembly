@@ -2940,7 +2940,7 @@ wSwitchableObjectAnimationStage::
   ds 1 ; D6F8
 
 ; Unlabeled
-wD6F9::
+wLinkStandingOnSwitchBlock::
   ds 1 ; D6F9
 
 ; Is there one or more switchable objects in the room

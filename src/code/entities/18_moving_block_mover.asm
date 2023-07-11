@@ -31,12 +31,12 @@ MovingBlockMoverEntityHandler::
     cp   $04                                      ; $5401: $FE $04
     jr   nc, jr_018_5466                          ; $5403: $30 $61
 
-    ld   e, $20                                   ; $5405: $1E $20
+    ld   e, J_B                                   ; $5405: $1E $20
     ld   a, [wInventoryItems.BButtonSlot]         ; $5407: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $540A: $FE $03
     jr   z, .jr_5417                              ; $540C: $28 $09
 
-    ld   e, $10                                   ; $540E: $1E $10
+    ld   e, J_A                                   ; $540E: $1E $10
     ld   a, [wInventoryItems.AButtonSlot]         ; $5410: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $5413: $FE $03
     jr   nz, jr_018_5466                          ; $5415: $20 $4F

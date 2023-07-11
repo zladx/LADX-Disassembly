@@ -304,7 +304,7 @@ jr_004_41AC:
     jr   nz, .jr_41DF                             ; $41D5: $20 $08
 
     ldh  a, [hPressedButtonsMask]                 ; $41D7: $F0 $CB
-    and  $20                                      ; $41D9: $E6 $20
+    and  J_B                                      ; $41D9: $E6 $20
     jr   nz, jr_004_41EC                          ; $41DB: $20 $0F
 
     jr   jr_004_4210                              ; $41DD: $18 $31
@@ -315,7 +315,7 @@ jr_004_41AC:
     jr   nz, jr_004_4210                          ; $41E4: $20 $2A
 
     ldh  a, [hPressedButtonsMask]                 ; $41E6: $F0 $CB
-    and  $10                                      ; $41E8: $E6 $10
+    and  J_A                                      ; $41E8: $E6 $10
     jr   z, jr_004_4210                           ; $41EA: $28 $24
 
 jr_004_41EC:

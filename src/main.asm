@@ -187,7 +187,7 @@ MenuTiles::
 incbin "gfx/menus/menu.dmg.2bpp"
 SaveMenuTiles::
 incbin "gfx/menus/save_menu.dmg.2bpp"
-TitleLogoTitles::
+TitleLogoTiles::
 incbin "gfx/intro/title.dmg.2bpp"
 FontTiles::
 incbin "gfx/fonts/font.2bpp"
@@ -526,10 +526,10 @@ incbin "gfx/characters/oam_photographer.2bpp"
 CreditsRollTiles::
 incbin "gfx/ending/credits_roll.2bpp"
 TitleDXTiles::
-TitleDXTilesDMG::
-incbin "gfx/intro/title_dx.dmg.2bpp"
 TitleDXTilesCGB::
 incbin "gfx/intro/title_dx.cgb.2bpp"
+TitleDXTilesDMG::
+incbin "gfx/intro/title_dx.dmg.2bpp"
 MarinPortraitTiles::
 incbin "gfx/ending/oam_marin_portrait.2bpp"
 MarinPortraitOverlayTiles::

@@ -381,7 +381,7 @@ include "code/bank23.asm"
 section "bank24",romx[$4000],bank[$24]
 include "data/object_attributes/indoors_b.asm"
 include "code/background_colors.asm"
-include "data/backgrounds/palettes.asm"
+include "data/backgrounds/forest_palettes.asm"
 include "code/overworld_macros.asm"
 
 section "bank25",romx[$4000],bank[$25]

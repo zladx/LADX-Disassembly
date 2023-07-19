@@ -2217,7 +2217,7 @@ func_002_4EDD::
     ld   [wC167], a                               ; $4EE1: $EA $67 $C1
 
 IF !__PATCH_0__
-    ld   [wDDD6], a                               ; $4EE4: $EA $D6 $DD
+    ld   [wBGPaletteTransitionEffect], a          ; $4EE4: $EA $D6 $DD
     ld   [wDDD7], a                               ; $4EE7: $EA $D7 $DD
 ENDC
 
@@ -6273,7 +6273,7 @@ CheckPositionForMapTransition::
     ld   [wIsRunningWithPegasusBoots], a          ; $6DF4: $EA $4A $C1
     ld   [wC188], a                               ; $6DF7: $EA $88 $C1
 IF __PATCH_0__
-    ld   [wDDD6], a
+    ld   [wBGPaletteTransitionEffect], a
     ld   [wDDD7], a
 ENDC
 

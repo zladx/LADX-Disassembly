@@ -8907,7 +8907,7 @@ ApplySwordIntersectionWithObjects::
     cp   LINK_MOTION_REVOLVING_DOOR               ; $7CEC: $FE $05
     ret  z                                        ; $7CEE: $C8
 
-    ld   a, [wDDD6]                               ; $7CEF: $FA $D6 $DD
+    ld   a, [wBGPaletteTransitionEffect]          ; $7CEF: $FA $D6 $DD
     and  a                                        ; $7CF2: $A7
     jp   nz, jr_003_7E03                          ; $7CF3: $C2 $03 $7E
 
@@ -8974,7 +8974,7 @@ ApplySwordIntersectionWithObjects::
     jr   z, .jr_7D63                              ; $7D57: $28 $0A
 
     ld   a, $40                                   ; $7D59: $3E $40
-    ld   [wDDD6], a                               ; $7D5B: $EA $D6 $DD
+    ld   [wBGPaletteTransitionEffect], a          ; $7D5B: $EA $D6 $DD
     ld   a, $0B                                   ; $7D5E: $3E $0B
     ld   [wDDD7], a                               ; $7D60: $EA $D7 $DD
 

@@ -145,7 +145,7 @@ jr_006_5361:
     jr   nc, label_006_5411                       ; $53B1: $30 $5E
 
     inc  [hl]                                     ; $53B3: $34
-    ld   a, ENTITY_ENTITY_LIFTABLE_ROCK           ; $53B4: $3E $05
+    ld   a, ENTITY_LIFTABLE_ROCK                  ; $53B4: $3E $05
     call SpawnNewEntity_trampoline                ; $53B6: $CD $86 $3B
     jr   c, label_006_5411                        ; $53B9: $38 $56
 
@@ -171,7 +171,7 @@ jr_006_5361:
     jr   nc, label_006_5411                       ; $53DA: $30 $35
 
     inc  [hl]                                     ; $53DC: $34
-    ld   a, ENTITY_ENTITY_LIFTABLE_ROCK           ; $53DD: $3E $05
+    ld   a, ENTITY_LIFTABLE_ROCK                  ; $53DD: $3E $05
     call SpawnNewEntity_trampoline                ; $53DF: $CD $86 $3B
     jr   c, label_006_5411                        ; $53E2: $38 $2D
 

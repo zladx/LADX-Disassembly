@@ -2388,7 +2388,7 @@ label_1637::
     ld   [wC16D], a                               ; $1650: $EA $6D $C1
 
 label_1653::
-    ld   a, ENTITY_ENTITY_LIFTABLE_ROCK           ; $1653: $3E $05
+    ld   a, ENTITY_LIFTABLE_ROCK                  ; $1653: $3E $05
     call SpawnPlayerProjectile                    ; $1655: $CD $2F $14
     jr   c, .dropRandomItem                       ; $1658: $38 $22
 
@@ -3799,7 +3799,7 @@ func_014_5526_trampoline::
     jp   ReloadSavedBank                          ; $2180: $C3 $1D $08
 
 label_2183::
-    ld   a, ENTITY_ENTITY_LIFTABLE_ROCK           ; $2183: $3E $05
+    ld   a, ENTITY_LIFTABLE_ROCK                  ; $2183: $3E $05
     call SpawnPlayerProjectile                    ; $2185: $CD $2F $14
 
 IF __OPTIMIZATIONS_1__

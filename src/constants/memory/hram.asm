@@ -201,6 +201,7 @@ hStaircasePosY::
   ds 1 ; FFAE
 
 ; Type of the object under the active entity
+; See OBJECT_* constants
 hObjectUnderEntity::
   ds 1 ; FFAF
 

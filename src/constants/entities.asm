@@ -55,7 +55,7 @@ ENTITY_BOOMERANG                     equ $01
 ENTITY_BOMB                          equ $02
 ENTITY_HOOKSHOT_CHAIN                equ $03
 ENTITY_MAGIC_ROD_FIREBALL            equ $04
-ENTITY_ENTITY_LIFTABLE_ROCK          equ $05
+ENTITY_LIFTABLE_ROCK                 equ $05
 ENTITY_PUSHED_BLOCK                  equ $06 ; The entity spawned when pushing an OBJECT_PUSHABLE_BLOCK, before it's moved into its new position
 ENTITY_CHEST_WITH_ITEM               equ $07
 ENTITY_MAGIC_POWDER_SPRINKLE         equ $08

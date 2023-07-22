@@ -1721,7 +1721,7 @@ InitGotItemSequence::
     xor  a                                        ; $111F: $AF
     ld   [wInvincibilityCounter], a               ; $1120: $EA $C7 $DB
     ldh  [hLinkPhysicsModifier], a                ; $1123: $E0 $9C
-    ld   [wDDD6], a                               ; $1125: $EA $D6 $DD
+    ld   [wBGPaletteTransitionEffect], a          ; $1125: $EA $D6 $DD
     ld   [wDDD7], a                               ; $1128: $EA $D7 $DD
     ld   [wD464], a                               ; $112B: $EA $64 $D4
     call label_27F2                               ; $112E: $CD $F2 $27
@@ -2733,7 +2733,7 @@ LinkMotionMapFadeOutHandler::
     ldh  [hBaseScrollX], a                        ; $185B: $E0 $96
     ldh  [hBaseScrollY], a                        ; $185D: $E0 $97
     ldh  [hDungeonTitleMessageCountdown], a       ; $185F: $E0 $B4
-    ld   [wDDD6], a                               ; $1861: $EA $D6 $DD
+    ld   [wBGPaletteTransitionEffect], a          ; $1861: $EA $D6 $DD
     ld   [wDDD7], a                               ; $1864: $EA $D7 $DD
 
     ld   e, $10                                   ; $1867: $1E $10

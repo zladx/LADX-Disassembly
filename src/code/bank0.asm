@@ -1287,17 +1287,26 @@ ExecuteGameplayHandler::
     jr   nz, jumpToGameplayHandler                ; $0E44: $20 $3F
 
 presentSaveScreenIfNeeded::
-    ; If a indoor/outdoor transition is running
+    ; If a indoor/outdoor transition is running...
     ld   a, [wTransitionSequenceCounter]          ; $0E46: $FA $6B $C1
     cp   $04                                      ; $0E49: $FE $04
+    ; ...don't open the save screen.
     jr   nz, jumpToGameplayHandler                ; $0E4B: $20 $38
 
-    ; If a dialog is visible, or the screen is animating from one map to another
+    ; If a dialog is visible...
     ld   a, [wDialogState]                        ; $0E4D: $FA $9F $C1
+    ; ...or wC167 is non-zero...
     ld   hl, wC167                                ; $0E50: $21 $67 $C1
     or   [hl]                                     ; $0E53: $B6
+    ; ...or the screen is currently scrolling from one room to another...
+    ;
+    ; (POI: This last check was added in 1.1 of the non-DX version of the game,
+    ; and patches the screen warp glitch. However, removing this check doesn't
+    ; re-introduce the glitch into the DX version, perhaps because of another
+    ; check somewhere else.)
     ld   hl, wRoomTransitionState                 ; $0E54: $21 $24 $C1
     or   [hl]                                     ; $0E57: $B6
+    ; ...don't open the save screen.
     jr   nz, jumpToGameplayHandler                ; $0E58: $20 $2B
 
     ; If GameplayType > INVENTORY (i.e. photo album and pictures)

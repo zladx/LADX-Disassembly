@@ -37,7 +37,7 @@ KeeseEntityHandler::
     call RenderActiveEntitySpritesPair            ; $673C: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $673F: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $6742: $CD $F7 $64
-    call label_3B39                               ; $6745: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $6745: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $6748: $F0 $F0
     JP_TABLE                                      ; $674A
 ._00 dw KeeseRestingHandler
@@ -80,7 +80,7 @@ KeeseRestingHandler::
 
 KeeseFlyingHandler::
     call UpdateEntityPosWithSpeed_06              ; $678F: $CD $41 $65
-    call label_3B23                               ; $6792: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $6792: $CD $23 $3B
     call GetEntityTransitionCountdown             ; $6795: $CD $05 $0C
     jr   nz, .jr_67A2                             ; $6798: $20 $08
 

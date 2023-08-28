@@ -69,7 +69,7 @@ jr_003_5286:
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $5290: $21 $10 $C4
     add  hl, bc                                   ; $5293: $09
     ld   [hl], a                                  ; $5294: $77
-    call func_003_7893                            ; $5295: $CD $93 $78
+    call DefaultEntityPhysics                     ; $5295: $CD $93 $78
     ld   hl, wEntitiesStatusTable                 ; $5298: $21 $80 $C2
     add  hl, bc                                   ; $529B: $09
     ld   a, [hl]                                  ; $529C: $7E
@@ -99,7 +99,7 @@ jr_003_5286:
     cp   TRIGGER_PUSH_BLOCKS                      ; $52C1: $FE $07
     ret  nz                                       ; $52C3: $C0
 
-    call func_003_7893                            ; $52C4: $CD $93 $78
+    call DefaultEntityPhysics                     ; $52C4: $CD $93 $78
     ld   a, [wC503]                               ; $52C7: $FA $03 $C5
     cp   $A7                                      ; $52CA: $FE $A7
     jr   z, .jr_52D1                              ; $52CC: $28 $03

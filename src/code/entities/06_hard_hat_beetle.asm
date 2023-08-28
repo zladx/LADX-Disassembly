@@ -28,9 +28,9 @@ HardHatBeetleEntityHandler::
     call RenderActiveEntitySpritesPair            ; $4F48: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $4F4B: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $4F4E: $CD $F7 $64
-    call label_3B39                               ; $4F51: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $4F51: $CD $39 $3B
     call UpdateEntityPosWithSpeed_06              ; $4F54: $CD $41 $65
-    call label_3B23                               ; $4F57: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $4F57: $CD $23 $3B
     ldh  a, [hFrameCounter]                       ; $4F5A: $F0 $E7
     rra                                           ; $4F5C: $1F
     rra                                           ; $4F5D: $1F

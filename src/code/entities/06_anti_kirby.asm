@@ -72,14 +72,14 @@ label_006_42A2:
 
 .jr_42AD
     call UpdateEntityPosWithSpeed_06              ; $42AD: $CD $41 $65
-    call label_3B23                               ; $42B0: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $42B0: $CD $23 $3B
     ld   hl, wEntitiesDirectionTable              ; $42B3: $21 $80 $C3
     add  hl, bc                                   ; $42B6: $09
     ld   a, [hl]                                  ; $42B7: $7E
     rla                                           ; $42B8: $17
     and  $06                                      ; $42B9: $E6 $06
     call SetEntitySpriteVariant                   ; $42BB: $CD $0C $3B
-    jp   label_3B39                               ; $42BE: $C3 $39 $3B
+    jp   DefaultEnemyDamageCollisionHandler_trampoline ; $42BE: $C3 $39 $3B
 
 Data_006_42C1::
     db   $08, $F8, $08, $F8

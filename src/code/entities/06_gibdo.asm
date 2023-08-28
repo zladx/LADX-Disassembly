@@ -31,11 +31,11 @@ GibdoEntityHandler::
     call RenderActiveEntitySpritesPair            ; $7E91: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $7E94: $CD $C6 $64
     call DecrementEntityIgnoreHitsCountdown       ; $7E97: $CD $56 $0C
-    call label_3B39                               ; $7E9A: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $7E9A: $CD $39 $3B
 
 label_006_7E9D:
     call UpdateEntityPosWithSpeed_06              ; $7E9D: $CD $41 $65
-    call label_3B23                               ; $7EA0: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7EA0: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $7EA3: $21 $A0 $C2
     add  hl, bc                                   ; $7EA6: $09
     ld   a, [hl]                                  ; $7EA7: $7E

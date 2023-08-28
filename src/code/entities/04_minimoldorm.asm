@@ -90,7 +90,7 @@ jr_004_5AA9:
     ldh  a, [hActiveEntityVisualPosY]             ; $5ADD: $F0 $EC
     ld   [hl], a                                  ; $5ADF: $77
     call ApplyRecoilIfNeeded_04                   ; $5AE0: $CD $80 $6D
-    call label_3B39                               ; $5AE3: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $5AE3: $CD $39 $3B
 
 func_004_5AE6::
     ld   hl, wEntitiesFlashCountdownTable         ; $5AE6: $21 $20 $C4
@@ -102,7 +102,7 @@ func_004_5AE6::
     call UpdateEntityPosWithSpeed_04              ; $5AEE: $CD $CA $6D
 
 .jr_5AF1
-    call label_3B23                               ; $5AF1: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $5AF1: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $5AF4: $21 $A0 $C2
     add  hl, bc                                   ; $5AF7: $09
     ld   a, [hl]                                  ; $5AF8: $7E

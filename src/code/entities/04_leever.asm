@@ -19,7 +19,7 @@ LeeverEntityHandler::
     call ReturnIfNonInteractive_04                ; $7EFB: $CD $A3 $7F
     call ApplyRecoilIfNeeded_04                   ; $7EFE: $CD $80 $6D
     call UpdateEntityPosWithSpeed_04              ; $7F01: $CD $CA $6D
-    call label_3B23                               ; $7F04: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7F04: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $7F07: $F0 $F0
     and  $03                                      ; $7F09: $E6 $03
     JP_TABLE                                      ; $7F0B
@@ -66,7 +66,7 @@ label_004_7F3A:
     jp   SetEntitySpriteVariant                   ; $7F46: $C3 $0C $3B
 
 func_004_7F49::
-    call label_3B39                               ; $7F49: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $7F49: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $7F4C: $CD $05 $0C
     jr   nz, .jr_7F59                             ; $7F4F: $20 $08
 

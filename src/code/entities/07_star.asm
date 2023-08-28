@@ -21,9 +21,9 @@ StarEntityHandler::
     call RenderActiveEntitySpritesPair            ; $725E: $CD $C0 $3B
     call ReturnIfNonInteractive_07                ; $7261: $CD $96 $7D
     call ApplyRecoilIfNeeded_07                   ; $7264: $CD $C3 $7D
-    call label_3B39                               ; $7267: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $7267: $CD $39 $3B
     call UpdateEntityPosWithSpeed_07              ; $726A: $CD $0A $7E
-    call label_3B23                               ; $726D: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $726D: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $7270: $21 $A0 $C2
     add  hl, bc                                   ; $7273: $09
     ld   a, [hl]                                  ; $7274: $7E

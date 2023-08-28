@@ -17,7 +17,7 @@ Data_004_569F::
 
 func_004_56A7::
     call ReturnIfNonInteractive_04                ; $56A7: $CD $A3 $7F
-    jp   label_3B39                               ; $56AA: $C3 $39 $3B
+    jp   DefaultEnemyDamageCollisionHandler_trampoline ; $56AA: $C3 $39 $3B
 
 MoldormEntityHandler::
     call label_394D                               ; $56AD: $CD $4D $39

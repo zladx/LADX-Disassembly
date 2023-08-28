@@ -249,7 +249,7 @@ jr_005_4137:
     ld   [de], a                                  ; $415F: $12
 
 .jr_4160
-    call label_3B23                               ; $4160: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $4160: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $4163: $F0 $F0
     JP_TABLE                                      ; $4165
 ._00 dw func_005_4180                             ; $4166

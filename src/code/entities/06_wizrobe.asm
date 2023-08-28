@@ -34,7 +34,7 @@ WizrobeEntityHandler::
     call ReturnIfNonInteractive_06                ; $762E: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $7631: $CD $F7 $64
     call UpdateEntityPosWithSpeed_06              ; $7634: $CD $41 $65
-    call label_3B23                               ; $7637: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7637: $CD $23 $3B
     ld   hl, wEntitiesStateTable                  ; $763A: $21 $90 $C2
     add  hl, bc                                   ; $763D: $09
     ld   a, [hl]                                  ; $763E: $7E
@@ -126,7 +126,7 @@ jr_006_76B6:
     jp   label_006_7735                           ; $76B6: $C3 $35 $77
 
 WizrobeState3Handler::
-    call label_3B39                               ; $76B9: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $76B9: $CD $39 $3B
     call GetEntityPrivateCountdown1               ; $76BC: $CD $00 $0C
     cp   $28                                      ; $76BF: $FE $28
     jr   z, jr_006_76E9                           ; $76C1: $28 $26

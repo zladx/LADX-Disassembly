@@ -33,7 +33,7 @@ HorsePieceEntityHandler::
     call UpdateEntityPosWithSpeed_07              ; $7607: $CD $0A $7E
     call AddEntityZSpeedToPos_07                  ; $760A: $CD $43 $7E
     ; Apply collision physics
-    call label_3B23                               ; $760D: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $760D: $CD $23 $3B
     ; Add gravity.
     ld   hl, wEntitiesSpeedZTable                 ; $7610: $21 $20 $C3
     add  hl, bc                                   ; $7613: $09

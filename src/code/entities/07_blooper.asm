@@ -12,11 +12,11 @@ BlooperEntityHandler::
     call RenderActiveEntitySpritesPair            ; $5BFC: $CD $C0 $3B
     call ReturnIfNonInteractive_07                ; $5BFF: $CD $96 $7D
     call ApplyRecoilIfNeeded_07                   ; $5C02: $CD $C3 $7D
-    call label_3B39                               ; $5C05: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $5C05: $CD $39 $3B
     call UpdateEntityPosWithSpeed_07              ; $5C08: $CD $0A $7E
 
 .jr_5C0B
-    call label_3B23                               ; $5C0B: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $5C0B: $CD $23 $3B
     ld   hl, wEntitiesGroundStatusTable           ; $5C0E: $21 $70 $C4
     add  hl, bc                                   ; $5C11: $09
     ld   a, [hl]                                  ; $5C12: $7E

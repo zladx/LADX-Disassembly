@@ -119,7 +119,7 @@ SideViewPotState1And2Handler::
     inc  [hl]                                     ; $598A: $34
 
 jr_019_598B:
-    call label_3B23                               ; $598B: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $598B: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $598E: $21 $A0 $C2
     add  hl, bc                                   ; $5991: $09
     ld   a, [hl]                                  ; $5992: $7E

@@ -23,9 +23,9 @@ SnakeEntityHandler::
     call RenderActiveEntitySpritesPair            ; $685A: $CD $C0 $3B
     call ReturnIfNonInteractive_07                ; $685D: $CD $96 $7D
     call ApplyRecoilIfNeeded_07                   ; $6860: $CD $C3 $7D
-    call label_3B39                               ; $6863: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $6863: $CD $39 $3B
     call UpdateEntityPosWithSpeed_07              ; $6866: $CD $0A $7E
-    call label_3B23                               ; $6869: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $6869: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $686C: $21 $A0 $C2
     add  hl, bc                                   ; $686F: $09
     ld   a, [hl]                                  ; $6870: $7E

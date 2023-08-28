@@ -304,7 +304,7 @@ func_007_6649::
 
 .jr_665A
     call UpdateEntityPosWithSpeed_07              ; $665A: $CD $0A $7E
-    call label_3B23                               ; $665D: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $665D: $CD $23 $3B
 
 label_007_6660:
     ldh  a, [hFrameCounter]                       ; $6660: $F0 $E7
@@ -370,7 +370,7 @@ func_007_66B8::
     call GetEntitySpeedYAddress                   ; $66BB: $CD $05 $40
     inc  [hl]                                     ; $66BE: $34
     inc  [hl]                                     ; $66BF: $34
-    call label_3B23                               ; $66C0: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $66C0: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $66C3: $21 $A0 $C2
     add  hl, bc                                   ; $66C6: $09
     ld   a, [hl]                                  ; $66C7: $7E

@@ -108,7 +108,7 @@ func_015_78DE::
 
 func_015_792E::
     call UpdateEntityPosWithSpeed_15              ; $792E: $CD $88 $7B
-    call label_3B23                               ; $7931: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7931: $CD $23 $3B
     ldh  a, [hMultiPurposeG]                      ; $7934: $F0 $E8
     and  a                                        ; $7936: $A7
     jr   z, jr_015_7950                           ; $7937: $28 $17

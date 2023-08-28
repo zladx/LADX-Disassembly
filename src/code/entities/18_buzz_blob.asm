@@ -57,7 +57,7 @@ BuzzBlobEntityHandler::
     call RenderActiveEntitySpritesPair            ; $7767: $CD $C0 $3B
     call ReturnIfNonInteractive_18                ; $776A: $CD $E8 $7D
     call ApplyRecoilIfNeeded_18                   ; $776D: $CD $15 $7E
-    call label_3B39                               ; $7770: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $7770: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $7773: $F0 $F0
     JP_TABLE                                      ; $7775
 ._00 dw BuzzBlobState0Handler
@@ -95,7 +95,7 @@ BuzzBlobState0Handler::
 
 .jr_77A9
     call UpdateEntityPosWithSpeed_18              ; $77A9: $CD $5F $7E
-    call label_3B23                               ; $77AC: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $77AC: $CD $23 $3B
     ld   hl, wEntitiesPrivateState1Table          ; $77AF: $21 $B0 $C2
     add  hl, bc                                   ; $77B2: $09
     ld   a, [hl]                                  ; $77B3: $7E

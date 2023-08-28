@@ -88,7 +88,7 @@ jr_006_6CE4:
 jr_006_6CE8:
     call ReturnIfNonInteractive_06                ; $6CE8: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $6CEB: $CD $F7 $64
-    call label_3B39                               ; $6CEE: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $6CEE: $CD $39 $3B
     ld   hl, wEntitiesHealthTable                 ; $6CF1: $21 $60 $C3
     add  hl, bc                                   ; $6CF4: $09
     ld   a, [hl]                                  ; $6CF5: $7E
@@ -293,7 +293,7 @@ RollingBonesState3Handler::
 
 jr_006_6E04:
     call UpdateEntityPosWithSpeed_06              ; $6E04: $CD $41 $65
-    call label_3B23                               ; $6E07: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $6E07: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $6E0A: $21 $A0 $C2
     add  hl, bc                                   ; $6E0D: $09
     ld   a, [hl]                                  ; $6E0E: $7E

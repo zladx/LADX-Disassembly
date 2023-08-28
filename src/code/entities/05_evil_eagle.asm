@@ -1013,7 +1013,7 @@ func_005_5FA8::
     and  a                                        ; $5FBF: $A7
     jr   nz, .ret_5FE9                            ; $5FC0: $20 $27
 
-    call label_3B39                               ; $5FC2: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $5FC2: $CD $39 $3B
     ld   a, [wIgnoreLinkCollisionsCountdown]      ; $5FC5: $FA $3E $C1
     and  a                                        ; $5FC8: $A7
     jr   z, .ret_5FE9                             ; $5FC9: $28 $1E
@@ -1071,7 +1071,7 @@ func_005_6017::
     xor  a                                        ; $6017: $AF
     call SetEntitySpriteVariant                   ; $6018: $CD $0C $3B
     call UpdateEntityPosWithSpeed_05              ; $601B: $CD $B1 $7A
-    call label_3B39                               ; $601E: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $601E: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $6021: $CD $05 $0C
     jp   z, label_005_5F78                        ; $6024: $CA $78 $5F
 

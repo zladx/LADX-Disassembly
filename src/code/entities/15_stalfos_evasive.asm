@@ -39,14 +39,14 @@ StalfosEvasiveEntityHandler::
     and  $01                                      ; $4EAC: $E6 $01
     call SetEntitySpriteVariant                   ; $4EAE: $CD $0C $3B
     call UpdateEntityPosWithSpeed_15              ; $4EB1: $CD $88 $7B
-    call label_3B23                               ; $4EB4: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $4EB4: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $4EB7: $21 $A0 $C2
     add  hl, bc                                   ; $4EBA: $09
     ld   a, [hl]                                  ; $4EBB: $7E
     and  a                                        ; $4EBC: $A7
     jp   nz, label_015_4ECB                       ; $4EBD: $C2 $CB $4E
 
-    call label_3B39                               ; $4EC0: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $4EC0: $CD $39 $3B
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $4EC3: $21 $10 $C4
     add  hl, bc                                   ; $4EC6: $09
     ld   a, [hl]                                  ; $4EC7: $7E
@@ -83,7 +83,7 @@ jr_015_4EEE:
     call GetEntityTransitionCountdown             ; $4EFA: $CD $05 $0C
     jr   nz, .jr_4F02                             ; $4EFD: $20 $03
 
-    call label_3B39                               ; $4EFF: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $4EFF: $CD $39 $3B
 
 .jr_4F02
     call GetEntityPrivateCountdown1               ; $4F02: $CD $00 $0C
@@ -143,17 +143,17 @@ jr_015_4EEE:
 
 func_015_4F5A::
     call UpdateEntityPosWithSpeed_15              ; $4F5A: $CD $88 $7B
-    call label_3B23                               ; $4F5D: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $4F5D: $CD $23 $3B
     ldh  a, [hJoypadState]                        ; $4F60: $F0 $CC
     and  J_A | J_B                                ; $4F62: $E6 $30
     jr   z, .jr_4FAE                              ; $4F64: $28 $48
 
-    call func_015_7BDB                            ; $4F66: $CD $DB $7B
+    call GetEntityToLinkPositionDeltaX_15         ; $4F66: $CD $DB $7B
     add  $24                                      ; $4F69: $C6 $24
     cp   $48                                      ; $4F6B: $FE $48
     jr   nc, .jr_4FAE                             ; $4F6D: $30 $3F
 
-    call func_015_7BEB                            ; $4F6F: $CD $EB $7B
+    call GetEntityToLinkPositionDeltaY_15         ; $4F6F: $CD $EB $7B
     add  $24                                      ; $4F72: $C6 $24
     cp   $48                                      ; $4F74: $FE $48
     jr   nc, .jr_4FAE                             ; $4F76: $30 $36
@@ -274,7 +274,7 @@ func_015_501A::
     ld   a, [hl]                                  ; $5021: $7E
     push hl                                       ; $5022: $E5
     ld   [hl], $01                                ; $5023: $36 $01
-    call label_3B23                               ; $5025: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $5025: $CD $23 $3B
     pop  hl                                       ; $5028: $E1
     ld   [hl], b                                  ; $5029: $70
     call AddEntityZSpeedToPos_15                  ; $502A: $CD $C1 $7B

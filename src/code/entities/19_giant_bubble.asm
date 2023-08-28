@@ -29,7 +29,7 @@ GiantBubbleEntityHandler::
     call ReturnIfNonInteractive_19                ; $53B1: $CD $3D $7D
     call label_3B44                               ; $53B4: $CD $44 $3B
     call UpdateEntityPosWithSpeed_19              ; $53B7: $CD $B8 $7D
-    call label_3B23                               ; $53BA: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $53BA: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $53BD: $21 $A0 $C2
     add  hl, bc                                   ; $53C0: $09
     ld   a, [hl]                                  ; $53C1: $7E

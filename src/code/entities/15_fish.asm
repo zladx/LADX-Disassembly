@@ -41,7 +41,7 @@ jr_015_44D7:
     call ReturnIfNonInteractive_15                ; $44D7: $CD $0D $7B
     call ApplyRecoilIfNeeded_15                   ; $44DA: $CD $3E $7B
     call UpdateEntityPosWithSpeed_15              ; $44DD: $CD $88 $7B
-    call label_3B23                               ; $44E0: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $44E0: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $44E3: $F0 $F0
     JP_TABLE                                      ; $44E5
 ._00 dw func_015_44EC                             ; $44E6
@@ -117,7 +117,7 @@ jr_015_4530:
     ret                                           ; $4552: $C9
 
 func_015_4553::
-    call label_3B39                               ; $4553: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $4553: $CD $39 $3B
     call AddEntityZSpeedToPos_15                  ; $4556: $CD $C1 $7B
     ld   hl, wEntitiesSpeedZTable                 ; $4559: $21 $20 $C3
     add  hl, bc                                   ; $455C: $09

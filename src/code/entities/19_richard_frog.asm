@@ -31,7 +31,7 @@ RichardFrogEntityHandler::
     call ReturnIfNonInteractive_19                ; $5BC6: $CD $3D $7D
     call UpdateEntityPosWithSpeed_19              ; $5BC9: $CD $B8 $7D
     call AddEntityZSpeedToPos_19                  ; $5BCC: $CD $F1 $7D
-    call label_3B23                               ; $5BCF: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $5BCF: $CD $23 $3B
 
 .jr_5BD2
     ld   hl, wEntitiesSpeedZTable                 ; $5BD2: $21 $20 $C3

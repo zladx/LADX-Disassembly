@@ -249,7 +249,7 @@ label_004_6910:
     ld   [hl], a                                  ; $696D: $77
     call CopyEntityPositionToActivePosition       ; $696E: $CD $8A $3D
     call UpdateEntityPosWithSpeed_04              ; $6971: $CD $CA $6D
-    call label_3B23                               ; $6974: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $6974: $CD $23 $3B
     ldh  a, [hActiveEntityPosX]                   ; $6977: $F0 $EE
     ld   hl, hLinkPositionX                       ; $6979: $21 $98 $FF
     sub  [hl]                                     ; $697C: $96

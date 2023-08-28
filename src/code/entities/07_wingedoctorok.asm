@@ -73,7 +73,7 @@ WingedOctorokEntityHandler::
     ld   [hl], b                                  ; $5692: $70
 
 .jr_5693
-    call label_3B23                               ; $5693: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $5693: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $5696: $F0 $F0
     cp   $02                                      ; $5698: $FE $02
     jp   z, label_007_577A                        ; $569A: $CA $7A $57
@@ -221,7 +221,7 @@ jr_007_5757:
     jp   func_007_733F                            ; $5774: $C3 $3F $73
 
 jr_007_5777:
-    jp   label_3B39                               ; $5777: $C3 $39 $3B
+    jp   DefaultEnemyDamageCollisionHandler_trampoline ; $5777: $C3 $39 $3B
 
 label_007_577A:
     ldh  a, [hFrameCounter]                       ; $577A: $F0 $E7

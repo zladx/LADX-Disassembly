@@ -1572,9 +1572,9 @@ IronMaskEntityHandler::
     call RenderActiveEntitySpritesPair            ; $5006: $CD $C0 $3B
     call ReturnIfNonInteractive_03                ; $5009: $CD $78 $7F
     call ApplyRecoilIfNeeded_03                   ; $500C: $CD $A9 $7F
-    call func_003_6E28                            ; $500F: $CD $28 $6E
+    call DefaultEnemyDamageCollisionHandler       ; $500F: $CD $28 $6E
     call UpdateEntityPosWithSpeed_03              ; $5012: $CD $25 $7F
-    call func_003_7893                            ; $5015: $CD $93 $78
+    call DefaultEntityPhysics                     ; $5015: $CD $93 $78
     call GetEntityTransitionCountdown             ; $5018: $CD $05 $0C
     jr   nz, .jp_003_503D                         ; $501B: $20 $20
 
@@ -1850,7 +1850,7 @@ EntityInitPushedBlock::
     add  hl, bc                                   ; $5185: $09
     ld   [hl], a                                  ; $5186: $77
     call PushedBlockEntityHandler                 ; $5187: $CD $49 $52
-    call func_003_7893                            ; $518A: $CD $93 $78
+    call DefaultEntityPhysics                     ; $518A: $CD $93 $78
     ld   hl, wEntitiesCollisionsTable             ; $518D: $21 $A0 $C2
     add  hl, bc                                   ; $5190: $09
     ld   a, [hl]                                  ; $5191: $7E
@@ -3986,7 +3986,7 @@ label_003_60AA:
 func_003_60B3::
     call UpdateEntityPosWithSpeed_03              ; $60B3: $CD $25 $7F
     call func_003_6B7B                            ; $60B6: $CD $7B $6B
-    call func_003_7893                            ; $60B9: $CD $93 $78
+    call DefaultEntityPhysics                     ; $60B9: $CD $93 $78
     ldh  a, [hIsSideScrolling]                    ; $60BC: $F0 $F9
     and  a                                        ; $60BE: $A7
     jr   z, .jr_60E3                              ; $60BF: $28 $22
@@ -6182,7 +6182,7 @@ jr_003_6E0E:
     scf                                           ; $6E26: $37
     ret                                           ; $6E27: $C9
 
-func_003_6E28::
+DefaultEnemyDamageCollisionHandler::
     call func_003_6C6B                            ; $6E28: $CD $6B $6C
 
 func_003_6E2B::
@@ -8124,7 +8124,7 @@ Data_003_788B::
     db   $01, $FF, $00, $00, $01, $01, $FF, $FF
 
 ; Another function for entity physics
-func_003_7893::
+DefaultEntityPhysics::
     ld   hl, wEntitiesGroundStatusTable           ; $7893: $21 $70 $C4
     add  hl, bc                                   ; $7896: $09
     ld   a, [hl]                                  ; $7897: $7E
@@ -9539,7 +9539,7 @@ ApplyRecoilIfNeeded_03::
     and  $20                                      ; $7FDD: $E6 $20
     jr   nz, .restoreOriginalSpeed                ; $7FDF: $20 $03
 
-    call func_003_7893                            ; $7FE1: $CD $93 $78
+    call DefaultEntityPhysics                     ; $7FE1: $CD $93 $78
 
 .restoreOriginalSpeed
     ld   hl, wEntitiesSpeedYTable                 ; $7FE4: $21 $50 $C2

@@ -41,7 +41,7 @@ SmasherEntityHandler::
 
     call ReturnIfNonInteractive_06                ; $454C: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $454F: $CD $F7 $64
-    call label_3B39                               ; $4552: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $4552: $CD $39 $3B
     call AddEntityZSpeedToPos_06                  ; $4555: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $4558: $21 $20 $C3
     add  hl, bc                                   ; $455B: $09
@@ -94,7 +94,7 @@ SmasherState0Handler::
     ld   a, $10                                   ; $459F: $3E $10
     call ApplyVectorTowardsLink_trampoline        ; $45A1: $CD $AA $3B
     call UpdateEntityPosWithSpeed_06              ; $45A4: $CD $41 $65
-    call label_3B23                               ; $45A7: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $45A7: $CD $23 $3B
     call func_006_6594                            ; $45AA: $CD $94 $65
     ld   hl, wEntitiesDirectionTable              ; $45AD: $21 $80 $C3
     add  hl, bc                                   ; $45B0: $09
@@ -195,7 +195,7 @@ SmasherState1Handler::
 
 .jr_463E
     call UpdateEntityPosWithSpeed_06              ; $463E: $CD $41 $65
-    call label_3B23                               ; $4641: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $4641: $CD $23 $3B
     call func_006_45E5                            ; $4644: $CD $E5 $45
     ldh  a, [hFrameCounter]                       ; $4647: $F0 $E7
     and  $08                                      ; $4649: $E6 $08
@@ -315,7 +315,7 @@ SmasherState3Handler::
     ld   [hl], e                                  ; $470A: $73
     call func_006_46BD                            ; $470B: $CD $BD $46
     call UpdateEntityPosWithSpeed_06              ; $470E: $CD $41 $65
-    jp   label_3B23                               ; $4711: $C3 $23 $3B
+    jp   DefaultEntityPhysics_trampoline          ; $4711: $C3 $23 $3B
 
 SmasherState4Handler::
     call GetEntityTransitionCountdown             ; $4714: $CD $05 $0C
@@ -414,7 +414,7 @@ jr_006_47C9:
     sra  [hl]                                     ; $47D8: $CB $2E
 
 jr_006_47DA:
-    call label_3B23                               ; $47DA: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $47DA: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $47DD: $F0 $F0
     JP_TABLE                                      ; $47DF
 ._00 dw func_006_47EA                             ; $47E0

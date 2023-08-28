@@ -14,9 +14,9 @@ AntiFairyEntityHandler::
 
 .jr_787F
     call ApplyRecoilIfNeeded_06                   ; $787F: $CD $F7 $64
-    call label_3B39                               ; $7882: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $7882: $CD $39 $3B
     call UpdateEntityPosWithSpeed_06              ; $7885: $CD $41 $65
-    call label_3B23                               ; $7888: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7888: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $788B: $21 $A0 $C2
     add  hl, bc                                   ; $788E: $09
     ld   a, [hl]                                  ; $788F: $7E

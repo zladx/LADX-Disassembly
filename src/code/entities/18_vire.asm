@@ -464,7 +464,7 @@ jr_018_6C88:
     jp   SetEntitySpriteVariant                   ; $6CB5: $C3 $0C $3B
 
 func_018_6CB8::
-    call label_3B39                               ; $6CB8: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $6CB8: $CD $39 $3B
     ld   hl, wEntitiesFlashCountdownTable         ; $6CBB: $21 $20 $C4
     add  hl, bc                                   ; $6CBE: $09
     ld   a, [hl]                                  ; $6CBF: $7E
@@ -722,7 +722,7 @@ func_018_6E3B::
     ldh  a, [hActiveEntityPosY]                   ; $6E43: $F0 $EF
     sub  $28                                      ; $6E45: $D6 $28
     ldh  [hActiveEntityPosY], a                   ; $6E47: $E0 $EF
-    call label_3B23                               ; $6E49: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $6E49: $CD $23 $3B
     ld   hl, wEntitiesPosYTable                   ; $6E4C: $21 $10 $C2
     add  hl, bc                                   ; $6E4F: $09
     ld   a, [hl]                                  ; $6E50: $7E
@@ -893,7 +893,7 @@ jr_018_6F54:
     call GetEntityTransitionCountdown             ; $6F57: $CD $05 $0C
     ret  nz                                       ; $6F5A: $C0
 
-    call label_3B23                               ; $6F5B: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $6F5B: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $6F5E: $21 $A0 $C2
     add  hl, bc                                   ; $6F61: $09
     ld   a, [hl]                                  ; $6F62: $7E
@@ -966,11 +966,11 @@ func_018_6FB4::
     jp   IncrementEntityState                     ; $6FBF: $C3 $12 $3B
 
 func_018_6FC2::
-    call label_3B39                               ; $6FC2: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $6FC2: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $6FC5: $CD $05 $0C
     ret  nz                                       ; $6FC8: $C0
 
-    call label_3B23                               ; $6FC9: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $6FC9: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $6FCC: $21 $A0 $C2
     add  hl, bc                                   ; $6FCF: $09
     ld   a, [hl]                                  ; $6FD0: $7E

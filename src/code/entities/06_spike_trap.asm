@@ -23,7 +23,7 @@ SpikeTrapEntityHandler::
     call RenderActiveEntitySpritesPair            ; $7517: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $751A: $CD $C6 $64
     call DecrementEntityIgnoreHitsCountdown       ; $751D: $CD $56 $0C
-    call label_3B39                               ; $7520: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $7520: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $7523: $F0 $F0
     JP_TABLE                                      ; $7525
 ._00 dw SpikeTrapState0Handler
@@ -89,7 +89,7 @@ SpikeTrapState1Handler::
 jr_006_7585:
     call GetEntityTransitionCountdown             ; $7585: $CD $05 $0C
     ld   [hl], e                                  ; $7588: $73
-    call label_3B23                               ; $7589: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7589: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $758C: $21 $A0 $C2
     add  hl, bc                                   ; $758F: $09
     ld   a, [hl]                                  ; $7590: $7E
@@ -120,7 +120,7 @@ jr_006_75A9:
     jp   IncrementEntityState                     ; $75B2: $C3 $12 $3B
 
 jr_006_75B5:
-    call label_3B23                               ; $75B5: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $75B5: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $75B8: $21 $A0 $C2
     add  hl, bc                                   ; $75BB: $09
     ld   a, [hl]                                  ; $75BC: $7E

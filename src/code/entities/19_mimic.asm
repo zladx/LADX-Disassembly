@@ -64,9 +64,9 @@ jr_019_6ACE:
 jr_019_6AD4:
     call ReturnIfNonInteractive_19                ; $6AD4: $CD $3D $7D
     call ApplyRecoilIfNeeded_19                   ; $6AD7: $CD $6E $7D
-    call label_3B39                               ; $6ADA: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $6ADA: $CD $39 $3B
     call UpdateEntityPosWithSpeed_19              ; $6ADD: $CD $B8 $7D
-    call label_3B23                               ; $6AE0: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $6AE0: $CD $23 $3B
     ld   a, [wCollisionType]                      ; $6AE3: $FA $33 $C1
     and  a                                        ; $6AE6: $A7
     jr   nz, jr_019_6B41                          ; $6AE7: $20 $58

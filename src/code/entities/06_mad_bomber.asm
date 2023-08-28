@@ -107,7 +107,7 @@ MadBomberState2Handler::
     jp   SetEntitySpriteVariant                   ; $41C7: $C3 $0C $3B
 
 MadBomberState3Handler::
-    call label_3B39                               ; $41CA: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $41CA: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $41CD: $CD $05 $0C
     jr   nz, jr_006_4218                          ; $41D0: $20 $46
 

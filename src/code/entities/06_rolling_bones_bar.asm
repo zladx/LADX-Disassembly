@@ -88,11 +88,11 @@ jr_006_6F48:
     and  a                                        ; $6F4D: $A7
     jr   nz, .jr_6F53                             ; $6F4E: $20 $03
 
-    call label_3B39                               ; $6F50: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $6F50: $CD $39 $3B
 
 .jr_6F53
     call AddEntitySpeedToPos_06                   ; $6F53: $CD $4E $65
-    call label_3B23                               ; $6F56: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $6F56: $CD $23 $3B
     ld   hl, wEntitiesSpeedXTable                 ; $6F59: $21 $40 $C2
     add  hl, bc                                   ; $6F5C: $09
     ld   a, [hl]                                  ; $6F5D: $7E

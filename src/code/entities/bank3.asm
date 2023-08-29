@@ -6182,6 +6182,8 @@ jr_003_6E0E:
     scf                                           ; $6E26: $37
     ret                                           ; $6E27: $C9
 
+; Handle collision and damages between Link and the active entity.
+; This includes the entity being damaged by sword, the position of Link being modified, etc.
 DefaultEnemyDamageCollisionHandler::
     call func_003_6C6B                            ; $6E28: $CD $6B $6C
 

@@ -8125,7 +8125,8 @@ Data_003_7883::
 Data_003_788B::
     db   $01, $FF, $00, $00, $01, $01, $FF, $FF
 
-; Another function for entity physics
+; Handle physics between an entity and the Background / objects.
+; This includes not being able to clip walls, falling in pits and stuff.
 DefaultEntityPhysics::
     ld   hl, wEntitiesGroundStatusTable           ; $7893: $21 $70 $C4
     add  hl, bc                                   ; $7896: $09

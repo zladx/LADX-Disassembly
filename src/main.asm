@@ -238,8 +238,8 @@ OverworldMysteriousWoodsTiles::
 incbin "gfx/world/ow_mysterious_woods.dmg.2bpp"
 OverworldBeachTiles::
 incbin "gfx/world/ow_beach.dmg.2bpp"
-OverworldPrarieStoneHeadTiles::
-incbin "gfx/world/ow_prarie_stone_head.dmg.2bpp"
+OverworldPrairieStoneHeadTiles::
+incbin "gfx/world/ow_prairie_stone_head.dmg.2bpp"
 OverworldMabeVillageTiles::
 incbin "gfx/world/ow_mabe_village.dmg.2bpp"
 OverworldKanaletCastleTiles::
@@ -248,8 +248,8 @@ OverworldFaceShrineTiles::
 incbin "gfx/world/ow_face_shrine.dmg.2bpp"
 OverworldYarnaDesertTiles::
 incbin "gfx/world/ow_yarna_desert.dmg.2bpp"
-OverworldPrarieSouthTiles::
-incbin "gfx/world/ow_prarie_south.dmg.2bpp"
+OverworldPrairieSouthTiles::
+incbin "gfx/world/ow_prairie_south.dmg.2bpp"
 OverworldEaglesTowerTiles::
 incbin "gfx/world/ow_eagles_tower.dmg.2bpp"
 OverworldRaftingGameTiles::
@@ -627,8 +627,8 @@ OverworldMysteriousWoodsTilesCGB::
 incbin "gfx/world/ow_mysterious_woods.cgb.2bpp"
 OverworldBeachTilesCGB::
 incbin "gfx/world/ow_beach.cgb.2bpp"
-OverworldPrarieStoneHeadTilesCGB::
-incbin "gfx/world/ow_prarie_stone_head.cgb.2bpp"
+OverworldPrairieStoneHeadTilesCGB::
+incbin "gfx/world/ow_prairie_stone_head.cgb.2bpp"
 OverworldMabeVillageTilesCGB::
 incbin "gfx/world/ow_mabe_village.cgb.2bpp"
 OverworldKanaletCastleTilesCGB::
@@ -637,8 +637,8 @@ OverworldFaceShrineTilesCGB::
 incbin "gfx/world/ow_face_shrine.cgb.2bpp"
 OverworldYarnaDesertTilesCGB::
 incbin "gfx/world/ow_yarna_desert.cgb.2bpp"
-OverworldPrarieSouthTilesCGB::
-incbin "gfx/world/ow_prarie_south.cgb.2bpp"
+OverworldPrairieSouthTilesCGB::
+incbin "gfx/world/ow_prairie_south.cgb.2bpp"
 OverworldEaglesTowerTilesCGB::
 incbin "gfx/world/ow_eagles_tower.cgb.2bpp"
 OverworldRaftingGameTilesCGB::

@@ -6699,7 +6699,7 @@ DrawDialogArrow::
     cp   GAMEPLAY_CREDITS                         ; $7D90: $FE $01
     jr   z, .credits                              ; $7D92: $28 $18
 
-    ld   hl, DialogArrowOAMYTable                      ; $7D94: $21 $7A $7D
+    ld   hl, DialogArrowOAMYTable                 ; $7D94: $21 $7A $7D
     add  hl, de                                   ; $7D97: $19
     ld   a, [hl]                                  ; $7D98: $7E
     ld   [wOAMBuffer+$18], a                      ; $7D99: $EA $18 $C0
@@ -6712,7 +6712,7 @@ DrawDialogArrow::
     ret                                           ; $7DAB: $C9
 
 .credits
-    ld   hl, DialogArrowOAMYTable                      ; $7DAC: $21 $7A $7D
+    ld   hl, DialogArrowOAMYTable                 ; $7DAC: $21 $7A $7D
     add  hl, de                                   ; $7DAF: $19
     ld   a, [hl]                                  ; $7DB0: $7E
     ld   hl, hBaseScrollY                         ; $7DB1: $21 $97 $FF

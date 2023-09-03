@@ -5370,7 +5370,7 @@ LoadRoomSpecificTiles::
     jr   nz, .skipBGLoading                       ; $2F55: $20 $12
 .notColorDungeon
 
-    ld   hl, Dungeons2Tiles                       ; $2F57: $21 $00 $50
+    ld   hl, IndoorTiles                          ; $2F57: $21 $00 $50
     ldh  a, [hWorldTileset]                       ; $2F5A: $F0 $94
     cp   W_TILESET_NO_UPDATE                      ; $2F5C: $FE $FF
     jr   z, .skipBGLoading                        ; $2F5E: $28 $09

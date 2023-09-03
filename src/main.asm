@@ -146,39 +146,39 @@ DungeonFloorCTiles::
 incbin "gfx/dungeons/floor/floor_c.dmg.2bpp"
 DungeonFloorDTiles::
 incbin "gfx/dungeons/floor/floor_d.dmg.2bpp"
-Dungeons2Tiles::
-Dungeons2_00Tiles::
-incbin "gfx/dungeons/dungeons_2/00.dmg.2bpp"
-Dungeons2_01Tiles::
-incbin "gfx/dungeons/dungeons_2/01.dmg.2bpp"
-Dungeons2_02Tiles::
-incbin "gfx/dungeons/dungeons_2/02.dmg.2bpp"
-Dungeons2_03Tiles::
-incbin "gfx/dungeons/dungeons_2/03.dmg.2bpp"
-Dungeons2_04Tiles::
-incbin "gfx/dungeons/dungeons_2/04.dmg.2bpp"
-Dungeons2_05Tiles::
-incbin "gfx/dungeons/dungeons_2/05.dmg.2bpp"
-Dungeons2_06Tiles::
-incbin "gfx/dungeons/dungeons_2/06.dmg.2bpp"
-Dungeons2_07Tiles::
-incbin "gfx/dungeons/dungeons_2/07.dmg.2bpp"
-Dungeons2_08Tiles::
-incbin "gfx/dungeons/dungeons_2/08.dmg.2bpp"
-Dungeons2_09Tiles::
-incbin "gfx/dungeons/dungeons_2/09.dmg.2bpp"
-Dungeons2_0ATiles::
-incbin "gfx/dungeons/dungeons_2/0A.dmg.2bpp"
-Dungeons2_0BTiles::
-incbin "gfx/dungeons/dungeons_2/0B.dmg.2bpp"
-Dungeons2_0CTiles::
-incbin "gfx/dungeons/dungeons_2/0C.dmg.2bpp"
-Dungeons2_0DTiles::
-incbin "gfx/dungeons/dungeons_2/0D.dmg.2bpp"
-Dungeons2_0ETiles::
-incbin "gfx/dungeons/dungeons_2/0E.dmg.2bpp"
-Dungeons2_0FTiles::
-incbin "gfx/dungeons/dungeons_2/0F.dmg.2bpp"
+IndoorTiles::
+Indoor00Tiles::
+incbin "gfx/indoor/tilesets/00.dmg.2bpp"
+Indoor01Tiles::
+incbin "gfx/indoor/tilesets/01.dmg.2bpp"
+Indoor02Tiles::
+incbin "gfx/indoor/tilesets/02.dmg.2bpp"
+Indoor03Tiles::
+incbin "gfx/indoor/tilesets/03.dmg.2bpp"
+Indoor04Tiles::
+incbin "gfx/indoor/tilesets/04.dmg.2bpp"
+Indoor05Tiles::
+incbin "gfx/indoor/tilesets/05.dmg.2bpp"
+Indoor06Tiles::
+incbin "gfx/indoor/tilesets/06.dmg.2bpp"
+Indoor07Tiles::
+incbin "gfx/indoor/tilesets/07.dmg.2bpp"
+Indoor08Tiles::
+incbin "gfx/indoor/tilesets/08.dmg.2bpp"
+Indoor09Tiles::
+incbin "gfx/indoor/tilesets/09.dmg.2bpp"
+Indoor0ATiles::
+incbin "gfx/indoor/tilesets/0A.dmg.2bpp"
+Indoor0BTiles::
+incbin "gfx/indoor/tilesets/0B.dmg.2bpp"
+Indoor0CTiles::
+incbin "gfx/indoor/tilesets/0C.dmg.2bpp"
+Indoor0DTiles::
+incbin "gfx/indoor/tilesets/0D.dmg.2bpp"
+Indoor0ETiles::
+incbin "gfx/indoor/tilesets/0E.dmg.2bpp"
+Indoor0FTiles::
+incbin "gfx/indoor/tilesets/0F.dmg.2bpp"
 DungeonFloorETiles::
 incbin "gfx/dungeons/floor/floor_e.dmg.2bpp"
 DungeonFloorFTiles::
@@ -193,12 +193,12 @@ DungeonFloorJTiles::
 incbin "gfx/dungeons/floor/floor_j.dmg.2bpp"
 DungeonFloorKTiles::
 incbin "gfx/dungeons/floor/floor_k.dmg.2bpp"
-Dungeons2_17Tiles::
-incbin "gfx/dungeons/dungeons_2/17.dmg.2bpp"
-Dungeons2_18Tiles::
-incbin "gfx/dungeons/dungeons_2/18.dmg.2bpp"
-Dungeons2_19Tiles::
-incbin "gfx/dungeons/dungeons_2/19.dmg.2bpp"
+Indoor17Tiles::
+incbin "gfx/indoor/tilesets/17.dmg.2bpp"
+Indoor18Tiles::
+incbin "gfx/indoor/tilesets/18.dmg.2bpp"
+Indoor19Tiles::
+incbin "gfx/indoor/tilesets/19.dmg.2bpp"
 WindfishFloorTiles::
 incbin "gfx/dungeons/floor/windfish_floor.dmg.2bpp"
 DungeonFloorLTiles::
@@ -540,39 +540,39 @@ DungeonFloorCTilesCGB::
 incbin "gfx/dungeons/floor/floor_c.cgb.2bpp"
 DungeonFloorDTilesCGB::
 incbin "gfx/dungeons/floor/floor_d.cgb.2bpp"
-Dungeons2TilesCGB::
-Dungeons2_00TilesCGB::
-incbin "gfx/dungeons/dungeons_2/00.cgb.2bpp"
-Dungeons2_01TilesCGB::
-incbin "gfx/dungeons/dungeons_2/01.cgb.2bpp"
-Dungeons2_02TilesCGB::
-incbin "gfx/dungeons/dungeons_2/02.cgb.2bpp"
-Dungeons2_03TilesCGB::
-incbin "gfx/dungeons/dungeons_2/03.cgb.2bpp"
-Dungeons2_04TilesCGB::
-incbin "gfx/dungeons/dungeons_2/04.cgb.2bpp"
-Dungeons2_05TilesCGB::
-incbin "gfx/dungeons/dungeons_2/05.cgb.2bpp"
-Dungeons2_06TilesCGB::
-incbin "gfx/dungeons/dungeons_2/06.cgb.2bpp"
-Dungeons2_07TilesCGB::
-incbin "gfx/dungeons/dungeons_2/07.cgb.2bpp"
-Dungeons2_08TilesCGB::
-incbin "gfx/dungeons/dungeons_2/08.cgb.2bpp"
-Dungeons2_09TilesCGB::
-incbin "gfx/dungeons/dungeons_2/09.cgb.2bpp"
-Dungeons2_0ATilesCGB::
-incbin "gfx/dungeons/dungeons_2/0A.cgb.2bpp"
-Dungeons2_0BTilesCGB::
-incbin "gfx/dungeons/dungeons_2/0B.cgb.2bpp"
-Dungeons2_0CTilesCGB::
-incbin "gfx/dungeons/dungeons_2/0C.cgb.2bpp"
-Dungeons2_0DTilesCGB::
-incbin "gfx/dungeons/dungeons_2/0D.cgb.2bpp"
-Dungeons2_0ETilesCGB::
-incbin "gfx/dungeons/dungeons_2/0E.cgb.2bpp"
-Dungeons2_0FTilesCGB::
-incbin "gfx/dungeons/dungeons_2/0F.cgb.2bpp"
+IndoorTilesCGB::
+Indoor00TilesCGB::
+incbin "gfx/indoor/tilesets/00.cgb.2bpp"
+Indoor01TilesCGB::
+incbin "gfx/indoor/tilesets/01.cgb.2bpp"
+Indoor02TilesCGB::
+incbin "gfx/indoor/tilesets/02.cgb.2bpp"
+Indoor03TilesCGB::
+incbin "gfx/indoor/tilesets/03.cgb.2bpp"
+Indoor04TilesCGB::
+incbin "gfx/indoor/tilesets/04.cgb.2bpp"
+Indoor05TilesCGB::
+incbin "gfx/indoor/tilesets/05.cgb.2bpp"
+Indoor06TilesCGB::
+incbin "gfx/indoor/tilesets/06.cgb.2bpp"
+Indoor07TilesCGB::
+incbin "gfx/indoor/tilesets/07.cgb.2bpp"
+Indoor08TilesCGB::
+incbin "gfx/indoor/tilesets/08.cgb.2bpp"
+Indoor09TilesCGB::
+incbin "gfx/indoor/tilesets/09.cgb.2bpp"
+Indoor0ATilesCGB::
+incbin "gfx/indoor/tilesets/0A.cgb.2bpp"
+Indoor0BTilesCGB::
+incbin "gfx/indoor/tilesets/0B.cgb.2bpp"
+Indoor0CTilesCGB::
+incbin "gfx/indoor/tilesets/0C.cgb.2bpp"
+Indoor0DTilesCGB::
+incbin "gfx/indoor/tilesets/0D.cgb.2bpp"
+Indoor0ETilesCGB::
+incbin "gfx/indoor/tilesets/0E.cgb.2bpp"
+Indoor0FTilesCGB::
+incbin "gfx/indoor/tilesets/0F.cgb.2bpp"
 DungeonFloorETilesCGB::
 incbin "gfx/dungeons/floor/floor_e.cgb.2bpp"
 DungeonFloorFTilesCGB::
@@ -587,12 +587,12 @@ DungeonFloorJTilesCGB::
 incbin "gfx/dungeons/floor/floor_j.cgb.2bpp"
 DungeonFloorKTilesCGB::
 incbin "gfx/dungeons/floor/floor_k.cgb.2bpp"
-Dungeons2_17TilesCGB::
-incbin "gfx/dungeons/dungeons_2/17.cgb.2bpp"
-Dungeons2_18TilesCGB::
-incbin "gfx/dungeons/dungeons_2/18.cgb.2bpp"
-Dungeons2_19TilesCGB::
-incbin "gfx/dungeons/dungeons_2/19.cgb.2bpp"
+Indoor17TilesCGB::
+incbin "gfx/indoor/tilesets/17.cgb.2bpp"
+Indoor18TilesCGB::
+incbin "gfx/indoor/tilesets/18.cgb.2bpp"
+Indoor19TilesCGB::
+incbin "gfx/indoor/tilesets/19.cgb.2bpp"
 WindfishFloorTilesCGB::
 incbin "gfx/dungeons/floor/windfish_floor.cgb.2bpp"
 DungeonFloorLTilesCGB::

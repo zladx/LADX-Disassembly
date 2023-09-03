@@ -514,7 +514,7 @@ ENDC
     cp   TILESET_LOAD_DUNGEON_MINIMAP             ; $05E9: $FE $02
     jp   z, LoadDungeonMinimapTiles               ; $05EB: $CA $26 $08
 
-    ld   a, BANK(Dungeons2Tiles)                  ; $05EE: $3E $0D
+    ld   a, BANK(IndoorTiles)                     ; $05EE: $3E $0D
     call AdjustBankNumberForGBC                   ; $05F0: $CD $0B $0B
     ld   [rSelectROMBank], a                      ; $05F3: $EA $00 $21
     ldh  a, [hBGTilesLoadingStage]                ; $05F6: $F0 $92
@@ -536,7 +536,7 @@ ENDC
     add  hl, bc                                   ; $0616: $09
     ld   e, l                                     ; $0617: $5D
     ld   d, h                                     ; $0618: $54
-    ld   hl, Dungeons2Tiles                       ; $0619: $21 $00 $50
+    ld   hl, IndoorTiles                          ; $0619: $21 $00 $50
 
     ldh  a, [hMapId]                              ; $061C: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $061E: $FE $FF

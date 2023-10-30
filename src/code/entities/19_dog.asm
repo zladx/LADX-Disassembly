@@ -220,7 +220,7 @@ DogState2Handler::
     ld   hl, wEntitiesSpeedZTable                 ; $4A14: $21 $20 $C3
     add  hl, bc                                   ; $4A17: $09
     ld   [hl], $18                                ; $4A18: $36 $18
-    call entityLinkPositionXDifference            ; $4A1A: $CD $0B $7E
+    call EntityLinkPositionXDifference_19         ; $4A1A: $CD $0B $7E
     ld   hl, wEntitiesDirectionTable              ; $4A1D: $21 $80 $C3
     add  hl, bc                                   ; $4A20: $09
     ld   a, e                                     ; $4A21: $7B

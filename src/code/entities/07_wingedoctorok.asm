@@ -173,12 +173,12 @@ label_007_5721:
     and  a                                        ; $5726: $A7
     jr   nz, jr_007_5777                          ; $5727: $20 $4E
 
-    call func_007_7E5D                            ; $5729: $CD $5D $7E
+    call EntityLinkPositionXDifference_07         ; $5729: $CD $5D $7E
     add  $20                                      ; $572C: $C6 $20
     cp   $40                                      ; $572E: $FE $40
     jr   nc, jr_007_5777                          ; $5730: $30 $45
 
-    call func_007_7E6D                            ; $5732: $CD $6D $7E
+    call EntityLinkPositionYDifference_07         ; $5732: $CD $6D $7E
     add  $20                                      ; $5735: $C6 $20
     cp   $40                                      ; $5737: $FE $40
     jr   nc, jr_007_5777                          ; $5739: $30 $3C

@@ -37,12 +37,12 @@ jr_019_4869:
     and  a                                        ; $4872: $A7
     jr   z, .ret_4890                             ; $4873: $28 $1B
 
-    call entityLinkPositionXDifference            ; $4875: $CD $0B $7E
+    call EntityLinkPositionXDifference_19         ; $4875: $CD $0B $7E
     add  $0C                                      ; $4878: $C6 $0C
     cp   $18                                      ; $487A: $FE $18
     jr   nc, .ret_4890                            ; $487C: $30 $12
 
-    call entityLinkPositionYDifference            ; $487E: $CD $1B $7E
+    call EntityLinkPositionYDifference_19         ; $487E: $CD $1B $7E
     add  $0C                                      ; $4881: $C6 $0C
     cp   $18                                      ; $4883: $FE $18
     jr   nc, .ret_4890                            ; $4885: $30 $09

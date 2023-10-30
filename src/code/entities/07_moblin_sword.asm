@@ -164,12 +164,12 @@ func_007_7A2D::
     and  a                                        ; $7A30: $A7
     jr   nz, func_007_7A55                        ; $7A31: $20 $22
 
-    call func_007_7E5D                            ; $7A33: $CD $5D $7E
+    call EntityLinkPositionXDifference_07         ; $7A33: $CD $5D $7E
     add  $30                                      ; $7A36: $C6 $30
     cp   $60                                      ; $7A38: $FE $60
     jr   nc, ret_007_7A6C                         ; $7A3A: $30 $30
 
-    call func_007_7E6D                            ; $7A3C: $CD $6D $7E
+    call EntityLinkPositionYDifference_07         ; $7A3C: $CD $6D $7E
     add  $30                                      ; $7A3F: $C6 $30
     cp   $60                                      ; $7A41: $FE $60
     jr   nc, ret_007_7A6C                         ; $7A43: $30 $27

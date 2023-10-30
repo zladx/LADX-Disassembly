@@ -891,7 +891,7 @@ AddEntityZSpeedToPos_19::
     jr   AddEntitySpeedToPos_19.updatePosition    ; $7E09: $18 $D2
 
 ; Get the difference between link's position and this entities position in X.
-entityLinkPositionXDifference::
+EntityLinkPositionXDifference_19::
     ld   e, $00                                   ; $7E0B: $1E $00
     ldh  a, [hLinkPositionX]                      ; $7E0D: $F0 $98
     ld   hl, wEntitiesPosXTable                   ; $7E0F: $21 $00 $C2
@@ -907,7 +907,7 @@ entityLinkPositionXDifference::
     ret                                           ; $7E1A: $C9
 
 ; Get the difference between link's position and this entities position in Y.
-entityLinkPositionYDifference::
+EntityLinkPositionYDifference_19::
     ld   e, $02                                   ; $7E1B: $1E $02
     ldh  a, [hLinkPositionY]                      ; $7E1D: $F0 $99
     ld   hl, wEntitiesPosYTable                   ; $7E1F: $21 $10 $C2
@@ -936,7 +936,7 @@ entityLinkPositionYDifference::
     ret                                           ; $7E39: $C9
 
 func_019_7E3A::
-    call entityLinkPositionXDifference            ; $7E3A: $CD $0B $7E
+    call EntityLinkPositionXDifference_19         ; $7E3A: $CD $0B $7E
     ld   a, e                                     ; $7E3D: $7B
     ldh  [hMultiPurpose0], a                      ; $7E3E: $E0 $D7
     ld   a, d                                     ; $7E40: $7A
@@ -948,7 +948,7 @@ func_019_7E3A::
 
 .jr_7E47
     push af                                       ; $7E47: $F5
-    call entityLinkPositionYDifference            ; $7E48: $CD $1B $7E
+    call EntityLinkPositionYDifference_19         ; $7E48: $CD $1B $7E
     ld   a, e                                     ; $7E4B: $7B
     ldh  [hMultiPurpose1], a                      ; $7E4C: $E0 $D8
     ld   a, d                                     ; $7E4E: $7A

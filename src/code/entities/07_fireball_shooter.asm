@@ -3,12 +3,12 @@ Data_007_7112::
 
 FireballShooterEntityHandler::
     call ReturnIfNonInteractive_07                ; $711C: $CD $96 $7D
-    call func_007_7E5D                            ; $711F: $CD $5D $7E
+    call EntityLinkPositionXDifference_07         ; $711F: $CD $5D $7E
     add  $20                                      ; $7122: $C6 $20
     cp   $40                                      ; $7124: $FE $40
     jr   nc, .jr_7131                             ; $7126: $30 $09
 
-    call func_007_7E6D                            ; $7128: $CD $6D $7E
+    call EntityLinkPositionYDifference_07         ; $7128: $CD $6D $7E
     add  $20                                      ; $712B: $C6 $20
     cp   $40                                      ; $712D: $FE $40
     jr   c, ret_007_7197                          ; $712F: $38 $66

@@ -68,13 +68,13 @@ func_007_72F4::
     call GetEntityTransitionCountdown             ; $72F4: $CD $05 $0C
     jr   nz, ret_007_731F                         ; $72F7: $20 $26
 
-    call func_007_7E5D                            ; $72F9: $CD $5D $7E
+    call EntityLinkPositionXDifference_07         ; $72F9: $CD $5D $7E
     add  $20                                      ; $72FC: $C6 $20
     cp   $40                                      ; $72FE: $FE $40
     jr   nc, ret_007_731F                         ; $7300: $30 $1D
 
 .jr_7302
-    call func_007_7E6D                            ; $7302: $CD $6D $7E
+    call EntityLinkPositionYDifference_07         ; $7302: $CD $6D $7E
     add  $20                                      ; $7305: $C6 $20
     cp   $40                                      ; $7307: $FE $40
     jr   nc, ret_007_731F                         ; $7309: $30 $14

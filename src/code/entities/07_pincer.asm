@@ -103,12 +103,12 @@ func_007_535A::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $535F: $21 $40 $C3
     add  hl, bc                                   ; $5362: $09
     set  6, [hl]                                  ; $5363: $CB $F6
-    call func_007_7E5D                            ; $5365: $CD $5D $7E
+    call EntityLinkPositionXDifference_07         ; $5365: $CD $5D $7E
     add  $20                                      ; $5368: $C6 $20
     cp   $40                                      ; $536A: $FE $40
     jr   nc, .jr_537F                             ; $536C: $30 $11
 
-    call func_007_7E6D                            ; $536E: $CD $6D $7E
+    call EntityLinkPositionYDifference_07         ; $536E: $CD $6D $7E
     add  $20                                      ; $5371: $C6 $20
     cp   $40                                      ; $5373: $FE $40
     jr   nc, .jr_537F                             ; $5375: $30 $08
@@ -190,12 +190,12 @@ func_007_53D8::
     ldh  [hLinkPositionY], a                      ; $53EA: $E0 $99
     ld   a, $10                                   ; $53EC: $3E $10
     call ApplyVectorTowardsLink_trampoline        ; $53EE: $CD $AA $3B
-    call func_007_7E5D                            ; $53F1: $CD $5D $7E
+    call EntityLinkPositionXDifference_07         ; $53F1: $CD $5D $7E
     add  $02                                      ; $53F4: $C6 $02
     cp   $04                                      ; $53F6: $FE $04
     jr   nc, .jr_541F                             ; $53F8: $30 $25
 
-    call func_007_7E6D                            ; $53FA: $CD $6D $7E
+    call EntityLinkPositionYDifference_07         ; $53FA: $CD $6D $7E
     add  $02                                      ; $53FD: $C6 $02
     cp   $04                                      ; $53FF: $FE $04
     jr   nc, .jr_541F                             ; $5401: $30 $1C

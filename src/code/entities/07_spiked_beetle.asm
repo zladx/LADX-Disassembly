@@ -176,12 +176,12 @@ jr_007_786E:
     ld   hl, wEntitiesOptions1Table               ; $7874: $21 $30 $C4
     add  hl, bc                                   ; $7877: $09
     ld   [hl], ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_SPLASH_IN_WATER ; $7878: $36 $48
-    call func_007_7E5D                            ; $787A: $CD $5D $7E
+    call EntityLinkPositionXDifference_07         ; $787A: $CD $5D $7E
     add  $06                                      ; $787D: $C6 $06
     cp   $0A                                      ; $787F: $FE $0A
     jr   c, .jr_788C                              ; $7881: $38 $09
 
-    call func_007_7E6D                            ; $7883: $CD $6D $7E
+    call EntityLinkPositionYDifference_07         ; $7883: $CD $6D $7E
     add  $06                                      ; $7886: $C6 $06
     cp   $0A                                      ; $7888: $FE $0A
     jr   nc, ret_007_789C                         ; $788A: $30 $10

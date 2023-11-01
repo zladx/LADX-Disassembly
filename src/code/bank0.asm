@@ -3423,7 +3423,7 @@ LinkDirectionToLinkAnimationState_2::
 .up:    db  LINK_ANIMATION_STATE_UNKNOWN_3A
 .down:  db  LINK_ANIMATION_STATE_UNKNOWN_3C                       ; $1F51
 
-data_1F55::
+LinkDirectionToLiftDirectionButton::
     db   2, 1, 8, 4                               ; $1F55
 
 data_1F59::
@@ -3722,7 +3722,7 @@ ENDC
     add  hl, de                                   ; $2100: $19
     ld   a, [hl]                                  ; $2101: $7E
     ldh  [hLinkAnimationState], a                 ; $2102: $E0 $9D
-    ld   hl, data_1F55                            ; $2104: $21 $55 $1F
+    ld   hl, LinkDirectionToLiftDirectionButton   ; $2104: $21 $55 $1F
     add  hl, de                                   ; $2107: $19
     ldh  a, [hPressedButtonsMask]                 ; $2108: $F0 $CB
     and  [hl]                                     ; $210A: $A6

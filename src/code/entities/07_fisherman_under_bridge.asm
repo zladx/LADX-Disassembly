@@ -564,7 +564,7 @@ label_007_45F7:
     and  $80                                      ; $4624: $E6 $80
     jr   nz, .jr_4640                             ; $4626: $20 $18
 
-    call func_007_7E6D                            ; $4628: $CD $6D $7E
+    call EntityLinkPositionYDifference_07         ; $4628: $CD $6D $7E
     add  $08                                      ; $462B: $C6 $08
     bit  7, a                                     ; $462D: $CB $7F
     jr   z, .jr_4640                              ; $462F: $28 $0F

@@ -122,12 +122,12 @@ func_007_68F0::
     call GetEntityPrivateCountdown1               ; $68F0: $CD $00 $0C
     jr   nz, ret_007_6919                         ; $68F3: $20 $24
 
-    call func_007_7E5D                            ; $68F5: $CD $5D $7E
+    call EntityLinkPositionXDifference_07         ; $68F5: $CD $5D $7E
     add  $08                                      ; $68F8: $C6 $08
     cp   $10                                      ; $68FA: $FE $10
     jr   nc, jr_007_691A                          ; $68FC: $30 $1C
 
-    call func_007_7E6D                            ; $68FE: $CD $6D $7E
+    call EntityLinkPositionYDifference_07         ; $68FE: $CD $6D $7E
 
 jr_007_6901:
     call func_007_68AD                            ; $6901: $CD $AD $68
@@ -145,12 +145,12 @@ ret_007_6919:
     ret                                           ; $6919: $C9
 
 jr_007_691A:
-    call func_007_7E6D                            ; $691A: $CD $6D $7E
+    call EntityLinkPositionYDifference_07         ; $691A: $CD $6D $7E
     add  $08                                      ; $691D: $C6 $08
     cp   $10                                      ; $691F: $FE $10
     jr   nc, .ret_6928                            ; $6921: $30 $05
 
-    call func_007_7E5D                            ; $6923: $CD $5D $7E
+    call EntityLinkPositionXDifference_07         ; $6923: $CD $5D $7E
     jr   jr_007_6901                              ; $6926: $18 $D9
 
 .ret_6928

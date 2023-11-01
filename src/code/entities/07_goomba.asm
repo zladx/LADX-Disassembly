@@ -352,7 +352,7 @@ label_007_6693:
 ._01 dw func_007_66B8                             ; $66A4
 
 func_007_66A6::
-    call func_007_7E5D                            ; $66A6: $CD $5D $7E
+    call EntityLinkPositionXDifference_07         ; $66A6: $CD $5D $7E
     ld   a, $08                                   ; $66A9: $3E $08
     dec  e                                        ; $66AB: $1D
     jr   nz, .jr_66B0                             ; $66AC: $20 $02

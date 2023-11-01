@@ -387,7 +387,7 @@ func_019_6FC5::
     ld   [hl], $01                                ; $6FCE: $36 $01
 
 .jr_6FD0
-    call entityLinkPositionXDifference            ; $6FD0: $CD $0B $7E
+    call EntityLinkPositionXDifference_19         ; $6FD0: $CD $0B $7E
     ld   a, e                                     ; $6FD3: $7B
     add  $02                                      ; $6FD4: $C6 $02
     jp   SetEntitySpriteVariant                   ; $6FD6: $C3 $0C $3B
@@ -497,12 +497,12 @@ label_019_70A9:
     inc  a                                        ; $70D3: $3C
     add  [hl]                                     ; $70D4: $86
     call SetEntitySpriteVariant                   ; $70D5: $CD $0C $3B
-    call entityLinkPositionYDifference            ; $70D8: $CD $1B $7E
+    call EntityLinkPositionYDifference_19         ; $70D8: $CD $1B $7E
     add  $13                                      ; $70DB: $C6 $13
     cp   $26                                      ; $70DD: $FE $26
     jr   nc, .jr_70F2                             ; $70DF: $30 $11
 
-    call entityLinkPositionXDifference            ; $70E1: $CD $0B $7E
+    call EntityLinkPositionXDifference_19         ; $70E1: $CD $0B $7E
     add  $13                                      ; $70E4: $C6 $13
     cp   $26                                      ; $70E6: $FE $26
     jr   nc, .jr_70F2                             ; $70E8: $30 $08

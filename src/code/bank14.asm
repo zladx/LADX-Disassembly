@@ -1204,24 +1204,25 @@ func_014_53A3::
 .jr_53B6
     ld   hl, wEntitiesStatusTable                 ; $53B6: $21 $80 $C2
     add  hl, bc                                   ; $53B9: $09
-    cp   $D6                                      ; $53BA: $FE $D6
+    cp   ENTITY_SIDE_VIEW_POT                     ; $53BA: $FE $D6
     jr   z, .jr_53ED                              ; $53BC: $28 $2F
 
-    cp   $D5                                      ; $53BE: $FE $D5
+    cp   ENTITY_ROOSTER                           ; $53BE: $FE $D5
     jr   z, .jr_53ED                              ; $53C0: $28 $2B
 
-    cp   $6C                                      ; $53C2: $FE $6C
+    cp   ENTITY_CUCCO                             ; $53C2: $FE $6C
     jr   z, .jr_53ED                              ; $53C4: $28 $27
 
-    cp   $9D                                      ; $53C6: $FE $9D
+    cp   ENTITY_LIFTABLE_STATUE                   ; $53C6: $FE $9D
     jr   z, .jr_53ED                              ; $53C8: $28 $23
 
-    cp   $A8                                      ; $53CA: $FE $A8
+    cp   ENTITY_WRECKING_BALL                     ; $53CA: $FE $A8
     jr   z, .jr_53ED                              ; $53CC: $28 $1F
 
-    cp   $98                                      ; $53CE: $FE $98
+    cp   ENTITY_HORSE_PIECE                       ; $53CE: $FE $98
     jr   nz, jr_014_53F6                          ; $53D0: $20 $24
 
+    ; Horse head piece specific handling on throwing
     push hl                                       ; $53D2: $E5
     ldh  a, [hLinkDirection]                      ; $53D3: $F0 $9E
     ld   e, a                                     ; $53D5: $5F
@@ -1240,22 +1241,24 @@ func_014_53A3::
     pop  hl                                       ; $53EC: $E1
 
 .jr_53ED
+    ; Set the entity state to 2 for certain throwable objects.
     ld   [hl], $05                                ; $53ED: $36 $05
     call IncrementEntityState                     ; $53EF: $CD $12 $3B
     ld   [hl], $02                                ; $53F2: $36 $02
     jr   jr_014_5409                              ; $53F4: $18 $13
 
 jr_014_53F6:
-    cp   $92                                      ; $53F6: $FE $92
+    cp   ENTITY_SMASHER                           ; $53F6: $FE $92
     jr   nz, .jr_5403                             ; $53F8: $20 $09
 
+    ; Smasher ball throw
     ld   [hl], $05                                ; $53FA: $36 $05
     call IncrementEntityState                     ; $53FC: $CD $12 $3B
     ld   [hl], $03                                ; $53FF: $36 $03
     jr   jr_014_5409                              ; $5401: $18 $06
 
 .jr_5403
-    cp   $05                                      ; $5403: $FE $05
+    cp   ENTITY_LIFTABLE_ROCK                     ; $5403: $FE $05
     jr   z, jr_014_5409                           ; $5405: $28 $02
 
     ld   [hl], $08                                ; $5407: $36 $08

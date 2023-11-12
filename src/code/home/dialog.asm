@@ -703,14 +703,14 @@ DialogBoxOrigin::
 DialogBreakHandler::
     ; @bug: This check should be done after the next two
     ; checks for terminators to trigger on odd-numbered lines as well.
-    ld   a, [wDialogCharacterIndex]               ; $2695: $FA $70 $C1
-    and  $1F                                      ; $2698: $E6 $1F
-    jr   nz, .buildDrawCommand                    ; $269A: $20 $45
     ld   a, [wDialogNextChar]                     ; $269C: $FA $C3 $C3
     cp   "@"                                      ; $269F: $FE $FF
     jp   z, DialogDrawNextCharacterHandler.end    ; $26A1: $CA $AD $25
     cp   "<ask>"                                  ; $26A4: $FE $FE
     jp   z, DialogDrawNextCharacterHandler.choice ; $26A6: $CA $95 $25
+    ld   a, [wDialogCharacterIndex]               ; $2695: $FA $70 $C1
+    and  $1F                                      ; $2698: $E6 $1F
+    jr   nz, .buildDrawCommand                    ; $269A: $20 $45
     ld   a, [wDialogIsWaitingForButtonPress]      ; $26A9: $FA $CC $C1
     and  a                                        ; $26AC: $A7
     jr   nz, .dialogButtonPressHandler            ; $26AD: $20 $07

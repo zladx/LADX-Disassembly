@@ -363,7 +363,8 @@ MovingBlockBottomRightState1Handler::
     inc  [hl]                                     ; $42E2: $34
     ld   a, [hl]                                  ; $42E3: $7E
     cp   $0A                                      ; $42E4: $FE $0A
-    jr   c, .ret_42FA                             ; $42E6: $38 $12
+;    jr   c, .ret_42FA                             ; $42E6: $38 $12
+    ret  c
 
     ld   [hl], b                                  ; $42E8: $70
     ld   a, NOISE_SFX_RUMBLE                      ; $42E9: $3E $11
@@ -374,7 +375,8 @@ MovingBlockBottomRightState1Handler::
     ld   hl, wEntitiesPosXTable                   ; $42F2: $21 $00 $C2
     add  hl, bc                                   ; $42F5: $09
     cp   [hl]                                     ; $42F6: $BE
-    jr   z, .ret_42FA                             ; $42F7: $28 $01
+;    jr   z, .ret_42FA                             ; $42F7: $28 $01
+    ret  z
 
     inc  [hl]                                     ; $42F9: $34
 

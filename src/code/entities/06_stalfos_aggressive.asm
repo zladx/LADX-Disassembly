@@ -15,7 +15,7 @@ StalfosAggressiveEntityHandler::
     call RenderActiveEntitySpritesPair            ; $4AB7: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $4ABA: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $4ABD: $CD $F7 $64
-    call label_3B39                               ; $4AC0: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $4AC0: $CD $39 $3B
     ldh  a, [hMapId]                              ; $4AC3: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $4AC5: $FE $FF
     jr   nz, .jr_4ACE                             ; $4AC7: $20 $05
@@ -66,7 +66,7 @@ StalfosAggressiveState1Handler::
 
 .jr_4B0C
     call UpdateEntityPosWithSpeed_06              ; $4B0C: $CD $41 $65
-    call label_3B23                               ; $4B0F: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $4B0F: $CD $23 $3B
     ldh  a, [hFrameCounter]                       ; $4B12: $F0 $E7
     rra                                           ; $4B14: $1F
     rra                                           ; $4B15: $1F
@@ -75,7 +75,7 @@ StalfosAggressiveState1Handler::
 
 StalfosAggressiveState2Handler::
     call UpdateEntityPosWithSpeed_06              ; $4B1B: $CD $41 $65
-    call label_3B23                               ; $4B1E: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $4B1E: $CD $23 $3B
     call AddEntityZSpeedToPos_06                  ; $4B21: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $4B24: $21 $20 $C3
     add  hl, bc                                   ; $4B27: $09

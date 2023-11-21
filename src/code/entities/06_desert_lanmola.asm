@@ -348,7 +348,7 @@ func_006_57ED::
 .jr_5803
     call UpdateEntityPosWithSpeed_06              ; $5803: $CD $41 $65
     call AddEntityZSpeedToPos_06                  ; $5806: $CD $7A $65
-    jp   label_3B39                               ; $5809: $C3 $39 $3B
+    jp   DefaultEnemyDamageCollisionHandler_trampoline ; $5809: $C3 $39 $3B
 
 func_006_580C::
     call GetEntityTransitionCountdown             ; $580C: $CD $05 $0C
@@ -380,7 +380,7 @@ func_006_580C::
 jr_006_582C:
     call UpdateEntityPosWithSpeed_06              ; $582C: $CD $41 $65
     call AddEntityZSpeedToPos_06                  ; $582F: $CD $7A $65
-    jp   label_3B39                               ; $5832: $C3 $39 $3B
+    jp   DefaultEnemyDamageCollisionHandler_trampoline ; $5832: $C3 $39 $3B
 
 func_006_5835::
     call GetEntityTransitionCountdown             ; $5835: $CD $05 $0C
@@ -459,7 +459,7 @@ jr_006_5888:
     and  $80                                      ; $5893: $E6 $80
     jr   nz, .jr_589A                             ; $5895: $20 $03
 
-    call label_3B39                               ; $5897: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $5897: $CD $39 $3B
 
 .jr_589A
     ld   a, $02                                   ; $589A: $3E $02

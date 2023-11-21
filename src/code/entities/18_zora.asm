@@ -160,7 +160,7 @@ ZoraState3Handler::
     ld   hl, wEntitiesPosZTable                   ; $4AB4: $21 $10 $C3
     add  hl, bc                                   ; $4AB7: $09
     ld   [hl], a                                  ; $4AB8: $77
-    call label_3B39                               ; $4AB9: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $4AB9: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $4ABC: $CD $05 $0C
     jr   nz, .jr_4ADC                             ; $4ABF: $20 $1B
 

@@ -97,7 +97,7 @@ jr_018_7C54:
     and  a                                        ; $7C61: $A7
     jr   nz, jr_018_7CAF                          ; $7C62: $20 $4B
 
-    call label_3B23                               ; $7C64: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7C64: $CD $23 $3B
     ld   a, [wIsIndoor]                           ; $7C67: $FA $A5 $DB
     and  a                                        ; $7C6A: $A7
     jr   z, ret_018_7CAE                          ; $7C6B: $28 $41

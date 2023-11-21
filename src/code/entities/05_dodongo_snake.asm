@@ -74,7 +74,7 @@ DodongoSnakeEntityHandler::
     call ReturnIfNonInteractive_05                ; $687C: $CD $3A $7A
     call BossIntro                                ; $687F: $CD $E8 $3E
     call DecrementEntityIgnoreHitsCountdown       ; $6882: $CD $56 $0C
-    call label_3B39                               ; $6885: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $6885: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $6888: $F0 $F0
     JP_TABLE                                      ; $688A
 ._00 dw func_005_6891                             ; $688B
@@ -141,7 +141,7 @@ func_005_6891::
     ldh  a, [hActiveEntityVisualPosY]             ; $68EA: $F0 $EC
     ld   [hl], a                                  ; $68EC: $77
     call UpdateEntityPosWithSpeed_05              ; $68ED: $CD $B1 $7A
-    call label_3B23                               ; $68F0: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $68F0: $CD $23 $3B
     ld   e, $0F                                   ; $68F3: $1E $0F
     ld   d, b                                     ; $68F5: $50
 

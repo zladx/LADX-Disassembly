@@ -40,7 +40,7 @@ LaserEntityHandler::
     call RenderActiveEntitySpritesPair            ; $6C6A: $CD $C0 $3B
     call ReturnIfNonInteractive_04                ; $6C6D: $CD $A3 $7F
     call label_3B44                               ; $6C70: $CD $44 $3B
-    call label_3B23                               ; $6C73: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $6C73: $CD $23 $3B
     call GetEntityTransitionCountdown             ; $6C76: $CD $05 $0C
     jr   z, jr_004_6CB4                           ; $6C79: $28 $39
 

@@ -249,7 +249,7 @@ ApplyRecoilIfNeeded_07::
     and  $20                                      ; $7DF6: $E6 $20
     jr   nz, .restoreOriginalSpeed                ; $7DF8: $20 $03
 
-    call label_3B23                               ; $7DFA: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7DFA: $CD $23 $3B
 
 .restoreOriginalSpeed
     call GetEntitySpeedYAddress                   ; $7DFD: $CD $05 $40

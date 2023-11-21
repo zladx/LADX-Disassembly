@@ -52,9 +52,9 @@ GhomaEntityHandler::
 
 .jr_7C1C
     call BossIntro                                ; $7C1C: $CD $E8 $3E
-    call label_3B39                               ; $7C1F: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $7C1F: $CD $39 $3B
     call UpdateEntityPosWithSpeed_05              ; $7C22: $CD $B1 $7A
-    call label_3B23                               ; $7C25: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7C25: $CD $23 $3B
     call DecrementEntityIgnoreHitsCountdown       ; $7C28: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $7C2B: $F0 $F0
     JP_TABLE                                      ; $7C2D
@@ -97,7 +97,7 @@ func_005_7C52::
     cp   $01                                      ; $7C64: $FE $01
     jr   nz, jr_005_7C9C                          ; $7C66: $20 $34
 
-    call func_005_7B04                            ; $7C68: $CD $04 $7B
+    call GetEntityToLinkPositionDeltaX_05         ; $7C68: $CD $04 $7B
     ld   d, b                                     ; $7C6B: $50
     ld   hl, Data_005_7B53                        ; $7C6C: $21 $53 $7B
     add  hl, de                                   ; $7C6F: $19

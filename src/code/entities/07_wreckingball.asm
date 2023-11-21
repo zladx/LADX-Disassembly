@@ -122,7 +122,7 @@ jr_007_608F:
     ldh  a, [hActiveEntityPosY]                   ; $60A1: $F0 $EF
     add  e                                        ; $60A3: $83
     ldh  [hActiveEntityPosY], a                   ; $60A4: $E0 $EF
-    call label_3B23                               ; $60A6: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $60A6: $CD $23 $3B
     ldh  a, [hActiveEntityFlipAttribute]          ; $60A9: $F0 $ED
     ld   e, a                                     ; $60AB: $5F
     ld   hl, wEntitiesPosYTable                   ; $60AC: $21 $10 $C2

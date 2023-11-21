@@ -61,7 +61,7 @@ jr_007_620E:
     ld   a, [hl]                                  ; $621F: $7E
     push hl                                       ; $6220: $E5
     push af                                       ; $6221: $F5
-    call label_3B23                               ; $6222: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $6222: $CD $23 $3B
     pop  af                                       ; $6225: $F1
     pop  hl                                       ; $6226: $E1
     ld   [hl], a                                  ; $6227: $77

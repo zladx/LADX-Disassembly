@@ -30,7 +30,7 @@ MoblinKingEntityHandler::
     call label_394D                               ; $46E1: $CD $4D $39
     call ReturnIfNonInteractive_15                ; $46E4: $CD $0D $7B
     call ApplyRecoilIfNeeded_15                   ; $46E7: $CD $3E $7B
-    call label_3B39                               ; $46EA: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $46EA: $CD $39 $3B
     ld   hl, wEntitiesOptions1Table               ; $46ED: $21 $30 $C4
     add  hl, bc                                   ; $46F0: $09
     set  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $46F1: $CB $F6
@@ -38,7 +38,7 @@ MoblinKingEntityHandler::
     add  hl, bc                                   ; $46F6: $09
     res  ENTITY_PHYSICS_B_HARMLESS, [hl]          ; $46F7: $CB $BE
     call UpdateEntityPosWithSpeed_15              ; $46F9: $CD $88 $7B
-    call label_3B23                               ; $46FC: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $46FC: $CD $23 $3B
     call AddEntityZSpeedToPos_15                  ; $46FF: $CD $C1 $7B
     ld   hl, wEntitiesSpeedZTable                 ; $4702: $21 $20 $C3
     add  hl, bc                                   ; $4705: $09
@@ -82,7 +82,7 @@ func_015_4734::
     call IncrementEntityState                     ; $4740: $CD $12 $3B
 
 func_015_4743::
-    call func_015_7BDB                            ; $4743: $CD $DB $7B
+    call GetEntityToLinkPositionDeltaX_15         ; $4743: $CD $DB $7B
     ld   a, e                                     ; $4746: $7B
     ld   [wD227], a                               ; $4747: $EA $27 $D2
     ld   hl, wEntitiesDirectionTable              ; $474A: $21 $80 $C3
@@ -207,7 +207,7 @@ jr_015_47E3:
 
     ldh  a, [hLinkPositionX]                      ; $47F8: $F0 $98
     push af                                       ; $47FA: $F5
-    call func_015_7BDB                            ; $47FB: $CD $DB $7B
+    call GetEntityToLinkPositionDeltaX_15         ; $47FB: $CD $DB $7B
     ld   d, b                                     ; $47FE: $50
     ld   hl, Data_015_477E                        ; $47FF: $21 $7E $47
     add  hl, de                                   ; $4802: $19

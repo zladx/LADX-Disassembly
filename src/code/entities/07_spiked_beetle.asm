@@ -51,10 +51,10 @@ SpikedBeetleEntityHandler::
 
 .jr_77C1
     call ApplyRecoilIfNeeded_07                   ; $77C1: $CD $C3 $7D
-    call label_3B39                               ; $77C4: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $77C4: $CD $39 $3B
     call UpdateEntityPosWithSpeed_07              ; $77C7: $CD $0A $7E
     call AddEntityZSpeedToPos_07                  ; $77CA: $CD $43 $7E
-    call label_3B23                               ; $77CD: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $77CD: $CD $23 $3B
     ld   hl, wEntitiesSpeedZTable                 ; $77D0: $21 $20 $C3
     add  hl, bc                                   ; $77D3: $09
     dec  [hl]                                     ; $77D4: $35
@@ -316,7 +316,7 @@ jr_007_792B:
     ld   a, [hl]                                  ; $792F: $7E
     push af                                       ; $7930: $F5
     ld   [hl], $01                                ; $7931: $36 $01
-    call label_3B23                               ; $7933: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7933: $CD $23 $3B
     pop  af                                       ; $7936: $F1
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7937: $21 $10 $C4
     add  hl, bc                                   ; $793A: $09

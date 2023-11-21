@@ -288,7 +288,7 @@ jr_005_4A46:
 
 .jr_4AAE
     call UpdateEntityPosWithSpeed_05              ; $4AAE: $CD $B1 $7A
-    call label_3B23                               ; $4AB1: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $4AB1: $CD $23 $3B
     call GetEntityDropTimer                       ; $4AB4: $CD $FB $0B
     cp   $06                                      ; $4AB7: $FE $06
     jr   nc, jr_005_4AEC                          ; $4AB9: $30 $31
@@ -430,12 +430,12 @@ func_005_4B41::
     call func_005_7B24                            ; $4B66: $CD $24 $7B
     add  $08                                      ; $4B69: $C6 $08
     call SetEntitySpriteVariant                   ; $4B6B: $CD $0C $3B
-    call func_005_7B04                            ; $4B6E: $CD $04 $7B
+    call GetEntityToLinkPositionDeltaX_05         ; $4B6E: $CD $04 $7B
     add  $12                                      ; $4B71: $C6 $12
     cp   $24                                      ; $4B73: $FE $24
     jr   nc, .jr_4B86                             ; $4B75: $30 $0F
 
-    call func_005_7B14                            ; $4B77: $CD $14 $7B
+    call GetEntityToLinkPositionDeltaY_05         ; $4B77: $CD $14 $7B
     add  $12                                      ; $4B7A: $C6 $12
     cp   $24                                      ; $4B7C: $FE $24
     jr   nc, .jr_4B86                             ; $4B7E: $30 $06

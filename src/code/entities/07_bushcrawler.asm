@@ -127,7 +127,7 @@ BushCrawlerEntityHandler::
 
 .jr_40C1
     call DecrementEntityIgnoreHitsCountdown       ; $40C1: $CD $56 $0C
-    call label_3B39                               ; $40C4: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $40C4: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $40C7: $F0 $F0
   JP_TABLE                                        ; $40C9
 ._00 dw BushCrawlerState0Handler                  ; $40CA
@@ -291,7 +291,7 @@ jr_007_41BE:
 
 jr_007_41C8:
     call UpdateEntityPosWithSpeed_07              ; $41C8: $CD $0A $7E
-    call label_3B23                               ; $41CB: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $41CB: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $41CE: $21 $A0 $C2
     add  hl, bc                                   ; $41D1: $09
     ld   a, [hl]                                  ; $41D2: $7E
@@ -326,8 +326,8 @@ label_007_41F0:
     and  $01                                      ; $4201: $E6 $01
     call SetEntitySpriteVariant                   ; $4203: $CD $0C $3B
     call UpdateEntityPosWithSpeed_07              ; $4206: $CD $0A $7E
-    call label_3B23                               ; $4209: $CD $23 $3B
-    call label_3B39                               ; $420C: $CD $39 $3B
+    call DefaultEntityPhysics_trampoline          ; $4209: $CD $23 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $420C: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $420F: $CD $05 $0C
     jr   nz, .ret_4233                            ; $4212: $20 $1F
 

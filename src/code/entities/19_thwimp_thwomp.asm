@@ -97,7 +97,7 @@ ThwompRammableState1Handler::
     ldh  [hActiveEntityPosY], a                   ; $5609: $E0 $EF
 
 .jr_560B
-    call label_3B23                               ; $560B: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $560B: $CD $23 $3B
     ld   hl, wEntitiesPosYTable                   ; $560E: $21 $10 $C2
     add  hl, bc                                   ; $5611: $09
     ld   a, [hl]                                  ; $5612: $7E
@@ -203,7 +203,7 @@ ThwimpEntityHandler::
     call RenderActiveEntitySpritesPair            ; $56C8: $CD $C0 $3B
     call ReturnIfNonInteractive_19                ; $56CB: $CD $3D $7D
     call DecrementEntityIgnoreHitsCountdown       ; $56CE: $CD $56 $0C
-    call label_3B39                               ; $56D1: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $56D1: $CD $39 $3B
     xor  a                                        ; $56D4: $AF
     call SetEntitySpriteVariant                   ; $56D5: $CD $0C $3B
     ldh  a, [hActiveEntityState]                  ; $56D8: $F0 $F0
@@ -267,7 +267,7 @@ ThwimpState2Handler::
     ld   [hl], a                                  ; $5731: $77
 
 .jr_5732
-    call label_3B23                               ; $5732: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $5732: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $5735: $21 $A0 $C2
     add  hl, bc                                   ; $5738: $09
     ld   a, [hl]                                  ; $5739: $7E
@@ -433,7 +433,7 @@ ThwompState2Handler::
     ldh  a, [hActiveEntityPosY]                   ; $584E: $F0 $EF
     add  $10                                      ; $5850: $C6 $10
     ldh  [hActiveEntityPosY], a                   ; $5852: $E0 $EF
-    call label_3B23                               ; $5854: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $5854: $CD $23 $3B
     ld   hl, wEntitiesPosYTable                   ; $5857: $21 $10 $C2
     add  hl, bc                                   ; $585A: $09
     ld   a, [hl]                                  ; $585B: $7E

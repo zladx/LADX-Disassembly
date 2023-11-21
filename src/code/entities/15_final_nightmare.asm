@@ -310,9 +310,9 @@ func_015_520C::
 
 func_015_522C::
     call func_015_5435                            ; $522C: $CD $35 $54
-    call label_3B39                               ; $522F: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $522F: $CD $39 $3B
     call UpdateEntityPosWithSpeed_15              ; $5232: $CD $88 $7B
-    call label_3B23                               ; $5235: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $5235: $CD $23 $3B
     call AddEntityZSpeedToPos_15                  ; $5238: $CD $C1 $7B
     ld   hl, wEntitiesSpeedZTable                 ; $523B: $21 $20 $C3
     add  hl, bc                                   ; $523E: $09
@@ -384,7 +384,7 @@ func_015_528A::
 
 .jr_52A4
     call func_015_5435                            ; $52A4: $CD $35 $54
-    jp   label_3B39                               ; $52A7: $C3 $39 $3B
+    jp   DefaultEnemyDamageCollisionHandler_trampoline ; $52A7: $C3 $39 $3B
 
 func_015_52AA::
     call GetEntityTransitionCountdown             ; $52AA: $CD $05 $0C
@@ -1715,7 +1715,7 @@ label_015_5DED:
 
 jr_015_5E24:
     call UpdateEntityPosWithSpeed_15              ; $5E24: $CD $88 $7B
-    call label_3B23                               ; $5E27: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $5E27: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $5E2A: $F0 $F0
     JP_TABLE                                      ; $5E2C
 ._00 dw func_015_5E35                             ; $5E2D
@@ -1724,7 +1724,7 @@ jr_015_5E24:
 ._03 dw func_015_5F22                             ; $5E33
 
 func_015_5E35::
-    call label_3B39                               ; $5E35: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $5E35: $CD $39 $3B
 
 func_015_5E38::
     ld   hl, wEntitiesInertiaTable                ; $5E38: $21 $D0 $C3
@@ -1986,7 +1986,7 @@ Data_015_5FC9::
 
 func_015_5FD1::
     call ReturnIfNonInteractive_15                ; $5FD1: $CD $0D $7B
-    jp   label_3B39                               ; $5FD4: $C3 $39 $3B
+    jp   DefaultEnemyDamageCollisionHandler_trampoline ; $5FD4: $C3 $39 $3B
 
 FinalNightmareForm4Handler::
     ldh  a, [hActiveEntityState]                  ; $5FD7: $F0 $F0
@@ -2350,7 +2350,7 @@ func_015_6331::
     call UpdateEntityPosWithSpeed_15              ; $633F: $CD $88 $7B
 
 .jr_6342
-    call label_3B23                               ; $6342: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $6342: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $6345: $21 $A0 $C2
     add  hl, bc                                   ; $6348: $09
     ld   a, [hl]                                  ; $6349: $7E
@@ -2481,7 +2481,7 @@ jr_015_63F5:
     cp   $09                                      ; $63FD: $FE $09
     jr   nc, jr_015_6425                          ; $63FF: $30 $24
 
-    call label_3B39                               ; $6401: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $6401: $CD $39 $3B
     ld   hl, wEntitiesHealthTable                 ; $6404: $21 $60 $C3
     add  hl, bc                                   ; $6407: $09
     ld   a, [hl]                                  ; $6408: $7E
@@ -2622,7 +2622,7 @@ func_015_6553::
     jp   IncrementEntityState                     ; $655A: $C3 $12 $3B
 
 func_015_655D::
-    call func_015_7BDB                            ; $655D: $CD $DB $7B
+    call GetEntityToLinkPositionDeltaX_15         ; $655D: $CD $DB $7B
     ld   a, e                                     ; $6560: $7B
     ld   [wD21E], a                               ; $6561: $EA $1E $D2
     ret                                           ; $6564: $C9
@@ -3028,9 +3028,9 @@ func_015_67FA::
     jp   ClearEntitySpeed                         ; $680E: $C3 $7F $3D
 
 func_015_6811::
-    call label_3B39                               ; $6811: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $6811: $CD $39 $3B
     call UpdateEntityPosWithSpeed_15              ; $6814: $CD $88 $7B
-    call label_3B23                               ; $6817: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $6817: $CD $23 $3B
     ldh  a, [hFrameCounter]                       ; $681A: $F0 $E7
     and  $01                                      ; $681C: $E6 $01
     jr   nz, jr_015_683F                          ; $681E: $20 $1F
@@ -3822,7 +3822,7 @@ func_015_6E66::
     res  7, [hl]                                  ; $6F2E: $CB $BE
 
 .jr_6F30
-    call label_3B39                               ; $6F30: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $6F30: $CD $39 $3B
     ld   e, $0F                                   ; $6F33: $1E $0F
     ld   hl, wEntitiesHealthTable                 ; $6F35: $21 $60 $C3
     add  hl, bc                                   ; $6F38: $09
@@ -3872,7 +3872,7 @@ func_015_6E66::
 
 jr_015_6F70:
     call UpdateEntityPosWithSpeed_15              ; $6F70: $CD $88 $7B
-    call label_3B23                               ; $6F73: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $6F73: $CD $23 $3B
     ld   hl, wEntitiesPrivateState1Table          ; $6F76: $21 $B0 $C2
     add  hl, bc                                   ; $6F79: $09
     ld   e, [hl]                                  ; $6F7A: $5E

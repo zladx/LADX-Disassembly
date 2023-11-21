@@ -1461,7 +1461,7 @@ Data_005_76F2::
 func_005_7702::
     call UpdateEntityPosWithSpeed_05              ; $7702: $CD $B1 $7A
     call label_3B44                               ; $7705: $CD $44 $3B
-    call label_3B23                               ; $7708: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7708: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $770B: $21 $A0 $C2
     add  hl, bc                                   ; $770E: $09
     ld   a, [hl]                                  ; $770F: $7E

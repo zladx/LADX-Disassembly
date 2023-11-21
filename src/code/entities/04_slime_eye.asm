@@ -401,7 +401,7 @@ func_004_4BC7::
     ret  nz                                       ; $4BCE: $C0
 
     call UpdateEntityPosWithSpeed_04              ; $4BCF: $CD $CA $6D
-    jp   label_3B23                               ; $4BD2: $C3 $23 $3B
+    jp   DefaultEntityPhysics_trampoline          ; $4BD2: $C3 $23 $3B
 
 .jr_4BD5
     ld   [hl], $30                                ; $4BD5: $36 $30
@@ -609,7 +609,7 @@ Data_004_4E9C::
 func_004_4EA4::
     ld   a, $18                                   ; $4EA4: $3E $18
     call func_004_4B37                            ; $4EA6: $CD $37 $4B
-    call label_3B39                               ; $4EA9: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $4EA9: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $4EAC: $CD $05 $0C
     jr   nz, jr_004_4EE7                          ; $4EAF: $20 $36
 
@@ -655,7 +655,7 @@ func_004_4EEB::
     jr   nz, jr_004_4F60                          ; $4EEF: $20 $6F
 
     call UpdateEntityPosWithSpeed_04              ; $4EF1: $CD $CA $6D
-    call label_3B23                               ; $4EF4: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $4EF4: $CD $23 $3B
     call AddEntityZSpeedToPos_04                  ; $4EF7: $CD $03 $6E
     ld   hl, wEntitiesSpeedZTable                 ; $4EFA: $21 $20 $C3
     add  hl, bc                                   ; $4EFD: $09

@@ -523,7 +523,7 @@ func_007_5B25::
     cp   $05                                      ; $5B34: $FE $05
     jr   nc, .jr_5B3B                             ; $5B36: $30 $03
 
-    call label_3B23                               ; $5B38: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $5B38: $CD $23 $3B
 
 .jr_5B3B
     ldh  a, [hMultiPurposeG]                      ; $5B3B: $F0 $E8

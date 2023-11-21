@@ -74,7 +74,7 @@ TimerBombiteEntityHandler::
 .jr_7D51
     call ApplyRecoilIfNeeded_04                   ; $7D51: $CD $80 $6D
     call UpdateEntityPosWithSpeed_04              ; $7D54: $CD $CA $6D
-    call label_3B23                               ; $7D57: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7D57: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $7D5A: $F0 $F0
     JP_TABLE                                      ; $7D5C
 ._00 dw func_004_7D69                             ; $7D5D
@@ -87,7 +87,7 @@ Data_004_7D65::
     db   $00, $00, $F8, $00
 
 func_004_7D69::
-    call label_3B39                               ; $7D69: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $7D69: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $7D6C: $CD $05 $0C
     jr   nz, .jr_7D91                             ; $7D6F: $20 $20
 
@@ -222,11 +222,11 @@ BouncingBombiteEntityHandler::
     call GetEntityPrivateCountdown1               ; $7E22: $CD $00 $0C
     jr   nz, .jr_7E2A                             ; $7E25: $20 $03
 
-    call label_3B39                               ; $7E27: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $7E27: $CD $39 $3B
 
 .jr_7E2A
     call UpdateEntityPosWithSpeed_04              ; $7E2A: $CD $CA $6D
-    call label_3B23                               ; $7E2D: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7E2D: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $7E30: $F0 $F0
     JP_TABLE                                      ; $7E32
 ._00 dw func_004_7E39                             ; $7E33

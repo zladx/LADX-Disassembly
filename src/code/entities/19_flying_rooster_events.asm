@@ -558,7 +558,7 @@ label_019_50C4::
     ldh  a, [hFrameCounter]                       ; $5167: $F0 $E7
     and  [hl]                                     ; $5169: $A6
     call z, UpdateEntityPosWithSpeed_19           ; $516A: $CC $B8 $7D
-    call label_3B23                               ; $516D: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $516D: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $5170: $21 $A0 $C2
     add  hl, bc                                   ; $5173: $09
     ld   a, [hl]                                  ; $5174: $7E

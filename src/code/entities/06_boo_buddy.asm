@@ -124,7 +124,7 @@ BooBuddyState1Handler::
     ld   hl, wEntitiesHealthTable                 ; $7A44: $21 $60 $C3
     add  hl, bc                                   ; $7A47: $09
     ld   [hl], $01                                ; $7A48: $36 $01
-    call label_3B39                               ; $7A4A: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $7A4A: $CD $39 $3B
     ld   a, $04                                   ; $7A4D: $3E $04
     call GetVectorTowardsLink_trampoline          ; $7A4F: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $7A52: $F0 $D7

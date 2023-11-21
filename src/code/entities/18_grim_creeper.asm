@@ -443,7 +443,7 @@ func_018_72A5::
     jp   label_018_7276                           ; $72C5: $C3 $76 $72
 
 func_018_72C8::
-    call label_3B39                               ; $72C8: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $72C8: $CD $39 $3B
     call func_018_7273                            ; $72CB: $CD $73 $72
     call AddEntityZSpeedToPos_18                  ; $72CE: $CD $98 $7E
     ldh  a, [hFrameCounter]                       ; $72D1: $F0 $E7

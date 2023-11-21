@@ -12,10 +12,10 @@ PeaHatEntityHandler::
     call RenderActiveEntitySpritesPair            ; $670C: $CD $C0 $3B
     call ReturnIfNonInteractive_07                ; $670F: $CD $96 $7D
     call ApplyRecoilIfNeeded_07                   ; $6712: $CD $C3 $7D
-    call label_3B39                               ; $6715: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $6715: $CD $39 $3B
     call UpdateEntityPosWithSpeed_07              ; $6718: $CD $0A $7E
     call AddEntityZSpeedToPos_07                  ; $671B: $CD $43 $7E
-    call label_3B23                               ; $671E: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $671E: $CD $23 $3B
     ld   hl, wEntitiesHitboxFlagsTable            ; $6721: $21 $50 $C3
     add  hl, bc                                   ; $6724: $09
     set  7, [hl]                                  ; $6725: $CB $FE

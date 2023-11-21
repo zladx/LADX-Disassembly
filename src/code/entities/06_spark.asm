@@ -127,7 +127,7 @@ func_006_66CC::
     ld   a, [hl]                                  ; $66D8: $7E
     push af                                       ; $66D9: $F5
     ld   [hl], $01                                ; $66DA: $36 $01
-    call label_3B23                               ; $66DC: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $66DC: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $66DF: $21 $A0 $C2
     add  hl, bc                                   ; $66E2: $09
     ld   a, [hl]                                  ; $66E3: $7E
@@ -138,7 +138,7 @@ func_006_66CC::
     ld   hl, wEntitiesSpeedYTable                 ; $66EB: $21 $50 $C2
     add  hl, bc                                   ; $66EE: $09
     ld   [hl], $FF                                ; $66EF: $36 $FF
-    call label_3B23                               ; $66F1: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $66F1: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $66F4: $21 $A0 $C2
     add  hl, bc                                   ; $66F7: $09
     pop  af                                       ; $66F8: $F1

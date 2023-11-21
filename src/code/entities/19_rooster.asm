@@ -133,7 +133,7 @@ jr_019_5A35:
 
 jr_019_5A7F:
     call UpdateEntityPosWithSpeed_19              ; $5A7F: $CD $B8 $7D
-    jp   label_3B23                               ; $5A82: $C3 $23 $3B
+    jp   DefaultEntityPhysics_trampoline          ; $5A82: $C3 $23 $3B
 
 jr_019_5A85:
     ld   hl, wEntitiesSpeedXTable                 ; $5A85: $21 $40 $C2

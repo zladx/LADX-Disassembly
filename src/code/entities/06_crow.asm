@@ -215,7 +215,7 @@ jr_006_5D9F:
     jp   IncrementEntityState                     ; $5DAA: $C3 $12 $3B
 
 CrowState1Handler::
-    call label_3B39                               ; $5DAD: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $5DAD: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $5DB0: $CD $05 $0C
     jr   nz, .jr_5DBA                             ; $5DB3: $20 $05
 
@@ -231,7 +231,7 @@ CrowState1Handler::
     jr   jr_006_5E08                              ; $5DC6: $18 $40
 
 CrowState2Handler::
-    call label_3B39                               ; $5DC8: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $5DC8: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $5DCB: $CD $05 $0C
     jp   z, IncrementEntityState                  ; $5DCE: $CA $12 $3B
 
@@ -289,7 +289,7 @@ func_006_5E14::
     jp   PlayBoomerangSfx_trampoline              ; $5E14: $C3 $F8 $29
 
 CrowState3Handler::
-    call label_3B39                               ; $5E17: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $5E17: $CD $39 $3B
     ldh  a, [hFrameCounter]                       ; $5E1A: $F0 $E7
     and  $03                                      ; $5E1C: $E6 $03
     jr   nz, jr_006_5E51                          ; $5E1E: $20 $31

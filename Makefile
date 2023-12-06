@@ -7,9 +7,11 @@
 # Dev tools binaries and options
 #
 
-2BPP    := rgbgfx
+RGBDS   :=
 
-ASM     := rgbasm
+2BPP    := $(RGBDS)rgbgfx
+
+ASM     := $(RGBDS)rgbasm
 
 # Get assembler version
 ASMVER    := $(shell $(ASM) --version | cut -f2 -dv)
@@ -41,10 +43,10 @@ ifeq ($(shell expr \
     --nop-after-halt
 endif
 
-LD      := rgblink
+LD      := $(RGBDS)rgblink
 LDFLAGS :=
 
-FX      := rgbfix
+FX      := $(RGBDS)rgbfix
 FXFLAGS := \
   --color-compatible \
   --sgb-compatible \

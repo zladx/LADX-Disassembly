@@ -8,7 +8,7 @@ RUN apt-get install -y git curl ssh tar gzip ca-certificates
 RUN apt-get install -y build-essential bison pkg-config libpng-dev
 
 # Retrieve rgbds
-RUN git clone https://github.com/rednex/rgbds.git && \
+RUN git clone https://github.com/gbdev/rgbds.git && \
   cd rgbds && \
   git fetch --tags && git checkout v0.6.0
 

@@ -1685,11 +1685,11 @@ func_001_7920::
 ; Position of the DX logo
 
 IF LANG_JP
-X_POS = $79
-Y_OFFSET = $46
+    def X_POS = $79
+    def Y_OFFSET = $46
 ELSE
-X_POS = $78
-Y_OFFSET = $59
+    def X_POS = $78
+    def Y_OFFSET = $59
 ENDC
 
 .jr_001_7929
@@ -1844,7 +1844,7 @@ func_001_79AE::
 func_001_79C2::
     ; bc = a * CHUNKSIZE
 IF LANG_JP
-CHUNKSIZE = $18
+    def CHUNKSIZE = $18
     ld   b, a
     sla  a
     add  b
@@ -1852,7 +1852,7 @@ CHUNKSIZE = $18
     sla  a
     sla  a
 ELSE
-CHUNKSIZE = $10
+    def CHUNKSIZE = $10
     sla  a                                        ; $79C2: $CB $27
     sla  a                                        ; $79C4: $CB $27
     sla  a                                        ; $79C6: $CB $27

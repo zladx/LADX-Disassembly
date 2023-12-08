@@ -23,9 +23,9 @@ Data_007_6493::
     db   $9A, $20, $53, $7F
 
 IF __PATCH_0__
-TILE = $00
+    def TILE = $00
 ELSE
-TILE = $01
+    def TILE = $01
 ENDC
 
 Data_007_64F6:

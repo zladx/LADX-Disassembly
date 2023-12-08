@@ -1,7 +1,7 @@
 .POSIX:
 .SUFFIXES:
 .PRECIOUS: %.2bpp oam_%.2bpp
-.PHONY: default build build-all test test-all all clean
+.PHONY: default build build-all test test-all all clean tidy
 
 #
 # Dev tools binaries and options
@@ -189,11 +189,13 @@ test-all: build-all
 
 all: build-all test-all
 
-clean:
+tidy:
 	rm -f $(games)
 	rm -f $(games:%.gbc=src/main.%.o)
 	rm -f $(games:.gbc=.map)
 	rm -f $(games:.gbc=.sym)
+
+clean: tidy
 	rm -f $(gfx_files:.png=.2bpp)
 	rm -f $(azlj_gfx:.png=.2bpp)
 	rm -f $(azlg_gfx:.png=.2bpp)

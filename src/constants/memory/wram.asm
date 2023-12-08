@@ -3855,12 +3855,12 @@ wStack::
   ds $DFFF - @ + 1 ; DE04 - DFFF
 
 ; init puts the SP here
-wStackTop equ $DFFF
+def wStackTop equ $DFFF
 
 section "WRAM Bank2", wramx[$D000], bank[2]
 
 ; TODO
 
 ; Something rombank and photographs related
-w2_D16A EQU $D16A
+DEF w2_D16A EQU $D16A
 

@@ -257,10 +257,10 @@ GameplayWorldSelectTilesetHandler::
     jr   z, .jr_44C9                              ; $44BB: $28 $0C
     di                                            ; $44BD: $F3
     ld   a, $03                                   ; $44BE: $3E $03
-    ld   [rSVBK], a                               ; $44C0: $E0 $70
+    ldh  [rSVBK], a                               ; $44C0: $E0 $70
     xor  a                                        ; $44C2: $AF
     ld   [wIsFileSelectionArrowShifted], a        ; $44C3: $EA $00 $D0
-    ld   [rSVBK], a                               ; $44C6: $E0 $70
+    ldh  [rSVBK], a                               ; $44C6: $E0 $70
     ei                                            ; $44C8: $FB
 
 .jr_44C9::
@@ -341,10 +341,10 @@ GameplayWorldLoad6Handler::
     ; Finish preparations
     ;
 
-    ld   a, [rLCDC]                               ; $450A: $F0 $40
+    ldh  a, [rLCDC]                               ; $450A: $F0 $40
     or   LCDCF_WINON                              ; $450C: $F6 $20
     ld   [wLCDControl], a                         ; $450E: $EA $FD $D6
-    ld   [rLCDC], a                               ; $4511: $E0 $40
+    ldh  [rLCDC], a                               ; $4511: $E0 $40
 
     call IncrementGameplaySubtype                 ; $4513: $CD $D6 $44
 

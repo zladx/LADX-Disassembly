@@ -19,30 +19,30 @@ SuperGameBoyInit::
     call WaitFor3Frames                           ; $6A32: $CD $86 $6B
 
     ; Try to detect the Super GameBoy by reading from the joypad
-    ld   a, [rP1]                                 ; $6A35: $F0 $00
+    ldh  a, [rP1]                                 ; $6A35: $F0 $00
     and  J_RIGHT | J_LEFT                         ; $6A37: $E6 $03
     cp   J_RIGHT | J_LEFT                         ; $6A39: $FE $03
     jr   nz, .superGameBoyDetected                ; $6A3B: $20 $39
     ld   a, J_B                                   ; $6A3D: $3E $20
-    ld   [rP1], a                                 ; $6A3F: $E0 $00
-    ld   a, [rP1]                                 ; $6A41: $F0 $00
-    ld   a, [rP1]                                 ; $6A43: $F0 $00
+    ldh  [rP1], a                                 ; $6A3F: $E0 $00
+    ldh  a, [rP1]                                 ; $6A41: $F0 $00
+    ldh  a, [rP1]                                 ; $6A43: $F0 $00
     ld   a, J_A | J_B                             ; $6A45: $3E $30
-    ld   [rP1], a                                 ; $6A47: $E0 $00
+    ldh  [rP1], a                                 ; $6A47: $E0 $00
     ld   a, J_A                                   ; $6A49: $3E $10
-    ld   [rP1], a                                 ; $6A4B: $E0 $00
-    ld   a, [rP1]                                 ; $6A4D: $F0 $00
-    ld   a, [rP1]                                 ; $6A4F: $F0 $00
-    ld   a, [rP1]                                 ; $6A51: $F0 $00
-    ld   a, [rP1]                                 ; $6A53: $F0 $00
-    ld   a, [rP1]                                 ; $6A55: $F0 $00
-    ld   a, [rP1]                                 ; $6A57: $F0 $00
+    ldh  [rP1], a                                 ; $6A4B: $E0 $00
+    ldh  a, [rP1]                                 ; $6A4D: $F0 $00
+    ldh  a, [rP1]                                 ; $6A4F: $F0 $00
+    ldh  a, [rP1]                                 ; $6A51: $F0 $00
+    ldh  a, [rP1]                                 ; $6A53: $F0 $00
+    ldh  a, [rP1]                                 ; $6A55: $F0 $00
+    ldh  a, [rP1]                                 ; $6A57: $F0 $00
     ld   a, J_A | J_B                             ; $6A59: $3E $30
-    ld   [rP1], a                                 ; $6A5B: $E0 $00
-    ld   a, [rP1]                                 ; $6A5D: $F0 $00
-    ld   a, [rP1]                                 ; $6A5F: $F0 $00
-    ld   a, [rP1]                                 ; $6A61: $F0 $00
-    ld   a, [rP1]                                 ; $6A63: $F0 $00
+    ldh  [rP1], a                                 ; $6A5B: $E0 $00
+    ldh  a, [rP1]                                 ; $6A5D: $F0 $00
+    ldh  a, [rP1]                                 ; $6A5F: $F0 $00
+    ldh  a, [rP1]                                 ; $6A61: $F0 $00
+    ldh  a, [rP1]                                 ; $6A63: $F0 $00
     and  J_RIGHT | J_LEFT                         ; $6A65: $E6 $03
     cp   J_RIGHT | J_LEFT                         ; $6A67: $FE $03
     jr   nz, .superGameBoyDetected                ; $6A69: $20 $0B
@@ -162,7 +162,7 @@ SuperGameBoyInit::
     jr   nz, .loop_6B30_3C                        ; $6B35: $20 $F9
 
     ld   a, LCDCF_ON | LCDCF_BGON                 ; $6B37: $3E $81
-    ld   [rLCDC], a                               ; $6B39: $E0 $40
+    ldh  [rLCDC], a                               ; $6B39: $E0 $40
     ld   bc, $06                                  ; $6B3B: $01 $06 $00
     call WaitForBCFrames                          ; $6B3E: $CD $92 $6B
 
@@ -174,7 +174,7 @@ SuperGameBoyInit::
 
     ; Disable all LCD Control flags
     xor  a                                        ; $6B4D: $AF
-    ld   [rLCDC], a                               ; $6B4E: $E0 $40
+    ldh  [rLCDC], a                               ; $6B4E: $E0 $40
     ret                                           ; $6B50: $C9
 
 SendUploadCommand::
@@ -186,9 +186,9 @@ SendUploadCommand::
 .func_03C_6B58::
     push bc                                       ; $6B58: $C5
     xor  a                                        ; $6B59: $AF
-    ld   [$ff00+c], a                             ; $6B5A: $E2
+    ldh  [$ff00+c], a                             ; $6B5A: $E2
     ld   a, $30                                   ; $6B5B: $3E $30
-    ld   [$ff00+c], a                             ; $6B5D: $E2
+    ldh  [$ff00+c], a                             ; $6B5D: $E2
     ld   b, $10                                   ; $6B5E: $06 $10
 .loop_6B60_3C
     ld   e, $08                                   ; $6B60: $1E $08
@@ -200,18 +200,18 @@ SendUploadCommand::
     jr   nz, .else_6B6C_3C                        ; $6B68: $20 $02
     ld   a, $20                                   ; $6B6A: $3E $20
 .else_6B6C_3C:
-    ld   [$ff00+c], a                             ; $6B6C: $E2
+    ldh  [$ff00+c], a                             ; $6B6C: $E2
     ld   a, $30                                   ; $6B6D: $3E $30
-    ld   [$ff00+c], a                             ; $6B6F: $E2
+    ldh  [$ff00+c], a                             ; $6B6F: $E2
     rr   d                                        ; $6B70: $CB $1A
     dec  e                                        ; $6B72: $1D
     jr   nz, .loop_6B64_3C                        ; $6B73: $20 $EF
     dec  b                                        ; $6B75: $05
     jr   nz, .loop_6B60_3C                        ; $6B76: $20 $E8
     ld   a, $20                                   ; $6B78: $3E $20
-    ld   [$ff00+c], a                             ; $6B7A: $E2
+    ldh  [$ff00+c], a                             ; $6B7A: $E2
     ld   a, $30                                   ; $6B7B: $3E $30
-    ld   [$ff00+c], a                             ; $6B7D: $E2
+    ldh  [$ff00+c], a                             ; $6B7D: $E2
     pop  bc                                       ; $6B7E: $C1
     dec  b                                        ; $6B7F: $05
     ret  z                                        ; $6B80: $C8
@@ -269,7 +269,7 @@ WaitForBCFrames::
 SendVRAMCommand::
     push de                                       ; $6BA3: $D5
     ld   a, $E4                                   ; $6BA4: $3E $E4
-    ld   [rBGP], a                                ; $6BA6: $E0 $47
+    ldh  [rBGP], a                                ; $6BA6: $E0 $47
     ld   de, $8800                                ; $6BA8: $11 $00 $88
     ld   bc, $1000                                ; $6BAB: $01 $00 $10
     call CopyData                                 ; $6BAE: $CD $14 $29
@@ -288,7 +288,7 @@ SendVRAMCommand::
     dec  c                                        ; $6BC3: $0D
     jr   nz, .loop_6BBB_3C                        ; $6BC4: $20 $F5
     ld   a, LCDCF_ON | LCDCF_BGON                 ; $6BC6: $3E $81
-    ld   [rLCDC], a                               ; $6BC8: $E0 $40
+    ldh  [rLCDC], a                               ; $6BC8: $E0 $40
     ld   bc, $05                                  ; $6BCA: $01 $05 $00
     call WaitForBCFrames                          ; $6BCD: $CD $92 $6B
     pop  hl                                       ; $6BD0: $E1
@@ -296,5 +296,5 @@ SendVRAMCommand::
     ld   bc, $06                                  ; $6BD4: $01 $06 $00
     call WaitForBCFrames                          ; $6BD7: $CD $92 $6B
     xor  a                                        ; $6BDA: $AF
-    ld   [rLCDC], a                               ; $6BDB: $E0 $40
+    ldh  [rLCDC], a                               ; $6BDB: $E0 $40
     ret                                           ; $6BDD: $C9

@@ -50,10 +50,10 @@ MarinBeachPrepare0::
 
 .loop_624D
     xor  a                                        ; $624D: $AF
-    ld   [rSVBK], a                               ; $624E: $E0 $70
+    ldh  [rSVBK], a                               ; $624E: $E0 $70
     ld   b, [hl]                                  ; $6250: $46
     ld   a, $03                                   ; $6251: $3E $03
-    ld   [rSVBK], a                               ; $6253: $E0 $70
+    ldh  [rSVBK], a                               ; $6253: $E0 $70
     ld   [hl], b                                  ; $6255: $70
     inc  hl                                       ; $6256: $23
     dec  c                                        ; $6257: $0D
@@ -61,7 +61,7 @@ MarinBeachPrepare0::
     and  a                                        ; $6259: $A7
     jr   nz, .loop_624D                           ; $625A: $20 $F1
     xor  a                                        ; $625C: $AF
-    ld   [rSVBK], a                               ; $625D: $E0 $70
+    ldh  [rSVBK], a                               ; $625D: $E0 $70
     ei                                            ; $625F: $FB
 
 MarinBeachPrepare1::

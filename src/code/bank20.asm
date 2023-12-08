@@ -578,7 +578,7 @@ func_020_4856::
 
     di                                            ; $4858: $F3
     ld   a, $05                                   ; $4859: $3E $05
-    ld   [rSVBK], a                               ; $485B: $E0 $70
+    ldh  [rSVBK], a                               ; $485B: $E0 $70
     ld   hl, wIsFileSelectionArrowShifted         ; $485D: $21 $00 $D0
 
 .loop
@@ -736,12 +736,12 @@ func_020_4923::
     ld   [wAddRupeeBufferLow], a                  ; $492E: $EA $90 $DB
     di                                            ; $4931: $F3
     ld   a, $05                                   ; $4932: $3E $05
-    ld   [rSVBK], a                               ; $4934: $E0 $70
+    ldh  [rSVBK], a                               ; $4934: $E0 $70
     ld   hl, wD011                                ; $4936: $21 $11 $D0
     add  hl, de                                   ; $4939: $19
     ld   [hl], a                                  ; $493A: $77
     xor  a                                        ; $493B: $AF
-    ld   [rSVBK], a                               ; $493C: $E0 $70
+    ldh  [rSVBK], a                               ; $493C: $E0 $70
     ei                                            ; $493E: $FB
     call label_2887                               ; $493F: $CD $87 $28
     push bc                                       ; $4942: $C5
@@ -4469,7 +4469,7 @@ jr_020_6628:
     ld   a, $80                                   ; $6638: $3E $80
     ld   [wWindowY], a                            ; $663A: $EA $9A $DB
     ld   a, $07                                   ; $663D: $3E $07
-    ld   [rWX], a                                 ; $663F: $E0 $4B
+    ldh  [rWX], a                                 ; $663F: $E0 $4B
     ld   a, $08                                   ; $6641: $3E $08
     ld   [wSubscreenScrollIncrement], a           ; $6643: $EA $50 $C1
     ld   a, $07                                   ; $6646: $3E $07
@@ -4486,10 +4486,10 @@ jr_020_6628:
 
 .loop_6659
     ld   a, $03                                   ; $6659: $3E $03
-    ld   [rSVBK], a                               ; $665B: $E0 $70
+    ldh  [rSVBK], a                               ; $665B: $E0 $70
     ld   b, [hl]                                  ; $665D: $46
     dec  a                                        ; $665E: $3D
-    ld   [rSVBK], a                               ; $665F: $E0 $70
+    ldh  [rSVBK], a                               ; $665F: $E0 $70
     ld   [hl], b                                  ; $6661: $70
     inc  hl                                       ; $6662: $23
     dec  c                                        ; $6663: $0D
@@ -4498,10 +4498,10 @@ jr_020_6628:
     jr   nz, .loop_6659                           ; $6666: $20 $F1
 
     xor  a                                        ; $6668: $AF
-    ld   [rSVBK], a                               ; $6669: $E0 $70
+    ldh  [rSVBK], a                               ; $6669: $E0 $70
     ld   a, [wLCDControl]                         ; $666B: $FA $FD $D6
     and  ~LCDCF_ON                                ; $666E: $E6 $7F
-    ld   [rLCDC], a                               ; $6670: $E0 $40
+    ldh  [rLCDC], a                               ; $6670: $E0 $40
     ldh  a, [hMapId]                              ; $6672: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $6674: $FE $FF
     jr   nz, .jr_667C                             ; $6676: $20 $04
@@ -4511,7 +4511,7 @@ jr_020_6628:
 
 .jr_667C
     ld   a, [wLCDControl]                         ; $667C: $FA $FD $D6
-    ld   [rLCDC], a                               ; $667F: $E0 $40
+    ldh  [rLCDC], a                               ; $667F: $E0 $40
     ei                                            ; $6681: $FB
 
 label_020_6682:

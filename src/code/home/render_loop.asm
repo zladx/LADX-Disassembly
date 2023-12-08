@@ -45,7 +45,7 @@ ENDC
     ldh  a, [hBaseScrollY]                        ; $01F5: $F0 $97
     add  a, [hl]                                  ; $01F7: $86
 .setScrollY
-    ld   [rSCY], a                                ; $01F8: $E0 $42
+    ldh  [rSCY], a                                ; $01F8: $E0 $42
 
     ;
     ; Set scroll X
@@ -57,7 +57,7 @@ ENDC
     add  a, [hl]                                  ; $01FF: $86
     ld   hl, wScrollXOffset                       ; $0200: $21 $BF $C1
     add  a, [hl]                                  ; $0203: $86
-    ld   [rSCX], a ; scrollX                      ; $0204: $E0 $43
+    ldh  [rSCX], a ; scrollX                      ; $0204: $E0 $43
 
     ;
     ; Load requested GFX (if needed)
@@ -113,10 +113,10 @@ ENDC
     ld   a, [wLCDControl]                         ; $023D: $FA $FD $D6
     and  ~LCDCF_ON                                ; $0240: $E6 $7F
     ld   e, a                                     ; $0242: $5F
-    ld   a, [rLCDC]                               ; $0243: $F0 $40
+    ldh  a, [rLCDC]                               ; $0243: $F0 $40
     and  LCDCF_ON                                 ; $0245: $E6 $80
     or   e                                        ; $0247: $B3
-    ld   [rLCDC], a                               ; $0248: $E0 $40
+    ldh  [rLCDC], a                               ; $0248: $E0 $40
 
     ; Increment the global frame counter
     ld   hl, hFrameCounter                        ; $024A: $21 $E7 $FF
@@ -222,11 +222,11 @@ ENDC
     call PlayAudioStep                            ; $02C0: $CD $A4 $08
     ; Apply pending palettes
     ld   a, [wBGPalette]                          ; $02C3: $FA $97 $DB
-    ld   [rBGP], a                                ; $02C6: $E0 $47
+    ldh  [rBGP], a                                ; $02C6: $E0 $47
     ld   a, [wOBJ0Palette]                        ; $02C8: $FA $98 $DB
-    ld   [rOBP0], a                               ; $02CB: $E0 $48
+    ldh  [rOBP0], a                               ; $02CB: $E0 $48
     ld   a, [wOBJ1Palette]                        ; $02CD: $FA $99 $DB
-    ld   [rOBP1], a                               ; $02D0: $E0 $49
+    ldh  [rOBP1], a                               ; $02D0: $E0 $49
     ; This is a non-interactive transition: no new gameplay frame is rendered.
     ; Wait for the next V-Blank.
     jp   .waitForNextFrame                        ; $02D2: $C3 $5F $03
@@ -238,13 +238,13 @@ ENDC
 
     ; Update graphics registers from game values
     ld   a, [wWindowY]                            ; $02D5: $FA $9A $DB
-    ld   [rWY], a                                 ; $02D8: $E0 $4A
+    ldh  [rWY], a                                 ; $02D8: $E0 $4A
     ld   a, [wBGPalette]                          ; $02DA: $FA $97 $DB
-    ld   [rBGP], a                                ; $02DD: $E0 $47
+    ldh  [rBGP], a                                ; $02DD: $E0 $47
     ld   a, [wOBJ0Palette]                        ; $02DF: $FA $98 $DB
-    ld   [rOBP0], a                               ; $02E2: $E0 $48
+    ldh  [rOBP0], a                               ; $02E2: $E0 $48
     ld   a, [wOBJ1Palette]                        ; $02E4: $FA $99 $DB
-    ld   [rOBP1], a                               ; $02E7: $E0 $49
+    ldh  [rOBP1], a                               ; $02E7: $E0 $49
 
     call PlayAudioStep                            ; $02E9: $CD $A4 $08
     call ReadJoypadState                          ; $02EC: $CD $1E $28
@@ -361,7 +361,8 @@ ENDC
     ldh  [hIsRenderingFrame], a                   ; $0370: $E0 $FD
 
     ; Stop the CPU until the next interrupt
-    halt                                          ; $0372: $76 $00
+    halt                                          ; $0372: $76
+    nop                                           ; $0373: $00
 
     ; An interrupt occured; but maybe it wasn't the V-Blank interrupt.
     ; Busy-loop until the V-Blank interrupt actually ran and finished.

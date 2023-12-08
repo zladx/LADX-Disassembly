@@ -32,7 +32,7 @@ FileSaveInitial::
 
     ; Select WRAM Bank 3
     ld   a, $03                                   ; $4020: $3E $03
-    ld   [rSVBK], a                               ; $4022: $E0 $70
+    ldh  [rSVBK], a                               ; $4022: $E0 $70
 
     ; If wIsFileSelectionArrowShifted == 0...
     ld   a, [wIsFileSelectionArrowShifted]        ; $4024: $FA $00 $D0
@@ -43,12 +43,12 @@ FileSaveInitial::
 .loop
     ; Switch to WRAM bank 0
     xor  a                                        ; $402A: $AF
-    ld   [rSVBK], a                               ; $402B: $E0 $70
+    ldh  [rSVBK], a                               ; $402B: $E0 $70
     ; Read a byte
     ld   b, [hl]                                  ; $402D: $46
     ; Switch to WRAM bank 3
     ld   a, $03                                   ; $402E: $3E $03
-    ld   [rSVBK], a                               ; $4030: $E0 $70
+    ldh  [rSVBK], a                               ; $4030: $E0 $70
     ; Write a byte
     ld   [hl], b                                  ; $4032: $70
     ; Increment the pointer, and loop until done.
@@ -65,7 +65,7 @@ FileSaveInitial::
 .done
     ; Switch back to WRAM bank 0
     xor  a                                        ; $403E: $AF
-    ld   [rSVBK], a                               ; $403F: $E0 $70
+    ldh  [rSVBK], a                               ; $403F: $E0 $70
     ; Enable interrupts
     ei                                            ; $4041: $FB
 
@@ -153,10 +153,10 @@ label_40D6::
     xor  a                                        ; $40D6: $AF
     ld   [wOBJ0Palette], a                        ; $40D7: $EA $98 $DB
     ld   [wOBJ1Palette], a                        ; $40DA: $EA $99 $DB
-    ld   [rOBP0], a                               ; $40DD: $E0 $48
-    ld   [rOBP1], a                               ; $40DF: $E0 $49
+    ldh  [rOBP0], a                               ; $40DD: $E0 $48
+    ldh  [rOBP1], a                               ; $40DF: $E0 $49
     ld   [wBGPalette], a                          ; $40E1: $EA $97 $DB
-    ld   [rBGP], a                                ; $40E4: $E0 $47
+    ldh  [rBGP], a                                ; $40E4: $E0 $47
     ldh  a, [hLinkPositionX]                      ; $40E6: $F0 $98
     ld   [wMapEntrancePositionX], a               ; $40E8: $EA $9D $DB
     ldh  a, [hLinkPositionY]                      ; $40EB: $F0 $99
@@ -192,17 +192,17 @@ LCDOn::
     ;   Bit 1: Sprite displayed enabled
     ;   Bit 0: Background display enabled
     ld   a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON ; $410D: $3E $C7
-    ld   [rLCDC], a                               ; $410F: $E0 $40
+    ldh  [rLCDC], a                               ; $410F: $E0 $40
     ld   [wLCDControl], a                         ; $4111: $EA $FD $D6
 
     ; Set Window X position
     ld   a, $07                                   ; $4114: $3E $07
-    ld   [rWX], a                                 ; $4116: $E0 $4B
+    ldh  [rWX], a                                 ; $4116: $E0 $4B
 
     ; Set Window Y position (inventory status bar)
     ld   a, $80                                   ; $4118: $3E $80
     ld   [wWindowY], a                            ; $411A: $EA $9A $DB
-    ld   [rWY], a                                 ; $411D: $E0 $4A
+    ldh  [rWY], a                                 ; $411D: $E0 $4A
 
     ; Configure volume
     ld   a, $07                                   ; $411F: $3E $07
@@ -250,7 +250,7 @@ func_001_412A::
 
 .wait1
     xor  a                                        ; $4158: $AF
-    ld   [rBGP], a                                ; $4159: $E0 $47
+    ldh  [rBGP], a                                ; $4159: $E0 $47
     nop                                           ; $415B: $00
     nop                                           ; $415C: $00
     nop                                           ; $415D: $00
@@ -287,21 +287,21 @@ func_001_412A::
 
 .loop1
     ld   a, $40                                   ; $417E: $3E $40
-    ld   [rBGP], a                                ; $4180: $E0 $47
+    ldh  [rBGP], a                                ; $4180: $E0 $47
     dec  e                                        ; $4182: $1D
     jr   nz, .loop1                               ; $4183: $20 $F9
     ld   e, $30                                   ; $4185: $1E $30
 
 .loop2
     ld   a, $80                                   ; $4187: $3E $80
-    ld   [rBGP], a                                ; $4189: $E0 $47
+    ldh  [rBGP], a                                ; $4189: $E0 $47
     dec  e                                        ; $418B: $1D
     jr   nz, .loop2                               ; $418C: $20 $F9
     ld   e, $FF                                   ; $418E: $1E $FF
 
 .wait2
     ld   a, $C0                                   ; $4190: $3E $C0
-    ld   [rBGP], a                                ; $4192: $E0 $47
+    ldh  [rBGP], a                                ; $4192: $E0 $47
     nop                                           ; $4194: $00
     nop                                           ; $4195: $00
     nop                                           ; $4196: $00
@@ -326,19 +326,19 @@ func_001_412A::
 
 .loop3
     ld   a, $80                                   ; $41AB: $3E $80
-    ld   [rBGP], a                                ; $41AD: $E0 $47
+    ldh  [rBGP], a                                ; $41AD: $E0 $47
     dec  e                                        ; $41AF: $1D
     jr   nz, .loop3                               ; $41B0: $20 $F9
     ld   e, $30                                   ; $41B2: $1E $30
 
 .loop4
     ld   a, $40                                   ; $41B4: $3E $40
-    ld   [rBGP], a                                ; $41B6: $E0 $47
+    ldh  [rBGP], a                                ; $41B6: $E0 $47
     dec  e                                        ; $41B8: $1D
     jr   nz, .loop4                               ; $41B9: $20 $F9
 
 .cleanup
     xor  a                                        ; $41BB: $AF
     ld   [wBGPalette], a                          ; $41BC: $EA $97 $DB
-    ld   [rBGP], a                                ; $41BF: $E0 $47
+    ldh  [rBGP], a                                ; $41BF: $E0 $47
     ret                                           ; $41C1: $C9

@@ -1,6 +1,6 @@
 
 ; GBC palette entry
-; usage: 
+; usage:
 ;    rgb   #F8F888, #000000, #10A840, #F8B888
 ; outputs:
 ;    db   $FF, $47, $00, $00, $A2, $22, $FF, $46

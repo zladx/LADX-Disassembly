@@ -3125,7 +3125,7 @@ wSwordLevel::
   ds 1 ; DB4E
 
 ; The player's name
-; Name is padded with $00 (spaces) to the max length (default length is 5) 
+; Name is padded with $00 (spaces) to the max length (default length is 5)
 wName::
   ds NAME_LENGTH ; DB4F - DB53
 
@@ -3641,7 +3641,7 @@ wDC0E::
 ; 0 = green,
 ; 1 = red,
 ; 2 = blue
-; 
+;
 ; Other valid values (don't occur naturally, but can be set by the "Tunic Glitch" bug
 ; when wKillOrder overflows into this memory location):
 ; 3 = inverted red,

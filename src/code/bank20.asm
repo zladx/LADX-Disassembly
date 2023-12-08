@@ -2354,7 +2354,7 @@ InventoryEntryPoint::
     ld   a, [wGameplaySubtype]                    ; $5904: $FA $96 $DB
     JP_TABLE                                      ; $5907
 ._00 dw InventoryInitialHandler     ; GAMEPLAY_INVENTORY_INITIAL
-._01 dw InventoryMapFadeOutHandler  ; GAMEPLAY_INVENTORY_MAP_FADE_OUT 
+._01 dw InventoryMapFadeOutHandler  ; GAMEPLAY_INVENTORY_MAP_FADE_OUT
 ._02 dw InventoryLoad1Handler       ; GAMEPLAY_INVENTORY_DELAY1
 ._03 dw InventoryLoad2Handler       ; GAMEPLAY_INVENTORY_DELAY2
 ._04 dw InventoryLoad3Handler       ; GAMEPLAY_INVENTORY_DELAY3

@@ -4706,7 +4706,7 @@ ENDC
     ; should scroll down (ie. it should close). This will never
     ; be true in DX, because when the subscreen is open
     ; we will never be at this point! Instead, it sets wGameplayType
-    ; here and handles the rest of the subscreen with 
+    ; here and handles the rest of the subscreen with
     ; InventoryHandler.
     and  $80                                      ; POI: Zeroing this restores the scroll up/down subscreen????
     jr   z, .subscreenClosing                     ; $6161: $28 $3C

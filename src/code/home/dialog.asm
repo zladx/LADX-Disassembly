@@ -685,7 +685,7 @@ DialogBoxOrigin::
 
 ; Handle a break in the dialog, ie. the dialog box is full but
 ; there is more text left to print (wDialogState == DIALOG_BREAK)
-; 
+;
 ; This routine checks the next character to see if it's more
 ; text, and if so, display arrow and wait for the player to press A.
 ;

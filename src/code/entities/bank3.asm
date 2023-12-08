@@ -2959,19 +2959,19 @@ HeartPieceState8Handler::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 HeartPieceSpriteVariants::
 .variant0
-    db $9A, OAM_GBC_PAL_2 
+    db $9A, OAM_GBC_PAL_2
     db $9A, OAM_GBC_PAL_2 | OAMF_XFLIP
 .variant1
-    db $9C, OAM_GBC_PAL_2 
+    db $9C, OAM_GBC_PAL_2
     db $9A, OAM_GBC_PAL_2 | OAMF_XFLIP
 .variant2
-    db $9E, OAM_GBC_PAL_2 
+    db $9E, OAM_GBC_PAL_2
     db $9A, OAM_GBC_PAL_2 | OAMF_XFLIP
 .variant3
-    db $9E, OAM_GBC_PAL_2 
+    db $9E, OAM_GBC_PAL_2
     db $9C, OAM_GBC_PAL_2 | OAMF_XFLIP
 .variant4
-    db $9E, OAM_GBC_PAL_2 
+    db $9E, OAM_GBC_PAL_2
     db $9E, OAM_GBC_PAL_2 | OAMF_XFLIP
 
 DrawHeartPiecesInDialog::

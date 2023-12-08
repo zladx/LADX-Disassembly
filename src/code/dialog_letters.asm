@@ -256,11 +256,11 @@ AnimateDialogClosingAttrs::
     ld   e, $12                                   ; $4B16: $1E $12
 .loop_4B18_1C
     ld   a, $02                                   ; $4B18: $3E $02
-    ld   [rSVBK], a                               ; $4B1A: $E0 $70
+    ldh  [rSVBK], a                               ; $4B1A: $E0 $70
     ld   a, [bc]                                  ; $4B1C: $0A
     ld   d, a                                     ; $4B1D: $57
     xor  a                                        ; $4B1E: $AF
-    ld   [rSVBK], a                               ; $4B1F: $E0 $70
+    ldh  [rSVBK], a                               ; $4B1F: $E0 $70
     ld   a, d                                     ; $4B21: $7A
     ldi  [hl], a                                  ; $4B22: $22
     inc  bc                                       ; $4B23: $03

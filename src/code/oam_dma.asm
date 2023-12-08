@@ -5,7 +5,7 @@ WriteDMACodeToHRAM::
     ld   hl, DMARoutine ; start                   ; $6D36: $21 $40 $6D
 .copy
     ld   a, [hli]                                 ; $6D39: $2A
-    ld   [$FF00+C], a                             ; $6D3A: $E2
+    ldh  [$FF00+c], a                             ; $6D3A: $E2
     inc  c                                        ; $6D3B: $0C
     dec  b                                        ; $6D3C: $05
     jr   nz, .copy                                ; $6D3D: $20 $FA
@@ -15,7 +15,7 @@ WriteDMACodeToHRAM::
 DMARoutine:
     ; Initiate DMA
     ld   a, wOAMBuffer / $100 ;                   ; $6D40: $3E $C0
-    ld   [rDMA], a                                ; $6D42: $E0 $46
+    ldh  [rDMA], a                                ; $6D42: $E0 $46
 
     ; Wait for DMA to finish
     ld   a, $28                                   ; $6D44: $3E $28

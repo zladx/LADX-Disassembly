@@ -204,7 +204,7 @@ JumpTable_037_40EC::
     push hl                                       ; $414A: $E5
     ld   de, wObjPal1 + 2*2                       ; $414B: $11 $54 $DC
     ld   a, $02                                   ; $414E: $3E $02
-    ld   [rSVBK], a                               ; $4150: $E0 $70
+    ldh  [rSVBK], a                               ; $4150: $E0 $70
 .loop_4152_37
     ld   a, [hl+]                                 ; $4152: $2A
     ld   [de], a                                  ; $4153: $12
@@ -229,7 +229,7 @@ JumpTable_037_40EC::
     ld   a, [hl]                                  ; $416F: $7E
     ld   [de], a                                  ; $4170: $12
     xor  a                                        ; $4171: $AF
-    ld   [rSVBK], a                               ; $4172: $E0 $70
+    ldh  [rSVBK], a                               ; $4172: $E0 $70
 .else_4174_37:
     xor  a                                        ; $4174: $AF
     ldh  [hBaseScrollX], a                        ; $4175: $E0 $96

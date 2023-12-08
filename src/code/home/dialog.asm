@@ -231,16 +231,16 @@ label_2444::
     ld   a, [hl]                                  ; $2444: $7E
     ld   [bc], a                                  ; $2445: $02
     ld   a, $01                                   ; $2446: $3E $01
-    ld   [rVBK], a                                ; $2448: $E0 $4F
+    ldh  [rVBK], a                                ; $2448: $E0 $4F
 
 label_244A::
     ld   a, $02                                   ; $244A: $3E $02
-    ld   [rSVBK], a                               ; $244C: $E0 $70
+    ldh  [rSVBK], a                               ; $244C: $E0 $70
     ld   a, [hl]                                  ; $244E: $7E
     ld   [bc], a                                  ; $244F: $02
     xor  a                                        ; $2450: $AF
-    ld   [rVBK], a                                ; $2451: $E0 $4F
-    ld   [rSVBK], a                               ; $2453: $E0 $70
+    ldh  [rVBK], a                                ; $2451: $E0 $4F
+    ldh  [rSVBK], a                               ; $2453: $E0 $70
     inc  bc                                       ; $2455: $03
     ld   a, l                                     ; $2456: $7D
     add  a, $01                                   ; $2457: $C6 $01

@@ -2055,10 +2055,10 @@ func_002_4DFC::
     ; Copy 8 bytes from 01:DC50 to 02:DC50
 .loop
     xor  a                                        ; $4E04: $AF
-    ld   [rSVBK], a                               ; $4E05: $E0 $70
+    ldh  [rSVBK], a                               ; $4E05: $E0 $70
     ld   b, [hl]                                  ; $4E07: $46
     ld   a, $02                                   ; $4E08: $3E $02
-    ld   [rSVBK], a                               ; $4E0A: $E0 $70
+    ldh  [rSVBK], a                               ; $4E0A: $E0 $70
     ld   a, b                                     ; $4E0C: $78
     ld   [hl], a                                  ; $4E0D: $77
     inc  hl                                       ; $4E0E: $23
@@ -2068,7 +2068,7 @@ func_002_4DFC::
     jr   c, .loop                                 ; $4E13: $38 $EF
 
     xor  a                                        ; $4E15: $AF
-    ld   [rSVBK], a                               ; $4E16: $E0 $70
+    ldh  [rSVBK], a                               ; $4E16: $E0 $70
     ei                                            ; $4E18: $FB
     pop  de                                       ; $4E19: $D1
     pop  bc                                       ; $4E1A: $C1
@@ -6251,7 +6251,7 @@ CheckPositionForMapTransition::
     ; … reset scrollX to zero.
     xor  a                                        ; $6DDE: $AF
     ld   [wScrollXOffset], a                      ; $6DDF: $EA $BF $C1
-    ld   [rSCX], a                                ; $6DE2: $E0 $43
+    ldh  [rSCX], a                                ; $6DE2: $E0 $43
 .eagleTowerBossEnd
 
     ;

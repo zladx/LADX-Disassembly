@@ -34,17 +34,17 @@ WorldMapState0Handler::
     ld   c, $80                                   ; $5653: $0E $80
     di                                            ; $5655: $F3
     ld   a, $03                                   ; $5656: $3E $03
-    ld   [rSVBK], a                               ; $5658: $E0 $70
+    ldh  [rSVBK], a                               ; $5658: $E0 $70
     ld   a, [wIsFileSelectionArrowShifted]        ; $565A: $FA $00 $D0
     and  a                                        ; $565D: $A7
     jr   nz, jr_001_5674                          ; $565E: $20 $14
 
 .loop_5660
     xor  a                                        ; $5660: $AF
-    ld   [rSVBK], a                               ; $5661: $E0 $70
+    ldh  [rSVBK], a                               ; $5661: $E0 $70
     ld   b, [hl]                                  ; $5663: $46
     ld   a, $03                                   ; $5664: $3E $03
-    ld   [rSVBK], a                               ; $5666: $E0 $70
+    ldh  [rSVBK], a                               ; $5666: $E0 $70
     ld   [hl], b                                  ; $5668: $70
     inc  hl                                       ; $5669: $23
     dec  c                                        ; $566A: $0D
@@ -56,7 +56,7 @@ WorldMapState0Handler::
 
 jr_001_5674::
     xor  a                                        ; $5674: $AF
-    ld   [rSVBK], a                               ; $5675: $E0 $70
+    ldh  [rSVBK], a                               ; $5675: $E0 $70
     ei                                            ; $5677: $FB
 
 WorldMapState1Handler::
@@ -110,10 +110,10 @@ WorldMapState1Handler::
     ld   [wC1B1], a                               ; $56D9: $EA $B1 $C1
     ld   a, [wDBB4]                               ; $56DC: $FA $B4 $DB
     ld   [wC1B4], a                               ; $56DF: $EA $B4 $C1
-    ld   a, [rLCDC]                               ; $56E2: $F0 $40
+    ldh  a, [rLCDC]                               ; $56E2: $F0 $40
     and  ~LCDCF_WINON                             ; $56E4: $E6 $DF
     ld   [wLCDControl], a                         ; $56E6: $EA $FD $D6
-    ld   [rLCDC], a                               ; $56E9: $E0 $40
+    ldh  [rLCDC], a                               ; $56E9: $E0 $40
     call func_001_5888                            ; $56EB: $CD $88 $58
     ld   a, TILEMAP_WORLD_MAP                     ; $56EE: $3E $08
     ld   [wBGMapToLoad], a                        ; $56F0: $EA $FF $D6

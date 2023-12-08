@@ -9,20 +9,20 @@ Start::
     ; Switch CPU to double-speed if needed
     cp   BOOTUP_A_CGB ; running on Game Boy Color? ; $0150: $FE $11
     jr   nz, .notGBC                              ; $0152: $20 $1A
-    ld   a, [rKEY1]                               ; $0154: $F0 $4D
+    ldh  a, [rKEY1]                               ; $0154: $F0 $4D
     and  KEY1F_DBLSPEED       ; do we need to     ; $0156: $E6 $80
     jr   nz, .speedSwitchDone ; switch CPU speed? ; $0158: $20 $0D
     ld   a, P1F_5 | P1F_4 ; \                     ; $015A: $3E $30
-    ld   [rP1], a         ; |                     ; $015C: $E0 $00
+    ldh  [rP1], a         ; |                     ; $015C: $E0 $00
     ld   a, KEY1F_PREPARE ; |                     ; $015E: $3E $01
-    ld   [rKEY1], a       ; | Prepare CPU speed   ; $0160: $E0 $4D
+    ldh  [rKEY1], a       ; | Prepare CPU speed   ; $0160: $E0 $4D
     xor  a                ; |                     ; $0162: $AF
-    ld   [rIE], a         ; |                     ; $0163: $E0 $FF
+    ldh  [rIE], a         ; |                     ; $0163: $E0 $FF
     stop                  ; / Switch CPU speed    ; $0165: $10 $00
 
 .speedSwitchDone
     xor  a                                        ; $0167: $AF
-    ld   [rSVBK], a                               ; $0168: $E0 $70
+    ldh  [rSVBK], a                               ; $0168: $E0 $70
     ld   a, $01 ; isGBC = true                    ; $016A: $3E $01
     jr   Init                                     ; $016C: $18 $01
 
@@ -39,9 +39,9 @@ Init::
 
     ; Clear registers
     xor  a                                        ; $017F: $AF
-    ld   [rBGP], a                                ; $0180: $E0 $47
-    ld   [rOBP0], a                               ; $0182: $E0 $48
-    ld   [rOBP1], a                               ; $0184: $E0 $49
+    ldh  [rBGP], a                                ; $0180: $E0 $47
+    ldh  [rOBP0], a                               ; $0182: $E0 $48
+    ldh  [rOBP1], a                               ; $0184: $E0 $49
 
     ; Clear Tiles
     ld   hl, vTiles0                              ; $0186: $21 $00 $80
@@ -72,12 +72,12 @@ Init::
     ;   Bit 3: Mode 0 H-Blank interrupt disabled
     ;   Bit 2-0: read-only
     ld   a, STATF_LYC | STATF_LYCF                ; $01AE: $3E $44
-    ld   [rSTAT], a                               ; $01B0: $E0 $41
+    ldh  [rSTAT], a                               ; $01B0: $E0 $41
 
     ; Initialize LY Compare register
     ; Request a STAT interrupt when LY equals $4F
     ld   a, $4F                                   ; $01B2: $3E $4F
-    ld   [rLYC], a                                ; $01B4: $E0 $45
+    ldh  [rLYC], a                                ; $01B4: $E0 $45
 
     ; Initialize wCurrentBank
     ld   a, $01                                   ; $01B6: $3E $01
@@ -90,7 +90,7 @@ Init::
     ;   Bit 1: LCD STAT interrupt disabled
     ;   Bit 0: V-Blank interrupt enabled
     ld   a, IEF_VBLANK                            ; $01BB: $3E $01
-    ld   [rIE], a                                 ; $01BD: $E0 $FF
+    ldh  [rIE], a                                 ; $01BD: $E0 $FF
 
     ; Initialize save files
     call InitSaveFiles                            ; $01BF: $CD $AA $46

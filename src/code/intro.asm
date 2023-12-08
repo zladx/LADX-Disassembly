@@ -70,7 +70,7 @@ IntroHandlerEntryPoint::
     ld   [wEntitiesStatusTable + $03], a          ; $6E74: $EA $83 $C2
     ld   [wEntitiesStatusTable + $04], a          ; $6E77: $EA $84 $C2
 
-    ld   [rBGP], a                                ; $6E7A: $E0 $47
+    ldh  [rBGP], a                                ; $6E7A: $E0 $47
     ld   [wBGPalette], a                          ; $6E7C: $EA $97 $DB
 
     ld   a, $10                                   ; $6E7F: $3E $10
@@ -91,16 +91,16 @@ IntroHandlerEntryPoint::
     ld   [wGameplaySubtype], a                    ; $6E98: $EA $96 $DB
     ldh  [hBaseScrollX], a                        ; $6E9B: $E0 $96
     ldh  [hBaseScrollY], a                        ; $6E9D: $E0 $97
-    ld   [rBGP], a                                ; $6E9F: $E0 $47
+    ldh  [rBGP], a                                ; $6E9F: $E0 $47
     ld   [wBGPalette], a                          ; $6EA1: $EA $97 $DB
     ld   hl, wGameplayType                        ; $6EA4: $21 $95 $DB
     inc  [hl]                                     ; $6EA7: $34
 
 .enableVBlankInterruptAndReturn
     ld   a, IEF_VBLANK                            ; $6EA8: $3E $01
-    ld   [rIE], a ; Enable VBlank interrupt only  ; $6EAA: $E0 $FF
+    ldh  [rIE], a ; Enable VBlank interrupt only  ; $6EAA: $E0 $FF
     ld   a, $4F                                   ; $6EAC: $3E $4F
-    ld   [rLYC], a                                ; $6EAE: $E0 $45
+    ldh  [rLYC], a                                ; $6EAE: $E0 $45
     ret                                           ; $6EB0: $C9
 
 RenderIntroFrame::
@@ -171,10 +171,10 @@ ENDC
     ld   a, $A2                                   ; $6F10: $3E $A2
     ld   [wRandomSeed], a                         ; $6F12: $EA $3D $C1
     ; Disable window
-    ld   a, [rLCDC]                               ; $6F15: $F0 $40
+    ldh  a, [rLCDC]                               ; $6F15: $F0 $40
     and  ~LCDCF_WINON                             ; $6F17: $E6 $DF
     ld   [wLCDControl], a                         ; $6F19: $EA $FD $D6
-    ld   [rLCDC], a                               ; $6F1C: $E0 $40
+    ldh  [rLCDC], a                               ; $6F1C: $E0 $40
     ld   a, $B4                                   ; $6F1E: $3E $B4
     ld   [wD016], a                               ; $6F20: $EA $16 $D0
     xor  a                                        ; $6F23: $AF
@@ -206,9 +206,9 @@ IntroSceneStage2Handler::
     ld   a, $E0                                   ; $6F4C: $3E $E0
     ld   [wOBJ1Palette], a                        ; $6F4E: $EA $99 $DB
     ld   a, IEF_STAT | IEF_VBLANK                 ; $6F51: $3E $03
-    ld   [rIE], a                                 ; $6F53: $E0 $FF
+    ldh  [rIE], a                                 ; $6F53: $E0 $FF
     ld   a, $00                                   ; $6F55: $3E $00
-    ld   [rLYC], a                                ; $6F57: $E0 $45
+    ldh  [rLYC], a                                ; $6F57: $E0 $45
     ld   e, $11                                   ; $6F59: $1E $11
     ld   hl, wIntroLightningVisibleCountdown      ; $6F5B: $21 $00 $D0
     xor  a                                        ; $6F5E: $AF
@@ -300,7 +300,7 @@ IntroShipOnSeaHandler::
     ld   a, $92                                   ; $700A: $3E $92
     ld   [wScrollXOffsetForSection+1], a          ; $700C: $EA $01 $C1
     ld   a, IEF_STAT | IEF_VBLANK                 ; $700F: $3E $03
-    ld   [rIE], a                                 ; $7011: $E0 $FF
+    ldh  [rIE], a                                 ; $7011: $E0 $FF
 
 .jp_001_7013
     ret                                           ; $7013: $C9
@@ -313,13 +313,13 @@ IntroShipOnSeaHandler::
 
     ; Transition to next sequence
     ld   a, $FF                                   ; $701B: $3E $FF
-    ld   [rBGP], a                                ; $701D: $E0 $47
+    ldh  [rBGP], a                                ; $701D: $E0 $47
     ld   a, GAMEPLAY_INTRO_LINK_FACE              ; $701F: $3E $04
     ld   [wGameplaySubtype], a                    ; $7021: $EA $96 $DB
     ld   a, TILEMAP_INTRO_LINK_FACE               ; $7024: $3E $0F
     ld   [wBGMapToLoad], a                        ; $7026: $EA $FF $D6
     ld   a, IEF_VBLANK                            ; $7029: $3E $01
-    ld   [rIE], a                                 ; $702B: $E0 $FF
+    ldh  [rIE], a                                 ; $702B: $E0 $FF
     xor  a                                        ; $702D: $AF
     ldh  [hBaseScrollX], a                        ; $702E: $E0 $96
     ret                                           ; $7030: $C9
@@ -458,7 +458,7 @@ IntroLinkFaceHandler::
     call LoadTileMapZero_trampoline               ; $70E3: $CD $08 $71
     ; Enable interrupts on VBlank and LCDStat
     ld   a, IEF_STAT | IEF_VBLANK                 ; $70E6: $3E $03
-    ld   [rIE], a                                 ; $70E8: $E0 $FF
+    ldh  [rIE], a                                 ; $70E8: $E0 $FF
     xor  a                                        ; $70EA: $AF
     ld   [wEntitiesStatusTable], a                ; $70EB: $EA $80 $C2
     ld   [wEntitiesStatusTable+1], a              ; $70EE: $EA $81 $C2
@@ -521,7 +521,7 @@ IntroStage6Handler::
     jr   nz, .jr_001_7168                         ; $7160: $20 $06
     push af                                       ; $7162: $F5
     ld   a, $02                                   ; $7163: $3E $02
-    ld   [rLYC], a                                ; $7165: $E0 $45
+    ldh  [rLYC], a                                ; $7165: $E0 $45
     pop  af                                       ; $7167: $F1
 
 .jr_001_7168
@@ -1353,9 +1353,9 @@ IntroMarinState3::
     jr   nz, .jr_775C                             ; $7749: $20 $11
     ld   a, $A0                                   ; $774B: $3E $A0
     ld   [hl], a                                  ; $774D: $77
-    ld   [rSCX], a                                ; $774E: $E0 $43
+    ldh  [rSCX], a                                ; $774E: $E0 $43
     ld   a, IEF_VBLANK                            ; $7750: $3E $01
-    ld   [rIE], a                                 ; $7752: $E0 $FF
+    ldh  [rIE], a                                 ; $7752: $E0 $FF
     call GetEntityTransitionCountdown             ; $7754: $CD $05 $0C
     ld   [hl], $E0                                ; $7757: $36 $E0
     jp   IncrementEntityState                     ; $7759: $C3 $12 $3B

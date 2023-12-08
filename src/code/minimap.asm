@@ -156,7 +156,7 @@ ENDC
 .loop
     ld   d, $01                                   ; $67C7: $16 $01
     xor  a                                        ; $67C9: $AF
-    ld   [rSVBK], a                               ; $67CA: $E0 $70
+    ldh  [rSVBK], a                               ; $67CA: $E0 $70
     ld   a, [hl]                                  ; $67CC: $7E
     cp   $ED                                      ; $67CD: $FE $ED
     jr   nz, .jr_002_67D3                         ; $67CF: $20 $02
@@ -165,7 +165,7 @@ ENDC
 
 .jr_002_67D3
     ld   a, $02                                   ; $67D3: $3E $02
-    ld   [rSVBK], a                               ; $67D5: $E0 $70
+    ldh  [rSVBK], a                               ; $67D5: $E0 $70
     ld   a, d                                     ; $67D7: $7A
     ld   [hl], a                                  ; $67D8: $77
     inc  hl                                       ; $67D9: $23
@@ -177,7 +177,7 @@ ENDC
     jr   nz, .loop                                ; $67DE: $20 $E7
 
     xor  a                                        ; $67E0: $AF
-    ld   [rSVBK], a                               ; $67E1: $E0 $70
+    ldh  [rSVBK], a                               ; $67E1: $E0 $70
     ei                                            ; $67E3: $FB
 
 .return
@@ -270,9 +270,9 @@ jr_002_6848:
     push hl                                       ; $684E: $E5
     di                                            ; $684F: $F3
     ld   a, $02                                   ; $6850: $3E $02
-    ld   [rSVBK], a                               ; $6852: $E0 $70
+    ldh  [rSVBK], a                               ; $6852: $E0 $70
     ld   a, $01                                   ; $6854: $3E $01
-    ld   [rVBK], a                                ; $6856: $E0 $4F
+    ldh  [rVBK], a                                ; $6856: $E0 $4F
     ld   c, $00                                   ; $6858: $0E $00
     ld   d, c                                     ; $685A: $51
 
@@ -306,8 +306,8 @@ jr_002_6848:
 
 .jr_687D
     xor  a                                        ; $687D: $AF
-    ld   [rSVBK], a                               ; $687E: $E0 $70
-    ld   [rVBK], a                                ; $6880: $E0 $4F
+    ldh  [rSVBK], a                               ; $687E: $E0 $70
+    ldh  [rVBK], a                                ; $6880: $E0 $4F
     ei                                            ; $6882: $FB
 
 .jr_6883

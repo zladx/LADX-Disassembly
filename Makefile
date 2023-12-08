@@ -12,6 +12,10 @@ RGBDS   :=
 2BPP    := $(RGBDS)rgbgfx
 
 ASM     := $(RGBDS)rgbasm
+ASFLAGS := \
+  --export-all\
+  --halt-without-nop\
+  --preserve-ld
 
 # Get assembler version
 ASMVER    := $(shell $(ASM) --version | cut -f2 -dv)
@@ -26,21 +30,6 @@ ifneq ($(MAKECMDGOALS), "clean")
   ), 1)
     $(error Requires RGBDS version >= 0.5.0)
   endif
-endif
-
-ASFLAGS := --export-all
-
-# If we're using RGBDS >= 0.6.0, add flags to force behavior that used to be default
-ifeq ($(shell expr \
-  \( $(ASMVERMAJ) \> 0 \) \|\
-  \(\
-    \( $(ASMVERMAJ) = 0 \) \&\
-    \( $(ASMVERMIN) \> 5 \)\
-  \)\
-), 1)
-  ASFLAGS += \
-    --auto-ldh\
-    --nop-after-halt
 endif
 
 LD      := $(RGBDS)rgblink

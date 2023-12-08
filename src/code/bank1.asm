@@ -768,10 +768,10 @@ FileSaveFadeOut::
 
 .loop_583A
     ld   a, $03                                   ; $583A: $3E $03
-    ld   [rSVBK], a                               ; $583C: $E0 $70
+    ldh  [rSVBK], a                               ; $583C: $E0 $70
     ld   b, [hl]                                  ; $583E: $46
     dec  a                                        ; $583F: $3D
-    ld   [rSVBK], a                               ; $5840: $E0 $70
+    ldh  [rSVBK], a                               ; $5840: $E0 $70
     ld   [hl], b                                  ; $5842: $70
     inc  hl                                       ; $5843: $23
     dec  c                                        ; $5844: $0D
@@ -779,10 +779,10 @@ FileSaveFadeOut::
     and  a                                        ; $5846: $A7
     jr   nz, .loop_583A                           ; $5847: $20 $F1
     ld   a, $03                                   ; $5849: $3E $03
-    ld   [rSVBK], a                               ; $584B: $E0 $70
+    ldh  [rSVBK], a                               ; $584B: $E0 $70
     xor  a                                        ; $584D: $AF
     ld   [wIsFileSelectionArrowShifted], a        ; $584E: $EA $00 $D0
-    ld   [rSVBK], a                               ; $5851: $E0 $70
+    ldh  [rSVBK], a                               ; $5851: $E0 $70
     ei                                            ; $5853: $FB
 
 jr_001_5854::
@@ -829,7 +829,7 @@ InitializeInventoryBar::
     ld   a, $80                                   ; $5895: $3E $80
     ld   [wWindowY], a                            ; $5897: $EA $9A $DB
     ld   a, $07                                   ; $589A: $3E $07
-    ld   [rWX], a                                 ; $589C: $E0 $4B
+    ldh  [rWX], a                                 ; $589C: $E0 $4B
     ; Set wSubscreenScrollIncrement to be $08 (closing/closed), so it's
     ; ready to be flipped to $F8 if inventory is opened
     ld   a, $08                                   ; $589E: $3E $08
@@ -2384,9 +2384,9 @@ func_001_6162::
     ld   [wOBJ0Palette], a                        ; $616C: $EA $98 $DB
     ld   [wOBJ1Palette], a                        ; $616F: $EA $99 $DB
     ld   [wBGPalette], a                          ; $6172: $EA $97 $DB
-    ld   [rBGP], a                                ; $6175: $E0 $47
-    ld   [rOBP0], a                               ; $6177: $E0 $48
-    ld   [rOBP1], a                               ; $6179: $E0 $49
+    ldh  [rBGP], a                                ; $6175: $E0 $47
+    ldh  [rOBP0], a                               ; $6177: $E0 $48
+    ldh  [rOBP1], a                               ; $6179: $E0 $49
     ldh  [hBaseScrollY], a                        ; $617B: $E0 $97
     ldh  [hBaseScrollX], a                        ; $617D: $E0 $96
     ld   [wSwitchBlocksState], a                  ; $617F: $EA $FB $D6
@@ -2482,10 +2482,10 @@ PeachPictureState0Handler::
 
 .loop_6816
     xor  a                                        ; $6816: $AF
-    ld   [rSVBK], a                               ; $6817: $E0 $70
+    ldh  [rSVBK], a                               ; $6817: $E0 $70
     ld   b, [hl]                                  ; $6819: $46
     ld   a, $03                                   ; $681A: $3E $03
-    ld   [rSVBK], a                               ; $681C: $E0 $70
+    ldh  [rSVBK], a                               ; $681C: $E0 $70
     ld   [hl], b                                  ; $681E: $70
     inc  hl                                       ; $681F: $23
     dec  c                                        ; $6820: $0D
@@ -2493,7 +2493,7 @@ PeachPictureState0Handler::
     and  a                                        ; $6822: $A7
     jr   nz, .loop_6816                           ; $6823: $20 $F1
     xor  a                                        ; $6825: $AF
-    ld   [rSVBK], a                               ; $6826: $E0 $70
+    ldh  [rSVBK], a                               ; $6826: $E0 $70
     ei                                            ; $6828: $FB
 
 PeachPictureState1Handler::
@@ -3147,7 +3147,7 @@ func_001_6D11::
 
 .jr_6D1C::
     ld   a, $01                                   ; $6D1C: $3E $01
-    ld   [rVBK], a                                ; $6D1E: $E0 $4F
+    ldh  [rVBK], a                                ; $6D1E: $E0 $4F
     ld   hl, vBGMap0                              ; $6D20: $21 $00 $98
     ld   bc, $400                                 ; $6D23: $01 $00 $04
 
@@ -3159,7 +3159,7 @@ func_001_6D11::
     or   c                                        ; $6D2A: $B1
     jr   nz, .loop_6D26                           ; $6D2B: $20 $F9
     ld   a, $00                                   ; $6D2D: $3E $00
-    ld   [rVBK], a                                ; $6D2F: $E0 $4F
+    ldh  [rVBK], a                                ; $6D2F: $E0 $4F
     ret                                           ; $6D31: $C9
 
 include "code/oam_dma.asm"

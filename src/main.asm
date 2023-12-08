@@ -1,5 +1,8 @@
 ; Root source file for the game.
 
+; RGBDS version check
+include "rgbdscheck.asm"
+
 ; Build options
 include "options.asm"
 

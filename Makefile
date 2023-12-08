@@ -17,28 +17,6 @@ ASFLAGS := \
   --halt-without-nop\
   --preserve-ld
 
-# Get assembler version
-ASMVERMAJ := $(shell $(ASM) tools/rgbasm_version.asm -DMAJOR)
-ASMVERMIN := $(shell $(ASM) tools/rgbasm_version.asm -DMINOR)
-ASMVERPAT := $(shell $(ASM) tools/rgbasm_version.asm -DPATCH)
-
-# Abort if RGBDS version is too low and 'clean' is not the only target
-ifneq ($(MAKECMDGOALS), "clean")
-  ifeq ($(shell expr \
-    \(\
-      \( $(ASMVERMAJ) = 0 \) \&\
-      \( $(ASMVERMIN) \< 5 \)\
-    \) \|\
-    \(\
-      \( $(ASMVERMAJ) = 0 \) \&\
-      \( $(ASMVERMIN) = 5 \) \&\
-      \( $(ASMVERPAT) \< 1 \)\
-    \)\
-  ), 1)
-    $(error Requires RGBDS version >= 0.5.1)
-  endif
-endif
-
 LD      := $(RGBDS)rgblink
 LDFLAGS :=
 

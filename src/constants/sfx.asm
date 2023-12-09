@@ -42,9 +42,9 @@ MUSIC_DREAM_SHRINE_BED                  equ $24
 MUSIC_HEART_CONTAINER                   equ $25
 MUSIC_CAVE                              equ $26
 MUSIC_OBTAIN_POWERUP                    equ $27
-MUSIC_INSTRUMENT_CONCH_HORN             equ $28 ;\ 
-MUSIC_INSTRUMENT_SEA_LILYS_BELL         equ $29 ; \ 
-MUSIC_INSTRUMENT_SURF_HARP              equ $2A ;  \ 
+MUSIC_INSTRUMENT_CONCH_HORN             equ $28 ;\
+MUSIC_INSTRUMENT_SEA_LILYS_BELL         equ $29 ; \
+MUSIC_INSTRUMENT_SURF_HARP              equ $2A ;  \
 MUSIC_INSTRUMENT_WIND_MARIMBA           equ $2B ;   After obtaining
 MUSIC_INSTRUMENT_CORAL_TRIANGLE         equ $2C ;  /
 MUSIC_INSTRUMENT_ORGAN_OF_EVENING_CALM  equ $2D ; /

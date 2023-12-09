@@ -620,7 +620,7 @@ InteriorPalettes::
     dw   InteriorPalette22 ; Great Fairy $FB
 
 CaveBPaletteMap:: ;0A MAP_CAVE_B
-    ; magnifying lens cave, Manbo, cave in Mysterious Woods, 
+    ; magnifying lens cave, Manbo, cave in Mysterious Woods,
     ; cave at indoor_b $B6 $B7, something at $C5, something at $B3 B4
      ;    0    1    2    3    4    5    6    7    8    9    a    b    c    d    e    f
     db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00; 0
@@ -681,7 +681,7 @@ MinigamePaletteMap:: ;0F MAP_MINIGAME
     db   $04, $01, $01, $00, $01, $1C, $01, $01, $01, $01, $00, $01, $01, $01, $01, $00; f
 
 HousePaletteMap:: ;10 MAP_HOUSE
-    ; Camera Shop, Seashell Mansion, Christine, Sale's House o' Bananas, quadruplets house, 
+    ; Camera Shop, Seashell Mansion, Christine, Sale's House o' Bananas, quadruplets house,
     ; bear chef, Schule, Hen House, Mr. Write, Zora's house I think, Madam MeowMeow,
     ; every telephone booth, Trendy Game operator's house at B0?, bunny quadruplets...?
     ; Richard's Villa, Marin and Tarin's House, Ulrira's House
@@ -1025,11 +1025,11 @@ IndoorSpritePaletteIndexData::
     ; hMapId, hRoomId, wTransitionDirection, wPaletteToLoadForTileMap
     db   MAP_TAIL_CAVE,      $17, DIRECTION_ENTER, $81 ; dungeon entrance
     db   MAP_TAIL_CAVE,      $13, DIRECTION_LEFT,  $80
-    db   MAP_TAIL_CAVE,      $13, DIRECTION_RIGHT, $80 
+    db   MAP_TAIL_CAVE,      $13, DIRECTION_RIGHT, $80
     db   MAP_TAIL_CAVE,      $13, DIRECTION_DOWN,  $81
-    db   MAP_TAIL_CAVE,      $10, DIRECTION_RIGHT, $CA 
+    db   MAP_TAIL_CAVE,      $10, DIRECTION_RIGHT, $CA
     db   MAP_TAIL_CAVE,      $1C, DIRECTION_UP,    $C2
-    db   MAP_BOTTLE_GROTTO,  $2D, DIRECTION_UP,    $D0 
+    db   MAP_BOTTLE_GROTTO,  $2D, DIRECTION_UP,    $D0
     db   MAP_KEY_CAVERN,     $52, DIRECTION_ENTER, $83 ; dungeon entrance
     db   MAP_KEY_CAVERN,     $51, DIRECTION_UP,    $82
     db   MAP_KEY_CAVERN,     $51, DIRECTION_DOWN,  $83
@@ -1485,7 +1485,7 @@ RedTunicPalette::
 
 BlueTunicPalette::
     rgb   #F8F8F8, #000000, #1880F8, #F8B888      ; blue objects: sword, Bow-Wow, blue tunic, etc.
-    
+
 
     rgb   #F8F8F8, #F8B030, #D80000, #000000      ; red/orange objects: hearts, red rupees, secret seashells, etc.
                                                   ; - Link/enemies get hurt, charging sword, Piece of Power HUD
@@ -1812,7 +1812,7 @@ OverworldPalette11:: ; Rapids Ride, Tal Tal Heights
     rgb   #808028, #C87020, #703020, #000000
     rgb   #F8F888, #9878A0, #381850, #000000
 
-OverworldPalette12:: ; Face Shrine South 
+OverworldPalette12:: ; Face Shrine South
     rgb   #F8F888, #20B048, #084828, #000000 ; 5CD0
     rgb   #F8F888, #9878A0, #381850, #000000
     rgb   #F8F888, #C80028, #500020, #000000
@@ -1947,7 +1947,7 @@ OverworldPalette17:: ; Tal Tal Heights (ext: L4 Angler's Tunner)
 
 TailCavePaletteA:: ; 00 TAIL_CAVE
     rgb   #F8F888, #20B048, #084828, #000000 ; 5FE0
-    rgb   #F8F888, #9878A0, #381850, #000000 ; Nightmare 
+    rgb   #F8F888, #9878A0, #381850, #000000 ; Nightmare
     rgb   #F8F888, #B80028, #400020, #000000
     rgb   #F8F888, #C87020, #703020, #000000
     rgb   #F898B0, #F83070, #900018, #000000
@@ -2318,7 +2318,7 @@ InteriorPalette00::
     rgb   #A0F8F8, #18E060, #288820, #100810
     rgb   #A8D0A8, #58A080, #2040F8, #100810
     rgb   #F0F8C0, #C09058, #2040F8, #100810
-    
+
     rgb   #F0F8C0, #D0A858, #805028, #100810
     rgb   #F8D8D8, #909038, #283818, #000000
 
@@ -2331,7 +2331,7 @@ InteriorPalette1C:: ; Fisherman under the bridge
     rgb   #A0F8F8, #18E060, #288820, #100810
     rgb   #A8D0A8, #58A080, #2040F8, #100810
     rgb   #F0F8C0, #C09058, #2040F8, #100810
-    
+
     rgb   #F8F888, #B80028, #400020, #000000
     rgb   #F8F8F8, #000000, #881888, #F858F8
 
@@ -2344,7 +2344,7 @@ InteriorPalette21:: ; Manbo
     rgb   #A0F8F8, #18E060, #288820, #100810
     rgb   #A8D0A8, #58A080, #2040F8, #100810
     rgb   #F0F8C0, #C09058, #2040F8, #100810
-    
+
     rgb   #F0F8C0, #D0A858, #805028, #100810
     rgb   #F8F888, #C80028, #500020, #000000
 
@@ -2357,7 +2357,7 @@ InteriorPalette22:: ; Great Fairy $FB
     rgb   #C88818, #884030, #F0F8C0, #000000
     rgb   #6880E8, #2850F8, #202878, #000000
     rgb   #C88818, #20B048, #084828, #000000
-    
+
     rgb   #C88818, #20B048, #084828, #000000
     rgb   #F8F888, #C80028, #500020, #000000
 
@@ -2370,7 +2370,7 @@ InteriorPalette01::
     rgb   #C88818, #884030, #F0F8C0, #000000
     rgb   #6880E8, #2850F8, #202878, #000000
     rgb   #C88818, #20B048, #084828, #000000
-    
+
     rgb   #C88818, #20B048, #084828, #000000
     rgb   #C88818, #9878A0, #381850, #000000
 
@@ -2383,7 +2383,7 @@ InteriorPalette02:: ; cave in Mysterious Woods, cave at indoor_b $B6 $B7, someth
     rgb   #C88818, #884030, #F0F8C0, #000000
     rgb   #C88818, #A8A8F8, #3850F8, #000000
     rgb   #C88818, #20B048, #084828, #000000
-    
+
     rgb   #C88818, #20B048, #084828, #000000
     rgb   #C88818, #9878A0, #381850, #000000
 
@@ -2396,7 +2396,7 @@ InteriorPalette03:: ; unused I think
     rgb   #C88818, #884030, #F0F8C0, #000000
     rgb   #6880E8, #2850F8, #202878, #000000
     rgb   #C88818, #20B048, #084828, #000000
-    
+
     rgb   #C88818, #20B048, #084828, #000000
     rgb   #C88818, #9878A0, #381850, #000000
 
@@ -2409,7 +2409,7 @@ InteriorPalette1F:: ; the guy who expands your bags
     rgb   #C88818, #884030, #F0F8C0, #000000
     rgb   #6880E8, #2850F8, #202878, #000000
     rgb   #C88818, #20B048, #084828, #000000
-    
+
     rgb   #C88818, #20B048, #084828, #000000
     rgb   #9888C0, #D04000, #F8F818, #F8F8F8
 
@@ -2422,7 +2422,7 @@ InteriorPalette04:: ; Great Fairy $AC
     rgb   #C88818, #884030, #F0F8C0, #000000
     rgb   #6880E8, #2850F8, #202878, #000000
     rgb   #C88818, #B8F800, #383000, #000000
-    
+
     rgb   #C88818, #20B048, #084828, #000000
     rgb   #C88818, #9878A0, #381850, #000000
 
@@ -2435,7 +2435,7 @@ InteriorPalette1D:: ; Pegasus Boots cave at indoor_b $E4, $F4
     rgb   #C88818, #884030, #F0F8C0, #000000
     rgb   #6880E8, #2850F8, #202878, #000000
     rgb   #C88818, #20B048, #084828, #000000
-    
+
     rgb   #000000, #3800B8, #1880F8, #F8F8F8
     rgb   #000000, #000000, #1880F8, #F8F8F8
 
@@ -2448,7 +2448,7 @@ InteriorPalette1E:: ; magnifying lens cave
     rgb   #C88818, #884030, #F0F8C0, #000000
     rgb   #6880E8, #2850F8, #202878, #000000
     rgb   #C88818, #20B048, #084828, #000000
-    
+
     rgb   #C88818, #20B048, #084828, #000000
     rgb   #C88818, #70A8F8, #0000F8, #000000
 
@@ -2461,7 +2461,7 @@ InteriorPalette05:: ; Moblin hideout
     rgb   #808028, #484800, #909830, #000000
     rgb   #808028, #9878A0, #381850, #000000
     rgb   #709048, #305000, #B0C888, #000000
-    
+
     rgb   #709048, #305000, #B0C888, #000000
     rgb   #F8F888, #20B048, #084828, #000000
 
@@ -2474,7 +2474,7 @@ InteriorPalette06:: ; House by the Bay, Richard's Villa, Marin and Tarin's House
     rgb   #F07888, #F81858, #700028, #000000
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #E8B858, #F8F800, #987000, #000000
-    
+
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #F8F888, #8888A0, #283050, #000000
 
@@ -2487,7 +2487,7 @@ InteriorPalette07:: ; bunny quadruplets...?
     rgb   #6880E8, #2850F8, #202878, #000000
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #E8B858, #F8F800, #987000, #000000
-    
+
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #F8F888, #8888A0, #283050, #000000
 
@@ -2500,7 +2500,7 @@ InteriorPalette08:: ; Tool Shop
     rgb   #F0F8C0, #F0F8C0, #F0F8C0, #F0F8C0
     rgb   #E8B858, #B0C8F8, #2850F8, #000000
     rgb   #F0F8C0, #20B048, #084828, #000000
-    
+
     rgb   #E8B858, #B0C8F8, #2850F8, #000000
     rgb   #F8F888, #8888A0, #283050, #000000
 
@@ -2513,7 +2513,7 @@ InteriorPalette09:: ; Trendy Game
     rgb   #78D078, #20B048, #084828, #000000
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #F0F8C0, #20B048, #084828, #000000
-    
+
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #F8F888, #F8F8F8, #109008, #000000
 
@@ -2526,7 +2526,7 @@ InteriorPalette0A:: ; Library, every telephone booth, Trendy Game operator's hou
     rgb   #F07888, #F81858, #700028, #000000
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #E8B858, #F8F800, #987000, #000000
-    
+
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #F8F888, #8888A0, #283050, #000000
 
@@ -2539,7 +2539,7 @@ InteriorPalette0B:: ; Ulrira's House
     rgb   #78D078, #20B048, #084828, #000000
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #E8B858, #F8F800, #987000, #000000
-    
+
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #F8F888, #8888A0, #283050, #000000
 
@@ -2552,7 +2552,7 @@ InteriorPalette0C:: ; Madam MeowMeow
     rgb   #C09018, #804830, #F0F8C0, #000000
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #E8B858, #F8F800, #987000, #000000
-    
+
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #F8F888, #8888A0, #283050, #000000
 
@@ -2565,7 +2565,7 @@ InteriorPalette0D:: ; Hen House, Mr. Write, Zora's house I think
     rgb   #6880E8, #2850F8, #202878, #000000
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #E8B858, #F8F800, #987000, #000000
-    
+
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #F8F888, #8888A0, #283050, #000000
 
@@ -2578,7 +2578,7 @@ InteriorPalette0E:: ; Crazy Tracy
     rgb   #F07888, #F81858, #700028, #000000
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #E8B858, #F8F800, #987000, #000000
-    
+
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #F8F888, #8888A0, #283050, #000000
 
@@ -2591,7 +2591,7 @@ InteriorPalette0F:: ; Witch's Hut
     rgb   #F868F8, #B800B8, #600060, #000000
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #E8B858, #F8F800, #987000, #000000
-    
+
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #F8F888, #8888A0, #283050, #000000
 
@@ -2604,7 +2604,7 @@ InteriorPalette10:: ; Schule
     rgb   #F868F8, #B800B8, #600060, #000000
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #E8B858, #F8F800, #987000, #000000
-    
+
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #F8F888, #8888A0, #283050, #000000
 
@@ -2617,7 +2617,7 @@ InteriorPalette11:: ; bear chef
     rgb   #F07888, #F81858, #700028, #000000
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #E8B858, #F8F800, #987000, #000000
-    
+
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #F8F8F8, #F87808, #10A840, #000000
 
@@ -2630,7 +2630,7 @@ InteriorPalette12:: ; quadruplets house
     rgb   #6880E8, #2850F8, #202878, #000000
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #E8B858, #F8F800, #987000, #000000
-    
+
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #F8F888, #F81858, #700028, #000000
 
@@ -2643,7 +2643,7 @@ InteriorPalette13:: ; ribbon dog
     rgb   #C09018, #804830, #F0F8C0, #000000
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #E8B858, #F8F800, #987000, #000000
-    
+
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #F8F888, #F8F8F8, #8888A0, #000000
 
@@ -2656,7 +2656,7 @@ InteriorPalette14:: ; Sale's House o' Bananas
     rgb   #6880E8, #2850F8, #202878, #000000
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #E8B858, #F8F800, #987000, #000000
-    
+
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #F8F888, #F0E818, #988000, #000000
 
@@ -2669,7 +2669,7 @@ InteriorPalette15:: ; Christine's house
     rgb   #6880E8, #2850F8, #202878, #000000
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #E8B858, #F8F800, #987000, #000000
-    
+
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #F8F888, #F8F8F8, #E80810, #000000
 
@@ -2682,7 +2682,7 @@ InteriorPalette16:: ; Kanalet
     rgb   #3860F8, #303888, #6880E8, #000000
     rgb   #3860F8, #C87020, #703020, #000000
     rgb   #3860F8, #F83070, #900018, #000000
-    
+
     rgb   #3860F8, #C87020, #703020, #000000
     rgb   #F8F888, #9878A0, #381850, #000000
 
@@ -2695,7 +2695,7 @@ InteriorPalette17:: ; Kanalet sidescrolling
     rgb   #F8F8F8, #A88068, #600020, #000000
     rgb   #F8F888, #909038, #283818, #000000
     rgb   #18E060, #C87020, #703020, #100810
-    
+
     rgb   #F8F888, #909038, #283818, #000000
     rgb   #F8F888, #9878A0, #381850, #000000
 
@@ -2708,7 +2708,7 @@ InteriorPalette20:: ; Dream Shrine dreamworld
     rgb   #808028, #484800, #909830, #000000
     rgb   #7890A0, #385870, #103058, #000000
     rgb   #808028, #20B048, #084828, #000000
-    
+
     rgb   #F8F888, #000000, #8888A0, #F8F888
     rgb   #F8F888, #C80028, #500020, #000000
 
@@ -2724,7 +2724,7 @@ InteriorPalette18:: ; Dream Shrine bedside
 
     rgb   #F8F888, #000000, #8888A0, #F8F888
     rgb   #F8F888, #000000, #10A840, #F8F888
-    
+
     rgb   #F8F888, #20B048, #084828, #000000
     rgb   #F8F888, #9878A0, #381850, #000000
     rgb   #F8F888, #B80028, #400020, #000000
@@ -2733,10 +2733,10 @@ InteriorPalette18:: ; Dream Shrine bedside
     rgb   #808028, #484800, #909830, #000000
     rgb   #7890A0, #385870, #103058, #000000
     rgb   #808028, #20B048, #084828, #000000
-    
+
     rgb   #F8F888, #000000, #8888A0, #F8F888
     rgb   #F8F888, #000000, #F80828, #F8F888
-    
+
     rgb   #F8F888, #20B048, #084828, #000000
     rgb   #F8F888, #9878A0, #381850, #000000
     rgb   #F8F888, #B80028, #400020, #000000
@@ -2745,7 +2745,7 @@ InteriorPalette18:: ; Dream Shrine bedside
     rgb   #808028, #484800, #909830, #000000
     rgb   #7890A0, #385870, #103058, #000000
     rgb   #808028, #20B048, #084828, #000000
-    
+
     rgb   #F8F888, #000000, #8888A0, #F8F888
     rgb   #F8F888, #000000, #1880F8, #F8F888
 
@@ -2771,7 +2771,7 @@ InteriorPalette1B:: ; Camera Shop
     rgb   #78D078, #20B048, #084828, #000000
     rgb   #E8B858, #B0C8F8, #2850F8, #000000
     rgb   #E8B858, #C87020, #703020, #000000
-    
+
     rgb   #F8F8F8, #000000, #881888, #F858F8
     rgb   #F8F8F8, #000000, #8888A0, #F0F8C0
 
@@ -2789,10 +2789,10 @@ Data_021_73B0::
     rgb   #F07888, #F81858, #700028, #000000
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #E8B858, #F8F800, #987000, #000000
-    
+
     rgb   #F8F888, #000000, #8888A0, #F8F888
     rgb   #F8F888, #000000, #10A840, #F8F888 ; green tunic?
-    
+
     rgb   #F8F888, #E8B858, #A86828, #000000
     rgb   #F8F888, #8888A0, #283050, #000000
     rgb   #F8F888, #F81858, #700028, #000000
@@ -2801,10 +2801,10 @@ Data_021_73B0::
     rgb   #F07888, #F81858, #700028, #000000
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #E8B858, #F8F800, #987000, #000000
-    
+
     rgb   #F8F888, #000000, #8888A0, #F8F888
     rgb   #F8F888, #000000, #F80828, #F8F888 ; red tunic?
-    
+
     rgb   #F8F888, #E8B858, #A86828, #000000
     rgb   #F8F888, #8888A0, #283050, #000000
     rgb   #F8F888, #F81858, #700028, #000000
@@ -2813,7 +2813,7 @@ Data_021_73B0::
     rgb   #F07888, #F81858, #700028, #000000
     rgb   #E8B858, #C87020, #703020, #000000
     rgb   #E8B858, #F8F800, #987000, #000000
-    
+
     rgb   #F8F888, #000000, #8888A0, #F8F888
     rgb   #F8F888, #000000, #1880F8, #F8F888 ; blue tunic?
 
@@ -2878,7 +2878,7 @@ Data_021_7536:
     rgb   #F86840, #F8C090, #500090, #000000
     rgb   #0020A8, #506870, #385050, #183828
     rgb   #1878C0, #F8F8F8, #1820B8, #100068
-    
+
     rgb   #0090F8, #000000, #109008, #F8B898
     rgb   #0090F8, #A0A0B0, #F8D028, #00B8F8
     rgb   #0090F8, #306090, #C0C8D8, #000850

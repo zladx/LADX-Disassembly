@@ -1925,7 +1925,7 @@ HideAllSprites::
 
 ; Hide sprites that should be obscured by the inventory window
 ; or the dialog box.
-; 
+;
 ; Note that this code checks if wInventoryAppearing is true, and if
 ; so, it hides sprites based on wWindowY, ie. the window's Y position.
 ; This is likely a remnant from the DMG version of the game, where

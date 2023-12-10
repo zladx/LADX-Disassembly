@@ -45,7 +45,7 @@ DebugSaveFileData::
     db 1, 1, 1, 1, 8 ; Turtle Rock                ; $46A0
     db 1, 1, 1, 1, 9 ; POI: unused? (9th dungeon?) ; $46A5
 
-def DEBUG_SAVE_FILE_SIZE equ @ - DebugSaveFileData
+DEF DEBUG_SAVE_FILE_SIZE EQU @ - DebugSaveFileData
 
 
 ; Initialize save files, and load debug save file if needed

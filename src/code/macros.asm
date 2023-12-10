@@ -8,9 +8,9 @@ macro rgb
     REPT _NARG
       REDEF eval EQUS STRRPL("\1", "#", "$")
       REDEF arg EQU {eval}
-      redef red equ ((arg & $FF0000) >> 16) / 8
-      redef grn equ ((arg & $00FF00) >>  8) / 8
-      redef blu equ ((arg & $0000FF) >>  0) / 8
+      REDEF red EQU ((arg & $FF0000) >> 16) / 8
+      REDEF grn EQU ((arg & $00FF00) >>  8) / 8
+      REDEF blu EQU ((arg & $0000FF) >>  0) / 8
       dw (red) + (grn) << 5 + (blu) << 10
       SHIFT 1
     ENDR

@@ -4,8 +4,8 @@
 
 
 ; One full heart of health is counted as 08
-def HALF_HEARTS equs "* 4"
-def FULL_HEARTS equs "* 8"
+DEF HALF_HEARTS EQUS "* 4"
+DEF FULL_HEARTS EQUS "* 8"
 
 ; LADX uses $2100 as the address for the register to
 ; switch ROM banks (all addresses in the $2000-$2FFF

@@ -16,9 +16,9 @@ ENDC
 endm
 
 macro CREDITS_MACRO_LDH_AND_LD
-def mask = $03
+DEF mask = $03
 IF _NARG == 1
-    def mask = \1
+    DEF mask = \1
 ENDC
 
 IF !__PATCH_0__

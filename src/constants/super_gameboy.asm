@@ -4,12 +4,12 @@
 
 ; Super GameBoy command types
 ; (See SGB Programming Manual for documentation)
-def SGB_PAL01    equ $00
-def SGB_ATTR_LIN equ $05
-def SGB_ICON_EN  equ $0E
-def SGB_DATA_SND equ $0F
-def SGB_MLT_REQ  equ $11
-def SGB_CHR_TRN  equ $13
-def SGB_PCT_TRN  equ $14
-def SGB_MASK_EN  equ $17
-def SGB_PAL_PRI  equ $19
+DEF SGB_PAL01    EQU $00
+DEF SGB_ATTR_LIN EQU $05
+DEF SGB_ICON_EN  EQU $0E
+DEF SGB_DATA_SND EQU $0F
+DEF SGB_MLT_REQ  EQU $11
+DEF SGB_CHR_TRN  EQU $13
+DEF SGB_PCT_TRN  EQU $14
+DEF SGB_MASK_EN  EQU $17
+DEF SGB_PAL_PRI  EQU $19

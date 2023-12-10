@@ -3855,7 +3855,7 @@ wStack::
   ds $DFFF - @ + 1 ; DE04 - DFFF
 
 ; init puts the SP here
-def wStackTop equ $DFFF
+DEF wStackTop EQU $DFFF
 
 section "WRAM Bank2", wramx[$D000], bank[2]
 

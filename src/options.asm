@@ -17,7 +17,7 @@
 ; - Dialogue debugger  (Marin will become a text-debugging object if your name begins with one space)
 ; - Jump to credits    (Marin will trigger the ending if your name begins with two spaces)
 
-;ENABLE_DEBUG_1 equ 1
+;ENABLE_DEBUG_1 EQU 1
 
 
 ;
@@ -30,7 +30,7 @@
 ; - Dungeon minimap entrance arrows aren't drawn.
 ; - Ending scene skipping (Left / Right during credits will move between scenes, Up / Down restarts)
 
-;ENABLE_DEBUG_2 equ 1
+;ENABLE_DEBUG_2 EQU 1
 
 
 ;
@@ -42,21 +42,21 @@
 ; - Full photo album     (View the photo album to get all 12 images)
 ; - Jump to ending       (Push Start on the map screen)
 
-;ENABLE_DEBUG_3 equ 1
+;ENABLE_DEBUG_3 EQU 1
 
 IF(!DEF(VERSION))
-def VERSION equs "0"
+DEF VERSION EQUS "0"
 ENDC
 
-def FALSE equ 0
-def TRUE equ 1
+DEF FALSE EQU 0
+DEF TRUE EQU 1
 
-def LANG_JP = FALSE
-def LANG_EN = FALSE
-def LANG_FR = FALSE
-def LANG_DE = FALSE
+DEF LANG_JP = FALSE
+DEF LANG_EN = FALSE
+DEF LANG_FR = FALSE
+DEF LANG_DE = FALSE
 
-def BANK_1C_VAR = 1
+DEF BANK_1C_VAR = 1
 
 
 ; @TODO Patch effects and changes:
@@ -107,25 +107,25 @@ def BANK_1C_VAR = 1
 ;   Small optimizations that were implemented in version 1.1 of the Japanese and English
 ;   revisions, but not backported to other language releases
 
-def __PATCH_0__ = FALSE ; Applies to JP1+, EN1+, DE, FR
-def __PATCH_1__ = FALSE ; Applies to DE, FR
-def __PATCH_2__ = FALSE ; Applies to DE, JP1+, EN2+, FR
-def __PATCH_3__ = FALSE ; Applies to JP1+, EN1+
-def __PATCH_4__ = FALSE ; Applies to DE1+, JP2+, EN2+, FR1+
-def __PATCH_8__ = FALSE ; Applies to JP1+
-def __PATCH_A__ = 0 ; 1 in JP, 2 in DE
-def __SKIP_DIALOG_SUPPORT__ = FALSE ; TRUE in DE, FR
-def __DIACRITICS_SUPPORT__ = FALSE ; TRUE in JP, DE
-def __WEAK_GENIE__ = FALSE ; TRUE in FR, DE
-def __USE_FIXED_DIALOG_BANKS__ = FALSE ; TRUE in JP
-def __RECALCULATE_MAX_HEARTS__ = FALSE ; Applies to DE1+, JP2+, EN2+, FR1+
-def __OPTIMIZATIONS_1__ = FALSE ; Applies to JP1+, EN1+, DE, FR
-def __OPTIMIZATIONS_2__ = FALSE ; Applies to DE, JP
-def __OPTIMIZATIONS_3__ = FALSE ; Applies to JP1+, EN1+
+DEF __PATCH_0__ = FALSE ; Applies to JP1+, EN1+, DE, FR
+DEF __PATCH_1__ = FALSE ; Applies to DE, FR
+DEF __PATCH_2__ = FALSE ; Applies to DE, JP1+, EN2+, FR
+DEF __PATCH_3__ = FALSE ; Applies to JP1+, EN1+
+DEF __PATCH_4__ = FALSE ; Applies to DE1+, JP2+, EN2+, FR1+
+DEF __PATCH_8__ = FALSE ; Applies to JP1+
+DEF __PATCH_A__ = 0 ; 1 in JP, 2 in DE
+DEF __SKIP_DIALOG_SUPPORT__ = FALSE ; TRUE in DE, FR
+DEF __DIACRITICS_SUPPORT__ = FALSE ; TRUE in JP, DE
+DEF __WEAK_GENIE__ = FALSE ; TRUE in FR, DE
+DEF __USE_FIXED_DIALOG_BANKS__ = FALSE ; TRUE in JP
+DEF __RECALCULATE_MAX_HEARTS__ = FALSE ; Applies to DE1+, JP2+, EN2+, FR1+
+DEF __OPTIMIZATIONS_1__ = FALSE ; Applies to JP1+, EN1+, DE, FR
+DEF __OPTIMIZATIONS_2__ = FALSE ; Applies to DE, JP
+DEF __OPTIMIZATIONS_3__ = FALSE ; Applies to JP1+, EN1+
 
 ; If the Key Cavern map is split into 1F and B1F on the subscreen.
 ; See also: https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening/Version_Differences#Key_Cavern
-def __SPLIT_KEY_CAVERN_MAP__ = TRUE ; FALSE in EN
+DEF __SPLIT_KEY_CAVERN_MAP__ = TRUE ; FALSE in EN
 
 
 ; -------------------------------------------------------------------
@@ -135,7 +135,7 @@ def __SPLIT_KEY_CAVERN_MAP__ = TRUE ; FALSE in EN
 ; FALSE: Arrows, then bombs
 ; TRUE: Bombs, then arrows
 ; This has no impact on gameplay - it just reorders the assignments.
-def DEBUG_SAVE_SWITCH_ARROWS = FALSE
+DEF DEBUG_SAVE_SWITCH_ARROWS = FALSE
 
 ; Tiles used for the "floor numbers" in split-floor dungeon maps.
 ; These are functionally unused in the DX version due to the map being moved
@@ -148,153 +148,153 @@ def DEBUG_SAVE_SWITCH_ARROWS = FALSE
 ; FR changes "[B-][1F]" into "[SS][1]", DE changes it into just "[ ][KI]".
 ; See also: https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening/Version_Differences#Key_Cavern
 ; (examples of different languages)
-def MINIMAP_VAR_0 = $EC
-def MINIMAP_VAR_1 = $E8
-def MINIMAP_VAR_2 = $E8
+DEF MINIMAP_VAR_0 = $EC
+DEF MINIMAP_VAR_1 = $E8
+DEF MINIMAP_VAR_2 = $E8
 
 
-def CREDITS_VAR_0 = $1A
-def CREDITS_VAR_1 = $1B
-def CREDITS_VAR_2 = $0F
+DEF CREDITS_VAR_0 = $1A
+DEF CREDITS_VAR_1 = $1B
+DEF CREDITS_VAR_2 = $0F
 
 
 
 IF ("{LANG}" == "JP")
-def LANG_JP = TRUE
-def FILE_28 = $14
-def FILE_6C = $6C
-def FILE_2C = $54
-def FILE_64 = $74
-def EASTER_EGG_FILENAME_1 equs "ぜるだ" ; Zelda
-def EASTER_EGG_SONG_1 equ $60 ; MUSIC_FILE_SELECT_ZELDA
-def EASTER_EGG_FILENAME_2 equs "とたけけ" ; Totakeke
-def EASTER_EGG_SONG_2 equ $3C ; MUSIC_FILE_SELECT_TOTAKA
-def THIEF_NAME equs "どろぼ－"
-def DEBUG_SAVE_FILE_NAME equs "えすばはら" ; Sbahara (abbreviation of Shibahara, nickname of programmer Kuzuhara)
-def BANK_1C_VAR = 0
-def DEBUG_SAVE_BOMB_COUNT equ $59
-def DEBUG_SAVE_MAGIC_COUNT equ $39
-def DEBUG_SAVE_SWITCH_ARROWS = TRUE
-def GAMEOVER_OPTION_SAVE_CONTINUE_Y equ 72
-def GAMEOVER_OPTION_SAVE_QUIT_Y equ 88
-def GAMEOVER_OPTION_CONTINUE_Y equ 104
-def SAVE_OPTION_X equ 36
-def __USE_FIXED_DIALOG_BANKS__ = TRUE
-def __DIACRITICS_SUPPORT__ = TRUE
-def __OPTIMIZATIONS_2__ = TRUE
-def __PATCH_A__ = 1
+DEF LANG_JP = TRUE
+DEF FILE_28 = $14
+DEF FILE_6C = $6C
+DEF FILE_2C = $54
+DEF FILE_64 = $74
+DEF EASTER_EGG_FILENAME_1 EQUS "ぜるだ" ; Zelda
+DEF EASTER_EGG_SONG_1 EQU $60 ; MUSIC_FILE_SELECT_ZELDA
+DEF EASTER_EGG_FILENAME_2 EQUS "とたけけ" ; Totakeke
+DEF EASTER_EGG_SONG_2 EQU $3C ; MUSIC_FILE_SELECT_TOTAKA
+DEF THIEF_NAME EQUS "どろぼ－"
+DEF DEBUG_SAVE_FILE_NAME EQUS "えすばはら" ; Sbahara (abbreviation of Shibahara, nickname of programmer Kuzuhara)
+DEF BANK_1C_VAR = 0
+DEF DEBUG_SAVE_BOMB_COUNT EQU $59
+DEF DEBUG_SAVE_MAGIC_COUNT EQU $39
+DEF DEBUG_SAVE_SWITCH_ARROWS = TRUE
+DEF GAMEOVER_OPTION_SAVE_CONTINUE_Y EQU 72
+DEF GAMEOVER_OPTION_SAVE_QUIT_Y EQU 88
+DEF GAMEOVER_OPTION_CONTINUE_Y EQU 104
+DEF SAVE_OPTION_X EQU 36
+DEF __USE_FIXED_DIALOG_BANKS__ = TRUE
+DEF __DIACRITICS_SUPPORT__ = TRUE
+DEF __OPTIMIZATIONS_2__ = TRUE
+DEF __PATCH_A__ = 1
 IF (VERSION > 0)
-def __PATCH_0__ = TRUE
-def __PATCH_2__ = TRUE
-def __PATCH_3__ = TRUE
-def __PATCH_8__ = TRUE
-def __OPTIMIZATIONS_1__ = TRUE
-def __OPTIMIZATIONS_3__ = TRUE
+DEF __PATCH_0__ = TRUE
+DEF __PATCH_2__ = TRUE
+DEF __PATCH_3__ = TRUE
+DEF __PATCH_8__ = TRUE
+DEF __OPTIMIZATIONS_1__ = TRUE
+DEF __OPTIMIZATIONS_3__ = TRUE
 ENDC
 IF (VERSION > 1)
-def __PATCH_4__ = TRUE
-def __RECALCULATE_MAX_HEARTS__ = TRUE
+DEF __PATCH_4__ = TRUE
+DEF __RECALCULATE_MAX_HEARTS__ = TRUE
 ENDC
 
 ELIF ("{LANG}" == "EN")
-def LANG_EN = TRUE
-def FILE_28 = $28
-def FILE_6C = $6C
-def FILE_2C = $2C
-def FILE_64 = $64
-def EASTER_EGG_FILENAME_1 equs "ZELDA"
-def EASTER_EGG_SONG_1 equ $60 ; MUSIC_FILE_SELECT_ZELDA
-def THIEF_NAME equs "THIEF"
-def __SPLIT_KEY_CAVERN_MAP__ = FALSE
+DEF LANG_EN = TRUE
+DEF FILE_28 = $28
+DEF FILE_6C = $6C
+DEF FILE_2C = $2C
+DEF FILE_64 = $64
+DEF EASTER_EGG_FILENAME_1 EQUS "ZELDA"
+DEF EASTER_EGG_SONG_1 EQU $60 ; MUSIC_FILE_SELECT_ZELDA
+DEF THIEF_NAME EQUS "THIEF"
+DEF __SPLIT_KEY_CAVERN_MAP__ = FALSE
 IF (VERSION > 0)
-def __PATCH_0__ = TRUE
-def __PATCH_3__ = TRUE
-def __OPTIMIZATIONS_1__ = TRUE
-def __OPTIMIZATIONS_3__ = TRUE
+DEF __PATCH_0__ = TRUE
+DEF __PATCH_3__ = TRUE
+DEF __OPTIMIZATIONS_1__ = TRUE
+DEF __OPTIMIZATIONS_3__ = TRUE
 ENDC
 IF (VERSION > 1)
-def __PATCH_2__ = TRUE
-def __PATCH_4__ = TRUE
-def __RECALCULATE_MAX_HEARTS__ = TRUE
+DEF __PATCH_2__ = TRUE
+DEF __PATCH_4__ = TRUE
+DEF __RECALCULATE_MAX_HEARTS__ = TRUE
 ENDC
 
 ELIF ("{LANG}" == "FR")
-def LANG_FR = TRUE
-def FILE_28 = $1E
-def FILE_6C = $6D
-def FILE_2C = $2E
-def FILE_64 = $68
-def EASTER_EGG_FILENAME_1 equs "LOLO"
-def EASTER_EGG_SONG_1 equ $60 ; MUSIC_FILE_SELECT_ZELDA
-def THIEF_NAME equs "VOYOU"
-def MINIMAP_VAR_1 = $B1
-def MINIMAP_VAR_2 = $B1
-def CREDITS_VAR_0 = $1E
-def CREDITS_VAR_1 = $1F
-def CREDITS_VAR_2 = $13
-def GAMEOVER_OPTION_SAVE_CONTINUE_Y equ 56
-def GAMEOVER_OPTION_SAVE_QUIT_Y equ 80
-def GAMEOVER_OPTION_CONTINUE_Y equ 104
-def __PATCH_0__ = TRUE
-def __PATCH_1__ = TRUE
-def __PATCH_2__ = TRUE
-def __OPTIMIZATIONS_1__ = TRUE
+DEF LANG_FR = TRUE
+DEF FILE_28 = $1E
+DEF FILE_6C = $6D
+DEF FILE_2C = $2E
+DEF FILE_64 = $68
+DEF EASTER_EGG_FILENAME_1 EQUS "LOLO"
+DEF EASTER_EGG_SONG_1 EQU $60 ; MUSIC_FILE_SELECT_ZELDA
+DEF THIEF_NAME EQUS "VOYOU"
+DEF MINIMAP_VAR_1 = $B1
+DEF MINIMAP_VAR_2 = $B1
+DEF CREDITS_VAR_0 = $1E
+DEF CREDITS_VAR_1 = $1F
+DEF CREDITS_VAR_2 = $13
+DEF GAMEOVER_OPTION_SAVE_CONTINUE_Y EQU 56
+DEF GAMEOVER_OPTION_SAVE_QUIT_Y EQU 80
+DEF GAMEOVER_OPTION_CONTINUE_Y EQU 104
+DEF __PATCH_0__ = TRUE
+DEF __PATCH_1__ = TRUE
+DEF __PATCH_2__ = TRUE
+DEF __OPTIMIZATIONS_1__ = TRUE
 IF (VERSION > 0)
-def __PATCH_4__ = TRUE
-def __RECALCULATE_MAX_HEARTS__ = TRUE
+DEF __PATCH_4__ = TRUE
+DEF __RECALCULATE_MAX_HEARTS__ = TRUE
 ENDC
-def __SKIP_DIALOG_SUPPORT__ = TRUE
-def __WEAK_GENIE__ = TRUE
+DEF __SKIP_DIALOG_SUPPORT__ = TRUE
+DEF __WEAK_GENIE__ = TRUE
 
 ELIF ("{LANG}" == "DE")
-def LANG_DE = TRUE
-def FILE_28 = $1E
-def FILE_6C = $66
-def FILE_2C = $2E
-def FILE_64 = $66
+DEF LANG_DE = TRUE
+DEF FILE_28 = $1E
+DEF FILE_6C = $66
+DEF FILE_2C = $2E
+DEF FILE_64 = $66
 
-def EASTER_EGG_FILENAME_1 equs "MOYSE"
-def EASTER_EGG_SONG_1 equ $3C ; MUSIC_FILE_SELECT_TOTAKA
-def EASTER_EGG_FILENAME_2 equs "ZELDA"
-def EASTER_EGG_SONG_2 equ $60 ; MUSIC_FILE_SELECT_ZELDA
-def THIEF_NAME equs "DIEB"
-def MINIMAP_VAR_0 = $7F
-def MINIMAP_VAR_1 = $EC
-def CREDITS_VAR_0 = $1F
-def CREDITS_VAR_1 = $20
-def CREDITS_VAR_2 = $13
-def DEBUG_SAVE_SWITCH_ARROWS = TRUE
-def GAMEOVER_OPTION_X equ 20
-def __DIACRITICS_SUPPORT__ = TRUE
-def __PATCH_0__ = TRUE
-def __PATCH_1__ = TRUE
-def __PATCH_2__ = TRUE
-def __OPTIMIZATIONS_1__ = TRUE
-def __OPTIMIZATIONS_2__ = TRUE
-def __PATCH_A__ = 2
+DEF EASTER_EGG_FILENAME_1 EQUS "MOYSE"
+DEF EASTER_EGG_SONG_1 EQU $3C ; MUSIC_FILE_SELECT_TOTAKA
+DEF EASTER_EGG_FILENAME_2 EQUS "ZELDA"
+DEF EASTER_EGG_SONG_2 EQU $60 ; MUSIC_FILE_SELECT_ZELDA
+DEF THIEF_NAME EQUS "DIEB"
+DEF MINIMAP_VAR_0 = $7F
+DEF MINIMAP_VAR_1 = $EC
+DEF CREDITS_VAR_0 = $1F
+DEF CREDITS_VAR_1 = $20
+DEF CREDITS_VAR_2 = $13
+DEF DEBUG_SAVE_SWITCH_ARROWS = TRUE
+DEF GAMEOVER_OPTION_X EQU 20
+DEF __DIACRITICS_SUPPORT__ = TRUE
+DEF __PATCH_0__ = TRUE
+DEF __PATCH_1__ = TRUE
+DEF __PATCH_2__ = TRUE
+DEF __OPTIMIZATIONS_1__ = TRUE
+DEF __OPTIMIZATIONS_2__ = TRUE
+DEF __PATCH_A__ = 2
 IF (VERSION > 0)
-def __PATCH_4__ = TRUE
-def __RECALCULATE_MAX_HEARTS__ = TRUE
+DEF __PATCH_4__ = TRUE
+DEF __RECALCULATE_MAX_HEARTS__ = TRUE
 ENDC
-def __SKIP_DIALOG_SUPPORT__ = TRUE
-def __WEAK_GENIE__ = TRUE
+DEF __SKIP_DIALOG_SUPPORT__ = TRUE
+DEF __WEAK_GENIE__ = TRUE
 ENDC
 
 IF !DEF(DEBUG_SAVE_BOMB_COUNT)
-def DEBUG_SAVE_BOMB_COUNT equ $60
+DEF DEBUG_SAVE_BOMB_COUNT EQU $60
 ENDC
 
 IF !DEF(DEBUG_SAVE_MAGIC_COUNT)
-def DEBUG_SAVE_MAGIC_COUNT equ $40
+DEF DEBUG_SAVE_MAGIC_COUNT EQU $40
 ENDC
 
 IF !DEF(DEBUG_SAVE_FILE_NAME)
-def DEBUG_SAVE_FILE_NAME equs "ZELDA"
+DEF DEBUG_SAVE_FILE_NAME EQUS "ZELDA"
 ENDC
 
 macro SET_DEFAULT
 IF !DEF(\1)
-def \1 equ \2
+DEF \1 EQU \2
 ENDC
 endm
 

@@ -1,9 +1,9 @@
 IF __WEAK_GENIE__
-    def JAR_HEALTH = $02
-    def GENIE_HEALTH = $06
+    DEF JAR_HEALTH = $02
+    DEF GENIE_HEALTH = $06
 ELSE
-    def JAR_HEALTH = $03
-    def GENIE_HEALTH = $08
+    DEF JAR_HEALTH = $03
+    DEF GENIE_HEALTH = $08
 ENDC
 
 GenieEntityHandler::

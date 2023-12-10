@@ -272,18 +272,18 @@ EntityHandlersTable::
 .overflow db $6B, $62, $C9
 
 func_020_4303::
-    ld   a, [wC5A0]                               ; $4303: $FA $A0 $C5
-    ld   [wC5A1], a                               ; $4306: $EA $A1 $C5
-    xor  a                                        ; $4309: $AF
-    ld   [wC5A0], a                               ; $430A: $EA $A0 $C5
-    ld   [wShouldGetLostInMysteriousWoods], a     ; $430D: $EA $0C $C1
-    ldh  [hLinkSlowWalkingSpeed], a               ; $4310: $E0 $B2
-    ld   [wC117], a                               ; $4312: $EA $17 $C1
-    ld   [wC19D], a                               ; $4315: $EA $9D $C1
-    ld   [wC147], a                               ; $4318: $EA $47 $C1
-    ld   [wLiftedEntityType], a                   ; $431B: $EA $A8 $C5
-    ld   [wD45E], a                               ; $431E: $EA $5E $D4
-    ret                                           ; $4321: $C9
+    ld   a, [wC5A0]                               ; $20:4303: $FA $A0 $C5
+    ld   [wC5A1], a                               ; $20:4306: $EA $A1 $C5
+    xor  a                                        ; $20:4309: $AF
+    ld   [wC5A0], a                               ; $20:430A: $EA $A0 $C5
+    ld   [wShouldGetLostInMysteriousWoods], a     ; $20:430D: $EA $0C $C1
+    ldh  [hLinkSlowWalkingSpeed], a               ; $20:4310: $E0 $B2
+    ld   [wC117], a                               ; $20:4312: $EA $17 $C1
+    ld   [wC19D], a                               ; $20:4315: $EA $9D $C1
+    ld   [wC147], a                               ; $20:4318: $EA $47 $C1
+    ld   [wLiftedEntityType], a                   ; $20:431B: $EA $A8 $C5
+    ld   [wD45E], a                               ; $20:431E: $EA $5E $D4
+    ret                                           ; $20:4321: $C9
 
 ; -----------------------------------------------------------------
 ;
@@ -550,16 +550,16 @@ EntityInitHandlersTable::
 ; Returns:
 ;   de   an address
 GetEntityInitHandler::
-    ldh  a, [hActiveEntityType]                   ; $4518: $F0 $EB
-    ld   e, a                                     ; $451A: $5F
-    ld   d, $00                                   ; $451B: $16 $00
-    ld   hl, EntityInitHandlersTable              ; $451D: $21 $22 $43
-    sla  e                                        ; $4520: $CB $23
-    rl   d                                        ; $4522: $CB $12
-    add  hl, de                                   ; $4524: $19
-    ld   e, [hl]                                  ; $4525: $5E
-    inc  hl                                       ; $4526: $23
-    ld   d, [hl]                                  ; $4527: $56
-    push de                                       ; $4528: $D5
-    pop  hl                                       ; $4529: $E1
-    ret                                           ; $452A: $C9
+    ldh  a, [hActiveEntityType]                   ; $20:4518: $F0 $EB
+    ld   e, a                                     ; $20:451A: $5F
+    ld   d, $00                                   ; $20:451B: $16 $00
+    ld   hl, EntityInitHandlersTable              ; $20:451D: $21 $22 $43
+    sla  e                                        ; $20:4520: $CB $23
+    rl   d                                        ; $20:4522: $CB $12
+    add  hl, de                                   ; $20:4524: $19
+    ld   e, [hl]                                  ; $20:4525: $5E
+    inc  hl                                       ; $20:4526: $23
+    ld   d, [hl]                                  ; $20:4527: $56
+    push de                                       ; $20:4528: $D5
+    pop  hl                                       ; $20:4529: $E1
+    ret                                           ; $20:452A: $C9

@@ -7,7 +7,7 @@ import re
 import os
 
 def main():
-    regex = re.compile(r"(; \$[0-9A-F][0-9A-F][0-9A-F][0-9A-F]:(?: \$[0-9A-F]+)+)(.*)", re.IGNORECASE)
+    regex = re.compile(r"(; \$[0-9A-F][0-9A-F][0-9A-F][0-9A-F](:?( \$[0-9A-F]{2})*)$", re.IGNORECASE)
     basepath = os.path.dirname(__file__)
     for path, paths, files in os.walk(os.path.join(basepath, "..", "src")):
         for file in files:

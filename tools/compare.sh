@@ -1,10 +1,12 @@
-#!/bin/bash -eu
+#!/usr/bin/env bash
 #
 # Compare the given files to their reference md5 checksum.
 # The SUMFILE is expected to be in the `checksum` format.
 #
 # Usage:
 #   md5sum.sh SUMFILE FILE [, FILE…]
+
+set -eu
 
 # Parse arguments
 if [[ "$#" -lt 2 ]]; then

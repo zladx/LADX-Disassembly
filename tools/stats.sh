@@ -1,8 +1,10 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
 #
 # Output statistics about the project progression.
 # Usage:
 #   tools/stats [--verbose]
+
+set -e
 
 VERBOSE=${1:-"disabled"}
 SOURCE_DIR="src/code"

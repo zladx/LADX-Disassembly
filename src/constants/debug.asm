@@ -13,16 +13,16 @@
 ;  - Warp to any map.
 ;  - Text debugger.
 ;  - Jumping to the Ending sequence.
-ROM_DebugTool1 equ $0003
+DEF ROM_DebugTool1 EQU $0003
 
 ; Debug Tool 2
 ;  - Disable subscreen redraw.
 ;  - Reset Photo Album.
-ROM_DebugTool2 equ $0004
+DEF ROM_DebugTool2 EQU $0004
 
 ; Debug Tool 3
 ;  - Pressing Select on the sub-screen toggles Free-Movement Mode.
 ;  - Pressing Select on the sub-screen resets the photo gallery.
 ;  - Pressing Start on the world map activates the Ending sequence.
 ;  - Viewing the photo gallery automatically sets all pictures to captured.
-ROM_DebugTool3 equ $0005
+DEF ROM_DebugTool3 EQU $0005

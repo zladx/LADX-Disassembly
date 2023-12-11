@@ -45,7 +45,7 @@ DebugSaveFileData::
     db 1, 1, 1, 1, 8 ; Turtle Rock                ; $46A0
     db 1, 1, 1, 1, 9 ; POI: unused? (9th dungeon?) ; $46A5
 
-DEBUG_SAVE_FILE_SIZE equ @ - DebugSaveFileData
+DEF DEBUG_SAVE_FILE_SIZE EQU @ - DebugSaveFileData
 
 
 ; Initialize save files, and load debug save file if needed
@@ -134,11 +134,9 @@ ENDC
     ; Set save file name; "ZELDA" in NA, "えすばはら" in JP
     ; POI: "えすばはら" = "Esubahara" - possibly Takamitsu Kuzuhara?
     ; (credited as "Programmer")
-INDEX = 0
-REPT 5
+FOR INDEX, 5
     ld   a, CHARSUB("{DEBUG_SAVE_FILE_NAME}", INDEX + 1) + 1
     ld   [SaveGame1.main + wName - wOverworldRoomStatus + INDEX], a
-INDEX = INDEX + 1
 ENDR
 
 .notOnNewFileScreen

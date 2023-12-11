@@ -509,14 +509,12 @@ ENDC
     ret                                           ; $25B7: $C9
 
 .ThiefString::
-INDEX = 0
-REPT 5
-IF CHARLEN("{THIEF_NAME}") < INDEX + 1
-    db 0
-ELSE
-    db CHARSUB("{THIEF_NAME}", INDEX + 1) + 1     ; $25B8
-ENDC
-INDEX = INDEX + 1
+FOR INDEX, 5
+    IF CHARLEN("{THIEF_NAME}") < INDEX + 1
+        db 0
+    ELSE
+        db CHARSUB("{THIEF_NAME}", INDEX + 1) + 1 ; $25B8
+    ENDC
 ENDR
 
 .notEnd

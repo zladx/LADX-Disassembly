@@ -1,55 +1,55 @@
 ; Constants used for displaying dialog boxes
 
 ; Dialog states, used as values for wDialogState
-DIALOG_CLOSED              equ $00
-DIALOG_OPENING_1           equ $01
-DIALOG_OPENING_2           equ $02
-DIALOG_OPENING_3           equ $03
-DIALOG_OPENING_4           equ $04
-DIALOG_OPENING_5           equ $05
-DIALOG_LETTER_IN_1         equ $06
-DIALOG_LETTER_IN_2         equ $07
-DIALOG_LETTER_IN_3         equ $08
-DIALOG_BREAK               equ $09 ; press A to continue
-DIALOG_SCROLLING_1         equ $0A
-DIALOG_SCROLLING_2         equ $0B
-DIALOG_END                 equ $0C ; press A to close
-DIALOG_CHOICE              equ $0D ; press A to choose
-DIALOG_CLOSING_1           equ $0E
-DIALOG_CLOSING_2           equ $0F
+DEF DIALOG_CLOSED              EQU $00
+DEF DIALOG_OPENING_1           EQU $01
+DEF DIALOG_OPENING_2           EQU $02
+DEF DIALOG_OPENING_3           EQU $03
+DEF DIALOG_OPENING_4           EQU $04
+DEF DIALOG_OPENING_5           EQU $05
+DEF DIALOG_LETTER_IN_1         EQU $06
+DEF DIALOG_LETTER_IN_2         EQU $07
+DEF DIALOG_LETTER_IN_3         EQU $08
+DEF DIALOG_BREAK               EQU $09 ; press A to continue
+DEF DIALOG_SCROLLING_1         EQU $0A
+DEF DIALOG_SCROLLING_2         EQU $0B
+DEF DIALOG_END                 EQU $0C ; press A to close
+DEF DIALOG_CHOICE              EQU $0D ; press A to choose
+DEF DIALOG_CLOSING_1           EQU $0E
+DEF DIALOG_CLOSING_2           EQU $0F
 
 ; Bit 7 of wDialogState is a flag denoting whether the dialog box
 ; should be displayed at the bottom of the screen instead of the top
 ; (this flag is combined with one of the above states)
-DIALOG_BOX_BOTTOM_FLAG     equ $80
-DIALOG_BOX_BOTTOM_BIT      equ 7
+DEF DIALOG_BOX_BOTTOM_FLAG     EQU $80
+DEF DIALOG_BOX_BOTTOM_BIT      EQU 7
 
 ; Tiles used as the dialog background color
-DIALOG_BG_TILE_DARK        equ $7E
-DIALOG_BG_TILE_LIGHT       equ $7F
+DEF DIALOG_BG_TILE_DARK        EQU $7E
+DEF DIALOG_BG_TILE_LIGHT       EQU $7F
 
 ; Tiles used for diacritics above regular characters
 ; Note that the order of the tiles in the tilemap are reversed from
 ; the diacritic number, which is used in the CodepointToDiacritic table
-DIALOG_DIACRITIC_1         equ $C9
-DIALOG_DIACRITIC_2         equ $C8
+DEF DIALOG_DIACRITIC_1         EQU $C9
+DEF DIALOG_DIACRITIC_2         EQU $C8
 
 ; Values for wDialogGotItem
-DIALOG_GOT_PIECE_OF_POWER equ $01
-DIALOG_GOT_TOADSTOOL      equ $02
-DIALOG_GOT_MAGIC_POWDER   equ $03
-DIALOG_GOT_ROD            equ $04
-DIALOG_GOT_GUARDIAN_ACORN equ $05
+DEF DIALOG_GOT_PIECE_OF_POWER EQU $01
+DEF DIALOG_GOT_TOADSTOOL      EQU $02
+DEF DIALOG_GOT_MAGIC_POWDER   EQU $03
+DEF DIALOG_GOT_ROD            EQU $04
+DEF DIALOG_GOT_GUARDIAN_ACORN EQU $05
 
 ; Cooldown time for dialog boxes
-DIALOG_COOLDOWN              equ $18
+DEF DIALOG_COOLDOWN              EQU $18
 
 ; Flag for denoting a dialog as unskippable,
 ; set as the high bit of the dialog bank
 ; (see dialog_banks.asm)
-DIALOG_UNSKIPPABLE equ $80
+DEF DIALOG_UNSKIPPABLE EQU $80
 
 ; Dialog box position and size
-DIALOG_BOX_HEIGHT       equ $28
-DIALOG_BOX_TOP_Y        equ $08
-DIALOG_BOX_BOTTOM_Y     equ $60
+DEF DIALOG_BOX_HEIGHT       EQU $28
+DEF DIALOG_BOX_TOP_Y        EQU $08
+DEF DIALOG_BOX_BOTTOM_Y     EQU $60

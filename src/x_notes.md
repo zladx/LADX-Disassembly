@@ -130,7 +130,7 @@ _(To-do)_
     * `0`: Calls `label_3E5A`, then `IncrementGameplaySubtype`.
     * `1`: Calls `IncrementGameplaySubtype`, then (if debug flag 2 is _not_ set) `label_3E5A`
     * `2`: Calls `IncrementGameplaySubtype`, then `label_3E5A`
-	* `label_3E5A` draws the A and B button inventory icons (according to comments)
+      * `label_3E5A` draws the A and B button inventory icons (according to comments)
 * No other changes
 
 

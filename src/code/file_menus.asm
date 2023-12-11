@@ -12,7 +12,7 @@
 ;
 ; -----------------------------------------------------------------------------
 
-NameEntryCharacterTableSize equs "(NameEntryCharacterTable.end - NameEntryCharacterTable)"
+DEF NameEntryCharacterTableSize EQUS "(NameEntryCharacterTable.end - NameEntryCharacterTable)"
 
 FileSelectionEntryPoint::
     call func_5DC0                                ; $47CE: $CD $C0 $5D
@@ -501,10 +501,10 @@ FileSelectionLoadSavedFile::
 ; -----------------------------------------------------------------------------
 
 ; Address of the tile indicating the save slot index in the BG Map
-FILE_NEW_SAVE_SLOT_INDEX_BG   equ vBGMap0 + $49
+DEF FILE_NEW_SAVE_SLOT_INDEX_BG EQU vBGMap0 + $49
 ; Offset of the tile indicating the save slot index "1" in the "menu.dmg.2bpp" tileset
 ; The tiles for index "2" and "3" follow next in the tileset.
-FILE_NEW_SAVE_SLOT_1_TILE equ $AB
+DEF FILE_NEW_SAVE_SLOT_1_TILE EQU $AB
 
 FileCreationEntryPoint::
     ld   a, [wGameplaySubtype]                    ; $4A07: $FA $96 $DB
@@ -611,8 +611,7 @@ SaveSlotNameAddresses::
 macro CHECKNAME
     ld   hl, wSaveSlotNames
     add  hl, de
-I = 0
-REPT NAME_LENGTH
+FOR I, NAME_LENGTH
     ld   a, [hli]
 IF CHARLEN(\1) < I + 1
     cp   0
@@ -620,7 +619,6 @@ ELSE
     cp   CHARSUB(\1, 1 + I) + $01
 ENDC
     jr   nz, \3
-I = I + 1
 ENDR
     ld   a, \2
 ENDM

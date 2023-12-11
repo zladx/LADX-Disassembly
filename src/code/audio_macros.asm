@@ -108,95 +108,95 @@ endm
 
 
 ; Noise (channel 4) doesn't really correspond to notes like the other channels.
-NOISE_1     EQU $01
-NOISE_2     EQU $06
-NOISE_3     EQU $0b
-NOISE_4     EQU $10
-NOISE_5     EQU $15
-NOISE_6     EQU $1a
-NOISE_7     EQU $1f
-NOISE_8     EQU $24
-NOISE_9     EQU $29
-NOISE_10    EQU $2e
-NOISE_11    EQU $33
-NOISE_12    EQU $38
-NOISE_13    EQU $3d
-NOISE_14    EQU $42
-NOISE_15    EQU $47
-NOISE_16    EQU $4c
-NOISE_17    EQU $51
-NOISE_FF    EQU $ff ; Some special-case behaviour?
+DEF NOISE_1     EQU $01
+DEF NOISE_2     EQU $06
+DEF NOISE_3     EQU $0b
+DEF NOISE_4     EQU $10
+DEF NOISE_5     EQU $15
+DEF NOISE_6     EQU $1a
+DEF NOISE_7     EQU $1f
+DEF NOISE_8     EQU $24
+DEF NOISE_9     EQU $29
+DEF NOISE_10    EQU $2e
+DEF NOISE_11    EQU $33
+DEF NOISE_12    EQU $38
+DEF NOISE_13    EQU $3d
+DEF NOISE_14    EQU $42
+DEF NOISE_15    EQU $47
+DEF NOISE_16    EQU $4c
+DEF NOISE_17    EQU $51
+DEF NOISE_FF    EQU $ff ; Some special-case behaviour?
 
 ; Notes for channels 1-3
-C_1     EQU $02
-C#1     EQU $04
-D_1     EQU $06
-D#1     EQU $08
-E_1     EQU $0a
-F_1     EQU $0c
-F#1     EQU $0e
-G_1     EQU $10
-G#1     EQU $12
-A_1     EQU $14
-A#1     EQU $16
-B_1     EQU $18
-C_2     EQU $1a
-C#2     EQU $1c
-D_2     EQU $1e
-D#2     EQU $20
-E_2     EQU $22
-F_2     EQU $24
-F#2     EQU $26
-G_2     EQU $28
-G#2     EQU $2a
-A_2     EQU $2c
-A#2     EQU $2e
-B_2     EQU $30
-C_3     EQU $32
-C#3     EQU $34
-D_3     EQU $36
-D#3     EQU $38
-E_3     EQU $3a
-F_3     EQU $3c
-F#3     EQU $3e
-G_3     EQU $40
-G#3     EQU $42
-A_3     EQU $44
-A#3     EQU $46
-B_3     EQU $48
-C_4     EQU $4a
-C#4     EQU $4c
-D_4     EQU $4e
-D#4     EQU $50
-E_4     EQU $52
-F_4     EQU $54
-F#4     EQU $56
-G_4     EQU $58
-G#4     EQU $5a
-A_4     EQU $5c
-A#4     EQU $5e
-B_4     EQU $60
-C_5     EQU $62
-C#5     EQU $64
-D_5     EQU $66
-D#5     EQU $68
-E_5     EQU $6a
-F_5     EQU $6c
-F#5     EQU $6e
-G_5     EQU $70
-G#5     EQU $72
-A_5     EQU $74
-A#5     EQU $76
-B_5     EQU $78
-C_6     EQU $7a
-C#6     EQU $7c
-D_6     EQU $7e
-D#6     EQU $80
-E_6     EQU $82
-F_6     EQU $84
-F#6     EQU $86
-G_6     EQU $88
-G#6     EQU $8a
-A_6     EQU $8c
-A#6     EQU $8e
-B_6     EQU $90
+DEF C_1     EQU $02
+DEF C#1     EQU $04
+DEF D_1     EQU $06
+DEF D#1     EQU $08
+DEF E_1     EQU $0a
+DEF F_1     EQU $0c
+DEF F#1     EQU $0e
+DEF G_1     EQU $10
+DEF G#1     EQU $12
+DEF A_1     EQU $14
+DEF A#1     EQU $16
+DEF B_1     EQU $18
+DEF C_2     EQU $1a
+DEF C#2     EQU $1c
+DEF D_2     EQU $1e
+DEF D#2     EQU $20
+DEF E_2     EQU $22
+DEF F_2     EQU $24
+DEF F#2     EQU $26
+DEF G_2     EQU $28
+DEF G#2     EQU $2a
+DEF A_2     EQU $2c
+DEF A#2     EQU $2e
+DEF B_2     EQU $30
+DEF C_3     EQU $32
+DEF C#3     EQU $34
+DEF D_3     EQU $36
+DEF D#3     EQU $38
+DEF E_3     EQU $3a
+DEF F_3     EQU $3c
+DEF F#3     EQU $3e
+DEF G_3     EQU $40
+DEF G#3     EQU $42
+DEF A_3     EQU $44
+DEF A#3     EQU $46
+DEF B_3     EQU $48
+DEF C_4     EQU $4a
+DEF C#4     EQU $4c
+DEF D_4     EQU $4e
+DEF D#4     EQU $50
+DEF E_4     EQU $52
+DEF F_4     EQU $54
+DEF F#4     EQU $56
+DEF G_4     EQU $58
+DEF G#4     EQU $5a
+DEF A_4     EQU $5c
+DEF A#4     EQU $5e
+DEF B_4     EQU $60
+DEF C_5     EQU $62
+DEF C#5     EQU $64
+DEF D_5     EQU $66
+DEF D#5     EQU $68
+DEF E_5     EQU $6a
+DEF F_5     EQU $6c
+DEF F#5     EQU $6e
+DEF G_5     EQU $70
+DEF G#5     EQU $72
+DEF A_5     EQU $74
+DEF A#5     EQU $76
+DEF B_5     EQU $78
+DEF C_6     EQU $7a
+DEF C#6     EQU $7c
+DEF D_6     EQU $7e
+DEF D#6     EQU $80
+DEF E_6     EQU $82
+DEF F_6     EQU $84
+DEF F#6     EQU $86
+DEF G_6     EQU $88
+DEF G#6     EQU $8a
+DEF A_6     EQU $8c
+DEF A#6     EQU $8e
+DEF B_6     EQU $90

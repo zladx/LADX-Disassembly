@@ -821,7 +821,7 @@ func_005_52DB::
     ld   a, $02                                   ; $52F6: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $52F8: $EA $46 $C1
     ld   a, $12                                   ; $52FB: $3E $12
-    ldh  [hLinkVelocityZ], a                      ; $52FD: $E0 $A3
+    ldh  [hLinkSpeedZ], a                         ; $52FD: $E0 $A3
     ld   a, $0C                                   ; $52FF: $3E $0C
     ldh  [hLinkSpeedX], a                         ; $5301: $E0 $9A
     xor  a                                        ; $5303: $AF

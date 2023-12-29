@@ -1034,8 +1034,8 @@ label_3E8E::
 ; Clear the entity "ignore hits" countdown when the entity is
 ; recoiling, but collisions with something.
 StopEntityRecoilOnCollision::
-    ; [hMultiPurpose0] = abs(wEntitiesRecoilVelocityX[bc])
-    ld   hl, wEntitiesRecoilVelocityX             ; $3EAF: $21 $F0 $C3
+    ; [hMultiPurpose0] = abs(wEntitiesRecoilSpeedX[bc])
+    ld   hl, wEntitiesRecoilSpeedX                ; $3EAF: $21 $F0 $C3
     add  hl, bc                                   ; $3EB2: $09
     ld   a, [hl]                                  ; $3EB3: $7E
 
@@ -1046,8 +1046,8 @@ StopEntityRecoilOnCollision::
 .negativeTEnd
     ldh  [hMultiPurpose0], a                      ; $3EBA: $E0 $D7
 
-    ; a = abs(wEntitiesRecoilVelocityY[bc])
-    ld   hl, wEntitiesRecoilVelocityY             ; $3EBC: $21 $00 $C4
+    ; a = abs(wEntitiesRecoilSpeedY[bc])
+    ld   hl, wEntitiesRecoilSpeedY                ; $3EBC: $21 $00 $C4
     add  hl, bc                                   ; $3EBF: $09
     ld   a, [hl]                                  ; $3EC0: $7E
 

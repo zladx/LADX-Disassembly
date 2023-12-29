@@ -277,7 +277,7 @@ label_019_5B3C:
     ld   a, $02                                   ; $5B4C: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $5B4E: $EA $46 $C1
     xor  a                                        ; $5B51: $AF
-    ldh  [hLinkVelocityZ], a                      ; $5B52: $E0 $A3
+    ldh  [hLinkSpeedZ], a                         ; $5B52: $E0 $A3
     ldh  a, [hFrameCounter]                       ; $5B54: $F0 $E7
     and  $03                                      ; $5B56: $E6 $03
     jr   nz, jr_019_5B75                          ; $5B58: $20 $1B

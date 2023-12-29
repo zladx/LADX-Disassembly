@@ -263,7 +263,7 @@ HinoxState4Handler::
 .jr_5157
     ldh  [hLinkSpeedX], a                         ; $5157: $E0 $9A
     ld   a, $10                                   ; $5159: $3E $10
-    ldh  [hLinkVelocityZ], a                      ; $515B: $E0 $A3
+    ldh  [hLinkSpeedZ], a                         ; $515B: $E0 $A3
     ld   a, $02                                   ; $515D: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $515F: $EA $46 $C1
     ld   a, JINGLE_FALL_DOWN                      ; $5162: $3E $08

@@ -1005,13 +1005,13 @@ wEntitiesPosXSignTable::
 wEntitiesPosYSignTable::
   ds $10 ; C230 - C23F
 
-; X Velocity of visible entities / 16.
+; X Speed of visible entities / 16.
 ; The entity will move this number of pixels every 16 frames. For example, if it's 8,
 ; the entity will move 1 pixel every other frame (8/16).
 wEntitiesSpeedXTable::
   ds $10 ; C240 - C24F
 
-; Y Velocity of visible entities / 16.
+; Y Speed of visible entities / 16.
 ; The entity will move this number of pixels every 16 frames. For example, if it's 8,
 ; the entity will move 1 pixel every other frame (8/16).
 wEntitiesSpeedYTable::
@@ -1098,7 +1098,7 @@ wEntitiesPrivateCountdown2Table::
 wEntitiesPosZTable::
   ds $10 ; C310 - C31F
 
-; Z Velocity of visible entities / 16.
+; Z Speed of visible entities / 16.
 ; The entity will move this number of pixels every 16 frames. For example, if it's 8,
 ; the entity will move 1 pixel every other frame (8/16).
 wEntitiesSpeedZTable::
@@ -1227,18 +1227,18 @@ wEntitiesInertiaTable::
 wEntitiesRoomTable::
   ds $10 ; C3E0 - C3EF
 
-; Recoil velocity X
+; Recoil Speed X
 ; (e.g. when hit by the sword, or bumped against the shield)
 ;
 ; NB: recoil is applied only when wEntitiesIgnoreHitsCountdownTable is non-zero for this entity.
-wEntitiesRecoilVelocityX::
+wEntitiesRecoilSpeedX::
   ds $10 ; C3F0 - C3FF
 
-; Recoil velocity Y
+; Recoil Speed Y
 ; (e.g. when hit by the sword, or bumped against the shield)
 ;
 ; NB: recoil is applied only when wEntitiesIgnoreHitsCountdownTable is non-zero for this entity.
-wEntitiesRecoilVelocityY::
+wEntitiesRecoilSpeedY::
   ds $10 ; C400 - C40F
 
 ; Invulnerability countdown?

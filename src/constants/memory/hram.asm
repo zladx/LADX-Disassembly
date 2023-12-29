@@ -144,8 +144,8 @@ hLinkInteractiveMotionBlocked::
 hLinkPositionZ::
   ds 1 ; FFA2
 
-; Z velocity of link, signed value.
-hLinkVelocityZ::
+; Z Speed of link, signed value.
+hLinkSpeedZ::
   ds 1 ; FFA3
 
 ; Animated tiles are grouped by groups of 4 tiles.

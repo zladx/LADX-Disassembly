@@ -7305,7 +7305,7 @@ func_036_6AEC::
     ld   [hl], a                                  ; $6B13: $77
     ret                                           ; $6B14: $C9
 
-; If the entity is ignoring hits, apply its recoil velocity.
+; If the entity is ignoring hits, apply its recoil Speed.
 ApplyRecoilIfNeeded_36::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $6B15: $21 $10 $C4
     add  hl, bc                                   ; $6B18: $09
@@ -7330,13 +7330,13 @@ ApplyRecoilIfNeeded_36::
     ld   a, [hl]                                  ; $6B2A: $7E
     push af                                       ; $6B2B: $F5
 
-    ld   hl, wEntitiesRecoilVelocityX             ; $6B2C: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilSpeedX                ; $6B2C: $21 $F0 $C3
     add  hl, bc                                   ; $6B2F: $09
     ld   a, [hl]                                  ; $6B30: $7E
     call PointHLToEntitySpeedX                    ; $6B31: $CD $EE $6B
     ld   [hl], a                                  ; $6B34: $77
 
-    ld   hl, wEntitiesRecoilVelocityY             ; $6B35: $21 $00 $C4
+    ld   hl, wEntitiesRecoilSpeedY                ; $6B35: $21 $00 $C4
     add  hl, bc                                   ; $6B38: $09
     ld   a, [hl]                                  ; $6B39: $7E
     call PointHLToEntitySpeedY                    ; $6B3A: $CD $F3 $6B
@@ -7961,10 +7961,10 @@ jr_036_6E3F:
     ret                                           ; $6ED4: $C9
 
 PiranhaPlantEntityHandler::
-    ld   hl, wEntitiesRecoilVelocityX             ; $6ED5: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilSpeedX                ; $6ED5: $21 $F0 $C3
     add  hl, bc                                   ; $6ED8: $09
     ld   [hl], b                                  ; $6ED9: $70
-    ld   hl, wEntitiesRecoilVelocityY             ; $6EDA: $21 $00 $C4
+    ld   hl, wEntitiesRecoilSpeedY                ; $6EDA: $21 $00 $C4
     add  hl, bc                                   ; $6EDD: $09
     ld   [hl], b                                  ; $6EDE: $70
     call func_036_7022                            ; $6EDF: $CD $22 $70

@@ -1830,14 +1830,14 @@ func_015_5EAC::
     add  hl, bc                                   ; $5ED6: $09
     ld   a, [hl]                                  ; $5ED7: $7E
     sla  a                                        ; $5ED8: $CB $27
-    ld   hl, wEntitiesRecoilVelocityX             ; $5EDA: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilSpeedX                ; $5EDA: $21 $F0 $C3
     add  hl, de                                   ; $5EDD: $19
     ld   [hl], a                                  ; $5EDE: $77
     ld   hl, wEntitiesSpeedYTable                 ; $5EDF: $21 $50 $C2
     add  hl, bc                                   ; $5EE2: $09
     ld   a, [hl]                                  ; $5EE3: $7E
     sla  a                                        ; $5EE4: $CB $27
-    ld   hl, wEntitiesRecoilVelocityY             ; $5EE6: $21 $00 $C4
+    ld   hl, wEntitiesRecoilSpeedY                ; $5EE6: $21 $00 $C4
     add  hl, de                                   ; $5EE9: $19
     ld   [hl], a                                  ; $5EEA: $77
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $5EEB: $21 $10 $C4

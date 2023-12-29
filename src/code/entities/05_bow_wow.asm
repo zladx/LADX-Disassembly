@@ -742,7 +742,7 @@ func_005_43FE::
     ldh  a, [hLinkSpeedY]                         ; $4406: $F0 $9B
     ld   hl, hLinkSpeedX                          ; $4408: $21 $9A $FF
     or   [hl]                                     ; $440B: $B6
-    ld   hl, hLinkVelocityZ                       ; $440C: $21 $A3 $FF
+    ld   hl, hLinkSpeedZ                          ; $440C: $21 $A3 $FF
     or   [hl]                                     ; $440F: $B6
     jp   z, ret_005_44CA                          ; $4410: $CA $CA $44
 

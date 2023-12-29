@@ -1193,7 +1193,7 @@ func_007_70B7::
     ld   a, $02                                   ; $70FA: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $70FC: $EA $46 $C1
     ld   a, $13                                   ; $70FF: $3E $13
-    ldh  [hLinkVelocityZ], a                      ; $7101: $E0 $A3
+    ldh  [hLinkSpeedZ], a                         ; $7101: $E0 $A3
     ld   a, $08                                   ; $7103: $3E $08
     ld   [wSubtractHealthBuffer], a               ; $7105: $EA $94 $DB
     ld   a, $20                                   ; $7108: $3E $20

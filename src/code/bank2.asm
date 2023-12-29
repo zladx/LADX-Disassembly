@@ -201,7 +201,7 @@ LinkMotionDefault::
     ldh  [hLinkInteractiveMotionBlocked], a       ; $42B9: $E0 $A1
     ldh  [hLinkSpeedX], a                         ; $42BB: $E0 $9A
     ldh  [hLinkSpeedY], a                         ; $42BD: $E0 $9B
-    ldh  [hLinkVelocityZ], a                      ; $42BF: $E0 $A3
+    ldh  [hLinkSpeedZ], a                         ; $42BF: $E0 $A3
     call LinkPlayingOcarinaHandler                ; $42C1: $CD $16 $4A
     jp   func_002_753A                            ; $42C4: $C3 $3A $75
 .interactiveMotionBlockedEnd
@@ -629,10 +629,10 @@ ApplyLinkGroundMotion::
 .noChecks
     call func_21E1                                ; $44FA: $CD $E1 $21
 
-    ; hLinkVelocityZ = hLinkVelocityZ - 2
-    ldh  a, [hLinkVelocityZ]                      ; $44FD: $F0 $A3
+    ; hLinkSpeedZ = hLinkSpeedZ - 2
+    ldh  a, [hLinkSpeedZ]                         ; $44FD: $F0 $A3
     sub  $02                                      ; $44FF: $D6 $02
-    ldh  [hLinkVelocityZ], a                      ; $4501: $E0 $A3
+    ldh  [hLinkSpeedZ], a                         ; $4501: $E0 $A3
 
     ld   a, -1                                    ; $4503: $3E $FF
     ld   [wConsecutiveStepsCount], a              ; $4505: $EA $20 $C1
@@ -719,7 +719,7 @@ ApplyLinkGroundMotion::
     call ResetPegasusBoots                        ; $456C: $CD $B6 $0C
     ldh  [hLinkPositionZ], a                      ; $456F: $E0 $A2
     ld   [wC149], a                               ; $4571: $EA $49 $C1
-    ldh  [hLinkVelocityZ], a                      ; $4574: $E0 $A3
+    ldh  [hLinkSpeedZ], a                         ; $4574: $E0 $A3
     ld   [wIsLinkInTheAir], a                     ; $4576: $EA $46 $C1
     ld   [wC152], a                               ; $4579: $EA $52 $C1
     ld   [wC153], a                               ; $457C: $EA $53 $C1
@@ -2533,7 +2533,7 @@ LinkMotionUnknownHandler::
     call ApplyMapFadeOutTransition                ; $50BA: $CD $83 $0C
     call ClearLinkPositionIncrement               ; $50BD: $CD $8E $17
     ldh  [hLinkPositionZ], a                      ; $50C0: $E0 $A2
-    ldh  [hLinkVelocityZ], a                      ; $50C2: $E0 $A3
+    ldh  [hLinkSpeedZ], a                         ; $50C2: $E0 $A3
     ld   a, $70                                   ; $50C4: $3E $70
     ld   [wDBC8], a                               ; $50C6: $EA $C8 $DB
     ret                                           ; $50C9: $C9
@@ -2635,7 +2635,7 @@ jr_002_5155:
 jr_002_515C:
     ld   [wDBC8], a                               ; $515C: $EA $C8 $DB
     call ClearLinkPositionIncrement               ; $515F: $CD $8E $17
-    ldh  [hLinkVelocityZ], a                      ; $5162: $E0 $A3
+    ldh  [hLinkSpeedZ], a                         ; $5162: $E0 $A3
     ld   [wIsLinkInTheAir], a                     ; $5164: $EA $46 $C1
     jp   ApplyMapFadeOutTransition                ; $5167: $C3 $83 $0C
 
@@ -2655,7 +2655,7 @@ jr_002_516A:
 
     ldh  a, [hMapRoom]                            ; Underworld 2:
     cp   MOUNTAIN_CAVE_ROOM_1                     ; caves in the mountains where falling in a pit will spit you out of a waterfall
-    jr   z, .jr_518E                           ;
+    jr   z, .jr_518E                              ;
     cp   MOUNTAIN_CAVE_ROOM_2                     ; $5182: $FE $7B
     jr   z, .jr_518E                              ; $5184: $28 $08
     cp   MOUNTAIN_CAVE_ROOM_3                     ; $5186: $FE $7C
@@ -2707,9 +2707,9 @@ HandleGotItemB::
     ld   [wIgnoreLinkCollisionsCountdown], a      ; $51D0: $EA $3E $C1
     call ApplyLinkMotionState                     ; $51D3: $CD $94 $17
     call func_21E1                                ; $51D6: $CD $E1 $21
-    ldh  a, [hLinkVelocityZ]                      ; $51D9: $F0 $A3
+    ldh  a, [hLinkSpeedZ]                         ; $51D9: $F0 $A3
     sub  $02                                      ; $51DB: $D6 $02
-    ldh  [hLinkVelocityZ], a                      ; $51DD: $E0 $A3
+    ldh  [hLinkSpeedZ], a                         ; $51DD: $E0 $A3
     ldh  a, [hLinkPositionZ]                      ; $51DF: $F0 $A2
     and  $80                                      ; $51E1: $E6 $80
     jr   z, .jr_51ED                              ; $51E3: $28 $08
@@ -2717,7 +2717,7 @@ HandleGotItemB::
     xor  a                                        ; $51E5: $AF
     ldh  [hLinkPositionZ], a                      ; $51E6: $E0 $A2
     ld   [wC149], a                               ; $51E8: $EA $49 $C1
-    ldh  [hLinkVelocityZ], a                      ; $51EB: $E0 $A3
+    ldh  [hLinkSpeedZ], a                         ; $51EB: $E0 $A3
 
 .jr_51ED
     ld   a, LINK_ANIMATION_STATE_UNKNOWN_6B       ; $51ED: $3E $6B
@@ -6772,7 +6772,7 @@ ENDC
     ld   a, [hl]                                  ; $70C3: $7E
     ldh  [hLinkSpeedY], a                         ; $70C4: $E0 $9B
     ld   a, $1C                                   ; $70C6: $3E $1C
-    ldh  [hLinkVelocityZ], a                      ; $70C8: $E0 $A3
+    ldh  [hLinkSpeedZ], a                         ; $70C8: $E0 $A3
     ld   a, $01                                   ; $70CA: $3E $01
     ld   [wIsLinkInTheAir], a                     ; $70CC: $EA $46 $C1
     ld   a, $01                                   ; $70CF: $3E $01
@@ -7466,7 +7466,7 @@ func_002_7468::
     ld   [wInvincibilityCounter], a               ; $7486: $EA $C7 $DB
     ld   [wC198], a                               ; $7489: $EA $98 $C1
     ldh  [hLinkPositionZ], a                      ; $748C: $E0 $A2
-    ldh  [hLinkVelocityZ], a                      ; $748E: $E0 $A3
+    ldh  [hLinkSpeedZ], a                         ; $748E: $E0 $A3
     jp   ResetSpinAttack                          ; $7490: $C3 $AF $0C
 
 jr_002_7493:
@@ -7525,7 +7525,7 @@ label_002_74AD:
     sra  a                                        ; $74DC: $CB $2F
     ldh  [hLinkSpeedY], a                         ; $74DE: $E0 $9B
     ld   a, $18                                   ; $74E0: $3E $18
-    ldh  [hLinkVelocityZ], a                      ; $74E2: $E0 $A3
+    ldh  [hLinkSpeedZ], a                      ; $74E2: $E0 $A3
     ld   a, $02                                   ; $74E4: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $74E6: $EA $46 $C1
     ld   a, $20                                   ; $74E9: $3E $20
@@ -7758,7 +7758,7 @@ HurtBySpikes::
     jr   nz, .topViewEnd                          ; $7612: $20 $0A
     ; … move Link slighly above the ground
     ld   a, $10                                   ; $7614: $3E $10
-    ldh  [hLinkVelocityZ], a                      ; $7616: $E0 $A3
+    ldh  [hLinkSpeedZ], a                      ; $7616: $E0 $A3
     ldh  a, [hLinkPositionZ]                      ; $7618: $F0 $A2
     add  $02                                      ; $761A: $C6 $02
     ldh  [hLinkPositionZ], a                      ; $761C: $E0 $A2

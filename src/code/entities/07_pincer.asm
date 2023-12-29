@@ -67,10 +67,10 @@ PincerEntityHandler::
     ld   hl, wEntitiesGroundStatusTable           ; $5322: $21 $70 $C4
     add  hl, bc                                   ; $5325: $09
     ld   [hl], b                                  ; $5326: $70
-    ld   hl, wEntitiesRecoilVelocityX             ; $5327: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilSpeedX                ; $5327: $21 $F0 $C3
     add  hl, bc                                   ; $532A: $09
     ld   [hl], b                                  ; $532B: $70
-    ld   hl, wEntitiesRecoilVelocityY             ; $532C: $21 $00 $C4
+    ld   hl, wEntitiesRecoilSpeedY                ; $532C: $21 $00 $C4
     add  hl, bc                                   ; $532F: $09
     ld   [hl], b                                  ; $5330: $70
     call func_007_5453                            ; $5331: $CD $53 $54

@@ -534,7 +534,7 @@ func_006_4855::
     add  hl, bc                                   ; $4884: $09
     ld   a, [hl]                                  ; $4885: $7E
     push hl                                       ; $4886: $E5
-    ld   hl, wEntitiesRecoilVelocityX             ; $4887: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilSpeedX                ; $4887: $21 $F0 $C3
     add  hl, de                                   ; $488A: $19
     ld   [hl], a                                  ; $488B: $77
     pop  hl                                       ; $488C: $E1
@@ -546,7 +546,7 @@ func_006_4855::
     add  hl, bc                                   ; $4895: $09
     ld   a, [hl]                                  ; $4896: $7E
     push hl                                       ; $4897: $E5
-    ld   hl, wEntitiesRecoilVelocityY             ; $4898: $21 $00 $C4
+    ld   hl, wEntitiesRecoilSpeedY                ; $4898: $21 $00 $C4
     add  hl, de                                   ; $489B: $19
     ld   [hl], a                                  ; $489C: $77
     pop  hl                                       ; $489D: $E1

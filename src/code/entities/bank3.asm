@@ -5979,7 +5979,7 @@ ApplyLinkCollisionWithEnemy::
     and  a                                        ; $6D0C: $A7
     jr   nz, .jr_003_6D15                         ; $6D0D: $20 $06
 
-    ldh  a, [hLinkVelocityZ]                      ; $6D0F: $F0 $A3
+    ldh  a, [hLinkSpeedZ]                         ; $6D0F: $F0 $A3
     xor  $80                                      ; $6D11: $EE $80
     jr   .jr_003_6D17                             ; $6D13: $18 $02
 
@@ -6005,7 +6005,7 @@ ApplyLinkCollisionWithEnemy::
     jr   nz, .jr_003_6D38                         ; $6D31: $20 $05
 
     ld   a, $10                                   ; $6D33: $3E $10
-    ldh  [hLinkVelocityZ], a                      ; $6D35: $E0 $A3
+    ldh  [hLinkSpeedZ], a                         ; $6D35: $E0 $A3
     ret                                           ; $6D37: $C9
 
 .jr_003_6D38
@@ -6503,7 +6503,7 @@ ConfigureEntityRecoil::
     ldh  a, [hMultiPurpose0]                      ; $6FCF: $F0 $D7
     cpl                                           ; $6FD1: $2F
     inc  a                                        ; $6FD2: $3C
-    ld   hl, wEntitiesRecoilVelocityY             ; $6FD3: $21 $00 $C4
+    ld   hl, wEntitiesRecoilSpeedY                ; $6FD3: $21 $00 $C4
     add  hl, bc                                   ; $6FD6: $09
     ld   [hl], a                                  ; $6FD7: $77
 
@@ -6511,7 +6511,7 @@ ConfigureEntityRecoil::
     ldh  a, [hMultiPurpose1]                      ; $6FD8: $F0 $D8
     cpl                                           ; $6FDA: $2F
     inc  a                                        ; $6FDB: $3C
-    ld   hl, wEntitiesRecoilVelocityX             ; $6FDC: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilSpeedX                ; $6FDC: $21 $F0 $C3
     add  hl, bc                                   ; $6FDF: $09
     ld   [hl], a                                  ; $6FE0: $77
 
@@ -6732,10 +6732,10 @@ ENDC
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $70EF: $21 $10 $C4
     add  hl, bc                                   ; $70F2: $09
     ld   [hl], $10                                ; $70F3: $36 $10
-    ld   hl, wEntitiesRecoilVelocityX             ; $70F5: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilSpeedX                ; $70F5: $21 $F0 $C3
     add  hl, bc                                   ; $70F8: $09
     ld   [hl], b                                  ; $70F9: $70
-    ld   hl, wEntitiesRecoilVelocityY             ; $70FA: $21 $00 $C4
+    ld   hl, wEntitiesRecoilSpeedY                ; $70FA: $21 $00 $C4
     add  hl, bc                                   ; $70FD: $09
     ld   [hl], b                                  ; $70FE: $70
     jp   func_003_6DDF                            ; $70FF: $C3 $DF $6D
@@ -7378,13 +7378,13 @@ func_003_73EB::
     ldh  a, [hMultiPurpose0]                      ; $745F: $F0 $D7
     cpl                                           ; $7461: $2F
     inc  a                                        ; $7462: $3C
-    ld   hl, wEntitiesRecoilVelocityY             ; $7463: $21 $00 $C4
+    ld   hl, wEntitiesRecoilSpeedY                ; $7463: $21 $00 $C4
     add  hl, bc                                   ; $7466: $09
     ld   [hl], a                                  ; $7467: $77
     ldh  a, [hMultiPurpose1]                      ; $7468: $F0 $D8
     cpl                                           ; $746A: $2F
     inc  a                                        ; $746B: $3C
-    ld   hl, wEntitiesRecoilVelocityX             ; $746C: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilSpeedX                ; $746C: $21 $F0 $C3
     add  hl, bc                                   ; $746F: $09
     ld   [hl], a                                  ; $7470: $77
     call StartIgnoringHitsForEntity               ; $7471: $CD $DB $73
@@ -7596,7 +7596,7 @@ jr_003_7571:
     xor  a                                        ; $758D: $AF
     ldh  [hLinkSpeedY], a                         ; $758E: $E0 $9B
     ld   a, $30                                   ; $7590: $3E $30
-    ldh  [hLinkVelocityZ], a                      ; $7592: $E0 $A3
+    ldh  [hLinkSpeedZ], a                         ; $7592: $E0 $A3
     ld   a, JINGLE_STRONG_BUMP                    ; $7594: $3E $0B
     ldh  [hJingle], a                             ; $7596: $E0 $F2
     ret                                           ; $7598: $C9
@@ -7999,13 +7999,13 @@ func_003_77A7::
     ld   hl, wEntitiesSpeedXTable                 ; $77B8: $21 $40 $C2
     add  hl, bc                                   ; $77BB: $09
     ld   a, [hl]                                  ; $77BC: $7E
-    ld   hl, wEntitiesRecoilVelocityX             ; $77BD: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilSpeedX                ; $77BD: $21 $F0 $C3
     add  hl, de                                   ; $77C0: $19
     ld   [hl], a                                  ; $77C1: $77
     ld   hl, wEntitiesSpeedYTable                 ; $77C2: $21 $50 $C2
     add  hl, bc                                   ; $77C5: $09
     ld   a, [hl]                                  ; $77C6: $7E
-    ld   hl, wEntitiesRecoilVelocityY             ; $77C7: $21 $00 $C4
+    ld   hl, wEntitiesRecoilSpeedY                ; $77C7: $21 $00 $C4
     add  hl, de                                   ; $77CA: $19
     ld   [hl], a                                  ; $77CB: $77
     push bc                                       ; $77CC: $C5
@@ -8068,11 +8068,11 @@ jr_003_77DD:
     call func_003_77A7                            ; $781E: $CD $A7 $77
     ld   a, $30                                   ; $7821: $3E $30
     call func_003_783B                            ; $7823: $CD $3B $78
-    ld   hl, wEntitiesRecoilVelocityY             ; $7826: $21 $00 $C4
+    ld   hl, wEntitiesRecoilSpeedY                ; $7826: $21 $00 $C4
     add  hl, de                                   ; $7829: $19
     ldh  a, [hMultiPurpose0]                      ; $782A: $F0 $D7
     ld   [hl], a                                  ; $782C: $77
-    ld   hl, wEntitiesRecoilVelocityX             ; $782D: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilSpeedX                ; $782D: $21 $F0 $C3
     add  hl, de                                   ; $7830: $19
     ldh  a, [hMultiPurpose1]                      ; $7831: $F0 $D8
     ld   [hl], a                                  ; $7833: $77
@@ -9493,7 +9493,7 @@ ReturnIfNonInteractive_03::
 .return
     ret                                           ; $7FA8: $C9
 
-; If the entity is ignoring hits, apply its recoil velocity.
+; If the entity is ignoring hits, apply its recoil Speed.
 ApplyRecoilIfNeeded_03::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7FA9: $21 $10 $C4
     add  hl, bc                                   ; $7FAC: $09
@@ -9520,14 +9520,14 @@ ApplyRecoilIfNeeded_03::
     ld   a, [hl]                                  ; $7FBF: $7E
     push af                                       ; $7FC0: $F5
 
-    ld   hl, wEntitiesRecoilVelocityX             ; $7FC1: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilSpeedX                ; $7FC1: $21 $F0 $C3
     add  hl, bc                                   ; $7FC4: $09
     ld   a, [hl]                                  ; $7FC5: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $7FC6: $21 $40 $C2
     add  hl, bc                                   ; $7FC9: $09
     ld   [hl], a                                  ; $7FCA: $77
 
-    ld   hl, wEntitiesRecoilVelocityY             ; $7FCB: $21 $00 $C4
+    ld   hl, wEntitiesRecoilSpeedY                ; $7FCB: $21 $00 $C4
     add  hl, bc                                   ; $7FCE: $09
     ld   a, [hl]                                  ; $7FCF: $7E
     ld   hl, wEntitiesSpeedYTable                 ; $7FD0: $21 $50 $C2

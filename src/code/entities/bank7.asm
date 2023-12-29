@@ -202,7 +202,7 @@ ReturnIfNonInteractive_07::
 .return
     ret                                           ; $7DC2: $C9
 
-; If the entity is ignoring hits, apply its recoil velocity.
+; If the entity is ignoring hits, apply its recoil Speed.
 ApplyRecoilIfNeeded_07::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7DC3: $21 $10 $C4
     add  hl, bc                                   ; $7DC6: $09
@@ -228,14 +228,14 @@ ApplyRecoilIfNeeded_07::
     ld   a, [hl]                                  ; $7DD9: $7E
     push af                                       ; $7DDA: $F5
 
-    ld   hl, wEntitiesRecoilVelocityX             ; $7DDB: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilSpeedX                ; $7DDB: $21 $F0 $C3
     add  hl, bc                                   ; $7DDE: $09
     ld   a, [hl]                                  ; $7DDF: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $7DE0: $21 $40 $C2
     add  hl, bc                                   ; $7DE3: $09
     ld   [hl], a                                  ; $7DE4: $77
 
-    ld   hl, wEntitiesRecoilVelocityY             ; $7DE5: $21 $00 $C4
+    ld   hl, wEntitiesRecoilSpeedY                ; $7DE5: $21 $00 $C4
     add  hl, bc                                   ; $7DE8: $09
     ld   a, [hl]                                  ; $7DE9: $7E
     call GetEntitySpeedYAddress                   ; $7DEA: $CD $05 $40

@@ -33,7 +33,7 @@ func_015_7D01::
     ld   a, $02                                   ; $7D2A: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $7D2C: $EA $46 $C1
     ld   a, $12                                   ; $7D2F: $3E $12
-    ldh  [hLinkVelocityZ], a                      ; $7D31: $E0 $A3
+    ldh  [hLinkSpeedZ], a                         ; $7D31: $E0 $A3
     ld   a, $0C                                   ; $7D33: $3E $0C
     ldh  [hLinkSpeedX], a                         ; $7D35: $E0 $9A
     xor  a                                        ; $7D37: $AF

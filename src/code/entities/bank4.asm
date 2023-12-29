@@ -28,7 +28,7 @@ ClearEntityStatusBank04::
     ld   [hl], b                                  ; $6D7E: $70
     ret                                           ; $6D7F: $C9
 
-; If the entity is ignoring hits, apply its recoil velocity.
+; If the entity is ignoring hits, apply its recoil Speed.
 ApplyRecoilIfNeeded_04::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $6D80: $21 $10 $C4
     add  hl, bc                                   ; $6D83: $09
@@ -55,14 +55,14 @@ ApplyRecoilIfNeeded_04::
     ld   a, [hl]                                  ; $6D97: $7E
     push af                                       ; $6D98: $F5
 
-    ld   hl, wEntitiesRecoilVelocityX             ; $6D99: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilSpeedX                ; $6D99: $21 $F0 $C3
     add  hl, bc                                   ; $6D9C: $09
     ld   a, [hl]                                  ; $6D9D: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $6D9E: $21 $40 $C2
     add  hl, bc                                   ; $6DA1: $09
     ld   [hl], a                                  ; $6DA2: $77
 
-    ld   hl, wEntitiesRecoilVelocityY             ; $6DA3: $21 $00 $C4
+    ld   hl, wEntitiesRecoilSpeedY                ; $6DA3: $21 $00 $C4
     add  hl, bc                                   ; $6DA6: $09
     ld   a, [hl]                                  ; $6DA7: $7E
     ld   hl, wEntitiesSpeedYTable                 ; $6DA8: $21 $50 $C2
@@ -75,11 +75,11 @@ ApplyRecoilIfNeeded_04::
     add  hl, bc                                   ; $6DB3: $09
     ld   a, [hl]                                  ; $6DB4: $7E
     and  $20                                      ; $6DB5: $E6 $20
-    jr   nz, .restoreOriginalVelocity             ; $6DB7: $20 $03
+    jr   nz, .restoreOriginalSpeed                ; $6DB7: $20 $03
 
     call DefaultEntityPhysics_trampoline          ; $6DB9: $CD $23 $3B
 
-.restoreOriginalVelocity
+.restoreOriginalSpeed
     ld   hl, wEntitiesSpeedYTable                 ; $6DBC: $21 $50 $C2
     add  hl, bc                                   ; $6DBF: $09
     pop  af                                       ; $6DC0: $F1

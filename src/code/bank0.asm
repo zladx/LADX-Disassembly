@@ -2170,13 +2170,13 @@ UseRocsFeather::
 .label_14F8
     ldh  [hLinkSpeedY], a                         ; $14F8: $E0 $9B
     xor  a                                        ; $14FA: $AF
-    ldh  [hLinkVelocityZ], a                      ; $14FB: $E0 $A3
+    ldh  [hLinkSpeedZ], a                         ; $14FB: $E0 $A3
     call UpdateFinalLinkPosition                  ; $14FD: $CD $A8 $21
     jpsw CheckPositionForMapTransition            ; $1500: $3E $02 $CD $0C $08 $C3 $75 $6C
 
 .label_1508
     ld   a, $20                                   ; $1508: $3E $20
-    ldh  [hLinkVelocityZ], a                      ; $150A: $E0 $A3
+    ldh  [hLinkSpeedZ], a                         ; $150A: $E0 $A3
 
     ; If running with Pegasus Boots, jump further
     ld   a, [wIsRunningWithPegasusBoots]          ; $150C: $FA $4A $C1
@@ -3898,7 +3898,7 @@ ComputeLinkPosition::
     ret                                           ; $21E0: $C9
 
 func_21E1::
-    ldh  a, [hLinkVelocityZ]                      ; $21E1: $F0 $A3
+    ldh  a, [hLinkSpeedZ]                         ; $21E1: $F0 $A3
     push af                                       ; $21E3: $F5
     swap a                                        ; $21E4: $CB $37
     and  $F0                                      ; $21E6: $E6 $F0

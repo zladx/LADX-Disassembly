@@ -12,7 +12,7 @@ CrystalSwitchEntityHandler::
     rla                                           ; $432D: $17
     and  OAMF_PAL1                                ; $432E: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $4330: $E0 $ED
-    ld   de, CrystalSwitchSpriteVariants         ; $4332: $11 $20 $43
+    ld   de, CrystalSwitchSpriteVariants          ; $4332: $11 $20 $43
     call RenderActiveEntitySpritesPair            ; $4335: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $4338: $CD $0D $7B
     call DecrementEntityIgnoreHitsCountdown       ; $433B: $CD $56 $0C

@@ -46,7 +46,7 @@ MrWriteBirdEntityHandler::
     ldh  a, [hActiveEntitySpriteVariant]          ; $7240: $F0 $F1
     add  [hl]                                     ; $7242: $86
     ldh  [hActiveEntitySpriteVariant], a          ; $7243: $E0 $F1
-    ld   hl, wEntitiesSpeedXTable                 ; $7245: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7245: $21 $40 $C2
     add  hl, bc                                   ; $7248: $09
     ld   a, [hl]                                  ; $7249: $7E
     and  a                                        ; $724A: $A7
@@ -78,8 +78,8 @@ jr_006_725A:
     and  a                                        ; $726F: $A7
     jp   z, label_006_7372                        ; $7270: $CA $72 $73
 
-    call AddEntityZSpeedToPos_06                  ; $7273: $CD $7A $65
-    ld   hl, wEntitiesSpeedZTable                 ; $7276: $21 $20 $C3
+    call AddEntityZVelocityToPos_06               ; $7273: $CD $7A $65
+    ld   hl, wEntitiesVelocityZTable              ; $7276: $21 $20 $C3
     add  hl, bc                                   ; $7279: $09
     dec  [hl]                                     ; $727A: $35
     ld   hl, wEntitiesPosZTable                   ; $727B: $21 $10 $C3
@@ -120,7 +120,7 @@ MrWriteBirdState0Handler::
     ld   hl, Data_006_7295                        ; $72B0: $21 $95 $72
     add  hl, de                                   ; $72B3: $19
     ld   a, [hl]                                  ; $72B4: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $72B5: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $72B5: $21 $40 $C2
     add  hl, bc                                   ; $72B8: $09
     ld   [hl], a                                  ; $72B9: $77
     ld   a, e                                     ; $72BA: $7B
@@ -134,7 +134,7 @@ MrWriteBirdState0Handler::
     ld   hl, Data_006_7295                        ; $72C8: $21 $95 $72
     add  hl, de                                   ; $72CB: $19
     ld   a, [hl]                                  ; $72CC: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $72CD: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $72CD: $21 $50 $C2
     add  hl, bc                                   ; $72D0: $09
     ld   [hl], a                                  ; $72D1: $77
     call GetEntityTransitionCountdown             ; $72D2: $CD $05 $0C
@@ -149,7 +149,7 @@ MrWriteBirdState0Handler::
 
 MrWriteBirdState1Handler::
     call func_006_7335                            ; $72E3: $CD $35 $73
-    call UpdateEntityPosWithSpeed_06              ; $72E6: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $72E6: $CD $41 $65
     call DefaultEntityPhysics_trampoline          ; $72E9: $CD $23 $3B
     ldh  a, [hMultiPurposeG]                      ; $72EC: $F0 $E8
     and  a                                        ; $72EE: $A7
@@ -164,7 +164,7 @@ MrWriteBirdState1Handler::
     ret                                           ; $72FC: $C9
 
 .jr_72FD
-    ld   hl, wEntitiesSpeedZTable                 ; $72FD: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $72FD: $21 $20 $C3
     add  hl, bc                                   ; $7300: $09
     ld   [hl], $08                                ; $7301: $36 $08
     ld   hl, wEntitiesPosZTable                   ; $7303: $21 $10 $C3
@@ -180,13 +180,13 @@ label_006_7308:
     jp   SetEntitySpriteVariant                   ; $730F: $C3 $0C $3B
 
 MrWriteBirdState2Handler::
-    call UpdateEntityPosWithSpeed_06              ; $7312: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $7312: $CD $41 $65
     call DefaultEntityPhysics_trampoline          ; $7315: $CD $23 $3B
     ldh  a, [hFrameCounter]                       ; $7318: $F0 $E7
     and  $01                                      ; $731A: $E6 $01
     jr   nz, .jr_7323                             ; $731C: $20 $05
 
-    ld   hl, wEntitiesSpeedZTable                 ; $731E: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $731E: $21 $20 $C3
     add  hl, bc                                   ; $7321: $09
     inc  [hl]                                     ; $7322: $34
 
@@ -227,16 +227,16 @@ func_006_7335::
     ldh  a, [hMultiPurpose0]                      ; $7358: $F0 $D7
     cpl                                           ; $735A: $2F
     inc  a                                        ; $735B: $3C
-    ld   hl, wEntitiesSpeedYTable                 ; $735C: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $735C: $21 $50 $C2
     add  hl, bc                                   ; $735F: $09
     ld   [hl], a                                  ; $7360: $77
     ldh  a, [hMultiPurpose1]                      ; $7361: $F0 $D8
     cpl                                           ; $7363: $2F
     inc  a                                        ; $7364: $3C
-    ld   hl, wEntitiesSpeedXTable                 ; $7365: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7365: $21 $40 $C2
     add  hl, bc                                   ; $7368: $09
     ld   [hl], a                                  ; $7369: $77
-    ld   hl, wEntitiesSpeedZTable                 ; $736A: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $736A: $21 $20 $C3
     add  hl, bc                                   ; $736D: $09
     ld   [hl], $0C                                ; $736E: $36 $0C
     pop  af                                       ; $7370: $F1

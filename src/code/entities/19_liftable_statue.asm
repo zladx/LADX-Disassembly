@@ -17,9 +17,9 @@ LiftableStatueEntityHandler::
     ld   de, LiftableStatueRubbleSprite           ; $402A: $11 $20 $40
     call RenderActiveEntitySprite                 ; $402D: $CD $77 $3C
     call ReturnIfNonInteractive_19                ; $4030: $CD $3D $7D
-    call UpdateEntityPosWithSpeed_19              ; $4033: $CD $B8 $7D
-    call AddEntityZSpeedToPos_19                  ; $4036: $CD $F1 $7D
-    ld   hl, wEntitiesSpeedZTable                 ; $4039: $21 $20 $C3
+    call UpdateEntityPosWithVelocity_19           ; $4033: $CD $B8 $7D
+    call AddEntityZVelocityToPos_19               ; $4036: $CD $F1 $7D
+    ld   hl, wEntitiesVelocityZTable              ; $4039: $21 $20 $C3
     add  hl, bc                                   ; $403C: $09
     dec  [hl]                                     ; $403D: $35
     dec  [hl]                                     ; $403E: $35
@@ -161,10 +161,10 @@ LiftableStatueState_Standing::
     ret                                           ; $4122: $C9
 
 LiftableStatueState_Lifted_Thrown::
-    call UpdateEntityPosWithSpeed_19              ; $4123: $CD $B8 $7D
-    call AddEntityZSpeedToPos_19                  ; $4126: $CD $F1 $7D
+    call UpdateEntityPosWithVelocity_19           ; $4123: $CD $B8 $7D
+    call AddEntityZVelocityToPos_19               ; $4126: $CD $F1 $7D
     call DefaultEntityPhysics_trampoline          ; $4129: $CD $23 $3B
-    ld   hl, wEntitiesSpeedZTable                 ; $412C: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $412C: $21 $20 $C3
     add  hl, bc                                   ; $412F: $09
     dec  [hl]                                     ; $4130: $35
     dec  [hl]                                     ; $4131: $35
@@ -211,13 +211,13 @@ LiftableStatue_RubbleX::
 LiftableStatue_RubbleY::
     db   $F8, $F8, $00, $00, $08, $08
 
-LiftableStatue_RubbleSpeedX::
+LiftableStatue_RubbleVelocityX::
     db   $FC, $05, $FA, $06, $FB, $04
 
-LiftableStatue_RubbleSpeedY::
+LiftableStatue_RubbleVelocityY::
     db   $FC, $F8, $FE, $FF, $03, $02
 
-LiftableStatue_RubbleSpeedZ::
+LiftableStatue_RubbleVelocityZ::
     db   $18, $14, $13, $16, $12, $14
 
 LiftableStatue_SpawnRubble::
@@ -258,22 +258,22 @@ LiftableStatue_SpawnRubble::
     ld   hl, wEntitiesPosZTable                   ; $41B7: $21 $10 $C3
     add  hl, de                                   ; $41BA: $19
     ld   [hl], a                                  ; $41BB: $77
-    ld   hl, LiftableStatue_RubbleSpeedX          ; $41BC: $21 $71 $41
+    ld   hl, LiftableStatue_RubbleVelocityX       ; $41BC: $21 $71 $41
     add  hl, bc                                   ; $41BF: $09
     ld   a, [hl]                                  ; $41C0: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $41C1: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $41C1: $21 $40 $C2
     add  hl, de                                   ; $41C4: $19
     ld   [hl], a                                  ; $41C5: $77
-    ld   hl, LiftableStatue_RubbleSpeedY          ; $41C6: $21 $77 $41
+    ld   hl, LiftableStatue_RubbleVelocityY       ; $41C6: $21 $77 $41
     add  hl, bc                                   ; $41C9: $09
     ld   a, [hl]                                  ; $41CA: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $41CB: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $41CB: $21 $50 $C2
     add  hl, de                                   ; $41CE: $19
     ld   [hl], a                                  ; $41CF: $77
-    ld   hl, LiftableStatue_RubbleSpeedZ          ; $41D0: $21 $7D $41
+    ld   hl, LiftableStatue_RubbleVelocityZ       ; $41D0: $21 $7D $41
     add  hl, bc                                   ; $41D3: $09
     ld   a, [hl]                                  ; $41D4: $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $41D5: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $41D5: $21 $20 $C3
     add  hl, de                                   ; $41D8: $19
     ld   [hl], a                                  ; $41D9: $77
     pop  bc                                       ; $41DA: $C1

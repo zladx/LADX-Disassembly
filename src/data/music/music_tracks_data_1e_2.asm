@@ -1,6 +1,6 @@
 Music1a::
     db   $00
-    dw   MusicSpeedData_1e_4ae8
+    dw   MusicVelocityData_1e_4ae8
     dw   Music1aChannel1
     dw   Music1aChannel2
     dw   Music1aChannel3
@@ -451,7 +451,7 @@ ChannelDefinition_1e_5151::
     end_def
 
 ChannelDefinition_1e_51e3::
-    set_speed MusicSpeedData_1e_4ad9
+    set_Velocity MusicVelocityData_1e_4ad9
     notelen 1
     note C_3
     note F_3
@@ -491,7 +491,7 @@ ChannelDefinition_1e_51e3::
 
 Music11::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   MusicVelocityData_1e_4ad9
     dw   Music11Channel1
     dw   Music11Channel2
     dw   Music11Channel3
@@ -649,7 +649,7 @@ ChannelDefinition_1e_5293::
 
 Music5d::
     db   $00
-    dw   MusicSpeedData_1e_4ae8
+    dw   MusicVelocityData_1e_4ae8
     dw   Music5dChannel1
     dw   Music5dChannel2
     dw   Music5dChannel3
@@ -662,7 +662,7 @@ Music5dChannel2::
 
 Music23::
     db   $00
-    dw   MusicSpeedData_1e_4aac
+    dw   MusicVelocityData_1e_4aac
     dw   Music23Channel1
     dw   Music23Channel2
     dw   Music23Channel3
@@ -1500,7 +1500,7 @@ ChannelDefinition_1e_5615::
 
 Music12::
     db   $00
-    dw   MusicSpeedData_1e_4af7
+    dw   MusicVelocityData_1e_4af7
     dw   Music12Channel1
     dw   Music12Channel2
     dw   Music12Channel3
@@ -2080,7 +2080,7 @@ ChannelDefinition_1e_589b::
 
 Music5a::
     db   $00
-    dw   MusicSpeedData_1e_4aca
+    dw   MusicVelocityData_1e_4aca
     dw   Music5aChannel1
     dw   Music5aChannel2
     dw   Music5aChannel3
@@ -2234,7 +2234,7 @@ ChannelDefinition_1e_596e::
 Music14::
 Music52::
     db   $00
-    dw   MusicSpeedData_1e_4abb
+    dw   MusicVelocityData_1e_4abb
     dw   Music14Channel1
     dw   Music14Channel2
     dw   Music14Channel3
@@ -2473,7 +2473,7 @@ ChannelDefinition_1e_5a9f::
 
 Music15::
     db   $00
-    dw   MusicSpeedData_1e_4abb
+    dw   MusicVelocityData_1e_4abb
     dw   Music15Channel1
     dw   Music15Channel2
     dw   Music15Channel3
@@ -2857,7 +2857,7 @@ ChannelDefinition_1e_5ca1::
 
 Music16::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   MusicVelocityData_1e_4ad9
     dw   Music16Channel1
     dw   Music16Channel2
     dw   Music16Channel3
@@ -3076,7 +3076,7 @@ ChannelDefinition_1e_5d98::
 
 Music17::
     db   $00
-    dw   MusicSpeedData_1e_4abb
+    dw   MusicVelocityData_1e_4abb
     dw   Music17Channel1
     dw   Music17Channel2
     dw   Music17Channel3
@@ -3255,7 +3255,7 @@ ChannelDefinition_1e_5e5f::
 Music13::
 Music51::
     db   $00
-    dw   MusicSpeedData_1e_4ae8
+    dw   MusicVelocityData_1e_4ae8
     dw   Music13Channel1
     dw   Music13Channel2
     dw   Music13Channel3
@@ -3380,7 +3380,7 @@ ChannelDefinition_1e_5ee0::
 
 Music18::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   MusicVelocityData_1e_4ad9
     dw   Music18Channel1
     dw   Music18Channel2
     dw   $0000
@@ -3449,7 +3449,7 @@ ChannelDefinition_1e_5f2b::
 
 Music19::
     db   $00
-    dw   MusicSpeedData_1e_4a9d
+    dw   MusicVelocityData_1e_4a9d
     dw   Music19Channel1
     dw   Music19Channel2
     dw   Music19Channel3
@@ -3729,7 +3729,7 @@ ChannelDefinition_1e_6053::
 
 Music1b::
     db   $00
-    dw   MusicSpeedData_1e_4aac
+    dw   MusicVelocityData_1e_4aac
     dw   Music1bChannel1
     dw   Music1bChannel2
     dw   Music1bChannel3
@@ -3816,7 +3816,7 @@ ChannelDefinition_1e_6087::
 
 Music1c::
     db   $00
-    dw   MusicSpeedData_1e_4aca
+    dw   MusicVelocityData_1e_4aca
     dw   Music1cChannel1
     dw   Music1cChannel2
     dw   Music1cChannel3
@@ -3905,7 +3905,7 @@ ChannelDefinition_1e_60e3::
 
 Music1d::
     db   $00
-    dw   MusicSpeedData_1e_4aac
+    dw   MusicVelocityData_1e_4aac
     dw   Music1dChannel1
     dw   Music1dChannel2
     dw   Music1dChannel3
@@ -4280,7 +4280,7 @@ ChannelDefinition_1e_6267::
 
 Music1e::
     db   $00
-    dw   MusicSpeedData_1e_4abb
+    dw   MusicVelocityData_1e_4abb
     dw   Music1eChannel1
     dw   Music1eChannel2
     dw   Music1eChannel3
@@ -4355,7 +4355,7 @@ ChannelDefinition_1e_6304::
 
 Music4b::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   MusicVelocityData_1e_4ad9
     dw   Music4bChannel1
     dw   Music4bChannel2
     dw   Music4bChannel3
@@ -4676,7 +4676,7 @@ ChannelDefinition_1e_645a::
 
 Music1f::
     db   $00
-    dw   MusicSpeedData_1e_4abb
+    dw   MusicVelocityData_1e_4abb
     dw   Music1fChannel1
     dw   Music1fChannel2
     dw   Music1fChannel3
@@ -4939,7 +4939,7 @@ ChannelDefinition_1e_654b::
 
 Music58::
     db   $00
-    dw   MusicSpeedData_1e_4ae8
+    dw   MusicVelocityData_1e_4ae8
     dw   Music58Channel1
     dw   Music58Channel2
     dw   Music58Channel3
@@ -5020,7 +5020,7 @@ Music58Channel2::
 
 Music21::
     db   $00
-    dw   MusicSpeedData_1e_4ae8
+    dw   MusicVelocityData_1e_4ae8
     dw   Music21Channel1
     dw   Music21Channel2
     dw   Music21Channel3
@@ -5053,7 +5053,7 @@ ChannelDefinition_1e_6625::
 
 Music22::
     db   $00
-    dw   MusicSpeedData_1e_4abb
+    dw   MusicVelocityData_1e_4abb
     dw   Music22Channel1
     dw   Music22Channel2
     dw   Music22Channel3
@@ -5091,7 +5091,7 @@ ChannelDefinition_1e_6653::
 
 Music24::
     db   $00
-    dw   MusicSpeedData_1e_4aca
+    dw   MusicVelocityData_1e_4aca
     dw   Music24Channel1
     dw   Music24Channel2
     dw   Music24Channel3
@@ -5176,7 +5176,7 @@ ChannelDefinition_1e_66ab::
 
 Music53::
     db   $00
-    dw   MusicSpeedData_1e_4aca
+    dw   MusicVelocityData_1e_4aca
     dw   Music53Channel1
     dw   Music53Channel2
     dw   Music53Channel3
@@ -5348,7 +5348,7 @@ ChannelDefinition_1e_6745::
 
 Music26::
     db   $00
-    dw   MusicSpeedData_1e_4aca
+    dw   MusicVelocityData_1e_4aca
     dw   Music26Channel1
     dw   Music26Channel2
     dw   Music26Channel3
@@ -5372,7 +5372,7 @@ MusicLoop_1e_6792::
 
 Music5b::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   MusicVelocityData_1e_4ad9
     dw   Music5bChannel1
     dw   Music5bChannel2
     dw   Music5bChannel3
@@ -5794,7 +5794,7 @@ ChannelDefinition_1e_6973::
 
 Music4c::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   MusicVelocityData_1e_4ad9
     dw   Music4cChannel1
     dw   Music4cChannel2
     dw   Music4cChannel3
@@ -5896,7 +5896,7 @@ ChannelDefinition_1e_69da::
 
 Music4d::
     db   $00
-    dw   MusicSpeedData_1e_4ae8
+    dw   MusicVelocityData_1e_4ae8
     dw   Music4dChannel1
     dw   Music4dChannel2
     dw   Music4dChannel3
@@ -5955,7 +5955,7 @@ ChannelDefinition_1e_6a1c::
 
 Music4e::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   MusicVelocityData_1e_4ad9
     dw   Music4eChannel1
     dw   Music4eChannel2
     dw   Music4eChannel3
@@ -6330,7 +6330,7 @@ ChannelDefinition_1e_6b78::
 
 Music4f::
     db   $00
-    dw   MusicSpeedData_1e_4aca
+    dw   MusicVelocityData_1e_4aca
     dw   Music4fChannel1
     dw   Music4fChannel2
     dw   Music4fChannel3
@@ -6392,7 +6392,7 @@ ChannelDefinition_1e_6c40::
 
 Music5c::
     db   $00
-    dw   MusicSpeedData_1e_4abb
+    dw   MusicVelocityData_1e_4abb
     dw   Music5cChannel1
     dw   Music5cChannel2
     dw   Music5cChannel3
@@ -6424,7 +6424,7 @@ Music5cChannel2::
 
 Music54::
     db   $00
-    dw   MusicSpeedData_1e_4abb
+    dw   MusicVelocityData_1e_4abb
     dw   Music54Channel1
     dw   Music54Channel2
     dw   Music54Channel3
@@ -6838,25 +6838,25 @@ ChannelDefinition_1e_6e9d::
     end_def
 
 ChannelDefinition_1e_6ea0::
-    set_speed MusicSpeedData_1e_4a9d
+    set_Velocity MusicVelocityData_1e_4a9d
     end_def
 
 ChannelDefinition_1e_6ea4::
-    set_speed MusicSpeedData_1e_4aac
+    set_Velocity MusicVelocityData_1e_4aac
     end_def
 
 ChannelDefinition_1e_6ea8::
-    set_speed MusicSpeedData_1e_4aca
+    set_Velocity MusicVelocityData_1e_4aca
     end_def
 
 ChannelDefinition_1e_6eac::
-    set_speed MusicSpeedData_1e_4ad9
+    set_Velocity MusicVelocityData_1e_4ad9
     end_def
 
 ChannelDefinition_1e_6eb0::
-    set_speed MusicSpeedData_1e_4ae8
+    set_Velocity MusicVelocityData_1e_4ae8
     end_def
 
 ChannelDefinition_1e_6eb4::
-    set_speed MusicSpeedData_1e_4af7
+    set_Velocity MusicVelocityData_1e_4af7
     end_def

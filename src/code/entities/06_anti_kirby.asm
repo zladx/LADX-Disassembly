@@ -2,8 +2,8 @@ AntiKirbyEntityHandler::
     call func_006_44B6                            ; $423A: $CD $B6 $44
     call ReturnIfNonInteractive_06                ; $423D: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $4240: $CD $F7 $64
-    call AddEntityZSpeedToPos_06                  ; $4243: $CD $7A $65
-    ld   hl, wEntitiesSpeedZTable                 ; $4246: $21 $20 $C3
+    call AddEntityZVelocityToPos_06               ; $4243: $CD $7A $65
+    ld   hl, wEntitiesVelocityZTable              ; $4246: $21 $20 $C3
     add  hl, bc                                   ; $4249: $09
     dec  [hl]                                     ; $424A: $35
     dec  [hl]                                     ; $424B: $35
@@ -16,7 +16,7 @@ AntiKirbyEntityHandler::
     jr   z, .jr_425E                              ; $4256: $28 $06
 
     ld   [hl], b                                  ; $4258: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $4259: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4259: $21 $20 $C3
     add  hl, bc                                   ; $425C: $09
     ld   [hl], b                                  ; $425D: $70
 
@@ -33,7 +33,7 @@ AntiKirbyState0Handler::
     call GetEntityTransitionCountdown             ; $426B: $CD $05 $0C
     jr   nz, label_006_42A2                       ; $426E: $20 $32
 
-    call ClearEntitySpeed                         ; $4270: $CD $7F $3D
+    call ClearEntityVelocity                      ; $4270: $CD $7F $3D
     call GetEntityDropTimer                       ; $4273: $CD $FB $0B
     jr   nz, .jr_4294                             ; $4276: $20 $1C
 
@@ -66,12 +66,12 @@ label_006_42A2:
     and  a                                        ; $42A4: $A7
     jr   z, .jr_42AD                              ; $42A5: $28 $06
 
-    ld   hl, wEntitiesSpeedZTable                 ; $42A7: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $42A7: $21 $20 $C3
     add  hl, bc                                   ; $42AA: $09
     ld   [hl], $10                                ; $42AB: $36 $10
 
 .jr_42AD
-    call UpdateEntityPosWithSpeed_06              ; $42AD: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $42AD: $CD $41 $65
     call DefaultEntityPhysics_trampoline          ; $42B0: $CD $23 $3B
     ld   hl, wEntitiesDirectionTable              ; $42B3: $21 $80 $C3
     add  hl, bc                                   ; $42B6: $09
@@ -125,13 +125,13 @@ jr_006_42F5:
     ld   hl, Data_006_42C1                        ; $42FC: $21 $C1 $42
     add  hl, de                                   ; $42FF: $19
     ld   a, [hl]                                  ; $4300: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $4301: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4301: $21 $40 $C2
     add  hl, bc                                   ; $4304: $09
     ld   [hl], a                                  ; $4305: $77
     ld   hl, Data_006_42C5                        ; $4306: $21 $C5 $42
     add  hl, de                                   ; $4309: $19
     ld   a, [hl]                                  ; $430A: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $430B: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $430B: $21 $50 $C2
     add  hl, bc                                   ; $430E: $09
     ld   [hl], a                                  ; $430F: $77
 
@@ -156,7 +156,7 @@ label_006_431B:
 jr_006_432B:
     ld   a, $01                                   ; $432B: $3E $01
     ld   [wD3E6], a                               ; $432D: $EA $E6 $D3
-    ld   hl, wEntitiesSpeedZTable                 ; $4330: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4330: $21 $20 $C3
     add  hl, bc                                   ; $4333: $09
     ld   [hl], b                                  ; $4334: $70
     ldh  a, [hFrameCounter]                       ; $4335: $F0 $E7
@@ -218,11 +218,11 @@ jr_006_434B:
     ldh  a, [hMultiPurpose0]                      ; $4384: $F0 $D7
     cpl                                           ; $4386: $2F
     inc  a                                        ; $4387: $3C
-    ldh  [hLinkSpeedY], a                         ; $4388: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $4388: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $438A: $F0 $D8
     cpl                                           ; $438C: $2F
     inc  a                                        ; $438D: $3C
-    ldh  [hLinkSpeedX], a                         ; $438E: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $438E: $E0 $9A
     push bc                                       ; $4390: $C5
     call UpdateFinalLinkPosition                  ; $4391: $CD $A8 $21
     call label_3E19                               ; $4394: $CD $19 $3E
@@ -269,7 +269,7 @@ AntiKirbyState3Handler::
     jr   nz, .jr_43E2                             ; $43D5: $20 $0B
 
     inc  [hl]                                     ; $43D7: $34
-    ld   hl, wEntitiesSpeedZTable                 ; $43D8: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $43D8: $21 $20 $C3
     add  hl, bc                                   ; $43DB: $09
     ld   [hl], $0C                                ; $43DC: $36 $0C
     ld   a, JINGLE_BUMP                           ; $43DE: $3E $09
@@ -293,7 +293,7 @@ jr_006_43F5:
     add  hl, bc                                   ; $43FA: $09
     ld   [hl], b                                  ; $43FB: $70
     xor  a                                        ; $43FC: $AF
-    ldh  [hLinkSpeedY], a                         ; $43FD: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $43FD: $E0 $9B
     ld   hl, wEntitiesDirectionTable              ; $43FF: $21 $80 $C3
     add  hl, bc                                   ; $4402: $09
     ld   a, [hl]                                  ; $4403: $7E
@@ -304,9 +304,9 @@ jr_006_43F5:
     ld   a, $E8                                   ; $440A: $3E $E8
 
 .jr_440C
-    ldh  [hLinkSpeedX], a                         ; $440C: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $440C: $E0 $9A
     ld   a, $10                                   ; $440E: $3E $10
-    ldh  [hLinkSpeedZ], a                         ; $4410: $E0 $A3
+    ldh  [hLinkVelocityZ], a                      ; $4410: $E0 $A3
     ld   a, $20                                   ; $4412: $3E $20
     ld   [wInvincibilityCounter], a               ; $4414: $EA $C7 $DB
     ld   a, $02                                   ; $4417: $3E $02
@@ -321,7 +321,7 @@ AntiKirbyState4Handler::
     call GetEntityTransitionCountdown             ; $4428: $CD $05 $0C
     jp   z, label_006_431B                        ; $442B: $CA $1B $43
 
-    ld   hl, wEntitiesSpeedZTable                 ; $442E: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $442E: $21 $20 $C3
     add  hl, bc                                   ; $4431: $09
     ld   [hl], b                                  ; $4432: $70
     jp   label_006_43B8                           ; $4433: $C3 $B8 $43

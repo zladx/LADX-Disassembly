@@ -13,7 +13,7 @@ BlooperEntityHandler::
     call ReturnIfNonInteractive_07                ; $5BFF: $CD $96 $7D
     call ApplyRecoilIfNeeded_07                   ; $5C02: $CD $C3 $7D
     call DefaultEnemyDamageCollisionHandler_trampoline ; $5C05: $CD $39 $3B
-    call UpdateEntityPosWithSpeed_07              ; $5C08: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $5C08: $CD $0A $7E
 
 .jr_5C0B
     call DefaultEntityPhysics_trampoline          ; $5C0B: $CD $23 $3B
@@ -52,7 +52,7 @@ func_007_5C35::
     cp   $03                                      ; $5C3E: $FE $03
     jr   z, .jr_5C58                              ; $5C40: $28 $16
 
-    call ClearEntitySpeed                         ; $5C42: $CD $7F $3D
+    call ClearEntityVelocity                      ; $5C42: $CD $7F $3D
     call GetEntityTransitionCountdown             ; $5C45: $CD $05 $0C
     ld   [hl], $25                                ; $5C48: $36 $25
     call EntityLinkPositionXDifference_07         ; $5C4A: $CD $5D $7E
@@ -64,7 +64,7 @@ func_007_5C35::
     ret                                           ; $5C57: $C9
 
 .jr_5C58
-    call GetEntitySpeedYAddress                   ; $5C58: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $5C58: $CD $05 $40
     ld   a, [hl]                                  ; $5C5B: $7E
     sub  $04                                      ; $5C5C: $D6 $04
 
@@ -81,7 +81,7 @@ func_007_5C35::
     dec  [hl]                                     ; $5C66: $35
 
 jr_007_5C67:
-    ld   hl, wEntitiesSpeedXTable                 ; $5C67: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5C67: $21 $40 $C2
     add  hl, bc                                   ; $5C6A: $09
     ld   a, [hl]                                  ; $5C6B: $7E
     and  a                                        ; $5C6C: $A7
@@ -116,7 +116,7 @@ func_007_5C79::
     and  $01                                      ; $5C87: $E6 $01
     jr   nz, .jr_5CA0                             ; $5C89: $20 $15
 
-    call GetEntitySpeedYAddress                   ; $5C8B: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $5C8B: $CD $05 $40
     dec  [hl]                                     ; $5C8E: $35
     ld   hl, wEntitiesDirectionTable              ; $5C8F: $21 $80 $C3
     add  hl, bc                                   ; $5C92: $09
@@ -125,7 +125,7 @@ func_007_5C79::
     ld   hl, Data_007_5C77                        ; $5C95: $21 $77 $5C
     add  hl, de                                   ; $5C98: $19
     ld   a, [hl]                                  ; $5C99: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $5C9A: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5C9A: $21 $40 $C2
     add  hl, bc                                   ; $5C9D: $09
     add  [hl]                                     ; $5C9E: $86
     ld   [hl], a                                  ; $5C9F: $77

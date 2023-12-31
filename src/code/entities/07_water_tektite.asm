@@ -21,7 +21,7 @@ WaterTektiteEntityHandler::
 .jr_7547
     and  $01                                      ; $7547: $E6 $01
     call SetEntitySpriteVariant                   ; $7549: $CD $0C $3B
-    call UpdateEntityPosWithSpeed_07              ; $754C: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $754C: $CD $0A $7E
     call DefaultEntityPhysics_trampoline          ; $754F: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $7552: $21 $A0 $C2
     add  hl, bc                                   ; $7555: $09
@@ -31,7 +31,7 @@ WaterTektiteEntityHandler::
 
     call GetEntityTransitionCountdown             ; $755B: $CD $05 $0C
     ld   [hl], $10                                ; $755E: $36 $10
-    call ClearEntitySpeed                         ; $7560: $CD $7F $3D
+    call ClearEntityVelocity                      ; $7560: $CD $7F $3D
     call IncrementEntityState                     ; $7563: $CD $12 $3B
     xor  a                                        ; $7566: $AF
     ld   [hl], a                                  ; $7567: $77
@@ -79,14 +79,14 @@ func_007_7597::
 .jr_75A4
     add  hl, bc                                   ; $75A4: $09
     ld   a, [hl]                                  ; $75A5: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $75A6: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $75A6: $21 $40 $C2
     add  hl, bc                                   ; $75A9: $09
     add  [hl]                                     ; $75AA: $86
     ld   [hl], a                                  ; $75AB: $77
     ld   hl, wEntitiesPrivateState2Table          ; $75AC: $21 $C0 $C2
     add  hl, bc                                   ; $75AF: $09
     ld   a, [hl]                                  ; $75B0: $7E
-    call GetEntitySpeedYAddress                   ; $75B1: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $75B1: $CD $05 $40
     add  [hl]                                     ; $75B4: $86
     ld   [hl], a                                  ; $75B5: $77
 
@@ -98,7 +98,7 @@ func_007_75B7::
     and  $01                                      ; $75B9: $E6 $01
     jr   nz, ret_007_75DD                         ; $75BB: $20 $20
 
-    ld   hl, wEntitiesSpeedXTable                 ; $75BD: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $75BD: $21 $40 $C2
     add  hl, bc                                   ; $75C0: $09
     ld   a, [hl]                                  ; $75C1: $7E
     and  a                                        ; $75C2: $A7
@@ -112,7 +112,7 @@ func_007_75B7::
 
 .jr_75CF
     call func_007_75D6                            ; $75CF: $CD $D6 $75
-    call GetEntitySpeedYAddress                   ; $75D2: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $75D2: $CD $05 $40
     ld   a, [hl]                                  ; $75D5: $7E
 
 func_007_75D6::

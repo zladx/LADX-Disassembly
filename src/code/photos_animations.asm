@@ -73,7 +73,7 @@ func_038_785A::
     ld   bc, $00                                  ; $7864: $01 $00 $00
 .loop_7867_38
     push bc                                       ; $7867: $C5
-    ld   hl, wEntitiesSpeedXTable+2               ; $7868: $21 $42 $C2
+    ld   hl, wEntitiesVelocityXTable+2            ; $7868: $21 $42 $C2
     add  hl, bc                                   ; $786B: $09
     ld   a, [hl]                                  ; $786C: $7E
     and  a                                        ; $786D: $A7

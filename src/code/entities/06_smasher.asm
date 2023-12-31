@@ -42,8 +42,8 @@ SmasherEntityHandler::
     call ReturnIfNonInteractive_06                ; $454C: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $454F: $CD $F7 $64
     call DefaultEnemyDamageCollisionHandler_trampoline ; $4552: $CD $39 $3B
-    call AddEntityZSpeedToPos_06                  ; $4555: $CD $7A $65
-    ld   hl, wEntitiesSpeedZTable                 ; $4558: $21 $20 $C3
+    call AddEntityZVelocityToPos_06               ; $4555: $CD $7A $65
+    ld   hl, wEntitiesVelocityZTable              ; $4558: $21 $20 $C3
     add  hl, bc                                   ; $455B: $09
     dec  [hl]                                     ; $455C: $35
     dec  [hl]                                     ; $455D: $35
@@ -56,7 +56,7 @@ SmasherEntityHandler::
     jr   z, .jr_4570                              ; $4568: $28 $06
 
     ld   [hl], b                                  ; $456A: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $456B: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $456B: $21 $20 $C3
     add  hl, bc                                   ; $456E: $09
     ld   [hl], b                                  ; $456F: $70
 
@@ -93,7 +93,7 @@ SmasherState0Handler::
     ldh  [hLinkPositionY], a                      ; $459D: $E0 $99
     ld   a, $10                                   ; $459F: $3E $10
     call ApplyVectorTowardsLink_trampoline        ; $45A1: $CD $AA $3B
-    call UpdateEntityPosWithSpeed_06              ; $45A4: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $45A4: $CD $41 $65
     call DefaultEntityPhysics_trampoline          ; $45A7: $CD $23 $3B
     call func_006_6594                            ; $45AA: $CD $94 $65
     ld   hl, wEntitiesDirectionTable              ; $45AD: $21 $80 $C3
@@ -136,7 +136,7 @@ func_006_45E5::
     and  a                                        ; $45E7: $A7
     jr   z, .jr_45F0                              ; $45E8: $28 $06
 
-    ld   hl, wEntitiesSpeedZTable                 ; $45EA: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $45EA: $21 $20 $C3
     add  hl, bc                                   ; $45ED: $09
     ld   [hl], $10                                ; $45EE: $36 $10
 
@@ -183,18 +183,18 @@ SmasherState1Handler::
     ld   hl, Data_006_45FA                        ; $462A: $21 $FA $45
     add  hl, de                                   ; $462D: $19
     ld   a, [hl]                                  ; $462E: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $462F: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $462F: $21 $40 $C2
     add  hl, bc                                   ; $4632: $09
     ld   [hl], a                                  ; $4633: $77
     ld   hl, Data_006_45FE                        ; $4634: $21 $FE $45
     add  hl, de                                   ; $4637: $19
     ld   a, [hl]                                  ; $4638: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $4639: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4639: $21 $50 $C2
     add  hl, bc                                   ; $463C: $09
     ld   [hl], a                                  ; $463D: $77
 
 .jr_463E
-    call UpdateEntityPosWithSpeed_06              ; $463E: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $463E: $CD $41 $65
     call DefaultEntityPhysics_trampoline          ; $4641: $CD $23 $3B
     call func_006_45E5                            ; $4644: $CD $E5 $45
     ldh  a, [hFrameCounter]                       ; $4647: $F0 $E7
@@ -294,11 +294,11 @@ SmasherState3Handler::
     ld   b, d                                     ; $46E1: $42
     ld   a, $20                                   ; $46E2: $3E $20
     call ApplyVectorTowardsLink_trampoline        ; $46E4: $CD $AA $3B
-    ld   hl, wEntitiesSpeedZTable                 ; $46E7: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $46E7: $21 $20 $C3
     add  hl, bc                                   ; $46EA: $09
     ld   [hl], $18                                ; $46EB: $36 $18
     pop  bc                                       ; $46ED: $C1
-    ld   hl, wEntitiesSpeedZTable                 ; $46EE: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $46EE: $21 $20 $C3
     add  hl, bc                                   ; $46F1: $09
     ld   [hl], $20                                ; $46F2: $36 $20
     ld   a, JINGLE_FALL_DOWN                      ; $46F4: $3E $08
@@ -314,7 +314,7 @@ SmasherState3Handler::
     add  hl, bc                                   ; $4709: $09
     ld   [hl], e                                  ; $470A: $73
     call func_006_46BD                            ; $470B: $CD $BD $46
-    call UpdateEntityPosWithSpeed_06              ; $470E: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $470E: $CD $41 $65
     jp   DefaultEntityPhysics_trampoline          ; $4711: $C3 $23 $3B
 
 SmasherState4Handler::
@@ -372,9 +372,9 @@ label_006_4781:
     call ReturnIfNonInteractive_06                ; $4793: $CD $C6 $64
     call DecrementEntityIgnoreHitsCountdown       ; $4796: $CD $56 $0C
     call label_3B70                               ; $4799: $CD $70 $3B
-    call UpdateEntityPosWithSpeed_06              ; $479C: $CD $41 $65
-    call AddEntityZSpeedToPos_06                  ; $479F: $CD $7A $65
-    ld   hl, wEntitiesSpeedZTable                 ; $47A2: $21 $20 $C3
+    call UpdateEntityPosWithVelocity_06           ; $479C: $CD $41 $65
+    call AddEntityZVelocityToPos_06               ; $479F: $CD $7A $65
+    ld   hl, wEntitiesVelocityZTable              ; $47A2: $21 $20 $C3
     add  hl, bc                                   ; $47A5: $09
     dec  [hl]                                     ; $47A6: $35
     dec  [hl]                                     ; $47A7: $35
@@ -387,7 +387,7 @@ label_006_4781:
     jr   z, jr_006_47DA                           ; $47B3: $28 $25
 
     ld   [hl], b                                  ; $47B5: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $47B6: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $47B6: $21 $20 $C3
     add  hl, bc                                   ; $47B9: $09
     ld   a, [hl]                                  ; $47BA: $7E
     sra  a                                        ; $47BB: $CB $2F
@@ -404,11 +404,11 @@ label_006_4781:
 
 jr_006_47C9:
     ld   [hl], a                                  ; $47C9: $77
-    ld   hl, wEntitiesSpeedXTable                 ; $47CA: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $47CA: $21 $40 $C2
     add  hl, bc                                   ; $47CD: $09
     sra  [hl]                                     ; $47CE: $CB $2E
     sra  [hl]                                     ; $47D0: $CB $2E
-    ld   hl, wEntitiesSpeedYTable                 ; $47D2: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $47D2: $21 $50 $C2
     add  hl, bc                                   ; $47D5: $09
     sra  [hl]                                     ; $47D6: $CB $2E
     sra  [hl]                                     ; $47D8: $CB $2E
@@ -429,9 +429,9 @@ func_006_47EA::
     and  $80                                      ; $47ED: $E6 $80
     jr   z, jr_006_4806                           ; $47EF: $28 $15
 
-    ld   hl, wEntitiesSpeedYTable                 ; $47F1: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $47F1: $21 $50 $C2
     call func_006_47FA                            ; $47F4: $CD $FA $47
-    ld   hl, wEntitiesSpeedXTable                 ; $47F7: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $47F7: $21 $40 $C2
 
 func_006_47FA::
     add  hl, bc                                   ; $47FA: $09
@@ -530,11 +530,11 @@ func_006_4855::
     ld   hl, wEntitiesFlashCountdownTable         ; $487B: $21 $20 $C4
     add  hl, de                                   ; $487E: $19
     ld   [hl], $20                                ; $487F: $36 $20
-    ld   hl, wEntitiesSpeedXTable                 ; $4881: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4881: $21 $40 $C2
     add  hl, bc                                   ; $4884: $09
     ld   a, [hl]                                  ; $4885: $7E
     push hl                                       ; $4886: $E5
-    ld   hl, wEntitiesRecoilSpeedX                ; $4887: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilVelocityX             ; $4887: $21 $F0 $C3
     add  hl, de                                   ; $488A: $19
     ld   [hl], a                                  ; $488B: $77
     pop  hl                                       ; $488C: $E1
@@ -542,11 +542,11 @@ func_006_4855::
     inc  a                                        ; $488E: $3C
     sra  a                                        ; $488F: $CB $2F
     ld   [hl], a                                  ; $4891: $77
-    ld   hl, wEntitiesSpeedYTable                 ; $4892: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4892: $21 $50 $C2
     add  hl, bc                                   ; $4895: $09
     ld   a, [hl]                                  ; $4896: $7E
     push hl                                       ; $4897: $E5
-    ld   hl, wEntitiesRecoilSpeedY                ; $4898: $21 $00 $C4
+    ld   hl, wEntitiesRecoilVelocityY             ; $4898: $21 $00 $C4
     add  hl, de                                   ; $489B: $19
     ld   [hl], a                                  ; $489C: $77
     pop  hl                                       ; $489D: $E1
@@ -614,11 +614,11 @@ jr_006_48EC:
     and  $03                                      ; $48F9: $E6 $03
     jr   z, .jr_4902                              ; $48FB: $28 $05
 
-    ld   hl, wEntitiesSpeedXTable                 ; $48FD: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $48FD: $21 $40 $C2
     jr   jr_006_4905                              ; $4900: $18 $03
 
 .jr_4902
-    ld   hl, wEntitiesSpeedYTable                 ; $4902: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4902: $21 $50 $C2
 
 jr_006_4905:
     add  hl, bc                                   ; $4905: $09

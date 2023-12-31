@@ -42,7 +42,7 @@ PolsVoiceEntityHandler::
     call RenderActiveEntitySpritesPair            ; $73B0: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $73B3: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $73B6: $CD $F7 $64
-    call UpdateEntityPosWithSpeed_06              ; $73B9: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $73B9: $CD $41 $65
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $73BC: $21 $10 $C4
     add  hl, bc                                   ; $73BF: $09
     ld   [hl], $01                                ; $73C0: $36 $01
@@ -74,7 +74,7 @@ func_006_73E0::
     call GetRandomByte                            ; $73ED: $CD $0D $28
     and  $07                                      ; $73F0: $E6 $07
     add  $10                                      ; $73F2: $C6 $10
-    ld   hl, wEntitiesSpeedZTable                 ; $73F4: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $73F4: $21 $20 $C3
     add  hl, bc                                   ; $73F7: $09
     ld   [hl], a                                  ; $73F8: $77
     call GetRandomByte                            ; $73F9: $CD $0D $28
@@ -92,13 +92,13 @@ func_006_73E0::
     ld   hl, Data_006_73D4                        ; $740B: $21 $D4 $73
     add  hl, de                                   ; $740E: $19
     ld   a, [hl]                                  ; $740F: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $7410: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7410: $21 $40 $C2
     add  hl, bc                                   ; $7413: $09
     ld   [hl], a                                  ; $7414: $77
     ld   hl, Data_006_73DA                        ; $7415: $21 $DA $73
     add  hl, de                                   ; $7418: $19
     ld   a, [hl]                                  ; $7419: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $741A: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $741A: $21 $50 $C2
     add  hl, bc                                   ; $741D: $09
     ld   [hl], a                                  ; $741E: $77
 
@@ -107,8 +107,8 @@ jr_006_741F:
     jp   SetEntitySpriteVariant                   ; $7420: $C3 $0C $3B
 
 func_006_7423::
-    call AddEntityZSpeedToPos_06                  ; $7423: $CD $7A $65
-    ld   hl, wEntitiesSpeedZTable                 ; $7426: $21 $20 $C3
+    call AddEntityZVelocityToPos_06               ; $7423: $CD $7A $65
+    ld   hl, wEntitiesVelocityZTable              ; $7426: $21 $20 $C3
     add  hl, bc                                   ; $7429: $09
     dec  [hl]                                     ; $742A: $35
     ld   hl, wEntitiesPosZTable                   ; $742B: $21 $10 $C3
@@ -125,4 +125,4 @@ func_006_7423::
     and  $0F                                      ; $743E: $E6 $0F
     add  $18                                      ; $7440: $C6 $18
     ld   [hl], a                                  ; $7442: $77
-    jp   ClearEntitySpeed                         ; $7443: $C3 $7F $3D
+    jp   ClearEntityVelocity                      ; $7443: $C3 $7F $3D

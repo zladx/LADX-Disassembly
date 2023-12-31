@@ -28,7 +28,7 @@ SideViewPlatformVerticalEntityHandler::
     ld   hl, Data_007_63F7                        ; $637F: $21 $F7 $63
     add  hl, de                                   ; $6382: $19
     ld   a, [hl]                                  ; $6383: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $6384: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6384: $21 $40 $C2
     add  hl, bc                                   ; $6387: $09
     add  [hl]                                     ; $6388: $86
     ld   [hl], a                                  ; $6389: $77
@@ -51,7 +51,7 @@ func_007_639E::
     ld   [hl], b                                  ; $63A2: $70
     ldh  a, [hActiveEntityPosX]                   ; $63A3: $F0 $EE
     push af                                       ; $63A5: $F5
-    call UpdateEntityPosWithSpeed_07              ; $63A6: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $63A6: $CD $0A $7E
     pop  af                                       ; $63A9: $F1
     ld   e, a                                     ; $63AA: $5F
     ld   hl, wEntitiesPosXTable                   ; $63AB: $21 $00 $C2
@@ -63,7 +63,7 @@ func_007_639E::
     call CheckLinkCollisionWithEnemy_trampoline   ; $63B6: $CD $5A $3B
     jr   nc, .ret_63F6                            ; $63B9: $30 $3B
 
-    ldh  a, [hLinkSpeedY]                         ; $63BB: $F0 $9B
+    ldh  a, [hLinkVelocityY]                      ; $63BB: $F0 $9B
     and  $80                                      ; $63BD: $E6 $80
     jr   nz, .ret_63F6                            ; $63BF: $20 $35
 
@@ -77,10 +77,10 @@ func_007_639E::
     ld   a, [hl]                                  ; $63CE: $7E
     sub  $10                                      ; $63CF: $D6 $10
     ldh  [hLinkPositionY], a                      ; $63D1: $E0 $99
-    ldh  a, [hLinkSpeedX]                         ; $63D3: $F0 $9A
+    ldh  a, [hLinkVelocityX]                      ; $63D3: $F0 $9A
     push af                                       ; $63D5: $F5
     ldh  a, [hMultiPurposeG]                      ; $63D6: $F0 $E8
-    ldh  [hLinkSpeedX], a                         ; $63D8: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $63D8: $E0 $9A
     ld   hl, hLinkPositionX                       ; $63DA: $21 $98 $FF
     add  [hl]                                     ; $63DD: $86
     ld   [hl], a                                  ; $63DE: $77
@@ -88,9 +88,9 @@ func_007_639E::
     call label_3E19                               ; $63E0: $CD $19 $3E
     pop  bc                                       ; $63E3: $C1
     pop  af                                       ; $63E4: $F1
-    ldh  [hLinkSpeedX], a                         ; $63E5: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $63E5: $E0 $9A
     ld   a, $02                                   ; $63E7: $3E $02
-    ldh  [hLinkSpeedY], a                         ; $63E9: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $63E9: $E0 $9B
     ld   a, $01                                   ; $63EB: $3E $01
     ld   [wC147], a                               ; $63ED: $EA $47 $C1
     ld   hl, wEntitiesPrivateState2Table          ; $63F0: $21 $C0 $C2
@@ -114,7 +114,7 @@ label_007_63FB:
     ld   hl, Data_007_63F7                        ; $6401: $21 $F7 $63
     add  hl, de                                   ; $6404: $19
     ld   a, [hl]                                  ; $6405: $7E
-    call GetEntitySpeedYAddress                   ; $6406: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $6406: $CD $05 $40
     add  [hl]                                     ; $6409: $86
     ld   [hl], a                                  ; $640A: $77
     ld   hl, Data_007_63F9                        ; $640B: $21 $F9 $63
@@ -187,7 +187,7 @@ SideViewPlatformEntityHandler::
     and  $03                                      ; $647A: $E6 $03
     jr   nz, ret_007_6488                         ; $647C: $20 $0A
 
-    call GetEntitySpeedYAddress                   ; $647E: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $647E: $CD $05 $40
 
 .jr_6481
     ld   a, [hl]                                  ; $6481: $7E
@@ -201,7 +201,7 @@ ret_007_6488:
     ret                                           ; $6488: $C9
 
 jr_007_6489:
-    call GetEntitySpeedYAddress                   ; $6489: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $6489: $CD $05 $40
     ld   [hl], b                                  ; $648C: $70
     ld   hl, wEntitiesPrivateState4Table          ; $648D: $21 $40 $C4
     add  hl, bc                                   ; $6490: $09

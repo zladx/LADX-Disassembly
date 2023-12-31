@@ -28,8 +28,8 @@ WitchRatEntityHandler::
     ld   de, WitchRatSpriteVariants               ; $78AB: $11 $8D $78
     call RenderActiveEntitySpritesPair            ; $78AE: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $78B1: $CD $0D $7B
-    call AddEntityZSpeedToPos_15                  ; $78B4: $CD $C1 $7B
-    ld   hl, wEntitiesSpeedZTable                 ; $78B7: $21 $20 $C3
+    call AddEntityZVelocityToPos_15               ; $78B4: $CD $C1 $7B
+    ld   hl, wEntitiesVelocityZTable              ; $78B7: $21 $20 $C3
     add  hl, bc                                   ; $78BA: $09
     dec  [hl]                                     ; $78BB: $35
     dec  [hl]                                     ; $78BC: $35
@@ -42,7 +42,7 @@ WitchRatEntityHandler::
 
     xor  a                                        ; $78C8: $AF
     ld   [hl], a                                  ; $78C9: $77
-    ld   hl, wEntitiesSpeedZTable                 ; $78CA: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $78CA: $21 $20 $C3
     add  hl, bc                                   ; $78CD: $09
     ld   [hl], a                                  ; $78CE: $77
 
@@ -66,7 +66,7 @@ func_015_78DE::
     ld   hl, Data_015_78D6                        ; $78EA: $21 $D6 $78
     add  hl, de                                   ; $78ED: $19
     ld   a, [hl]                                  ; $78EE: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $78EF: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $78EF: $21 $40 $C2
     add  hl, bc                                   ; $78F2: $09
     ld   [hl], a                                  ; $78F3: $77
     ld   a, e                                     ; $78F4: $7B
@@ -80,7 +80,7 @@ func_015_78DE::
     ld   hl, Data_015_78D6                        ; $7902: $21 $D6 $78
     add  hl, de                                   ; $7905: $19
     ld   a, [hl]                                  ; $7906: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $7907: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $7907: $21 $50 $C2
     add  hl, bc                                   ; $790A: $09
     ld   [hl], a                                  ; $790B: $77
     call GetEntityTransitionCountdown             ; $790C: $CD $05 $0C
@@ -107,7 +107,7 @@ func_015_78DE::
     ret                                           ; $792D: $C9
 
 func_015_792E::
-    call UpdateEntityPosWithSpeed_15              ; $792E: $CD $88 $7B
+    call UpdateEntityPosWithVelocity_15           ; $792E: $CD $88 $7B
     call DefaultEntityPhysics_trampoline          ; $7931: $CD $23 $3B
     ldh  a, [hMultiPurposeG]                      ; $7934: $F0 $E8
     and  a                                        ; $7936: $A7
@@ -122,7 +122,7 @@ func_015_792E::
     ret                                           ; $7944: $C9
 
 .jr_7945
-    ld   hl, wEntitiesSpeedZTable                 ; $7945: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $7945: $21 $20 $C3
     add  hl, bc                                   ; $7948: $09
     ld   [hl], $08                                ; $7949: $36 $08
     ld   hl, wEntitiesPosZTable                   ; $794B: $21 $10 $C3

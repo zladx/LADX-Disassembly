@@ -65,16 +65,16 @@ LaserEntityHandler::
     ld   hl, wEntitiesDirectionTable              ; $6C9A: $21 $80 $C3
     add  hl, de                                   ; $6C9D: $19
     ld   [hl], a                                  ; $6C9E: $77
-    ld   hl, wEntitiesSpeedXTable                 ; $6C9F: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6C9F: $21 $40 $C2
     add  hl, bc                                   ; $6CA2: $09
     ld   a, [hl]                                  ; $6CA3: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $6CA4: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6CA4: $21 $40 $C2
     add  hl, de                                   ; $6CA7: $19
     ld   [hl], a                                  ; $6CA8: $77
-    ld   hl, wEntitiesSpeedYTable                 ; $6CA9: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6CA9: $21 $50 $C2
     add  hl, bc                                   ; $6CAC: $09
     ld   a, [hl]                                  ; $6CAD: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $6CAE: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6CAE: $21 $50 $C2
     add  hl, de                                   ; $6CB1: $19
     ld   [hl], a                                  ; $6CB2: $77
 
@@ -127,13 +127,13 @@ jr_004_6CB4:
     ld   hl, Data_004_6C51                        ; $6CF9: $21 $51 $6C
     add  hl, bc                                   ; $6CFC: $09
     ld   a, [hl]                                  ; $6CFD: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $6CFE: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6CFE: $21 $40 $C2
     add  hl, de                                   ; $6D01: $19
     ld   [hl], a                                  ; $6D02: $77
     ld   hl, Data_004_6C4D                        ; $6D03: $21 $4D $6C
     add  hl, bc                                   ; $6D06: $09
     ld   a, [hl]                                  ; $6D07: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $6D08: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6D08: $21 $50 $C2
     add  hl, de                                   ; $6D0B: $19
     ld   [hl], a                                  ; $6D0C: $77
     pop  bc                                       ; $6D0D: $C1
@@ -191,7 +191,7 @@ label_004_6D0F:
     ret                                           ; $6D5B: $C9
 
 .jr_6D5C
-    ld   hl, wEntitiesSpeedXTable                 ; $6D5C: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6D5C: $21 $40 $C2
     add  hl, bc                                   ; $6D5F: $09
     ld   a, [hl]                                  ; $6D60: $7E
     ld   hl, wEntitiesPosXTable                   ; $6D61: $21 $00 $C2
@@ -201,7 +201,7 @@ label_004_6D0F:
     cp   $9C                                      ; $6D67: $FE $9C
     jp   nc, ClearEntityStatusBank04              ; $6D69: $D2 $7A $6D
 
-    ld   hl, wEntitiesSpeedYTable                 ; $6D6C: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6D6C: $21 $50 $C2
     add  hl, bc                                   ; $6D6F: $09
     ld   a, [hl]                                  ; $6D70: $7E
     ld   hl, wEntitiesPosYTable                   ; $6D71: $21 $10 $C2

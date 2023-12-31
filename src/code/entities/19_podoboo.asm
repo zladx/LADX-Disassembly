@@ -52,7 +52,7 @@ PodobooState1Handler::
     cp   $02                                      ; $541E: $FE $02
     ret  nc                                       ; $5420: $D0
 
-    ld   hl, wEntitiesSpeedYTable                 ; $5421: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $5421: $21 $50 $C2
     add  hl, bc                                   ; $5424: $09
     ld   [hl], $D0                                ; $5425: $36 $D0
     call IncrementEntityState                     ; $5427: $CD $12 $3B
@@ -86,13 +86,13 @@ func_019_542A::
     ld   hl, Data_019_5412                        ; $5451: $21 $12 $54
     add  hl, bc                                   ; $5454: $09
     ld   a, [hl]                                  ; $5455: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $5456: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5456: $21 $40 $C2
     add  hl, de                                   ; $5459: $19
     ld   [hl], a                                  ; $545A: $77
     ld   hl, Data_019_5414                        ; $545B: $21 $14 $54
     add  hl, bc                                   ; $545E: $09
     ld   a, [hl]                                  ; $545F: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $5460: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $5460: $21 $50 $C2
     add  hl, de                                   ; $5463: $19
     ld   [hl], a                                  ; $5464: $77
     pop  bc                                       ; $5465: $C1
@@ -113,8 +113,8 @@ PodobooState2Handler::
     call RenderActiveEntitySpritesPair            ; $5476: $CD $C0 $3B
     call ReturnIfNonInteractive_19                ; $5479: $CD $3D $7D
     call label_3B44                               ; $547C: $CD $44 $3B
-    call UpdateEntityYPosWithSpeed_19             ; $547F: $CD $BB $7D
-    ld   hl, wEntitiesSpeedYTable                 ; $5482: $21 $50 $C2
+    call UpdateEntityYPosWithVelocity_19          ; $547F: $CD $BB $7D
+    ld   hl, wEntitiesVelocityYTable              ; $5482: $21 $50 $C2
     add  hl, bc                                   ; $5485: $09
     inc  [hl]                                     ; $5486: $34
     ld   e, $00                                   ; $5487: $1E $00
@@ -248,8 +248,8 @@ jr_019_552D:
     rra                                           ; $5536: $1F
     and  $01                                      ; $5537: $E6 $01
     call SetEntitySpriteVariant                   ; $5539: $CD $0C $3B
-    call UpdateEntityPosWithSpeed_19              ; $553C: $CD $B8 $7D
-    ld   hl, wEntitiesSpeedYTable                 ; $553F: $21 $50 $C2
+    call UpdateEntityPosWithVelocity_19           ; $553C: $CD $B8 $7D
+    ld   hl, wEntitiesVelocityYTable              ; $553F: $21 $50 $C2
     add  hl, bc                                   ; $5542: $09
     inc  [hl]                                     ; $5543: $34
     ld   a, [hl]                                  ; $5544: $7E

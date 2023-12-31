@@ -426,7 +426,7 @@ jr_004_5273:
     ld   [hl], $1B                                ; $5327: $36 $1B
     ld   c, e                                     ; $5329: $4B
     ld   b, d                                     ; $532A: $42
-    ld   hl, wEntitiesSpeedXTable                 ; $532B: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $532B: $21 $40 $C2
     add  hl, bc                                   ; $532E: $09
     ld   [hl], $01                                ; $532F: $36 $01
     call DefaultEntityPhysics_trampoline          ; $5331: $CD $23 $3B
@@ -588,11 +588,11 @@ FacadeState1Handler:
     ldh  a, [hMultiPurpose0]                      ; $54B4: $F0 $D7
     cpl                                           ; $54B6: $2F
     inc  a                                        ; $54B7: $3C
-    ldh  [hLinkSpeedY], a                         ; $54B8: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $54B8: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $54BA: $F0 $D8
     cpl                                           ; $54BC: $2F
     inc  a                                        ; $54BD: $3C
-    ldh  [hLinkSpeedX], a                         ; $54BE: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $54BE: $E0 $9A
     push bc                                       ; $54C0: $C5
     call UpdateFinalLinkPosition                  ; $54C1: $CD $A8 $21
     pop  bc                                       ; $54C4: $C1
@@ -725,7 +725,7 @@ jr_004_557E:
     jp   ApplyVectorTowardsLink_trampoline        ; $5583: $C3 $AA $3B
 
 func_004_5586::
-    call UpdateEntityPosWithSpeed_04              ; $5586: $CD $CA $6D
+    call UpdateEntityPosWithVelocity_04           ; $5586: $CD $CA $6D
     call DefaultEntityPhysics_trampoline          ; $5589: $CD $23 $3B
     call DefaultEnemyDamageCollisionHandler_trampoline ; $558C: $CD $39 $3B
     ld   hl, wEntitiesCollisionsTable             ; $558F: $21 $A0 $C2
@@ -790,7 +790,7 @@ jr_004_55D8:
     jp   ApplyVectorTowardsLink_trampoline        ; $55DD: $C3 $AA $3B
 
 func_004_55E0::
-    call UpdateEntityPosWithSpeed_04              ; $55E0: $CD $CA $6D
+    call UpdateEntityPosWithVelocity_04           ; $55E0: $CD $CA $6D
     call DefaultEntityPhysics_trampoline          ; $55E3: $CD $23 $3B
     call DefaultEnemyDamageCollisionHandler_trampoline ; $55E6: $CD $39 $3B
     ld   hl, wEntitiesCollisionsTable             ; $55E9: $21 $A0 $C2

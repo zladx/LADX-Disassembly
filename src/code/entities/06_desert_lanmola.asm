@@ -94,7 +94,7 @@ func_006_564B::
     ld   hl, wEntitiesSpriteVariantTable          ; $566D: $21 $B0 $C3
     add  hl, de                                   ; $5670: $19
     ld   [hl], $02                                ; $5671: $36 $02
-    ld   hl, wEntitiesSpeedZTable                 ; $5673: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5673: $21 $20 $C3
     add  hl, de                                   ; $5676: $19
     ld   [hl], $10                                ; $5677: $36 $10
     ld   hl, wEntitiesPrivateCountdown1Table      ; $5679: $21 $F0 $C2
@@ -188,7 +188,7 @@ label_006_56C8:
     ld   hl, Data_006_55E5                        ; $56FA: $21 $E5 $55
     add  hl, bc                                   ; $56FD: $09
     ld   a, [hl]                                  ; $56FE: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $56FF: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $56FF: $21 $40 $C2
     add  hl, de                                   ; $5702: $19
     ld   [hl], a                                  ; $5703: $77
     ld   a, [wC1CE]                               ; $5704: $FA $CE $C1
@@ -196,7 +196,7 @@ label_006_56C8:
     ld   hl, wEntitiesPosYTable                   ; $5709: $21 $10 $C2
     add  hl, de                                   ; $570C: $19
     ld   [hl], a                                  ; $570D: $77
-    ld   hl, wEntitiesSpeedYTable                 ; $570E: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $570E: $21 $50 $C2
     add  hl, de                                   ; $5711: $19
     ld   [hl], $F0                                ; $5712: $36 $F0
     ld   hl, wEntitiesPrivateState3Table          ; $5714: $21 $D0 $C2
@@ -311,7 +311,7 @@ func_006_57A8::
     ldh  [hLinkPositionY], a                      ; $57C3: $E0 $99
     pop  af                                       ; $57C5: $F1
     ldh  [hLinkPositionX], a                      ; $57C6: $E0 $98
-    ld   hl, wEntitiesSpeedZTable                 ; $57C8: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $57C8: $21 $20 $C3
     add  hl, bc                                   ; $57CB: $09
     ld   [hl], $08                                ; $57CC: $36 $08
     ldh  a, [hActiveEntityPosX]                   ; $57CE: $F0 $EE
@@ -346,8 +346,8 @@ func_006_57ED::
     call IncrementEntityState                     ; $5800: $CD $12 $3B
 
 .jr_5803
-    call UpdateEntityPosWithSpeed_06              ; $5803: $CD $41 $65
-    call AddEntityZSpeedToPos_06                  ; $5806: $CD $7A $65
+    call UpdateEntityPosWithVelocity_06           ; $5803: $CD $41 $65
+    call AddEntityZVelocityToPos_06               ; $5806: $CD $7A $65
     jp   DefaultEnemyDamageCollisionHandler_trampoline ; $5809: $C3 $39 $3B
 
 func_006_580C::
@@ -366,7 +366,7 @@ func_006_580C::
     bit  0, a                                     ; $581D: $CB $47
     jr   nz, jr_006_582C                          ; $581F: $20 $0B
 
-    ld   hl, wEntitiesSpeedZTable                 ; $5821: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5821: $21 $20 $C3
     add  hl, bc                                   ; $5824: $09
     and  $20                                      ; $5825: $E6 $20
     jr   nz, .jr_582B                             ; $5827: $20 $02
@@ -378,8 +378,8 @@ func_006_580C::
     dec  [hl]                                     ; $582B: $35
 
 jr_006_582C:
-    call UpdateEntityPosWithSpeed_06              ; $582C: $CD $41 $65
-    call AddEntityZSpeedToPos_06                  ; $582F: $CD $7A $65
+    call UpdateEntityPosWithVelocity_06           ; $582C: $CD $41 $65
+    call AddEntityZVelocityToPos_06               ; $582F: $CD $7A $65
     jp   DefaultEnemyDamageCollisionHandler_trampoline ; $5832: $C3 $39 $3B
 
 func_006_5835::
@@ -405,7 +405,7 @@ func_006_5835::
     ldh  [hNoiseSfx], a                           ; $5856: $E0 $F4
 
 .jr_5858
-    ld   hl, wEntitiesSpeedZTable                 ; $5858: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5858: $21 $20 $C3
     add  hl, bc                                   ; $585B: $09
     ld   a, [hl]                                  ; $585C: $7E
     sub  $F4                                      ; $585D: $D6 $F4
@@ -419,7 +419,7 @@ func_006_5835::
     and  $07                                      ; $5866: $E6 $07
     jr   nz, jr_006_5888                          ; $5868: $20 $1E
 
-    ld   hl, wEntitiesSpeedXTable                 ; $586A: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $586A: $21 $40 $C2
     add  hl, bc                                   ; $586D: $09
     ld   a, [hl]                                  ; $586E: $7E
     and  a                                        ; $586F: $A7
@@ -435,7 +435,7 @@ func_006_5835::
     dec  [hl]                                     ; $5878: $35
 
 jr_006_5879:
-    ld   hl, wEntitiesSpeedYTable                 ; $5879: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $5879: $21 $50 $C2
     add  hl, bc                                   ; $587C: $09
     ld   a, [hl]                                  ; $587D: $7E
     and  a                                        ; $587E: $A7
@@ -451,8 +451,8 @@ jr_006_5879:
     dec  [hl]                                     ; $5887: $35
 
 jr_006_5888:
-    call UpdateEntityPosWithSpeed_06              ; $5888: $CD $41 $65
-    call AddEntityZSpeedToPos_06                  ; $588B: $CD $7A $65
+    call UpdateEntityPosWithVelocity_06           ; $5888: $CD $41 $65
+    call AddEntityZVelocityToPos_06               ; $588B: $CD $7A $65
     ld   hl, wEntitiesPosZTable                   ; $588E: $21 $10 $C3
     add  hl, bc                                   ; $5891: $09
     ld   a, [hl]                                  ; $5892: $7E
@@ -589,7 +589,7 @@ jr_006_5936:
     jp   CopyEntityPositionToActivePosition       ; $5949: $C3 $8A $3D
 
 func_006_594C::
-    ld   hl, wEntitiesSpeedXTable                 ; $594C: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $594C: $21 $40 $C2
     add  hl, bc                                   ; $594F: $09
     ld   a, [hl]                                  ; $5950: $7E
     ld   d, a                                     ; $5951: $57
@@ -601,7 +601,7 @@ func_006_594C::
 
 .jr_5958
     ld   e, a                                     ; $5958: $5F
-    ld   hl, wEntitiesSpeedYTable                 ; $5959: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $5959: $21 $50 $C2
     add  hl, bc                                   ; $595C: $09
     ld   a, [hl]                                  ; $595D: $7E
     bit  7, a                                     ; $595E: $CB $7F
@@ -644,8 +644,8 @@ label_006_5988:
     ld   de, Data_006_5980                        ; $5988: $11 $80 $59
     call RenderActiveEntitySprite                 ; $598B: $CD $77 $3C
     call ReturnIfNonInteractive_06                ; $598E: $CD $C6 $64
-    call UpdateEntityPosWithSpeed_06              ; $5991: $CD $41 $65
-    ld   hl, wEntitiesSpeedYTable                 ; $5994: $21 $50 $C2
+    call UpdateEntityPosWithVelocity_06           ; $5991: $CD $41 $65
+    ld   hl, wEntitiesVelocityYTable              ; $5994: $21 $50 $C2
     add  hl, bc                                   ; $5997: $09
     inc  [hl]                                     ; $5998: $34
     ld   a, [hl]                                  ; $5999: $7E

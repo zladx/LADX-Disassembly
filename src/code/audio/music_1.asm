@@ -767,10 +767,10 @@ soundOpcode00:
 soundOpcode9E:
     call IncChannelDefinitionPointer              ; $44AD: $CD $0B $44
     call ReadSoundPointerByte                     ; $44B0: $CD $20 $44
-    ld   [wMusicSpeedPointer], a                  ; $44B3: $EA $01 $D3
+    ld   [wMusicVelocityPointer], a               ; $44B3: $EA $01 $D3
     call IncChannelDefinitionPointer              ; $44B6: $CD $0B $44
     call ReadSoundPointerByte                     ; $44B9: $CD $20 $44
-    ld   [wMusicSpeedPointer+1], a                ; $44BC: $EA $02 $D3
+    ld   [wMusicVelocityPointer+1], a             ; $44BC: $EA $02 $D3
     jr   IncChannelDefinitonPointerAndParseNext   ; $44BF: $18 $09
 
 soundOpcode9F:
@@ -929,7 +929,7 @@ ParseSoundOpcode:
     ld   c, a                                     ; $457E: $4F
     ld   b, $00                                   ; $457F: $06 $00
     push hl                                       ; $4581: $E5
-    ld   de, wMusicSpeedPointer                   ; $4582: $11 $01 $D3
+    ld   de, wMusicVelocityPointer                ; $4582: $11 $01 $D3
     ld   a, [de]                                  ; $4585: $1A
     ld   l, a                                     ; $4586: $6F
     inc  e                                        ; $4587: $1C

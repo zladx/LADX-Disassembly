@@ -114,13 +114,13 @@ jr_006_505B:
     ld   hl, Data_006_4FB0                        ; $505F: $21 $B0 $4F
     add  hl, de                                   ; $5062: $19
     ld   a, [hl]                                  ; $5063: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $5064: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5064: $21 $40 $C2
     add  hl, bc                                   ; $5067: $09
     ld   [hl], a                                  ; $5068: $77
     ld   hl, Data_006_4FB4                        ; $5069: $21 $B4 $4F
     add  hl, de                                   ; $506C: $19
     ld   a, [hl]                                  ; $506D: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $506E: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $506E: $21 $50 $C2
     add  hl, bc                                   ; $5071: $09
     ld   [hl], a                                  ; $5072: $77
     ret                                           ; $5073: $C9
@@ -142,10 +142,10 @@ HinoxState0Handler::
     or   $10                                      ; $508A: $F6 $10
     ld   [hl], a                                  ; $508C: $77
     call IncrementEntityState                     ; $508D: $CD $12 $3B
-    call ClearEntitySpeed                         ; $5090: $CD $7F $3D
+    call ClearEntityVelocity                      ; $5090: $CD $7F $3D
 
 jr_006_5093:
-    call UpdateEntityPosWithSpeed_06              ; $5093: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $5093: $CD $41 $65
     call DefaultEntityPhysics_trampoline          ; $5096: $CD $23 $3B
 
 func_006_5099::
@@ -192,7 +192,7 @@ HinoxState3Handler::
     ld   [hl], b                                  ; $50D6: $70
 
 .jr_50D7
-    call UpdateEntityPosWithSpeed_06              ; $50D7: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $50D7: $CD $41 $65
     call DefaultEntityPhysics_trampoline          ; $50DA: $CD $23 $3B
     call func_006_6594                            ; $50DD: $CD $94 $65
     add  $18                                      ; $50E0: $C6 $18
@@ -252,7 +252,7 @@ HinoxState4Handler::
     jr   nz, jr_006_5179                          ; $5147: $20 $30
 
     ld   a, $20                                   ; $5149: $3E $20
-    ldh  [hLinkSpeedY], a                         ; $514B: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $514B: $E0 $9B
     ldh  a, [hLinkPositionX]                      ; $514D: $F0 $98
     cp   $50                                      ; $514F: $FE $50
     ld   a, $E0                                   ; $5151: $3E $E0
@@ -261,9 +261,9 @@ HinoxState4Handler::
     ld   a, $20                                   ; $5155: $3E $20
 
 .jr_5157
-    ldh  [hLinkSpeedX], a                         ; $5157: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $5157: $E0 $9A
     ld   a, $10                                   ; $5159: $3E $10
-    ldh  [hLinkSpeedZ], a                         ; $515B: $E0 $A3
+    ldh  [hLinkVelocityZ], a                      ; $515B: $E0 $A3
     ld   a, $02                                   ; $515D: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $515F: $EA $46 $C1
     ld   a, JINGLE_FALL_DOWN                      ; $5162: $3E $08

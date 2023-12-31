@@ -29,7 +29,7 @@ SparkCounterClockwiseEntityHandler::
     call ReturnIfNonInteractive_06                ; $6646: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $6649: $CD $F7 $64
     call label_3B44                               ; $664C: $CD $44 $3B
-    call UpdateEntityPosWithSpeed_06              ; $664F: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $664F: $CD $41 $65
     call func_006_66CC                            ; $6652: $CD $CC $66
     ld   hl, wEntitiesPrivateState1Table          ; $6655: $21 $B0 $C2
     add  hl, bc                                   ; $6658: $09
@@ -96,7 +96,7 @@ jr_006_669D:
     ld   hl, Data_006_661D                        ; $66AA: $21 $1D $66
     add  hl, de                                   ; $66AD: $19
     ld   a, [hl]                                  ; $66AE: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $66AF: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $66AF: $21 $50 $C2
     add  hl, bc                                   ; $66B2: $09
     ld   [hl], a                                  ; $66B3: $77
     ld   hl, wEntitiesPrivateState1Table          ; $66B4: $21 $B0 $C2
@@ -111,18 +111,18 @@ jr_006_669D:
     ld   hl, Data_006_6625                        ; $66C1: $21 $25 $66
     add  hl, de                                   ; $66C4: $19
     ld   a, [hl]                                  ; $66C5: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $66C6: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $66C6: $21 $40 $C2
     add  hl, bc                                   ; $66C9: $09
     ld   [hl], a                                  ; $66CA: $77
     ret                                           ; $66CB: $C9
 
 func_006_66CC::
-    ld   hl, wEntitiesSpeedXTable                 ; $66CC: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $66CC: $21 $40 $C2
     add  hl, bc                                   ; $66CF: $09
     ld   a, [hl]                                  ; $66D0: $7E
     push af                                       ; $66D1: $F5
     ld   [hl], $01                                ; $66D2: $36 $01
-    ld   hl, wEntitiesSpeedYTable                 ; $66D4: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $66D4: $21 $50 $C2
     add  hl, bc                                   ; $66D7: $09
     ld   a, [hl]                                  ; $66D8: $7E
     push af                                       ; $66D9: $F5
@@ -132,10 +132,10 @@ func_006_66CC::
     add  hl, bc                                   ; $66E2: $09
     ld   a, [hl]                                  ; $66E3: $7E
     push af                                       ; $66E4: $F5
-    ld   hl, wEntitiesSpeedXTable                 ; $66E5: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $66E5: $21 $40 $C2
     add  hl, bc                                   ; $66E8: $09
     ld   [hl], $FF                                ; $66E9: $36 $FF
-    ld   hl, wEntitiesSpeedYTable                 ; $66EB: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $66EB: $21 $50 $C2
     add  hl, bc                                   ; $66EE: $09
     ld   [hl], $FF                                ; $66EF: $36 $FF
     call DefaultEntityPhysics_trampoline          ; $66F1: $CD $23 $3B
@@ -145,11 +145,11 @@ func_006_66CC::
     or   [hl]                                     ; $66F9: $B6
     ld   [hl], a                                  ; $66FA: $77
     pop  af                                       ; $66FB: $F1
-    ld   hl, wEntitiesSpeedYTable                 ; $66FC: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $66FC: $21 $50 $C2
     add  hl, bc                                   ; $66FF: $09
     ld   [hl], a                                  ; $6700: $77
     pop  af                                       ; $6701: $F1
-    ld   hl, wEntitiesSpeedXTable                 ; $6702: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6702: $21 $40 $C2
     add  hl, bc                                   ; $6705: $09
     ld   [hl], a                                  ; $6706: $77
     ret                                           ; $6707: $C9

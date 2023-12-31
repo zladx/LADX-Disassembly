@@ -33,7 +33,7 @@ WizrobeEntityHandler::
     call RenderActiveEntitySpritesPair            ; $762B: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $762E: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $7631: $CD $F7 $64
-    call UpdateEntityPosWithSpeed_06              ; $7634: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $7634: $CD $41 $65
     call DefaultEntityPhysics_trampoline          ; $7637: $CD $23 $3B
     ld   hl, wEntitiesStateTable                  ; $763A: $21 $90 $C2
     add  hl, bc                                   ; $763D: $09
@@ -188,13 +188,13 @@ label_006_7709:
     ld   hl, Data_006_7620                        ; $7711: $21 $20 $76
     add  hl, bc                                   ; $7714: $09
     ld   a, [hl]                                  ; $7715: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $7716: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7716: $21 $40 $C2
     add  hl, de                                   ; $7719: $19
     ld   [hl], a                                  ; $771A: $77
     ld   hl, Data_006_7624                        ; $771B: $21 $24 $76
     add  hl, bc                                   ; $771E: $09
     ld   a, [hl]                                  ; $771F: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $7720: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $7720: $21 $50 $C2
     add  hl, de                                   ; $7723: $19
     ld   [hl], a                                  ; $7724: $77
 

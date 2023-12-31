@@ -93,7 +93,7 @@ jr_006_6CE8:
     add  hl, bc                                   ; $6CF4: $09
     ld   a, [hl]                                  ; $6CF5: $7E
     ldh  [hIndexOfObjectBelowLink], a             ; $6CF6: $E0 $E9
-    ld   hl, wEntitiesSpeedXTable                 ; $6CF8: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6CF8: $21 $40 $C2
     add  hl, bc                                   ; $6CFB: $09
     ld   a, [hl]                                  ; $6CFC: $7E
     and  a                                        ; $6CFD: $A7
@@ -111,8 +111,8 @@ jr_006_6CE8:
     ld   [hl], e                                  ; $6D0C: $73
 
 jr_006_6D0D:
-    call AddEntityZSpeedToPos_06                  ; $6D0D: $CD $7A $65
-    ld   hl, wEntitiesSpeedZTable                 ; $6D10: $21 $20 $C3
+    call AddEntityZVelocityToPos_06               ; $6D0D: $CD $7A $65
+    ld   hl, wEntitiesVelocityZTable              ; $6D10: $21 $20 $C3
     add  hl, bc                                   ; $6D13: $09
     dec  [hl]                                     ; $6D14: $35
     dec  [hl]                                     ; $6D15: $35
@@ -126,7 +126,7 @@ jr_006_6D0D:
     jr   z, .jr_6D32                              ; $6D21: $28 $0F
 
     ld   [hl], b                                  ; $6D23: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $6D24: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6D24: $21 $20 $C3
     add  hl, bc                                   ; $6D27: $09
     ld   a, [hl]                                  ; $6D28: $7E
     ld   [hl], b                                  ; $6D29: $70
@@ -162,7 +162,7 @@ RollingBonesState0Handler::
     ld   e, $F8                                   ; $6D53: $1E $F8
 
 .jr_6D55
-    ld   hl, wEntitiesSpeedXTable                 ; $6D55: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6D55: $21 $40 $C2
     add  hl, bc                                   ; $6D58: $09
     ld   [hl], e                                  ; $6D59: $73
     add  $10                                      ; $6D5A: $C6 $10
@@ -174,12 +174,12 @@ RollingBonesState0Handler::
     jp   IncrementEntityState                     ; $6D65: $C3 $12 $3B
 
 .jr_6D68
-    call AddEntitySpeedToPos_06                   ; $6D68: $CD $4E $65
+    call AddEntityVelocityToPos_06                ; $6D68: $CD $4E $65
     ldh  a, [hMultiPurposeG]                      ; $6D6B: $F0 $E8
     and  a                                        ; $6D6D: $A7
     jr   z, .jr_6D76                              ; $6D6E: $28 $06
 
-    ld   hl, wEntitiesSpeedZTable                 ; $6D70: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6D70: $21 $20 $C3
     add  hl, bc                                   ; $6D73: $09
     ld   [hl], $0C                                ; $6D74: $36 $0C
 
@@ -205,7 +205,7 @@ RollingBonesState1Handler::
     ld   a, [wD201]                               ; $6D8C: $FA $01 $D2
     ld   e, a                                     ; $6D8F: $5F
     ld   d, b                                     ; $6D90: $50
-    ld   hl, wEntitiesSpeedXTable                 ; $6D91: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6D91: $21 $40 $C2
     add  hl, de                                   ; $6D94: $19
     pop  af                                       ; $6D95: $F1
     ld   [hl], a                                  ; $6D96: $77
@@ -253,7 +253,7 @@ RollingBonesState3Handler::
 
 .jr_6DD4
     ld   e, $10                                   ; $6DD4: $1E $10
-    ld   hl, wEntitiesSpeedZTable                 ; $6DD6: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6DD6: $21 $20 $C3
     add  hl, bc                                   ; $6DD9: $09
     ld   [hl], $19                                ; $6DDA: $36 $19
     ldh  a, [hIndexOfObjectBelowLink]             ; $6DDC: $F0 $E9
@@ -275,7 +275,7 @@ RollingBonesState3Handler::
     inc  a                                        ; $6DF0: $3C
 
 .jr_6DF1
-    ld   hl, wEntitiesSpeedXTable                 ; $6DF1: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6DF1: $21 $40 $C2
     add  hl, bc                                   ; $6DF4: $09
     ld   [hl], a                                  ; $6DF5: $77
     ldh  a, [hActiveEntityVisualPosY]             ; $6DF6: $F0 $EC
@@ -287,12 +287,12 @@ RollingBonesState3Handler::
     inc  a                                        ; $6DFE: $3C
 
 .jr_6DFF
-    ld   hl, wEntitiesSpeedYTable                 ; $6DFF: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6DFF: $21 $50 $C2
     add  hl, bc                                   ; $6E02: $09
     ld   [hl], a                                  ; $6E03: $77
 
 jr_006_6E04:
-    call UpdateEntityPosWithSpeed_06              ; $6E04: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $6E04: $CD $41 $65
     call DefaultEntityPhysics_trampoline          ; $6E07: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $6E0A: $21 $A0 $C2
     add  hl, bc                                   ; $6E0D: $09
@@ -304,7 +304,7 @@ jr_006_6E04:
     ld   [hl], b                                  ; $6E15: $70
     call GetEntityTransitionCountdown             ; $6E16: $CD $05 $0C
     ld   [hl], $08                                ; $6E19: $36 $08
-    jp   ClearEntitySpeed                         ; $6E1B: $C3 $7F $3D
+    jp   ClearEntityVelocity                      ; $6E1B: $C3 $7F $3D
 
 Data_006_6E1E::
     db   $00, $F8, $60, $06, $00, $00, $62, $06, $00, $08, $64, $06, $F0, $00, $6E, $26

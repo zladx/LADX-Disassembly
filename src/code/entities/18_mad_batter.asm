@@ -71,13 +71,13 @@ MadBatterState2Handler::
     ld   e, $04                                   ; $4F4C: $1E $04
 
 .jr_018_4F4E
-    ld   hl, wEntitiesSpeedXTable                 ; $4F4E: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4F4E: $21 $40 $C2
     add  hl, bc                                   ; $4F51: $09
     ld   [hl], e                                  ; $4F52: $73
-    ld   hl, wEntitiesSpeedYTable                 ; $4F53: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4F53: $21 $50 $C2
     add  hl, bc                                   ; $4F56: $09
     ld   [hl], $FC                                ; $4F57: $36 $FC
-    jp   UpdateEntityPosWithSpeed_18              ; $4F59: $C3 $5F $7E
+    jp   UpdateEntityPosWithVelocity_18           ; $4F59: $C3 $5F $7E
 
 MadBatterState3Handler::
     call MadBatterRenderSmallSprite               ; $4F5C: $CD $C3 $50
@@ -198,7 +198,7 @@ MadBatterState7Handler::
     call GetEntityTransitionCountdown             ; $500F: $CD $05 $0C
     ret  nz                                       ; $5012: $C0
 
-    call ClearEntitySpeed                         ; $5013: $CD $7F $3D
+    call ClearEntityVelocity                      ; $5013: $CD $7F $3D
     ld_dialog_low a, Dialog0E5 ; "Take care!"     ; $5016: $3E $E5
     call OpenDialogAtBottom                       ; $5018: $CD $80 $50
     call IncrementEntityState                     ; $501B: $CD $12 $3B
@@ -256,8 +256,8 @@ MadBatterState8Handler::
     ldh  [hJingle], a                             ; $5065: $E0 $F2
 
 .jr_5067
-    call UpdateEntityYPosWithSpeed_18             ; $5067: $CD $62 $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $506A: $21 $50 $C2
+    call UpdateEntityYPosWithVelocity_18          ; $5067: $CD $62 $7E
+    ld   hl, wEntitiesVelocityYTable              ; $506A: $21 $50 $C2
     add  hl, bc                                   ; $506D: $09
     dec  [hl]                                     ; $506E: $35
     dec  [hl]                                     ; $506F: $35

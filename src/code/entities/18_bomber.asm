@@ -39,7 +39,7 @@ BomberEntityHandler::
     add  hl, bc                                   ; $7851: $09
     ld   [hl], a                                  ; $7852: $77
     call ApplyRecoilIfNeeded_18                   ; $7853: $CD $15 $7E
-    call UpdateEntityPosWithSpeed_18              ; $7856: $CD $5F $7E
+    call UpdateEntityPosWithVelocity_18           ; $7856: $CD $5F $7E
     call DefaultEntityPhysics_trampoline          ; $7859: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $785C: $F0 $F0
     JP_TABLE                                      ; $785E
@@ -67,13 +67,13 @@ BomberState0Handler::
     ld   hl, Data_018_7867                        ; $7880: $21 $67 $78
     add  hl, de                                   ; $7883: $19
     ld   a, [hl]                                  ; $7884: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $7885: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7885: $21 $40 $C2
     add  hl, bc                                   ; $7888: $09
     ld   [hl], a                                  ; $7889: $77
     ld   hl, Data_018_7865                        ; $788A: $21 $65 $78
     add  hl, de                                   ; $788D: $19
     ld   a, [hl]                                  ; $788E: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $788F: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $788F: $21 $50 $C2
     add  hl, bc                                   ; $7892: $09
     ld   [hl], a                                  ; $7893: $77
     ld   hl, wEntitiesPrivateState1Table          ; $7894: $21 $B0 $C2
@@ -116,7 +116,7 @@ label_018_78A6:
     ld   hl, wEntitiesPosZTable                   ; $78CD: $21 $10 $C3
     add  hl, de                                   ; $78D0: $19
     ld   [hl], a                                  ; $78D1: $77
-    ld   hl, wEntitiesSpeedZTable                 ; $78D2: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $78D2: $21 $20 $C3
     add  hl, de                                   ; $78D5: $19
     ld   [hl], $08                                ; $78D6: $36 $08
     ld   hl, wEntitiesTransitionCountdownTable    ; $78D8: $21 $E0 $C2
@@ -164,13 +164,13 @@ label_018_78A6:
     ldh  a, [hMultiPurpose0]                      ; $7922: $F0 $D7
     cpl                                           ; $7924: $2F
     inc  a                                        ; $7925: $3C
-    ld   hl, wEntitiesSpeedYTable                 ; $7926: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $7926: $21 $50 $C2
     add  hl, bc                                   ; $7929: $09
     ld   [hl], a                                  ; $792A: $77
     ldh  a, [hMultiPurpose1]                      ; $792B: $F0 $D8
     cpl                                           ; $792D: $2F
     inc  a                                        ; $792E: $3C
-    ld   hl, wEntitiesSpeedXTable                 ; $792F: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $792F: $21 $40 $C2
     add  hl, bc                                   ; $7932: $09
     ld   [hl], a                                  ; $7933: $77
     ret                                           ; $7934: $C9
@@ -192,7 +192,7 @@ BomberState1Handler::
     ld   [hl], $20                                ; $7946: $36 $20
     call IncrementEntityState                     ; $7948: $CD $12 $3B
     ld   [hl], b                                  ; $794B: $70
-    call ClearEntitySpeed                         ; $794C: $CD $7F $3D
+    call ClearEntityVelocity                      ; $794C: $CD $7F $3D
 
 .jr_794F
     jp   label_018_78A6                           ; $794F: $C3 $A6 $78

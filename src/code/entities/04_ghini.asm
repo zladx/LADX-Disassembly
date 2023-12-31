@@ -75,8 +75,8 @@ jr_004_5C43:
     call label_3B70                               ; $5C60: $CD $70 $3B
 
 func_004_5C63::
-    call UpdateEntityPosWithSpeed_04              ; $5C63: $CD $CA $6D
-    call AddEntityZSpeedToPos_04                  ; $5C66: $CD $03 $6E
+    call UpdateEntityPosWithVelocity_04           ; $5C63: $CD $CA $6D
+    call AddEntityZVelocityToPos_04               ; $5C66: $CD $03 $6E
     call func_004_5D08                            ; $5C69: $CD $08 $5D
     ld   hl, wEntitiesPrivateCountdown2Table      ; $5C6C: $21 $00 $C3
     add  hl, bc                                   ; $5C6F: $09
@@ -163,7 +163,7 @@ jr_004_5CD9:
     ld   hl, Data_004_5C04                        ; $5CDF: $21 $04 $5C
     add  hl, de                                   ; $5CE2: $19
     ld   a, [hl]                                  ; $5CE3: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $5CE4: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5CE4: $21 $40 $C2
     add  hl, bc                                   ; $5CE7: $09
     sub  [hl]                                     ; $5CE8: $96
     and  $80                                      ; $5CE9: $E6 $80
@@ -181,7 +181,7 @@ jr_004_5CD9:
     ld   hl, Data_004_5C06                        ; $5CF6: $21 $06 $5C
     add  hl, de                                   ; $5CF9: $19
     ld   a, [hl]                                  ; $5CFA: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $5CFB: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $5CFB: $21 $50 $C2
     add  hl, bc                                   ; $5CFE: $09
     sub  [hl]                                     ; $5CFF: $96
     and  $80                                      ; $5D00: $E6 $80

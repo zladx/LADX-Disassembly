@@ -28,7 +28,7 @@ GiantBubbleEntityHandler::
     call RenderActiveEntitySpritesRect            ; $53AE: $CD $E6 $3C
     call ReturnIfNonInteractive_19                ; $53B1: $CD $3D $7D
     call label_3B44                               ; $53B4: $CD $44 $3B
-    call UpdateEntityPosWithSpeed_19              ; $53B7: $CD $B8 $7D
+    call UpdateEntityPosWithVelocity_19           ; $53B7: $CD $B8 $7D
     call DefaultEntityPhysics_trampoline          ; $53BA: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $53BD: $21 $A0 $C2
     add  hl, bc                                   ; $53C0: $09
@@ -36,7 +36,7 @@ GiantBubbleEntityHandler::
     and  $03                                      ; $53C2: $E6 $03
     jr   z, .jr_53CE                              ; $53C4: $28 $08
 
-    ld   hl, wEntitiesSpeedXTable                 ; $53C6: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $53C6: $21 $40 $C2
     add  hl, bc                                   ; $53C9: $09
     ld   a, [hl]                                  ; $53CA: $7E
     cpl                                           ; $53CB: $2F
@@ -50,7 +50,7 @@ GiantBubbleEntityHandler::
     and  $0C                                      ; $53D3: $E6 $0C
     jr   z, .ret_53DF                             ; $53D5: $28 $08
 
-    ld   hl, wEntitiesSpeedYTable                 ; $53D7: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $53D7: $21 $50 $C2
     add  hl, bc                                   ; $53DA: $09
     ld   a, [hl]                                  ; $53DB: $7E
     cpl                                           ; $53DC: $2F

@@ -230,8 +230,8 @@ jr_005_4137:
     add  hl, bc                                   ; $4142: $09
     ld   a, [hl]                                  ; $4143: $7E
     ld   [wD151], a                               ; $4144: $EA $51 $D1
-    call AddEntityZSpeedToPos_05                  ; $4147: $CD $EA $7A
-    ld   hl, wEntitiesSpeedZTable                 ; $414A: $21 $20 $C3
+    call AddEntityZVelocityToPos_05               ; $4147: $CD $EA $7A
+    ld   hl, wEntitiesVelocityZTable              ; $414A: $21 $20 $C3
     add  hl, bc                                   ; $414D: $09
     dec  [hl]                                     ; $414E: $35
     dec  [hl]                                     ; $414F: $35
@@ -283,13 +283,13 @@ func_005_4180::
     ld   hl, Data_005_4170                        ; $419C: $21 $70 $41
     add  hl, de                                   ; $419F: $19
     ld   a, [hl]                                  ; $41A0: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $41A1: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $41A1: $21 $40 $C2
     add  hl, bc                                   ; $41A4: $09
     ld   [hl], a                                  ; $41A5: $77
     ld   hl, Data_005_4178                        ; $41A6: $21 $78 $41
     add  hl, de                                   ; $41A9: $19
     ld   a, [hl]                                  ; $41AA: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $41AB: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $41AB: $21 $50 $C2
     add  hl, bc                                   ; $41AE: $09
     ld   [hl], a                                  ; $41AF: $77
 
@@ -306,7 +306,7 @@ jr_005_41B1:
     jp   label_005_4297                           ; $41BC: $C3 $97 $42
 
 .bow_wow_not_following
-    ld   hl, wEntitiesSpeedZTable                 ; $41BF: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $41BF: $21 $20 $C3
     add  hl, bc                                   ; $41C2: $09
     ld   [hl], $20                                ; $41C3: $36 $20
     call IncrementEntityState                     ; $41C5: $CD $12 $3B
@@ -327,25 +327,25 @@ func_005_41CF::
     and  a                                        ; $41DC: $A7
     jr   z, .jr_41E5                              ; $41DD: $28 $06
 
-    ld   hl, wEntitiesSpeedZTable                 ; $41DF: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $41DF: $21 $20 $C3
     add  hl, bc                                   ; $41E2: $09
     ld   [hl], $10                                ; $41E3: $36 $10
 
 .jr_41E5
-    call UpdateEntityPosWithSpeed_05              ; $41E5: $CD $B1 $7A
+    call UpdateEntityPosWithVelocity_05           ; $41E5: $CD $B1 $7A
     jp   func_005_4228                            ; $41E8: $C3 $28 $42
 
 func_005_41EB::
     call GetEntityTransitionCountdown             ; $41EB: $CD $05 $0C
     jr   z, .jr_41F9                              ; $41EE: $28 $09
 
-    call UpdateEntityPosWithSpeed_05              ; $41F0: $CD $B1 $7A
+    call UpdateEntityPosWithVelocity_05           ; $41F0: $CD $B1 $7A
     call func_005_4228                            ; $41F3: $CD $28 $42
     dec  e                                        ; $41F6: $1D
     jr   z, jr_005_4206                           ; $41F7: $28 $0D
 
 .jr_41F9
-    call ClearEntitySpeed                         ; $41F9: $CD $7F $3D
+    call ClearEntityVelocity                      ; $41F9: $CD $7F $3D
     call IncrementEntityState                     ; $41FC: $CD $12 $3B
     ld   [hl], $03                                ; $41FF: $36 $03
     call GetEntityTransitionCountdown             ; $4201: $CD $05 $0C
@@ -552,7 +552,7 @@ jr_005_42B9:
     ldh  [hLinkPositionX], a                      ; $4312: $E0 $98
     pop  af                                       ; $4314: $F1
     ldh  [hLinkPositionY], a                      ; $4315: $E0 $99
-    ld   hl, wEntitiesSpeedZTable                 ; $4317: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4317: $21 $20 $C3
     add  hl, bc                                   ; $431A: $09
     ld   [hl], $10                                ; $431B: $36 $10
     call IncrementEntityState                     ; $431D: $CD $12 $3B
@@ -739,10 +739,10 @@ func_005_43FE::
     cp   BOW_WOW_KIDNAPPED                        ; $4403: $FE $80
     ret  z                                        ; $4405: $C8
 
-    ldh  a, [hLinkSpeedY]                         ; $4406: $F0 $9B
-    ld   hl, hLinkSpeedX                          ; $4408: $21 $9A $FF
+    ldh  a, [hLinkVelocityY]                      ; $4406: $F0 $9B
+    ld   hl, hLinkVelocityX                       ; $4408: $21 $9A $FF
     or   [hl]                                     ; $440B: $B6
-    ld   hl, hLinkSpeedZ                          ; $440C: $21 $A3 $FF
+    ld   hl, hLinkVelocityZ                       ; $440C: $21 $A3 $FF
     or   [hl]                                     ; $440F: $B6
     jp   z, ret_005_44CA                          ; $4410: $CA $CA $44
 
@@ -905,15 +905,15 @@ ret_005_44CA:
     ret                                           ; $44CA: $C9
 
 func_005_44CB::
-    ld   hl, wEntitiesSpeedXTable                 ; $44CB: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $44CB: $21 $40 $C2
     add  hl, bc                                   ; $44CE: $09
     ld   a, [hl]                                  ; $44CF: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $44D0: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $44D0: $21 $50 $C2
     add  hl, bc                                   ; $44D3: $09
     or   [hl]                                     ; $44D4: $B6
     ret  z                                        ; $44D5: $C8
 
-    ld   hl, wEntitiesSpeedXTable                 ; $44D6: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $44D6: $21 $40 $C2
     add  hl, bc                                   ; $44D9: $09
     ld   a, [hl]                                  ; $44DA: $7E
     ld   d, a                                     ; $44DB: $57
@@ -925,7 +925,7 @@ func_005_44CB::
 
 .jr_44E2
     ld   e, a                                     ; $44E2: $5F
-    ld   hl, wEntitiesSpeedYTable                 ; $44E3: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $44E3: $21 $50 $C2
     add  hl, bc                                   ; $44E6: $09
     ld   a, [hl]                                  ; $44E7: $7E
     bit  7, a                                     ; $44E8: $CB $7F

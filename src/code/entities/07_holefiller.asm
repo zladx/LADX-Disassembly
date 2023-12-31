@@ -61,13 +61,13 @@ func_007_5159::
     ld   hl, Data_007_5127                        ; $515A: $21 $27 $51
     add  hl, de                                   ; $515D: $19
     ld   a, [hl]                                  ; $515E: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $515F: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $515F: $21 $40 $C2
     add  hl, bc                                   ; $5162: $09
     ld   [hl], a                                  ; $5163: $77
     ld   hl, Data_007_512B                        ; $5164: $21 $2B $51
     add  hl, de                                   ; $5167: $19
     ld   a, [hl]                                  ; $5168: $7E
-    call GetEntitySpeedYAddress                   ; $5169: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $5169: $CD $05 $40
     ld   [hl], a                                  ; $516C: $77
     ret                                           ; $516D: $C9
 
@@ -125,7 +125,7 @@ jr_007_519F:
     ld   [hl], e                                  ; $51A9: $73
 
 jr_007_51AA:
-    call UpdateEntityPosWithSpeed_07              ; $51AA: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $51AA: $CD $0A $7E
     ld   hl, wEntitiesPosXTable                   ; $51AD: $21 $00 $C2
     add  hl, bc                                   ; $51B0: $09
     ld   a, [hl]                                  ; $51B1: $7E

@@ -15,9 +15,9 @@ TurtleRockHeadEntityHandler::
     ld   de, Data_018_72F5                        ; $7310: $11 $F5 $72
     call RenderActiveEntitySprite                 ; $7313: $CD $77 $3C
     call ReturnIfNonInteractive_18                ; $7316: $CD $E8 $7D
-    call UpdateEntityPosWithSpeed_18              ; $7319: $CD $5F $7E
-    call AddEntityZSpeedToPos_18                  ; $731C: $CD $98 $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $731F: $21 $20 $C3
+    call UpdateEntityPosWithVelocity_18           ; $7319: $CD $5F $7E
+    call AddEntityZVelocityToPos_18               ; $731C: $CD $98 $7E
+    ld   hl, wEntitiesVelocityZTable              ; $731F: $21 $20 $C3
     add  hl, bc                                   ; $7322: $09
     dec  [hl]                                     ; $7323: $35
     dec  [hl]                                     ; $7324: $35
@@ -150,10 +150,10 @@ TurtleRockHeadState2Handler::
     ld   e, $F8                                   ; $73E4: $1E $F8
 
 .jr_73E6
-    ld   hl, wEntitiesSpeedXTable                 ; $73E6: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $73E6: $21 $40 $C2
     add  hl, bc                                   ; $73E9: $09
     ld   [hl], e                                  ; $73EA: $73
-    jp   AddEntitySpeedToPos_18                   ; $73EB: $C3 $6C $7E
+    jp   AddEntityVelocityToPos_18                ; $73EB: $C3 $6C $7E
 
 Data_018_73EE::
     db   $F8, $08, $10, $00, $00, $08
@@ -212,19 +212,19 @@ TurtleRockHeadState3Handler::
     ld   hl, Data_018_73FA                        ; $744A: $21 $FA $73
     add  hl, bc                                   ; $744D: $09
     ld   a, [hl]                                  ; $744E: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $744F: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $744F: $21 $40 $C2
     add  hl, de                                   ; $7452: $19
     ld   [hl], a                                  ; $7453: $77
     ld   hl, Data_018_7400                        ; $7454: $21 $00 $74
     add  hl, bc                                   ; $7457: $09
     ld   a, [hl]                                  ; $7458: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $7459: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $7459: $21 $50 $C2
     add  hl, de                                   ; $745C: $19
     ld   [hl], a                                  ; $745D: $77
     ld   hl, Data_018_7406                        ; $745E: $21 $06 $74
     add  hl, bc                                   ; $7461: $09
     ld   a, [hl]                                  ; $7462: $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $7463: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $7463: $21 $20 $C3
     add  hl, de                                   ; $7466: $19
     ld   [hl], a                                  ; $7467: $77
     ld   hl, wEntitiesPrivateState1Table          ; $7468: $21 $B0 $C2
@@ -292,17 +292,17 @@ TurtleRockHeadState5Handler::
     ret                                           ; $74BB: $C9
 
 .jr_74BC
-    ld   hl, wEntitiesSpeedYTable                 ; $74BC: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $74BC: $21 $50 $C2
     add  hl, bc                                   ; $74BF: $09
     ld   [hl], $04                                ; $74C0: $36 $04
-    jp   UpdateEntityYPosWithSpeed_18             ; $74C2: $C3 $62 $7E
+    jp   UpdateEntityYPosWithVelocity_18          ; $74C2: $C3 $62 $7E
 
 TurtleRockHeadState6Handler::
     call GetEntityTransitionCountdown             ; $74C5: $CD $05 $0C
     ret  nz                                       ; $74C8: $C0
 
     ld   [hl], $20                                ; $74C9: $36 $20
-    ld   hl, wEntitiesSpeedXTable                 ; $74CB: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $74CB: $21 $40 $C2
     add  hl, bc                                   ; $74CE: $09
     ld   [hl], $08                                ; $74CF: $36 $08
     jp   IncrementEntityState                     ; $74D1: $C3 $12 $3B
@@ -319,7 +319,7 @@ TurtleRockHeadState7Handler::
     call IncrementEntityState                     ; $74E4: $CD $12 $3B
 
 .jr_74E7
-    jp   AddEntitySpeedToPos_18                   ; $74E7: $C3 $6C $7E
+    jp   AddEntityVelocityToPos_18                ; $74E7: $C3 $6C $7E
 
 TurtleRockHeadState8Handler::
     call GetEntityTransitionCountdown             ; $74EA: $CD $05 $0C
@@ -349,7 +349,7 @@ TurtleRockHeadState8Handler::
     call IncrementEntityState                     ; $7511: $CD $12 $3B
     dec  [hl]                                     ; $7514: $35
     dec  [hl]                                     ; $7515: $35
-    ld   hl, wEntitiesSpeedXTable                 ; $7516: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7516: $21 $40 $C2
     add  hl, bc                                   ; $7519: $09
     ld   a, [hl]                                  ; $751A: $7E
     cpl                                           ; $751B: $2F
@@ -366,7 +366,7 @@ TurtleRockHeadState9Handler::
     ld   [hl], $20                                ; $7523: $36 $20
     ld   a, $18                                   ; $7525: $3E $18
     call ApplyVectorTowardsLink_trampoline        ; $7527: $CD $AA $3B
-    ld   hl, wEntitiesSpeedYTable                 ; $752A: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $752A: $21 $50 $C2
     add  hl, bc                                   ; $752D: $09
     ld   a, [hl]                                  ; $752E: $7E
     bit  7, [hl]                                  ; $752F: $CB $7E
@@ -393,7 +393,7 @@ TurtleRockHeadStateAHandler::
     call IncrementEntityState                     ; $7546: $CD $12 $3B
 
 jr_018_7549:
-    jp   UpdateEntityPosWithSpeed_18              ; $7549: $C3 $5F $7E
+    jp   UpdateEntityPosWithVelocity_18           ; $7549: $C3 $5F $7E
 
 TurtleRockHeadStateBHandler::
     ldh  a, [hLinkPositionX]                      ; $754C: $F0 $98
@@ -430,7 +430,7 @@ TurtleRockHeadStateBHandler::
     ldh  [hLinkPositionY], a                      ; $7586: $E0 $99
     pop  af                                       ; $7588: $F1
     ldh  [hLinkPositionX], a                      ; $7589: $E0 $98
-    jp   UpdateEntityPosWithSpeed_18              ; $758B: $C3 $5F $7E
+    jp   UpdateEntityPosWithVelocity_18           ; $758B: $C3 $5F $7E
 
 Data_018_758E::
     db   $F0, $F8, $7A, $16, $F0, $00, $7C, $16, $F0, $08, $7C, $36, $F0, $10, $7A, $36
@@ -548,9 +548,9 @@ jr_018_76C9:
 
 .jr_76FE
     ld   a, e                                     ; $76FE: $7B
-    ldh  [hLinkSpeedX], a                         ; $76FF: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $76FF: $E0 $9A
     xor  a                                        ; $7701: $AF
-    ldh  [hLinkSpeedY], a                         ; $7702: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $7702: $E0 $9B
     ld   a, $18                                   ; $7704: $3E $18
     ld   [wIgnoreLinkCollisionsCountdown], a      ; $7706: $EA $3E $C1
     ld   a, $10                                   ; $7709: $3E $10

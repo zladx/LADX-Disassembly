@@ -326,19 +326,19 @@ func_007_4867::
     ld   e, $F8                                   ; $487B: $1E $F8
 
 .jr_487D
-    ld   hl, wEntitiesSpeedXTable                 ; $487D: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $487D: $21 $40 $C2
     add  hl, bc                                   ; $4880: $09
     ld   [hl], e                                  ; $4881: $73
-    ld   hl, wEntitiesSpeedZTable                 ; $4882: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4882: $21 $20 $C3
     add  hl, bc                                   ; $4885: $09
     ld   [hl], $20                                ; $4886: $36 $20
     call func_007_48FD                            ; $4888: $CD $FD $48
     jp   func_007_733F                            ; $488B: $C3 $3F $73
 
 func_007_488E::
-    call UpdateEntityPosWithSpeed_07              ; $488E: $CD $0A $7E
-    call AddEntityZSpeedToPos_07                  ; $4891: $CD $43 $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $4894: $21 $20 $C3
+    call UpdateEntityPosWithVelocity_07           ; $488E: $CD $0A $7E
+    call AddEntityZVelocityToPos_07               ; $4891: $CD $43 $7E
+    ld   hl, wEntitiesVelocityZTable              ; $4894: $21 $20 $C3
     add  hl, bc                                   ; $4897: $09
     dec  [hl]                                     ; $4898: $35
     dec  [hl]                                     ; $4899: $35
@@ -461,10 +461,10 @@ func_007_492E::
 
 func_007_4945::
     call ReturnIfNonInteractive_07                ; $4945: $CD $96 $7D
-    ld   hl, wEntitiesSpeedZTable                 ; $4948: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4948: $21 $20 $C3
     add  hl, bc                                   ; $494B: $09
     ld   [hl], $20                                ; $494C: $36 $20
-    call GetEntitySpeedYAddress                   ; $494E: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $494E: $CD $05 $40
     ld   [hl], $FC                                ; $4951: $36 $FC
     call func_007_48FD                            ; $4953: $CD $FD $48
     jp   IncrementEntityState                     ; $4956: $C3 $12 $3B
@@ -472,9 +472,9 @@ func_007_4945::
 func_007_4959::
     call func_007_49DC                            ; $4959: $CD $DC $49
     call ReturnIfNonInteractive_07                ; $495C: $CD $96 $7D
-    call UpdateEntityPosWithSpeed_07              ; $495F: $CD $0A $7E
-    call AddEntityZSpeedToPos_07                  ; $4962: $CD $43 $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $4965: $21 $20 $C3
+    call UpdateEntityPosWithVelocity_07           ; $495F: $CD $0A $7E
+    call AddEntityZVelocityToPos_07               ; $4962: $CD $43 $7E
+    ld   hl, wEntitiesVelocityZTable              ; $4965: $21 $20 $C3
     add  hl, bc                                   ; $4968: $09
     dec  [hl]                                     ; $4969: $35
     ld   hl, wEntitiesPosZTable                   ; $496A: $21 $10 $C3

@@ -195,10 +195,10 @@ MarinCreditsHandler:
     ld   hl, Data_005_4E60                        ; $4F22: $21 $60 $4E
     add  hl, bc                                   ; $4F25: $09
     ld   a, [hl]                                  ; $4F26: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $4F27: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4F27: $21 $40 $C2
     add  hl, de                                   ; $4F2A: $19
     ld   [hl], a                                  ; $4F2B: $77
-    ld   hl, wEntitiesSpeedYTable                 ; $4F2C: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4F2C: $21 $50 $C2
     add  hl, de                                   ; $4F2F: $19
     ld   [hl], $FC                                ; $4F30: $36 $FC
     ld   hl, wEntitiesInertiaTable                ; $4F32: $21 $D0 $C3
@@ -530,11 +530,11 @@ func_005_5059::
     ld   hl, Data_005_4E60                        ; $5113: $21 $60 $4E
     add  hl, bc                                   ; $5116: $09
     ld   a, [hl]                                  ; $5117: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $5118: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5118: $21 $40 $C2
     add  hl, de                                   ; $511B: $19
     ld   [hl], a                                  ; $511C: $77
     pop  bc                                       ; $511D: $C1
-    ld   hl, wEntitiesSpeedYTable                 ; $511E: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $511E: $21 $50 $C2
     add  hl, de                                   ; $5121: $19
     ld   [hl], $FC                                ; $5122: $36 $FC
     ld   hl, wEntitiesInertiaTable                ; $5124: $21 $D0 $C3
@@ -821,11 +821,11 @@ func_005_52DB::
     ld   a, $02                                   ; $52F6: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $52F8: $EA $46 $C1
     ld   a, $12                                   ; $52FB: $3E $12
-    ldh  [hLinkSpeedZ], a                         ; $52FD: $E0 $A3
+    ldh  [hLinkVelocityZ], a                      ; $52FD: $E0 $A3
     ld   a, $0C                                   ; $52FF: $3E $0C
-    ldh  [hLinkSpeedX], a                         ; $5301: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $5301: $E0 $9A
     xor  a                                        ; $5303: $AF
-    ldh  [hLinkSpeedY], a                         ; $5304: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $5304: $E0 $9B
     ld   a, $00                                   ; $5306: $3E $00
     ldh  [hLinkDirection], a                      ; $5308: $E0 $9E
     ldh  [hLinkInteractiveMotionBlocked], a       ; $530A: $E0 $A1

@@ -231,7 +231,7 @@ func_004_6FC6::
 jr_004_6FE6:
     xor  a                                        ; $6FE6: $AF
     ld   [wConsecutiveStepsCount], a              ; $6FE7: $EA $20 $C1
-    ldh  [hLinkSpeedX], a                         ; $6FEA: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $6FEA: $E0 $9A
     ld   e, $06                                   ; $6FEC: $1E $06
     ld   hl, wEntitiesPrivateState5Table          ; $6FEE: $21 $90 $C3
     add  hl, bc                                   ; $6FF1: $09
@@ -392,10 +392,10 @@ jr_004_70A6:
 
 .jr_70CA
     call SetEntitySpriteVariant                   ; $70CA: $CD $0C $3B
-    ld   hl, wEntitiesSpeedXTable                 ; $70CD: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $70CD: $21 $40 $C2
     add  hl, bc                                   ; $70D0: $09
     ld   [hl], $F8                                ; $70D1: $36 $F8
-    call AddEntitySpeedToPos_04                   ; $70D3: $CD $D7 $6D
+    call AddEntityVelocityToPos_04                ; $70D3: $CD $D7 $6D
     ld   hl, wEntitiesPosXTable                   ; $70D6: $21 $00 $C2
     add  hl, bc                                   ; $70D9: $09
     pop  bc                                       ; $70DA: $C1
@@ -728,7 +728,7 @@ func_004_7296::
     ld   c, $01                                   ; $72BB: $0E $01
     ld   a, $04                                   ; $72BD: $3E $04
     call ApplyVectorTowardsLink_trampoline        ; $72BF: $CD $AA $3B
-    call UpdateEntityPosWithSpeed_04              ; $72C2: $CD $CA $6D
+    call UpdateEntityPosWithVelocity_04           ; $72C2: $CD $CA $6D
     ld   a, [wEntitiesPosXTable + $01]            ; $72C5: $FA $01 $C2
     ld   [wD204], a                               ; $72C8: $EA $04 $D2
     ld   a, [wEntitiesPosYTable+1]                ; $72CB: $FA $11 $C2
@@ -1140,7 +1140,7 @@ jr_004_7517:
 ._05 dw func_004_7698                             ; $7527
 
 func_004_7529::
-    call UpdateEntityPosWithSpeed_04              ; $7529: $CD $CA $6D
+    call UpdateEntityPosWithVelocity_04           ; $7529: $CD $CA $6D
     ld   hl, wEntitiesDirectionTable              ; $752C: $21 $80 $C3
     add  hl, bc                                   ; $752F: $09
     ld   a, [hl]                                  ; $7530: $7E
@@ -1196,8 +1196,8 @@ func_004_7566::
     ldh  [hLinkInteractiveMotionBlocked], a       ; $756E: $E0 $A1
 
 .jr_7570
-    call AddEntityZSpeedToPos_04                  ; $7570: $CD $03 $6E
-    ld   hl, wEntitiesSpeedZTable                 ; $7573: $21 $20 $C3
+    call AddEntityZVelocityToPos_04               ; $7570: $CD $03 $6E
+    ld   hl, wEntitiesVelocityZTable              ; $7573: $21 $20 $C3
     add  hl, bc                                   ; $7576: $09
     dec  [hl]                                     ; $7577: $35
     dec  [hl]                                     ; $7578: $35
@@ -1209,7 +1209,7 @@ func_004_7566::
 
     xor  a                                        ; $7582: $AF
     ld   [hl], a                                  ; $7583: $77
-    ld   hl, wEntitiesSpeedZTable                 ; $7584: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $7584: $21 $20 $C3
     add  hl, bc                                   ; $7587: $09
     ld   a, [hl]                                  ; $7588: $7E
     sra  a                                        ; $7589: $CB $2F
@@ -1267,8 +1267,8 @@ func_004_75BC::
     ldh  [hLinkInteractiveMotionBlocked], a       ; $75C4: $E0 $A1
 
 .jr_75C6
-    call AddEntityZSpeedToPos_04                  ; $75C6: $CD $03 $6E
-    ld   hl, wEntitiesSpeedZTable                 ; $75C9: $21 $20 $C3
+    call AddEntityZVelocityToPos_04               ; $75C6: $CD $03 $6E
+    ld   hl, wEntitiesVelocityZTable              ; $75C9: $21 $20 $C3
     add  hl, bc                                   ; $75CC: $09
     dec  [hl]                                     ; $75CD: $35
     dec  [hl]                                     ; $75CE: $35
@@ -1280,7 +1280,7 @@ func_004_75BC::
 
     xor  a                                        ; $75D9: $AF
     ld   [hl], a                                  ; $75DA: $77
-    ld   hl, wEntitiesSpeedZTable                 ; $75DB: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $75DB: $21 $20 $C3
     add  hl, bc                                   ; $75DE: $09
     ld   a, [hl]                                  ; $75DF: $7E
     sra  a                                        ; $75E0: $CB $2F
@@ -1440,13 +1440,13 @@ func_004_76B3::
     ld   hl, Data_004_76A0                        ; $76B5: $21 $A0 $76
     add  hl, de                                   ; $76B8: $19
     ld   a, [hl]                                  ; $76B9: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $76BA: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $76BA: $21 $40 $C2
     add  hl, bc                                   ; $76BD: $09
     ld   [hl], a                                  ; $76BE: $77
     ld   hl, Data_004_76A5                        ; $76BF: $21 $A5 $76
     add  hl, de                                   ; $76C2: $19
     ld   a, [hl]                                  ; $76C3: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $76C4: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $76C4: $21 $50 $C2
     add  hl, bc                                   ; $76C7: $09
     ld   [hl], a                                  ; $76C8: $77
     ret                                           ; $76C9: $C9

@@ -279,13 +279,13 @@ jr_007_6630:
     ld   hl, Data_007_65FE                        ; $6631: $21 $FE $65
     add  hl, de                                   ; $6634: $19
     ld   a, [hl]                                  ; $6635: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $6636: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6636: $21 $40 $C2
     add  hl, bc                                   ; $6639: $09
     ld   [hl], a                                  ; $663A: $77
     ld   hl, Data_007_6602                        ; $663B: $21 $02 $66
     add  hl, de                                   ; $663E: $19
     ld   a, [hl]                                  ; $663F: $7E
-    call GetEntitySpeedYAddress                   ; $6640: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $6640: $CD $05 $40
     ld   [hl], a                                  ; $6643: $77
     call IncrementEntityState                     ; $6644: $CD $12 $3B
 
@@ -303,7 +303,7 @@ func_007_6649::
     ld   [hl], b                                  ; $6659: $70
 
 .jr_665A
-    call UpdateEntityPosWithSpeed_07              ; $665A: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $665A: $CD $0A $7E
     call DefaultEntityPhysics_trampoline          ; $665D: $CD $23 $3B
 
 label_007_6660:
@@ -360,14 +360,14 @@ func_007_66A6::
     ld   a, $F8                                   ; $66AE: $3E $F8
 
 .jr_66B0
-    ld   hl, wEntitiesSpeedXTable                 ; $66B0: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $66B0: $21 $40 $C2
     add  hl, bc                                   ; $66B3: $09
     ld   [hl], a                                  ; $66B4: $77
     jp   IncrementEntityState                     ; $66B5: $C3 $12 $3B
 
 func_007_66B8::
-    call UpdateEntityPosWithSpeed_07              ; $66B8: $CD $0A $7E
-    call GetEntitySpeedYAddress                   ; $66BB: $CD $05 $40
+    call UpdateEntityPosWithVelocity_07           ; $66B8: $CD $0A $7E
+    call GetEntityVelocityYAddress                ; $66BB: $CD $05 $40
     inc  [hl]                                     ; $66BE: $34
     inc  [hl]                                     ; $66BF: $34
     call DefaultEntityPhysics_trampoline          ; $66C0: $CD $23 $3B
@@ -377,7 +377,7 @@ func_007_66B8::
     and  $03                                      ; $66C8: $E6 $03
     jr   z, .jr_66D4                              ; $66CA: $28 $08
 
-    ld   hl, wEntitiesSpeedXTable                 ; $66CC: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $66CC: $21 $40 $C2
     add  hl, bc                                   ; $66CF: $09
     ld   a, [hl]                                  ; $66D0: $7E
     cpl                                           ; $66D1: $2F
@@ -397,7 +397,7 @@ func_007_66B8::
     and  $F0                                      ; $66E2: $E6 $F0
     add  $03                                      ; $66E4: $C6 $03
     ld   [hl], a                                  ; $66E6: $77
-    call GetEntitySpeedYAddress                   ; $66E7: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $66E7: $CD $05 $40
     ld   [hl], b                                  ; $66EA: $70
     jp   label_007_6660                           ; $66EB: $C3 $60 $66
 

@@ -32,10 +32,10 @@ SwordBeamEntityHandler::
     ld   hl, wEntitiesPosYTable                   ; $4544: $21 $10 $C2
     add  hl, bc                                   ; $4547: $09
     ld   [hl], a                                  ; $4548: $77
-    ld   hl, wEntitiesSpeedXTable                 ; $4549: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4549: $21 $40 $C2
     add  hl, bc                                   ; $454C: $09
     sla  [hl]                                     ; $454D: $CB $26
-    ld   hl, wEntitiesSpeedYTable                 ; $454F: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $454F: $21 $50 $C2
     add  hl, bc                                   ; $4552: $09
     sla  [hl]                                     ; $4553: $CB $26
     ld   hl, wEntitiesFlashCountdownTable         ; $4555: $21 $20 $C4
@@ -51,7 +51,7 @@ SwordBeamEntityHandler::
     ld   a, $01                                   ; $4568: $3E $01
     ld   [wC19E], a                               ; $456A: $EA $9E $C1
     call label_3B7B                               ; $456D: $CD $7B $3B
-    call UpdateEntityPosWithSpeed_19              ; $4570: $CD $B8 $7D
+    call UpdateEntityPosWithVelocity_19           ; $4570: $CD $B8 $7D
     call label_3B2E                               ; $4573: $CD $2E $3B
     ld   hl, wEntitiesCollisionsTable             ; $4576: $21 $A0 $C2
     add  hl, bc                                   ; $4579: $09

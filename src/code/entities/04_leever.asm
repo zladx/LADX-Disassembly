@@ -18,7 +18,7 @@ LeeverEntityHandler::
     call RenderActiveEntitySpritesPair            ; $7EF8: $CD $C0 $3B
     call ReturnIfNonInteractive_04                ; $7EFB: $CD $A3 $7F
     call ApplyRecoilIfNeeded_04                   ; $7EFE: $CD $80 $6D
-    call UpdateEntityPosWithSpeed_04              ; $7F01: $CD $CA $6D
+    call UpdateEntityPosWithVelocity_04           ; $7F01: $CD $CA $6D
     call DefaultEntityPhysics_trampoline          ; $7F04: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $7F07: $F0 $F0
     and  $03                                      ; $7F09: $E6 $03
@@ -36,7 +36,7 @@ func_004_7F14::
 
     ld   [hl], $1F                                ; $7F1D: $36 $1F
     call IncrementEntityState                     ; $7F1F: $CD $12 $3B
-    jp   ClearEntitySpeed                         ; $7F22: $C3 $7F $3D
+    jp   ClearEntityVelocity                      ; $7F22: $C3 $7F $3D
 
 Data_004_7F25::
     db   $01, $00
@@ -72,7 +72,7 @@ func_004_7F49::
 
     ld   [hl], $1F                                ; $7F51: $36 $1F
     call IncrementEntityState                     ; $7F53: $CD $12 $3B
-    jp   ClearEntitySpeed                         ; $7F56: $C3 $7F $3D
+    jp   ClearEntityVelocity                      ; $7F56: $C3 $7F $3D
 
 .jr_7F59
     ldh  a, [hFrameCounter]                       ; $7F59: $F0 $E7
@@ -114,7 +114,7 @@ func_004_7F75::
     jp   label_004_7F3A                           ; $7F8D: $C3 $3A $7F
 
 func_004_7F90:: ; also called from ghini code
-    ld   hl, wEntitiesSpeedXTable                 ; $7F90: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7F90: $21 $40 $C2
     add  hl, bc                                   ; $7F93: $09
     ld   a, [hl]                                  ; $7F94: $7E
     rl   a                                        ; $7F95: $CB $17

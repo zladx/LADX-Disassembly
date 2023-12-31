@@ -39,7 +39,7 @@ BoomerangEntityHandler::
     call label_3B7B                               ; $4486: $CD $7B $3B
 
 .jr_4489
-    call UpdateEntityPosWithSpeed_19              ; $4489: $CD $B8 $7D
+    call UpdateEntityPosWithVelocity_19           ; $4489: $CD $B8 $7D
     call label_3B2E                               ; $448C: $CD $2E $3B
     call func_019_44CC                            ; $448F: $CD $CC $44
     ldh  a, [hActiveEntityState]                  ; $4492: $F0 $F0

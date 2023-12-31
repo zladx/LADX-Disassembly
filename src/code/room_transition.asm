@@ -41,20 +41,20 @@ ApplyRoomTransition::
     ; Apply the scroll offset
     ;
 
-    ; hLinkSpeedX = RoomTransitionLinkXIncrement[wRoomTransitionDirection]
+    ; hLinkVelocityX = RoomTransitionLinkXIncrement[wRoomTransitionDirection]
     ld   a, [wRoomTransitionDirection]            ; $78F6: $FA $25 $C1
     ld   c, a                                     ; $78F9: $4F
     ld   b, $00                                   ; $78FA: $06 $00
     ld   hl, RoomTransitionLinkXIncrement         ; $78FC: $21 $D8 $78
     add  hl, bc                                   ; $78FF: $09
     ld   a, [hl]                                  ; $7900: $7E
-    ldh  [hLinkSpeedX], a                         ; $7901: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $7901: $E0 $9A
 
-    ; hLinkSpeedY = RoomTransitionLinkYIncrement[wRoomTransitionDirection]
+    ; hLinkVelocityY = RoomTransitionLinkYIncrement[wRoomTransitionDirection]
     ld   hl, RoomTransitionLinkYIncrement         ; $7903: $21 $DC $78
     add  hl, bc                                   ; $7906: $09
     ld   a, [hl]                                  ; $7907: $7E
-    ldh  [hLinkSpeedY], a                         ; $7908: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $7908: $E0 $9B
 
     push bc                                       ; $790A: $C5
     call UpdateFinalLinkPosition                  ; $790B: $CD $A8 $21
@@ -102,7 +102,7 @@ ApplyRoomTransition::
 
     ; Clear variables
     call ClearLinkPositionIncrement               ; $793D: $CD $8E $17
-    ldh  [hLinkSpeedZ], a                         ; $7940: $E0 $A3
+    ldh  [hLinkVelocityZ], a                      ; $7940: $E0 $A3
     ld   [wRoomTransitionState], a                ; $7942: $EA $24 $C1
 
     ; Save Link's initial position on the new map
@@ -118,7 +118,7 @@ ApplyRoomTransition::
 
     ; Initiate a jump if Link landed on a ledge
     ld   a, $01                                   ; $7956: $3E $01
-    ldh  [hLinkSpeedY], a                         ; $7958: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $7958: $E0 $9B
     call CheckForLedgeJump                        ; $795A: $CD $45 $6E
 
     ; If transitioning over an object with collisions, unstuck the player
@@ -840,10 +840,10 @@ jr_002_7C8B:
     ld   hl, Data_002_7C40                        ; $7C8D: $21 $40 $7C
     add  hl, de                                   ; $7C90: $19
     ld   a, [hl]                                  ; $7C91: $7E
-    ldh  [hLinkSpeedX], a                         ; $7C92: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $7C92: $E0 $9A
     ld   hl, Data_002_7C48                        ; $7C94: $21 $48 $7C
     add  hl, de                                   ; $7C97: $19
     ld   a, [hl]                                  ; $7C98: $7E
-    ldh  [hLinkSpeedY], a                         ; $7C99: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $7C99: $E0 $9B
     call UpdateFinalLinkPosition                  ; $7C9B: $CD $A8 $21
     jp   CheckForLedgeJump                        ; $7C9E: $C3 $45 $6E

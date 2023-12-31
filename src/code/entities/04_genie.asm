@@ -66,8 +66,8 @@ GenieState0Handler::
     ld   hl, wEntitiesHitboxFlagsTable            ; $4064: $21 $50 $C3
     add  hl, bc                                   ; $4067: $09
     ld   [hl], $80                                ; $4068: $36 $80
-    call AddEntityZSpeedToPos_04                  ; $406A: $CD $03 $6E
-    ld   hl, wEntitiesSpeedZTable                 ; $406D: $21 $20 $C3
+    call AddEntityZVelocityToPos_04               ; $406A: $CD $03 $6E
+    ld   hl, wEntitiesVelocityZTable              ; $406D: $21 $20 $C3
     add  hl, bc                                   ; $4070: $09
     dec  [hl]                                     ; $4071: $35
     dec  [hl]                                     ; $4072: $35
@@ -80,7 +80,7 @@ GenieState0Handler::
 
     xor  a                                        ; $407E: $AF
     ld   [hl], a                                  ; $407F: $77
-    ld   hl, wEntitiesSpeedZTable                 ; $4080: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4080: $21 $20 $C3
     add  hl, bc                                   ; $4083: $09
     ld   [hl], b                                  ; $4084: $70
 
@@ -121,9 +121,9 @@ func_004_40A3::
     ld   a, $14                                   ; $40BA: $3E $14
     call GetVectorTowardsLink_trampoline          ; $40BC: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $40BF: $F0 $D7
-    ldh  [hLinkSpeedY], a                         ; $40C1: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $40C1: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $40C3: $F0 $D8
-    ldh  [hLinkSpeedX], a                         ; $40C5: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $40C5: $E0 $9A
 
 .jr_40C7
     ld   hl, wEntitiesPrivateState3Table          ; $40C7: $21 $D0 $C2
@@ -136,7 +136,7 @@ func_004_40A3::
     and  $80                                      ; $40D1: $E6 $80
     jr   z, .jr_40DF                              ; $40D3: $28 $0A
 
-    ld   hl, wEntitiesSpeedZTable                 ; $40D5: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $40D5: $21 $20 $C3
     add  hl, bc                                   ; $40D8: $09
     ld   [hl], $10                                ; $40D9: $36 $10
     ld   a, JINGLE_BOUNCE                         ; $40DB: $3E $20
@@ -176,7 +176,7 @@ func_004_40A3::
     ldh  [hLinkPositionY], a                      ; $4110: $E0 $99
     pop  af                                       ; $4112: $F1
     ldh  [hLinkPositionX], a                      ; $4113: $E0 $98
-    call UpdateEntityPosWithSpeed_04              ; $4115: $CD $CA $6D
+    call UpdateEntityPosWithVelocity_04           ; $4115: $CD $CA $6D
 
 jr_004_4118:
     call GetEntityTransitionCountdown             ; $4118: $CD $05 $0C
@@ -239,10 +239,10 @@ func_004_4155::
     cp   $28                                      ; $416E: $FE $28
     jr   c, .jr_418D                              ; $4170: $38 $1B
 
-    ld   hl, wEntitiesSpeedXTable                 ; $4172: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4172: $21 $40 $C2
     add  hl, bc                                   ; $4175: $09
     ld   a, [hl]                                  ; $4176: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $4177: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4177: $21 $50 $C2
     add  hl, bc                                   ; $417A: $09
     or   [hl]                                     ; $417B: $B6
     jr   z, .jr_418D                              ; $417C: $28 $0F
@@ -257,7 +257,7 @@ func_004_4155::
     call_open_dialog Dialog17F                    ; $4188
 
 .jr_418D
-    call ClearEntitySpeed                         ; $418D: $CD $7F $3D
+    call ClearEntityVelocity                      ; $418D: $CD $7F $3D
     call GetEntityTransitionCountdown             ; $4190: $CD $05 $0C
     cp   $28                                      ; $4193: $FE $28
     jr   nc, jr_004_41A9                          ; $4195: $30 $12
@@ -270,12 +270,12 @@ func_004_4155::
     ld   e, $F8                                   ; $419F: $1E $F8
 
 .jr_41A1
-    ld   hl, wEntitiesSpeedXTable                 ; $41A1: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $41A1: $21 $40 $C2
     add  hl, bc                                   ; $41A4: $09
     ld   [hl], e                                  ; $41A5: $73
 
 jr_004_41A6:
-    call UpdateEntityPosWithSpeed_04              ; $41A6: $CD $CA $6D
+    call UpdateEntityPosWithVelocity_04           ; $41A6: $CD $CA $6D
 
 jr_004_41A9:
     call DefaultEntityPhysics_trampoline          ; $41A9: $CD $23 $3B
@@ -352,7 +352,7 @@ func_004_4214::
     ld   [hl], b                                  ; $421C: $70
     call IncrementEntityState                     ; $421D: $CD $12 $3B
     ld   [hl], $02                                ; $4220: $36 $02
-    ld   hl, wEntitiesSpeedZTable                 ; $4222: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4222: $21 $20 $C3
     add  hl, bc                                   ; $4225: $09
     ld   [hl], $20                                ; $4226: $36 $20
     ld   a, $08                                   ; $4228: $3E $08
@@ -360,13 +360,13 @@ func_004_4214::
     ldh  a, [hMultiPurpose0]                      ; $422D: $F0 $D7
     cpl                                           ; $422F: $2F
     inc  a                                        ; $4230: $3C
-    ld   hl, wEntitiesSpeedYTable                 ; $4231: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4231: $21 $50 $C2
     add  hl, bc                                   ; $4234: $09
     ld   [hl], a                                  ; $4235: $77
     ldh  a, [hMultiPurpose1]                      ; $4236: $F0 $D8
     cpl                                           ; $4238: $2F
     inc  a                                        ; $4239: $3C
-    ld   hl, wEntitiesSpeedXTable                 ; $423A: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $423A: $21 $40 $C2
     add  hl, bc                                   ; $423D: $09
     ld   [hl], a                                  ; $423E: $77
     call GetEntityTransitionCountdown             ; $423F: $CD $05 $0C
@@ -392,7 +392,7 @@ func_004_4214::
     and  $80                                      ; $4265: $E6 $80
     jr   z, .jr_4278                              ; $4267: $28 $0F
 
-    ld   hl, wEntitiesSpeedZTable                 ; $4269: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4269: $21 $20 $C3
     add  hl, bc                                   ; $426C: $09
     ld   [hl], $10                                ; $426D: $36 $10
     ld   a, JINGLE_BOUNCE                         ; $426F: $3E $20
@@ -401,7 +401,7 @@ func_004_4214::
     call ApplyVectorTowardsLink_trampoline        ; $4275: $CD $AA $3B
 
 .jr_4278
-    call UpdateEntityPosWithSpeed_04              ; $4278: $CD $CA $6D
+    call UpdateEntityPosWithVelocity_04           ; $4278: $CD $CA $6D
     call DefaultEntityPhysics_trampoline          ; $427B: $CD $23 $3B
     jp   label_004_4144                           ; $427E: $C3 $44 $41
 
@@ -488,11 +488,11 @@ GenieKilledHandler2::
 
 jr_004_431A:
     call ReturnIfNonInteractive_04                ; $431A: $CD $A3 $7F
-    ld   hl, wEntitiesSpeedXTable                 ; $431D: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $431D: $21 $40 $C2
     add  hl, bc                                   ; $4320: $09
     ld   a, [hl]                                  ; $4321: $7E
     ld   [wIsFileSelectionArrowShifted], a        ; $4322: $EA $00 $D0
-    ld   hl, wEntitiesSpeedYTable                 ; $4325: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4325: $21 $50 $C2
     add  hl, bc                                   ; $4328: $09
     ld   a, [hl]                                  ; $4329: $7E
     ld   [wIntroTimer], a                         ; $432A: $EA $01 $D0
@@ -553,7 +553,7 @@ Data_004_437E::
     db   8, -8
 
 func_004_4380::
-    call UpdateEntityPosWithSpeed_04              ; $4380: $CD $CA $6D
+    call UpdateEntityPosWithVelocity_04           ; $4380: $CD $CA $6D
     ld   hl, wEntitiesDirectionTable              ; $4383: $21 $80 $C3
     add  hl, bc                                   ; $4386: $09
     ld   e, [hl]                                  ; $4387: $5E
@@ -562,7 +562,7 @@ func_004_4380::
     and  $07                                      ; $438B: $E6 $07
     jr   nz, jr_004_43A6                          ; $438D: $20 $17
 
-    ld   hl, wEntitiesSpeedXTable                 ; $438F: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $438F: $21 $40 $C2
     add  hl, bc                                   ; $4392: $09
     ld   a, [hl]                                  ; $4393: $7E
 
@@ -575,7 +575,7 @@ func_004_4380::
     ld   hl, Data_004_437C                        ; $439B: $21 $7C $43
     add  hl, de                                   ; $439E: $19
     ld   a, [hl]                                  ; $439F: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $43A0: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $43A0: $21 $40 $C2
     add  hl, bc                                   ; $43A3: $09
     add  [hl]                                     ; $43A4: $86
     ld   [hl], a                                  ; $43A5: $77
@@ -605,7 +605,7 @@ jr_004_43A6:
     ld   hl, Data_004_437C                        ; $43C3: $21 $7C $43
     add  hl, de                                   ; $43C6: $19
     ld   a, [hl]                                  ; $43C7: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $43C8: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $43C8: $21 $50 $C2
     add  hl, bc                                   ; $43CB: $09
     add  [hl]                                     ; $43CC: $86
     ld   [hl], a                                  ; $43CD: $77
@@ -669,10 +669,10 @@ jr_004_43A6:
     ld   hl, wEntitiesPrivateState1Table          ; $4420: $21 $B0 $C2
     add  hl, de                                   ; $4423: $19
     ld   [hl], $03                                ; $4424: $36 $03
-    ld   hl, wEntitiesSpeedZTable                 ; $4426: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4426: $21 $20 $C3
     add  hl, de                                   ; $4429: $19
     ld   [hl], $20                                ; $442A: $36 $20
-    ld   hl, wEntitiesSpeedXTable                 ; $442C: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $442C: $21 $40 $C2
     add  hl, de                                   ; $442F: $19
     ld   [hl], $0C                                ; $4430: $36 $0C
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4432: $21 $40 $C3
@@ -707,7 +707,7 @@ jr_004_4438:
     ld   hl, wEntitiesPosYTable                   ; $445E: $21 $10 $C2
     add  hl, de                                   ; $4461: $19
     ld   [hl], a                                  ; $4462: $77
-    ld   hl, wEntitiesSpeedZTable                 ; $4463: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4463: $21 $20 $C3
     add  hl, de                                   ; $4466: $19
     ld   [hl], $24                                ; $4467: $36 $24
     ld   hl, wEntitiesPrivateState1Table          ; $4469: $21 $B0 $C2
@@ -768,7 +768,7 @@ func_004_449F::
     ldh  [hLinkPositionY], a                      ; $44B8: $E0 $99
     ld   a, $10                                   ; $44BA: $3E $10
     call ApplyVectorTowardsLink_trampoline        ; $44BC: $CD $AA $3B
-    call UpdateEntityPosWithSpeed_04              ; $44BF: $CD $CA $6D
+    call UpdateEntityPosWithVelocity_04           ; $44BF: $CD $CA $6D
     ld   hl, hLinkPositionX                       ; $44C2: $21 $98 $FF
     ldh  a, [hActiveEntityPosX]                   ; $44C5: $F0 $EE
     sub  [hl]                                     ; $44C7: $96
@@ -844,7 +844,7 @@ func_004_4517::
 .jr_4535
     call ApplyRecoilIfNeeded_04                   ; $4535: $CD $80 $6D
     call label_3B70                               ; $4538: $CD $70 $3B
-    call UpdateEntityPosWithSpeed_04              ; $453B: $CD $CA $6D
+    call UpdateEntityPosWithVelocity_04           ; $453B: $CD $CA $6D
     call DefaultEntityPhysics_trampoline          ; $453E: $CD $23 $3B
     ldh  a, [hFrameCounter]                       ; $4541: $F0 $E7
     and  $03                                      ; $4543: $E6 $03
@@ -852,7 +852,7 @@ func_004_4517::
 
     ld   a, $10                                   ; $4547: $3E $10
     call GetVectorTowardsLink_trampoline          ; $4549: $CD $B5 $3B
-    ld   hl, wEntitiesSpeedXTable                 ; $454C: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $454C: $21 $40 $C2
     add  hl, bc                                   ; $454F: $09
     ldh  a, [hMultiPurpose1]                      ; $4550: $F0 $D8
     sub  [hl]                                     ; $4552: $96
@@ -864,7 +864,7 @@ func_004_4517::
 
 .jr_4559
     inc  [hl]                                     ; $4559: $34
-    ld   hl, wEntitiesSpeedYTable                 ; $455A: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $455A: $21 $50 $C2
     add  hl, bc                                   ; $455D: $09
     ldh  a, [hMultiPurpose0]                      ; $455E: $F0 $D7
     sub  [hl]                                     ; $4560: $96
@@ -918,7 +918,7 @@ func_004_4575::
     ld   [hl], a                                  ; $45A5: $77
 
 .jr_45A6
-    call ClearEntitySpeed                         ; $45A6: $CD $7F $3D
+    call ClearEntityVelocity                      ; $45A6: $CD $7F $3D
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $45A9: $21 $10 $C4
     add  hl, bc                                   ; $45AC: $09
     ld   [hl], b                                  ; $45AD: $70
@@ -944,7 +944,7 @@ func_004_4575::
     ld   hl, wEntitiesPosYTable                   ; $45CD: $21 $10 $C2
     add  hl, de                                   ; $45D0: $19
     ld   [hl], a                                  ; $45D1: $77
-    ld   hl, wEntitiesSpeedZTable                 ; $45D2: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $45D2: $21 $20 $C3
     add  hl, de                                   ; $45D5: $19
     ld   [hl], $24                                ; $45D6: $36 $24
     ld   hl, wEntitiesPrivateState1Table          ; $45D8: $21 $B0 $C2
@@ -986,20 +986,20 @@ jr_004_45F1:
     ld   hl, hMultiPurpose1                       ; $4611: $21 $D8 $FF
     pop  af                                       ; $4614: $F1
     add  [hl]                                     ; $4615: $86
-    ld   hl, wEntitiesSpeedXTable                 ; $4616: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4616: $21 $40 $C2
     add  hl, bc                                   ; $4619: $09
     ld   [hl], a                                  ; $461A: $77
     ld   hl, hMultiPurpose0                       ; $461B: $21 $D7 $FF
     pop  af                                       ; $461E: $F1
     add  [hl]                                     ; $461F: $86
-    ld   hl, wEntitiesSpeedYTable                 ; $4620: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4620: $21 $50 $C2
     add  hl, bc                                   ; $4623: $09
     ld   [hl], a                                  ; $4624: $77
     pop  af                                       ; $4625: $F1
     ldh  [hLinkPositionY], a                      ; $4626: $E0 $99
     pop  af                                       ; $4628: $F1
     ldh  [hLinkPositionX], a                      ; $4629: $E0 $98
-    call UpdateEntityPosWithSpeed_04              ; $462B: $CD $CA $6D
+    call UpdateEntityPosWithVelocity_04           ; $462B: $CD $CA $6D
     call func_004_4634                            ; $462E: $CD $34 $46
     jp   label_004_4568                           ; $4631: $C3 $68 $45
 
@@ -1254,35 +1254,35 @@ GenieState3Handler::
     rra                                           ; $48E6: $1F
     and  $01                                      ; $48E7: $E6 $01
     call SetEntitySpriteVariant                   ; $48E9: $CD $0C $3B
-    ld   hl, wEntitiesSpeedXTable                 ; $48EC: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $48EC: $21 $40 $C2
     add  hl, bc                                   ; $48EF: $09
     ld   a, [hl]                                  ; $48F0: $7E
     push af                                       ; $48F1: $F5
     ld   a, [wIsFileSelectionArrowShifted]        ; $48F2: $FA $00 $D0
     add  [hl]                                     ; $48F5: $86
     ld   [hl], a                                  ; $48F6: $77
-    ld   hl, wEntitiesSpeedYTable                 ; $48F7: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $48F7: $21 $50 $C2
     add  hl, bc                                   ; $48FA: $09
     ld   a, [hl]                                  ; $48FB: $7E
     push af                                       ; $48FC: $F5
     ld   a, [wIntroTimer]                         ; $48FD: $FA $01 $D0
     add  [hl]                                     ; $4900: $86
     ld   [hl], a                                  ; $4901: $77
-    call UpdateEntityPosWithSpeed_04              ; $4902: $CD $CA $6D
+    call UpdateEntityPosWithVelocity_04           ; $4902: $CD $CA $6D
     pop  af                                       ; $4905: $F1
-    ld   hl, wEntitiesSpeedYTable                 ; $4906: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4906: $21 $50 $C2
     add  hl, bc                                   ; $4909: $09
     ld   [hl], a                                  ; $490A: $77
     pop  af                                       ; $490B: $F1
-    ld   hl, wEntitiesSpeedXTable                 ; $490C: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $490C: $21 $40 $C2
     add  hl, bc                                   ; $490F: $09
     ld   [hl], a                                  ; $4910: $77
     ldh  a, [hActiveEntityState]                  ; $4911: $F0 $F0
     and  a                                        ; $4913: $A7
     jr   nz, jr_004_4938                          ; $4914: $20 $22
 
-    call AddEntityZSpeedToPos_04                  ; $4916: $CD $03 $6E
-    ld   hl, wEntitiesSpeedZTable                 ; $4919: $21 $20 $C3
+    call AddEntityZVelocityToPos_04               ; $4916: $CD $03 $6E
+    ld   hl, wEntitiesVelocityZTable              ; $4919: $21 $20 $C3
     add  hl, bc                                   ; $491C: $09
     dec  [hl]                                     ; $491D: $35
     dec  [hl]                                     ; $491E: $35
@@ -1296,7 +1296,7 @@ GenieState3Handler::
     call IncrementEntityState                     ; $4929: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $492C: $CD $05 $0C
     ld   [hl], $08                                ; $492F: $36 $08
-    ld   hl, wEntitiesSpeedXTable                 ; $4931: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4931: $21 $40 $C2
     add  hl, bc                                   ; $4934: $09
     ld   [hl], $E0                                ; $4935: $36 $E0
 
@@ -1318,9 +1318,9 @@ GenieState4Handler::
     and  $01                                      ; $494C: $E6 $01
     call SetEntitySpriteVariant                   ; $494E: $CD $0C $3B
     call label_3B44                               ; $4951: $CD $44 $3B
-    call UpdateEntityPosWithSpeed_04              ; $4954: $CD $CA $6D
-    call AddEntityZSpeedToPos_04                  ; $4957: $CD $03 $6E
-    ld   hl, wEntitiesSpeedZTable                 ; $495A: $21 $20 $C3
+    call UpdateEntityPosWithVelocity_04           ; $4954: $CD $CA $6D
+    call AddEntityZVelocityToPos_04               ; $4957: $CD $03 $6E
+    ld   hl, wEntitiesVelocityZTable              ; $495A: $21 $20 $C3
     add  hl, bc                                   ; $495D: $09
     dec  [hl]                                     ; $495E: $35
     dec  [hl]                                     ; $495F: $35

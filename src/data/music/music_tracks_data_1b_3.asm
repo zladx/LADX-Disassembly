@@ -15,7 +15,7 @@ Music6e::
 Music6f::
 Music70::
     db   $00
-    dw   MusicSpeedData_1b_4ac8
+    dw   MusicVelocityData_1b_4ac8
     dw   Music61Channel1
     dw   Music61Channel2
     dw   Music61Channel3

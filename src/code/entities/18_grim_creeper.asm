@@ -37,10 +37,10 @@ GrimCreeperEntityHandler::
     inc  [hl]                                     ; $7010: $34
 
 .jr_7011
-    ld   hl, wEntitiesSpeedZTable                 ; $7011: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $7011: $21 $20 $C3
     add  hl, bc                                   ; $7014: $09
     ld   [hl], $20                                ; $7015: $36 $20
-    call AddEntityZSpeedToPos_18                  ; $7017: $CD $98 $7E
+    call AddEntityZVelocityToPos_18               ; $7017: $CD $98 $7E
     ld   hl, wEntitiesPosZTable                   ; $701A: $21 $10 $C3
     add  hl, bc                                   ; $701D: $09
     ld   a, [hl]                                  ; $701E: $7E
@@ -387,7 +387,7 @@ jr_018_726D:
     ldh  [hLinkPositionX], a                      ; $7271: $E0 $98
 
 func_018_7273::
-    call UpdateEntityPosWithSpeed_18              ; $7273: $CD $5F $7E
+    call UpdateEntityPosWithVelocity_18           ; $7273: $CD $5F $7E
 
 label_018_7276:
     ldh  a, [hFrameCounter]                       ; $7276: $F0 $E7
@@ -432,7 +432,7 @@ func_018_72A5::
     res  ENTITY_PHYSICS_B_PROJECTILE_NOCLIP, [hl] ; $72B1: $CB $B6
     ld   a, $20                                   ; $72B3: $3E $20
     call ApplyVectorTowardsLink_trampoline        ; $72B5: $CD $AA $3B
-    ld   hl, wEntitiesSpeedZTable                 ; $72B8: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $72B8: $21 $20 $C3
     add  hl, bc                                   ; $72BB: $09
     ld   [hl], $F4                                ; $72BC: $36 $F4
     ld   a, JINGLE_GRIM_CREEPER_BATS              ; $72BE: $3E $31
@@ -445,12 +445,12 @@ func_018_72A5::
 func_018_72C8::
     call DefaultEnemyDamageCollisionHandler_trampoline ; $72C8: $CD $39 $3B
     call func_018_7273                            ; $72CB: $CD $73 $72
-    call AddEntityZSpeedToPos_18                  ; $72CE: $CD $98 $7E
+    call AddEntityZVelocityToPos_18               ; $72CE: $CD $98 $7E
     ldh  a, [hFrameCounter]                       ; $72D1: $F0 $E7
     and  $03                                      ; $72D3: $E6 $03
     jr   nz, .jr_72E1                             ; $72D5: $20 $0A
 
-    ld   hl, wEntitiesSpeedZTable                 ; $72D7: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $72D7: $21 $20 $C3
     add  hl, bc                                   ; $72DA: $09
     ld   a, [hl]                                  ; $72DB: $7E
     cp   $0C                                      ; $72DC: $FE $0C

@@ -18,7 +18,7 @@ CheepCheepVerticalEntityHandler::
     ld   de, CheepCheepSpriteVariants             ; $6B54: $11 $44 $6B
     call RenderActiveEntitySpritesPair            ; $6B57: $CD $C0 $3B
     call ReturnIfNonInteractive_19                ; $6B5A: $CD $3D $7D
-    ld   hl, wEntitiesSpeedXTable                 ; $6B5D: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6B5D: $21 $40 $C2
     add  hl, bc                                   ; $6B60: $09
     ld   a, [hl]                                  ; $6B61: $7E
     rlca                                          ; $6B62: $07
@@ -40,12 +40,12 @@ CheepCheepVerticalEntityHandler::
 ._02 dw CheepCheepState2Handler
 
 CheepCheepState0Handler::
-    ld   hl, wEntitiesSpeedXTable                 ; $6B7E: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6B7E: $21 $40 $C2
     ldh  a, [hActiveEntityType]                   ; $6B81: $F0 $EB
     cp   $AA                                      ; $6B83: $FE $AA
     jr   z, .jr_6B8A                              ; $6B85: $28 $03
 
-    ld   hl, wEntitiesSpeedYTable                 ; $6B87: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6B87: $21 $50 $C2
 
 .jr_6B8A
     add  hl, bc                                   ; $6B8A: $09
@@ -74,19 +74,19 @@ CheepCheepState1Handler::
     call IncrementEntityState                     ; $6BA8: $CD $12 $3B
 
 .jr_6BAB
-    jp   UpdateEntityPosWithSpeed_19              ; $6BAB: $C3 $B8 $7D
+    jp   UpdateEntityPosWithVelocity_19           ; $6BAB: $C3 $B8 $7D
 
 CheepCheepState2Handler::
     call GetEntityTransitionCountdown             ; $6BAE: $CD $05 $0C
     jr   nz, .ret_6BC6                            ; $6BB1: $20 $13
 
-    ld   hl, wEntitiesSpeedXTable                 ; $6BB3: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6BB3: $21 $40 $C2
     add  hl, bc                                   ; $6BB6: $09
     ld   a, [hl]                                  ; $6BB7: $7E
     cpl                                           ; $6BB8: $2F
     inc  a                                        ; $6BB9: $3C
     ld   [hl], a                                  ; $6BBA: $77
-    ld   hl, wEntitiesSpeedYTable                 ; $6BBB: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6BBB: $21 $50 $C2
     add  hl, bc                                   ; $6BBE: $09
     ld   a, [hl]                                  ; $6BBF: $7E
     cpl                                           ; $6BC0: $2F
@@ -110,7 +110,7 @@ CheepCheepJumpingEntityHandler::
     ld   de, CheepCheepSpriteVariants             ; $6BD3: $11 $44 $6B
     call RenderActiveEntitySpritesPair            ; $6BD6: $CD $C0 $3B
     call ReturnIfNonInteractive_19                ; $6BD9: $CD $3D $7D
-    ld   hl, wEntitiesSpeedXTable                 ; $6BDC: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6BDC: $21 $40 $C2
     add  hl, bc                                   ; $6BDF: $09
     ld   a, [hl]                                  ; $6BE0: $7E
     rlca                                          ; $6BE1: $07
@@ -165,7 +165,7 @@ CheepCheepJumpingState1Handler::
     ld   e, $0C                                   ; $6C30: $1E $0C
 
 .jr_6C32
-    ld   hl, wEntitiesSpeedXTable                 ; $6C32: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6C32: $21 $40 $C2
     add  hl, bc                                   ; $6C35: $09
     ld   [hl], e                                  ; $6C36: $73
     jp   IncrementEntityState                     ; $6C37: $C3 $12 $3B
@@ -174,7 +174,7 @@ CheepCheepJumpingState2Handler::
     call GetEntityTransitionCountdown             ; $6C3A: $CD $05 $0C
     jr   nz, .jr_6C53                             ; $6C3D: $20 $14
 
-    ld   hl, wEntitiesSpeedYTable                 ; $6C3F: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6C3F: $21 $50 $C2
     add  hl, bc                                   ; $6C42: $09
     ld   [hl], $D4                                ; $6C43: $36 $D4
     ldh  a, [hActiveEntityVisualPosY]             ; $6C45: $F0 $EC
@@ -192,7 +192,7 @@ CheepCheepJumpingState2Handler::
     and  $3F                                      ; $6C5B: $E6 $3F
     or   $10                                      ; $6C5D: $F6 $10
     ld   [hl], a                                  ; $6C5F: $77
-    ld   hl, wEntitiesSpeedXTable                 ; $6C60: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6C60: $21 $40 $C2
     add  hl, bc                                   ; $6C63: $09
     ld   a, [hl]                                  ; $6C64: $7E
     cpl                                           ; $6C65: $2F
@@ -200,16 +200,16 @@ CheepCheepJumpingState2Handler::
     ld   [hl], a                                  ; $6C67: $77
 
 .jr_6C68
-    call AddEntitySpeedToPos_19                   ; $6C68: $CD $C5 $7D
+    call AddEntityVelocityToPos_19                ; $6C68: $CD $C5 $7D
     jp   DefaultEntityPhysics_trampoline          ; $6C6B: $C3 $23 $3B
 
 CheepCheepJumpingState3Handler::
     call GetEntityTransitionCountdown             ; $6C6E: $CD $05 $0C
     ret  nz                                       ; $6C71: $C0
 
-    call UpdateEntityYPosWithSpeed_19             ; $6C72: $CD $BB $7D
+    call UpdateEntityYPosWithVelocity_19          ; $6C72: $CD $BB $7D
     call func_019_6C99                            ; $6C75: $CD $99 $6C
-    ld   hl, wEntitiesSpeedYTable                 ; $6C78: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6C78: $21 $50 $C2
     add  hl, bc                                   ; $6C7B: $09
     inc  [hl]                                     ; $6C7C: $34
     ld   a, [hl]                                  ; $6C7D: $7E
@@ -232,7 +232,7 @@ CheepCheepJumpingState4Handler::
     ret                                           ; $6C95: $C9
 
 .jr_6C96
-    call UpdateEntityYPosWithSpeed_19             ; $6C96: $CD $BB $7D
+    call UpdateEntityYPosWithVelocity_19          ; $6C96: $CD $BB $7D
 
 func_019_6C99::
     ld   hl, wEntitiesOptions1Table               ; $6C99: $21 $30 $C4
@@ -249,7 +249,7 @@ CheepCheepJumpingState5Handler::
     add  hl, bc                                   ; $6CAC: $09
     set  ENTITY_PHYSICS_B_HARMLESS, [hl]          ; $6CAD: $CB $FE
     set  ENTITY_PHYSICS_B_PROJECTILE_NOCLIP, [hl] ; $6CAF: $CB $F6
-    ld   hl, wEntitiesSpeedYTable                 ; $6CB1: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6CB1: $21 $50 $C2
     add  hl, bc                                   ; $6CB4: $09
     inc  [hl]                                     ; $6CB5: $34
     push hl                                       ; $6CB6: $E5
@@ -263,7 +263,7 @@ CheepCheepJumpingState5Handler::
     ld   [hl], $06                                ; $6CC0: $36 $06
 
 .jr_6CC2
-    call UpdateEntityYPosWithSpeed_19             ; $6CC2: $CD $BB $7D
+    call UpdateEntityYPosWithVelocity_19          ; $6CC2: $CD $BB $7D
     ldh  a, [hActiveEntityVisualPosY]             ; $6CC5: $F0 $EC
     cp   $70                                      ; $6CC7: $FE $70
     jr   c, func_019_6C99                         ; $6CC9: $38 $CE

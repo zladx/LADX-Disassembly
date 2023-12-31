@@ -35,7 +35,7 @@ EntityInitDodongoSnake::
     cp   $00                                      ; $6844: $FE $00
     jr   nz, .loop_6840                           ; $6846: $20 $F8
 
-    ld   hl, wEntitiesSpeedYTable                 ; $6848: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6848: $21 $50 $C2
     add  hl, bc                                   ; $684B: $09
     ld   [hl], $06                                ; $684C: $36 $06
     call GetEntityTransitionCountdown             ; $684E: $CD $05 $0C
@@ -140,7 +140,7 @@ func_005_6891::
     add  hl, de                                   ; $68E9: $19
     ldh  a, [hActiveEntityVisualPosY]             ; $68EA: $F0 $EC
     ld   [hl], a                                  ; $68EC: $77
-    call UpdateEntityPosWithSpeed_05              ; $68ED: $CD $B1 $7A
+    call UpdateEntityPosWithVelocity_05           ; $68ED: $CD $B1 $7A
     call DefaultEntityPhysics_trampoline          ; $68F0: $CD $23 $3B
     ld   e, $0F                                   ; $68F3: $1E $0F
     ld   d, b                                     ; $68F5: $50
@@ -249,13 +249,13 @@ jr_005_697E:
     ld   hl, Data_005_685F                        ; $698C: $21 $5F $68
     add  hl, de                                   ; $698F: $19
     ld   a, [hl]                                  ; $6990: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $6991: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6991: $21 $40 $C2
     add  hl, bc                                   ; $6994: $09
     ld   [hl], a                                  ; $6995: $77
     ld   hl, Data_005_6863                        ; $6996: $21 $63 $68
     add  hl, de                                   ; $6999: $19
     ld   a, [hl]                                  ; $699A: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $699B: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $699B: $21 $50 $C2
     add  hl, bc                                   ; $699E: $09
     ld   [hl], a                                  ; $699F: $77
 

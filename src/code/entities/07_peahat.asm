@@ -13,8 +13,8 @@ PeaHatEntityHandler::
     call ReturnIfNonInteractive_07                ; $670F: $CD $96 $7D
     call ApplyRecoilIfNeeded_07                   ; $6712: $CD $C3 $7D
     call DefaultEnemyDamageCollisionHandler_trampoline ; $6715: $CD $39 $3B
-    call UpdateEntityPosWithSpeed_07              ; $6718: $CD $0A $7E
-    call AddEntityZSpeedToPos_07                  ; $671B: $CD $43 $7E
+    call UpdateEntityPosWithVelocity_07           ; $6718: $CD $0A $7E
+    call AddEntityZVelocityToPos_07               ; $671B: $CD $43 $7E
     call DefaultEntityPhysics_trampoline          ; $671E: $CD $23 $3B
     ld   hl, wEntitiesHitboxFlagsTable            ; $6721: $21 $50 $C3
     add  hl, bc                                   ; $6724: $09
@@ -55,7 +55,7 @@ jr_007_6753:
     and  $07                                      ; $6755: $E6 $07
     jr   nz, jr_007_6776                          ; $6757: $20 $1D
 
-    ld   hl, wEntitiesSpeedXTable                 ; $6759: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6759: $21 $40 $C2
     add  hl, bc                                   ; $675C: $09
     ld   a, [hl]                                  ; $675D: $7E
     and  a                                        ; $675E: $A7
@@ -71,7 +71,7 @@ jr_007_6753:
     dec  [hl]                                     ; $6767: $35
 
 jr_007_6768:
-    call GetEntitySpeedYAddress                   ; $6768: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $6768: $CD $05 $40
     ld   a, [hl]                                  ; $676B: $7E
     and  a                                        ; $676C: $A7
     jr   z, jr_007_6776                           ; $676D: $28 $07
@@ -200,13 +200,13 @@ jr_007_67EB:
     add  hl, de                                   ; $6817: $19
     ld   a, [hl]                                  ; $6818: $7E
     sra  a                                        ; $6819: $CB $2F
-    call GetEntitySpeedYAddress                   ; $681B: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $681B: $CD $05 $40
     ld   [hl], a                                  ; $681E: $77
     ld   hl, Data_007_67C7                        ; $681F: $21 $C7 $67
     add  hl, de                                   ; $6822: $19
     ld   a, [hl]                                  ; $6823: $7E
     sra  a                                        ; $6824: $CB $2F
-    ld   hl, wEntitiesSpeedXTable                 ; $6826: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6826: $21 $40 $C2
     add  hl, bc                                   ; $6829: $09
     ld   [hl], a                                  ; $682A: $77
     call GetRandomByte                            ; $682B: $CD $0D $28

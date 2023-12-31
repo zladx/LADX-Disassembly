@@ -74,13 +74,13 @@ PokeyEntityHandler::
     ldh  a, [hMultiPurpose1]                      ; $4C30: $F0 $D8
     cpl                                           ; $4C32: $2F
     inc  a                                        ; $4C33: $3C
-    ld   hl, wEntitiesSpeedXTable                 ; $4C34: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4C34: $21 $40 $C2
     add  hl, bc                                   ; $4C37: $09
     ld   [hl], a                                  ; $4C38: $77
     ldh  a, [hMultiPurpose0]                      ; $4C39: $F0 $D7
     cpl                                           ; $4C3B: $2F
     inc  a                                        ; $4C3C: $3C
-    ld   hl, wEntitiesSpeedYTable                 ; $4C3D: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4C3D: $21 $50 $C2
     add  hl, bc                                   ; $4C40: $09
     ld   [hl], a                                  ; $4C41: $77
     ld   hl, wEntitiesTransitionCountdownTable    ; $4C42: $21 $E0 $C2
@@ -111,18 +111,18 @@ PokeyEntityHandler::
     ld   hl, Data_015_4BD9                        ; $4C6B: $21 $D9 $4B
     add  hl, de                                   ; $4C6E: $19
     ld   a, [hl]                                  ; $4C6F: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $4C70: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4C70: $21 $40 $C2
     add  hl, bc                                   ; $4C73: $09
     ld   [hl], a                                  ; $4C74: $77
     ld   hl, Data_015_4BD7                        ; $4C75: $21 $D7 $4B
     add  hl, de                                   ; $4C78: $19
     ld   a, [hl]                                  ; $4C79: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $4C7A: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4C7A: $21 $50 $C2
     add  hl, bc                                   ; $4C7D: $09
     ld   [hl], a                                  ; $4C7E: $77
 
 .jr_4C7F
-    call UpdateEntityPosWithSpeed_15              ; $4C7F: $CD $88 $7B
+    call UpdateEntityPosWithVelocity_15           ; $4C7F: $CD $88 $7B
     jp   DefaultEntityPhysics_trampoline          ; $4C82: $C3 $23 $3B
 
 func_015_4C85::
@@ -197,7 +197,7 @@ label_015_4CD9:
     call DefaultEnemyDamageCollisionHandler_trampoline ; $4CEA: $CD $39 $3B
 
 .jr_4CED
-    call UpdateEntityPosWithSpeed_15              ; $4CED: $CD $88 $7B
+    call UpdateEntityPosWithVelocity_15           ; $4CED: $CD $88 $7B
     call DefaultEntityPhysics_trampoline          ; $4CF0: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $4CF3: $21 $A0 $C2
     add  hl, bc                                   ; $4CF6: $09
@@ -205,7 +205,7 @@ label_015_4CD9:
     and  $03                                      ; $4CF8: $E6 $03
     jr   z, .jr_4D03                              ; $4CFA: $28 $07
 
-    ld   hl, wEntitiesSpeedXTable                 ; $4CFC: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4CFC: $21 $40 $C2
     call func_015_4D0F                            ; $4CFF: $CD $0F $4D
     ret  c                                        ; $4D02: $D8
 
@@ -216,7 +216,7 @@ label_015_4CD9:
     and  $0C                                      ; $4D08: $E6 $0C
     jr   z, jr_015_4D39                           ; $4D0A: $28 $2D
 
-    ld   hl, wEntitiesSpeedYTable                 ; $4D0C: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4D0C: $21 $50 $C2
 
 func_015_4D0F::
     add  hl, bc                                   ; $4D0F: $09

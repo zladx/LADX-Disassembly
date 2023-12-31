@@ -33,7 +33,7 @@ SideViewWeightsEntityHandler::
     and  $01                                      ; $61FC: $E6 $01
     jr   nz, jr_007_620E                          ; $61FE: $20 $0E
 
-    call GetEntitySpeedYAddress                   ; $6200: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $6200: $CD $05 $40
     ld   a, [hl]                                  ; $6203: $7E
     sub  e                                        ; $6204: $93
     jr   z, jr_007_620E                           ; $6205: $28 $07
@@ -51,7 +51,7 @@ jr_007_620E:
     ld   hl, wEntitiesHitboxFlagsTable            ; $620E: $21 $50 $C3
     add  hl, bc                                   ; $6211: $09
     ld   [hl], $02                                ; $6212: $36 $02
-    call GetEntitySpeedYAddress                   ; $6214: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $6214: $CD $05 $40
     ld   a, [hl]                                  ; $6217: $7E
     push hl                                       ; $6218: $E5
     push af                                       ; $6219: $F5
@@ -77,10 +77,10 @@ jr_007_620E:
     and  a                                        ; $6236: $A7
     jr   z, .jr_6246                              ; $6237: $28 $0D
 
-    call GetEntitySpeedYAddress                   ; $6239: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $6239: $CD $05 $40
     ld   [hl], b                                  ; $623C: $70
     call func_007_631C                            ; $623D: $CD $1C $63
-    ld   hl, wEntitiesSpeedYTable                 ; $6240: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6240: $21 $50 $C2
     add  hl, de                                   ; $6243: $19
     ld   [hl], $00                                ; $6244: $36 $00
 
@@ -88,7 +88,7 @@ jr_007_620E:
     jr   jr_007_625F                              ; $6246: $18 $17
 
 jr_007_6248:
-    call GetEntitySpeedYAddress                   ; $6248: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $6248: $CD $05 $40
     ld   a, [hl]                                  ; $624B: $7E
     and  a                                        ; $624C: $A7
     jr   z, jr_007_6256                           ; $624D: $28 $07
@@ -127,7 +127,7 @@ jr_007_625F:
     or   e                                        ; $627A: $B3
     ld   e, a                                     ; $627B: $5F
     ld   d, b                                     ; $627C: $50
-    call GetEntitySpeedYAddress                   ; $627D: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $627D: $CD $05 $40
     ld   a, [hl]                                  ; $6280: $7E
     and  a                                        ; $6281: $A7
     jr   z, ret_007_62D1                          ; $6282: $28 $4D

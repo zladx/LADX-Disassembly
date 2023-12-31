@@ -22,7 +22,7 @@ StarEntityHandler::
     call ReturnIfNonInteractive_07                ; $7261: $CD $96 $7D
     call ApplyRecoilIfNeeded_07                   ; $7264: $CD $C3 $7D
     call DefaultEnemyDamageCollisionHandler_trampoline ; $7267: $CD $39 $3B
-    call UpdateEntityPosWithSpeed_07              ; $726A: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $726A: $CD $0A $7E
     call DefaultEntityPhysics_trampoline          ; $726D: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $7270: $21 $A0 $C2
     add  hl, bc                                   ; $7273: $09
@@ -37,7 +37,7 @@ StarEntityHandler::
     jr   jr_007_7291                              ; $727E: $18 $11
 
 .jr_7280
-    ld   hl, wEntitiesSpeedXTable                 ; $7280: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7280: $21 $40 $C2
     add  hl, bc                                   ; $7283: $09
     ld   a, [hl]                                  ; $7284: $7E
     cpl                                           ; $7285: $2F
@@ -46,7 +46,7 @@ StarEntityHandler::
     jr   jr_007_7291                              ; $7288: $18 $07
 
 jr_007_728A:
-    call GetEntitySpeedYAddress                   ; $728A: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $728A: $CD $05 $40
     ld   a, [hl]                                  ; $728D: $7E
     cpl                                           ; $728E: $2F
     inc  a                                        ; $728F: $3C

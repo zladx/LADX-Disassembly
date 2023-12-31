@@ -386,8 +386,8 @@ DEF POWER_UP_GUARDIAN_ACORN   EQU 2
 DEF ARROW_MAX_ACTIVE_COUNT    EQU 2 ; maximun amount of arrows in the air
 DEF BOMB_ARROW_COOLDOWN       EQU 6 ; number of frames, until bomb / arrow can be used again
 
-; speed of the hookshot in x or y direction
-DEF HOOKSHOT_CHAIN_SPEED      EQU $30
+; Velocity of the hookshot in x or y direction
+DEF HOOKSHOT_CHAIN_Velocity      EQU $30
 
 ; Values for wActivePowerUp
 DEF ACTIVE_POWER_UP_NONE            EQU 0

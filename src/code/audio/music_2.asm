@@ -759,10 +759,10 @@ jr_01E_450E:
 label_01E_451F:
     call func_01E_4487                            ; $451F: $CD $87 $44
     call func_01E_449C                            ; $4522: $CD $9C $44
-    ld   [wMusicSpeedPointer], a                  ; $4525: $EA $01 $D3
+    ld   [wMusicVelocityPointer], a               ; $4525: $EA $01 $D3
     call func_01E_4487                            ; $4528: $CD $87 $44
     call func_01E_449C                            ; $452B: $CD $9C $44
-    ld   [wMusicSpeedPointer+1], a                ; $452E: $EA $02 $D3
+    ld   [wMusicVelocityPointer+1], a             ; $452E: $EA $02 $D3
     jr   jr_01E_453C                              ; $4531: $18 $09
 
 label_01E_4533:
@@ -914,7 +914,7 @@ jr_01E_45A5:
     ld   c, a                                     ; $45F2: $4F
     ld   b, $00                                   ; $45F3: $06 $00
     push hl                                       ; $45F5: $E5
-    ld   de, wMusicSpeedPointer                   ; $45F6: $11 $01 $D3
+    ld   de, wMusicVelocityPointer                ; $45F6: $11 $01 $D3
     ld   a, [de]                                  ; $45F9: $1A
     ld   l, a                                     ; $45FA: $6F
     inc  e                                        ; $45FB: $1C

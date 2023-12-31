@@ -54,8 +54,8 @@ RoosterEntityHandler::
     jr   jr_019_5A31                              ; $5A0B: $18 $24
 
 .jr_5A0D
-    call AddEntityZSpeedToPos_19                  ; $5A0D: $CD $F1 $7D
-    ld   hl, wEntitiesSpeedZTable                 ; $5A10: $21 $20 $C3
+    call AddEntityZVelocityToPos_19               ; $5A0D: $CD $F1 $7D
+    ld   hl, wEntitiesVelocityZTable              ; $5A10: $21 $20 $C3
     add  hl, bc                                   ; $5A13: $09
     dec  [hl]                                     ; $5A14: $35
     ld   hl, wEntitiesPosZTable                   ; $5A15: $21 $10 $C3
@@ -65,7 +65,7 @@ RoosterEntityHandler::
     jr   z, jr_019_5A35                           ; $5A1C: $28 $17
 
     ld   [hl], b                                  ; $5A1E: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $5A1F: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5A1F: $21 $20 $C3
     add  hl, bc                                   ; $5A22: $09
     ld   [hl], $10                                ; $5A23: $36 $10
     ld   a, [wIsLinkInTheAir]                     ; $5A25: $FA $46 $C1
@@ -132,11 +132,11 @@ jr_019_5A35:
     ld   [hl], a                                  ; $5A7E: $77
 
 jr_019_5A7F:
-    call UpdateEntityPosWithSpeed_19              ; $5A7F: $CD $B8 $7D
+    call UpdateEntityPosWithVelocity_19           ; $5A7F: $CD $B8 $7D
     jp   DefaultEntityPhysics_trampoline          ; $5A82: $C3 $23 $3B
 
 jr_019_5A85:
-    ld   hl, wEntitiesSpeedXTable                 ; $5A85: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5A85: $21 $40 $C2
     add  hl, bc                                   ; $5A88: $09
     ld   a, [hl]                                  ; $5A89: $7E
     and  $80                                      ; $5A8A: $E6 $80
@@ -147,7 +147,7 @@ jr_019_5A85:
 
 .jr_5A90
     dec  [hl]                                     ; $5A90: $35
-    ld   hl, wEntitiesSpeedYTable                 ; $5A91: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $5A91: $21 $50 $C2
     add  hl, bc                                   ; $5A94: $09
     ld   a, [hl]                                  ; $5A95: $7E
     and  $80                                      ; $5A96: $E6 $80
@@ -161,7 +161,7 @@ jr_019_5A85:
     jr   jr_019_5A7F                              ; $5A9D: $18 $E0
 
 jr_019_5A9F:
-    call ClearEntitySpeed                         ; $5A9F: $CD $7F $3D
+    call ClearEntityVelocity                      ; $5A9F: $CD $7F $3D
     call CheckLinkCollisionWithEnemy_trampoline   ; $5AA2: $CD $5A $3B
     ret  nc                                       ; $5AA5: $D0
 
@@ -222,7 +222,7 @@ Data_019_5AF8::
     db   $06, $07, $08, $09, $09, $08, $07, $06
 
 func_019_5B00::
-    ld   hl, wEntitiesSpeedZTable                 ; $5B00: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5B00: $21 $20 $C3
     add  hl, bc                                   ; $5B03: $09
     ld   [hl], b                                  ; $5B04: $70
     ldh  a, [hFrameCounter]                       ; $5B05: $F0 $E7
@@ -277,7 +277,7 @@ label_019_5B3C:
     ld   a, $02                                   ; $5B4C: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $5B4E: $EA $46 $C1
     xor  a                                        ; $5B51: $AF
-    ldh  [hLinkSpeedZ], a                         ; $5B52: $E0 $A3
+    ldh  [hLinkVelocityZ], a                      ; $5B52: $E0 $A3
     ldh  a, [hFrameCounter]                       ; $5B54: $F0 $E7
     and  $03                                      ; $5B56: $E6 $03
     jr   nz, jr_019_5B75                          ; $5B58: $20 $1B
@@ -325,7 +325,7 @@ jr_019_5B75:
     jr   z, .jr_5B93                              ; $5B8E: $28 $03
 
     xor  a                                        ; $5B90: $AF
-    ldh  [hLinkSpeedY], a                         ; $5B91: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $5B91: $E0 $9B
 
 .jr_5B93
     ld   a, [wCollisionType]                      ; $5B93: $FA $33 $C1
@@ -333,7 +333,7 @@ jr_019_5B75:
     jr   z, .jr_5B9D                              ; $5B98: $28 $03
 
     xor  a                                        ; $5B9A: $AF
-    ldh  [hLinkSpeedX], a                         ; $5B9B: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $5B9B: $E0 $9A
 
 .jr_5B9D
     jp   PlayBoomerangSfx_trampoline              ; $5B9D: $C3 $F8 $29

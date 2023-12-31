@@ -131,16 +131,16 @@ func_005_63A8::
     ld   a, [hl]                                  ; $63CB: $7E
 
 .jr_63CC
-    ld   hl, wEntitiesSpeedXTable                 ; $63CC: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $63CC: $21 $40 $C2
     add  hl, bc                                   ; $63CF: $09
     ld   [hl], a                                  ; $63D0: $77
     ld   hl, Data_005_63A0                        ; $63D1: $21 $A0 $63
     add  hl, de                                   ; $63D4: $19
     ld   a, [hl]                                  ; $63D5: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $63D6: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $63D6: $21 $50 $C2
     add  hl, bc                                   ; $63D9: $09
     ld   [hl], a                                  ; $63DA: $77
-    ld   hl, wEntitiesSpeedZTable                 ; $63DB: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $63DB: $21 $20 $C3
     add  hl, bc                                   ; $63DE: $09
     ld   [hl], $18                                ; $63DF: $36 $18
     ld   a, WAVE_SFX_BOSS_GROWL                   ; $63E1: $3E $16
@@ -149,7 +149,7 @@ func_005_63A8::
     jp   IncrementEntityState                     ; $63E8: $C3 $12 $3B
 
 func_005_63EB::
-    ld   hl, wEntitiesSpeedXTable                 ; $63EB: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $63EB: $21 $40 $C2
     add  hl, bc                                   ; $63EE: $09
     ld   a, [hl]                                  ; $63EF: $7E
     and  a                                        ; $63F0: $A7
@@ -170,13 +170,13 @@ func_005_63EB::
     call IncrementEntityState                     ; $6405: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $6408: $CD $05 $0C
     ld   [hl], $40                                ; $640B: $36 $40
-    ld   hl, wEntitiesSpeedXTable                 ; $640D: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $640D: $21 $40 $C2
     add  hl, bc                                   ; $6410: $09
     ld   [hl], $18                                ; $6411: $36 $18
-    ld   hl, wEntitiesSpeedYTable                 ; $6413: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6413: $21 $50 $C2
     add  hl, bc                                   ; $6416: $09
     ld   [hl], $18                                ; $6417: $36 $18
-    ld   hl, wEntitiesSpeedZTable                 ; $6419: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6419: $21 $20 $C3
     add  hl, bc                                   ; $641C: $09
     ld   [hl], b                                  ; $641D: $70
     call GetEntityDropTimer                       ; $641E: $CD $FB $0B
@@ -203,9 +203,9 @@ ret_005_6443:
     ret                                           ; $6443: $C9
 
 jr_005_6444:
-    call UpdateEntityPosWithSpeed_05              ; $6444: $CD $B1 $7A
-    call AddEntityZSpeedToPos_05                  ; $6447: $CD $EA $7A
-    ld   hl, wEntitiesSpeedZTable                 ; $644A: $21 $20 $C3
+    call UpdateEntityPosWithVelocity_05           ; $6444: $CD $B1 $7A
+    call AddEntityZVelocityToPos_05               ; $6447: $CD $EA $7A
+    ld   hl, wEntitiesVelocityZTable              ; $644A: $21 $20 $C3
     add  hl, bc                                   ; $644D: $09
     dec  [hl]                                     ; $644E: $35
     ld   hl, wEntitiesPosZTable                   ; $644F: $21 $10 $C3
@@ -233,7 +233,7 @@ jr_005_6444:
     cp   $05                                      ; $6476: $FE $05
     jp   nc, jr_005_656D                          ; $6478: $D2 $6D $65
 
-    ld   hl, wEntitiesSpeedXTable                 ; $647B: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $647B: $21 $40 $C2
     add  hl, bc                                   ; $647E: $09
     ld   a, [hl]                                  ; $647F: $7E
     and  a                                        ; $6480: $A7
@@ -262,13 +262,13 @@ func_005_648E::
     ld   e, $F8                                   ; $649E: $1E $F8
 
 .jr_64A0
-    ld   hl, wEntitiesSpeedXTable                 ; $64A0: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $64A0: $21 $40 $C2
     add  hl, bc                                   ; $64A3: $09
     push hl                                       ; $64A4: $E5
     ld   a, [hl]                                  ; $64A5: $7E
     push af                                       ; $64A6: $F5
     ld   [hl], e                                  ; $64A7: $73
-    call AddEntitySpeedToPos_05                   ; $64A8: $CD $BE $7A
+    call AddEntityVelocityToPos_05                ; $64A8: $CD $BE $7A
     pop  af                                       ; $64AB: $F1
     pop  hl                                       ; $64AC: $E1
     ld   [hl], a                                  ; $64AD: $77
@@ -291,7 +291,7 @@ ELSE
 ENDC
     jr   nc, .jr_64CC                             ; $64C1: $30 $09
 
-    call ClearEntitySpeed                         ; $64C3: $CD $7F $3D
+    call ClearEntityVelocity                      ; $64C3: $CD $7F $3D
     call IncrementEntityState                     ; $64C6: $CD $12 $3B
     ld   [hl], $01                                ; $64C9: $36 $01
     ret                                           ; $64CB: $C9
@@ -323,7 +323,7 @@ ENDC
     jr   c, .jr_64F7                              ; $64E9: $38 $0C
 
     call IncrementEntityState                     ; $64EB: $CD $12 $3B
-    call ClearEntitySpeed                         ; $64EE: $CD $7F $3D
+    call ClearEntityVelocity                      ; $64EE: $CD $7F $3D
     call GetEntityTransitionCountdown             ; $64F1: $CD $05 $0C
     ld   [hl], $80                                ; $64F4: $36 $80
     ret                                           ; $64F6: $C9
@@ -335,7 +335,7 @@ ENDC
     cp   $0B                                      ; $64FC: $FE $0B
     ret  nc                                       ; $64FE: $D0
 
-    call UpdateEntityPosWithSpeed_05              ; $64FF: $CD $B1 $7A
+    call UpdateEntityPosWithVelocity_05           ; $64FF: $CD $B1 $7A
     call DefaultEntityPhysics_trampoline          ; $6502: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $6505: $21 $A0 $C2
     add  hl, bc                                   ; $6508: $09
@@ -344,7 +344,7 @@ ENDC
     and  $03                                      ; $650B: $E6 $03
     jr   z, .jr_6515                              ; $650D: $28 $06
 
-    ld   hl, wEntitiesSpeedXTable                 ; $650F: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $650F: $21 $40 $C2
     call func_005_651D                            ; $6512: $CD $1D $65
 
 .jr_6515
@@ -352,7 +352,7 @@ ENDC
     and  $0C                                      ; $6516: $E6 $0C
     jr   z, jr_005_6522                           ; $6518: $28 $08
 
-    ld   hl, wEntitiesSpeedYTable                 ; $651A: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $651A: $21 $50 $C2
 
 func_005_651D::
     add  hl, bc                                   ; $651D: $09
@@ -392,13 +392,13 @@ func_005_6534::
     ld   e, $F0                                   ; $654A: $1E $F0
 
 .jr_654C
-    ld   hl, wEntitiesSpeedXTable                 ; $654C: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $654C: $21 $40 $C2
     add  hl, bc                                   ; $654F: $09
     push hl                                       ; $6550: $E5
     ld   a, [hl]                                  ; $6551: $7E
     push af                                       ; $6552: $F5
     ld   [hl], e                                  ; $6553: $73
-    call AddEntitySpeedToPos_05                   ; $6554: $CD $BE $7A
+    call AddEntityVelocityToPos_05                ; $6554: $CD $BE $7A
     pop  af                                       ; $6557: $F1
     pop  hl                                       ; $6558: $E1
     ld   [hl], a                                  ; $6559: $77
@@ -410,7 +410,7 @@ jr_005_655B:
 
     call IncrementEntityState                     ; $655E: $CD $12 $3B
     ld   [hl], $01                                ; $6561: $36 $01
-    call ClearEntitySpeed                         ; $6563: $CD $7F $3D
+    call ClearEntityVelocity                      ; $6563: $CD $7F $3D
     ld   hl, wEntitiesHealthTable                 ; $6566: $21 $60 $C3
     add  hl, bc                                   ; $6569: $09
     ld   [hl], $08                                ; $656A: $36 $08
@@ -472,14 +472,14 @@ jr_005_6581:
     ld   hl, Data_005_657C                        ; $65B6: $21 $7C $65
     add  hl, bc                                   ; $65B9: $09
     ld   a, [hl]                                  ; $65BA: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $65BB: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $65BB: $21 $40 $C2
     add  hl, de                                   ; $65BE: $19
     ld   [hl], a                                  ; $65BF: $77
-    ld   hl, wEntitiesSpeedYTable                 ; $65C0: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $65C0: $21 $50 $C2
     add  hl, de                                   ; $65C3: $19
     ld   [hl], $04                                ; $65C4: $36 $04
     pop  bc                                       ; $65C6: $C1
-    ld   hl, wEntitiesSpeedZTable                 ; $65C7: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $65C7: $21 $20 $C3
     add  hl, de                                   ; $65CA: $19
     ld   [hl], $08                                ; $65CB: $36 $08
     ld   hl, wEntitiesPhysicsFlagsTable           ; $65CD: $21 $40 $C3
@@ -561,17 +561,17 @@ jr_005_6613:
     ld   hl, Data_005_6609 - 1                    ; $663E: $21 $08 $66
     add  hl, bc                                   ; $6641: $09
     ld   a, [hl]                                  ; $6642: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $6643: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6643: $21 $40 $C2
     add  hl, de                                   ; $6646: $19
     ld   [hl], a                                  ; $6647: $77
     ld   hl, Data_005_660D - 1                    ; $6648: $21 $0C $66
     add  hl, bc                                   ; $664B: $09
     ld   a, [hl]                                  ; $664C: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $664D: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $664D: $21 $50 $C2
     add  hl, de                                   ; $6650: $19
     ld   [hl], a                                  ; $6651: $77
     pop  bc                                       ; $6652: $C1
-    ld   hl, wEntitiesSpeedZTable                 ; $6653: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6653: $21 $20 $C3
     add  hl, de                                   ; $6656: $19
     ld   [hl], $13                                ; $6657: $36 $13
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6659: $21 $40 $C3
@@ -717,9 +717,9 @@ label_005_6798:
 ._01 dw func_005_67D2                             ; $67A9
 
 func_005_67AB::
-    call UpdateEntityPosWithSpeed_05
-    call AddEntityZSpeedToPos_05                  ; $67AE: $CD $EA $7A
-    ld   hl, wEntitiesSpeedZTable                 ; $67B1: $21 $20 $C3
+    call UpdateEntityPosWithVelocity_05
+    call AddEntityZVelocityToPos_05               ; $67AE: $CD $EA $7A
+    ld   hl, wEntitiesVelocityZTable              ; $67B1: $21 $20 $C3
     add  hl, bc                                   ; $67B4: $09
     dec  [hl]                                     ; $67B5: $35
     ld   hl, wEntitiesPosZTable                   ; $67B6: $21 $10 $C3
@@ -766,9 +766,9 @@ label_005_67EA:
     ld   de, HotHead2SpriteVariants               ; $67EA: $11 $E2 $67
     call RenderActiveEntitySpritesPair            ; $67ED: $CD $C0 $3B
     call ReturnIfNonInteractive_05                ; $67F0: $CD $3A $7A
-    call UpdateEntityPosWithSpeed_05              ; $67F3: $CD $B1 $7A
-    call AddEntityZSpeedToPos_05                  ; $67F6: $CD $EA $7A
-    ld   hl, wEntitiesSpeedZTable                 ; $67F9: $21 $20 $C3
+    call UpdateEntityPosWithVelocity_05           ; $67F3: $CD $B1 $7A
+    call AddEntityZVelocityToPos_05               ; $67F6: $CD $EA $7A
+    ld   hl, wEntitiesVelocityZTable              ; $67F9: $21 $20 $C3
     add  hl, bc                                   ; $67FC: $09
     dec  [hl]                                     ; $67FD: $35
     ld   hl, wEntitiesPosZTable                   ; $67FE: $21 $10 $C3

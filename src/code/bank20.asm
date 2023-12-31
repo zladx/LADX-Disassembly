@@ -1142,14 +1142,14 @@ func_020_4B4A::
     ld   [wSwordCollisionEnabled], a              ; $4B75: $EA $B0 $C5
     ret                                           ; $4B78: $C9
 
-; trwo speed in X direction ?
+; trwo Velocity in X direction ?
 Data_020_4B79::
 .right: db   8
 .left:  db  -8
 .up:    db   0
 .down:  db   0
 
-; trwo speed in Y direction ?
+; trwo Velocity in Y direction ?
 Data_020_4B7D::
 .right: db   0
 .left:  db   0
@@ -1223,13 +1223,13 @@ ENDC
     ld   [hl], d                                  ; $4BCC: $72
 
 jr_020_4BCD:
-    ld   hl, wEntitiesSpeedXTable                 ; $4BCD: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4BCD: $21 $40 $C2
     add  hl, de                                   ; $4BD0: $19
     ld   [hl], d                                  ; $4BD1: $72
-    ld   hl, wEntitiesSpeedYTable                 ; $4BD2: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4BD2: $21 $50 $C2
     add  hl, de                                   ; $4BD5: $19
     ld   [hl], d                                  ; $4BD6: $72
-    ld   hl, wEntitiesSpeedZTable                 ; $4BD7: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4BD7: $21 $20 $C3
     add  hl, de                                   ; $4BDA: $19
     ld   [hl], d                                  ; $4BDB: $72
     ldh  a, [hLinkDirection]                      ; $4BDC: $F0 $9E
@@ -1286,7 +1286,7 @@ jr_020_4C0B:
     ld   hl, Data_020_4BF9 - 1                    ; $4C1F: $21 $F8 $4B
     add  hl, bc                                   ; $4C22: $09
     ld   a, [hl]                                  ; $4C23: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $4C24: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4C24: $21 $40 $C2
     add  hl, de                                   ; $4C27: $19
     ld   [hl], a                                  ; $4C28: $77
     ldh  a, [hPressedButtonsMask]                 ; $4C29: $F0 $CB
@@ -1298,7 +1298,7 @@ jr_020_4C0B:
     ld   hl, Data_020_4BFB                        ; $4C34: $21 $FB $4B
     add  hl, bc                                   ; $4C37: $09
     ld   a, [hl]                                  ; $4C38: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $4C39: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4C39: $21 $50 $C2
     add  hl, de                                   ; $4C3C: $19
     ld   [hl], a                                  ; $4C3D: $77
 

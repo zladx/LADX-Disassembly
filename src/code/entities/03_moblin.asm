@@ -122,13 +122,13 @@ jr_003_58B9:
     ld   hl, Data_003_581B                        ; $58C2: $21 $1B $58
     add  hl, de                                   ; $58C5: $19
     ld   a, [hl]                                  ; $58C6: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $58C7: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $58C7: $21 $40 $C2
     add  hl, bc                                   ; $58CA: $09
     ld   [hl], a                                  ; $58CB: $77
     ld   hl, Data_003_581F                        ; $58CC: $21 $1F $58
     add  hl, de                                   ; $58CF: $19
     ld   a, [hl]                                  ; $58D0: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $58D1: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $58D1: $21 $50 $C2
     add  hl, bc                                   ; $58D4: $09
     ld   [hl], a                                  ; $58D5: $77
     ret                                           ; $58D6: $C9
@@ -151,10 +151,10 @@ jr_003_58D7:
     ld   hl, wEntitiesStateTable                  ; $58ED: $21 $90 $C2
     add  hl, bc                                   ; $58F0: $09
     ld   [hl], $01                                ; $58F1: $36 $01
-    call ClearEntitySpeed                         ; $58F3: $CD $7F $3D
+    call ClearEntityVelocity                      ; $58F3: $CD $7F $3D
 
 jr_003_58F6:
-    call UpdateEntityPosWithSpeed_03              ; $58F6: $CD $25 $7F
+    call UpdateEntityPosWithVelocity_03           ; $58F6: $CD $25 $7F
     call DefaultEntityPhysics                     ; $58F9: $CD $93 $78
 
 func_003_58FC::
@@ -241,7 +241,7 @@ SpawnMoblinArrow::
     ld   hl, Data_003_593F                        ; $596A: $21 $3F $59
     add  hl, bc                                   ; $596D: $09
     ld   a, [hl]                                  ; $596E: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $596F: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $596F: $21 $40 $C2
     add  hl, de                                   ; $5972: $19
     ld   [hl], a                                  ; $5973: $77
 
@@ -249,7 +249,7 @@ SpawnMoblinArrow::
     ld   hl, Data_003_5943                        ; $5974: $21 $43 $59
     add  hl, bc                                   ; $5977: $09
     ld   a, [hl]                                  ; $5978: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $5979: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $5979: $21 $50 $C2
     add  hl, de                                   ; $597C: $19
     ld   [hl], a                                  ; $597D: $77
     ldh  a, [hMultiPurpose2]                      ; $597E: $F0 $D9
@@ -304,13 +304,13 @@ SpawnOctorokRock::
     ld   hl, Data_003_5992                        ; $59C0: $21 $92 $59
     add  hl, bc                                   ; $59C3: $09
     ld   a, [hl]                                  ; $59C4: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $59C5: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $59C5: $21 $40 $C2
     add  hl, de                                   ; $59C8: $19
     ld   [hl], a                                  ; $59C9: $77
     ld   hl, Data_003_5994                        ; $59CA: $21 $94 $59
     add  hl, bc                                   ; $59CD: $09
     ld   a, [hl]                                  ; $59CE: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $59CF: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $59CF: $21 $50 $C2
     add  hl, de                                   ; $59D2: $19
     ld   [hl], a                                  ; $59D3: $77
     pop  bc                                       ; $59D4: $C1

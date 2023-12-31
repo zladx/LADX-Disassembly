@@ -91,9 +91,9 @@ jr_006_6F48:
     call DefaultEnemyDamageCollisionHandler_trampoline ; $6F50: $CD $39 $3B
 
 .jr_6F53
-    call AddEntitySpeedToPos_06                   ; $6F53: $CD $4E $65
+    call AddEntityVelocityToPos_06                ; $6F53: $CD $4E $65
     call DefaultEntityPhysics_trampoline          ; $6F56: $CD $23 $3B
-    ld   hl, wEntitiesSpeedXTable                 ; $6F59: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6F59: $21 $40 $C2
     add  hl, bc                                   ; $6F5C: $09
     ld   a, [hl]                                  ; $6F5D: $7E
     and  a                                        ; $6F5E: $A7
@@ -153,7 +153,7 @@ RollingBonesBarRollingHandler::
     and  $03                                      ; $6F95: $E6 $03
     jr   z, .jr_6FB3                              ; $6F97: $28 $1A
 
-    ld   hl, wEntitiesSpeedXTable                 ; $6F99: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6F99: $21 $40 $C2
     add  hl, bc                                   ; $6F9C: $09
     ld   a, [hl]                                  ; $6F9D: $7E
     sra  a                                        ; $6F9E: $CB $2F
@@ -187,7 +187,7 @@ RollingBonesBarDeceleratingHandler::
     and  $07                                      ; $6FC6: $E6 $07
     jr   nz, ret_006_6FD9                         ; $6FC8: $20 $0F
 
-    ld   hl, wEntitiesSpeedXTable                 ; $6FCA: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6FCA: $21 $40 $C2
 
 .jr_6FCD
     add  hl, bc                                   ; $6FCD: $09

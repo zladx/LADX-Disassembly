@@ -82,10 +82,10 @@ ENDC
 
     ld   hl, hLinkAnimationState                  ; $544D: $21 $9D $FF
     inc  [hl]                                     ; $5450: $34
-    ld   hl, wEntitiesSpeedYTable                 ; $5451: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $5451: $21 $50 $C2
     add  hl, bc                                   ; $5454: $09
     ld   [hl], $04                                ; $5455: $36 $04
-    call UpdateEntityYPosWithSpeed_18             ; $5457: $CD $62 $7E
+    call UpdateEntityYPosWithVelocity_18          ; $5457: $CD $62 $7E
     ld   a, $01                                   ; $545A: $3E $01
     ldh  [hMovingBlockMoverState], a              ; $545C: $E0 $BA
 
@@ -103,10 +103,10 @@ jr_018_5466:
     cp   $1B                                      ; $5468: $FE $1B
     jr   c, .jr_5479                              ; $546A: $38 $0D
 
-    ld   hl, wEntitiesSpeedYTable                 ; $546C: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $546C: $21 $50 $C2
     add  hl, bc                                   ; $546F: $09
     ld   [hl], $FD                                ; $5470: $36 $FD
-    call UpdateEntityYPosWithSpeed_18             ; $5472: $CD $62 $7E
+    call UpdateEntityYPosWithVelocity_18          ; $5472: $CD $62 $7E
 
 IF !__PATCH_0__
     ld   a, $00                                   ; $5475: $3E $00
@@ -209,14 +209,14 @@ jr_018_54DF:
     ld   e, $FC                                   ; $54EC: $1E $FC
 
 .jr_54EE
-    ld   hl, wEntitiesSpeedYTable                 ; $54EE: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $54EE: $21 $50 $C2
     add  hl, bc                                   ; $54F1: $09
     ld   [hl], e                                  ; $54F2: $73
-    ld   hl, wEntitiesSpeedXTable                 ; $54F3: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $54F3: $21 $40 $C2
     add  hl, bc                                   ; $54F6: $09
     ld   [hl], $FF                                ; $54F7: $36 $FF
     ldh  a, [hFrameCounter]                       ; $54F9: $F0 $E7
     and  $03                                      ; $54FB: $E6 $03
     ret  nz                                       ; $54FD: $C0
 
-    jp   UpdateEntityPosWithSpeed_18              ; $54FE: $C3 $5F $7E
+    jp   UpdateEntityPosWithVelocity_18           ; $54FE: $C3 $5F $7E

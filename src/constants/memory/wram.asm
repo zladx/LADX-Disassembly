@@ -75,8 +75,8 @@ wC10A:
 
 ; Music timing:
 ; 0 = normal,
-; 1 = double-speed,
-; 2 = half-speed
+; 1 = double-Velocity,
+; 2 = half-Velocity
 wMusicTrackTiming:
   ds 1 ; C10B
 
@@ -161,13 +161,13 @@ wC118:
 wC119:
   ds 1 ; C119
 
-; Written when updating Link's X position from its speed,
+; Written when updating Link's X position from its Velocity,
 ; but never read again.
 ; (unused)
 wC11A:;
   ds 1 ; C11A
 
-; Written when updating Link's Y position from its speed,
+; Written when updating Link's Y position from its Velocity,
 ; but never read again.
 ; (unused)
 wC11B:;
@@ -1005,26 +1005,26 @@ wEntitiesPosXSignTable::
 wEntitiesPosYSignTable::
   ds $10 ; C230 - C23F
 
-; X Speed of visible entities / 16.
+; X Velocity of visible entities / 16.
 ; The entity will move this number of pixels every 16 frames. For example, if it's 8,
 ; the entity will move 1 pixel every other frame (8/16).
-wEntitiesSpeedXTable::
+wEntitiesVelocityXTable::
   ds $10 ; C240 - C24F
 
-; Y Speed of visible entities / 16.
+; Y Velocity of visible entities / 16.
 ; The entity will move this number of pixels every 16 frames. For example, if it's 8,
 ; the entity will move 1 pixel every other frame (8/16).
-wEntitiesSpeedYTable::
+wEntitiesVelocityYTable::
   ds $10 ; C250 - C25F
 
-; Used as a way to give entities speeds divided by 16. (EntitySpeedX * 16) is
-; added to EntitySpeedXAcc and the carry is used to move the entity.
-wEntitiesSpeedXAccTable::
+; Used as a way to give entities Velocitys divided by 16. (EntityVelocityX * 16) is
+; added to EntityVelocityXAcc and the carry is used to move the entity.
+wEntitiesVelocityXAccTable::
   ds $10 ; C260 - C26F
 
-; Used as a way to give entities speeds divided by 16. (EntitySpeedY * 16) is
-; added to EntitySpeedYAcc and the carry is used to move the entity.
-wEntitiesSpeedYAccTable::
+; Used as a way to give entities Velocitys divided by 16. (EntityVelocityY * 16) is
+; added to EntityVelocityYAcc and the carry is used to move the entity.
+wEntitiesVelocityYAccTable::
   ds $10 ; C270 - C27F
 
 ; State of visible entities
@@ -1098,15 +1098,15 @@ wEntitiesPrivateCountdown2Table::
 wEntitiesPosZTable::
   ds $10 ; C310 - C31F
 
-; Z Speed of visible entities / 16.
+; Z Velocity of visible entities / 16.
 ; The entity will move this number of pixels every 16 frames. For example, if it's 8,
 ; the entity will move 1 pixel every other frame (8/16).
-wEntitiesSpeedZTable::
+wEntitiesVelocityZTable::
   ds $10 ; C320 - C32F
 
-; Used as a way to give entities speeds divided by 16. (EntitySpeedZ * 16) is
-; added to EntitySpeedZAcc and the carry is used to move the entity.
-wEntitiesSpeedZAccTable::
+; Used as a way to give entities Velocitys divided by 16. (EntityVelocityZ * 16) is
+; added to EntityVelocityZAcc and the carry is used to move the entity.
+wEntitiesVelocityZAccTable::
   ds $10 ; C330 - C33F
 
 ; Physics attribute flags. See ENTITY_PHYSICS_* for possible values.
@@ -1214,9 +1214,9 @@ wC3CE::
 wC3CF::
   ds 1 ; C3CF
 
-; How often should an entity speed be updated.
+; How often should an entity Velocity be updated.
 ;
-; For instance, a value of 4 means that the entity speedX or speedY
+; For instance, a value of 4 means that the entity VelocityX or VelocityY
 ; will be updated every 4 frames.
 ;
 ; Each entity uses this value differently.
@@ -1227,18 +1227,18 @@ wEntitiesInertiaTable::
 wEntitiesRoomTable::
   ds $10 ; C3E0 - C3EF
 
-; Recoil Speed X
+; Recoil Velocity X
 ; (e.g. when hit by the sword, or bumped against the shield)
 ;
 ; NB: recoil is applied only when wEntitiesIgnoreHitsCountdownTable is non-zero for this entity.
-wEntitiesRecoilSpeedX::
+wEntitiesRecoilVelocityX::
   ds $10 ; C3F0 - C3FF
 
-; Recoil Speed Y
+; Recoil Velocity Y
 ; (e.g. when hit by the sword, or bumped against the shield)
 ;
 ; NB: recoil is applied only when wEntitiesIgnoreHitsCountdownTable is non-zero for this entity.
-wEntitiesRecoilSpeedY::
+wEntitiesRecoilVelocityY::
   ds $10 ; C400 - C40F
 
 ; Invulnerability countdown?
@@ -2261,8 +2261,8 @@ wAudioSection::
 wMusicTranspose::
   ds 1 ; D300
 
-; Points to some data which somehow sets the music's speed
-wMusicSpeedPointer::
+; Points to some data which somehow sets the music's Velocity
+wMusicVelocityPointer::
   ds 2 ; D301 - D302
 
 ; not used

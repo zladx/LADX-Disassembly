@@ -99,7 +99,7 @@ func_004_5AE6::
     and  a                                        ; $5AEB: $A7
     jr   nz, .jr_5AF1                             ; $5AEC: $20 $03
 
-    call UpdateEntityPosWithSpeed_04              ; $5AEE: $CD $CA $6D
+    call UpdateEntityPosWithVelocity_04           ; $5AEE: $CD $CA $6D
 
 .jr_5AF1
     call DefaultEntityPhysics_trampoline          ; $5AF1: $CD $23 $3B
@@ -173,13 +173,13 @@ jr_004_5B28:
     ld   hl, Data_004_5A81                        ; $5B52: $21 $81 $5A
     add  hl, de                                   ; $5B55: $19
     ld   a, [hl]                                  ; $5B56: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $5B57: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $5B57: $21 $50 $C2
     add  hl, bc                                   ; $5B5A: $09
     ld   [hl], a                                  ; $5B5B: $77
     ld   hl, Data_004_5A85                        ; $5B5C: $21 $85 $5A
     add  hl, de                                   ; $5B5F: $19
     ld   a, [hl]                                  ; $5B60: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $5B61: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5B61: $21 $40 $C2
     add  hl, bc                                   ; $5B64: $09
     ld   [hl], a                                  ; $5B65: $77
 

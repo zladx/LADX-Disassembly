@@ -33,7 +33,7 @@ CueBallEntityHandler::
     call BossIntro                                ; $4BA8: $CD $E8 $3E
     call DecrementEntityIgnoreHitsCountdown       ; $4BAB: $CD $56 $0C
     call label_3B44                               ; $4BAE: $CD $44 $3B
-    call UpdateEntityPosWithSpeed_06              ; $4BB1: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $4BB1: $CD $41 $65
     ld   a, [wIsLinkInTheAir]                     ; $4BB4: $FA $46 $C1
     and  a                                        ; $4BB7: $A7
     jr   nz, jr_006_4BE1                          ; $4BB8: $20 $27
@@ -126,7 +126,7 @@ CueBallState0Handler::
     ld   [hl], a                                  ; $4C4B: $77
 
 .jr_4C4C
-    jp   ClearEntitySpeed                         ; $4C4C: $C3 $7F $3D
+    jp   ClearEntityVelocity                      ; $4C4C: $C3 $7F $3D
 
 jr_006_4C4F:
     call GetEntityTransitionCountdown             ; $4C4F: $CD $05 $0C
@@ -168,7 +168,7 @@ jr_006_4C78:
 jr_006_4C7B:
     call GetEntityTransitionCountdown             ; $4C7B: $CD $05 $0C
     ld   [hl], $15                                ; $4C7E: $36 $15
-    jp   ClearEntitySpeed                         ; $4C80: $C3 $7F $3D
+    jp   ClearEntityVelocity                      ; $4C80: $C3 $7F $3D
 
 jr_006_4C83:
     ld   hl, wEntitiesPrivateState4Table          ; $4C83: $21 $40 $C4
@@ -190,13 +190,13 @@ func_006_4C91::
     ld   hl, Data_006_4BE8                        ; $4C98: $21 $E8 $4B
     add  hl, de                                   ; $4C9B: $19
     ld   a, [hl]                                  ; $4C9C: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $4C9D: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4C9D: $21 $40 $C2
     add  hl, bc                                   ; $4CA0: $09
     ld   [hl], a                                  ; $4CA1: $77
     ld   hl, Data_006_4BEC                        ; $4CA2: $21 $EC $4B
     add  hl, de                                   ; $4CA5: $19
     ld   a, [hl]                                  ; $4CA6: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $4CA7: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4CA7: $21 $50 $C2
     add  hl, bc                                   ; $4CAA: $09
     ld   [hl], a                                  ; $4CAB: $77
     sla  e                                        ; $4CAC: $CB $23
@@ -252,13 +252,13 @@ func_006_4C91::
     ld   hl, Data_006_4C08                        ; $4CFC: $21 $08 $4C
     add  hl, bc                                   ; $4CFF: $09
     ld   a, [hl]                                  ; $4D00: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $4D01: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4D01: $21 $40 $C2
     add  hl, de                                   ; $4D04: $19
     ld   [hl], a                                  ; $4D05: $77
     ld   hl, Data_006_4C10                        ; $4D06: $21 $10 $4C
     add  hl, bc                                   ; $4D09: $09
     ld   a, [hl]                                  ; $4D0A: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $4D0B: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4D0B: $21 $50 $C2
     add  hl, de                                   ; $4D0E: $19
     ld   [hl], a                                  ; $4D0F: $77
     ld   hl, Data_006_4C18                        ; $4D10: $21 $18 $4C
@@ -316,7 +316,7 @@ CueBallState1Handler::
 
 .jr_4D5E
     call func_006_4C91                            ; $4D5E: $CD $91 $4C
-    jp   ClearEntitySpeed                         ; $4D61: $C3 $7F $3D
+    jp   ClearEntityVelocity                      ; $4D61: $C3 $7F $3D
 
 Data_006_4D64::
     db   $F8, $F8, $60, $02, $F8, $00, $62, $02, $F8, $08, $62, $22, $F8, $10, $60, $22
@@ -376,4 +376,4 @@ label_006_4E88:
     cp   $06                                      ; $4E97: $FE $06
     ret  nz                                       ; $4E99: $C0
 
-    jp   UpdateEntityPosWithSpeed_06              ; $4E9A: $C3 $41 $65
+    jp   UpdateEntityPosWithVelocity_06           ; $4E9A: $C3 $41 $65

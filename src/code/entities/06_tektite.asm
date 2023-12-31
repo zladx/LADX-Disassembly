@@ -21,7 +21,7 @@ TektiteEntityHandler::
     call ReturnIfNonInteractive_06                ; $78CD: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $78D0: $CD $F7 $64
     call DefaultEnemyDamageCollisionHandler_trampoline ; $78D3: $CD $39 $3B
-    call UpdateEntityPosWithSpeed_06              ; $78D6: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $78D6: $CD $41 $65
     call DefaultEntityPhysics_trampoline          ; $78D9: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $78DC: $21 $A0 $C2
     add  hl, bc                                   ; $78DF: $09
@@ -51,7 +51,7 @@ TektiteEntityHandler::
 
     xor  a                                        ; $78FE: $AF
     ld   [hl], a                                  ; $78FF: $77
-    call ClearEntitySpeed                         ; $7900: $CD $7F $3D
+    call ClearEntityVelocity                      ; $7900: $CD $7F $3D
     ld   hl, wEntitiesStateTable                  ; $7903: $21 $90 $C2
     add  hl, bc                                   ; $7906: $09
     inc  [hl]                                     ; $7907: $34
@@ -64,8 +64,8 @@ TektiteEntityHandler::
     jp   SetEntitySpriteVariant                   ; $7915: $C3 $0C $3B
 
 .jr_7918
-    call AddEntityZSpeedToPos_06                  ; $7918: $CD $7A $65
-    ld   hl, wEntitiesSpeedZTable                 ; $791B: $21 $20 $C3
+    call AddEntityZVelocityToPos_06               ; $7918: $CD $7A $65
+    ld   hl, wEntitiesVelocityZTable              ; $791B: $21 $20 $C3
     add  hl, bc                                   ; $791E: $09
     dec  [hl]                                     ; $791F: $35
     ret                                           ; $7920: $C9
@@ -90,10 +90,10 @@ jr_006_7921:
     call GetRandomByte                            ; $793A: $CD $0D $28
     and  $07                                      ; $793D: $E6 $07
     add  $10                                      ; $793F: $C6 $10
-    ld   hl, wEntitiesSpeedZTable                 ; $7941: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $7941: $21 $20 $C3
     add  hl, bc                                   ; $7944: $09
     ld   [hl], a                                  ; $7945: $77
-    call AddEntityZSpeedToPos_06                  ; $7946: $CD $7A $65
+    call AddEntityZVelocityToPos_06               ; $7946: $CD $7A $65
     call GetRandomByte                            ; $7949: $CD $0D $28
     and  $03                                      ; $794C: $E6 $03
     ld   e, a                                     ; $794E: $5F
@@ -101,13 +101,13 @@ jr_006_7921:
     ld   hl, Data_006_78BF                        ; $7950: $21 $BF $78
     add  hl, de                                   ; $7953: $19
     ld   a, [hl]                                  ; $7954: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $7955: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7955: $21 $40 $C2
     add  hl, bc                                   ; $7958: $09
     ld   [hl], a                                  ; $7959: $77
     ld   hl, Data_006_78C3                        ; $795A: $21 $C3 $78
     add  hl, de                                   ; $795D: $19
     ld   a, [hl]                                  ; $795E: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $795F: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $795F: $21 $50 $C2
     add  hl, bc                                   ; $7962: $09
     ld   [hl], a                                  ; $7963: $77
     call GetRandomByte                            ; $7964: $CD $0D $28
@@ -125,11 +125,11 @@ jr_006_7921:
     jp   SetEntitySpriteVariant                   ; $7976: $C3 $0C $3B
 
 func_006_7979::
-    ld   hl, wEntitiesSpeedXTable                 ; $7979: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7979: $21 $40 $C2
     jr   jr_006_7982                              ; $797C: $18 $04
 
 func_006_797E::
-    ld   hl, wEntitiesSpeedXTable                 ; $797E: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $797E: $21 $40 $C2
     add  hl, bc                                   ; $7981: $09
 
 jr_006_7982:

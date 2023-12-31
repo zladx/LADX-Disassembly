@@ -40,7 +40,7 @@ FishEntityHandler::
 jr_015_44D7:
     call ReturnIfNonInteractive_15                ; $44D7: $CD $0D $7B
     call ApplyRecoilIfNeeded_15                   ; $44DA: $CD $3E $7B
-    call UpdateEntityPosWithSpeed_15              ; $44DD: $CD $88 $7B
+    call UpdateEntityPosWithVelocity_15           ; $44DD: $CD $88 $7B
     call DefaultEntityPhysics_trampoline          ; $44E0: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $44E3: $F0 $F0
     JP_TABLE                                      ; $44E5
@@ -49,7 +49,7 @@ jr_015_44D7:
 ._02 dw func_015_4553                             ; $44EA
 
 func_015_44EC::
-    ld   hl, wEntitiesSpeedXTable                 ; $44EC: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $44EC: $21 $40 $C2
     add  hl, bc                                   ; $44EF: $09
     ld   [hl], $08                                ; $44F0: $36 $08
     call GetEntityTransitionCountdown             ; $44F2: $CD $05 $0C
@@ -67,11 +67,11 @@ func_015_4500::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4508: $21 $40 $C3
     add  hl, bc                                   ; $450B: $09
     ld   [hl], 2 | ENTITY_PHYSICS_SHADOW          ; $450C: $36 $12
-    ld   hl, wEntitiesSpeedZTable                 ; $450E: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $450E: $21 $20 $C3
     add  hl, bc                                   ; $4511: $09
     ld   [hl], $18                                ; $4512: $36 $18
     call IncrementEntityState                     ; $4514: $CD $12 $3B
-    ld   hl, wEntitiesSpeedXTable                 ; $4517: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4517: $21 $40 $C2
     add  hl, bc                                   ; $451A: $09
     sla  [hl]                                     ; $451B: $CB $26
 
@@ -93,7 +93,7 @@ jr_015_4530:
     and  $03                                      ; $4535: $E6 $03
     jr   z, .jr_4541                              ; $4537: $28 $08
 
-    ld   hl, wEntitiesSpeedXTable                 ; $4539: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4539: $21 $40 $C2
     add  hl, bc                                   ; $453C: $09
     ld   a, [hl]                                  ; $453D: $7E
     cpl                                           ; $453E: $2F
@@ -101,7 +101,7 @@ jr_015_4530:
     ld   [hl], a                                  ; $4540: $77
 
 .jr_4541
-    ld   hl, wEntitiesSpeedXTable                 ; $4541: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4541: $21 $40 $C2
     add  hl, bc                                   ; $4544: $09
     ld   e, $06                                   ; $4545: $1E $06
     ld   a, [hl]                                  ; $4547: $7E
@@ -118,8 +118,8 @@ jr_015_4530:
 
 func_015_4553::
     call DefaultEnemyDamageCollisionHandler_trampoline ; $4553: $CD $39 $3B
-    call AddEntityZSpeedToPos_15                  ; $4556: $CD $C1 $7B
-    ld   hl, wEntitiesSpeedZTable                 ; $4559: $21 $20 $C3
+    call AddEntityZVelocityToPos_15               ; $4556: $CD $C1 $7B
+    ld   hl, wEntitiesVelocityZTable              ; $4559: $21 $20 $C3
     add  hl, bc                                   ; $455C: $09
     dec  [hl]                                     ; $455D: $35
     ld   hl, wEntitiesPosZTable                   ; $455E: $21 $10 $C3
@@ -135,7 +135,7 @@ func_015_4553::
     and  $7F                                      ; $4571: $E6 $7F
     add  $50                                      ; $4573: $C6 $50
     ld   [hl], a                                  ; $4575: $77
-    ld   hl, wEntitiesSpeedXTable                 ; $4576: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4576: $21 $40 $C2
     add  hl, bc                                   ; $4579: $09
     sra  [hl]                                     ; $457A: $CB $2E
     ld   hl, wEntitiesPhysicsFlagsTable           ; $457C: $21 $40 $C3
@@ -147,7 +147,7 @@ func_015_4553::
 
 .jr_4588
     ld   e, $01                                   ; $4588: $1E $01
-    ld   hl, wEntitiesSpeedXTable                 ; $458A: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $458A: $21 $40 $C2
     add  hl, bc                                   ; $458D: $09
     ld   a, [hl]                                  ; $458E: $7E
     and  $80                                      ; $458F: $E6 $80
@@ -156,7 +156,7 @@ func_015_4553::
     ld   e, $03                                   ; $4593: $1E $03
 
 .jr_4595
-    ld   hl, wEntitiesSpeedZTable                 ; $4595: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4595: $21 $20 $C3
     add  hl, bc                                   ; $4598: $09
     ld   a, [hl]                                  ; $4599: $7E
     and  $80                                      ; $459A: $E6 $80

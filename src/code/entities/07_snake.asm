@@ -24,7 +24,7 @@ SnakeEntityHandler::
     call ReturnIfNonInteractive_07                ; $685D: $CD $96 $7D
     call ApplyRecoilIfNeeded_07                   ; $6860: $CD $C3 $7D
     call DefaultEnemyDamageCollisionHandler_trampoline ; $6863: $CD $39 $3B
-    call UpdateEntityPosWithSpeed_07              ; $6866: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $6866: $CD $0A $7E
     call DefaultEntityPhysics_trampoline          ; $6869: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $686C: $21 $A0 $C2
     add  hl, bc                                   ; $686F: $09
@@ -73,13 +73,13 @@ func_007_68AD::
     ld   hl, Data_007_688B                        ; $68AE: $21 $8B $68
     add  hl, de                                   ; $68B1: $19
     ld   a, [hl]                                  ; $68B2: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $68B3: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $68B3: $21 $40 $C2
     add  hl, bc                                   ; $68B6: $09
     ld   [hl], a                                  ; $68B7: $77
     ld   hl, Data_007_688F                        ; $68B8: $21 $8F $68
     add  hl, de                                   ; $68BB: $19
     ld   a, [hl]                                  ; $68BC: $7E
-    call GetEntitySpeedYAddress                   ; $68BD: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $68BD: $CD $05 $40
     ld   [hl], a                                  ; $68C0: $77
     ld   hl, Data_007_6893                        ; $68C1: $21 $93 $68
     add  hl, de                                   ; $68C4: $19
@@ -95,7 +95,7 @@ func_007_68AD::
     ret                                           ; $68CF: $C9
 
 jr_007_68D0:
-    call ClearEntitySpeed                         ; $68D0: $CD $7F $3D
+    call ClearEntityVelocity                      ; $68D0: $CD $7F $3D
     call func_007_68F0                            ; $68D3: $CD $F0 $68
     jr   jr_007_68E6                              ; $68D6: $18 $0E
 
@@ -131,10 +131,10 @@ func_007_68F0::
 
 jr_007_6901:
     call func_007_68AD                            ; $6901: $CD $AD $68
-    ld   hl, wEntitiesSpeedXTable                 ; $6904: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6904: $21 $40 $C2
     add  hl, bc                                   ; $6907: $09
     sla  [hl]                                     ; $6908: $CB $26
-    call GetEntitySpeedYAddress                   ; $690A: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $690A: $CD $05 $40
     sla  [hl]                                     ; $690D: $CB $26
     call IncrementEntityState                     ; $690F: $CD $12 $3B
     ld   [hl], $02                                ; $6912: $36 $02

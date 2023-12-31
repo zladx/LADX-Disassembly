@@ -1,22 +1,22 @@
-MusicSpeedData_1b_4aaa::
+MusicVelocityData_1b_4aaa::
     db   $02, $04, $08, $10, $20, $40, $0c, $18, $30, $02, $05, $03, $01, $01, $60
 
-MusicSpeedData_1b_4ab9::
+MusicVelocityData_1b_4ab9::
     db   $03, $05, $0a, $14, $28, $50, $0f, $1e, $3c, $02, $08, $10, $02, $01, $78
 
-MusicSpeedData_1b_4ac8::
+MusicVelocityData_1b_4ac8::
     db   $03, $06, $0c, $18, $30, $60, $12, $24, $48, $03, $08, $10, $02, $04, $90
 
-MusicSpeedData_1b_4ad7::
+MusicVelocityData_1b_4ad7::
     db   $03, $07, $0e, $1c, $38, $70, $15, $2a, $54, $04, $09, $12, $02, $01, $a8
 
-MusicSpeedData_1b_4ae6::
+MusicVelocityData_1b_4ae6::
     db   $04, $08, $10, $20, $40, $80, $18, $30, $60, $04, $02, $01, $01, $00, $c0
 
-MusicSpeedData_1b_4af5::
+MusicVelocityData_1b_4af5::
     db   $04, $09, $12, $24, $48, $90, $1b, $36, $6c, $05, $0c, $18, $18, $06, $d8
 
-MusicSpeedData_1b_4b04::
+MusicVelocityData_1b_4b04::
     db   $05, $0a, $14, $28, $50, $a0, $1e, $3c, $78, $05, $01, $01, $01, $01, $f0
 
 HardcodedData_1b_4b13::
@@ -46,7 +46,7 @@ ChannelDefinition_1b_4b20::
 
 Music10::
     db   $00
-    dw   MusicSpeedData_1b_4ab9
+    dw   MusicVelocityData_1b_4ab9
     dw   Music10Channel1
     dw   Music10Channel2
     dw   Music10Channel3
@@ -132,7 +132,7 @@ ChannelDefinition_1b_4b81::
 
 Music40::
     db   $04
-    dw   MusicSpeedData_1b_4af5
+    dw   MusicVelocityData_1b_4af5
     dw   Music40Channel1
     dw   Music40Channel2
     dw   Music40Channel3
@@ -342,7 +342,7 @@ ChannelDefinition_1b_4c74::
 
 Music3c::
     db   $00
-    dw   MusicSpeedData_1b_4ae6
+    dw   MusicVelocityData_1b_4ae6
     dw   Music3cChannel1
     dw   Music3cChannel2
     dw   Music3cChannel3
@@ -628,7 +628,7 @@ ChannelDefinition_1b_4d88::
 
 Music37::
     db   $00
-    dw   MusicSpeedData_1b_4ab9
+    dw   MusicVelocityData_1b_4ab9
     dw   Music37Channel1
     dw   Music37Channel2
     dw   Music37Channel3

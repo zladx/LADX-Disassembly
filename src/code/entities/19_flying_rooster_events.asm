@@ -247,16 +247,16 @@ label_019_4F30:
     ld   hl, Data_019_4F20                        ; $4F9A: $21 $20 $4F
     add  hl, de                                   ; $4F9D: $19
     ld   a, [hl]                                  ; $4F9E: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $4F9F: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4F9F: $21 $40 $C2
     add  hl, bc                                   ; $4FA2: $09
     ld   [hl], a                                  ; $4FA3: $77
     ld   hl, Data_019_4F1C                        ; $4FA4: $21 $1C $4F
     add  hl, de                                   ; $4FA7: $19
     ld   a, [hl]                                  ; $4FA8: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $4FA9: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4FA9: $21 $50 $C2
     add  hl, bc                                   ; $4FAC: $09
     ld   [hl], a                                  ; $4FAD: $77
-    call UpdateEntityPosWithSpeed_19              ; $4FAE: $CD $B8 $7D
+    call UpdateEntityPosWithVelocity_19           ; $4FAE: $CD $B8 $7D
     ld   hl, wEntitiesInertiaTable                ; $4FB1: $21 $D0 $C3
     add  hl, bc                                   ; $4FB4: $09
     ld   a, [hl]                                  ; $4FB5: $7E
@@ -462,7 +462,7 @@ label_019_50C4::
 
 .jr_50D2
     ld   e, $00                                   ; $50D2: $1E $00
-    ld   hl, wEntitiesSpeedXTable                 ; $50D4: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $50D4: $21 $40 $C2
     add  hl, bc                                   ; $50D7: $09
     ld   a, [hl]                                  ; $50D8: $7E
     and  $80                                      ; $50D9: $E6 $80
@@ -533,13 +533,13 @@ label_019_50C4::
     ld   hl, Data_019_50B4                        ; $5144: $21 $B4 $50
     add  hl, de                                   ; $5147: $19
     ld   a, [hl]                                  ; $5148: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $5149: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5149: $21 $40 $C2
     add  hl, bc                                   ; $514C: $09
     ld   [hl], a                                  ; $514D: $77
     ld   hl, Data_019_50AC                        ; $514E: $21 $AC $50
     add  hl, de                                   ; $5151: $19
     ld   a, [hl]                                  ; $5152: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $5153: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $5153: $21 $50 $C2
     add  hl, bc                                   ; $5156: $09
     ld   [hl], a                                  ; $5157: $77
 
@@ -557,7 +557,7 @@ label_019_50C4::
     add  hl, de                                   ; $5166: $19
     ldh  a, [hFrameCounter]                       ; $5167: $F0 $E7
     and  [hl]                                     ; $5169: $A6
-    call z, UpdateEntityPosWithSpeed_19           ; $516A: $CC $B8 $7D
+    call z, UpdateEntityPosWithVelocity_19        ; $516A: $CC $B8 $7D
     call DefaultEntityPhysics_trampoline          ; $516D: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $5170: $21 $A0 $C2
     add  hl, bc                                   ; $5173: $09
@@ -565,7 +565,7 @@ label_019_50C4::
     and  $03                                      ; $5175: $E6 $03
     jr   z, .jr_5181                              ; $5177: $28 $08
 
-    ld   hl, wEntitiesSpeedXTable                 ; $5179: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5179: $21 $40 $C2
     add  hl, bc                                   ; $517C: $09
     ld   a, [hl]                                  ; $517D: $7E
     cpl                                           ; $517E: $2F
@@ -579,7 +579,7 @@ label_019_50C4::
     and  $0C                                      ; $5186: $E6 $0C
     jr   z, .jr_5192                              ; $5188: $28 $08
 
-    ld   hl, wEntitiesSpeedYTable                 ; $518A: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $518A: $21 $50 $C2
     add  hl, bc                                   ; $518D: $09
     ld   a, [hl]                                  ; $518E: $7E
     cpl                                           ; $518F: $2F
@@ -855,8 +855,8 @@ FlyingRoosterState1Handler::
     jp   ClearEntityStatus_19                     ; $5360: $C3 $61 $7E
 
 label_019_5363:
-    ld   hl, wEntitiesSpeedYTable                 ; $5363: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $5363: $21 $50 $C2
     add  hl, bc                                   ; $5366: $09
     ld   [hl], $FC                                ; $5367: $36 $FC
-    jp   UpdateEntityYPosWithSpeed_19             ; $5369: $C3 $BB $7D
+    jp   UpdateEntityYPosWithVelocity_19          ; $5369: $C3 $BB $7D
 

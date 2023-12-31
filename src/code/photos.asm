@@ -535,7 +535,7 @@ JumpTable_037_4371::
     ld   [wEntitiesPosXTable+9], a                ; $4384: $EA $09 $C2
     ld   hl, wEntitiesPosXSignTable+13            ; $4387: $21 $2D $C2
     ld   [hl], $10                                ; $438A: $36 $10
-    ld   hl, wEntitiesSpeedXTable                 ; $438C: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $438C: $21 $40 $C2
     ld   bc, $92C0                                ; $438F: $01 $C0 $92
     ld   [hl], c                                  ; $4392: $71
     inc  hl                                       ; $4393: $23
@@ -626,7 +626,7 @@ JumpTable_037_440A::
     ld   a, $66                                   ; $4414: $3E $66
     ld   [wEntitiesPosXSignTable+3], a            ; $4416: $EA $23 $C2
     ld   e, $10                                   ; $4419: $1E $10
-    ld   hl, wEntitiesSpeedYTable+1               ; $441B: $21 $51 $C2
+    ld   hl, wEntitiesVelocityYTable+1            ; $441B: $21 $51 $C2
 
 .loop_441E_37
     ld   [hl+], a                                 ; $441E: $22
@@ -636,7 +636,7 @@ JumpTable_037_440A::
     ld   a, $70                                   ; $4422: $3E $70
     ld   [wEntitiesPosXSignTable+2], a            ; $4424: $EA $22 $C2
     ld   e, $10                                   ; $4427: $1E $10
-    ld   hl, wEntitiesSpeedXAccTable+1            ; $4429: $21 $61 $C2
+    ld   hl, wEntitiesVelocityXAccTable+1         ; $4429: $21 $61 $C2
 
 .loop_442C_37
     ld   [hl+], a                                 ; $442C: $22
@@ -681,9 +681,9 @@ JumpTable_037_446C::
     ld   [wEntitiesPosXTable+3], a                ; $4473: $EA $03 $C2
     ldh  [hLinkPositionY], a                      ; $4476: $E0 $99
     ld   a, $B0                                   ; $4478: $3E $B0
-    ld   [wEntitiesSpeedYTable], a                ; $447A: $EA $50 $C2
+    ld   [wEntitiesVelocityYTable], a             ; $447A: $EA $50 $C2
     ld   a, $66                                   ; $447D: $3E $66
-    ld   [wEntitiesSpeedXTable+15], a             ; $447F: $EA $4F $C2
+    ld   [wEntitiesVelocityXTable+15], a          ; $447F: $EA $4F $C2
     ret                                           ; $4482: $C9
 
 Data_037_4483::
@@ -714,7 +714,7 @@ Data_037_44EB::
 func_037_44EF::
     ld   bc, $00                                  ; $44EF: $01 $00 $00
 .loop_44F2_37
-    ld   hl, wEntitiesSpeedXTable+2               ; $44F2: $21 $42 $C2
+    ld   hl, wEntitiesVelocityXTable+2            ; $44F2: $21 $42 $C2
     add  hl, bc                                   ; $44F5: $09
     ld   e, l                                     ; $44F6: $5D
     ld   d, h                                     ; $44F7: $54
@@ -723,7 +723,7 @@ func_037_44EF::
     ld   hl, Data_037_44EB                        ; $44FA: $21 $EB $44
     add  hl, bc                                   ; $44FD: $09
     ld   a, [hl]                                  ; $44FE: $7E
-    ld   hl, wEntitiesSpeedXTable+6               ; $44FF: $21 $46 $C2
+    ld   hl, wEntitiesVelocityXTable+6            ; $44FF: $21 $46 $C2
     add  hl, bc                                   ; $4502: $09
     inc  [hl]                                     ; $4503: $34
     cp   [hl]                                     ; $4504: $BE
@@ -737,7 +737,7 @@ func_037_44EF::
     ld   [de], a                                  ; $450D: $12
     xor  a                                        ; $450E: $AF
     ld   [hl], a                                  ; $450F: $77
-    ld   hl, wEntitiesSpeedXTable+10              ; $4510: $21 $4A $C2
+    ld   hl, wEntitiesVelocityXTable+10           ; $4510: $21 $4A $C2
     add  hl, bc                                   ; $4513: $09
     inc  [hl]                                     ; $4514: $34
     ld   a, [hl]                                  ; $4515: $7E
@@ -981,7 +981,7 @@ JumpTable_037_462F::
 ; Marin and Link cliffside photo animation.
 JumpTable_037_4659::
     call func_037_44EF                            ; $4659: $CD $EF $44
-    ld   hl, wEntitiesSpeedXTable+2               ; $465C: $21 $42 $C2
+    ld   hl, wEntitiesVelocityXTable+2            ; $465C: $21 $42 $C2
     xor  a                                        ; $465F: $AF
     ld   [hl+], a                                 ; $4660: $22
     ld   [hl+], a                                 ; $4661: $22
@@ -1187,7 +1187,7 @@ func_037_4779::
 
 JumpTable_037_4781::
     call func_037_44EF                            ; $4781: $CD $EF $44
-    ld   hl, wEntitiesSpeedXTable+5               ; $4784: $21 $45 $C2
+    ld   hl, wEntitiesVelocityXTable+5            ; $4784: $21 $45 $C2
     ld   [hl], $00                                ; $4787: $36 $00
     ld   a, $1C                                   ; $4789: $3E $1C
     ld   [wEntitiesPosXTable], a                  ; $478B: $EA $00 $C2
@@ -1733,7 +1733,7 @@ JumpTable_037_4B1E::
     call func_037_4F1B                            ; $4B1E: $CD $1B $4F
     call func_037_4B31                            ; $4B21: $CD $31 $4B
     call func_037_4F37                            ; $4B24: $CD $37 $4F
-    ld   a, [wEntitiesSpeedYAccTable+5]           ; $4B27: $FA $75 $C2
+    ld   a, [wEntitiesVelocityYAccTable+5]        ; $4B27: $FA $75 $C2
     and  %00000010                                ; $4B2A: $E6 $02
     ret  nz                                       ; $4B2C: $C0
 
@@ -1772,7 +1772,7 @@ func_037_4B55::
     and  a                                        ; $4B5D: $A7
     ret  nz                                       ; $4B5E: $C0
 
-    ld   a, [wEntitiesSpeedYAccTable+5]           ; $4B5F: $FA $75 $C2
+    ld   a, [wEntitiesVelocityYAccTable+5]        ; $4B5F: $FA $75 $C2
     and  %00000010                                ; $4B62: $E6 $02
     call z, func_037_4BAC                         ; $4B64: $CC $AC $4B
     ld   a, [wEntitiesPosXSignTable+4]            ; $4B67: $FA $24 $C2
@@ -1793,11 +1793,11 @@ func_037_4B55::
     dw JumpTable_037_4E5F
 
 func_037_4B87::
-    ld   a, [wEntitiesSpeedYAccTable+6]           ; $4B87: $FA $76 $C2
+    ld   a, [wEntitiesVelocityYAccTable+6]        ; $4B87: $FA $76 $C2
     push af                                       ; $4B8A: $F5
     swap a                                        ; $4B8B: $CB $37
     and  %11110000                                ; $4B8D: $E6 $F0
-    ld   hl, wEntitiesSpeedYAccTable+7            ; $4B8F: $21 $77 $C2
+    ld   hl, wEntitiesVelocityYAccTable+7         ; $4B8F: $21 $77 $C2
     add  [hl]                                     ; $4B92: $86
     ld   [hl], a                                  ; $4B93: $77
     rl   d                                        ; $4B94: $CB $12
@@ -1819,11 +1819,11 @@ func_037_4B87::
     ret                                           ; $4BAB: $C9
 
 func_037_4BAC::
-    ld   a, [wEntitiesSpeedYAccTable+1]           ; $4BAC: $FA $71 $C2
+    ld   a, [wEntitiesVelocityYAccTable+1]        ; $4BAC: $FA $71 $C2
     push af                                       ; $4BAF: $F5
     swap a                                        ; $4BB0: $CB $37
     and  %11110000                                ; $4BB2: $E6 $F0
-    ld   hl, wEntitiesSpeedYAccTable+2            ; $4BB4: $21 $72 $C2
+    ld   hl, wEntitiesVelocityYAccTable+2         ; $4BB4: $21 $72 $C2
     add  [hl]                                     ; $4BB7: $86
     ld   [hl], a                                  ; $4BB8: $77
     rl   d                                        ; $4BB9: $CB $12
@@ -1848,11 +1848,11 @@ func_037_4BAC::
 
 .else_4BD5_37:
     ld   [hl], a                                  ; $4BD5: $77
-    ld   hl, wEntitiesSpeedYAccTable+1            ; $4BD6: $21 $71 $C2
+    ld   hl, wEntitiesVelocityYAccTable+1         ; $4BD6: $21 $71 $C2
     ld   a, [hl]                                  ; $4BD9: $7E
     add  $04                                      ; $4BDA: $C6 $04
     ld   [hl], a                                  ; $4BDC: $77
-    ld   a, [wEntitiesSpeedYAccTable+5]           ; $4BDD: $FA $75 $C2
+    ld   a, [wEntitiesVelocityYAccTable+5]        ; $4BDD: $FA $75 $C2
     and  a                                        ; $4BE0: $A7
     jr   z, .else_4BF0_37                         ; $4BE1: $28 $0D
 
@@ -1861,7 +1861,7 @@ func_037_4BAC::
     jr   c, .else_4C05_37                         ; $4BE8: $38 $1B
 
     xor  a                                        ; $4BEA: $AF
-    ld   [wEntitiesSpeedYAccTable+1], a           ; $4BEB: $EA $71 $C2
+    ld   [wEntitiesVelocityYAccTable+1], a        ; $4BEB: $EA $71 $C2
     jr   .else_4C31_37                            ; $4BEE: $18 $41
 
 .else_4BF0_37:
@@ -1875,11 +1875,11 @@ func_037_4BAC::
     sla  a                                        ; $4BFE: $CB $27
     cpl                                           ; $4C00: $2F
     inc  a                                        ; $4C01: $3C
-    ld   [wEntitiesSpeedYAccTable+1], a           ; $4C02: $EA $71 $C2
+    ld   [wEntitiesVelocityYAccTable+1], a        ; $4C02: $EA $71 $C2
 
 .else_4C05_37:
     ld   hl, wEntitiesPosXSignTable+3             ; $4C05: $21 $23 $C2
-    ld   a, [wEntitiesSpeedYAccTable+3]           ; $4C08: $FA $73 $C2
+    ld   a, [wEntitiesVelocityYAccTable+3]        ; $4C08: $FA $73 $C2
     and  a                                        ; $4C0B: $A7
     jr   nz, .else_4C18_37                        ; $4C0C: $20 $0A
 
@@ -1900,16 +1900,16 @@ func_037_4BAC::
     ld   a, $70                                   ; $4C1E: $3E $70
 .func_037_4C20::
     ld   [hl], a                                  ; $4C20: $77
-    ld   a, [wEntitiesSpeedYAccTable+3]           ; $4C21: $FA $73 $C2
+    ld   a, [wEntitiesVelocityYAccTable+3]        ; $4C21: $FA $73 $C2
     xor  $01                                      ; $4C24: $EE $01
-    ld   [wEntitiesSpeedYAccTable+3], a           ; $4C26: $EA $73 $C2
+    ld   [wEntitiesVelocityYAccTable+3], a        ; $4C26: $EA $73 $C2
     ld   a, [wEntitiesPosXSignTable+1]            ; $4C29: $FA $21 $C2
     xor  $02                                      ; $4C2C: $EE $02
     ld   [wEntitiesPosXSignTable+1], a            ; $4C2E: $EA $21 $C2
 
 .else_4C31_37:
     xor  a                                        ; $4C31: $AF
-    ld   [wEntitiesSpeedYAccTable+5], a           ; $4C32: $EA $75 $C2
+    ld   [wEntitiesVelocityYAccTable+5], a        ; $4C32: $EA $75 $C2
     ret                                           ; $4C35: $C9
 
 JumpTable_037_4C36::
@@ -1975,18 +1975,18 @@ JumpTable_037_4C75::
     ld   a, JINGLE_SWORD_POKING                   ; $4CBA: $3E $07
     ldh  [hJingle], a                             ; $4CBC: $E0 $F2
     ld   a, $28                                   ; $4CBE: $3E $28
-    ld   [wEntitiesSpeedYAccTable+6], a           ; $4CC0: $EA $76 $C2
+    ld   [wEntitiesVelocityYAccTable+6], a        ; $4CC0: $EA $76 $C2
     ld   a, [wEntitiesPosXTable+3]                ; $4CC3: $FA $03 $C2
     add  $03                                      ; $4CC6: $C6 $03
-    ld   [wEntitiesSpeedYAccTable+9], a           ; $4CC8: $EA $79 $C2
+    ld   [wEntitiesVelocityYAccTable+9], a        ; $4CC8: $EA $79 $C2
     ld   a, [wEntitiesPosXTable+2]                ; $4CCB: $FA $02 $C2
     sub  $0C                                      ; $4CCE: $D6 $0C
-    ld   [wEntitiesSpeedYAccTable+8], a           ; $4CD0: $EA $78 $C2
+    ld   [wEntitiesVelocityYAccTable+8], a        ; $4CD0: $EA $78 $C2
     jp   JumpTable_037_4C36.func_037_4C48         ; $4CD3: $C3 $48 $4C
 
 func_037_4CD6::
     call func_037_4B87                            ; $4CD6: $CD $87 $4B
-    ld   a, [wEntitiesSpeedYAccTable+6]           ; $4CD9: $FA $76 $C2
+    ld   a, [wEntitiesVelocityYAccTable+6]        ; $4CD9: $FA $76 $C2
     and  a                                        ; $4CDC: $A7
     ret  z                                        ; $4CDD: $C8
 
@@ -1997,7 +1997,7 @@ func_037_4CD6::
     xor  a                                        ; $4CE4: $AF
 
 .else_4CE5_37:
-    ld   [wEntitiesSpeedYAccTable+6], a           ; $4CE5: $EA $76 $C2
+    ld   [wEntitiesVelocityYAccTable+6], a        ; $4CE5: $EA $76 $C2
     ret                                           ; $4CE8: $C9
 
 Data_037_4CE9::
@@ -2005,7 +2005,7 @@ Data_037_4CE9::
 
 JumpTable_037_4CF9::
     ld   a, $01                                   ; $4CF9: $3E $01
-    ld   [wEntitiesSpeedYAccTable+5], a           ; $4CFB: $EA $75 $C2
+    ld   [wEntitiesVelocityYAccTable+5], a        ; $4CFB: $EA $75 $C2
     call func_037_4CD6                            ; $4CFE: $CD $D6 $4C
     ld   a, [wEntitiesPosXSignTable+5]            ; $4D01: $FA $25 $C2
     and  a                                        ; $4D04: $A7
@@ -2050,7 +2050,7 @@ JumpTable_037_4D2E::
 
 JumpTable_037_4D43::
     ld   a, $01                                   ; $4D43: $3E $01
-    ld   [wEntitiesSpeedYAccTable+5], a           ; $4D45: $EA $75 $C2
+    ld   [wEntitiesVelocityYAccTable+5], a        ; $4D45: $EA $75 $C2
     call func_037_4CD6                            ; $4D48: $CD $D6 $4C
     ld   a, [wEntitiesPosXSignTable+5]            ; $4D4B: $FA $25 $C2
     and  a                                        ; $4D4E: $A7
@@ -2083,7 +2083,7 @@ JumpTable_037_4D43::
 
 JumpTable_037_4D7B::
     ld   a, $01                                   ; $4D7B: $3E $01
-    ld   [wEntitiesSpeedYAccTable+5], a           ; $4D7D: $EA $75 $C2
+    ld   [wEntitiesVelocityYAccTable+5], a        ; $4D7D: $EA $75 $C2
     call func_037_4CD6                            ; $4D80: $CD $D6 $4C
     ld   a, [wEntitiesPosXSignTable+5]            ; $4D83: $FA $25 $C2
     and  a                                        ; $4D86: $A7
@@ -2096,7 +2096,7 @@ JumpTable_037_4D7B::
     jr   nz, .else_4DA0_37                        ; $4D8F: $20 $0F
 
     ld   a, $02                                   ; $4D91: $3E $02
-    ld   [wEntitiesSpeedYAccTable+5], a           ; $4D93: $EA $75 $C2
+    ld   [wEntitiesVelocityYAccTable+5], a        ; $4D93: $EA $75 $C2
     xor  a                                        ; $4D96: $AF
     ld   [hl], a                                  ; $4D97: $77
     call_open_dialog Dialog275                      ; $4D98
@@ -2117,7 +2117,7 @@ JumpTable_037_4D7B::
 
 JumpTable_037_4DB5::
     ld   a, $02                                   ; $4DB5: $3E $02
-    ld   [wEntitiesSpeedYAccTable+5], a           ; $4DB7: $EA $75 $C2
+    ld   [wEntitiesVelocityYAccTable+5], a        ; $4DB7: $EA $75 $C2
     call_open_dialog Dialog274                      ; $4DBA
     jp   JumpTable_037_4C36.func_037_4C48         ; $4DBF: $C3 $48 $4C
 
@@ -2165,7 +2165,7 @@ JumpTable_037_4DEC::
 
 .else_4DFD_37:
     ld   a, $02                                   ; $4DFD: $3E $02
-    ld   [wEntitiesSpeedYAccTable+5], a           ; $4DFF: $EA $75 $C2
+    ld   [wEntitiesVelocityYAccTable+5], a        ; $4DFF: $EA $75 $C2
     ld   a, [hl]                                  ; $4E02: $7E
     and  $03                                      ; $4E03: $E6 $03
     jr   nz, .else_4E23_37                        ; $4E05: $20 $1C
@@ -2206,7 +2206,7 @@ JumpTable_037_4DEC::
 
 JumpTable_037_4E41::
     ld   a, $02                                   ; $4E41: $3E $02
-    ld   [wEntitiesSpeedYAccTable+5], a           ; $4E43: $EA $75 $C2
+    ld   [wEntitiesVelocityYAccTable+5], a        ; $4E43: $EA $75 $C2
     ld   hl, wEntitiesPosYTable+3                 ; $4E46: $21 $13 $C2
     inc  [hl]                                     ; $4E49: $34
     ld   a, [hl]                                  ; $4E4A: $7E
@@ -2245,11 +2245,11 @@ JumpTable_037_4E5F::
 
 func_037_4E7F::
     ld   a, [wEntitiesPosXSignTable+3]            ; $4E7F: $FA $23 $C2
-    ld   [wEntitiesSpeedYTable+1], a              ; $4E82: $EA $51 $C2
+    ld   [wEntitiesVelocityYTable+1], a           ; $4E82: $EA $51 $C2
     ld   a, [wEntitiesPosXSignTable+2]            ; $4E85: $FA $22 $C2
-    ld   [wEntitiesSpeedXAccTable+1], a           ; $4E88: $EA $61 $C2
-    ld   de, wEntitiesSpeedYTable+1               ; $4E8B: $11 $51 $C2
-    ld   hl, wEntitiesSpeedYTable+2               ; $4E8E: $21 $52 $C2
+    ld   [wEntitiesVelocityXAccTable+1], a        ; $4E88: $EA $61 $C2
+    ld   de, wEntitiesVelocityYTable+1            ; $4E8B: $11 $51 $C2
+    ld   hl, wEntitiesVelocityYTable+2            ; $4E8E: $21 $52 $C2
     ld   c, $05                                   ; $4E91: $0E $05
 
 .loop_4E93_37
@@ -2277,8 +2277,8 @@ func_037_4E7F::
     dec  c                                        ; $4EA7: $0D
     jr   nz, .loop_4E93_37                        ; $4EA8: $20 $E9
 
-    ld   de, wEntitiesSpeedXAccTable+1            ; $4EAA: $11 $61 $C2
-    ld   hl, wEntitiesSpeedXAccTable+2            ; $4EAD: $21 $62 $C2
+    ld   de, wEntitiesVelocityXAccTable+1         ; $4EAA: $11 $61 $C2
+    ld   hl, wEntitiesVelocityXAccTable+2         ; $4EAD: $21 $62 $C2
     ld   c, $05                                   ; $4EB0: $0E $05
 
 .loop_4EB2_37
@@ -2310,7 +2310,7 @@ func_037_4E7F::
     and  $01                                      ; $4ECB: $E6 $01
     jr   z, .else_4EDE_37                         ; $4ECD: $28 $0F
 
-    ld   hl, wEntitiesSpeedXAccTable+1            ; $4ECF: $21 $61 $C2
+    ld   hl, wEntitiesVelocityXAccTable+1         ; $4ECF: $21 $61 $C2
 
 .loop_4ED2_37
     ld   a, [hl]                                  ; $4ED2: $7E
@@ -2343,12 +2343,12 @@ func_037_4E7F::
     rra                                           ; $4EF4: $1F
     jr   c, .else_4F0F_37                         ; $4EF5: $38 $18
 
-    ld   hl, wEntitiesSpeedXAccTable+1            ; $4EF7: $21 $61 $C2
+    ld   hl, wEntitiesVelocityXAccTable+1         ; $4EF7: $21 $61 $C2
     add  hl, bc                                   ; $4EFA: $09
     ld   a, [hl]                                  ; $4EFB: $7E
     ld   [de], a                                  ; $4EFC: $12
     inc  de                                       ; $4EFD: $13
-    ld   hl, wEntitiesSpeedYTable+1               ; $4EFE: $21 $51 $C2
+    ld   hl, wEntitiesVelocityYTable+1            ; $4EFE: $21 $51 $C2
     add  hl, bc                                   ; $4F01: $09
     ld   a, [hl]                                  ; $4F02: $7E
     add  $04                                      ; $4F03: $C6 $04
@@ -2378,9 +2378,9 @@ func_037_4F1B::
     dec  a                                        ; $4F20: $3D
     ld   [wEntitiesPosXSignTable+5], a            ; $4F21: $EA $25 $C2
     ld   hl, Data_037_4F13                        ; $4F24: $21 $13 $4F
-    ld   a, [wEntitiesSpeedYAccTable+9]           ; $4F27: $FA $79 $C2
+    ld   a, [wEntitiesVelocityYAccTable+9]        ; $4F27: $FA $79 $C2
     ldh  [hMultiPurpose0], a                      ; $4F2A: $E0 $D7
-    ld   a, [wEntitiesSpeedYAccTable+8]           ; $4F2C: $FA $78 $C2
+    ld   a, [wEntitiesVelocityYAccTable+8]        ; $4F2C: $FA $78 $C2
     ldh  [hMultiPurpose1], a                      ; $4F2F: $E0 $D8
     ld   c, $08                                   ; $4F31: $0E $08
     call func_037_4AB8                            ; $4F33: $CD $B8 $4A
@@ -2853,19 +2853,19 @@ JumpTable_037_5228::
 
     xor  a                                        ; $5230: $AF
     ld   [hl], a                                  ; $5231: $77
-    ld   a, [wEntitiesSpeedXTable+14]             ; $5232: $FA $4E $C2
+    ld   a, [wEntitiesVelocityXTable+14]          ; $5232: $FA $4E $C2
     xor  $01                                      ; $5235: $EE $01
-    ld   [wEntitiesSpeedXTable+14], a             ; $5237: $EA $4E $C2
-    ld   a, [wEntitiesSpeedYTable]                ; $523A: $FA $50 $C2
+    ld   [wEntitiesVelocityXTable+14], a          ; $5237: $EA $4E $C2
+    ld   a, [wEntitiesVelocityYTable]             ; $523A: $FA $50 $C2
     sub  $03                                      ; $523D: $D6 $03
-    ld   [wEntitiesSpeedYTable], a                ; $523F: $EA $50 $C2
+    ld   [wEntitiesVelocityYTable], a             ; $523F: $EA $50 $C2
     cp   $6C                                      ; $5242: $FE $6C
     ret  nc                                       ; $5244: $D0
 
     ld   a, $6E                                   ; $5245: $3E $6E
-    ld   [wEntitiesSpeedYTable], a                ; $5247: $EA $50 $C2
+    ld   [wEntitiesVelocityYTable], a             ; $5247: $EA $50 $C2
     xor  a                                        ; $524A: $AF
-    ld   [wEntitiesSpeedXTable+14], a             ; $524B: $EA $4E $C2
+    ld   [wEntitiesVelocityXTable+14], a          ; $524B: $EA $4E $C2
     call func_037_49CE                            ; $524E: $CD $CE $49
     call_open_dialog Dialog2AF                      ; $5251
     ret                                           ; $5256: $C9
@@ -2892,7 +2892,7 @@ JumpTable_037_526F::
     ret  nz                                       ; $5273: $C0
 
     ld   a, $01                                   ; $5274: $3E $01
-    ld   [wEntitiesSpeedXTable+14], a             ; $5276: $EA $4E $C2
+    ld   [wEntitiesVelocityXTable+14], a          ; $5276: $EA $4E $C2
     call func_037_49CE                            ; $5279: $CD $CE $49
     ret                                           ; $527C: $C9
 
@@ -2906,17 +2906,17 @@ JumpTable_037_527D::
 
     xor  a                                        ; $5288: $AF
     ld   [hl], a                                  ; $5289: $77
-    ld   a, [wEntitiesSpeedXTable+14]             ; $528A: $FA $4E $C2
+    ld   a, [wEntitiesVelocityXTable+14]          ; $528A: $FA $4E $C2
     xor  $01                                      ; $528D: $EE $01
-    ld   [wEntitiesSpeedXTable+14], a             ; $528F: $EA $4E $C2
-    ld   a, [wEntitiesSpeedXTable+15]             ; $5292: $FA $4F $C2
+    ld   [wEntitiesVelocityXTable+14], a          ; $528F: $EA $4E $C2
+    ld   a, [wEntitiesVelocityXTable+15]          ; $5292: $FA $4F $C2
     add  $02                                      ; $5295: $C6 $02
-    ld   [wEntitiesSpeedXTable+15], a             ; $5297: $EA $4F $C2
+    ld   [wEntitiesVelocityXTable+15], a          ; $5297: $EA $4F $C2
     push af                                       ; $529A: $F5
     and  %00000011                                ; $529B: $E6 $03
     jr   nz, .else_52A3_37                        ; $529D: $20 $04
 
-    ld   hl, wEntitiesSpeedYTable                 ; $529F: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $529F: $21 $50 $C2
     dec  [hl]                                     ; $52A2: $35
 
 .else_52A3_37:
@@ -3030,7 +3030,7 @@ JumpTable_037_532E::
 func_037_533F::
     ld   c, $08                                   ; $533F: $0E $08
     ld   hl, Data_037_5CDB                        ; $5341: $21 $DB $5C
-    ld   a, [wEntitiesSpeedXTable+14]             ; $5344: $FA $4E $C2
+    ld   a, [wEntitiesVelocityXTable+14]          ; $5344: $FA $4E $C2
     sla  a                                        ; $5347: $CB $27
     ld   e, a                                     ; $5349: $5F
     ld   d, $00                                   ; $534A: $16 $00
@@ -3038,9 +3038,9 @@ func_037_533F::
     ld   a, [hl+]                                 ; $534D: $2A
     ld   h, [hl]                                  ; $534E: $66
     ld   l, a                                     ; $534F: $6F
-    ld   a, [wEntitiesSpeedXTable+15]             ; $5350: $FA $4F $C2
+    ld   a, [wEntitiesVelocityXTable+15]          ; $5350: $FA $4F $C2
     ldh  [hMultiPurpose0], a                      ; $5353: $E0 $D7
-    ld   a, [wEntitiesSpeedYTable]                ; $5355: $FA $50 $C2
+    ld   a, [wEntitiesVelocityYTable]             ; $5355: $FA $50 $C2
     ldh  [hMultiPurpose1], a                      ; $5358: $E0 $D8
     call func_037_4AB8                            ; $535A: $CD $B8 $4A
     ret                                           ; $535D: $C9
@@ -3144,7 +3144,7 @@ func_037_5403::
 
 ; Dead-code?
 func_037_5408::
-    ld   hl, wEntitiesSpeedXTable                 ; $5408: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5408: $21 $40 $C2
     add  hl, bc                                   ; $540B: $09
     ret                                           ; $540C: $C9
 

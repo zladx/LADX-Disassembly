@@ -73,5 +73,5 @@ GopongaProjectileEntityHandler::
     and  $01                                      ; $63E6: $E6 $01
     call SetEntitySpriteVariant                   ; $63E8: $CD $0C $3B
     call DefaultEnemyDamageCollisionHandler_trampoline ; $63EB: $CD $39 $3B
-    call UpdateEntityPosWithSpeed_06              ; $63EE: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $63EE: $CD $41 $65
     jp   func_006_5E54                            ; $63F1: $C3 $54 $5E

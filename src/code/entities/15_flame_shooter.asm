@@ -55,7 +55,7 @@ FlameShooterEntityHandler::
     ld   hl, wEntitiesPrivateState1Table          ; $4D8B: $21 $B0 $C2
     add  hl, de                                   ; $4D8E: $19
     inc  [hl]                                     ; $4D8F: $34
-    ld   hl, wEntitiesSpeedYTable                 ; $4D90: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4D90: $21 $50 $C2
     add  hl, de                                   ; $4D93: $19
     ld   [hl], $10                                ; $4D94: $36 $10
     ld   hl, wEntitiesTransitionCountdownTable    ; $4D96: $21 $E0 $C2
@@ -123,10 +123,10 @@ label_015_4DB5:
     ld   a, $30                                   ; $4DE9: $3E $30
     call GetVectorTowardsLink_trampoline          ; $4DEB: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $4DEE: $F0 $D7
-    ldh  [hLinkSpeedY], a                         ; $4DF0: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $4DF0: $E0 $9B
 
 .jr_4DF2
-    call UpdateEntityYPosWithSpeed_15             ; $4DF2: $CD $8B $7B
+    call UpdateEntityYPosWithVelocity_15          ; $4DF2: $CD $8B $7B
     ldh  a, [hActiveEntityState]                  ; $4DF5: $F0 $F0
     and  a                                        ; $4DF7: $A7
     jr   z, jr_015_4E49                           ; $4DF8: $28 $4F
@@ -158,7 +158,7 @@ label_015_4DB5:
     ld   hl, Data_015_4DB3                        ; $4E1F: $21 $B3 $4D
     add  hl, bc                                   ; $4E22: $09
     ld   a, [hl]                                  ; $4E23: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $4E24: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4E24: $21 $40 $C2
     add  hl, de                                   ; $4E27: $19
     ld   [hl], a                                  ; $4E28: $77
     ldh  a, [hMultiPurpose1]                      ; $4E29: $F0 $D8
@@ -166,7 +166,7 @@ label_015_4DB5:
     ld   hl, wEntitiesPosYTable                   ; $4E2D: $21 $10 $C2
     add  hl, de                                   ; $4E30: $19
     ld   [hl], a                                  ; $4E31: $77
-    ld   hl, wEntitiesSpeedYTable                 ; $4E32: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4E32: $21 $50 $C2
     add  hl, de                                   ; $4E35: $19
     ld   [hl], $0C                                ; $4E36: $36 $0C
     ld   hl, wEntitiesTransitionCountdownTable    ; $4E38: $21 $E0 $C2
@@ -212,7 +212,7 @@ label_015_4E62:
     ld   de, Unknown046SpriteVariants             ; $4E6A: $11 $A9 $4D
     call RenderActiveEntitySpritesPair            ; $4E6D: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $4E70: $CD $0D $7B
-    call UpdateEntityPosWithSpeed_15              ; $4E73: $CD $88 $7B
+    call UpdateEntityPosWithVelocity_15           ; $4E73: $CD $88 $7B
     call GetEntityTransitionCountdown             ; $4E76: $CD $05 $0C
     jp   z, ClearEntityStatus_15                  ; $4E79: $CA $31 $7C
 

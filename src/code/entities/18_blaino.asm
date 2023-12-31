@@ -51,10 +51,10 @@ jr_018_650A:
     call DefaultEnemyDamageCollisionHandler_trampoline ; $6516: $CD $39 $3B
 
 .jr_6519
-    call UpdateEntityPosWithSpeed_18              ; $6519: $CD $5F $7E
+    call UpdateEntityPosWithVelocity_18           ; $6519: $CD $5F $7E
     call DefaultEntityPhysics_trampoline          ; $651C: $CD $23 $3B
-    call AddEntityZSpeedToPos_18                  ; $651F: $CD $98 $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $6522: $21 $20 $C3
+    call AddEntityZVelocityToPos_18               ; $651F: $CD $98 $7E
+    ld   hl, wEntitiesVelocityZTable              ; $6522: $21 $20 $C3
     add  hl, bc                                   ; $6525: $09
     dec  [hl]                                     ; $6526: $35
     dec  [hl]                                     ; $6527: $35
@@ -68,10 +68,10 @@ jr_018_650A:
     jr   z, .jr_653E                              ; $6533: $28 $09
 
     ld   [hl], b                                  ; $6535: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $6536: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6536: $21 $20 $C3
     add  hl, bc                                   ; $6539: $09
     ld   [hl], b                                  ; $653A: $70
-    call ClearEntitySpeed                         ; $653B: $CD $7F $3D
+    call ClearEntityVelocity                      ; $653B: $CD $7F $3D
 
 .jr_653E
     call func_018_65CF                            ; $653E: $CD $CF $65
@@ -87,7 +87,7 @@ jr_018_650A:
     ld   hl, Data_018_64CA - 2                    ; $6551: $21 $C8 $64
     add  hl, de                                   ; $6554: $19
     ld   a, [hl]                                  ; $6555: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $6556: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6556: $21 $50 $C2
     add  hl, bc                                   ; $6559: $09
     ld   [hl], a                                  ; $655A: $77
 
@@ -96,13 +96,13 @@ jr_018_650A:
     and  a                                        ; $655D: $A7
     jr   z, .jr_6588                              ; $655E: $28 $28
 
-    ld   hl, wEntitiesSpeedZTable                 ; $6560: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6560: $21 $20 $C3
     add  hl, bc                                   ; $6563: $09
     ld   [hl], $10                                ; $6564: $36 $10
     call GetRandomByte                            ; $6566: $CD $0D $28
     and  $0F                                      ; $6569: $E6 $0F
     sub  $08                                      ; $656B: $D6 $08
-    ld   hl, wEntitiesSpeedXTable                 ; $656D: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $656D: $21 $40 $C2
     add  hl, bc                                   ; $6570: $09
     ld   [hl], a                                  ; $6571: $77
     call func_018_7EB2                            ; $6572: $CD $B2 $7E
@@ -113,7 +113,7 @@ jr_018_650A:
     ld   a, $08                                   ; $657B: $3E $08
     call GetVectorTowardsLink_trampoline          ; $657D: $CD $B5 $3B
     ldh  a, [hMultiPurpose1]                      ; $6580: $F0 $D8
-    ld   hl, wEntitiesSpeedXTable                 ; $6582: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6582: $21 $40 $C2
     add  hl, bc                                   ; $6585: $09
     add  [hl]                                     ; $6586: $86
     ld   [hl], a                                  ; $6587: $77
@@ -259,7 +259,7 @@ func_018_6643::
     ld   e, a                                     ; $666D: $5F
 
 .jr_666E
-    ld   hl, wEntitiesSpeedXTable                 ; $666E: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $666E: $21 $40 $C2
     add  hl, bc                                   ; $6671: $09
     ld   [hl], e                                  ; $6672: $73
     call GetEntityTransitionCountdown             ; $6673: $CD $05 $0C
@@ -320,7 +320,7 @@ jr_018_66E9:
     ld   e, a                                     ; $6702: $5F
 
 .jr_6703
-    ld   hl, wEntitiesSpeedXTable                 ; $6703: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6703: $21 $40 $C2
     add  hl, bc                                   ; $6706: $09
     ld   [hl], e                                  ; $6707: $73
     call GetEntityPrivateCountdown1               ; $6708: $CD $00 $0C

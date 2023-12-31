@@ -277,7 +277,7 @@ func_020_4303::
     xor  a                                        ; $4309: $AF
     ld   [wC5A0], a                               ; $430A: $EA $A0 $C5
     ld   [wShouldGetLostInMysteriousWoods], a     ; $430D: $EA $0C $C1
-    ldh  [hLinkSlowWalkingSpeed], a               ; $4310: $E0 $B2
+    ldh  [hLinkSlowWalkingVelocity], a            ; $4310: $E0 $B2
     ld   [wC117], a                               ; $4312: $EA $17 $C1
     ld   [wC19D], a                               ; $4315: $EA $9D $C1
     ld   [wC147], a                               ; $4318: $EA $47 $C1
@@ -313,7 +313,7 @@ EntityInitHandlersTable::
 ._12 dw   EntityInitGhini
 ._13 dw   EntityInitBrokenHeartContainer
 ._14 dw   EntityInitMoblinSword
-._15 dw   EntityInitWithRandomSpeed
+._15 dw   EntityInitWithRandomVelocity
 ._16 dw   EntityInitSparkCounterClockwise
 ._17 dw   EntityInitSparkClockwise
 ._18 dw   EntityInitWithRandomDirection
@@ -448,7 +448,7 @@ EntityInitHandlersTable::
 ._99 dw   EntityInitNoop
 ._9A dw   EntityInitNoop
 ._9B dw   EntityInitNoop
-._9C dw   EntityInitWithRandomSpeed
+._9C dw   EntityInitWithRandomVelocity
 ._9D dw   EntityInitNoop
 ._9E dw   EntityInitFireballShooter
 ._9F dw   EntityInitNoop
@@ -511,7 +511,7 @@ EntityInitHandlersTable::
 ._D8 dw   EntityInitNoop
 ._D9 dw   EntityInitNoop
 ._DA dw   EntityInitNoop
-._DB dw   EntityInitWithRandomSpeed
+._DB dw   EntityInitWithRandomVelocity
 ._DC dw   EntityInitNoop
 ._DD dw   EntityInitNoop
 ._DE dw   EntityInitNoop

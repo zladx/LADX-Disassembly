@@ -835,7 +835,7 @@ func_036_44FC::
 .jr_4517
     ld   a, $08                                   ; $4517: $3E $08
     call ApplyVectorTowardsLink_trampoline        ; $4519: $CD $AA $3B
-    call UpdateEntityPosWithSpeed_36              ; $451C: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $451C: $CD $62 $6A
     call func_036_6B8A                            ; $451F: $CD $8A $6B
     cp   $0C                                      ; $4522: $FE $0C
     jr   nc, jr_036_452D                          ; $4524: $30 $07
@@ -854,7 +854,7 @@ jr_036_452D:
 
     inc  [hl]                                     ; $4535: $34
     ld   a, [hl]                                  ; $4536: $7E
-    ldh  [hLinkSpeedX], a                         ; $4537: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $4537: $E0 $9A
     push bc                                       ; $4539: $C5
     call UpdateFinalLinkPosition                  ; $453A: $CD $A8 $21
     call label_3E19                               ; $453D: $CD $19 $3E
@@ -936,7 +936,7 @@ func_036_4589::
 
     ld   a, $0C                                   ; $45AD: $3E $0C
     call ApplyVectorTowardsLink_trampoline        ; $45AF: $CD $AA $3B
-    call UpdateEntityPosWithSpeed_36              ; $45B2: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $45B2: $CD $62 $6A
     call func_036_6B9A                            ; $45B5: $CD $9A $6B
     cp   $0C                                      ; $45B8: $FE $0C
     jr   nc, jr_036_45E6                          ; $45BA: $30 $2A
@@ -950,7 +950,7 @@ func_036_4589::
 .jr_45C5
     ld   a, $08                                   ; $45C5: $3E $08
     call ApplyVectorTowardsLink_trampoline        ; $45C7: $CD $AA $3B
-    call UpdateEntityPosWithSpeed_36              ; $45CA: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $45CA: $CD $62 $6A
     call PointHLToEntityPosY                      ; $45CD: $CD $28 $6C
     ld   a, [hl]                                  ; $45D0: $7E
     cp   $2E                                      ; $45D1: $FE $2E
@@ -978,7 +978,7 @@ jr_036_45E6:
 
     inc  [hl]                                     ; $45EE: $34
     ld   a, [hl]                                  ; $45EF: $7E
-    ldh  [hLinkSpeedY], a                         ; $45F0: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $45F0: $E0 $9B
     push bc                                       ; $45F2: $C5
     call UpdateFinalLinkPosition                  ; $45F3: $CD $A8 $21
     call label_3E19                               ; $45F6: $CD $19 $3E
@@ -1611,7 +1611,7 @@ func_036_497B::
     add  hl, bc                                   ; $4981: $09
     ld   a, [hl]                                  ; $4982: $7E
     and  a                                        ; $4983: $A7
-    call PointHLToEntitySpeedX                    ; $4984: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $4984: $CD $EE $6B
     ld   e, $E8                                   ; $4987: $1E $E8
     and  a                                        ; $4989: $A7
     jr   z, .jr_498E                              ; $498A: $28 $02
@@ -1624,7 +1624,7 @@ func_036_497B::
 
 func_036_4992::
     call func_036_496E                            ; $4992: $CD $6E $49
-    call PointHLToEntitySpeedX                    ; $4995: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $4995: $CD $EE $6B
     ld   a, [hl]                                  ; $4998: $7E
     bit  7, a                                     ; $4999: $CB $7F
     jr   z, .jr_49A0                              ; $499B: $28 $03
@@ -1648,7 +1648,7 @@ jr_036_49A1:
     push af                                       ; $49AD: $F5
     swap a                                        ; $49AE: $CB $37
     and  $F0                                      ; $49B0: $E6 $F0
-    ld   hl, wEntitiesSpeedXAccTable              ; $49B2: $21 $60 $C2
+    ld   hl, wEntitiesVelocityXAccTable           ; $49B2: $21 $60 $C2
     add  [hl]                                     ; $49B5: $86
     ld   [hl], a                                  ; $49B6: $77
     rl   d                                        ; $49B7: $CB $12
@@ -2124,14 +2124,14 @@ func_036_4C25::
     cp   $18                                      ; $4C3B: $FE $18
     jr   nc, .jr_4C4C                             ; $4C3D: $30 $0D
 
-    call PointHLToEntitySpeedZ                    ; $4C3F: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $4C3F: $CD $F8 $6B
     ld   [hl], $28                                ; $4C42: $36 $28
     ld   a, $10                                   ; $4C44: $3E $10
     call ApplyVectorTowardsLink_trampoline        ; $4C46: $CD $AA $3B
     call IncrementEntityState                     ; $4C49: $CD $12 $3B
 
 .jr_4C4C
-    call UpdateEntityPosWithSpeed_36              ; $4C4C: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $4C4C: $CD $62 $6A
     call DefaultEntityPhysics_trampoline          ; $4C4F: $CD $23 $3B
     ldh  a, [hFrameCounter]                       ; $4C52: $F0 $E7
     rra                                           ; $4C54: $1F
@@ -2141,10 +2141,10 @@ func_036_4C25::
     ret                                           ; $4C5B: $C9
 
 func_036_4C5C::
-    call UpdateEntityPosWithSpeed_36              ; $4C5C: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $4C5C: $CD $62 $6A
     call DefaultEntityPhysics_trampoline          ; $4C5F: $CD $23 $3B
     call func_036_6AEC                            ; $4C62: $CD $EC $6A
-    call PointHLToEntitySpeedZ                    ; $4C65: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $4C65: $CD $F8 $6B
     dec  [hl]                                     ; $4C68: $35
     dec  [hl]                                     ; $4C69: $35
     ld   a, [hl]                                  ; $4C6A: $7E
@@ -2154,7 +2154,7 @@ func_036_4C5C::
     ld   [hl], $C0                                ; $4C6F: $36 $C0
     ld   a, $10                                   ; $4C71: $3E $10
     call func_036_6C83                            ; $4C73: $CD $83 $6C
-    call ClearEntitySpeed                         ; $4C76: $CD $7F $3D
+    call ClearEntityVelocity                      ; $4C76: $CD $7F $3D
     call IncrementEntityState                     ; $4C79: $CD $12 $3B
 
 .jr_4C7C
@@ -2177,7 +2177,7 @@ func_036_4C82::
     call func_036_6C83                            ; $4C93: $CD $83 $6C
     xor  a                                        ; $4C96: $AF
     call SetEntityState                           ; $4C97: $CD $07 $6C
-    ld   hl, wEntitiesSpeedZTable                 ; $4C9A: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4C9A: $21 $20 $C3
     add  hl, bc                                   ; $4C9D: $09
     ld   a, [hl]                                  ; $4C9E: $7E
     ld   [hl], b                                  ; $4C9F: $70
@@ -2221,7 +2221,7 @@ HardhitBeetleEntityHandler::
 .jr_4CD5
     call BossIntro                                ; $4CD5: $CD $E8 $3E
     call ReturnIfNonInteractive_36                ; $4CD8: $CD $40 $6A
-    call UpdateEntityPosWithSpeed_36              ; $4CDB: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $4CDB: $CD $62 $6A
     ld   de, Data_036_4CB4                        ; $4CDE: $11 $B4 $4C
     call func_036_6C90                            ; $4CE1: $CD $90 $6C
     call DefaultEnemyDamageCollisionHandler_trampoline ; $4CE4: $CD $39 $3B
@@ -2307,9 +2307,9 @@ func_036_4D4B::
     ld   a, $14                                   ; $4D61: $3E $14
     call GetVectorTowardsLink_trampoline          ; $4D63: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $4D66: $F0 $D7
-    ldh  [hLinkSpeedY], a                         ; $4D68: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $4D68: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $4D6A: $F0 $D8
-    ldh  [hLinkSpeedX], a                         ; $4D6C: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $4D6C: $E0 $9A
 
 jr_036_4D6E:
     ld   hl, wEntitiesHealthTable                 ; $4D6E: $21 $60 $C3
@@ -2464,9 +2464,9 @@ func_036_4E27::
     call_open_dialog Dialog26E                    ; $4E4B
 
 jr_036_4E50:
-    call PointHLToEntitySpeedX                    ; $4E50: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $4E50: $CD $EE $6B
     ld   [hl], a                                  ; $4E53: $77
-    call PointHLToEntitySpeedY                    ; $4E54: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $4E54: $CD $F3 $6B
     ld   [hl], a                                  ; $4E57: $77
     call IncrementEntityState                     ; $4E58: $CD $12 $3B
     ret                                           ; $4E5B: $C9
@@ -2485,12 +2485,12 @@ jr_036_4E5C:
     ld   hl, Data_036_4E1F                        ; $4E6C: $21 $1F $4E
     add  hl, de                                   ; $4E6F: $19
     ld   a, [hl]                                  ; $4E70: $7E
-    call PointHLToEntitySpeedX                    ; $4E71: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $4E71: $CD $EE $6B
     ld   [hl], a                                  ; $4E74: $77
     ld   hl, Data_036_4E1D                        ; $4E75: $21 $1D $4E
     add  hl, de                                   ; $4E78: $19
     ld   a, [hl]                                  ; $4E79: $7E
-    call PointHLToEntitySpeedY                    ; $4E7A: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $4E7A: $CD $F3 $6B
     ld   [hl], a                                  ; $4E7D: $77
     ret                                           ; $4E7E: $C9
 
@@ -2545,7 +2545,7 @@ func_036_4EA2::
     ld   hl, wEntitiesPosZTable                   ; $4EBE: $21 $10 $C3
     add  hl, de                                   ; $4EC1: $19
     ld   [hl], $30                                ; $4EC2: $36 $30
-    ld   hl, wEntitiesSpeedZTable                 ; $4EC4: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4EC4: $21 $20 $C3
     add  hl, de                                   ; $4EC7: $19
     ld   [hl], $C0                                ; $4EC8: $36 $C0
     ld   hl, wEntitiesSpriteVariantTable          ; $4ECA: $21 $B0 $C3
@@ -2676,13 +2676,13 @@ func_036_4F9B::
     ld   a, $36                                   ; $4FD4: $3E $36
     ld   [wCurrentBank], a                        ; $4FD6: $EA $AF $DB
     call label_3CD9                               ; $4FD9: $CD $D9 $3C
-    call PointHLToEntitySpeedX                    ; $4FDC: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $4FDC: $CD $EE $6B
     ld   a, [hl]                                  ; $4FDF: $7E
     rlca                                          ; $4FE0: $07
     rlca                                          ; $4FE1: $07
     and  $01                                      ; $4FE2: $E6 $01
     call SetEntitySpriteVariant                   ; $4FE4: $CD $0C $3B
-    call UpdateEntityPosWithSpeed_36              ; $4FE7: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $4FE7: $CD $62 $6A
     call func_036_5000                            ; $4FEA: $CD $00 $50
     ld   a, [wIsLinkInTheAir]                     ; $4FED: $FA $46 $C1
     and  a                                        ; $4FF0: $A7
@@ -2711,9 +2711,9 @@ func_036_5007::
     jr   c, .ret_501B                             ; $500D: $38 $0C
 
     xor  a                                        ; $500F: $AF
-    call PointHLToEntitySpeedX                    ; $5010: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $5010: $CD $EE $6B
     ld   [hl], a                                  ; $5013: $77
-    call PointHLToEntitySpeedY                    ; $5014: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $5014: $CD $F3 $6B
     ld   [hl], a                                  ; $5017: $77
     call IncrementEntityState                     ; $5018: $CD $12 $3B
 
@@ -2729,12 +2729,12 @@ func_036_501C::
     call GetRandomByte                            ; $5025: $CD $0D $28
     and  $0F                                      ; $5028: $E6 $0F
     sub  $08                                      ; $502A: $D6 $08
-    call PointHLToEntitySpeedX                    ; $502C: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $502C: $CD $EE $6B
     ld   [hl], a                                  ; $502F: $77
     call GetRandomByte                            ; $5030: $CD $0D $28
     and  $0F                                      ; $5033: $E6 $0F
     sub  $08                                      ; $5035: $D6 $08
-    call PointHLToEntitySpeedY                    ; $5037: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $5037: $CD $F3 $6B
     ld   [hl], a                                  ; $503A: $77
     ret                                           ; $503B: $C9
 
@@ -2813,7 +2813,7 @@ func_036_505F::
     ld   e, $02                                   ; $50AF: $1E $02
 
 .jr_50B1
-    call PointHLToEntitySpeedZ                    ; $50B1: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $50B1: $CD $F8 $6B
     ld   [hl], e                                  ; $50B4: $73
     call func_036_6AEC                            ; $50B5: $CD $EC $6A
     ld   a, [wCurrentBank]                        ; $50B8: $FA $AF $DB
@@ -3383,7 +3383,7 @@ jr_036_5465:
 
 .jr_5490
     ld   a, [hl]                                  ; $5490: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $5491: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5491: $21 $40 $C2
     add  hl, de                                   ; $5494: $19
     ld   [hl], $0C                                ; $5495: $36 $0C
     bit  7, a                                     ; $5497: $CB $7F
@@ -3395,7 +3395,7 @@ jr_036_5465:
     ld   hl, wEntitiesPosYTable                   ; $549D: $21 $10 $C2
     add  hl, de                                   ; $54A0: $19
     ld   [hl], $18                                ; $54A1: $36 $18
-    ld   hl, wEntitiesSpeedYTable                 ; $54A3: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $54A3: $21 $50 $C2
     add  hl, de                                   ; $54A6: $19
     ld   [hl], $0C                                ; $54A7: $36 $0C
     ld   hl, wEntitiesPosZTable                   ; $54A9: $21 $10 $C3
@@ -3593,9 +3593,9 @@ func_036_55B1::
     jr   nz, .jr_55E0                             ; $55C4: $20 $1A
 
     ld   [hl], a                                  ; $55C6: $77
-    call PointHLToEntitySpeedX                    ; $55C7: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $55C7: $CD $EE $6B
     ld   [hl], a                                  ; $55CA: $77
-    call PointHLToEntitySpeedY                    ; $55CB: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $55CB: $CD $F3 $6B
     ld   [hl], a                                  ; $55CE: $77
     ld   hl, wEntitiesPrivateState3Table          ; $55CF: $21 $D0 $C2
     add  hl, bc                                   ; $55D2: $09
@@ -3620,16 +3620,16 @@ func_036_55B1::
     ld   hl, Data_036_55A7                        ; $55F1: $21 $A7 $55
     add  hl, de                                   ; $55F4: $19
     ld   a, [hl]                                  ; $55F5: $7E
-    call PointHLToEntitySpeedX                    ; $55F6: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $55F6: $CD $EE $6B
     ld   [hl], a                                  ; $55F9: $77
     ld   hl, Data_036_55A5                        ; $55FA: $21 $A5 $55
     add  hl, de                                   ; $55FD: $19
     ld   a, [hl]                                  ; $55FE: $7E
-    call PointHLToEntitySpeedY                    ; $55FF: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $55FF: $CD $F3 $6B
     ld   [hl], a                                  ; $5602: $77
 
 .jr_5603
-    call UpdateEntityPosWithSpeed_36              ; $5603: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $5603: $CD $62 $6A
     ld   de, Data_036_55AF                        ; $5606: $11 $AF $55
     call func_036_6C90                            ; $5609: $CD $90 $6C
     ld   hl, wEntitiesStateTable                  ; $560C: $21 $90 $C2
@@ -3691,9 +3691,9 @@ func_036_55B1::
     ld   a, $20                                   ; $5666: $3E $20
     call GetVectorTowardsLink_trampoline          ; $5668: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $566B: $F0 $D7
-    ldh  [hLinkSpeedY], a                         ; $566D: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $566D: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $566F: $F0 $D8
-    ldh  [hLinkSpeedX], a                         ; $5671: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $5671: $E0 $9A
 
 jr_036_5673:
     ldh  a, [hFrameCounter]                       ; $5673: $F0 $E7
@@ -3762,7 +3762,7 @@ func_036_56CD::
     pop  hl                                       ; $56E9: $E1
     ld   a, [hl+]                                 ; $56EA: $2A
     push hl                                       ; $56EB: $E5
-    ld   hl, wEntitiesSpeedXTable                 ; $56EC: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $56EC: $21 $40 $C2
     add  hl, de                                   ; $56EF: $19
     ld   [hl], a                                  ; $56F0: $77
     call PointHLToEntityPosY                      ; $56F1: $CD $28 $6C
@@ -3777,7 +3777,7 @@ func_036_56CD::
     pop  hl                                       ; $56FE: $E1
     ld   a, [hl+]                                 ; $56FF: $2A
     push hl                                       ; $5700: $E5
-    ld   hl, wEntitiesSpeedYTable                 ; $5701: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $5701: $21 $50 $C2
     add  hl, de                                   ; $5704: $19
     ld   [hl], a                                  ; $5705: $77
     pop  hl                                       ; $5706: $E1
@@ -3893,7 +3893,7 @@ func_036_578F::
 
     ld   a, $08                                   ; $579E: $3E $08
     call ApplyVectorTowardsLink_trampoline        ; $57A0: $CD $AA $3B
-    call PointHLToEntitySpeedZ                    ; $57A3: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $57A3: $CD $F8 $6B
     ld   [hl], $20                                ; $57A6: $36 $20
     call IncrementEntityState                     ; $57A8: $CD $12 $3B
 
@@ -3902,9 +3902,9 @@ func_036_578F::
     ret                                           ; $57AE: $C9
 
 func_036_57AF::
-    call UpdateEntityPosWithSpeed_36              ; $57AF: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $57AF: $CD $62 $6A
     call func_036_6AEC                            ; $57B2: $CD $EC $6A
-    call PointHLToEntitySpeedZ                    ; $57B5: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $57B5: $CD $F8 $6B
     dec  [hl]                                     ; $57B8: $35
     call PointHLToEntityPosZ                      ; $57B9: $CD $2D $6C
     ld   a, [hl]                                  ; $57BC: $7E
@@ -4074,9 +4074,9 @@ func_036_58A1::
     cp   $05                                      ; $58A7: $FE $05
     jr   nc, .ret_58B8                            ; $58A9: $30 $0D
 
-    call PointHLToEntitySpeedY                    ; $58AB: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $58AB: $CD $F3 $6B
     ld   [hl], $14                                ; $58AE: $36 $14
-    call PointHLToEntitySpeedZ                    ; $58B0: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $58B0: $CD $F8 $6B
     ld   [hl], $10                                ; $58B3: $36 $10
     call IncrementEntityState                     ; $58B5: $CD $12 $3B
 
@@ -4084,13 +4084,13 @@ func_036_58A1::
     ret                                           ; $58B8: $C9
 
 func_036_58B9::
-    call UpdateEntityPosWithSpeed_36              ; $58B9: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $58B9: $CD $62 $6A
     call func_036_6AEC                            ; $58BC: $CD $EC $6A
     ldh  a, [hFrameCounter]                       ; $58BF: $F0 $E7
     and  $01                                      ; $58C1: $E6 $01
     jr   z, .jr_58CD                              ; $58C3: $28 $08
 
-    call PointHLToEntitySpeedY                    ; $58C5: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $58C5: $CD $F3 $6B
     ld   a, [hl]                                  ; $58C8: $7E
     and  a                                        ; $58C9: $A7
     jr   z, .jr_58CD                              ; $58CA: $28 $01
@@ -4098,7 +4098,7 @@ func_036_58B9::
     dec  [hl]                                     ; $58CC: $35
 
 .jr_58CD
-    call PointHLToEntitySpeedZ                    ; $58CD: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $58CD: $CD $F8 $6B
     dec  [hl]                                     ; $58D0: $35
     call PointHLToEntityPosZ                      ; $58D1: $CD $2D $6C
     ld   a, [hl]                                  ; $58D4: $7E
@@ -4107,7 +4107,7 @@ func_036_58B9::
 
     xor  a                                        ; $58D9: $AF
     ld   [hl], a                                  ; $58DA: $77
-    call PointHLToEntitySpeedZ                    ; $58DB: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $58DB: $CD $F8 $6B
     ld   [hl], $10                                ; $58DE: $36 $10
     call IncrementEntityState                     ; $58E0: $CD $12 $3B
 
@@ -4250,7 +4250,7 @@ func_036_5989::
     ld   hl, wEntitiesTypeTable                   ; $59A3: $21 $A0 $C3
     add  hl, bc                                   ; $59A6: $09
     ld   a, [hl]                                  ; $59A7: $7E
-    call PointHLToEntitySpeedX                    ; $59A8: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $59A8: $CD $EE $6B
     ld   [hl], $FA                                ; $59AB: $36 $FA
     and  $01                                      ; $59AD: $E6 $01
     jr   nz, .jr_59B3                             ; $59AF: $20 $02
@@ -4327,7 +4327,7 @@ ENDC
     ret                                           ; $5A1D: $C9
 
 .jr_5A1E
-    call PointHLToEntitySpeedX                    ; $5A1E: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $5A1E: $CD $EE $6B
     ld   [hl], $FA                                ; $5A21: $36 $FA
     ld   a, e                                     ; $5A23: $7B
     and  a                                        ; $5A24: $A7
@@ -4382,7 +4382,7 @@ func_036_5A40::
     ret                                           ; $5A69: $C9
 
 jr_036_5A6A:
-    call UpdateEntityPosWithSpeed_36              ; $5A6A: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $5A6A: $CD $62 $6A
     call PointHLToEntitySpriteVariant             ; $5A6D: $CD $02 $6C
     ldh  a, [hFrameCounter]                       ; $5A70: $F0 $E7
     srl  a                                        ; $5A72: $CB $3F
@@ -4471,7 +4471,7 @@ label_036_5AE4:
     call ReturnIfNonInteractive_36                ; $5AEA: $CD $40 $6A
     call DecrementEntityIgnoreHitsCountdown       ; $5AED: $CD $56 $0C
     call DefaultEnemyDamageCollisionHandler_trampoline ; $5AF0: $CD $39 $3B
-    call UpdateEntityPosWithSpeed_36              ; $5AF3: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $5AF3: $CD $62 $6A
     call func_036_6C15                            ; $5AF6: $CD $15 $6C
     jp   label_036_5BE8                           ; $5AF9: $C3 $E8 $5B
 
@@ -4508,7 +4508,7 @@ jr_036_5B1C:
     call ReturnIfNonInteractive_36                ; $5B22: $CD $40 $6A
     call DecrementEntityIgnoreHitsCountdown       ; $5B25: $CD $56 $0C
     call DefaultEnemyDamageCollisionHandler_trampoline ; $5B28: $CD $39 $3B
-    call UpdateEntityPosWithSpeed_36              ; $5B2B: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $5B2B: $CD $62 $6A
     ld   hl, wEntitiesPrivateState1Table          ; $5B2E: $21 $B0 $C2
     add  hl, bc                                   ; $5B31: $09
     ldh  a, [hFrameCounter]                       ; $5B32: $F0 $E7
@@ -4576,14 +4576,14 @@ BouncingBoulderEntityHandler::
     rra                                           ; $5B91: $1F
     and  $03                                      ; $5B92: $E6 $03
     call SetEntitySpriteVariant                   ; $5B94: $CD $0C $3B
-    call UpdateEntityPosWithSpeed_36              ; $5B97: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $5B97: $CD $62 $6A
     ldh  a, [hActiveEntityState]                  ; $5B9A: $F0 $F0
     bit  3, a                                     ; $5B9C: $CB $5F
     jr   nz, label_036_5BE8                       ; $5B9E: $20 $48
 
     call func_036_6AEC                            ; $5BA0: $CD $EC $6A
     call label_3CD9                               ; $5BA3: $CD $D9 $3C
-    call PointHLToEntitySpeedZ                    ; $5BA6: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $5BA6: $CD $F8 $6B
     dec  [hl]                                     ; $5BA9: $35
     dec  [hl]                                     ; $5BAA: $35
     call PointHLToEntityPosZ                      ; $5BAB: $CD $2D $6C
@@ -4599,7 +4599,7 @@ BouncingBoulderEntityHandler::
     ld   hl, Data_036_5B52                        ; $5BBB: $21 $52 $5B
     add  hl, de                                   ; $5BBE: $19
     ld   a, [hl]                                  ; $5BBF: $7E
-    call PointHLToEntitySpeedX                    ; $5BC0: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $5BC0: $CD $EE $6B
     ld   [hl], a                                  ; $5BC3: $77
     call GetRandomByte                            ; $5BC4: $CD $0D $28
     and  $03                                      ; $5BC7: $E6 $03
@@ -4608,7 +4608,7 @@ BouncingBoulderEntityHandler::
     ld   hl, Data_036_5B56                        ; $5BCB: $21 $56 $5B
     add  hl, de                                   ; $5BCE: $19
     ld   a, [hl]                                  ; $5BCF: $7E
-    call PointHLToEntitySpeedY                    ; $5BD0: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $5BD0: $CD $F3 $6B
     ld   [hl], a                                  ; $5BD3: $77
     call GetRandomByte                            ; $5BD4: $CD $0D $28
     and  $03                                      ; $5BD7: $E6 $03
@@ -4617,7 +4617,7 @@ BouncingBoulderEntityHandler::
     ld   hl, Data_036_5B5A                        ; $5BDB: $21 $5A $5B
     add  hl, de                                   ; $5BDE: $19
     ld   a, [hl]                                  ; $5BDF: $7E
-    call PointHLToEntitySpeedZ                    ; $5BE0: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $5BE0: $CD $F8 $6B
     ld   [hl], a                                  ; $5BE3: $77
     ld   a, JINGLE_BOUNCE                         ; $5BE4: $3E $20
     ldh  [hJingle], a                             ; $5BE6: $E0 $F2
@@ -4791,9 +4791,9 @@ ENDC
     ld   a, $20                                   ; $5CCC: $3E $20
     call GetVectorTowardsLink_trampoline          ; $5CCE: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $5CD1: $F0 $D7
-    ldh  [hLinkSpeedY], a                         ; $5CD3: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $5CD3: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $5CD5: $F0 $D8
-    ldh  [hLinkSpeedX], a                         ; $5CD7: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $5CD7: $E0 $9A
 
 .jr_5CD9
     ld   a, $30                                   ; $5CD9: $3E $30
@@ -4834,9 +4834,9 @@ AvalaunchState3Handler::
     ret  nz                                       ; $5D12: $C0
 
     xor  a                                        ; $5D13: $AF
-    call PointHLToEntitySpeedX                    ; $5D14: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $5D14: $CD $EE $6B
     ld   [hl], a                                  ; $5D17: $77
-    call PointHLToEntitySpeedY                    ; $5D18: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $5D18: $CD $F3 $6B
     ld   [hl], a                                  ; $5D1B: $77
     ld   hl, wEntitiesPrivateState3Table          ; $5D1C: $21 $D0 $C2
     add  hl, bc                                   ; $5D1F: $09
@@ -4845,7 +4845,7 @@ AvalaunchState3Handler::
     jr   nz, .jr_5D39                             ; $5D24: $20 $13
 
     ld   [hl], $01                                ; $5D26: $36 $01
-    call PointHLToEntitySpeedZ                    ; $5D28: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $5D28: $CD $F8 $6B
     ld   [hl], $18                                ; $5D2B: $36 $18
     ld   hl, wEntitiesPrivateState2Table          ; $5D2D: $21 $C0 $C2
     add  hl, bc                                   ; $5D30: $09
@@ -4868,7 +4868,7 @@ AvalaunchState3Handler::
     jr   z, .jr_5D62                              ; $5D51: $28 $0F
 
     ld   [hl], $06                                ; $5D53: $36 $06
-    call PointHLToEntitySpeedX                    ; $5D55: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $5D55: $CD $EE $6B
     call GetRandomByte                            ; $5D58: $CD $0D $28
     and  $01                                      ; $5D5B: $E6 $01
     jr   nz, jr_036_5D65                          ; $5D5D: $20 $06
@@ -4877,7 +4877,7 @@ AvalaunchState3Handler::
     ret                                           ; $5D61: $C9
 
 .jr_5D62
-    call PointHLToEntitySpeedY                    ; $5D62: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $5D62: $CD $F3 $6B
 
 jr_036_5D65:
     ld   [hl], $40                                ; $5D65: $36 $40
@@ -4890,7 +4890,7 @@ AvalaunchState4Handler::
     call GetEntityTransitionCountdown             ; $5D6C: $CD $05 $0C
     jr   nz, .ret_5D97                            ; $5D6F: $20 $26
 
-    call UpdateEntityPosWithSpeed_36              ; $5D71: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $5D71: $CD $62 $6A
     call DefaultEntityPhysics_trampoline          ; $5D74: $CD $23 $3B
     call func_036_6C0D                            ; $5D77: $CD $0D $6C
     ld   a, $20                                   ; $5D7A: $3E $20
@@ -4903,7 +4903,7 @@ AvalaunchState4Handler::
     jr   nz, .ret_5D97                            ; $5D86: $20 $0F
 
     ld   [hl], $06                                ; $5D88: $36 $06
-    call PointHLToEntitySpeedY                    ; $5D8A: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $5D8A: $CD $F3 $6B
     ld   [hl], $C0                                ; $5D8D: $36 $C0
     ld   a, $30                                   ; $5D8F: $3E $30
     call func_036_6C83                            ; $5D91: $CD $83 $6C
@@ -4919,7 +4919,7 @@ AvalaunchState5Handler::
     call GetEntityTransitionCountdown             ; $5D9C: $CD $05 $0C
     jr   nz, .ret_5DC2                            ; $5D9F: $20 $21
 
-    call UpdateEntityPosWithSpeed_36              ; $5DA1: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $5DA1: $CD $62 $6A
     call DefaultEntityPhysics_trampoline          ; $5DA4: $CD $23 $3B
     call func_036_6C0D                            ; $5DA7: $CD $0D $6C
     ld   a, $20                                   ; $5DAA: $3E $20
@@ -4946,7 +4946,7 @@ AvalaunchState6Handler::
     call GetEntityTransitionCountdown             ; $5DC7: $CD $05 $0C
     ret  nz                                       ; $5DCA: $C0
 
-    call UpdateEntityPosWithSpeed_36              ; $5DCB: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $5DCB: $CD $62 $6A
     call DefaultEntityPhysics_trampoline          ; $5DCE: $CD $23 $3B
     call func_036_6C0D                            ; $5DD1: $CD $0D $6C
     ld   a, $20                                   ; $5DD4: $3E $20
@@ -4959,7 +4959,7 @@ AvalaunchState6Handler::
     ret  nz                                       ; $5DE0: $C0
 
     ld   [hl], $06                                ; $5DE1: $36 $06
-    call PointHLToEntitySpeedX                    ; $5DE3: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $5DE3: $CD $EE $6B
     ld   a, [hl]                                  ; $5DE6: $7E
     cpl                                           ; $5DE7: $2F
     inc  a                                        ; $5DE8: $3C
@@ -4976,7 +4976,7 @@ AvalaunchState7Handler::
     call GetEntityTransitionCountdown             ; $5DF7: $CD $05 $0C
     ret  nz                                       ; $5DFA: $C0
 
-    call UpdateEntityPosWithSpeed_36              ; $5DFB: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $5DFB: $CD $62 $6A
     call DefaultEntityPhysics_trampoline          ; $5DFE: $CD $23 $3B
     call func_036_6C0D                            ; $5E01: $CD $0D $6C
     ld   a, $20                                   ; $5E04: $3E $20
@@ -5010,16 +5010,16 @@ AvalaunchState8Handler::
 
     ld   [hl], $01                                ; $5E30: $36 $01
     xor  a                                        ; $5E32: $AF
-    call PointHLToEntitySpeedX                    ; $5E33: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $5E33: $CD $EE $6B
     ld   [hl], a                                  ; $5E36: $77
-    call PointHLToEntitySpeedY                    ; $5E37: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $5E37: $CD $F3 $6B
     ld   [hl], a                                  ; $5E3A: $77
-    call PointHLToEntitySpeedZ                    ; $5E3B: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $5E3B: $CD $F8 $6B
     ld   [hl], $18                                ; $5E3E: $36 $18
     call IncrementEntityState                     ; $5E40: $CD $12 $3B
     call PointHLToEntityPosX                      ; $5E43: $CD $23 $6C
     ld   a, [hl]                                  ; $5E46: $7E
-    call PointHLToEntitySpeedX                    ; $5E47: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $5E47: $CD $EE $6B
     cp   $50                                      ; $5E4A: $FE $50
     jr   z, .jr_5E53                              ; $5E4C: $28 $05
 
@@ -5029,16 +5029,16 @@ AvalaunchState8Handler::
     ret                                           ; $5E52: $C9
 
 .jr_5E53
-    call PointHLToEntitySpeedY                    ; $5E53: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $5E53: $CD $F3 $6B
 
 jr_036_5E56:
     ld   [hl], $F0                                ; $5E56: $36 $F0
     ret                                           ; $5E58: $C9
 
 AvalaunchState9Handler::
-    call UpdateEntityPosWithSpeed_36              ; $5E59: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $5E59: $CD $62 $6A
     call DefaultEntityPhysics_trampoline          ; $5E5C: $CD $23 $3B
-    call PointHLToEntitySpeedX                    ; $5E5F: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $5E5F: $CD $EE $6B
     ld   a, [hl]                                  ; $5E62: $7E
     and  a                                        ; $5E63: $A7
     jr   z, jr_036_5E81                           ; $5E64: $28 $1B
@@ -5061,12 +5061,12 @@ AvalaunchState9Handler::
 jr_036_5E79:
     ld   a, $50                                   ; $5E79: $3E $50
     ld   [hl], a                                  ; $5E7B: $77
-    call PointHLToEntitySpeedX                    ; $5E7C: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $5E7C: $CD $EE $6B
     xor  a                                        ; $5E7F: $AF
     ld   [hl], a                                  ; $5E80: $77
 
 jr_036_5E81:
-    call PointHLToEntitySpeedZ                    ; $5E81: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $5E81: $CD $F8 $6B
     dec  [hl]                                     ; $5E84: $35
     call func_036_6AEC                            ; $5E85: $CD $EC $6A
     ld   a, [hl]                                  ; $5E88: $7E
@@ -5269,7 +5269,7 @@ HopperEntityHandler::
     call func_036_6219                            ; $5FA2: $CD $19 $62
     call ReturnIfNonInteractive_36                ; $5FA5: $CD $40 $6A
     call label_3B70                               ; $5FA8: $CD $70 $3B
-    call UpdateEntityPosWithSpeed_36              ; $5FAB: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $5FAB: $CD $62 $6A
     call label_3CD9                               ; $5FAE: $CD $D9 $3C
     ld   hl, wEntitiesFlashCountdownTable         ; $5FB1: $21 $20 $C4
     add  hl, bc                                   ; $5FB4: $09
@@ -5303,7 +5303,7 @@ HopperEntityHandler::
 ._04 dw HopperState4Handler
 
 HopperState4Handler::
-    call PointHLToEntitySpeedZ                    ; $5FDB: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $5FDB: $CD $F8 $6B
     dec  [hl]                                     ; $5FDE: $35
     ld   a, [hl]                                  ; $5FDF: $7E
     ldh  [hMultiPurpose0], a                      ; $5FE0: $E0 $D7
@@ -5324,7 +5324,7 @@ HopperState4Handler::
     ld   e, $FC                                   ; $5FF9: $1E $FC
 
 .jr_5FFB
-    call PointHLToEntitySpeedX                    ; $5FFB: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $5FFB: $CD $EE $6B
     ld   [hl], e                                  ; $5FFE: $73
     call PointHLToEntityDirection                 ; $5FFF: $CD $FD $6B
     ld   [hl], $00                                ; $6002: $36 $00
@@ -5342,9 +5342,9 @@ HopperState4Handler::
     ld   e, $FD                                   ; $6012: $1E $FD
 
 .jr_6014
-    call PointHLToEntitySpeedY                    ; $6014: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $6014: $CD $F3 $6B
     ld   [hl], e                                  ; $6017: $73
-    call PointHLToEntitySpeedZ                    ; $6018: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $6018: $CD $F8 $6B
     ld   [hl], $14                                ; $601B: $36 $14
     ld   a, JINGLE_FEATHER_JUMP                   ; $601D: $3E $0D
     ldh  [hJingle], a                             ; $601F: $E0 $F2
@@ -5382,9 +5382,9 @@ ret_036_604E:
 
 HopperState3Handler::
     xor  a                                        ; $604F: $AF
-    call PointHLToEntitySpeedX                    ; $6050: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $6050: $CD $EE $6B
     ld   [hl], a                                  ; $6053: $77
-    call PointHLToEntitySpeedY                    ; $6054: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $6054: $CD $F3 $6B
     ld   [hl], a                                  ; $6057: $77
     call PointHLToEntitySpriteVariant             ; $6058: $CD $02 $6C
     ld   [hl], a                                  ; $605B: $77
@@ -5430,7 +5430,7 @@ func_036_6084::
     cp   $10                                      ; $6093: $FE $10
     jr   nc, ret_036_60B2                         ; $6095: $30 $1B
 
-    call PointHLToEntitySpeedY                    ; $6097: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $6097: $CD $F3 $6B
     ld   [hl], $10                                ; $609A: $36 $10
     bit  1, e                                     ; $609C: $CB $4B
     jr   z, .jr_60A2                              ; $609E: $28 $02
@@ -5438,7 +5438,7 @@ func_036_6084::
     ld   [hl], $F0                                ; $60A0: $36 $F0
 
 .jr_60A2
-    call PointHLToEntitySpeedX                    ; $60A2: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $60A2: $CD $EE $6B
     ld   [hl], $10                                ; $60A5: $36 $10
     bit  0, e                                     ; $60A7: $CB $43
     jr   z, .jr_60AD                              ; $60A9: $28 $02
@@ -5566,7 +5566,7 @@ HopperState1Handler::
     add  hl, bc                                   ; $6150: $09
     ld   a, [hl]                                  ; $6151: $7E
     ld   e, a                                     ; $6152: $5F
-    call PointHLToEntitySpeedX                    ; $6153: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $6153: $CD $EE $6B
     cp   [hl]                                     ; $6156: $BE
     jr   z, .jr_6160                              ; $6157: $28 $07
 
@@ -5582,7 +5582,7 @@ HopperState1Handler::
     add  hl, bc                                   ; $6163: $09
     ld   a, [hl]                                  ; $6164: $7E
     ld   d, a                                     ; $6165: $57
-    call PointHLToEntitySpeedY                    ; $6166: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $6166: $CD $F3 $6B
     cp   [hl]                                     ; $6169: $BE
     jr   z, .jr_6173                              ; $616A: $28 $07
 
@@ -5598,7 +5598,7 @@ HopperState1Handler::
     cp   d                                        ; $6174: $BA
     jr   nz, jr_036_6181                          ; $6175: $20 $0A
 
-    call PointHLToEntitySpeedX                    ; $6177: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $6177: $CD $EE $6B
     ld   a, [hl]                                  ; $617A: $7E
     cp   e                                        ; $617B: $BB
     jr   nz, jr_036_6181                          ; $617C: $20 $03
@@ -5615,7 +5615,7 @@ HopperState2Handler::
     and  $01                                      ; $618A: $E6 $01
     jr   z, jr_036_6205                           ; $618C: $28 $77
 
-    call PointHLToEntitySpeedX                    ; $618E: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $618E: $CD $EE $6B
     ld   a, [hl]                                  ; $6191: $7E
     and  a                                        ; $6192: $A7
     jr   z, .jr_619C                              ; $6193: $28 $07
@@ -5628,7 +5628,7 @@ HopperState2Handler::
     dec  [hl]                                     ; $619B: $35
 
 .jr_619C
-    call PointHLToEntitySpeedY                    ; $619C: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $619C: $CD $F3 $6B
     ld   a, [hl]                                  ; $619F: $7E
     and  a                                        ; $61A0: $A7
     jr   z, .jr_61AA                              ; $61A1: $28 $07
@@ -5645,7 +5645,7 @@ HopperState2Handler::
     and  a                                        ; $61AB: $A7
     jr   nz, jr_036_6205                          ; $61AC: $20 $57
 
-    call PointHLToEntitySpeedX                    ; $61AE: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $61AE: $CD $EE $6B
     ld   a, [hl]                                  ; $61B1: $7E
     and  a                                        ; $61B2: $A7
     jr   nz, jr_036_6205                          ; $61B3: $20 $50
@@ -5684,7 +5684,7 @@ HopperState2Handler::
     ld   hl, wEntitiesPosZTable                   ; $61EE: $21 $10 $C3
     add  hl, de                                   ; $61F1: $19
     ld   [hl], a                                  ; $61F2: $77
-    ld   hl, wEntitiesSpeedZTable                 ; $61F3: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $61F3: $21 $20 $C3
     add  hl, de                                   ; $61F6: $19
     ld   [hl], $08                                ; $61F7: $36 $08
     ld   hl, wEntitiesTransitionCountdownTable    ; $61F9: $21 $E0 $C2
@@ -6106,16 +6106,16 @@ ColorGhoulState2Handler::
     ld   d, $00                                   ; $642F: $16 $00
     add  hl, de                                   ; $6431: $19
     ld   a, [hl]                                  ; $6432: $7E
-    call PointHLToEntitySpeedX                    ; $6433: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $6433: $CD $EE $6B
     ld   [hl], a                                  ; $6436: $77
-    call PointHLToEntitySpeedY                    ; $6437: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $6437: $CD $F3 $6B
     ld   [hl], a                                  ; $643A: $77
     call PointHLToEntityPosX                      ; $643B: $CD $23 $6C
     ld   e, [hl]                                  ; $643E: $5E
     call func_036_6C62                            ; $643F: $CD $62 $6C
     sub  e                                        ; $6442: $93
     ldh  [hMultiPurpose0], a                      ; $6443: $E0 $D7
-    call PointHLToEntitySpeedX                    ; $6445: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $6445: $CD $EE $6B
     and  a                                        ; $6448: $A7
     jr   nz, .jr_644C                             ; $6449: $20 $01
 
@@ -6136,7 +6136,7 @@ ColorGhoulState2Handler::
     call func_036_6C70                            ; $6458: $CD $70 $6C
     sub  e                                        ; $645B: $93
     ldh  [hMultiPurpose1], a                      ; $645C: $E0 $D8
-    call PointHLToEntitySpeedY                    ; $645E: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $645E: $CD $F3 $6B
     and  a                                        ; $6461: $A7
     jr   nz, .jr_6465                             ; $6462: $20 $01
 
@@ -6159,7 +6159,7 @@ ColorGhoulState2Handler::
     and  $FE                                      ; $6474: $E6 $FE
     push af                                       ; $6476: $F5
     push de                                       ; $6477: $D5
-    call UpdateEntityPosWithSpeed_36              ; $6478: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $6478: $CD $62 $6A
     call DefaultEntityPhysics_trampoline          ; $647B: $CD $23 $3B
     pop  de                                       ; $647E: $D1
     pop  af                                       ; $647F: $F1
@@ -6595,14 +6595,14 @@ ColorShellState1Handler::
     ld   hl, Data_036_6735                        ; $6744: $21 $35 $67
     add  hl, de                                   ; $6747: $19
     ld   a, [hl]                                  ; $6748: $7E
-    call PointHLToEntitySpeedX                    ; $6749: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $6749: $CD $EE $6B
     ld   [hl], a                                  ; $674C: $77
     ld   hl, Data_036_6739                        ; $674D: $21 $39 $67
     add  hl, de                                   ; $6750: $19
     ld   a, [hl]                                  ; $6751: $7E
-    call PointHLToEntitySpeedY                    ; $6752: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $6752: $CD $F3 $6B
     ld   [hl], a                                  ; $6755: $77
-    call UpdateEntityPosWithSpeed_36              ; $6756: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $6756: $CD $62 $6A
     call DefaultEntityPhysics_trampoline          ; $6759: $CD $23 $3B
     call func_036_66C6                            ; $675C: $CD $C6 $66
     call GetEntityTransitionCountdown             ; $675F: $CD $05 $0C
@@ -6663,13 +6663,13 @@ ColorShellState3Handler::
     ld   a, $01                                   ; $67BA: $3E $01
     call SetEntityState                           ; $67BC: $CD $07 $6C
     xor  a                                        ; $67BF: $AF
-    call PointHLToEntitySpeedX                    ; $67C0: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $67C0: $CD $EE $6B
     ld   [hl], a                                  ; $67C3: $77
-    call PointHLToEntitySpeedY                    ; $67C4: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $67C4: $CD $F3 $6B
     ld   [hl], a                                  ; $67C7: $77
 
 .jr_67C8
-    call UpdateEntityPosWithSpeed_36              ; $67C8: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $67C8: $CD $62 $6A
     call DefaultEntityPhysics_trampoline          ; $67CB: $CD $23 $3B
     call func_036_66C6                            ; $67CE: $CD $C6 $66
 
@@ -6801,12 +6801,12 @@ ColorShellState6Handler::
 
 .jr_6870
     ld   [hl], e                                  ; $6870: $73
-    call PointHLToEntitySpeedZ                    ; $6871: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $6871: $CD $F8 $6B
     ld   [hl], $10                                ; $6874: $36 $10
     jr   jr_036_688A                              ; $6876: $18 $12
 
 ColorShellState7Handler::
-    call PointHLToEntitySpeedZ                    ; $6878: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $6878: $CD $F8 $6B
     dec  [hl]                                     ; $687B: $35
     call func_036_6AEC                            ; $687C: $CD $EC $6A
     ld   a, [hl]                                  ; $687F: $7E
@@ -6815,7 +6815,7 @@ ColorShellState7Handler::
 
     xor  a                                        ; $6884: $AF
     ld   [hl], a                                  ; $6885: $77
-    call PointHLToEntitySpeedZ                    ; $6886: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $6886: $CD $F8 $6B
     ld   [hl], a                                  ; $6889: $77
 
 jr_036_688A:
@@ -6871,11 +6871,11 @@ ColorShellState8Handler::
 
 .jr_68D3
     xor  a                                        ; $68D3: $AF
-    call PointHLToEntitySpeedY                    ; $68D4: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $68D4: $CD $F3 $6B
     ld   [hl], a                                  ; $68D7: $77
-    call PointHLToEntitySpeedX                    ; $68D8: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $68D8: $CD $EE $6B
     ld   [hl], e                                  ; $68DB: $73
-    call PointHLToEntitySpeedZ                    ; $68DC: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $68DC: $CD $F8 $6B
     ld   [hl], $10                                ; $68DF: $36 $10
     ld   a, $18                                   ; $68E1: $3E $18
     call func_036_6C83                            ; $68E3: $CD $83 $6C
@@ -6889,15 +6889,15 @@ ColorShellState9Handler::
     call GetEntityTransitionCountdown             ; $68EC: $CD $05 $0C
     jr   nz, ret_036_691E                         ; $68EF: $20 $2D
 
-    call PointHLToEntitySpeedX                    ; $68F1: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $68F1: $CD $EE $6B
     ld   a, [hl]                                  ; $68F4: $7E
     and  a                                        ; $68F5: $A7
     jr   z, .jr_68FB                              ; $68F6: $28 $03
 
-    call UpdateEntityPosWithSpeed_36              ; $68F8: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $68F8: $CD $62 $6A
 
 .jr_68FB
-    call PointHLToEntitySpeedZ                    ; $68FB: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $68FB: $CD $F8 $6B
     dec  [hl]                                     ; $68FE: $35
     call func_036_6AEC                            ; $68FF: $CD $EC $6A
     call DefaultEntityPhysics_trampoline          ; $6902: $CD $23 $3B
@@ -6908,9 +6908,9 @@ ColorShellState9Handler::
 
     xor  a                                        ; $690D: $AF
     ld   [hl], a                                  ; $690E: $77
-    call PointHLToEntitySpeedZ                    ; $690F: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $690F: $CD $F8 $6B
     ld   [hl], $08                                ; $6912: $36 $08
-    call PointHLToEntitySpeedX                    ; $6914: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $6914: $CD $EE $6B
     sra  [hl]                                     ; $6917: $CB $2E
     ld   a, $0A                                   ; $6919: $3E $0A
     call SetEntityState                           ; $691B: $CD $07 $6C
@@ -6919,8 +6919,8 @@ ret_036_691E:
     ret                                           ; $691E: $C9
 
 ColorShellStateAHandler::
-    call UpdateEntityPosWithSpeed_36              ; $691F: $CD $62 $6A
-    call PointHLToEntitySpeedZ                    ; $6922: $CD $F8 $6B
+    call UpdateEntityPosWithVelocity_36           ; $691F: $CD $62 $6A
+    call PointHLToEntityVelocityZ                 ; $6922: $CD $F8 $6B
     dec  [hl]                                     ; $6925: $35
     call func_036_6AEC                            ; $6926: $CD $EC $6A
     push bc                                       ; $6929: $C5
@@ -6944,9 +6944,9 @@ ColorShellStateBHandler::
 
     xor  a                                        ; $6944: $AF
     ld   [hl], a                                  ; $6945: $77
-    call PointHLToEntitySpeedZ                    ; $6946: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $6946: $CD $F8 $6B
     ld   [hl], a                                  ; $6949: $77
-    call PointHLToEntitySpeedX                    ; $694A: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $694A: $CD $EE $6B
     ld   [hl], a                                  ; $694D: $77
     ld   a, $01                                   ; $694E: $3E $01
     call SetEntityState                           ; $6950: $CD $07 $6C
@@ -7163,37 +7163,37 @@ ReturnIfNonInteractive_36::
 .return
     ret                                           ; $6A61: $C9
 
-UpdateEntityPosWithSpeed_36::
-    call AddEntitySpeedToPos_36                   ; $6A62: $CD $6F $6A
+UpdateEntityPosWithVelocity_36::
+    call AddEntityVelocityToPos_36                ; $6A62: $CD $6F $6A
     push bc                                       ; $6A65: $C5
     ld   a, c                                     ; $6A66: $79
     add  $10                                      ; $6A67: $C6 $10
     ld   c, a                                     ; $6A69: $4F
-    call AddEntitySpeedToPos_36                   ; $6A6A: $CD $6F $6A
+    call AddEntityVelocityToPos_36                ; $6A6A: $CD $6F $6A
     pop  bc                                       ; $6A6D: $C1
     ret                                           ; $6A6E: $C9
 
-; Update the entity's position using its speed.
+; Update the entity's position using its Velocity.
 ;
-; The values in the entity speed tables are the number of pixels to
+; The values in the entity Velocity tables are the number of pixels to
 ; move within 16 frames. For example, if it's 8, the entity will move
 ; 1 pixel every other frame (8/16). If it's -16, the entity will move
 ; -1 pixel every frame (-16/16).
 ;
 ; Inputs:
 ;   bc  entity index
-AddEntitySpeedToPos_36::
-    call PointHLToEntitySpeedX                    ; $6A6F: $CD $EE $6B
+AddEntityVelocityToPos_36::
+    call PointHLToEntityVelocityX                 ; $6A6F: $CD $EE $6B
     ld   a, [hl]                                  ; $6A72: $7E
     and  a                                        ; $6A73: $A7
     ; No need to update the position if it's not moving
     ret  z                                        ; $6A74: $C8
 
     push af                                       ; $6A75: $F5
-    ; Multiply speed by 16 so the carry is set if greater than $0F
+    ; Multiply Velocity by 16 so the carry is set if greater than $0F
     swap a                                        ; $6A76: $CB $37
     and  $F0                                      ; $6A78: $E6 $F0
-    ld   hl, wEntitiesSpeedXAccTable              ; $6A7A: $21 $60 $C2
+    ld   hl, wEntitiesVelocityXAccTable           ; $6A7A: $21 $60 $C2
     add  hl, bc                                   ; $6A7D: $09
     add  [hl]                                     ; $6A7E: $86
     ld   [hl], a                                  ; $6A7F: $77
@@ -7275,7 +7275,7 @@ jr_036_6AEA:
     ret                                           ; $6AEB: $C9
 
 func_036_6AEC::
-    call PointHLToEntitySpeedZ                    ; $6AEC: $CD $F8 $6B
+    call PointHLToEntityVelocityZ                 ; $6AEC: $CD $F8 $6B
     ld   a, [hl]                                  ; $6AEF: $7E
     and  a                                        ; $6AF0: $A7
     ret  z                                        ; $6AF1: $C8
@@ -7283,7 +7283,7 @@ func_036_6AEC::
     push af                                       ; $6AF2: $F5
     swap a                                        ; $6AF3: $CB $37
     and  $F0                                      ; $6AF5: $E6 $F0
-    ld   hl, wEntitiesSpeedZAccTable              ; $6AF7: $21 $30 $C3
+    ld   hl, wEntitiesVelocityZAccTable           ; $6AF7: $21 $30 $C3
     add  hl, bc                                   ; $6AFA: $09
     add  [hl]                                     ; $6AFB: $86
     ld   [hl], a                                  ; $6AFC: $77
@@ -7305,7 +7305,7 @@ func_036_6AEC::
     ld   [hl], a                                  ; $6B13: $77
     ret                                           ; $6B14: $C9
 
-; If the entity is ignoring hits, apply its recoil Speed.
+; If the entity is ignoring hits, apply its recoil Velocity.
 ApplyRecoilIfNeeded_36::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $6B15: $21 $10 $C4
     add  hl, bc                                   ; $6B18: $09
@@ -7319,44 +7319,44 @@ ApplyRecoilIfNeeded_36::
     call label_3E8E                               ; $6B1F: $CD $8E $3E
 
     ;
-    ; Temporarily replace the entity speed by the recoil speed
+    ; Temporarily replace the entity Velocity by the recoil Velocity
     ;
 
-    call PointHLToEntitySpeedX                    ; $6B22: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $6B22: $CD $EE $6B
     ld   a, [hl]                                  ; $6B25: $7E
     push af                                       ; $6B26: $F5
 
-    call PointHLToEntitySpeedY                    ; $6B27: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $6B27: $CD $F3 $6B
     ld   a, [hl]                                  ; $6B2A: $7E
     push af                                       ; $6B2B: $F5
 
-    ld   hl, wEntitiesRecoilSpeedX                ; $6B2C: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilVelocityX             ; $6B2C: $21 $F0 $C3
     add  hl, bc                                   ; $6B2F: $09
     ld   a, [hl]                                  ; $6B30: $7E
-    call PointHLToEntitySpeedX                    ; $6B31: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $6B31: $CD $EE $6B
     ld   [hl], a                                  ; $6B34: $77
 
-    ld   hl, wEntitiesRecoilSpeedY                ; $6B35: $21 $00 $C4
+    ld   hl, wEntitiesRecoilVelocityY             ; $6B35: $21 $00 $C4
     add  hl, bc                                   ; $6B38: $09
     ld   a, [hl]                                  ; $6B39: $7E
-    call PointHLToEntitySpeedY                    ; $6B3A: $CD $F3 $6B
+    call PointHLToEntityVelocityY                 ; $6B3A: $CD $F3 $6B
     ld   [hl], a                                  ; $6B3D: $77
 
-    call UpdateEntityPosWithSpeed_36              ; $6B3E: $CD $62 $6A
+    call UpdateEntityPosWithVelocity_36           ; $6B3E: $CD $62 $6A
 
     ld   hl, wEntitiesOptions1Table               ; $6B41: $21 $30 $C4
     add  hl, bc                                   ; $6B44: $09
     ld   a, [hl]                                  ; $6B45: $7E
     and  $20                                      ; $6B46: $E6 $20
-    jr   nz, .restoreOriginalSpeed                ; $6B48: $20 $03
+    jr   nz, .restoreOriginalVelocity             ; $6B48: $20 $03
 
     call DefaultEntityPhysics_trampoline          ; $6B4A: $CD $23 $3B
 
-.restoreOriginalSpeed
-    call PointHLToEntitySpeedY                    ; $6B4D: $CD $F3 $6B
+.restoreOriginalVelocity
+    call PointHLToEntityVelocityY                 ; $6B4D: $CD $F3 $6B
     pop  af                                       ; $6B50: $F1
     ld   [hl], a                                  ; $6B51: $77
-    call PointHLToEntitySpeedX                    ; $6B52: $CD $EE $6B
+    call PointHLToEntityVelocityX                 ; $6B52: $CD $EE $6B
     pop  af                                       ; $6B55: $F1
     ld   [hl], a                                  ; $6B56: $77
     pop  af                                       ; $6B57: $F1
@@ -7483,18 +7483,18 @@ func_036_6BCF::
     ld   a, [hl]                                  ; $6BEC: $7E
     ret                                           ; $6BED: $C9
 
-PointHLToEntitySpeedX::
-    ld   hl, wEntitiesSpeedXTable                 ; $6BEE: $21 $40 $C2
+PointHLToEntityVelocityX::
+    ld   hl, wEntitiesVelocityXTable              ; $6BEE: $21 $40 $C2
     add  hl, bc                                   ; $6BF1: $09
     ret                                           ; $6BF2: $C9
 
-PointHLToEntitySpeedY::
-    ld   hl, wEntitiesSpeedYTable                 ; $6BF3: $21 $50 $C2
+PointHLToEntityVelocityY::
+    ld   hl, wEntitiesVelocityYTable              ; $6BF3: $21 $50 $C2
     add  hl, bc                                   ; $6BF6: $09
     ret                                           ; $6BF7: $C9
 
-PointHLToEntitySpeedZ::
-    ld   hl, wEntitiesSpeedZTable                 ; $6BF8: $21 $20 $C3
+PointHLToEntityVelocityZ::
+    ld   hl, wEntitiesVelocityZTable              ; $6BF8: $21 $20 $C3
     add  hl, bc                                   ; $6BFB: $09
     ret                                           ; $6BFC: $C9
 
@@ -7961,10 +7961,10 @@ jr_036_6E3F:
     ret                                           ; $6ED4: $C9
 
 PiranhaPlantEntityHandler::
-    ld   hl, wEntitiesRecoilSpeedX                ; $6ED5: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilVelocityX             ; $6ED5: $21 $F0 $C3
     add  hl, bc                                   ; $6ED8: $09
     ld   [hl], b                                  ; $6ED9: $70
-    ld   hl, wEntitiesRecoilSpeedY                ; $6EDA: $21 $00 $C4
+    ld   hl, wEntitiesRecoilVelocityY             ; $6EDA: $21 $00 $C4
     add  hl, bc                                   ; $6EDD: $09
     ld   [hl], b                                  ; $6EDE: $70
     call func_036_7022                            ; $6EDF: $CD $22 $70

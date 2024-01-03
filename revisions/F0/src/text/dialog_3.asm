@@ -1149,8 +1149,10 @@ Dialog29D::
     db "type de photo   "
     db "t'intéresse?@"
 
+; @bug The Tab character is likely an oversight, and was inserted by mistake.
+; In-game it displays as "A", but it should be a space instead.
 Dialog29E::
-    db "7 photos à    <09> "
+    db "7 photos à    <tab> "
     db "prendre! Quel   "
     db "type de photo   "
     db "t'intéresse?@"

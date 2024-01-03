@@ -5,7 +5,7 @@
 PUSHC
 NEWCHARMAP DialogCharmap
 
-charmap "<09>", $09
+charmap "<tab>", $09
 
 charmap " ", $20
 charmap "!", $21

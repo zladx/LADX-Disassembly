@@ -71,7 +71,7 @@ MaskedMimicGoriyaEntityHandler::
     ld   hl, Data_019_47B6                        ; $47F9: $21 $B6 $47
     add  hl, de                                   ; $47FC: $19
     ld   a, [hl]                                  ; $47FD: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $47FE: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $47FE: $21 $40 $C2
     add  hl, bc                                   ; $4801: $09
     ld   [hl], a                                  ; $4802: $77
     ldh  a, [hPressedButtonsMask]                 ; $4803: $F0 $CB
@@ -83,10 +83,10 @@ MaskedMimicGoriyaEntityHandler::
     ld   hl, Data_019_47B9                        ; $480B: $21 $B9 $47
     add  hl, de                                   ; $480E: $19
     ld   a, [hl]                                  ; $480F: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $4810: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4810: $21 $50 $C2
     add  hl, bc                                   ; $4813: $09
     ld   [hl], a                                  ; $4814: $77
-    call UpdateEntityPosWithSpeed_19              ; $4815: $CD $B8 $7D
+    call UpdateEntityPosWithVelocity_19           ; $4815: $CD $B8 $7D
     call DefaultEntityPhysics_trampoline          ; $4818: $CD $23 $3B
     ldh  a, [hLinkDirection]                      ; $481B: $F0 $9E
     xor  $01                                      ; $481D: $EE $01

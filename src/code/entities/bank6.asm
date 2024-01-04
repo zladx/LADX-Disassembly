@@ -204,7 +204,7 @@ ReturnIfNonInteractive_06::
 .return
     ret                                           ; $64F6: $C9
 
-; If the entity is ignoring hits, apply its recoil velocity.
+; If the entity is ignoring hits, apply its recoil Velocity.
 ApplyRecoilIfNeeded_06::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $64F7: $21 $10 $C4
     add  hl, bc                                   ; $64FA: $09
@@ -218,15 +218,15 @@ ApplyRecoilIfNeeded_06::
     call label_3E8E                               ; $6501: $CD $8E $3E
 
     ;
-    ; Temporarily replace the entity speed by the recoil speed
+    ; Temporarily replace the entity Velocity by the recoil Velocity
     ;
 
-    ld   hl, wEntitiesSpeedXTable                 ; $6504: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6504: $21 $40 $C2
     add  hl, bc                                   ; $6507: $09
     ld   a, [hl]                                  ; $6508: $7E
     push af                                       ; $6509: $F5
 
-    ld   hl, wEntitiesSpeedYTable                 ; $650A: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $650A: $21 $50 $C2
     add  hl, bc                                   ; $650D: $09
     ld   a, [hl]                                  ; $650E: $7E
     push af                                       ; $650F: $F5
@@ -234,33 +234,33 @@ ApplyRecoilIfNeeded_06::
     ld   hl, wEntitiesRecoilVelocityX             ; $6510: $21 $F0 $C3
     add  hl, bc                                   ; $6513: $09
     ld   a, [hl]                                  ; $6514: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $6515: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6515: $21 $40 $C2
     add  hl, bc                                   ; $6518: $09
     ld   [hl], a                                  ; $6519: $77
 
     ld   hl, wEntitiesRecoilVelocityY             ; $651A: $21 $00 $C4
     add  hl, bc                                   ; $651D: $09
     ld   a, [hl]                                  ; $651E: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $651F: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $651F: $21 $50 $C2
     add  hl, bc                                   ; $6522: $09
     ld   [hl], a                                  ; $6523: $77
 
-    call UpdateEntityPosWithSpeed_06              ; $6524: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $6524: $CD $41 $65
 
     ld   hl, wEntitiesOptions1Table               ; $6527: $21 $30 $C4
     add  hl, bc                                   ; $652A: $09
     ld   a, [hl]                                  ; $652B: $7E
     and  $20                                      ; $652C: $E6 $20
-    jr   nz, .restoreOriginalSpeed                ; $652E: $20 $03
+    jr   nz, .restoreOriginalVelocity             ; $652E: $20 $03
 
     call DefaultEntityPhysics_trampoline          ; $6530: $CD $23 $3B
 
-.restoreOriginalSpeed
-    ld   hl, wEntitiesSpeedYTable                 ; $6533: $21 $50 $C2
+.restoreOriginalVelocity
+    ld   hl, wEntitiesVelocityYTable              ; $6533: $21 $50 $C2
     add  hl, bc                                   ; $6536: $09
     pop  af                                       ; $6537: $F1
     ld   [hl], a                                  ; $6538: $77
-    ld   hl, wEntitiesSpeedXTable                 ; $6539: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6539: $21 $40 $C2
     add  hl, bc                                   ; $653C: $09
     pop  af                                       ; $653D: $F1
     ld   [hl], a                                  ; $653E: $77
@@ -269,27 +269,27 @@ ApplyRecoilIfNeeded_06::
 .return
     ret                                           ; $6540: $C9
 
-UpdateEntityPosWithSpeed_06::
-    call AddEntitySpeedToPos_06                   ; $6541: $CD $4E $65
+UpdateEntityPosWithVelocity_06::
+    call AddEntityVelocityToPos_06                ; $6541: $CD $4E $65
     push bc                                       ; $6544: $C5
     ld   a, c                                     ; $6545: $79
     add  $10                                      ; $6546: $C6 $10
     ld   c, a                                     ; $6548: $4F
-    call AddEntitySpeedToPos_06                   ; $6549: $CD $4E $65
+    call AddEntityVelocityToPos_06                ; $6549: $CD $4E $65
     pop  bc                                       ; $654C: $C1
     ret                                           ; $654D: $C9
 
-; Update the entity's position using its speed.
+; Update the entity's position using its Velocity.
 ;
-; The values in the entity speed tables are the number of pixels to
+; The values in the entity Velocity tables are the number of pixels to
 ; move within 16 frames. For example, if it's 8, the entity will move
 ; 1 pixel every other frame (8/16). If it's -16, the entity will move
 ; -1 pixel every frame (-16/16).
 ;
 ; Inputs:
 ;   bc  entity index
-AddEntitySpeedToPos_06::
-    ld   hl, wEntitiesSpeedXTable                 ; $654E: $21 $40 $C2
+AddEntityVelocityToPos_06::
+    ld   hl, wEntitiesVelocityXTable              ; $654E: $21 $40 $C2
     add  hl, bc                                   ; $6551: $09
     ld   a, [hl]                                  ; $6552: $7E
     and  a                                        ; $6553: $A7
@@ -299,7 +299,7 @@ AddEntitySpeedToPos_06::
     push af                                       ; $6556: $F5
     swap a                                        ; $6557: $CB $37
     and  $F0                                      ; $6559: $E6 $F0
-    ld   hl, wEntitiesSpeedXAccTable              ; $655B: $21 $60 $C2
+    ld   hl, wEntitiesVelocityXAccTable           ; $655B: $21 $60 $C2
     add  hl, bc                                   ; $655E: $09
     add  [hl]                                     ; $655F: $86
     ld   [hl], a                                  ; $6560: $77
@@ -329,23 +329,23 @@ AddEntitySpeedToPos_06::
 .return
     ret                                           ; $6579: $C9
 
-AddEntityZSpeedToPos_06::
-    ld   hl, wEntitiesSpeedZTable                 ; $657A: $21 $20 $C3
+AddEntityZVelocityToPos_06::
+    ld   hl, wEntitiesVelocityZTable              ; $657A: $21 $20 $C3
     add  hl, bc                                   ; $657D: $09
     ld   a, [hl]                                  ; $657E: $7E
     and  a                                        ; $657F: $A7
-    jr   z, AddEntitySpeedToPos_06.return         ; $6580: $28 $F7
+    jr   z, AddEntityVelocityToPos_06.return      ; $6580: $28 $F7
 
     push af                                       ; $6582: $F5
     swap a                                        ; $6583: $CB $37
     and  $F0                                      ; $6585: $E6 $F0
-    ld   hl, wEntitiesSpeedZAccTable              ; $6587: $21 $30 $C3
+    ld   hl, wEntitiesVelocityZAccTable           ; $6587: $21 $30 $C3
     add  hl, bc                                   ; $658A: $09
     add  [hl]                                     ; $658B: $86
     ld   [hl], a                                  ; $658C: $77
     rl   d                                        ; $658D: $CB $12
     ld   hl, wEntitiesPosZTable                   ; $658F: $21 $10 $C3
-    jr   AddEntitySpeedToPos_06.updatePosition    ; $6592: $18 $D2
+    jr   AddEntityVelocityToPos_06.updatePosition ; $6592: $18 $D2
 
 func_006_6594::
     ld   e, $00                                   ; $6594: $1E $00
@@ -482,13 +482,13 @@ label_006_7035:
     and  a                                        ; $7054: $A7
     jr   z, .jr_705F                              ; $7055: $28 $08
 
-    ld   hl, wEntitiesSpeedYTable                 ; $7057: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $7057: $21 $50 $C2
     add  hl, bc                                   ; $705A: $09
     ld   [hl], $F0                                ; $705B: $36 $F0
     jr   jr_006_706B                              ; $705D: $18 $0C
 
 .jr_705F
-    ld   hl, wEntitiesSpeedZTable                 ; $705F: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $705F: $21 $20 $C3
     add  hl, de                                   ; $7062: $19
     ld   [hl], $10                                ; $7063: $36 $10
     ld   hl, wEntitiesPosZTable                   ; $7065: $21 $10 $C3

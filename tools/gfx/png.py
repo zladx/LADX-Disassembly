@@ -2139,7 +2139,7 @@ class Reader:
         sample.  This method is similar to :meth:`asRGB8` and
         :meth:`asRGBA`:  The result pixels have an alpha channel, *and*
         values are rescaled to the range 0 to 255.  The alpha channel is
-        synthesized if necessary (with a small speed penalty).
+        synthesized if necessary (with a small Velocity penalty).
         """
 
         return self._as_rescale(self.asRGBA, 8)
@@ -2147,7 +2147,7 @@ class Reader:
     def asRGB(self):
         """Return image as RGB pixels.  RGB colour images are passed
         through unchanged; greyscales are expanded into RGB
-        triplets (there is a small speed overhead for doing this).
+        triplets (there is a small Velocity overhead for doing this).
 
         An alpha channel in the source image will raise an
         exception.

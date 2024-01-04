@@ -160,7 +160,7 @@ DropHeartContainer_04::
     ld   hl, wEntitiesPosYTable                   ; $5777: $21 $10 $C2
     add  hl, de                                   ; $577A: $19
     ld   [hl], a                                  ; $577B: $77
-    ld   hl, wEntitiesSpeedZTable                 ; $577C: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $577C: $21 $20 $C3
     add  hl, de                                   ; $577F: $19
     ld   [hl], $10                                ; $5780: $36 $10
     ldh  a, [hMultiPurpose3]                      ; $5782: $F0 $DA

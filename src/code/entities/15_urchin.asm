@@ -89,7 +89,7 @@ UrchinEntityHandler::
     ld   hl, Data_015_73A3                        ; $73FF: $21 $A3 $73
     add  hl, de                                   ; $7402: $19
     ld   a, [hl]                                  ; $7403: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $7404: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7404: $21 $40 $C2
     add  hl, bc                                   ; $7407: $09
 
 .jr_7408
@@ -97,12 +97,12 @@ UrchinEntityHandler::
     ld   hl, Data_015_73A7                        ; $7409: $21 $A7 $73
     add  hl, de                                   ; $740C: $19
     ld   a, [hl]                                  ; $740D: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $740E: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $740E: $21 $50 $C2
     add  hl, bc                                   ; $7411: $09
     ld   [hl], a                                  ; $7412: $77
     ld   a, JINGLE_URCHIN_PUSH                    ; $7413: $3E $3E
     ldh  [hJingle], a                             ; $7415: $E0 $F2
-    call UpdateEntityPosWithSpeed_15              ; $7417: $CD $88 $7B
+    call UpdateEntityPosWithVelocity_15           ; $7417: $CD $88 $7B
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $741A: $21 $10 $C4
     add  hl, bc                                   ; $741D: $09
     ld   [hl], $03                                ; $741E: $36 $03

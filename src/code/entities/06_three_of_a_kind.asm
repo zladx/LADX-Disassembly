@@ -33,7 +33,7 @@ ThreeOfAKindEntityHandler::
     call RenderActiveEntitySpritesPair            ; $493A: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $493D: $CD $C6 $64
     call DecrementEntityIgnoreHitsCountdown       ; $4940: $CD $56 $0C
-    call UpdateEntityPosWithSpeed_06              ; $4943: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $4943: $CD $41 $65
     call DefaultEntityPhysics_trampoline          ; $4946: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $4949: $F0 $F0
     JP_TABLE                                      ; $494B
@@ -47,7 +47,7 @@ ThreeOfAKindState0Handler::
     jr   nz, .jr_4962                             ; $4958: $20 $08
 
     ld   [hl], $20                                ; $495A: $36 $20
-    call ClearEntitySpeed                         ; $495C: $CD $7F $3D
+    call ClearEntityVelocity                      ; $495C: $CD $7F $3D
     call IncrementEntityState                     ; $495F: $CD $12 $3B
 
 .jr_4962
@@ -89,7 +89,7 @@ jr_006_4967:
     ld   [hl], $02                                ; $4991: $36 $02
     call GetEntityTransitionCountdown             ; $4993: $CD $05 $0C
     ld   [hl], $40                                ; $4996: $36 $40
-    jp   ClearEntitySpeed                         ; $4998: $C3 $7F $3D
+    jp   ClearEntityVelocity                      ; $4998: $C3 $7F $3D
 
 Data_006_499B::
     db   $0C, $F4, $00, $00
@@ -117,13 +117,13 @@ ThreeOfAKindState1Handler::
     ld   hl, Data_006_499B                        ; $49BE: $21 $9B $49
     add  hl, de                                   ; $49C1: $19
     ld   a, [hl]                                  ; $49C2: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $49C3: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $49C3: $21 $40 $C2
     add  hl, bc                                   ; $49C6: $09
     ld   [hl], a                                  ; $49C7: $77
     ld   hl, Data_006_499F                        ; $49C8: $21 $9F $49
     add  hl, de                                   ; $49CB: $19
     ld   a, [hl]                                  ; $49CC: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $49CD: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $49CD: $21 $50 $C2
     add  hl, bc                                   ; $49D0: $09
     ld   [hl], a                                  ; $49D1: $77
 

@@ -198,10 +198,10 @@ jr_018_5A8C::
     ld   hl, Data_018_5A8A                        ; $5AD0: $21 $8A $5A
     add  hl, bc                                   ; $5AD3: $09
     ld   a, [hl]                                  ; $5AD4: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $5AD5: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5AD5: $21 $40 $C2
     add  hl, de                                   ; $5AD8: $19
     ld   [hl], a                                  ; $5AD9: $77
-    ld   hl, wEntitiesSpeedYTable                 ; $5ADA: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $5ADA: $21 $50 $C2
     add  hl, de                                   ; $5ADD: $19
     ld   [hl], $FC                                ; $5ADE: $36 $FC
     ld   hl, wEntitiesInertiaTable                ; $5AE0: $21 $D0 $C3
@@ -364,10 +364,10 @@ func_018_5BD0::
     and  a                                        ; $5BD3: $A7
     ret  nz                                       ; $5BD4: $C0
 
-    ld   hl, wEntitiesSpeedXTable                 ; $5BD5: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5BD5: $21 $40 $C2
     add  hl, bc                                   ; $5BD8: $09
     ld   [hl], $F4                                ; $5BD9: $36 $F4
-    call AddEntitySpeedToPos_18                   ; $5BDB: $CD $6C $7E
+    call AddEntityVelocityToPos_18                ; $5BDB: $CD $6C $7E
     ldh  a, [hFrameCounter]                       ; $5BDE: $F0 $E7
     and  $08                                      ; $5BE0: $E6 $08
     ld   e, $04                                   ; $5BE2: $1E $04
@@ -538,8 +538,8 @@ label_018_5C6A:
     and  a                                        ; $5CDF: $A7
     jr   nz, jr_018_5CEF                          ; $5CE0: $20 $0D
 
-    ld   hl, hLinkSpeedX                          ; $5CE2: $21 $9A $FF
-    ldh  a, [hLinkSpeedY]                         ; $5CE5: $F0 $9B
+    ld   hl, hLinkVelocityX                       ; $5CE2: $21 $9A $FF
+    ldh  a, [hLinkVelocityY]                      ; $5CE5: $F0 $9B
     or   [hl]                                     ; $5CE7: $B6
     jr   z, jr_018_5CEF                           ; $5CE8: $28 $05
 

@@ -6,17 +6,17 @@
 ; Inputs:
 ;   bc   entity slot index
 ResetEntity::
-    call ClearEntitySpeed                         ; $4000: $CD $7F $3D
-    ld   hl, wEntitiesSpeedZAccTable              ; $4003: $21 $30 $C3
+    call ClearEntityVelocity                      ; $4000: $CD $7F $3D
+    ld   hl, wEntitiesVelocityZAccTable           ; $4003: $21 $30 $C3
     add  hl, bc                                   ; $4006: $09
     ld   [hl], b                                  ; $4007: $70
-    ld   hl, wEntitiesSpeedXAccTable              ; $4008: $21 $60 $C2
+    ld   hl, wEntitiesVelocityXAccTable           ; $4008: $21 $60 $C2
     add  hl, bc                                   ; $400B: $09
     ld   [hl], b                                  ; $400C: $70
-    ld   hl, wEntitiesSpeedYAccTable              ; $400D: $21 $70 $C2
+    ld   hl, wEntitiesVelocityYAccTable           ; $400D: $21 $70 $C2
     add  hl, bc                                   ; $4010: $09
     ld   [hl], b                                  ; $4011: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $4012: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4012: $21 $20 $C3
     add  hl, bc                                   ; $4015: $09
     ld   [hl], b                                  ; $4016: $70
     ld   hl, wEntitiesStateTable                  ; $4017: $21 $90 $C2

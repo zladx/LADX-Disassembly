@@ -151,10 +151,10 @@ RichardState3Handler::
     call IncrementEntityState                     ; $40DD: $CD $12 $3B
 
 .jr_40E0
-    ld   hl, wEntitiesSpeedXTable                 ; $40E0: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $40E0: $21 $40 $C2
     add  hl, bc                                   ; $40E3: $09
     ld   [hl], $F8                                ; $40E4: $36 $F8
-    jp   AddEntitySpeedToPos_06                   ; $40E6: $C3 $4E $65
+    jp   AddEntityVelocityToPos_06                ; $40E6: $C3 $4E $65
 
 RichardState4Handler::
     call CheckLinkInteractionWithEntity_06        ; $40E9: $CD $5D $64

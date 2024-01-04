@@ -16,7 +16,7 @@ SandCrabEntityHandler::
     call RenderActiveEntitySpritesPair            ; $7333: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $7336: $CD $0D $7B
     call ApplyRecoilIfNeeded_15                   ; $7339: $CD $3E $7B
-    call UpdateEntityPosWithSpeed_15              ; $733C: $CD $88 $7B
+    call UpdateEntityPosWithVelocity_15           ; $733C: $CD $88 $7B
     call DefaultEntityPhysics_trampoline          ; $733F: $CD $23 $3B
     call DefaultEnemyDamageCollisionHandler_trampoline ; $7342: $CD $39 $3B
     ldh  a, [hFrameCounter]                       ; $7345: $F0 $E7
@@ -47,13 +47,13 @@ SandCrabEntityHandler::
     ld   hl, Data_015_7328                        ; $736E: $21 $28 $73
     add  hl, de                                   ; $7371: $19
     ld   a, [hl]                                  ; $7372: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $7373: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7373: $21 $40 $C2
     add  hl, bc                                   ; $7376: $09
     ld   [hl], a                                  ; $7377: $77
     ld   hl, Data_015_732C                        ; $7378: $21 $2C $73
     add  hl, de                                   ; $737B: $19
     ld   a, [hl]                                  ; $737C: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $737D: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $737D: $21 $50 $C2
     add  hl, bc                                   ; $7380: $09
     ld   [hl], a                                  ; $7381: $77
 

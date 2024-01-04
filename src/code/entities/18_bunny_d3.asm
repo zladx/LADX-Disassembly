@@ -44,8 +44,8 @@ BunnyD3EntityHandler::
 .jr_51F3
     call func_018_7D60                            ; $51F3: $CD $60 $7D
     call ReturnIfNonInteractive_18                ; $51F6: $CD $E8 $7D
-    call AddEntityZSpeedToPos_18                  ; $51F9: $CD $98 $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $51FC: $21 $20 $C3
+    call AddEntityZVelocityToPos_18               ; $51F9: $CD $98 $7E
+    ld   hl, wEntitiesVelocityZTable              ; $51FC: $21 $20 $C3
     add  hl, bc                                   ; $51FF: $09
     dec  [hl]                                     ; $5200: $35
     dec  [hl]                                     ; $5201: $35
@@ -60,7 +60,7 @@ BunnyD3EntityHandler::
 
 .jr_520E
     ld   [hl], b                                  ; $520E: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $520F: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $520F: $21 $20 $C3
     add  hl, bc                                   ; $5212: $09
     ld   [hl], b                                  ; $5213: $70
     ldh  a, [hFrameCounter]                       ; $5214: $F0 $E7

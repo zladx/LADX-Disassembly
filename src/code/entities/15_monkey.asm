@@ -62,13 +62,13 @@ MonkeyEntityHandler::
     ld   [hl], $18                                ; $76D5: $36 $18
     call IncrementEntityState                     ; $76D7: $CD $12 $3B
     ld   [hl], $02                                ; $76DA: $36 $02
-    ld   hl, wEntitiesSpeedZTable                 ; $76DC: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $76DC: $21 $20 $C3
     add  hl, bc                                   ; $76DF: $09
     ld   [hl], $15                                ; $76E0: $36 $15
-    ld   hl, wEntitiesSpeedYTable                 ; $76E2: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $76E2: $21 $50 $C2
     add  hl, bc                                   ; $76E5: $09
     ld   [hl], $0C                                ; $76E6: $36 $0C
-    ld   hl, wEntitiesSpeedXTable                 ; $76E8: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $76E8: $21 $40 $C2
     add  hl, bc                                   ; $76EB: $09
     ld   [hl], $FA                                ; $76EC: $36 $FA
     ret                                           ; $76EE: $C9
@@ -147,7 +147,7 @@ jr_015_773A:
     ld   hl, wEntitiesPrivateState1Table          ; $7756: $21 $B0 $C2
     add  hl, de                                   ; $7759: $19
     inc  [hl]                                     ; $775A: $34
-    ld   hl, wEntitiesSpeedZTable                 ; $775B: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $775B: $21 $20 $C3
     add  hl, de                                   ; $775E: $19
     ld   [hl], $20                                ; $775F: $36 $20
     ldh  a, [hActiveEntitySpriteVariant]          ; $7761: $F0 $F1
@@ -158,10 +158,10 @@ jr_015_773A:
     ld   a, $08                                   ; $7769: $3E $08
 
 .jr_776B
-    ld   hl, wEntitiesSpeedXTable                 ; $776B: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $776B: $21 $40 $C2
     add  hl, de                                   ; $776E: $19
     ld   [hl], a                                  ; $776F: $77
-    ld   hl, wEntitiesSpeedYTable                 ; $7770: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $7770: $21 $50 $C2
     add  hl, de                                   ; $7773: $19
     ld   [hl], $0C                                ; $7774: $36 $0C
     ld   hl, wEntitiesPhysicsFlagsTable           ; $7776: $21 $40 $C3
@@ -185,9 +185,9 @@ ret_015_7792:
 func_015_7793::
     ld   a, $03                                   ; $7793: $3E $03
     call SetEntitySpriteVariant                   ; $7795: $CD $0C $3B
-    call UpdateEntityPosWithSpeed_15              ; $7798: $CD $88 $7B
-    call AddEntityZSpeedToPos_15                  ; $779B: $CD $C1 $7B
-    ld   hl, wEntitiesSpeedZTable                 ; $779E: $21 $20 $C3
+    call UpdateEntityPosWithVelocity_15           ; $7798: $CD $88 $7B
+    call AddEntityZVelocityToPos_15               ; $779B: $CD $C1 $7B
+    ld   hl, wEntitiesVelocityZTable              ; $779E: $21 $20 $C3
     add  hl, bc                                   ; $77A1: $09
     dec  [hl]                                     ; $77A2: $35
     dec  [hl]                                     ; $77A3: $35
@@ -198,10 +198,10 @@ func_015_7793::
     jr   z, ret_015_77BE                          ; $77AB: $28 $11
 
     ld   [hl], b                                  ; $77AD: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $77AE: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $77AE: $21 $20 $C3
     add  hl, bc                                   ; $77B1: $09
     ld   [hl], $20                                ; $77B2: $36 $20
-    call ClearEntitySpeed                         ; $77B4: $CD $7F $3D
+    call ClearEntityVelocity                      ; $77B4: $CD $7F $3D
     call IncrementEntityState                     ; $77B7: $CD $12 $3B
 
 jr_015_77BA:
@@ -214,9 +214,9 @@ ret_015_77BE:
 func_015_77BF::
     ld   a, $00                                   ; $77BF: $3E $00
     call SetEntitySpriteVariant                   ; $77C1: $CD $0C $3B
-    call UpdateEntityPosWithSpeed_15              ; $77C4: $CD $88 $7B
-    call AddEntityZSpeedToPos_15                  ; $77C7: $CD $C1 $7B
-    ld   hl, wEntitiesSpeedZTable                 ; $77CA: $21 $20 $C3
+    call UpdateEntityPosWithVelocity_15           ; $77C4: $CD $88 $7B
+    call AddEntityZVelocityToPos_15               ; $77C7: $CD $C1 $7B
+    ld   hl, wEntitiesVelocityZTable              ; $77CA: $21 $20 $C3
     add  hl, bc                                   ; $77CD: $09
     dec  [hl]                                     ; $77CE: $35
     dec  [hl]                                     ; $77CF: $35
@@ -230,7 +230,7 @@ func_015_77BF::
     call GetRandomByte                            ; $77DB: $CD $0D $28
     and  $0F                                      ; $77DE: $E6 $0F
     add  $08                                      ; $77E0: $C6 $08
-    ld   hl, wEntitiesSpeedZTable                 ; $77E2: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $77E2: $21 $20 $C3
     add  hl, bc                                   ; $77E5: $09
     ld   [hl], a                                  ; $77E6: $77
     ld   a, $10                                   ; $77E7: $3E $10
@@ -238,13 +238,13 @@ func_015_77BF::
     ldh  a, [hMultiPurpose0]                      ; $77EC: $F0 $D7
     cpl                                           ; $77EE: $2F
     inc  a                                        ; $77EF: $3C
-    ld   hl, wEntitiesSpeedYTable                 ; $77F0: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $77F0: $21 $50 $C2
     add  hl, bc                                   ; $77F3: $09
     ld   [hl], a                                  ; $77F4: $77
     ldh  a, [hMultiPurpose1]                      ; $77F5: $F0 $D8
     cpl                                           ; $77F7: $2F
     inc  a                                        ; $77F8: $3C
-    ld   hl, wEntitiesSpeedXTable                 ; $77F9: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $77F9: $21 $40 $C2
     add  hl, bc                                   ; $77FC: $09
     ld   [hl], a                                  ; $77FD: $77
 
@@ -292,9 +292,9 @@ label_015_7825:
     and  $01                                      ; $7837: $E6 $01
     call SetEntitySpriteVariant                   ; $7839: $CD $0C $3B
     call DefaultEnemyDamageCollisionHandler_trampoline ; $783C: $CD $39 $3B
-    call UpdateEntityPosWithSpeed_15              ; $783F: $CD $88 $7B
-    call AddEntityZSpeedToPos_15                  ; $7842: $CD $C1 $7B
-    ld   hl, wEntitiesSpeedZTable                 ; $7845: $21 $20 $C3
+    call UpdateEntityPosWithVelocity_15           ; $783F: $CD $88 $7B
+    call AddEntityZVelocityToPos_15               ; $7842: $CD $C1 $7B
+    ld   hl, wEntitiesVelocityZTable              ; $7845: $21 $20 $C3
     add  hl, bc                                   ; $7848: $09
     dec  [hl]                                     ; $7849: $35
     dec  [hl]                                     ; $784A: $35
@@ -308,7 +308,7 @@ label_015_7825:
     call GetRandomByte                            ; $7855: $CD $0D $28
     and  $0F                                      ; $7858: $E6 $0F
     add  $10                                      ; $785A: $C6 $10
-    ld   hl, wEntitiesSpeedZTable                 ; $785C: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $785C: $21 $20 $C3
     add  hl, bc                                   ; $785F: $09
     ld   [hl], a                                  ; $7860: $77
     call GetRandomByte                            ; $7861: $CD $0D $28
@@ -318,13 +318,13 @@ label_015_7825:
     ld   hl, Data_015_781D                        ; $7868: $21 $1D $78
     add  hl, de                                   ; $786B: $19
     ld   a, [hl]                                  ; $786C: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $786D: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $786D: $21 $40 $C2
     add  hl, bc                                   ; $7870: $09
     ld   [hl], a                                  ; $7871: $77
     ld   hl, Data_015_781B                        ; $7872: $21 $1B $78
     add  hl, de                                   ; $7875: $19
     ld   a, [hl]                                  ; $7876: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $7877: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $7877: $21 $50 $C2
     add  hl, bc                                   ; $787A: $09
     ld   [hl], a                                  ; $787B: $77
     ld   hl, wEntitiesInertiaTable                ; $787C: $21 $D0 $C3

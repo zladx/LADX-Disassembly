@@ -705,16 +705,16 @@ func_027_7ACB::
     ; Every 32 frames…
     and  $1F                                      ; $7AEF: $E6 $1F
     jr   nz, .done                                ; $7AF1: $20 $0A
-    ; if the Y speed hasn't maxed out yet…
-    ld   hl, wEntitiesSpeedYTable                 ; $7AF3: $21 $50 $C2
+    ; if the Y Velocity hasn't maxed out yet…
+    ld   hl, wEntitiesVelocityYTable              ; $7AF3: $21 $50 $C2
     add  hl, bc                                   ; $7AF6: $09
     ld   a, [hl]                                  ; $7AF7: $7E
     cp   $FF                                      ; $7AF8: $FE $FF
     jr   z, .done                                 ; $7AFA: $28 $01
-    ; increment the Y speed.
+    ; increment the Y Velocity.
     inc  [hl]                                     ; $7AFC: $34
 .done
-    call UpdateEntityPosWithSpeed_27              ; $7AFD: $CD $18 $7B
+    call UpdateEntityPosWithVelocity_27           ; $7AFD: $CD $18 $7B
 
     ldh  a, [hActiveEntityPosX]                   ; $7B00: $F0 $EE
     cp   $B0                                      ; $7B02: $FE $B0
@@ -737,27 +737,27 @@ jr_027_7B07:
     ld   [hl], a                                  ; $7B16: $77
     ret                                           ; $7B17: $C9
 
-UpdateEntityPosWithSpeed_27::
-    call AddEntitySpeedToPos_27                   ; $7B18: $CD $25 $7B
+UpdateEntityPosWithVelocity_27::
+    call AddEntityVelocityToPos_27                ; $7B18: $CD $25 $7B
     push bc                                       ; $7B1B: $C5
     ld   a, c                                     ; $7B1C: $79
     add  $10                                      ; $7B1D: $C6 $10
     ld   c, a                                     ; $7B1F: $4F
-    call AddEntitySpeedToPos_27                   ; $7B20: $CD $25 $7B
+    call AddEntityVelocityToPos_27                ; $7B20: $CD $25 $7B
     pop  bc                                       ; $7B23: $C1
     ret                                           ; $7B24: $C9
 
-; Update the entity's position using its speed.
+; Update the entity's position using its Velocity.
 ;
-; The values in the entity speed tables are the number of pixels to
+; The values in the entity Velocity tables are the number of pixels to
 ; move within 16 frames. For example, if it's 8, the entity will move
 ; 1 pixel every other frame (8/16). If it's -16, the entity will move
 ; -1 pixel every frame (-16/16).
 ;
 ; Inputs:
 ;   bc  entity index
-AddEntitySpeedToPos_27::
-    ld   hl, wEntitiesSpeedXTable                 ; $7B25: $21 $40 $C2
+AddEntityVelocityToPos_27::
+    ld   hl, wEntitiesVelocityXTable              ; $7B25: $21 $40 $C2
     add  hl, bc                                   ; $7B28: $09
     ld   a, [hl]                                  ; $7B29: $7E
     and  a                                        ; $7B2A: $A7
@@ -765,10 +765,10 @@ AddEntitySpeedToPos_27::
     jr   z, .return                               ; $7B2B: $28 $23
 
     push af                                       ; $7B2D: $F5
-    ; Multiply speed by 16 so the carry is set if greater than $0F
+    ; Multiply Velocity by 16 so the carry is set if greater than $0F
     swap a                                        ; $7B2E: $CB $37
     and  $F0                                      ; $7B30: $E6 $F0
-    ld   hl, wEntitiesSpeedXAccTable              ; $7B32: $21 $60 $C2
+    ld   hl, wEntitiesVelocityXAccTable           ; $7B32: $21 $60 $C2
     add  hl, bc                                   ; $7B35: $09
     add  [hl]                                     ; $7B36: $86
     ld   [hl], a                                  ; $7B37: $77

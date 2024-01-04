@@ -284,7 +284,7 @@ func_007_4429::
     cp   $0C                                      ; $442B: $FE $0C
     jr   c, .jr_4436                              ; $442D: $38 $07
 
-    call GetEntitySpeedYAddress                   ; $442F: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $442F: $CD $05 $40
     ld   a, [hl]                                  ; $4432: $7E
     bit  7, a                                     ; $4433: $CB $7F
     ret  z                                        ; $4435: $C8
@@ -322,10 +322,10 @@ func_007_4454::
     cp   $0C                                      ; $4466: $FE $0C
     ret  nz                                       ; $4468: $C0
 
-    ld   hl, wEntitiesSpeedXTable                 ; $4469: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4469: $21 $40 $C2
     add  hl, bc                                   ; $446C: $09
     ld   [hl], $F8                                ; $446D: $36 $F8
-    call GetEntitySpeedYAddress                   ; $446F: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $446F: $CD $05 $40
     ld   [hl], $F8                                ; $4472: $36 $F8
     ret                                           ; $4474: $C9
 
@@ -344,8 +344,8 @@ func_007_4475::
     jp   IncrementEntityState                     ; $448E: $C3 $12 $3B
 
 .jr_4491
-    call UpdateEntityPosWithSpeed_07              ; $4491: $CD $0A $7E
-    call GetEntitySpeedYAddress                   ; $4494: $CD $05 $40
+    call UpdateEntityPosWithVelocity_07           ; $4491: $CD $0A $7E
+    call GetEntityVelocityYAddress                ; $4494: $CD $05 $40
     inc  [hl]                                     ; $4497: $34
     ret                                           ; $4498: $C9
 
@@ -471,7 +471,7 @@ func_007_4537::
     add  hl, de                                   ; $455D: $19
     ld   [hl], a                                  ; $455E: $77
     ldh  [hActiveEntityVisualPosY], a             ; $455F: $E0 $EC
-    ld   hl, wEntitiesSpeedZTable                 ; $4561: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4561: $21 $20 $C3
     add  hl, de                                   ; $4564: $19
     ld   [hl], $20                                ; $4565: $36 $20
     ld   hl, wEntitiesPrivateState4Table          ; $4567: $21 $40 $C4
@@ -560,7 +560,7 @@ label_007_45F7:
     call CheckLinkCollisionWithEnemy_trampoline   ; $461D: $CD $5A $3B
     jr   nc, .jr_4640                             ; $4620: $30 $1E
 
-    ldh  a, [hLinkSpeedY]                         ; $4622: $F0 $9B
+    ldh  a, [hLinkVelocityY]                      ; $4622: $F0 $9B
     and  $80                                      ; $4624: $E6 $80
     jr   nz, .jr_4640                             ; $4626: $20 $18
 
@@ -573,7 +573,7 @@ label_007_45F7:
     sub  $0F                                      ; $4633: $D6 $0F
     ldh  [hLinkPositionY], a                      ; $4635: $E0 $99
     ld   a, $02                                   ; $4637: $3E $02
-    ldh  [hLinkSpeedY], a                         ; $4639: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $4639: $E0 $9B
     ld   a, $01                                   ; $463B: $3E $01
     ld   [wC147], a                               ; $463D: $EA $47 $C1
 

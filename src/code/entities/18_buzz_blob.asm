@@ -83,18 +83,18 @@ BuzzBlobState0Handler::
     ld   hl, Data_018_777C                        ; $7795: $21 $7C $77
     add  hl, de                                   ; $7798: $19
     ld   a, [hl]                                  ; $7799: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $779A: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $779A: $21 $40 $C2
     add  hl, bc                                   ; $779D: $09
     ld   [hl], a                                  ; $779E: $77
     ld   hl, Data_018_777A                        ; $779F: $21 $7A $77
     add  hl, de                                   ; $77A2: $19
     ld   a, [hl]                                  ; $77A3: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $77A4: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $77A4: $21 $50 $C2
     add  hl, bc                                   ; $77A7: $09
     ld   [hl], a                                  ; $77A8: $77
 
 .jr_77A9
-    call UpdateEntityPosWithSpeed_18              ; $77A9: $CD $5F $7E
+    call UpdateEntityPosWithVelocity_18           ; $77A9: $CD $5F $7E
     call DefaultEntityPhysics_trampoline          ; $77AC: $CD $23 $3B
     ld   hl, wEntitiesPrivateState1Table          ; $77AF: $21 $B0 $C2
     add  hl, bc                                   ; $77B2: $09

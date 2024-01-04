@@ -106,7 +106,7 @@ ChestWithItemEntityHandler::
     ld   hl, wEntitiesPosYTable                   ; $7BFF: $21 $10 $C2
     add  hl, de                                   ; $7C02: $19
     ld   [hl], a                                  ; $7C03: $77
-    ld   hl, wEntitiesSpeedZTable                 ; $7C04: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $7C04: $21 $20 $C3
     add  hl, de                                   ; $7C07: $19
     ld   [hl], $18                                ; $7C08: $36 $18
     ld   hl, wEntitiesPosZTable                   ; $7C0A: $21 $10 $C3
@@ -115,7 +115,7 @@ ChestWithItemEntityHandler::
     ld   hl, wEntitiesPrivateCountdown1Table      ; $7C10: $21 $F0 $C2
     add  hl, de                                   ; $7C13: $19
     ld   [hl], $50                                ; $7C14: $36 $50
-    ld   hl, wEntitiesSpeedXTable                 ; $7C16: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7C16: $21 $40 $C2
     add  hl, de                                   ; $7C19: $19
     ld   [hl], $08                                ; $7C1A: $36 $08
     ld   hl, wEntitiesStateTable                  ; $7C1C: $21 $90 $C2
@@ -172,7 +172,7 @@ jr_007_7C5E:
     and  a                                        ; $7C61: $A7
     ret  nz                                       ; $7C62: $C0
 
-    call UpdateEntityPosWithSpeed_07              ; $7C63: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $7C63: $CD $0A $7E
     ld   hl, wEntitiesInertiaTable                ; $7C66: $21 $D0 $C3
     add  hl, bc                                   ; $7C69: $09
     ld   a, [hl]                                  ; $7C6A: $7E
@@ -181,7 +181,7 @@ jr_007_7C5E:
     cp   $10                                      ; $7C6D: $FE $10
     jr   nz, .jr_7C76                             ; $7C6F: $20 $05
 
-    call GetEntitySpeedYAddress                   ; $7C71: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $7C71: $CD $05 $40
     ld   [hl], $00                                ; $7C74: $36 $00
 
 .jr_7C76

@@ -52,8 +52,8 @@ MadamMeowMeowEntityHandler::
     cp   BOW_WOW_KIDNAPPED                        ; $5B9D: $FE $80
     jr   nz, jr_006_5BC4                          ; $5B9F: $20 $23
 
-    call AddEntityZSpeedToPos_06                  ; $5BA1: $CD $7A $65
-    ld   hl, wEntitiesSpeedZTable                 ; $5BA4: $21 $20 $C3
+    call AddEntityZVelocityToPos_06               ; $5BA1: $CD $7A $65
+    ld   hl, wEntitiesVelocityZTable              ; $5BA4: $21 $20 $C3
     add  hl, bc                                   ; $5BA7: $09
     dec  [hl]                                     ; $5BA8: $35
     dec  [hl]                                     ; $5BA9: $35
@@ -68,7 +68,7 @@ MadamMeowMeowEntityHandler::
 
 .jr_5BB6
     ld   [hl], b                                  ; $5BB6: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $5BB7: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5BB7: $21 $20 $C3
     add  hl, bc                                   ; $5BBA: $09
     ld   [hl], b                                  ; $5BBB: $70
     ldh  a, [hFrameCounter]                       ; $5BBC: $F0 $E7

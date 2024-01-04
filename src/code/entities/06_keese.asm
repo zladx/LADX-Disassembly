@@ -79,7 +79,7 @@ KeeseRestingHandler::
     jp   label_006_67E6                           ; $678C: $C3 $E6 $67
 
 KeeseFlyingHandler::
-    call UpdateEntityPosWithSpeed_06              ; $678F: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $678F: $CD $41 $65
     call DefaultEntityPhysics_trampoline          ; $6792: $CD $23 $3B
     call GetEntityTransitionCountdown             ; $6795: $CD $05 $0C
     jr   nz, .jr_67A2                             ; $6798: $20 $08
@@ -113,13 +113,13 @@ KeeseFlyingHandler::
     ld   hl, Data_006_6718                        ; $67C0: $21 $18 $67
     add  hl, de                                   ; $67C3: $19
     ld   a, [hl]                                  ; $67C4: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $67C5: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $67C5: $21 $50 $C2
     add  hl, bc                                   ; $67C8: $09
     ld   [hl], a                                  ; $67C9: $77
     ld   hl, Data_006_671C                        ; $67CA: $21 $1C $67
     add  hl, de                                   ; $67CD: $19
     ld   a, [hl]                                  ; $67CE: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $67CF: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $67CF: $21 $40 $C2
     add  hl, bc                                   ; $67D2: $09
     ld   [hl], a                                  ; $67D3: $77
     call GetRandomByte                            ; $67D4: $CD $0D $28

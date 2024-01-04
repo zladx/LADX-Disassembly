@@ -21,11 +21,11 @@ MusicalNoteEntityHandler::
     bit  0, a                                     ; $7F10: $CB $47
     jr   nz, .jr_7F1B                             ; $7F12: $20 $07
 
-    ld   hl, wEntitiesSpeedXTable                 ; $7F14: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7F14: $21 $40 $C2
     add  hl, bc                                   ; $7F17: $09
     ld   a, [hl]                                  ; $7F18: $7E
     add  e                                        ; $7F19: $83
     ld   [hl], a                                  ; $7F1A: $77
 
 .jr_7F1B
-    jp   UpdateEntityPosWithSpeed_05              ; $7F1B: $C3 $B1 $7A
+    jp   UpdateEntityPosWithVelocity_05           ; $7F1B: $C3 $B1 $7A

@@ -52,9 +52,9 @@ WingedOctorokEntityHandler::
 
 .jr_566F
     call ApplyRecoilIfNeeded_07                   ; $566F: $CD $C3 $7D
-    call UpdateEntityPosWithSpeed_07              ; $5672: $CD $0A $7E
-    call AddEntityZSpeedToPos_07                  ; $5675: $CD $43 $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $5678: $21 $20 $C3
+    call UpdateEntityPosWithVelocity_07           ; $5672: $CD $0A $7E
+    call AddEntityZVelocityToPos_07               ; $5675: $CD $43 $7E
+    ld   hl, wEntitiesVelocityZTable              ; $5678: $21 $20 $C3
     add  hl, bc                                   ; $567B: $09
     dec  [hl]                                     ; $567C: $35
     ld   hl, wEntitiesPosZTable                   ; $567D: $21 $10 $C3
@@ -65,7 +65,7 @@ WingedOctorokEntityHandler::
     jr   z, .jr_5693                              ; $5686: $28 $0B
 
     ld   [hl], b                                  ; $5688: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $5689: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5689: $21 $20 $C3
     add  hl, bc                                   ; $568C: $09
     ld   [hl], b                                  ; $568D: $70
     ld   hl, wEntitiesPrivateState2Table          ; $568E: $21 $C0 $C2
@@ -97,7 +97,7 @@ WingedOctorokEntityHandler::
     call func_007_57B0                            ; $56B4: $CD $B0 $57
 
 .jr_56B7
-    call ClearEntitySpeed                         ; $56B7: $CD $7F $3D
+    call ClearEntityVelocity                      ; $56B7: $CD $7F $3D
     jp   label_007_5721                           ; $56BA: $C3 $21 $57
 
 jr_007_56BD:
@@ -133,13 +133,13 @@ jr_007_56E0:
     ld   hl, Data_007_5625                        ; $56E9: $21 $25 $56
     add  hl, de                                   ; $56EC: $19
     ld   a, [hl]                                  ; $56ED: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $56EE: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $56EE: $21 $40 $C2
     add  hl, bc                                   ; $56F1: $09
     ld   [hl], a                                  ; $56F2: $77
     ld   hl, Data_007_5629                        ; $56F3: $21 $29 $56
     add  hl, de                                   ; $56F6: $19
     ld   a, [hl]                                  ; $56F7: $7E
-    call GetEntitySpeedYAddress                   ; $56F8: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $56F8: $CD $05 $40
     ld   [hl], a                                  ; $56FB: $77
     jp   label_007_5721                           ; $56FC: $C3 $21 $57
 
@@ -161,7 +161,7 @@ jr_007_56FF:
     ld   hl, wEntitiesStateTable                  ; $5715: $21 $90 $C2
     add  hl, bc                                   ; $5718: $09
     ld   [hl], $01                                ; $5719: $36 $01
-    call ClearEntitySpeed                         ; $571B: $CD $7F $3D
+    call ClearEntityVelocity                      ; $571B: $CD $7F $3D
 
 jr_007_571E:
     call func_007_7D1A                            ; $571E: $CD $1A $7D
@@ -211,7 +211,7 @@ jr_007_5757:
     cp   e                                        ; $5761: $BB
     jr   z, jr_007_5777                           ; $5762: $28 $13
 
-    ld   hl, wEntitiesSpeedZTable                 ; $5764: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5764: $21 $20 $C3
     add  hl, bc                                   ; $5767: $09
     ld   [hl], $18                                ; $5768: $36 $18
     ld   a, $10                                   ; $576A: $3E $10
@@ -291,13 +291,13 @@ func_007_57B0::
     ld   hl, Data_007_57A8                        ; $57DE: $21 $A8 $57
     add  hl, bc                                   ; $57E1: $09
     ld   a, [hl]                                  ; $57E2: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $57E3: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $57E3: $21 $40 $C2
     add  hl, de                                   ; $57E6: $19
     ld   [hl], a                                  ; $57E7: $77
     ld   hl, Data_007_57AC                        ; $57E8: $21 $AC $57
     add  hl, bc                                   ; $57EB: $09
     ld   a, [hl]                                  ; $57EC: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $57ED: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $57ED: $21 $50 $C2
     add  hl, de                                   ; $57F0: $19
     ld   [hl], a                                  ; $57F1: $77
     pop  bc                                       ; $57F2: $C1

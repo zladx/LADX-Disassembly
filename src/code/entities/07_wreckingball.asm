@@ -67,9 +67,9 @@ jr_007_602A:
 
     call DecrementEntityIgnoreHitsCountdown       ; $604E: $CD $56 $0C
     call label_3B70                               ; $6051: $CD $70 $3B
-    call UpdateEntityPosWithSpeed_07              ; $6054: $CD $0A $7E
-    call AddEntityZSpeedToPos_07                  ; $6057: $CD $43 $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $605A: $21 $20 $C3
+    call UpdateEntityPosWithVelocity_07           ; $6054: $CD $0A $7E
+    call AddEntityZVelocityToPos_07               ; $6057: $CD $43 $7E
+    ld   hl, wEntitiesVelocityZTable              ; $605A: $21 $20 $C3
     add  hl, bc                                   ; $605D: $09
     dec  [hl]                                     ; $605E: $35
     dec  [hl]                                     ; $605F: $35
@@ -82,7 +82,7 @@ jr_007_602A:
     jr   z, jr_007_608F                           ; $606B: $28 $22
 
     ld   [hl], b                                  ; $606D: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $606E: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $606E: $21 $20 $C3
     add  hl, bc                                   ; $6071: $09
     ld   a, [hl]                                  ; $6072: $7E
     sra  a                                        ; $6073: $CB $2F
@@ -101,10 +101,10 @@ jr_007_602A:
 
 jr_007_6083:
     ld   [hl], a                                  ; $6083: $77
-    ld   hl, wEntitiesSpeedXTable                 ; $6084: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6084: $21 $40 $C2
     add  hl, bc                                   ; $6087: $09
     sra  [hl]                                     ; $6088: $CB $2E
-    call GetEntitySpeedYAddress                   ; $608A: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $608A: $CD $05 $40
     sra  [hl]                                     ; $608D: $CB $2E
 
 jr_007_608F:
@@ -145,9 +145,9 @@ func_007_60C1::
     and  $80                                      ; $60C4: $E6 $80
     jr   z, jr_007_60DD                           ; $60C6: $28 $15
 
-    ld   hl, wEntitiesSpeedYTable                 ; $60C8: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $60C8: $21 $50 $C2
     call func_007_60D1                            ; $60CB: $CD $D1 $60
-    ld   hl, wEntitiesSpeedXTable                 ; $60CE: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $60CE: $21 $40 $C2
 
 func_007_60D1::
     add  hl, bc                                   ; $60D1: $09
@@ -243,14 +243,14 @@ func_007_6135::
 func_007_6142::
     ld   a, JINGLE_SWORD_POKING                   ; $6142: $3E $07
     ldh  [hJingle], a                             ; $6144: $E0 $F2
-    ld   hl, wEntitiesSpeedXTable                 ; $6146: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6146: $21 $40 $C2
     add  hl, bc                                   ; $6149: $09
     ld   a, [hl]                                  ; $614A: $7E
     cpl                                           ; $614B: $2F
     inc  a                                        ; $614C: $3C
     sra  a                                        ; $614D: $CB $2F
     ld   [hl], a                                  ; $614F: $77
-    call GetEntitySpeedYAddress                   ; $6150: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $6150: $CD $05 $40
     ld   a, [hl]                                  ; $6153: $7E
     cpl                                           ; $6154: $2F
     inc  a                                        ; $6155: $3C

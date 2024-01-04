@@ -49,8 +49,8 @@ MarinAtTalTalHeightsEntityHandler::
     ld   de, MarinAtTalTalAndInStoreSpriteVariants ; $5EFA: $11 $B7 $5E
     call RenderActiveEntitySpritesPair            ; $5EFD: $CD $C0 $3B
     call func_018_7D60                            ; $5F00: $CD $60 $7D
-    call AddEntityZSpeedToPos_18                  ; $5F03: $CD $98 $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $5F06: $21 $20 $C3
+    call AddEntityZVelocityToPos_18               ; $5F03: $CD $98 $7E
+    ld   hl, wEntitiesVelocityZTable              ; $5F06: $21 $20 $C3
     add  hl, bc                                   ; $5F09: $09
     dec  [hl]                                     ; $5F0A: $35
     dec  [hl]                                     ; $5F0B: $35
@@ -66,7 +66,7 @@ MarinAtTalTalHeightsEntityHandler::
 
 .jr_5F1A
     ld   [hl], b                                  ; $5F1A: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $5F1B: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5F1B: $21 $20 $C3
     add  hl, bc                                   ; $5F1E: $09
     ld   [hl], b                                  ; $5F1F: $70
 
@@ -120,7 +120,7 @@ func_018_5F5E::
     and  $3F                                      ; $5F68: $E6 $3F
     jr   nz, .ret_5F72                            ; $5F6A: $20 $06
 
-    ld   hl, wEntitiesSpeedZTable                 ; $5F6C: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5F6C: $21 $20 $C3
     add  hl, bc                                   ; $5F6F: $09
     ld   [hl], $10                                ; $5F70: $36 $10
 
@@ -262,24 +262,24 @@ MarinAtTalTalHeightsStateAHandler::
     jp   IncrementEntityState                     ; $6061: $C3 $12 $3B
 
 .jr_6064
-    ld   hl, wEntitiesSpeedYTable                 ; $6064: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6064: $21 $50 $C2
     add  hl, bc                                   ; $6067: $09
     ld   [hl], $06                                ; $6068: $36 $06
     ld   hl, wEntitiesDirectionTable              ; $606A: $21 $80 $C3
     add  hl, bc                                   ; $606D: $09
     ld   [hl], $03                                ; $606E: $36 $03
-    jp   UpdateEntityYPosWithSpeed_18             ; $6070: $C3 $62 $7E
+    jp   UpdateEntityYPosWithVelocity_18          ; $6070: $C3 $62 $7E
 
 MarinAtTalTalHeightsStateBHandler::
     ld   a, $02                                   ; $6073: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $6075: $E0 $A1
-    ld   hl, wEntitiesSpeedXTable                 ; $6077: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6077: $21 $40 $C2
     add  hl, bc                                   ; $607A: $09
     ld   [hl], $FA                                ; $607B: $36 $FA
     ld   hl, wEntitiesDirectionTable              ; $607D: $21 $80 $C3
     add  hl, bc                                   ; $6080: $09
     ld   [hl], $01                                ; $6081: $36 $01
-    call AddEntitySpeedToPos_18                   ; $6083: $CD $6C $7E
+    call AddEntityVelocityToPos_18                ; $6083: $CD $6C $7E
     ldh  a, [hActiveEntityPosX]                   ; $6086: $F0 $EE
     cp   $18                                      ; $6088: $FE $18
     ret  nc                                       ; $608A: $D0
@@ -300,13 +300,13 @@ MarinAtTalTalHeightsStateCHandler::
     ret                                           ; $60A2: $C9
 
 .jr_60A3
-    ld   hl, wEntitiesSpeedXTable                 ; $60A3: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $60A3: $21 $40 $C2
     add  hl, bc                                   ; $60A6: $09
     ld   [hl], $F4                                ; $60A7: $36 $F4
     ld   hl, wEntitiesDirectionTable              ; $60A9: $21 $80 $C3
     add  hl, bc                                   ; $60AC: $09
     ld   [hl], $01                                ; $60AD: $36 $01
-    call AddEntitySpeedToPos_18                   ; $60AF: $CD $6C $7E
+    call AddEntityVelocityToPos_18                ; $60AF: $CD $6C $7E
     ldh  a, [hActiveEntityPosX]                   ; $60B2: $F0 $EE
     cp   $F0                                      ; $60B4: $FE $F0
     jr   nz, .jr_60C7                             ; $60B6: $20 $0F
@@ -374,10 +374,10 @@ TarinAtTalTalHeightsState0Handler::
     ld   hl, wEntitiesDirectionTable              ; $6109: $21 $80 $C3
     add  hl, bc                                   ; $610C: $09
     ld   [hl], $02                                ; $610D: $36 $02
-    ld   hl, wEntitiesSpeedYTable                 ; $610F: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $610F: $21 $50 $C2
     add  hl, bc                                   ; $6112: $09
     ld   [hl], $F4                                ; $6113: $36 $F4
-    call UpdateEntityYPosWithSpeed_18             ; $6115: $CD $62 $7E
+    call UpdateEntityYPosWithVelocity_18          ; $6115: $CD $62 $7E
     ldh  a, [hActiveEntityVisualPosY]             ; $6118: $F0 $EC
     cp   $70                                      ; $611A: $FE $70
     ret  nc                                       ; $611C: $D0
@@ -434,10 +434,10 @@ TarinAtTalTalHeightsState3Handler::
     ld   hl, wEntitiesDirectionTable              ; $6173: $21 $80 $C3
     add  hl, bc                                   ; $6176: $09
     ld   [hl], $01                                ; $6177: $36 $01
-    ld   hl, wEntitiesSpeedXTable                 ; $6179: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6179: $21 $40 $C2
     add  hl, bc                                   ; $617C: $09
     ld   [hl], $F8                                ; $617D: $36 $F8
-    call AddEntitySpeedToPos_18                   ; $617F: $CD $6C $7E
+    call AddEntityVelocityToPos_18                ; $617F: $CD $6C $7E
     ldh  a, [hActiveEntityPosX]                   ; $6182: $F0 $EE
     cp   $E0                                      ; $6184: $FE $E0
     ret  nz                                       ; $6186: $C0

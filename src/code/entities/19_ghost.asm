@@ -117,7 +117,7 @@ GhostEntityHandler::
 
     ld   a, [wIsRunningWithPegasusBoots]          ; $5E9F: $FA $4A $C1
     and  a                                        ; $5EA2: $A7
-    ; Set the speed at which the ghost follows you.
+    ; Set the Velocity at which the ghost follows you.
     ld   a, $08                                   ; $5EA3: $3E $08
     jr   z, .jr_5EA9                              ; $5EA5: $28 $02
     ld   a, $18                                   ; $5EA7: $3E $18
@@ -126,7 +126,7 @@ GhostEntityHandler::
     call ApplyVectorTowardsLink_trampoline        ; $5EA9: $CD $AA $3B
 
 jr_019_5EAC:
-    call UpdateEntityPosWithSpeed_19              ; $5EAC: $CD $B8 $7D
+    call UpdateEntityPosWithVelocity_19           ; $5EAC: $CD $B8 $7D
 
 jr_019_5EAF:
     ld   a, [wIsIndoor]                           ; $5EAF: $FA $A5 $DB
@@ -211,7 +211,7 @@ GhostState1Handler::
     ldh  [hLinkPositionX], a                      ; $5F31: $E0 $98
     pop  af                                       ; $5F33: $F1
     ldh  [hLinkPositionY], a                      ; $5F34: $E0 $99
-    call UpdateEntityPosWithSpeed_19              ; $5F36: $CD $B8 $7D
+    call UpdateEntityPosWithVelocity_19           ; $5F36: $CD $B8 $7D
     jp   label_019_6053                           ; $5F39: $C3 $53 $60
 
 GhostState2Handler::
@@ -367,13 +367,13 @@ func_019_5FFF::
     ld   hl, Data_019_5FF3                        ; $6014: $21 $F3 $5F
     add  hl, de                                   ; $6017: $19
     ld   a, [hl]                                  ; $6018: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $6019: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6019: $21 $40 $C2
     add  hl, bc                                   ; $601C: $09
     ld   [hl], a                                  ; $601D: $77
     ld   hl, Data_019_5FF7                        ; $601E: $21 $F7 $5F
     add  hl, de                                   ; $6021: $19
     ld   a, [hl]                                  ; $6022: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $6023: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6023: $21 $50 $C2
     add  hl, bc                                   ; $6026: $09
     ld   [hl], a                                  ; $6027: $77
     ld   hl, Data_019_5FFB                        ; $6028: $21 $FB $5F
@@ -405,7 +405,7 @@ func_019_6037::
     ld   [hl], b                                  ; $604F: $70
 
 .jr_6050
-    call UpdateEntityPosWithSpeed_19              ; $6050: $CD $B8 $7D
+    call UpdateEntityPosWithVelocity_19           ; $6050: $CD $B8 $7D
 
 label_019_6053:
     ld   hl, wEntitiesDirectionTable              ; $6053: $21 $80 $C3
@@ -445,16 +445,16 @@ func_019_6080::
     call IncrementEntityState                     ; $608A: $CD $12 $3B
 
 .jr_608D
-    ld   hl, wEntitiesSpeedYTable                 ; $608D: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $608D: $21 $50 $C2
     add  hl, bc                                   ; $6090: $09
     ld   [hl], $0A                                ; $6091: $36 $0A
-    ld   hl, wEntitiesSpeedXTable                 ; $6093: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6093: $21 $40 $C2
     add  hl, bc                                   ; $6096: $09
     ld   [hl], $FC                                ; $6097: $36 $FC
     ld   hl, wEntitiesDirectionTable              ; $6099: $21 $80 $C3
     add  hl, bc                                   ; $609C: $09
     ld   [hl], $02                                ; $609D: $36 $02
-    call UpdateEntityPosWithSpeed_19              ; $609F: $CD $B8 $7D
+    call UpdateEntityPosWithVelocity_19           ; $609F: $CD $B8 $7D
     jp   label_019_6053                           ; $60A2: $C3 $53 $60
 
 func_019_60A5::

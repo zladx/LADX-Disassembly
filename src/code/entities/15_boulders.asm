@@ -83,9 +83,9 @@ label_015_43CA:
     rra                                           ; $43DD: $1F
     and  $03                                      ; $43DE: $E6 $03
     call SetEntitySpriteVariant                   ; $43E0: $CD $0C $3B
-    call UpdateEntityPosWithSpeed_15              ; $43E3: $CD $88 $7B
-    call AddEntityZSpeedToPos_15                  ; $43E6: $CD $C1 $7B
-    ld   hl, wEntitiesSpeedZTable                 ; $43E9: $21 $20 $C3
+    call UpdateEntityPosWithVelocity_15           ; $43E3: $CD $88 $7B
+    call AddEntityZVelocityToPos_15               ; $43E6: $CD $C1 $7B
+    ld   hl, wEntitiesVelocityZTable              ; $43E9: $21 $20 $C3
     add  hl, bc                                   ; $43EC: $09
     dec  [hl]                                     ; $43ED: $35
     dec  [hl]                                     ; $43EE: $35
@@ -103,7 +103,7 @@ label_015_43CA:
     ld   hl, Data_015_43BE                        ; $4400: $21 $BE $43
     add  hl, de                                   ; $4403: $19
     ld   a, [hl]                                  ; $4404: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $4405: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4405: $21 $40 $C2
     add  hl, bc                                   ; $4408: $09
     ld   [hl], a                                  ; $4409: $77
     call GetRandomByte                            ; $440A: $CD $0D $28
@@ -117,7 +117,7 @@ label_015_43CA:
 
 .jr_4415
     ld   a, [hl]                                  ; $4415: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $4416: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4416: $21 $50 $C2
     add  hl, bc                                   ; $4419: $09
     ld   [hl], a                                  ; $441A: $77
     call GetRandomByte                            ; $441B: $CD $0D $28
@@ -127,7 +127,7 @@ label_015_43CA:
     ld   hl, Data_015_43C6                        ; $4422: $21 $C6 $43
     add  hl, de                                   ; $4425: $19
     ld   a, [hl]                                  ; $4426: $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $4427: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4427: $21 $20 $C3
     add  hl, bc                                   ; $442A: $09
     ld   [hl], a                                  ; $442B: $77
     ld   a, JINGLE_BOUNCE                         ; $442C: $3E $20

@@ -790,9 +790,9 @@ func_005_7283::
     ld   a, $18                                   ; $72BC: $3E $18
     call GetVectorTowardsLink_trampoline          ; $72BE: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $72C1: $F0 $D7
-    ldh  [hLinkSpeedY], a                         ; $72C3: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $72C3: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $72C5: $F0 $D8
-    ldh  [hLinkSpeedX], a                         ; $72C7: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $72C7: $E0 $9A
 
 .ret_72C9
     ret                                           ; $72C9: $C9
@@ -990,7 +990,7 @@ func_005_7363::
     ld   hl, Data_005_735F                        ; $73FD: $21 $5F $73
     add  hl, de                                   ; $7400: $19
     ld   a, [hl]                                  ; $7401: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $7402: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $7402: $21 $50 $C2
     add  hl, bc                                   ; $7405: $09
     ld   [hl], a                                  ; $7406: $77
     ld   hl, Data_005_7361                        ; $7407: $21 $61 $73
@@ -1127,14 +1127,14 @@ func_005_74B1::
     ld   a, [hl]                                  ; $74E9: $7E
     call GetVectorTowardsLink_trampoline          ; $74EA: $CD $B5 $3B
     ldh  a, [hMultiPurpose1]                      ; $74ED: $F0 $D8
-    ld   hl, wEntitiesSpeedXTable                 ; $74EF: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $74EF: $21 $40 $C2
     add  hl, bc                                   ; $74F2: $09
     ld   [hl], a                                  ; $74F3: $77
     ldh  a, [hMultiPurpose0]                      ; $74F4: $F0 $D7
-    ld   hl, wEntitiesSpeedYTable                 ; $74F6: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $74F6: $21 $50 $C2
     add  hl, bc                                   ; $74F9: $09
     ld   [hl], a                                  ; $74FA: $77
-    call UpdateEntityPosWithSpeed_05              ; $74FB: $CD $B1 $7A
+    call UpdateEntityPosWithVelocity_05           ; $74FB: $CD $B1 $7A
     ldh  a, [hLinkPositionY]                      ; $74FE: $F0 $99
     ld   hl, hActiveEntityVisualPosY              ; $7500: $21 $EC $FF
     sub  [hl]                                     ; $7503: $96
@@ -1255,13 +1255,13 @@ DropHeartContainer_05::
     and  a                                        ; $75A9: $A7
     jr   z, .jr_75B4                              ; $75AA: $28 $08
 
-    ld   hl, wEntitiesSpeedYTable                 ; $75AC: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $75AC: $21 $50 $C2
     add  hl, bc                                   ; $75AF: $09
     ld   [hl], $F0                                ; $75B0: $36 $F0
     jr   jr_005_75C0                              ; $75B2: $18 $0C
 
 .jr_75B4
-    ld   hl, wEntitiesSpeedZTable                 ; $75B4: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $75B4: $21 $20 $C3
     add  hl, de                                   ; $75B7: $19
     ld   [hl], $10                                ; $75B8: $36 $10
     ld   hl, wEntitiesPosZTable                   ; $75BA: $21 $10 $C3
@@ -1363,7 +1363,7 @@ jr_005_7621:
     and  a                                        ; $7653: $A7
     jr   z, .jr_765B                              ; $7654: $28 $05
 
-    call UpdateEntityPosWithSpeed_05              ; $7656: $CD $B1 $7A
+    call UpdateEntityPosWithVelocity_05           ; $7656: $CD $B1 $7A
     jr   jr_005_765E                              ; $7659: $18 $03
 
 .jr_765B
@@ -1459,7 +1459,7 @@ Data_005_76F2::
     db   $10, $0E, $0C, $06, $00, $FA, $F4, $F2, $F0, $F2, $F4, $FA, $00, $06, $0C, $0E
 
 func_005_7702::
-    call UpdateEntityPosWithSpeed_05              ; $7702: $CD $B1 $7A
+    call UpdateEntityPosWithVelocity_05           ; $7702: $CD $B1 $7A
     call label_3B44                               ; $7705: $CD $44 $3B
     call DefaultEntityPhysics_trampoline          ; $7708: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $770B: $21 $A0 $C2
@@ -1509,13 +1509,13 @@ jr_005_7730:
     ld   hl, Data_005_76EE                        ; $774A: $21 $EE $76
     add  hl, de                                   ; $774D: $19
     ld   a, [hl]                                  ; $774E: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $774F: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $774F: $21 $50 $C2
     add  hl, bc                                   ; $7752: $09
     ld   [hl], a                                  ; $7753: $77
     ld   hl, Data_005_76F2                        ; $7754: $21 $F2 $76
     add  hl, de                                   ; $7757: $19
     ld   a, [hl]                                  ; $7758: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $7759: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7759: $21 $40 $C2
     add  hl, bc                                   ; $775C: $09
     ld   [hl], a                                  ; $775D: $77
 

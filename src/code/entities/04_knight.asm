@@ -52,7 +52,7 @@ func_004_69F3::
     call ApplyVectorTowardsLink_trampoline        ; $6A01: $CD $AA $3B
 
 .jr_6A04
-    call UpdateEntityPosWithSpeed_04              ; $6A04: $CD $CA $6D
+    call UpdateEntityPosWithVelocity_04           ; $6A04: $CD $CA $6D
     call DefaultEntityPhysics_trampoline          ; $6A07: $CD $23 $3B
     call func_004_6E35                            ; $6A0A: $CD $35 $6E
     add  $30                                      ; $6A0D: $C6 $30

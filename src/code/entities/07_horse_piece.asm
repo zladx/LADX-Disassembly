@@ -30,16 +30,16 @@ HorsePieceEntityHandler::
     call RenderActiveEntitySpritesPair            ; $7601: $CD $C0 $3B
     ; Note: ReturnIfNonInteractive_07 also exits this entity if we are being carried
     call ReturnIfNonInteractive_07                ; $7604: $CD $96 $7D
-    call UpdateEntityPosWithSpeed_07              ; $7607: $CD $0A $7E
-    call AddEntityZSpeedToPos_07                  ; $760A: $CD $43 $7E
+    call UpdateEntityPosWithVelocity_07           ; $7607: $CD $0A $7E
+    call AddEntityZVelocityToPos_07               ; $760A: $CD $43 $7E
     ; Apply collision physics
     call DefaultEntityPhysics_trampoline          ; $760D: $CD $23 $3B
     ; Add gravity.
-    ld   hl, wEntitiesSpeedZTable                 ; $7610: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $7610: $21 $20 $C3
     add  hl, bc                                   ; $7613: $09
     dec  [hl]                                     ; $7614: $35
     dec  [hl]                                     ; $7615: $35
-    ; Check if we are on the floor, and then bounce with half Z speed
+    ; Check if we are on the floor, and then bounce with half Z Velocity
     ld   hl, wEntitiesPosZTable                   ; $7616: $21 $10 $C3
     add  hl, bc                                   ; $7619: $09
     ld   a, [hl]                                  ; $761A: $7E
@@ -49,13 +49,13 @@ HorsePieceEntityHandler::
     jr   z, .noBounce                             ; $7620: $28 $11
 
     ld   [hl], b                                  ; $7622: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $7623: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $7623: $21 $20 $C3
     add  hl, bc                                   ; $7626: $09
     ld   a, [hl]                                  ; $7627: $7E
     ldh  [hMultiPurposeH], a                      ; $7628: $E0 $E9
     sra  a                                        ; $762A: $CB $2F
     cpl                                           ; $762C: $2F
-    ; If new bounce speed is less then 7, set the speed to zero
+    ; If new bounce Velocity is less then 7, set the Velocity to zero
     cp   $07                                      ; $762D: $FE $07
     jr   nc, .doBounce                            ; $762F: $30 $01
     xor  a                                        ; $7631: $AF
@@ -89,7 +89,7 @@ HorsePieceStateThrowing:
     jr   nz, .stateNotEnded                       ; $765A: $20 $15
 
     ; End the throwing state, pick a random variant to show. If this is variant $00, then we are upright.
-    call ClearEntitySpeed                         ; $765C: $CD $7F $3D
+    call ClearEntityVelocity                      ; $765C: $CD $7F $3D
     call IncrementEntityState                     ; $765F: $CD $12 $3B
     call GetRandomByte                            ; $7662: $CD $0D $28
     and  $03                                      ; $7665: $E6 $03
@@ -148,13 +148,13 @@ HorsePieceStateThrowing:
     ld   hl, HorsePieceRandomBounceX              ; $76AC: $21 $43 $76
     add  hl, de                                   ; $76AF: $19
     ld   a, [hl]                                  ; $76B0: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $76B1: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $76B1: $21 $40 $C2
     add  hl, bc                                   ; $76B4: $09
     ld   [hl], a                                  ; $76B5: $77
     ld   hl, HorsePieceRandomBounceY              ; $76B6: $21 $4B $76
     add  hl, de                                   ; $76B9: $19
     ld   a, [hl]                                  ; $76BA: $7E
-    call GetEntitySpeedYAddress                   ; $76BB: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $76BB: $CD $05 $40
     ld   [hl], a                                  ; $76BE: $77
     call .func_76E7                               ; $76BF: $CD $E7 $76
 
@@ -172,12 +172,12 @@ HorsePieceStateThrowing:
     ld   [hl], a                                  ; $76D1: $77
     call GetEntityTransitionCountdown             ; $76D2: $CD $05 $0C
     srl  [hl]                                     ; $76D5: $CB $3E
-    ld   hl, wEntitiesSpeedXTable                 ; $76D7: $21 $40 $C2
-    call .bounceSpeedAdjust                       ; $76DA: $CD $E0 $76
-    ld   hl, wEntitiesSpeedYTable                 ; $76DD: $21 $50 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $76D7: $21 $40 $C2
+    call .bounceVelocityAdjust                    ; $76DA: $CD $E0 $76
+    ld   hl, wEntitiesVelocityYTable              ; $76DD: $21 $50 $C2
 
-    ; When bouncing, reduce the X/Y speed by half and flip them.
-.bounceSpeedAdjust
+    ; When bouncing, reduce the X/Y Velocity by half and flip them.
+.bounceVelocityAdjust
     add  hl, bc                                   ; $76E0: $09
     ld   a, [hl]                                  ; $76E1: $7E
     cpl                                           ; $76E2: $2F

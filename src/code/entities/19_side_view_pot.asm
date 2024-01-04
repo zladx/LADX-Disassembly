@@ -27,7 +27,7 @@ SideViewPotState0Handler::
     call func_019_599B                            ; $58FE: $CD $9B $59
 
 .jr_5901
-    ldh  a, [hLinkSpeedY]                         ; $5901: $F0 $9B
+    ldh  a, [hLinkVelocityY]                      ; $5901: $F0 $9B
     and  $80                                      ; $5903: $E6 $80
     jr   nz, jr_019_5922                          ; $5905: $20 $1B
 
@@ -42,7 +42,7 @@ SideViewPotState0Handler::
     sub  $10                                      ; $5915: $D6 $10
     ldh  [hLinkPositionY], a                      ; $5917: $E0 $99
     ld   a, $02                                   ; $5919: $3E $02
-    ldh  [hLinkSpeedY], a                         ; $591B: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $591B: $E0 $9B
     ld   a, $01                                   ; $591D: $3E $01
     ld   [wC147], a                               ; $591F: $EA $47 $C1
 
@@ -104,8 +104,8 @@ jr_019_5950:
     ret                                           ; $5978: $C9
 
 SideViewPotState1And2Handler::
-    call UpdateEntityPosWithSpeed_19              ; $5979: $CD $B8 $7D
-    ld   hl, wEntitiesSpeedYTable                 ; $597C: $21 $50 $C2
+    call UpdateEntityPosWithVelocity_19           ; $5979: $CD $B8 $7D
+    ld   hl, wEntitiesVelocityYTable              ; $597C: $21 $50 $C2
     add  hl, bc                                   ; $597F: $09
     ld   a, [hl]                                  ; $5980: $7E
     bit  7, a                                     ; $5981: $CB $7F
@@ -146,7 +146,7 @@ func_019_599B::
     ld   a, $F0                                   ; $59B2: $3E $F0
 
 .jr_59B4
-    ldh  [hLinkSpeedX], a                         ; $59B4: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $59B4: $E0 $9A
     ret                                           ; $59B6: $C9
 
 jr_019_59B7:

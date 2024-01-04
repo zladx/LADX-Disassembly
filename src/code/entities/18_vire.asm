@@ -55,7 +55,7 @@ func_018_6A31::
     add  hl, de                                   ; $6A5A: $19
     ld   [hl], $01                                ; $6A5B: $36 $01
     ldh  a, [hMultiPurposeG]                      ; $6A5D: $F0 $E8
-    ld   hl, wEntitiesSpeedXTable                 ; $6A5F: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6A5F: $21 $40 $C2
     add  hl, de                                   ; $6A62: $19
     ld   [hl], a                                  ; $6A63: $77
     ld   hl, wEntitiesTransitionCountdownTable    ; $6A64: $21 $E0 $C2
@@ -87,8 +87,8 @@ jr_018_6A71:
 .jr_6A8B
     call ReturnIfNonInteractive_18                ; $6A8B: $CD $E8 $7D
     call ApplyRecoilIfNeeded_18                   ; $6A8E: $CD $15 $7E
-    call UpdateEntityPosWithSpeed_18              ; $6A91: $CD $5F $7E
-    call AddEntityZSpeedToPos_18                  ; $6A94: $CD $98 $7E
+    call UpdateEntityPosWithVelocity_18           ; $6A91: $CD $5F $7E
+    call AddEntityZVelocityToPos_18               ; $6A94: $CD $98 $7E
     ldh  a, [hActiveEntityState]                  ; $6A97: $F0 $F0
     JP_TABLE                                      ; $6A99
 ._00 dw VireState0Handler
@@ -109,8 +109,8 @@ VireState0Handler::
     ld   hl, wEntitiesDropTimerTable              ; $6AB5: $21 $50 $C4
     add  hl, bc                                   ; $6AB8: $09
     ld   [hl], $80                                ; $6AB9: $36 $80
-    call ClearEntitySpeed                         ; $6ABB: $CD $7F $3D
-    ld   hl, wEntitiesSpeedXTable                 ; $6ABE: $21 $40 $C2
+    call ClearEntityVelocity                      ; $6ABB: $CD $7F $3D
+    ld   hl, wEntitiesVelocityXTable              ; $6ABE: $21 $40 $C2
     add  hl, bc                                   ; $6AC1: $09
     ld   [hl], $08                                ; $6AC2: $36 $08
     jp   IncrementEntityState                     ; $6AC4: $C3 $12 $3B
@@ -138,13 +138,13 @@ VireState1Handler::
     ldh  a, [hMultiPurpose0]                      ; $6AE5: $F0 $D7
     cpl                                           ; $6AE7: $2F
     inc  a                                        ; $6AE8: $3C
-    ld   hl, wEntitiesSpeedYTable                 ; $6AE9: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6AE9: $21 $50 $C2
     add  hl, bc                                   ; $6AEC: $09
     ld   [hl], a                                  ; $6AED: $77
     ldh  a, [hMultiPurpose1]                      ; $6AEE: $F0 $D8
     cpl                                           ; $6AF0: $2F
     inc  a                                        ; $6AF1: $3C
-    ld   hl, wEntitiesSpeedXTable                 ; $6AF2: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6AF2: $21 $40 $C2
     add  hl, bc                                   ; $6AF5: $09
     ld   [hl], a                                  ; $6AF6: $77
     call IncrementEntityState                     ; $6AF7: $CD $12 $3B
@@ -167,7 +167,7 @@ VireState1Handler::
     ret                                           ; $6B14: $C9
 
 .jr_6B15
-    ld   hl, wEntitiesSpeedZTable                 ; $6B15: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6B15: $21 $20 $C3
     add  hl, bc                                   ; $6B18: $09
     ld   [hl], b                                  ; $6B19: $70
     ld   hl, wEntitiesPosZTable                   ; $6B1A: $21 $10 $C3
@@ -183,7 +183,7 @@ VireState1Handler::
     ld   e, $F8                                   ; $6B29: $1E $F8
 
 .jr_6B2B
-    ld   hl, wEntitiesSpeedZTable                 ; $6B2B: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6B2B: $21 $20 $C3
     add  hl, bc                                   ; $6B2E: $09
     ld   [hl], e                                  ; $6B2F: $73
 
@@ -199,10 +199,10 @@ jr_018_6B30:
     ld   hl, Data_018_6AC8                        ; $6B3B: $21 $C8 $6A
     add  hl, de                                   ; $6B3E: $19
     ld   a, [hl]                                  ; $6B3F: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $6B40: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6B40: $21 $50 $C2
     add  hl, bc                                   ; $6B43: $09
     ld   [hl], a                                  ; $6B44: $77
-    ld   hl, wEntitiesSpeedXTable                 ; $6B45: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6B45: $21 $40 $C2
     add  hl, bc                                   ; $6B48: $09
     ld   [hl], $00                                ; $6B49: $36 $00
 
@@ -220,10 +220,10 @@ jr_018_6B30:
     ld   hl, Data_018_6AC7 - 1                    ; $6B58: $21 $C6 $6A
     add  hl, de                                   ; $6B5B: $19
     ld   a, [hl]                                  ; $6B5C: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $6B5D: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6B5D: $21 $40 $C2
     add  hl, bc                                   ; $6B60: $09
     ld   [hl], a                                  ; $6B61: $77
-    ld   hl, wEntitiesSpeedYTable                 ; $6B62: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6B62: $21 $50 $C2
     add  hl, bc                                   ; $6B65: $09
     ld   [hl], $00                                ; $6B66: $36 $00
 
@@ -280,7 +280,7 @@ VireState2Handler::
     call ApplyVectorTowardsLink_trampoline        ; $6BAF: $CD $AA $3B
     pop  af                                       ; $6BB2: $F1
     ldh  [hLinkPositionY], a                      ; $6BB3: $E0 $99
-    ld   hl, wEntitiesSpeedZTable                 ; $6BB5: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6BB5: $21 $20 $C3
     add  hl, bc                                   ; $6BB8: $09
     ld   [hl], $EC                                ; $6BB9: $36 $EC
     ld   hl, wEntitiesDropTimerTable              ; $6BBB: $21 $50 $C4
@@ -337,13 +337,13 @@ VireState3Handler::
     ldh  a, [hMultiPurpose0]                      ; $6C0A: $F0 $D7
     cpl                                           ; $6C0C: $2F
     inc  a                                        ; $6C0D: $3C
-    ld   hl, wEntitiesSpeedYTable                 ; $6C0E: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6C0E: $21 $50 $C2
     add  hl, bc                                   ; $6C11: $09
     ld   [hl], a                                  ; $6C12: $77
     ldh  a, [hMultiPurpose1]                      ; $6C13: $F0 $D8
     cpl                                           ; $6C15: $2F
     inc  a                                        ; $6C16: $3C
-    ld   hl, wEntitiesSpeedXTable                 ; $6C17: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6C17: $21 $40 $C2
     add  hl, bc                                   ; $6C1A: $09
     ld   [hl], a                                  ; $6C1B: $77
     call GetEntityTransitionCountdown             ; $6C1C: $CD $05 $0C
@@ -371,7 +371,7 @@ VireState3Handler::
     ldh  a, [hMultiPurpose0]                      ; $6C3D: $F0 $D7
     cpl                                           ; $6C3F: $2F
     inc  a                                        ; $6C40: $3C
-    ld   hl, wEntitiesSpeedYTable                 ; $6C41: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6C41: $21 $50 $C2
     add  hl, bc                                   ; $6C44: $09
     sub  [hl]                                     ; $6C45: $96
     and  $80                                      ; $6C46: $E6 $80
@@ -388,7 +388,7 @@ VireState3Handler::
     ldh  a, [hMultiPurpose1]                      ; $6C50: $F0 $D8
     cpl                                           ; $6C52: $2F
     inc  a                                        ; $6C53: $3C
-    ld   hl, wEntitiesSpeedXTable                 ; $6C54: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6C54: $21 $40 $C2
     add  hl, bc                                   ; $6C57: $09
     sub  [hl]                                     ; $6C58: $96
     and  $80                                      ; $6C59: $E6 $80
@@ -410,7 +410,7 @@ jr_018_6C63:
     cp   $40                                      ; $6C68: $FE $40
     jr   c, .jr_6C78                              ; $6C6A: $38 $0C
 
-    ld   hl, wEntitiesSpeedZTable                 ; $6C6C: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6C6C: $21 $20 $C3
     add  hl, bc                                   ; $6C6F: $09
     ld   a, [hl]                                  ; $6C70: $7E
     and  $80                                      ; $6C71: $E6 $80
@@ -420,7 +420,7 @@ jr_018_6C63:
     jr   jr_018_6C88                              ; $6C76: $18 $10
 
 .jr_6C78
-    ld   hl, wEntitiesSpeedZTable                 ; $6C78: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6C78: $21 $20 $C3
     add  hl, bc                                   ; $6C7B: $09
     ldh  a, [hFrameCounter]                       ; $6C7C: $F0 $E7
     and  $01                                      ; $6C7E: $E6 $01
@@ -471,7 +471,7 @@ func_018_6CB8::
     and  a                                        ; $6CC0: $A7
     jr   z, .jr_6CCD                              ; $6CC1: $28 $0A
 
-    call ClearEntitySpeed                         ; $6CC3: $CD $7F $3D
+    call ClearEntityVelocity                      ; $6CC3: $CD $7F $3D
     ld   hl, wEntitiesPrivateState2Table          ; $6CC6: $21 $C0 $C2
     add  hl, bc                                   ; $6CC9: $09
     ld   [hl], $FF                                ; $6CCA: $36 $FF
@@ -482,8 +482,8 @@ func_018_6CB8::
     jp   label_018_6B92                           ; $6CD0: $C3 $92 $6B
 
 func_018_6CD3::
-    call ClearEntitySpeed                         ; $6CD3: $CD $7F $3D
-    ld   hl, wEntitiesSpeedZTable                 ; $6CD6: $21 $20 $C3
+    call ClearEntityVelocity                      ; $6CD3: $CD $7F $3D
+    ld   hl, wEntitiesVelocityZTable              ; $6CD6: $21 $20 $C3
     add  hl, bc                                   ; $6CD9: $09
     ld   [hl], b                                  ; $6CDA: $70
     ret                                           ; $6CDB: $C9
@@ -548,13 +548,13 @@ VireState5Handler::
     and  $3F                                      ; $6D3D: $E6 $3F
     add  $20                                      ; $6D3F: $C6 $20
     ld   [hl], a                                  ; $6D41: $77
-    ld   hl, wEntitiesSpeedXTable                 ; $6D42: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6D42: $21 $40 $C2
     add  hl, bc                                   ; $6D45: $09
     ld   a, [hl]                                  ; $6D46: $7E
     cpl                                           ; $6D47: $2F
     inc  a                                        ; $6D48: $3C
     ld   [hl], a                                  ; $6D49: $77
-    ld   hl, wEntitiesSpeedYTable                 ; $6D4A: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6D4A: $21 $50 $C2
     add  hl, bc                                   ; $6D4D: $09
     ld   a, [hl]                                  ; $6D4E: $7E
     cpl                                           ; $6D4F: $2F
@@ -692,13 +692,13 @@ jr_018_6DC3:
     ld   hl, Data_018_6D59                        ; $6E1A: $21 $59 $6D
     add  hl, bc                                   ; $6E1D: $09
     ld   a, [hl]                                  ; $6E1E: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $6E1F: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6E1F: $21 $40 $C2
     add  hl, de                                   ; $6E22: $19
     ld   [hl], a                                  ; $6E23: $77
     ld   hl, Data_018_6D55                        ; $6E24: $21 $55 $6D
     add  hl, bc                                   ; $6E27: $09
     ld   a, [hl]                                  ; $6E28: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $6E29: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6E29: $21 $50 $C2
     add  hl, de                                   ; $6E2C: $19
     ld   [hl], a                                  ; $6E2D: $77
     ld   hl, wEntitiesTransitionCountdownTable    ; $6E2E: $21 $E0 $C2
@@ -792,7 +792,7 @@ jr_018_6E59:
     ld   a, $20                                   ; $6EAB: $3E $20
 
 .jr_6EAD
-    ld   hl, wEntitiesSpeedXTable                 ; $6EAD: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6EAD: $21 $40 $C2
     add  hl, bc                                   ; $6EB0: $09
     ld   [hl], a                                  ; $6EB1: $77
     ldh  a, [hMultiPurpose0]                      ; $6EB2: $F0 $D7
@@ -803,7 +803,7 @@ jr_018_6E59:
     ld   a, $20                                   ; $6EB8: $3E $20
 
 .jr_6EBA
-    ld   hl, wEntitiesSpeedYTable                 ; $6EBA: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6EBA: $21 $50 $C2
     add  hl, bc                                   ; $6EBD: $09
     ld   [hl], a                                  ; $6EBE: $77
     pop  af                                       ; $6EBF: $F1
@@ -889,7 +889,7 @@ label_018_6F1F:
     jp   ClearEntityStatusBank18                  ; $6F51: $C3 $08 $7F
 
 jr_018_6F54:
-    call UpdateEntityPosWithSpeed_18              ; $6F54: $CD $5F $7E
+    call UpdateEntityPosWithVelocity_18           ; $6F54: $CD $5F $7E
     call GetEntityTransitionCountdown             ; $6F57: $CD $05 $0C
     ret  nz                                       ; $6F5A: $C0
 
@@ -915,7 +915,7 @@ label_018_6F70:
     call RenderActiveEntitySpritesPair            ; $6F73: $CD $C0 $3B
     call ReturnIfNonInteractive_18                ; $6F76: $CD $E8 $7D
     call ApplyRecoilIfNeeded_18                   ; $6F79: $CD $15 $7E
-    call UpdateEntityPosWithSpeed_18              ; $6F7C: $CD $5F $7E
+    call UpdateEntityPosWithVelocity_18           ; $6F7C: $CD $5F $7E
     ldh  a, [hFrameCounter]                       ; $6F7F: $F0 $E7
     and  $03                                      ; $6F81: $E6 $03
     jr   nz, jr_018_6F95                          ; $6F83: $20 $10
@@ -953,7 +953,7 @@ func_018_6FA8::
     ret  nz                                       ; $6FAB: $C0
 
     ld   [hl], $20                                ; $6FAC: $36 $20
-    call ClearEntitySpeed                         ; $6FAE: $CD $7F $3D
+    call ClearEntityVelocity                      ; $6FAE: $CD $7F $3D
     jp   IncrementEntityState                     ; $6FB1: $C3 $12 $3B
 
 func_018_6FB4::

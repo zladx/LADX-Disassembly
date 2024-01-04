@@ -223,11 +223,11 @@ CrowState1Handler::
     jp   IncrementEntityState                     ; $5DB7: $C3 $12 $3B
 
 .jr_5DBA
-    call ClearEntitySpeed                         ; $5DBA: $CD $7F $3D
-    ld   hl, wEntitiesSpeedZTable                 ; $5DBD: $21 $20 $C3
+    call ClearEntityVelocity                      ; $5DBA: $CD $7F $3D
+    ld   hl, wEntitiesVelocityZTable              ; $5DBD: $21 $20 $C3
     add  hl, bc                                   ; $5DC0: $09
     ld   [hl], $08                                ; $5DC1: $36 $08
-    call AddEntityZSpeedToPos_06                  ; $5DC3: $CD $7A $65
+    call AddEntityZVelocityToPos_06               ; $5DC3: $CD $7A $65
     jr   jr_006_5E08                              ; $5DC6: $18 $40
 
 CrowState2Handler::
@@ -241,7 +241,7 @@ CrowState2Handler::
     ld   a, $20                                   ; $5DD5: $3E $20
     call GetVectorTowardsLink_trampoline          ; $5DD7: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $5DDA: $F0 $D7
-    ld   hl, wEntitiesSpeedYTable                 ; $5DDC: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $5DDC: $21 $50 $C2
     add  hl, bc                                   ; $5DDF: $09
     sub  [hl]                                     ; $5DE0: $96
     and  $80                                      ; $5DE1: $E6 $80
@@ -253,7 +253,7 @@ CrowState2Handler::
 .jr_5DE7
     dec  [hl]                                     ; $5DE7: $35
     ldh  a, [hMultiPurpose1]                      ; $5DE8: $F0 $D8
-    ld   hl, wEntitiesSpeedXTable                 ; $5DEA: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5DEA: $21 $40 $C2
     add  hl, bc                                   ; $5DED: $09
     sub  [hl]                                     ; $5DEE: $96
     and  $80                                      ; $5DEF: $E6 $80
@@ -264,7 +264,7 @@ CrowState2Handler::
 
 .jr_5DF5
     dec  [hl]                                     ; $5DF5: $35
-    ld   hl, wEntitiesSpeedXTable                 ; $5DF6: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5DF6: $21 $40 $C2
     add  hl, bc                                   ; $5DF9: $09
     ld   a, [hl]                                  ; $5DFA: $7E
     and  $80                                      ; $5DFB: $E6 $80
@@ -273,7 +273,7 @@ CrowState2Handler::
     ld   [hl], a                                  ; $5E01: $77
 
 func_006_5E02::
-    call UpdateEntityPosWithSpeed_06              ; $5E02: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $5E02: $CD $41 $65
     call func_006_5E14                            ; $5E05: $CD $14 $5E
 
 jr_006_5E08:
@@ -299,7 +299,7 @@ CrowState3Handler::
     ldh  a, [hMultiPurpose0]                      ; $5E25: $F0 $D7
     cpl                                           ; $5E27: $2F
     inc  a                                        ; $5E28: $3C
-    ld   hl, wEntitiesSpeedYTable                 ; $5E29: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $5E29: $21 $50 $C2
     add  hl, bc                                   ; $5E2C: $09
     sub  [hl]                                     ; $5E2D: $96
     and  $80                                      ; $5E2E: $E6 $80
@@ -313,7 +313,7 @@ CrowState3Handler::
     ldh  a, [hMultiPurpose1]                      ; $5E35: $F0 $D8
     cpl                                           ; $5E37: $2F
     inc  a                                        ; $5E38: $3C
-    ld   hl, wEntitiesSpeedXTable                 ; $5E39: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5E39: $21 $40 $C2
     add  hl, bc                                   ; $5E3C: $09
     sub  [hl]                                     ; $5E3D: $96
     and  $80                                      ; $5E3E: $E6 $80
@@ -324,7 +324,7 @@ CrowState3Handler::
 
 .jr_5E44
     dec  [hl]                                     ; $5E44: $35
-    ld   hl, wEntitiesSpeedXTable                 ; $5E45: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5E45: $21 $40 $C2
     add  hl, bc                                   ; $5E48: $09
     ld   a, [hl]                                  ; $5E49: $7E
     and  $80                                      ; $5E4A: $E6 $80

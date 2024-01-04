@@ -60,18 +60,18 @@ ENDC
     ldh  a, [hMultiPurpose0]                      ; $7C26: $F0 $D7
     cpl                                           ; $7C28: $2F
     inc  a                                        ; $7C29: $3C
-    ldh  [hLinkSpeedY], a                         ; $7C2A: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $7C2A: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $7C2C: $F0 $D8
     cpl                                           ; $7C2E: $2F
     inc  a                                        ; $7C2F: $3C
-    ldh  [hLinkSpeedX], a                         ; $7C30: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $7C30: $E0 $9A
     push bc                                       ; $7C32: $C5
     call UpdateFinalLinkPosition                  ; $7C33: $CD $A8 $21
     pop  bc                                       ; $7C36: $C1
     jr   jr_018_7C46                              ; $7C37: $18 $0D
 
 jr_018_7C39:
-    call UpdateEntityPosWithSpeed_18              ; $7C39: $CD $5F $7E
+    call UpdateEntityPosWithVelocity_18           ; $7C39: $CD $5F $7E
     call GetEntityTransitionCountdown             ; $7C3C: $CD $05 $0C
     jr   nz, jr_018_7C54                          ; $7C3F: $20 $13
 
@@ -103,7 +103,7 @@ jr_018_7C54:
     jr   z, ret_018_7CAE                          ; $7C6B: $28 $41
 
     call func_018_6493                            ; $7C6D: $CD $93 $64
-    ld   hl, wEntitiesSpeedYTable                 ; $7C70: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $7C70: $21 $50 $C2
     add  hl, bc                                   ; $7C73: $09
     ld   a, [hl]                                  ; $7C74: $7E
     and  a                                        ; $7C75: $A7

@@ -51,8 +51,8 @@ TarinBeekeeperEntityHandler::
     ld   de, TarinBeekeeperSpriteVariants         ; $4ECD: $11 $8D $4E
     call RenderActiveEntitySpritesPair            ; $4ED0: $CD $C0 $3B
     call ReturnIfNonInteractive_07                ; $4ED3: $CD $96 $7D
-    call AddEntityZSpeedToPos_07                  ; $4ED6: $CD $43 $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $4ED9: $21 $20 $C3
+    call AddEntityZVelocityToPos_07               ; $4ED6: $CD $43 $7E
+    ld   hl, wEntitiesVelocityZTable              ; $4ED9: $21 $20 $C3
     add  hl, bc                                   ; $4EDC: $09
     dec  [hl]                                     ; $4EDD: $35
     dec  [hl]                                     ; $4EDE: $35
@@ -63,7 +63,7 @@ TarinBeekeeperEntityHandler::
     jr   z, .jr_4EEE                              ; $4EE6: $28 $06
 
     ld   [hl], b                                  ; $4EE8: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $4EE9: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4EE9: $21 $20 $C3
     add  hl, bc                                   ; $4EEC: $09
     ld   [hl], b                                  ; $4EED: $70
 
@@ -157,12 +157,12 @@ func_007_4F56::
 
     ld   a, $02                                   ; $4F7F: $3E $02
     ldh  [hLinkDirection], a                      ; $4F81: $E0 $9E
-    ld   hl, wEntitiesSpeedXTable                 ; $4F83: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4F83: $21 $40 $C2
     add  hl, bc                                   ; $4F86: $09
     ld   [hl], $FE                                ; $4F87: $36 $FE
-    call GetEntitySpeedYAddress                   ; $4F89: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $4F89: $CD $05 $40
     ld   [hl], $F4                                ; $4F8C: $36 $F4
-    call UpdateEntityPosWithSpeed_07              ; $4F8E: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $4F8E: $CD $0A $7E
     call GetEntityTransitionCountdown             ; $4F91: $CD $05 $0C
     jr   nz, .jr_4FA5                             ; $4F94: $20 $0F
 
@@ -205,7 +205,7 @@ func_007_4FC6::
     cp   $20                                      ; $4FD7: $FE $20
     jr   nz, .jr_4FE5                             ; $4FD9: $20 $0A
 
-    ld   hl, wEntitiesSpeedZTable                 ; $4FDB: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4FDB: $21 $20 $C3
     add  hl, bc                                   ; $4FDE: $09
     ld   [hl], $18                                ; $4FDF: $36 $18
     call func_007_733F                            ; $4FE1: $CD $3F $73
@@ -318,13 +318,13 @@ jr_007_506E:
     ld   hl, Data_007_5032                        ; $5077: $21 $32 $50
     add  hl, de                                   ; $507A: $19
     ld   a, [hl]                                  ; $507B: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $507C: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $507C: $21 $40 $C2
     add  hl, bc                                   ; $507F: $09
     ld   [hl], a                                  ; $5080: $77
     ld   hl, Data_007_5036                        ; $5081: $21 $36 $50
     add  hl, de                                   ; $5084: $19
     ld   a, [hl]                                  ; $5085: $7E
-    call GetEntitySpeedYAddress                   ; $5086: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $5086: $CD $05 $40
     ld   [hl], a                                  ; $5089: $77
     ld   hl, Data_007_503A                        ; $508A: $21 $3A $50
     add  hl, de                                   ; $508D: $19
@@ -338,7 +338,7 @@ jr_007_506E:
 
 jr_007_509A:
     ldh  [hLinkDirection], a                      ; $509A: $E0 $9E
-    call UpdateEntityPosWithSpeed_07              ; $509C: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $509C: $CD $0A $7E
     ld   hl, wEntitiesDirectionTable              ; $509F: $21 $80 $C3
     add  hl, bc                                   ; $50A2: $09
     ld   e, [hl]                                  ; $50A3: $5E
@@ -360,12 +360,12 @@ func_007_50B4::
     add  hl, bc                                   ; $50BB: $09
     ld   a, $01                                   ; $50BC: $3E $01
     ld   [hl], a                                  ; $50BE: $77
-    ld   hl, wEntitiesSpeedXTable                 ; $50BF: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $50BF: $21 $40 $C2
     add  hl, bc                                   ; $50C2: $09
     ld   [hl], $E4                                ; $50C3: $36 $E4
-    call GetEntitySpeedYAddress                   ; $50C5: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $50C5: $CD $05 $40
     ld   [hl], $08                                ; $50C8: $36 $08
-    call UpdateEntityPosWithSpeed_07              ; $50CA: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $50CA: $CD $0A $7E
     ldh  a, [hActiveEntityPosX]                   ; $50CD: $F0 $EE
     cp   $C0                                      ; $50CF: $FE $C0
     jr   c, label_007_50DF                        ; $50D1: $38 $0C

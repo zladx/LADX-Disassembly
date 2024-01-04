@@ -13,7 +13,7 @@ LaserBeamEntityHandler::
     call CheckLinkCollisionWithProjectile_trampoline ; $75DE: $CD $4F $3B
 
 .jr_75E1
-    call UpdateEntityPosWithSpeed_15              ; $75E1: $CD $88 $7B
+    call UpdateEntityPosWithVelocity_15           ; $75E1: $CD $88 $7B
     call label_3B2E                               ; $75E4: $CD $2E $3B
     ld   hl, wEntitiesCollisionsTable             ; $75E7: $21 $A0 $C2
     add  hl, bc                                   ; $75EA: $09
@@ -41,11 +41,11 @@ LaserBeamEntityHandler::
     and  $02                                      ; $760D: $E6 $02
     jr   nz, .jr_7616                             ; $760F: $20 $05
 
-    ld   hl, wEntitiesSpeedXTable                 ; $7611: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7611: $21 $40 $C2
     jr   jr_015_7619                              ; $7614: $18 $03
 
 .jr_7616
-    ld   hl, wEntitiesSpeedYTable                 ; $7616: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $7616: $21 $50 $C2
 
 jr_015_7619:
     add  hl, bc                                   ; $7619: $09
@@ -62,11 +62,11 @@ jr_015_7619:
     ld   hl, Data_015_75CE                        ; $762A: $21 $CE $75
     add  hl, de                                   ; $762D: $19
     ld   a, [hl]                                  ; $762E: $7E
-    ldh  [hLinkSpeedX], a                         ; $762F: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $762F: $E0 $9A
     ld   hl, Data_015_75D2                        ; $7631: $21 $D2 $75
     add  hl, de                                   ; $7634: $19
     ld   a, [hl]                                  ; $7635: $7E
-    ldh  [hLinkSpeedY], a                         ; $7636: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $7636: $E0 $9B
     ret                                           ; $7638: $C9
 
 jr_015_7639:

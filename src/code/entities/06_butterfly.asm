@@ -6,8 +6,8 @@ ButterflyOAMAttributes::
 ._00 db $5E, OAM_GBC_PAL_1
 ._01 db $5E, OAM_GBC_PAL_1 | OAMF_YFLIP
 
-; Randomly-selected X or Y speed
-ButterflyPossibleSpeeds::
+; Randomly-selected X or Y Velocity
+ButterflyPossibleVelocitys::
     db $04, -$04, $03, -$03, $02, -$02, $05, -$06
 
 ButterflyEntityHandler::
@@ -43,48 +43,48 @@ ButterflyEntityHandler::
     rra                                           ; $6BED: $1F
     and  $01                                      ; $6BEE: $E6 $01
     call SetEntitySpriteVariant                   ; $6BF0: $CD $0C $3B
-    call UpdateEntityPosWithSpeed_06              ; $6BF3: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $6BF3: $CD $41 $65
 
     ; If [hActiveEntityState] & $1F == 0…
     ldh  a, [hActiveEntityState]                  ; $6BF6: $F0 $F0
     and  $1F                                      ; $6BF8: $E6 $1F
-    jr   nz, .speedXEnd                           ; $6BFA: $20 $16
-    ; Set a random horizontal speed
+    jr   nz, .VelocityXEnd                        ; $6BFA: $20 $16
+    ; Set a random horizontal Velocity
     call GetRandomByte                            ; $6BFC: $CD $0D $28
     and  $07                                      ; $6BFF: $E6 $07
     ld   e, a                                     ; $6C01: $5F
     ld   d, b                                     ; $6C02: $50
-    ld   hl, ButterflyPossibleSpeeds              ; $6C03: $21 $C1 $6B
+    ld   hl, ButterflyPossibleVelocitys           ; $6C03: $21 $C1 $6B
     add  hl, de                                   ; $6C06: $19
     ld   a, [hl]                                  ; $6C07: $7E
     ld   hl, wEntitiesPrivateState1Table          ; $6C08: $21 $B0 $C2
     add  hl, bc                                   ; $6C0B: $09
     add  [hl]                                     ; $6C0C: $86
-    ld   hl, wEntitiesSpeedXTable                 ; $6C0D: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6C0D: $21 $40 $C2
     add  hl, bc                                   ; $6C10: $09
     ld   [hl], a                                  ; $6C11: $77
-.speedXEnd
+.VelocityXEnd
 
     ; If [hActiveEntityState] + $10 & $1F == 0…
     ldh  a, [hActiveEntityState]                  ; $6C12: $F0 $F0
     add  $10                                      ; $6C14: $C6 $10
     and  $1F                                      ; $6C16: $E6 $1F
-    jr   nz, .speedYEnd                           ; $6C18: $20 $16
-    ; Set a random vertical speed
+    jr   nz, .VelocityYEnd                        ; $6C18: $20 $16
+    ; Set a random vertical Velocity
     call GetRandomByte                            ; $6C1A: $CD $0D $28
     and  $07                                      ; $6C1D: $E6 $07
     ld   e, a                                     ; $6C1F: $5F
     ld   d, b                                     ; $6C20: $50
-    ld   hl, ButterflyPossibleSpeeds              ; $6C21: $21 $C1 $6B
+    ld   hl, ButterflyPossibleVelocitys           ; $6C21: $21 $C1 $6B
     add  hl, de                                   ; $6C24: $19
     ld   a, [hl]                                  ; $6C25: $7E
     ld   hl, wEntitiesPrivateState2Table          ; $6C26: $21 $C0 $C2
     add  hl, bc                                   ; $6C29: $09
     add  [hl]                                     ; $6C2A: $86
-    ld   hl, wEntitiesSpeedYTable                 ; $6C2B: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6C2B: $21 $50 $C2
     add  hl, bc                                   ; $6C2E: $09
     ld   [hl], a                                  ; $6C2F: $77
-.speedYEnd
+.VelocityYEnd
 
     ;
     ; Move closer to Link every $3F frame

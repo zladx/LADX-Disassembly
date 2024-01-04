@@ -613,8 +613,8 @@ func_019_767B::
     ldh  [hLinkInteractiveMotionBlocked], a       ; $767D: $E0 $A1
     ld   [wC167], a                               ; $767F: $EA $67 $C1
     call func_019_78F1                            ; $7682: $CD $F1 $78
-    call UpdateEntityYPosWithSpeed_19             ; $7685: $CD $BB $7D
-    ld   hl, wEntitiesSpeedYTable                 ; $7688: $21 $50 $C2
+    call UpdateEntityYPosWithVelocity_19          ; $7685: $CD $BB $7D
+    ld   hl, wEntitiesVelocityYTable              ; $7688: $21 $50 $C2
     add  hl, bc                                   ; $768B: $09
     inc  [hl]                                     ; $768C: $34
     ld   a, [hl]                                  ; $768D: $7E
@@ -630,7 +630,7 @@ func_019_767B::
     ld   [hl], $70                                ; $769B: $36 $70
     ld   a, NOISE_SFX_CLINK                       ; $769D: $3E $17
     ldh  [hNoiseSfx], a                           ; $769F: $E0 $F4
-    ld   hl, wEntitiesSpeedYTable                 ; $76A1: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $76A1: $21 $50 $C2
     add  hl, bc                                   ; $76A4: $09
     ld   a, [hl]                                  ; $76A5: $7E
     cp   $04                                      ; $76A6: $FE $04
@@ -820,8 +820,8 @@ func_019_787D::
 
     ld   de, Unknown073SpriteVariants             ; $7881: $11 $79 $78
     call RenderActiveEntitySpritesPair            ; $7884: $CD $C0 $3B
-    call UpdateEntityYPosWithSpeed_19             ; $7887: $CD $BB $7D
-    ld   hl, wEntitiesSpeedYTable                 ; $788A: $21 $50 $C2
+    call UpdateEntityYPosWithVelocity_19          ; $7887: $CD $BB $7D
+    ld   hl, wEntitiesVelocityYTable              ; $788A: $21 $50 $C2
     add  hl, bc                                   ; $788D: $09
     inc  [hl]                                     ; $788E: $34
     ld   a, [hl]                                  ; $788F: $7E
@@ -837,7 +837,7 @@ func_019_787D::
     jr   c, ret_019_78CB                          ; $789B: $38 $2E
 
     ld   [hl], $70                                ; $789D: $36 $70
-    ld   hl, wEntitiesSpeedYTable                 ; $789F: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $789F: $21 $50 $C2
     add  hl, bc                                   ; $78A2: $09
     ld   [hl], b                                  ; $78A3: $70
     call CheckLinkCollisionWithEnemy_trampoline   ; $78A4: $CD $5A $3B

@@ -65,7 +65,7 @@ jr_019_6AD4:
     call ReturnIfNonInteractive_19                ; $6AD4: $CD $3D $7D
     call ApplyRecoilIfNeeded_19                   ; $6AD7: $CD $6E $7D
     call DefaultEnemyDamageCollisionHandler_trampoline ; $6ADA: $CD $39 $3B
-    call UpdateEntityPosWithSpeed_19              ; $6ADD: $CD $B8 $7D
+    call UpdateEntityPosWithVelocity_19           ; $6ADD: $CD $B8 $7D
     call DefaultEntityPhysics_trampoline          ; $6AE0: $CD $23 $3B
     ld   a, [wCollisionType]                      ; $6AE3: $FA $33 $C1
     and  a                                        ; $6AE6: $A7
@@ -80,10 +80,10 @@ jr_019_6AD4:
     ld   hl, Data_019_6AAC                        ; $6AF1: $21 $AC $6A
     add  hl, de                                   ; $6AF4: $19
     ld   a, [hl]                                  ; $6AF5: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $6AF6: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6AF6: $21 $40 $C2
     add  hl, bc                                   ; $6AF9: $09
     ld   [hl], a                                  ; $6AFA: $77
-    ld   hl, wEntitiesSpeedYTable                 ; $6AFB: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6AFB: $21 $50 $C2
     add  hl, bc                                   ; $6AFE: $09
     ld   [hl], b                                  ; $6AFF: $70
     ld   a, e                                     ; $6B00: $7B
@@ -112,10 +112,10 @@ jr_019_6AD4:
     ld   hl, Data_019_6AAC                        ; $6B1E: $21 $AC $6A
     add  hl, de                                   ; $6B21: $19
     ld   a, [hl]                                  ; $6B22: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $6B23: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6B23: $21 $50 $C2
     add  hl, bc                                   ; $6B26: $09
     ld   [hl], a                                  ; $6B27: $77
-    ld   hl, wEntitiesSpeedXTable                 ; $6B28: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6B28: $21 $40 $C2
     add  hl, bc                                   ; $6B2B: $09
     ld   [hl], b                                  ; $6B2C: $70
     ld   a, e                                     ; $6B2D: $7B
@@ -134,4 +134,4 @@ jr_019_6AD4:
     jp   SetEntitySpriteVariant                   ; $6B3E: $C3 $0C $3B
 
 jr_019_6B41:
-    jp   ClearEntitySpeed                         ; $6B41: $C3 $7F $3D
+    jp   ClearEntityVelocity                      ; $6B41: $C3 $7F $3D

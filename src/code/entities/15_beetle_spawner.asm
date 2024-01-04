@@ -59,10 +59,10 @@ BeetleSpawnerEntityHandler::
 .ret_756E
     ret                                           ; $756E: $C9
 
-BeetleXSpeeds::
+BeetleXVelocitys::
     db   $08, $F8, $00, $00
 
-BeetleYSpeeds::
+BeetleYVelocitys::
     db   $00, $00, $F8, $08
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
@@ -85,7 +85,7 @@ BeetleSpawnerBeetleHandler:
     rra                                           ; $758F: $1F
     and  $01                                      ; $7590: $E6 $01
     call SetEntitySpriteVariant                   ; $7592: $CD $0C $3B
-    call UpdateEntityPosWithSpeed_15              ; $7595: $CD $88 $7B
+    call UpdateEntityPosWithVelocity_15           ; $7595: $CD $88 $7B
     call GetEntityPrivateCountdown1               ; $7598: $CD $00 $0C
     jr   nz, .jr_75A0                             ; $759B: $20 $03
 
@@ -104,16 +104,16 @@ BeetleSpawnerBeetleHandler:
     and  $03                                      ; $75B3: $E6 $03
     ld   e, a                                     ; $75B5: $5F
     ld   d, b                                     ; $75B6: $50
-    ld   hl, BeetleXSpeeds                        ; $75B7: $21 $6F $75
+    ld   hl, BeetleXVelocitys                     ; $75B7: $21 $6F $75
     add  hl, de                                   ; $75BA: $19
     ld   a, [hl]                                  ; $75BB: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $75BC: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $75BC: $21 $40 $C2
     add  hl, bc                                   ; $75BF: $09
     ld   [hl], a                                  ; $75C0: $77
-    ld   hl, BeetleYSpeeds                        ; $75C1: $21 $73 $75
+    ld   hl, BeetleYVelocitys                     ; $75C1: $21 $73 $75
     add  hl, de                                   ; $75C4: $19
     ld   a, [hl]                                  ; $75C5: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $75C6: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $75C6: $21 $50 $C2
     add  hl, bc                                   ; $75C9: $09
     ld   [hl], a                                  ; $75CA: $77
 

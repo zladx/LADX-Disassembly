@@ -194,11 +194,11 @@ DEF rSB EQU $FF01
 DEF rSC EQU $FF02
 
 DEF SCF_START  EQU %10000000 ; Transfer Start Flag (1=Transfer in progress, or requested)
-DEF SCF_SPEED  EQU %00000010 ; Clock Speed (0=Normal, 1=Fast) ** CGB Mode Only **
+DEF SCF_Velocity  EQU %00000010 ; Clock Velocity (0=Normal, 1=Fast) ** CGB Mode Only **
 DEF SCF_SOURCE EQU %00000001 ; Shift Clock (0=External Clock, 1=Internal Clock)
 
 DEF SCB_START  EQU 7
-DEF SCB_SPEED  EQU 1
+DEF SCB_Velocity  EQU 1
 DEF SCB_SOURCE EQU 0
 
 ; --
@@ -671,13 +671,13 @@ DEF WX_OFS EQU 7 ; add this to a screen position to get a WX position
 
 
 ; --
-; -- SPEED ($FF4D)
-; -- Select CPU Speed (R/W)
+; -- Velocity ($FF4D)
+; -- Select CPU Velocity (R/W)
 ; --
 DEF rKEY1 EQU $FF4D
 DEF rSPD  EQU rKEY1
 
-DEF KEY1F_DBLSPEED EQU %10000000 ; 0=Normal Speed, 1=Double Speed (R)
+DEF KEY1F_DBLVelocity EQU %10000000 ; 0=Normal Velocity, 1=Double Velocity (R)
 DEF KEY1F_PREPARE  EQU %00000001 ; 0=No, 1=Prepare (R/W)
 
 

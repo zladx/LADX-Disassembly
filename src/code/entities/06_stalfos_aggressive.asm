@@ -57,7 +57,7 @@ StalfosAggressiveState1Handler::
     cp   $38                                      ; $4AFA: $FE $38
     jr   nc, .jr_4B0C                             ; $4AFC: $30 $0E
 
-    ld   hl, wEntitiesSpeedZTable                 ; $4AFE: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4AFE: $21 $20 $C3
     add  hl, bc                                   ; $4B01: $09
     ld   [hl], $28                                ; $4B02: $36 $28
     ld   a, $10                                   ; $4B04: $3E $10
@@ -65,7 +65,7 @@ StalfosAggressiveState1Handler::
     call IncrementEntityState                     ; $4B09: $CD $12 $3B
 
 .jr_4B0C
-    call UpdateEntityPosWithSpeed_06              ; $4B0C: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $4B0C: $CD $41 $65
     call DefaultEntityPhysics_trampoline          ; $4B0F: $CD $23 $3B
     ldh  a, [hFrameCounter]                       ; $4B12: $F0 $E7
     rra                                           ; $4B14: $1F
@@ -74,10 +74,10 @@ StalfosAggressiveState1Handler::
     jp   SetEntitySpriteVariant                   ; $4B18: $C3 $0C $3B
 
 StalfosAggressiveState2Handler::
-    call UpdateEntityPosWithSpeed_06              ; $4B1B: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $4B1B: $CD $41 $65
     call DefaultEntityPhysics_trampoline          ; $4B1E: $CD $23 $3B
-    call AddEntityZSpeedToPos_06                  ; $4B21: $CD $7A $65
-    ld   hl, wEntitiesSpeedZTable                 ; $4B24: $21 $20 $C3
+    call AddEntityZVelocityToPos_06               ; $4B21: $CD $7A $65
+    ld   hl, wEntitiesVelocityZTable              ; $4B24: $21 $20 $C3
     add  hl, bc                                   ; $4B27: $09
     dec  [hl]                                     ; $4B28: $35
     dec  [hl]                                     ; $4B29: $35
@@ -88,7 +88,7 @@ StalfosAggressiveState2Handler::
     ld   [hl], $C0                                ; $4B2F: $36 $C0
     call GetEntityTransitionCountdown             ; $4B31: $CD $05 $0C
     ld   [hl], $10                                ; $4B34: $36 $10
-    call ClearEntitySpeed                         ; $4B36: $CD $7F $3D
+    call ClearEntityVelocity                      ; $4B36: $CD $7F $3D
     call IncrementEntityState                     ; $4B39: $CD $12 $3B
 
 .jr_4B3C
@@ -99,7 +99,7 @@ StalfosAggressiveState3Handler::
     call GetEntityTransitionCountdown             ; $4B41: $CD $05 $0C
     ret  nz                                       ; $4B44: $C0
 
-    call AddEntityZSpeedToPos_06                  ; $4B45: $CD $7A $65
+    call AddEntityZVelocityToPos_06               ; $4B45: $CD $7A $65
     ld   hl, wEntitiesPosZTable                   ; $4B48: $21 $10 $C3
     add  hl, bc                                   ; $4B4B: $09
     ld   a, [hl]                                  ; $4B4C: $7E
@@ -115,7 +115,7 @@ StalfosAggressiveState3Handler::
     ld   [hl], $20                                ; $4B57: $36 $20
     call IncrementEntityState                     ; $4B59: $CD $12 $3B
     ld   [hl], b                                  ; $4B5C: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $4B5D: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4B5D: $21 $20 $C3
     add  hl, bc                                   ; $4B60: $09
     ld   a, [hl]                                  ; $4B61: $7E
     ld   [hl], b                                  ; $4B62: $70

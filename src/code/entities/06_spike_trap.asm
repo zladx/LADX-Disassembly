@@ -47,7 +47,7 @@ SpikeTrapState1Handler::
     call GetEntityTransitionCountdown             ; $753F: $CD $05 $0C
     jr   nz, ret_006_7599                         ; $7542: $20 $55
 
-    call ClearEntitySpeed                         ; $7544: $CD $7F $3D
+    call ClearEntityVelocity                      ; $7544: $CD $7F $3D
     call func_006_65A4                            ; $7547: $CD $A4 $65
     add  $12                                      ; $754A: $C6 $12
     cp   $24                                      ; $754C: $FE $24
@@ -61,7 +61,7 @@ SpikeTrapState1Handler::
     ld   hl, wEntitiesDirectionTable              ; $7559: $21 $80 $C3
     add  hl, bc                                   ; $755C: $09
     ld   [hl], e                                  ; $755D: $73
-    ld   hl, wEntitiesSpeedXTable                 ; $755E: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $755E: $21 $40 $C2
     add  hl, bc                                   ; $7561: $09
     ld   [hl], a                                  ; $7562: $77
     ld   e, $18                                   ; $7563: $1E $18
@@ -81,7 +81,7 @@ SpikeTrapState1Handler::
     ld   hl, wEntitiesDirectionTable              ; $7579: $21 $80 $C3
     add  hl, bc                                   ; $757C: $09
     ld   [hl], e                                  ; $757D: $73
-    ld   hl, wEntitiesSpeedYTable                 ; $757E: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $757E: $21 $50 $C2
     add  hl, bc                                   ; $7581: $09
     ld   [hl], a                                  ; $7582: $77
     ld   e, $10                                   ; $7583: $1E $10
@@ -108,7 +108,7 @@ jr_006_759A:
     jp   IncrementEntityState                     ; $759E: $C3 $12 $3B
 
 SpikeTrapState2Handler::
-    call UpdateEntityPosWithSpeed_06              ; $75A1: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $75A1: $CD $41 $65
     call GetEntityTransitionCountdown             ; $75A4: $CD $05 $0C
     jr   nz, jr_006_75B5                          ; $75A7: $20 $0C
 
@@ -140,16 +140,16 @@ SpikeTrapState3Handler::
     ld   hl, Data_006_7502                        ; $75CC: $21 $02 $75
     add  hl, de                                   ; $75CF: $19
     ld   a, [hl]                                  ; $75D0: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $75D1: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $75D1: $21 $40 $C2
     add  hl, bc                                   ; $75D4: $09
     ld   [hl], a                                  ; $75D5: $77
     ld   hl, Data_006_750A                        ; $75D6: $21 $0A $75
     add  hl, de                                   ; $75D9: $19
     ld   a, [hl]                                  ; $75DA: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $75DB: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $75DB: $21 $50 $C2
     add  hl, bc                                   ; $75DE: $09
     ld   [hl], a                                  ; $75DF: $77
-    call UpdateEntityPosWithSpeed_06              ; $75E0: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $75E0: $CD $41 $65
     ld   hl, wEntitiesPrivateState1Table          ; $75E3: $21 $B0 $C2
     add  hl, bc                                   ; $75E6: $09
     ld   a, [hl]                                  ; $75E7: $7E

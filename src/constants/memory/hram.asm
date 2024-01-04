@@ -87,11 +87,11 @@ hLinkPositionY::
  ds 1 ; FF99
 
 ; Increment applied to hLinkPositionX at the end of the frame
-hLinkSpeedX::
+hLinkVelocityX::
  ds 1 ; FF9A
 
 ; Increment applied to hLinkPositionY at the end of the frame
-hLinkSpeedY::
+hLinkVelocityY::
  ds 1 ; FF9B
 
 ; During gameplay: Link physics, mostly in side-scrolling sections.
@@ -144,7 +144,7 @@ hLinkInteractiveMotionBlocked::
 hLinkPositionZ::
   ds 1 ; FFA2
 
-; Z velocity of link, signed value.
+; Z Velocity of link, signed value.
 hLinkVelocityZ::
   ds 1 ; FFA3
 
@@ -216,7 +216,7 @@ hNextMusicTrackToFadeInto::
 
 ; When 1, Link is moving much slower, like when being
 ; incapacited by a gel.
-hLinkSlowWalkingSpeed::
+hLinkSlowWalkingVelocity::
   ds 1 ; FFB2
 
 ; Set to "hLinkPositionZ - wInvincibilityCounter" every frame

@@ -30,7 +30,7 @@ BooBuddyEntityHandler::
     call RenderActiveEntitySpritesPair            ; $79AC: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $79AF: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $79B2: $CD $F7 $64
-    call UpdateEntityPosWithSpeed_06              ; $79B5: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $79B5: $CD $41 $65
     call func_006_5E54                            ; $79B8: $CD $54 $5E
     ldh  a, [hActiveEntityState]                  ; $79BB: $F0 $F0
     JP_TABLE                                      ; $79BD
@@ -58,10 +58,10 @@ BooBuddyState0Handler::
     add  $06                                      ; $79E0: $C6 $06
     call GetVectorTowardsLink_trampoline          ; $79E2: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $79E5: $F0 $D7
-    ld   hl, wEntitiesSpeedYTable                 ; $79E7: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $79E7: $21 $50 $C2
     call func_006_7A79                            ; $79EA: $CD $79 $7A
     ldh  a, [hMultiPurpose1]                      ; $79ED: $F0 $D8
-    ld   hl, wEntitiesSpeedXTable                 ; $79EF: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $79EF: $21 $40 $C2
 
 .jr_79F2
     call func_006_7A79                            ; $79F2: $CD $79 $7A
@@ -85,7 +85,7 @@ jr_006_79FA:
     ld   [hl], $20                                ; $7A0F: $36 $20
 
 jr_006_7A11:
-    call ClearEntitySpeed                         ; $7A11: $CD $7F $3D
+    call ClearEntityVelocity                      ; $7A11: $CD $7F $3D
     call func_006_7AB0                            ; $7A14: $CD $B0 $7A
     ld   hl, wEntitiesPrivateState1Table          ; $7A17: $21 $B0 $C2
     add  hl, bc                                   ; $7A1A: $09
@@ -96,7 +96,7 @@ jr_006_7A11:
     call func_006_7A8C                            ; $7A1E: $CD $8C $7A
 
 jr_006_7A21:
-    call ClearEntitySpeed                         ; $7A21: $CD $7F $3D
+    call ClearEntityVelocity                      ; $7A21: $CD $7F $3D
     jp   func_006_7AB0                            ; $7A24: $C3 $B0 $7A
 
 jr_006_7A27:
@@ -130,13 +130,13 @@ BooBuddyState1Handler::
     ldh  a, [hMultiPurpose0]                      ; $7A52: $F0 $D7
     cpl                                           ; $7A54: $2F
     inc  a                                        ; $7A55: $3C
-    ld   hl, wEntitiesSpeedYTable                 ; $7A56: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $7A56: $21 $50 $C2
     add  hl, bc                                   ; $7A59: $09
     ld   [hl], a                                  ; $7A5A: $77
     ldh  a, [hMultiPurpose1]                      ; $7A5B: $F0 $D8
     cpl                                           ; $7A5D: $2F
     inc  a                                        ; $7A5E: $3C
-    ld   hl, wEntitiesSpeedXTable                 ; $7A5F: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7A5F: $21 $40 $C2
     add  hl, bc                                   ; $7A62: $09
     ld   [hl], a                                  ; $7A63: $77
     ldh  a, [hFrameCounter]                       ; $7A64: $F0 $E7

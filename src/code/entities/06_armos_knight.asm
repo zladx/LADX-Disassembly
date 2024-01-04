@@ -96,8 +96,8 @@ jr_006_5361:
     call BossIntro                                ; $5364: $CD $E8 $3E
     call label_3B70                               ; $5367: $CD $70 $3B
     call PushLinkOutOfEntity_06                   ; $536A: $CD $1A $64
-    call AddEntityZSpeedToPos_06                  ; $536D: $CD $7A $65
-    ld   hl, wEntitiesSpeedZTable                 ; $5370: $21 $20 $C3
+    call AddEntityZVelocityToPos_06               ; $536D: $CD $7A $65
+    ld   hl, wEntitiesVelocityZTable              ; $5370: $21 $20 $C3
     add  hl, bc                                   ; $5373: $09
     dec  [hl]                                     ; $5374: $35
     dec  [hl]                                     ; $5375: $35
@@ -109,7 +109,7 @@ jr_006_5361:
     jr   z, .jr_5387                              ; $537F: $28 $06
 
     ld   [hl], b                                  ; $5381: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $5382: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5382: $21 $20 $C3
     add  hl, bc                                   ; $5385: $09
     ld   [hl], b                                  ; $5386: $70
 
@@ -272,17 +272,17 @@ ArmosKnightState2Handler::
     ld   e, $F8                                   ; $547C: $1E $F8
 
 .jr_547E
-    ld   hl, wEntitiesSpeedXTable                 ; $547E: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $547E: $21 $40 $C2
     add  hl, bc                                   ; $5481: $09
     ld   [hl], e                                  ; $5482: $73
-    jp   AddEntitySpeedToPos_06                   ; $5483: $C3 $4E $65
+    jp   AddEntityVelocityToPos_06                ; $5483: $C3 $4E $65
 
 ArmosKnightState3Handler::
     call ApplyRecoilIfNeeded_06                   ; $5486: $CD $F7 $64
     call GetEntityTransitionCountdown             ; $5489: $CD $05 $0C
     jr   nz, .jr_549C                             ; $548C: $20 $0E
 
-    ld   hl, wEntitiesSpeedZTable                 ; $548E: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $548E: $21 $20 $C3
     add  hl, bc                                   ; $5491: $09
     ld   [hl], $30                                ; $5492: $36 $30
     call IncrementEntityState                     ; $5494: $CD $12 $3B
@@ -295,7 +295,7 @@ ArmosKnightState3Handler::
     and  a                                        ; $549E: $A7
     jr   z, jr_006_54BB                           ; $549F: $28 $1A
 
-    ld   hl, wEntitiesSpeedZTable                 ; $54A1: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $54A1: $21 $20 $C3
     add  hl, bc                                   ; $54A4: $09
     ld   [hl], $0C                                ; $54A5: $36 $0C
     ld   hl, wEntitiesHealthTable                 ; $54A7: $21 $60 $C3
@@ -313,11 +313,11 @@ ArmosKnightState3Handler::
     ldh  [hJingle], a                             ; $54B9: $E0 $F2
 
 jr_006_54BB:
-    jp   UpdateEntityPosWithSpeed_06              ; $54BB: $C3 $41 $65
+    jp   UpdateEntityPosWithVelocity_06           ; $54BB: $C3 $41 $65
 
 ArmosKnightState4Handler::
     call ApplyRecoilIfNeeded_06                   ; $54BE: $CD $F7 $64
-    ld   hl, wEntitiesSpeedZTable                 ; $54C1: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $54C1: $21 $20 $C3
     add  hl, bc                                   ; $54C4: $09
     ld   a, [hl]                                  ; $54C5: $7E
     and  $FE                                      ; $54C6: $E6 $FE
@@ -325,11 +325,11 @@ ArmosKnightState4Handler::
 
     call GetEntityTransitionCountdown             ; $54CA: $CD $05 $0C
     ld   [hl], $10                                ; $54CD: $36 $10
-    call ClearEntitySpeed                         ; $54CF: $CD $7F $3D
+    call ClearEntityVelocity                      ; $54CF: $CD $7F $3D
     call IncrementEntityState                     ; $54D2: $CD $12 $3B
 
 .jr_54D5
-    jp   UpdateEntityPosWithSpeed_06              ; $54D5: $C3 $41 $65
+    jp   UpdateEntityPosWithVelocity_06           ; $54D5: $C3 $41 $65
 
 ArmosKnightState5Handler::
     call ApplyRecoilIfNeeded_06                   ; $54D8: $CD $F7 $64
@@ -341,7 +341,7 @@ ArmosKnightState5Handler::
     ld   a, $B0                                   ; $54E5: $3E $B0
 
 .jr_54E7
-    ld   hl, wEntitiesSpeedZTable                 ; $54E7: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $54E7: $21 $20 $C3
     add  hl, bc                                   ; $54EA: $09
     ld   [hl], a                                  ; $54EB: $77
     ret                                           ; $54EC: $C9

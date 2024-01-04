@@ -65,7 +65,7 @@ YipYipEntityHandler::
     ld   hl, wEntitiesDirectionTable              ; $59F8: $21 $80 $C3
     add  hl, bc                                   ; $59FB: $09
     ld   [hl], e                                  ; $59FC: $73
-    call ClearEntitySpeed                         ; $59FD: $CD $7F $3D
+    call ClearEntityVelocity                      ; $59FD: $CD $7F $3D
     ld   a, [wDialogCharacterIndex]               ; $5A00: $FA $70 $C1
     ld   e, $00                                   ; $5A03: $1E $00
     and  $06                                      ; $5A05: $E6 $06
@@ -118,8 +118,8 @@ YipYipEntityHandler::
     call RenderActiveEntitySpritesPair            ; $5A43: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $5A46: $CD $C6 $64
     call DecrementEntityIgnoreHitsCountdown       ; $5A49: $CD $56 $0C
-    call AddEntityZSpeedToPos_06                  ; $5A4C: $CD $7A $65
-    ld   hl, wEntitiesSpeedZTable                 ; $5A4F: $21 $20 $C3
+    call AddEntityZVelocityToPos_06               ; $5A4C: $CD $7A $65
+    ld   hl, wEntitiesVelocityZTable              ; $5A4F: $21 $20 $C3
     add  hl, bc                                   ; $5A52: $09
     dec  [hl]                                     ; $5A53: $35
     dec  [hl]                                     ; $5A54: $35
@@ -132,7 +132,7 @@ YipYipEntityHandler::
 
     xor  a                                        ; $5A60: $AF
     ld   [hl], a                                  ; $5A61: $77
-    ld   hl, wEntitiesSpeedZTable                 ; $5A62: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5A62: $21 $20 $C3
     add  hl, bc                                   ; $5A65: $09
     ld   [hl], a                                  ; $5A66: $77
 
@@ -233,7 +233,7 @@ YipYipState0Handler::
     ld   hl, Data_006_5ADF                        ; $5AF7: $21 $DF $5A
     add  hl, de                                   ; $5AFA: $19
     ld   a, [hl]                                  ; $5AFB: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $5AFC: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5AFC: $21 $40 $C2
     add  hl, bc                                   ; $5AFF: $09
     ld   [hl], a                                  ; $5B00: $77
     ld   a, e                                     ; $5B01: $7B
@@ -247,7 +247,7 @@ YipYipState0Handler::
     ld   hl, Data_006_5ADF                        ; $5B0F: $21 $DF $5A
     add  hl, de                                   ; $5B12: $19
     ld   a, [hl]                                  ; $5B13: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $5B14: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $5B14: $21 $50 $C2
     add  hl, bc                                   ; $5B17: $09
     ld   [hl], a                                  ; $5B18: $77
     call GetEntityTransitionCountdown             ; $5B19: $CD $05 $0C
@@ -261,7 +261,7 @@ YipYipState0Handler::
     jp   label_006_5B4C                           ; $5B27: $C3 $4C $5B
 
 YipYipState1Handler::
-    call UpdateEntityPosWithSpeed_06              ; $5B2A: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $5B2A: $CD $41 $65
     call DefaultEntityPhysics_trampoline          ; $5B2D: $CD $23 $3B
     ldh  a, [hMultiPurposeG]                      ; $5B30: $F0 $E8
     and  a                                        ; $5B32: $A7
@@ -276,7 +276,7 @@ YipYipState1Handler::
     ret                                           ; $5B40: $C9
 
 .jr_5B41
-    ld   hl, wEntitiesSpeedZTable                 ; $5B41: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5B41: $21 $20 $C3
     add  hl, bc                                   ; $5B44: $09
     ld   [hl], $08                                ; $5B45: $36 $08
     ld   hl, wEntitiesPosZTable                   ; $5B47: $21 $10 $C3

@@ -47,15 +47,15 @@ SpikedBeetleEntityHandler::
     and  a                                        ; $77BB: $A7
     jr   z, .jr_77C1                              ; $77BC: $28 $03
 
-    call ClearEntitySpeed                         ; $77BE: $CD $7F $3D
+    call ClearEntityVelocity                      ; $77BE: $CD $7F $3D
 
 .jr_77C1
     call ApplyRecoilIfNeeded_07                   ; $77C1: $CD $C3 $7D
     call DefaultEnemyDamageCollisionHandler_trampoline ; $77C4: $CD $39 $3B
-    call UpdateEntityPosWithSpeed_07              ; $77C7: $CD $0A $7E
-    call AddEntityZSpeedToPos_07                  ; $77CA: $CD $43 $7E
+    call UpdateEntityPosWithVelocity_07           ; $77C7: $CD $0A $7E
+    call AddEntityZVelocityToPos_07               ; $77CA: $CD $43 $7E
     call DefaultEntityPhysics_trampoline          ; $77CD: $CD $23 $3B
-    ld   hl, wEntitiesSpeedZTable                 ; $77D0: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $77D0: $21 $20 $C3
     add  hl, bc                                   ; $77D3: $09
     dec  [hl]                                     ; $77D4: $35
     dec  [hl]                                     ; $77D5: $35
@@ -74,12 +74,12 @@ SpikedBeetleEntityHandler::
     cp   $03                                      ; $77E5: $FE $03
     jr   nz, jr_007_7808                          ; $77E7: $20 $1F
 
-    ld   hl, wEntitiesSpeedXTable                 ; $77E9: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $77E9: $21 $40 $C2
     add  hl, bc                                   ; $77EC: $09
     sra  [hl]                                     ; $77ED: $CB $2E
-    call GetEntitySpeedYAddress                   ; $77EF: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $77EF: $CD $05 $40
     sra  [hl]                                     ; $77F2: $CB $2E
-    ld   hl, wEntitiesSpeedZTable                 ; $77F4: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $77F4: $21 $20 $C3
     add  hl, bc                                   ; $77F7: $09
     ld   a, [hl]                                  ; $77F8: $7E
     sra  a                                        ; $77F9: $CB $2F
@@ -91,11 +91,11 @@ SpikedBeetleEntityHandler::
     jp   nc, jr_007_780D                          ; $77FF: $D2 $0D $78
 
     ld   [hl], b                                  ; $7802: $70
-    call ClearEntitySpeed                         ; $7803: $CD $7F $3D
+    call ClearEntityVelocity                      ; $7803: $CD $7F $3D
     jr   jr_007_780D                              ; $7806: $18 $05
 
 jr_007_7808:
-    ld   hl, wEntitiesSpeedZTable                 ; $7808: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $7808: $21 $20 $C3
     add  hl, bc                                   ; $780B: $09
     ld   [hl], b                                  ; $780C: $70
 
@@ -120,7 +120,7 @@ Data_007_7821::
     db   $00, $00, $FA, $06
 
 func_007_7825::
-    call ClearEntitySpeed                         ; $7825: $CD $7F $3D
+    call ClearEntityVelocity                      ; $7825: $CD $7F $3D
     call GetEntityTransitionCountdown             ; $7828: $CD $05 $0C
     jr   nz, jr_007_785E                          ; $782B: $20 $31
 
@@ -146,13 +146,13 @@ jr_007_784A:
     ld   hl, Data_007_781D                        ; $784B: $21 $1D $78
     add  hl, de                                   ; $784E: $19
     ld   a, [hl]                                  ; $784F: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $7850: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7850: $21 $40 $C2
     add  hl, bc                                   ; $7853: $09
     ld   [hl], a                                  ; $7854: $77
     ld   hl, Data_007_7821                        ; $7855: $21 $21 $78
     add  hl, de                                   ; $7858: $19
     ld   a, [hl]                                  ; $7859: $7E
-    call GetEntitySpeedYAddress                   ; $785A: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $785A: $CD $05 $40
     ld   [hl], a                                  ; $785D: $77
 
 jr_007_785E:
@@ -215,7 +215,7 @@ func_007_78A5::
     ld   hl, Data_007_789D                        ; $78B0: $21 $9D $78
     add  hl, de                                   ; $78B3: $19
     ld   a, [hl]                                  ; $78B4: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $78B5: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $78B5: $21 $40 $C2
     add  hl, bc                                   ; $78B8: $09
     sub  [hl]                                     ; $78B9: $96
     jr   z, jr_007_78C3                           ; $78BA: $28 $07
@@ -233,7 +233,7 @@ jr_007_78C3:
     ld   hl, Data_007_78A1                        ; $78C3: $21 $A1 $78
     add  hl, de                                   ; $78C6: $19
     ld   a, [hl]                                  ; $78C7: $7E
-    call GetEntitySpeedYAddress                   ; $78C8: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $78C8: $CD $05 $40
     sub  [hl]                                     ; $78CB: $96
     jr   z, jr_007_78D5                           ; $78CC: $28 $07
 
@@ -287,10 +287,10 @@ func_007_78EC::
 
     call IncrementEntityState                     ; $790A: $CD $12 $3B
     ld   [hl], b                                  ; $790D: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $790E: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $790E: $21 $20 $C3
     add  hl, bc                                   ; $7911: $09
     ld   [hl], $18                                ; $7912: $36 $18
-    ld   hl, wEntitiesSpeedXTable                 ; $7914: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7914: $21 $40 $C2
     add  hl, bc                                   ; $7917: $09
     ld   [hl], b                                  ; $7918: $70
     ret                                           ; $7919: $C9
@@ -306,7 +306,7 @@ func_007_78EC::
     ld   a, $F8                                   ; $7924: $3E $F8
 
 .jr_7926
-    ld   hl, wEntitiesSpeedXTable                 ; $7926: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7926: $21 $40 $C2
     add  hl, bc                                   ; $7929: $09
     ld   [hl], a                                  ; $792A: $77
 

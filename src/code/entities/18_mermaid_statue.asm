@@ -84,7 +84,7 @@ MermaidStatueOpeningHandler::
 .jr_49B6
     ret  nc                                       ; $49B6: $D0
 
-    ld   hl, wEntitiesSpeedXTable                 ; $49B7: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $49B7: $21 $40 $C2
     add  hl, bc                                   ; $49BA: $09
     ld   [hl], -4                                 ; $49BB: $36 $FC
-    jp   AddEntitySpeedToPos_18                   ; $49BD: $C3 $6C $7E
+    jp   AddEntityVelocityToPos_18                ; $49BD: $C3 $6C $7E

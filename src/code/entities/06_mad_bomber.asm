@@ -134,7 +134,7 @@ MadBomberState3Handler::
     ld   [hl], $04                                ; $41F6: $36 $04
 
 label_006_41F8:
-    ld   hl, wEntitiesSpeedZTable                 ; $41F8: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $41F8: $21 $20 $C3
     add  hl, de                                   ; $41FB: $19
     ld   [hl], $18                                ; $41FC: $36 $18
     ld   hl, wEntitiesTransitionCountdownTable    ; $41FE: $21 $E0 $C2

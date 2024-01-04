@@ -412,8 +412,8 @@ Data_019_4CF7::
 label_019_4CFF:
     ld   de, Data_019_4CF7                        ; $4CFF: $11 $F7 $4C
     call RenderActiveEntitySprite                 ; $4D02: $CD $77 $3C
-    call UpdateEntityPosWithSpeed_19              ; $4D05: $CD $B8 $7D
-    ld   hl, wEntitiesSpeedYTable                 ; $4D08: $21 $50 $C2
+    call UpdateEntityPosWithVelocity_19           ; $4D05: $CD $B8 $7D
+    ld   hl, wEntitiesVelocityYTable              ; $4D08: $21 $50 $C2
     add  hl, bc                                   ; $4D0B: $09
     inc  [hl]                                     ; $4D0C: $34
     call GetEntityTransitionCountdown             ; $4D0D: $CD $05 $0C
@@ -481,13 +481,13 @@ func_019_4D45::
     ld   hl, Data_019_4D35                        ; $4D7C: $21 $35 $4D
     add  hl, bc                                   ; $4D7F: $09
     ld   a, [hl]                                  ; $4D80: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $4D81: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4D81: $21 $40 $C2
     add  hl, de                                   ; $4D84: $19
     ld   [hl], a                                  ; $4D85: $77
     ld   hl, Data_019_4D3D                        ; $4D86: $21 $3D $4D
     add  hl, bc                                   ; $4D89: $09
     ld   a, [hl]                                  ; $4D8A: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $4D8B: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4D8B: $21 $50 $C2
     add  hl, de                                   ; $4D8E: $19
     sub  $08                                      ; $4D8F: $D6 $08
     ld   [hl], a                                  ; $4D91: $77

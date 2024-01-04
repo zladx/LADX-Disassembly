@@ -25,8 +25,8 @@ BunnyCallingMarinEntityHandler::
     ld   a, $02                                   ; $52B6: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $52B8: $E0 $A1
     ld   [wC167], a                               ; $52BA: $EA $67 $C1
-    call AddEntityZSpeedToPos_18                  ; $52BD: $CD $98 $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $52C0: $21 $20 $C3
+    call AddEntityZVelocityToPos_18               ; $52BD: $CD $98 $7E
+    ld   hl, wEntitiesVelocityZTable              ; $52C0: $21 $20 $C3
     add  hl, bc                                   ; $52C3: $09
     dec  [hl]                                     ; $52C4: $35
     dec  [hl]                                     ; $52C5: $35
@@ -38,7 +38,7 @@ BunnyCallingMarinEntityHandler::
     jr   z, .jr_52D7                              ; $52CF: $28 $06
 
     ld   [hl], b                                  ; $52D1: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $52D2: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $52D2: $21 $20 $C3
     add  hl, bc                                   ; $52D5: $09
     ld   [hl], b                                  ; $52D6: $70
 
@@ -54,10 +54,10 @@ BunnyCallingMarinState0Handler::
     call GetEntityTransitionCountdown             ; $52E2: $CD $05 $0C
     ret  nz                                       ; $52E5: $C0
 
-    ld   hl, wEntitiesSpeedXTable                 ; $52E6: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $52E6: $21 $40 $C2
     add  hl, bc                                   ; $52E9: $09
     ld   [hl], $0C                                ; $52EA: $36 $0C
-    call AddEntitySpeedToPos_18                   ; $52EC: $CD $6C $7E
+    call AddEntityVelocityToPos_18                ; $52EC: $CD $6C $7E
     ldh  a, [hActiveEntityPosX]                   ; $52EF: $F0 $EE
     cp   $20                                      ; $52F1: $FE $20
     jr   nz, .jr_5304                             ; $52F3: $20 $0F
@@ -101,7 +101,7 @@ func_018_5321::
     jr   nz, .ret_5337                            ; $532D: $20 $08
 
     ld   [hl], $08                                ; $532F: $36 $08
-    ld   hl, wEntitiesSpeedZTable                 ; $5331: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5331: $21 $20 $C3
     add  hl, bc                                   ; $5334: $09
     ld   [hl], $12                                ; $5335: $36 $12
 
@@ -166,16 +166,16 @@ jr_018_5375:
     cp   $E0                                      ; $538A: $FE $E0
     jr   z, .jr_5397                              ; $538C: $28 $09
 
-    ld   hl, wEntitiesSpeedXTable                 ; $538E: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $538E: $21 $40 $C2
     add  hl, bc                                   ; $5391: $09
     ld   [hl], $EC                                ; $5392: $36 $EC
-    call AddEntitySpeedToPos_18                   ; $5394: $CD $6C $7E
+    call AddEntityVelocityToPos_18                ; $5394: $CD $6C $7E
 
 .jr_5397
     ld   a, [wMarinEntityIndex]                   ; $5397: $FA $0F $C5
     ld   e, a                                     ; $539A: $5F
     ld   d, b                                     ; $539B: $50
-    ld   hl, wEntitiesSpeedXTable                 ; $539C: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $539C: $21 $40 $C2
     add  hl, de                                   ; $539F: $19
     ld   [hl], $F4                                ; $53A0: $36 $F4
     ldh  a, [hFrameCounter]                       ; $53A2: $F0 $E7
@@ -191,7 +191,7 @@ jr_018_5375:
     push bc                                       ; $53B1: $C5
     ld   c, e                                     ; $53B2: $4B
     ld   b, d                                     ; $53B3: $42
-    call AddEntitySpeedToPos_18                   ; $53B4: $CD $6C $7E
+    call AddEntityVelocityToPos_18                ; $53B4: $CD $6C $7E
     pop  bc                                       ; $53B7: $C1
     pop  de                                       ; $53B8: $D1
     ld   hl, wEntitiesPosXTable                   ; $53B9: $21 $00 $C2

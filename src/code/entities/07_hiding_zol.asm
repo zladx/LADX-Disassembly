@@ -36,8 +36,8 @@ HidingZolEntityHandler::
 jr_007_72C3:
     call ReturnIfNonInteractive_07                ; $72C3: $CD $96 $7D
     call ApplyRecoilIfNeeded_07                   ; $72C6: $CD $C3 $7D
-    call AddEntityZSpeedToPos_07                  ; $72C9: $CD $43 $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $72CC: $21 $20 $C3
+    call AddEntityZVelocityToPos_07               ; $72C9: $CD $43 $7E
+    ld   hl, wEntitiesVelocityZTable              ; $72CC: $21 $20 $C3
     add  hl, bc                                   ; $72CF: $09
     dec  [hl]                                     ; $72D0: $35
     dec  [hl]                                     ; $72D1: $35
@@ -49,7 +49,7 @@ jr_007_72C3:
     jr   z, .jr_72E3                              ; $72DB: $28 $06
 
     ld   [hl], b                                  ; $72DD: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $72DE: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $72DE: $21 $20 $C3
     add  hl, bc                                   ; $72E1: $09
     ld   [hl], b                                  ; $72E2: $70
 
@@ -99,7 +99,7 @@ func_007_7320::
     ld   hl, wEntitiesPosZTable                   ; $7325: $21 $10 $C3
     add  hl, bc                                   ; $7328: $09
     ld   [hl], $08                                ; $7329: $36 $08
-    ld   hl, wEntitiesSpeedZTable                 ; $732B: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $732B: $21 $20 $C3
     add  hl, bc                                   ; $732E: $09
     ld   [hl], $08                                ; $732F: $36 $08
     ld   hl, wEntitiesPhysicsFlagsTable           ; $7331: $21 $40 $C3
@@ -141,7 +141,7 @@ func_007_735C::
     jr   nz, .jr_736C                             ; $7362: $20 $08
 
     ld   [hl], $10                                ; $7364: $36 $10
-    call ClearEntitySpeed                         ; $7366: $CD $7F $3D
+    call ClearEntityVelocity                      ; $7366: $CD $7F $3D
     jp   IncrementEntityState                     ; $7369: $C3 $12 $3B
 
 .jr_736C
@@ -152,21 +152,21 @@ func_007_735C::
     ld   e, $F8                                   ; $7372: $1E $F8
 
 .jr_7374
-    ld   hl, wEntitiesSpeedXTable                 ; $7374: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7374: $21 $40 $C2
     add  hl, bc                                   ; $7377: $09
     ld   [hl], e                                  ; $7378: $73
-    jp   AddEntitySpeedToPos_07                   ; $7379: $C3 $17 $7E
+    jp   AddEntityVelocityToPos_07                ; $7379: $C3 $17 $7E
 
 func_007_737C::
     call DefaultEnemyDamageCollisionHandler_trampoline ; $737C: $CD $39 $3B
-    call UpdateEntityPosWithSpeed_07              ; $737F: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $737F: $CD $0A $7E
     call func_007_73F7                            ; $7382: $CD $F7 $73
     call GetEntityTransitionCountdown             ; $7385: $CD $05 $0C
     jr   nz, .jr_739B                             ; $7388: $20 $11
 
     ld   a, $0C                                   ; $738A: $3E $0C
     call ApplyVectorTowardsLink_trampoline        ; $738C: $CD $AA $3B
-    ld   hl, wEntitiesSpeedZTable                 ; $738F: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $738F: $21 $20 $C3
     add  hl, bc                                   ; $7392: $09
     ld   [hl], $18                                ; $7393: $36 $18
     call func_007_733F                            ; $7395: $CD $3F $73
@@ -178,13 +178,13 @@ func_007_737C::
 
 func_007_73A0::
     call DefaultEnemyDamageCollisionHandler_trampoline ; $73A0: $CD $39 $3B
-    call UpdateEntityPosWithSpeed_07              ; $73A3: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $73A3: $CD $0A $7E
     call func_007_73F7                            ; $73A6: $CD $F7 $73
     ldh  a, [hMultiPurposeG]                      ; $73A9: $F0 $E8
     and  a                                        ; $73AB: $A7
     jr   z, .jr_73D2                              ; $73AC: $28 $24
 
-    call ClearEntitySpeed                         ; $73AE: $CD $7F $3D
+    call ClearEntityVelocity                      ; $73AE: $CD $7F $3D
     call IncrementEntityState                     ; $73B1: $CD $12 $3B
     ld   [hl], $04                                ; $73B4: $36 $04
     call GetEntityTransitionCountdown             ; $73B6: $CD $05 $0C

@@ -1138,7 +1138,7 @@ func_014_5347::
     jr   z, jr_014_5360                           ; $5358: $28 $06
 
     call func_014_53A3                            ; $535A: $CD $A3 $53
-    jp   ClearEntitySpeed                         ; $535D: $C3 $7F $3D
+    jp   ClearEntityVelocity                      ; $535D: $C3 $7F $3D
 
 jr_014_5360:
     ld   a, [wC5AE]                               ; $5360: $FA $AE $C5
@@ -1288,19 +1288,19 @@ jr_014_5409:
     ld   hl, Data_014_5313                        ; $5420: $21 $13 $53
     add  hl, de                                   ; $5423: $19
     ld   a, [hl]                                  ; $5424: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $5425: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5425: $21 $40 $C2
     add  hl, bc                                   ; $5428: $09
     ld   [hl], a                                  ; $5429: $77
     ld   hl, Data_014_5323                        ; $542A: $21 $23 $53
     add  hl, de                                   ; $542D: $19
     ld   a, [hl]                                  ; $542E: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $542F: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $542F: $21 $50 $C2
     add  hl, bc                                   ; $5432: $09
     ld   [hl], a                                  ; $5433: $77
     ld   hl, Data_014_5333                        ; $5434: $21 $33 $53
     add  hl, de                                   ; $5437: $19
     ld   a, [hl]                                  ; $5438: $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $5439: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5439: $21 $20 $C3
     add  hl, bc                                   ; $543C: $09
     ld   [hl], a                                  ; $543D: $77
 

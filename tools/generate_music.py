@@ -75,9 +75,9 @@ def getLoopLabel(ptr):
     ptr = toGbPointer(ptr)
     return 'MusicLoop_{0}_{1}'.format(myhex(bank, 2), myhex(ptr, 4))
 
-def getSpeedDataLabel(ptr):
+def getVelocityDataLabel(ptr):
     bank = ptr // 0x4000
-    return 'MusicSpeedData_{0}_{1}'.format(myhex(bank), myhex(toGbPointer(ptr), 4))
+    return 'MusicVelocityData_{0}_{1}'.format(myhex(bank), myhex(toGbPointer(ptr), 4))
 
 NOTE_STRINGS = [ 'C_','C#','D_','D#','E_','F_','F#','G_','G#','A_','A#','B_' ]
 
@@ -319,9 +319,9 @@ def parseSoundChannelDefinition(ptr, channelIndex, endAddr, printPass):
                 out += '\n'
         elif op == 0x9e:
             sptr = bankedAddress(bank, read16(rom, ptr))
-            out += indent() + 'set_speed {0}\n'.format(getSpeedDataLabel(sptr))
+            out += indent() + 'set_Velocity {0}\n'.format(getVelocityDataLabel(sptr))
             ptr += 2
-            # I didn't add the speed pointer to the dataSet here, but it turned
+            # I didn't add the Velocity pointer to the dataSet here, but it turned
             # out not to matter (all are accounted for anyway apparently).
         elif op == 0x9f:
             val = signedByte(rom[ptr])
@@ -370,7 +370,7 @@ def dumpBank(indexTransformer):
 
             out += '    db   $' + myhex(rom[ptr]) + '\n'
             ptr += 1
-            out += '    dw   {0}\n'.format(getSpeedDataLabel(bankedAddress(bank, read16(rom, ptr))))
+            out += '    dw   {0}\n'.format(getVelocityDataLabel(bankedAddress(bank, read16(rom, ptr))))
             ptr += 2
             for c in range(1, 5): # Sound channels
                 cptr = read16(rom, ptr)
@@ -395,14 +395,14 @@ def dumpBank(indexTransformer):
             continue
         parsedMusicAddresses.add(ptr)
 
-        # Dump "speed" data
-        speedPtr = read16(rom, ptr)
-        assert(speedPtr != 0)
-        speedPtr = bankedAddress(MUSIC_BANK, speedPtr)
-        if not dataSet.hasDataAt(speedPtr):
-            speedData = Data(speedPtr, Data.printAsByteString)
-            speedData.setLabel(getSpeedDataLabel(speedPtr))
-            dataSet.addData(speedData)
+        # Dump "Velocity" data
+        VelocityPtr = read16(rom, ptr)
+        assert(VelocityPtr != 0)
+        VelocityPtr = bankedAddress(MUSIC_BANK, VelocityPtr)
+        if not dataSet.hasDataAt(VelocityPtr):
+            VelocityData = Data(VelocityPtr, Data.printAsByteString)
+            VelocityData.setLabel(getVelocityDataLabel(VelocityPtr))
+            dataSet.addData(VelocityData)
 
         # Dump sound channels
         ptr += 2

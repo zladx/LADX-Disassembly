@@ -73,7 +73,7 @@ func_007_4CEE::
     ld   hl, wEntitiesPrivateState4Table          ; $4D03: $21 $40 $C4
     add  hl, de                                   ; $4D06: $19
     ld   [hl], $01                                ; $4D07: $36 $01
-    ld   hl, wEntitiesSpeedXTable                 ; $4D09: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4D09: $21 $40 $C2
     add  hl, de                                   ; $4D0C: $19
     ld   [hl], $0E                                ; $4D0D: $36 $0E
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4D0F: $21 $40 $C3
@@ -117,7 +117,7 @@ func_007_4D27::
     ld   hl, wEntitiesInertiaTable                ; $4D42: $21 $D0 $C3
     add  hl, de                                   ; $4D45: $19
     ld   [hl], a                                  ; $4D46: $77
-    ld   hl, wEntitiesSpeedXTable                 ; $4D47: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4D47: $21 $40 $C2
     add  hl, de                                   ; $4D4A: $19
     ld   [hl], b                                  ; $4D4B: $70
 
@@ -131,8 +131,8 @@ func_007_4D4E::
     call GetEntityTransitionCountdown             ; $4D4E: $CD $05 $0C
     ret  nz                                       ; $4D51: $C0
 
-    call AddEntityZSpeedToPos_07                  ; $4D52: $CD $43 $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $4D55: $21 $20 $C3
+    call AddEntityZVelocityToPos_07               ; $4D52: $CD $43 $7E
+    ld   hl, wEntitiesVelocityZTable              ; $4D55: $21 $20 $C3
     add  hl, bc                                   ; $4D58: $09
     dec  [hl]                                     ; $4D59: $35
     dec  [hl]                                     ; $4D5A: $35
@@ -143,7 +143,7 @@ func_007_4D4E::
     ret  z                                        ; $4D62: $C8
 
     ld   [hl], b                                  ; $4D63: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $4D64: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4D64: $21 $20 $C3
     add  hl, bc                                   ; $4D67: $09
     ld   [hl], b                                  ; $4D68: $70
     call CheckLinkCollisionWithEnemy_trampoline   ; $4D69: $CD $5A $3B
@@ -197,7 +197,7 @@ func_007_4DA5::
     ld   hl, Data_007_4D9F                        ; $4DB1: $21 $9F $4D
     add  hl, de                                   ; $4DB4: $19
     ld   a, [hl]                                  ; $4DB5: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $4DB6: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4DB6: $21 $40 $C2
     add  hl, bc                                   ; $4DB9: $09
     add  [hl]                                     ; $4DBA: $86
     ld   [hl], a                                  ; $4DBB: $77
@@ -220,7 +220,7 @@ func_007_4DA5::
     ld   hl, Data_007_4D9F                        ; $4DD1: $21 $9F $4D
     add  hl, de                                   ; $4DD4: $19
     ld   a, [hl]                                  ; $4DD5: $7E
-    call GetEntitySpeedYAddress                   ; $4DD6: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $4DD6: $CD $05 $40
     add  [hl]                                     ; $4DD9: $86
     ld   [hl], a                                  ; $4DDA: $77
     ld   hl, Data_007_4DA3                        ; $4DDB: $21 $A3 $4D
@@ -235,7 +235,7 @@ func_007_4DA5::
     ld   [hl], a                                  ; $4DE9: $77
 
 jr_007_4DEA:
-    call UpdateEntityPosWithSpeed_07              ; $4DEA: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $4DEA: $CD $0A $7E
     ld   a, [wD202]                               ; $4DED: $FA $02 $D2
     and  a                                        ; $4DF0: $A7
     jp   nz, IncrementEntityState                 ; $4DF1: $C2 $12 $3B
@@ -320,7 +320,7 @@ func_007_4E25::
     ldh  [hLinkPositionX], a                      ; $4E87: $E0 $98
 
 .jr_4E89
-    jp   UpdateEntityPosWithSpeed_07              ; $4E89: $C3 $0A $7E
+    jp   UpdateEntityPosWithVelocity_07           ; $4E89: $C3 $0A $7E
 
 func_007_4E8C::
     ret                                           ; $4E8C: $C9

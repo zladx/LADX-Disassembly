@@ -345,9 +345,9 @@ label_007_5FAB:
 .jr_5FB1
     ld   de, Data_007_5F9B                        ; $5FB1: $11 $9B $5F
     call RenderActiveEntitySprite                 ; $5FB4: $CD $77 $3C
-    call UpdateEntityPosWithSpeed_07              ; $5FB7: $CD $0A $7E
-    call AddEntityZSpeedToPos_07                  ; $5FBA: $CD $43 $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $5FBD: $21 $20 $C3
+    call UpdateEntityPosWithVelocity_07           ; $5FB7: $CD $0A $7E
+    call AddEntityZVelocityToPos_07               ; $5FBA: $CD $43 $7E
+    ld   hl, wEntitiesVelocityZTable              ; $5FBD: $21 $20 $C3
     add  hl, bc                                   ; $5FC0: $09
     dec  [hl]                                     ; $5FC1: $35
     dec  [hl]                                     ; $5FC2: $35
@@ -370,7 +370,7 @@ label_007_5FAB:
     ld   hl, Data_007_5F9F                        ; $5FD9: $21 $9F $5F
     add  hl, de                                   ; $5FDC: $19
     ld   a, [hl]                                  ; $5FDD: $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $5FDE: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5FDE: $21 $20 $C3
     add  hl, bc                                   ; $5FE1: $09
     ld   [hl], a                                  ; $5FE2: $77
     call GetRandomByte                            ; $5FE3: $CD $0D $28
@@ -380,7 +380,7 @@ label_007_5FAB:
     ld   hl, Data_007_5FA3                        ; $5FEA: $21 $A3 $5F
     add  hl, de                                   ; $5FED: $19
     ld   a, [hl]                                  ; $5FEE: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $5FEF: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5FEF: $21 $40 $C2
     add  hl, bc                                   ; $5FF2: $09
     ld   [hl], a                                  ; $5FF3: $77
     ld   hl, Data_007_5FA7                        ; $5FF4: $21 $A7 $5F
@@ -388,7 +388,7 @@ label_007_5FAB:
 
 .jr_5FF8
     ld   a, [hl]                                  ; $5FF8: $7E
-    call GetEntitySpeedYAddress                   ; $5FF9: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $5FF9: $CD $05 $40
     ld   [hl], a                                  ; $5FFC: $77
     ld   a, e                                     ; $5FFD: $7B
     and  $01                                      ; $5FFE: $E6 $01

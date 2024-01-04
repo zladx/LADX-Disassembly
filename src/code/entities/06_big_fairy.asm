@@ -58,7 +58,7 @@ BigFairyEntityHandler::
     ld   hl, Data_006_70A3                        ; $70E6: $21 $A3 $70
     add  hl, de                                   ; $70E9: $19
     ld   a, [hl]                                  ; $70EA: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $70EB: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $70EB: $21 $40 $C2
     add  hl, bc                                   ; $70EE: $09
     add  [hl]                                     ; $70EF: $86
     ld   [hl], a                                  ; $70F0: $77
@@ -81,7 +81,7 @@ BigFairyEntityHandler::
     ld   hl, Data_006_70A3                        ; $7106: $21 $A3 $70
     add  hl, de                                   ; $7109: $19
     ld   a, [hl]                                  ; $710A: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $710B: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $710B: $21 $50 $C2
     add  hl, bc                                   ; $710E: $09
     add  [hl]                                     ; $710F: $86
     ld   [hl], a                                  ; $7110: $77
@@ -97,7 +97,7 @@ BigFairyEntityHandler::
     ld   [hl], a                                  ; $711F: $77
 
 jr_006_7120:
-    jp   UpdateEntityPosWithSpeed_06              ; $7120: $C3 $41 $65
+    jp   UpdateEntityPosWithVelocity_06           ; $7120: $C3 $41 $65
 
 label_006_7123:
     ld   hl, Data_006_7071                        ; $7123: $21 $71 $70
@@ -124,10 +124,10 @@ label_006_7123:
     ld   e, $02                                   ; $7148: $1E $02
 
 .jr_714A
-    ld   hl, wEntitiesSpeedZTable                 ; $714A: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $714A: $21 $20 $C3
     add  hl, bc                                   ; $714D: $09
     ld   [hl], e                                  ; $714E: $73
-    call AddEntityZSpeedToPos_06                  ; $714F: $CD $7A $65
+    call AddEntityZVelocityToPos_06               ; $714F: $CD $7A $65
     call ReturnIfNonInteractive_06                ; $7152: $CD $C6 $64
     ldh  a, [hActiveEntityState]                  ; $7155: $F0 $F0
     JP_TABLE                                      ; $7157
@@ -219,7 +219,7 @@ BigFairyHealingHandler::
     add  hl, de                                   ; $71E6: $19
     sub  $0E                                      ; $71E7: $D6 $0E
     ld   [hl], a                                  ; $71E9: $77
-    ld   hl, wEntitiesSpeedXTable                 ; $71EA: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $71EA: $21 $40 $C2
     add  hl, de                                   ; $71ED: $19
     ld   [hl], $E8                                ; $71EE: $36 $E8
 

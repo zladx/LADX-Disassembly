@@ -169,13 +169,13 @@ BushCrawlerState0Handler::
     ld   hl, Data_007_40CE                        ; $4100: $21 $CE $40
     add  hl, de                                   ; $4103: $19
     ld   a, [hl]                                  ; $4104: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $4105: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4105: $21 $40 $C2
     add  hl, bc                                   ; $4108: $09
     ld   [hl], a                                  ; $4109: $77
     ld   hl, Data_007_40D2                        ; $410A: $21 $D2 $40
     add  hl, de                                   ; $410D: $19
     ld   a, [hl]                                  ; $410E: $7E
-    call GetEntitySpeedYAddress                   ; $410F: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $410F: $CD $05 $40
     ld   [hl], a                                  ; $4112: $77
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4113: $21 $40 $C3
     add  hl, bc                                   ; $4116: $09
@@ -290,7 +290,7 @@ jr_007_41BE:
     ret                                           ; $41C7: $C9
 
 jr_007_41C8:
-    call UpdateEntityPosWithSpeed_07              ; $41C8: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $41C8: $CD $0A $7E
     call DefaultEntityPhysics_trampoline          ; $41CB: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $41CE: $21 $A0 $C2
     add  hl, bc                                   ; $41D1: $09
@@ -325,7 +325,7 @@ label_007_41F0:
     rra                                           ; $4200: $1F
     and  $01                                      ; $4201: $E6 $01
     call SetEntitySpriteVariant                   ; $4203: $CD $0C $3B
-    call UpdateEntityPosWithSpeed_07              ; $4206: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $4206: $CD $0A $7E
     call DefaultEntityPhysics_trampoline          ; $4209: $CD $23 $3B
     call DefaultEnemyDamageCollisionHandler_trampoline ; $420C: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $420F: $CD $05 $0C
@@ -341,13 +341,13 @@ label_007_41F0:
     ld   hl, Data_007_41E8                        ; $4220: $21 $E8 $41
     add  hl, de                                   ; $4223: $19
     ld   a, [hl]                                  ; $4224: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $4225: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4225: $21 $40 $C2
     add  hl, bc                                   ; $4228: $09
     ld   [hl], a                                  ; $4229: $77
     ld   hl, Data_007_41E6                        ; $422A: $21 $E6 $41
     add  hl, de                                   ; $422D: $19
     ld   a, [hl]                                  ; $422E: $7E
-    call GetEntitySpeedYAddress                   ; $422F: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $422F: $CD $05 $40
     ld   [hl], a                                  ; $4232: $77
 
 .ret_4233

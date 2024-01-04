@@ -26,6 +26,9 @@ DumpBanks
 *.sln
 *.suo
 
+# idea
+.idea
+
 # macos files
 *.DS_Store
 
@@ -35,3 +38,12 @@ DumpBanks
 # save files
 *.sav
 *.ss*
+
+### VisualStudioCode ###
+.vscode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets

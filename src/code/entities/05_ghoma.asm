@@ -53,7 +53,7 @@ GhomaEntityHandler::
 .jr_7C1C
     call BossIntro                                ; $7C1C: $CD $E8 $3E
     call DefaultEnemyDamageCollisionHandler_trampoline ; $7C1F: $CD $39 $3B
-    call UpdateEntityPosWithSpeed_05              ; $7C22: $CD $B1 $7A
+    call UpdateEntityPosWithVelocity_05           ; $7C22: $CD $B1 $7A
     call DefaultEntityPhysics_trampoline          ; $7C25: $CD $23 $3B
     call DecrementEntityIgnoreHitsCountdown       ; $7C28: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $7C2B: $F0 $F0
@@ -74,7 +74,7 @@ func_005_7C36::
     ld   hl, Data_005_7B51                        ; $7C42: $21 $51 $7B
     add  hl, de                                   ; $7C45: $19
     ld   a, [hl]                                  ; $7C46: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $7C47: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7C47: $21 $40 $C2
     add  hl, bc                                   ; $7C4A: $09
     ld   [hl], a                                  ; $7C4B: $77
     call IncrementEntityState                     ; $7C4C: $CD $12 $3B
@@ -102,10 +102,10 @@ func_005_7C52::
     ld   hl, Data_005_7B53                        ; $7C6C: $21 $53 $7B
     add  hl, de                                   ; $7C6F: $19
     ld   a, [hl]                                  ; $7C70: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $7C71: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7C71: $21 $40 $C2
     add  hl, bc                                   ; $7C74: $09
     ld   [hl], a                                  ; $7C75: $77
-    ld   hl, wEntitiesSpeedYTable                 ; $7C76: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $7C76: $21 $50 $C2
     add  hl, bc                                   ; $7C79: $09
     ld   [hl], b                                  ; $7C7A: $70
     call GetEntityPrivateCountdown1               ; $7C7B: $CD $00 $0C
@@ -128,10 +128,10 @@ func_005_7C52::
     ld   [hl], $60                                ; $7C9A: $36 $60
 
 jr_005_7C9C:
-    ld   hl, wEntitiesSpeedYTable                 ; $7C9C: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $7C9C: $21 $50 $C2
     add  hl, bc                                   ; $7C9F: $09
     ld   [hl], b                                  ; $7CA0: $70
-    ld   hl, wEntitiesSpeedXTable                 ; $7CA1: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7CA1: $21 $40 $C2
     add  hl, bc                                   ; $7CA4: $09
     and  $04                                      ; $7CA5: $E6 $04
     jr   nz, .jr_7CAE                             ; $7CA7: $20 $05
@@ -170,7 +170,7 @@ label_005_7CB3:
 func_005_7CD5::
     call IncrementEntityState                     ; $7CD5: $CD $12 $3B
     ld   [hl], $03                                ; $7CD8: $36 $03
-    call ClearEntitySpeed                         ; $7CDA: $CD $7F $3D
+    call ClearEntityVelocity                      ; $7CDA: $CD $7F $3D
     ld   hl, wEntitiesPrivateCountdown2Table      ; $7CDD: $21 $00 $C3
     add  hl, bc                                   ; $7CE0: $09
     ld   [hl], $40                                ; $7CE1: $36 $40
@@ -194,7 +194,7 @@ label_005_7CE8:
     call GetEntityPrivateCountdown1               ; $7CF1: $CD $00 $0C
     jr   z, .jr_7D01                              ; $7CF4: $28 $0B
 
-    ld   hl, wEntitiesSpeedXTable                 ; $7CF6: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7CF6: $21 $40 $C2
     add  hl, bc                                   ; $7CF9: $09
     ld   a, [hl]                                  ; $7CFA: $7E
     xor  $F0                                      ; $7CFB: $EE $F0
@@ -220,7 +220,7 @@ jr_005_7D09:
     ld   hl, Data_005_7B51                        ; $7D15: $21 $51 $7B
     add  hl, de                                   ; $7D18: $19
     ld   a, [hl]                                  ; $7D19: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $7D1A: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7D1A: $21 $40 $C2
     add  hl, bc                                   ; $7D1D: $09
     ld   [hl], a                                  ; $7D1E: $77
     jr   jr_005_7D48                              ; $7D1F: $18 $27
@@ -296,8 +296,8 @@ func_005_7D62::
     and  $02                                      ; $7D82: $E6 $02
     jr   z, .jr_7D92                              ; $7D84: $28 $0C
 
-    call ClearEntitySpeed                         ; $7D86: $CD $7F $3D
-    ld   hl, wEntitiesSpeedYTable                 ; $7D89: $21 $50 $C2
+    call ClearEntityVelocity                      ; $7D86: $CD $7F $3D
+    ld   hl, wEntitiesVelocityYTable              ; $7D89: $21 $50 $C2
     add  hl, bc                                   ; $7D8C: $09
     ld   [hl], $10                                ; $7D8D: $36 $10
     jp   label_005_7D97                           ; $7D8F: $C3 $97 $7D
@@ -330,8 +330,8 @@ jr_005_7DA8:
     ld   hl, wEntitiesPrivateState1Table          ; $7DB7: $21 $B0 $C2
     add  hl, bc                                   ; $7DBA: $09
     inc  [hl]                                     ; $7DBB: $34
-    call ClearEntitySpeed                         ; $7DBC: $CD $7F $3D
-    ld   hl, wEntitiesSpeedYTable                 ; $7DBF: $21 $50 $C2
+    call ClearEntityVelocity                      ; $7DBC: $CD $7F $3D
+    ld   hl, wEntitiesVelocityYTable              ; $7DBF: $21 $50 $C2
     add  hl, bc                                   ; $7DC2: $09
     ld   [hl], $F0                                ; $7DC3: $36 $F0
     ld   a, WAVE_SFX_BOSS_GROWL                   ; $7DC5: $3E $16
@@ -339,7 +339,7 @@ jr_005_7DA8:
     jp   label_005_7DF0                           ; $7DC9: $C3 $F0 $7D
 
 jr_005_7DCC:
-    ld   hl, wEntitiesSpeedXTable                 ; $7DCC: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7DCC: $21 $40 $C2
     add  hl, bc                                   ; $7DCF: $09
     and  $04                                      ; $7DD0: $E6 $04
     jr   nz, .jr_7DD8                             ; $7DD2: $20 $04
@@ -361,7 +361,7 @@ label_005_7DDC:
     jr   c, label_005_7DF0                        ; $7DE6: $38 $08
 
 label_005_7DE8:
-    call ClearEntitySpeed                         ; $7DE8: $CD $7F $3D
+    call ClearEntityVelocity                      ; $7DE8: $CD $7F $3D
     call IncrementEntityState                     ; $7DEB: $CD $12 $3B
     ld   [hl], $01                                ; $7DEE: $36 $01
 

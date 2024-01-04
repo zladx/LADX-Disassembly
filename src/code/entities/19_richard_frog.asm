@@ -29,12 +29,12 @@ RichardFrogEntityHandler::
     ld   de, RichardFrogSpriteVariants
     call RenderActiveEntitySpritesPair            ; $5BC3: $CD $C0 $3B
     call ReturnIfNonInteractive_19                ; $5BC6: $CD $3D $7D
-    call UpdateEntityPosWithSpeed_19              ; $5BC9: $CD $B8 $7D
-    call AddEntityZSpeedToPos_19                  ; $5BCC: $CD $F1 $7D
+    call UpdateEntityPosWithVelocity_19           ; $5BC9: $CD $B8 $7D
+    call AddEntityZVelocityToPos_19               ; $5BCC: $CD $F1 $7D
     call DefaultEntityPhysics_trampoline          ; $5BCF: $CD $23 $3B
 
 .jr_5BD2
-    ld   hl, wEntitiesSpeedZTable                 ; $5BD2: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5BD2: $21 $20 $C3
     add  hl, bc                                   ; $5BD5: $09
     dec  [hl]                                     ; $5BD6: $35
     dec  [hl]                                     ; $5BD7: $35
@@ -46,7 +46,7 @@ RichardFrogEntityHandler::
     jr   z, .jr_5BE9                              ; $5BE1: $28 $06
 
     ld   [hl], b                                  ; $5BE3: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $5BE4: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5BE4: $21 $20 $C3
     add  hl, bc                                   ; $5BE7: $09
     ld   [hl], b                                  ; $5BE8: $70
 
@@ -75,7 +75,7 @@ RichardFrogState0Handler::
     call GetRandomByte                            ; $5C10: $CD $0D $28
     and  $1F                                      ; $5C13: $E6 $1F
     or   $10                                      ; $5C15: $F6 $10
-    ld   hl, wEntitiesSpeedZTable                 ; $5C17: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $5C17: $21 $20 $C3
     add  hl, bc                                   ; $5C1A: $09
     ld   [hl], a                                  ; $5C1B: $77
     call GetRandomByte                            ; $5C1C: $CD $0D $28
@@ -87,7 +87,7 @@ RichardFrogState0Handler::
     ld   hl, Data_019_5BF0                        ; $5C23: $21 $F0 $5B
     add  hl, de                                   ; $5C26: $19
     ld   a, [hl]                                  ; $5C27: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $5C28: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $5C28: $21 $40 $C2
 
 .jr_5C2B
     add  hl, bc                                   ; $5C2B: $09
@@ -95,7 +95,7 @@ RichardFrogState0Handler::
     ld   hl, Data_019_5BF8                        ; $5C2D: $21 $F8 $5B
     add  hl, de                                   ; $5C30: $19
     ld   a, [hl]                                  ; $5C31: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $5C32: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $5C32: $21 $50 $C2
     add  hl, bc                                   ; $5C35: $09
     ld   [hl], a                                  ; $5C36: $77
     ld   hl, Data_019_5C00                        ; $5C37: $21 $00 $5C
@@ -121,7 +121,7 @@ RichardFrogState1Handler::
     and  $1F                                      ; $5C54: $E6 $1F
     add  $10                                      ; $5C56: $C6 $10
     ld   [hl], a                                  ; $5C58: $77
-    call ClearEntitySpeed                         ; $5C59: $CD $7F $3D
+    call ClearEntityVelocity                      ; $5C59: $CD $7F $3D
     call IncrementEntityState                     ; $5C5C: $CD $12 $3B
     ld   [hl], b                                  ; $5C5F: $70
     ret                                           ; $5C60: $C9

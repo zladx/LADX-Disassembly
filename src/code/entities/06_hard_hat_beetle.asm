@@ -29,7 +29,7 @@ HardHatBeetleEntityHandler::
     call ReturnIfNonInteractive_06                ; $4F4B: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $4F4E: $CD $F7 $64
     call DefaultEnemyDamageCollisionHandler_trampoline ; $4F51: $CD $39 $3B
-    call UpdateEntityPosWithSpeed_06              ; $4F54: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $4F54: $CD $41 $65
     call DefaultEntityPhysics_trampoline          ; $4F57: $CD $23 $3B
     ldh  a, [hFrameCounter]                       ; $4F5A: $F0 $E7
     rra                                           ; $4F5C: $1F
@@ -48,7 +48,7 @@ HardHatBeetleEntityHandler::
     add  $04                                      ; $4F71: $C6 $04
     call GetVectorTowardsLink_trampoline          ; $4F73: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $4F76: $F0 $D7
-    ld   hl, wEntitiesSpeedYTable                 ; $4F78: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4F78: $21 $50 $C2
     call func_006_4FA3                            ; $4F7B: $CD $A3 $4F
     ld   hl, wEntitiesCollisionsTable             ; $4F7E: $21 $A0 $C2
     add  hl, bc                                   ; $4F81: $09
@@ -56,13 +56,13 @@ HardHatBeetleEntityHandler::
     and  $0C                                      ; $4F83: $E6 $0C
     jr   z, .jr_4F8C                              ; $4F85: $28 $05
 
-    ld   hl, wEntitiesSpeedYTable                 ; $4F87: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $4F87: $21 $50 $C2
     add  hl, bc                                   ; $4F8A: $09
     ld   [hl], b                                  ; $4F8B: $70
 
 .jr_4F8C
     ldh  a, [hMultiPurpose1]                      ; $4F8C: $F0 $D8
-    ld   hl, wEntitiesSpeedXTable                 ; $4F8E: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4F8E: $21 $40 $C2
     call func_006_4FA3                            ; $4F91: $CD $A3 $4F
     ld   hl, wEntitiesCollisionsTable             ; $4F94: $21 $A0 $C2
     add  hl, bc                                   ; $4F97: $09
@@ -70,7 +70,7 @@ HardHatBeetleEntityHandler::
     and  $03                                      ; $4F99: $E6 $03
     jr   z, .ret_4FA2                             ; $4F9B: $28 $05
 
-    ld   hl, wEntitiesSpeedXTable                 ; $4F9D: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4F9D: $21 $40 $C2
     add  hl, bc                                   ; $4FA0: $09
     ld   [hl], b                                  ; $4FA1: $70
 

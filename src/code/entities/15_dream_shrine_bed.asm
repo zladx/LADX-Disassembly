@@ -35,9 +35,9 @@ func_015_7D01::
     ld   a, $12                                   ; $7D2F: $3E $12
     ldh  [hLinkVelocityZ], a                      ; $7D31: $E0 $A3
     ld   a, $0C                                   ; $7D33: $3E $0C
-    ldh  [hLinkSpeedX], a                         ; $7D35: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $7D35: $E0 $9A
     xor  a                                        ; $7D37: $AF
-    ldh  [hLinkSpeedY], a                         ; $7D38: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $7D38: $E0 $9B
     ld   a, $00                                   ; $7D3A: $3E $00
     ldh  [hLinkDirection], a                      ; $7D3C: $E0 $9E
     ld   a, $01                                   ; $7D3E: $3E $01

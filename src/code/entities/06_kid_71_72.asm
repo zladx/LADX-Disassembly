@@ -57,9 +57,9 @@ Kid72EntityHandler::
     ld   de, KidBallSprite                        ; $6087: $11 $7D $60
     call RenderActiveEntitySprite                 ; $608A: $CD $77 $3C
     call ReturnIfNonInteractive_06                ; $608D: $CD $C6 $64
-    call UpdateEntityPosWithSpeed_06              ; $6090: $CD $41 $65
-    call AddEntityZSpeedToPos_06                  ; $6093: $CD $7A $65
-    ld   hl, wEntitiesSpeedZTable                 ; $6096: $21 $20 $C3
+    call UpdateEntityPosWithVelocity_06           ; $6090: $CD $41 $65
+    call AddEntityZVelocityToPos_06               ; $6093: $CD $7A $65
+    ld   hl, wEntitiesVelocityZTable              ; $6096: $21 $20 $C3
     add  hl, bc                                   ; $6099: $09
     dec  [hl]                                     ; $609A: $35
     call GetEntityTransitionCountdown             ; $609B: $CD $05 $0C
@@ -151,7 +151,7 @@ KidBowwowKidnapState1::
 .moveTowardsLink:
     ld   a, $08                                   ; $6124: $3E $08
     call ApplyVectorTowardsLink_trampoline        ; $6126: $CD $AA $3B
-    call UpdateEntityPosWithSpeed_06              ; $6129: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $6129: $CD $41 $65
     ld   a, $02                                   ; $612C: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $612E: $E0 $A1
     ld   [wC167], a                               ; $6130: $EA $67 $C1
@@ -168,8 +168,8 @@ KidBowwowKidnapState2::
     jr   nc, .noTalking                           ; $6145: $30 $05
     call_open_dialog Dialog220                    ; $6147
 .noTalking
-    call AddEntityZSpeedToPos_06                  ; $614C: $CD $7A $65
-    ld   hl, wEntitiesSpeedZTable                 ; $614F: $21 $20 $C3
+    call AddEntityZVelocityToPos_06               ; $614C: $CD $7A $65
+    ld   hl, wEntitiesVelocityZTable              ; $614F: $21 $20 $C3
     add  hl, bc                                   ; $6152: $09
     dec  [hl]                                     ; $6153: $35
     dec  [hl]                                     ; $6154: $35
@@ -184,7 +184,7 @@ KidBowwowKidnapState2::
 
 .jr_6161
     ld   [hl], b                                  ; $6161: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $6162: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6162: $21 $20 $C3
     add  hl, bc                                   ; $6165: $09
     ld   [hl], b                                  ; $6166: $70
     ldh  a, [hFrameCounter]                       ; $6167: $F0 $E7
@@ -205,8 +205,8 @@ KidPlayingWithBall:
     call RenderActiveEntitySpritesPair            ; $617C: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $617F: $CD $C6 $64
     call func_006_6230                            ; $6182: $CD $30 $62
-    call AddEntityZSpeedToPos_06                  ; $6185: $CD $7A $65
-    ld   hl, wEntitiesSpeedZTable                 ; $6188: $21 $20 $C3
+    call AddEntityZVelocityToPos_06               ; $6185: $CD $7A $65
+    ld   hl, wEntitiesVelocityZTable              ; $6188: $21 $20 $C3
     add  hl, bc                                   ; $618B: $09
     dec  [hl]                                     ; $618C: $35
     ld   hl, wEntitiesPosZTable                   ; $618D: $21 $10 $C3
@@ -218,7 +218,7 @@ KidPlayingWithBall:
 
     xor  a                                        ; $6198: $AF
     ld   [hl], a                                  ; $6199: $77
-    ld   hl, wEntitiesSpeedZTable                 ; $619A: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $619A: $21 $20 $C3
     add  hl, bc                                   ; $619D: $09
     ld   [hl], a                                  ; $619E: $77
 
@@ -252,7 +252,7 @@ KidWithBallState0::
     ld   hl, wEntitiesPrivateState1Table          ; $61CA: $21 $B0 $C2
     add  hl, de                                   ; $61CD: $19
     ld   [hl], $01                                ; $61CE: $36 $01
-    ld   hl, wEntitiesSpeedZTable                 ; $61D0: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $61D0: $21 $20 $C3
     add  hl, de                                   ; $61D3: $19
     ld   [hl], $10                                ; $61D4: $36 $10
     ldh  a, [hActiveEntityType]                   ; $61D6: $F0 $EB
@@ -261,7 +261,7 @@ KidWithBallState0::
     jr   z, .throwRight                           ; $61DC: $28 $02
     ld   a, -$14                                  ; $61DE: $3E $EC
 .throwRight
-    ld   hl, wEntitiesSpeedXTable                 ; $61E0: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $61E0: $21 $40 $C2
     add  hl, de                                   ; $61E3: $19
     ld   [hl], a                                  ; $61E4: $77
     ld   hl, wEntitiesTransitionCountdownTable    ; $61E5: $21 $E0 $C2
@@ -291,7 +291,7 @@ KidWithBallState1::
     and  a                                        ; $6201: $A7
     jr   z, .noJump                               ; $6202: $28 $06
 
-    ld   hl, wEntitiesSpeedZTable                 ; $6204: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6204: $21 $20 $C3
     add  hl, bc                                   ; $6207: $09
     ld   [hl], $08                                ; $6208: $36 $08
 

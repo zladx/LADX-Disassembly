@@ -6,21 +6,21 @@
 ; is transfered to address $100, which immediatly jumps here.
 ; (See header.asm)
 Start::
-    ; Switch CPU to double-speed if needed
+    ; Switch CPU to double-Velocity if needed
     cp   BOOTUP_A_CGB ; running on Game Boy Color? ; $0150: $FE $11
     jr   nz, .notGBC                              ; $0152: $20 $1A
     ldh  a, [rKEY1]                               ; $0154: $F0 $4D
-    and  KEY1F_DBLSPEED       ; do we need to     ; $0156: $E6 $80
-    jr   nz, .speedSwitchDone ; switch CPU speed? ; $0158: $20 $0D
+    and  KEY1F_DBLVelocity       ; do we need to     ; $0156: $E6 $80
+    jr   nz, .VelocitySwitchDone ; switch CPU Velocity? ; $0158: $20 $0D
     ld   a, P1F_5 | P1F_4 ; \                     ; $015A: $3E $30
     ldh  [rP1], a         ; |                     ; $015C: $E0 $00
     ld   a, KEY1F_PREPARE ; |                     ; $015E: $3E $01
-    ldh  [rKEY1], a       ; | Prepare CPU speed   ; $0160: $E0 $4D
+    ldh  [rKEY1], a       ; | Prepare CPU Velocity   ; $0160: $E0 $4D
     xor  a                ; |                     ; $0162: $AF
     ldh  [rIE], a         ; |                     ; $0163: $E0 $FF
-    stop                  ; / Switch CPU speed    ; $0165: $10 $00
+    stop                  ; / Switch CPU Velocity    ; $0165: $10 $00
 
-.speedSwitchDone
+.VelocitySwitchDone
     xor  a                                        ; $0167: $AF
     ldh  [rSVBK], a                               ; $0168: $E0 $70
     ld   a, $01 ; isGBC = true                    ; $016A: $3E $01

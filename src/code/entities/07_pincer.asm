@@ -156,7 +156,7 @@ func_007_5383::
     jp   SetEntitySpriteVariant                   ; $53BA: $C3 $0C $3B
 
 func_007_53BD::
-    call UpdateEntityPosWithSpeed_07              ; $53BD: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $53BD: $CD $0A $7E
     call GetEntityTransitionCountdown             ; $53C0: $CD $05 $0C
     jr   nz, .jr_53CA                             ; $53C3: $20 $05
 
@@ -220,7 +220,7 @@ func_007_53D8::
     ldh  [hLinkPositionY], a                      ; $5420: $E0 $99
     pop  af                                       ; $5422: $F1
     ldh  [hLinkPositionX], a                      ; $5423: $E0 $98
-    call UpdateEntityPosWithSpeed_07              ; $5425: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $5425: $CD $0A $7E
     jp   DefaultEnemyDamageCollisionHandler_trampoline ; $5428: $C3 $39 $3B
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list

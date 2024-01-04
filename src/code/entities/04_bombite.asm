@@ -73,7 +73,7 @@ TimerBombiteEntityHandler::
 
 .jr_7D51
     call ApplyRecoilIfNeeded_04                   ; $7D51: $CD $80 $6D
-    call UpdateEntityPosWithSpeed_04              ; $7D54: $CD $CA $6D
+    call UpdateEntityPosWithVelocity_04           ; $7D54: $CD $CA $6D
     call DefaultEntityPhysics_trampoline          ; $7D57: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $7D5A: $F0 $F0
     JP_TABLE                                      ; $7D5C
@@ -101,13 +101,13 @@ func_004_7D69::
     ld   hl, Data_004_7D61                        ; $7D7D: $21 $61 $7D
     add  hl, de                                   ; $7D80: $19
     ld   a, [hl]                                  ; $7D81: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $7D82: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7D82: $21 $40 $C2
     add  hl, bc                                   ; $7D85: $09
     ld   [hl], a                                  ; $7D86: $77
     ld   hl, Data_004_7D65                        ; $7D87: $21 $65 $7D
     add  hl, de                                   ; $7D8A: $19
     ld   a, [hl]                                  ; $7D8B: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $7D8C: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $7D8C: $21 $50 $C2
     add  hl, bc                                   ; $7D8F: $09
     ld   [hl], a                                  ; $7D90: $77
 
@@ -157,7 +157,7 @@ func_004_7DA3::
     jr   jr_004_7DD4                              ; $7DCF: $18 $03
 
 jr_004_7DD1:
-    call ClearEntitySpeed                         ; $7DD1: $CD $7F $3D
+    call ClearEntityVelocity                      ; $7DD1: $CD $7F $3D
 
 jr_004_7DD4:
     call GetEntityDropTimer                       ; $7DD4: $CD $FB $0B
@@ -225,7 +225,7 @@ BouncingBombiteEntityHandler::
     call DefaultEnemyDamageCollisionHandler_trampoline ; $7E27: $CD $39 $3B
 
 .jr_7E2A
-    call UpdateEntityPosWithSpeed_04              ; $7E2A: $CD $CA $6D
+    call UpdateEntityPosWithVelocity_04           ; $7E2A: $CD $CA $6D
     call DefaultEntityPhysics_trampoline          ; $7E2D: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $7E30: $F0 $F0
     JP_TABLE                                      ; $7E32
@@ -266,13 +266,13 @@ jr_004_7E5D:
     ld   hl, Data_004_7E05                        ; $7E5F: $21 $05 $7E
     add  hl, de                                   ; $7E62: $19
     ld   a, [hl]                                  ; $7E63: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $7E64: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7E64: $21 $40 $C2
     add  hl, bc                                   ; $7E67: $09
     ld   [hl], a                                  ; $7E68: $77
     ld   hl, Data_004_7E09                        ; $7E69: $21 $09 $7E
     add  hl, de                                   ; $7E6C: $19
     ld   a, [hl]                                  ; $7E6D: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $7E6E: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $7E6E: $21 $50 $C2
     add  hl, bc                                   ; $7E71: $09
     ld   [hl], a                                  ; $7E72: $77
     call GetEntityTransitionCountdown             ; $7E73: $CD $05 $0C
@@ -302,7 +302,7 @@ func_004_7E83::
     jr   jr_004_7EB1                              ; $7E99: $18 $16
 
 .jr_7E9B
-    ld   hl, wEntitiesSpeedXTable                 ; $7E9B: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7E9B: $21 $40 $C2
     add  hl, bc                                   ; $7E9E: $09
     ld   a, [hl]                                  ; $7E9F: $7E
     cpl                                           ; $7EA0: $2F
@@ -311,7 +311,7 @@ func_004_7E83::
     jr   jr_004_7EAD                              ; $7EA3: $18 $08
 
 jr_004_7EA5:
-    ld   hl, wEntitiesSpeedYTable                 ; $7EA5: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $7EA5: $21 $50 $C2
     add  hl, bc                                   ; $7EA8: $09
     ld   a, [hl]                                  ; $7EA9: $7E
     cpl                                           ; $7EAA: $2F

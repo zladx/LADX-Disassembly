@@ -53,9 +53,9 @@ func_004_6848::
     cp   LINK_MOTION_DEFAULT                      ; $6855: $FE $00
     jp   nz, label_004_68E4                       ; $6857: $C2 $E4 $68
 
-    ldh  a, [hLinkSpeedX]                         ; $685A: $F0 $9A
+    ldh  a, [hLinkVelocityX]                      ; $685A: $F0 $9A
     push af                                       ; $685C: $F5
-    ldh  a, [hLinkSpeedY]                         ; $685D: $F0 $9B
+    ldh  a, [hLinkVelocityY]                      ; $685D: $F0 $9B
     push af                                       ; $685F: $F5
     ld   e, $00                                   ; $6860: $1E $00
     ldh  a, [hActiveEntityType]                   ; $6862: $F0 $EB
@@ -78,7 +78,7 @@ func_004_6848::
     inc  a                                        ; $6879: $3C
 
 .jr_687A
-    ldh  [hLinkSpeedY], a                         ; $687A: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $687A: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $687C: $F0 $D8
     bit  0, e                                     ; $687E: $CB $43
     jr   z, .jr_6884                              ; $6880: $28 $02
@@ -87,15 +87,15 @@ func_004_6848::
     inc  a                                        ; $6883: $3C
 
 .jr_6884
-    ldh  [hLinkSpeedX], a                         ; $6884: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $6884: $E0 $9A
     push bc                                       ; $6886: $C5
     call UpdateFinalLinkPosition                  ; $6887: $CD $A8 $21
     call label_3E19                               ; $688A: $CD $19 $3E
     pop  bc                                       ; $688D: $C1
     pop  af                                       ; $688E: $F1
-    ldh  [hLinkSpeedY], a                         ; $688F: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $688F: $E0 $9B
     pop  af                                       ; $6891: $F1
-    ldh  [hLinkSpeedX], a                         ; $6892: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $6892: $E0 $9A
     xor  a                                        ; $6894: $AF
     ld   [wIsLinkPushing], a                      ; $6895: $EA $44 $C1
     ldh  a, [hActiveEntityType]                   ; $6898: $F0 $EB
@@ -207,11 +207,11 @@ label_004_6910:
     ldh  [hLinkPositionX], a                      ; $6934: $E0 $98
     ldh  a, [hActiveEntityPosY]                   ; $6936: $F0 $EF
     ldh  [hLinkPositionY], a                      ; $6938: $E0 $99
-    ld   hl, wEntitiesSpeedXTable                 ; $693A: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $693A: $21 $40 $C2
     add  hl, bc                                   ; $693D: $09
     ld   a, [hl]                                  ; $693E: $7E
     push af                                       ; $693F: $F5
-    ld   hl, wEntitiesSpeedYTable                 ; $6940: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6940: $21 $50 $C2
     add  hl, bc                                   ; $6943: $09
     ld   a, [hl]                                  ; $6944: $7E
     push af                                       ; $6945: $F5
@@ -233,7 +233,7 @@ label_004_6910:
     inc  a                                        ; $695B: $3C
 
 .jr_695C
-    ld   hl, wEntitiesSpeedYTable                 ; $695C: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $695C: $21 $50 $C2
     add  hl, bc                                   ; $695F: $09
     ld   [hl], a                                  ; $6960: $77
     ldh  a, [hMultiPurpose1]                      ; $6961: $F0 $D8
@@ -244,11 +244,11 @@ label_004_6910:
     inc  a                                        ; $6968: $3C
 
 .jr_6969
-    ld   hl, wEntitiesSpeedXTable                 ; $6969: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6969: $21 $40 $C2
     add  hl, bc                                   ; $696C: $09
     ld   [hl], a                                  ; $696D: $77
     call CopyEntityPositionToActivePosition       ; $696E: $CD $8A $3D
-    call UpdateEntityPosWithSpeed_04              ; $6971: $CD $CA $6D
+    call UpdateEntityPosWithVelocity_04           ; $6971: $CD $CA $6D
     call DefaultEntityPhysics_trampoline          ; $6974: $CD $23 $3B
     ldh  a, [hActiveEntityPosX]                   ; $6977: $F0 $EE
     ld   hl, hLinkPositionX                       ; $6979: $21 $98 $FF
@@ -268,11 +268,11 @@ label_004_6910:
 
 .jr_6992
     pop  af                                       ; $6992: $F1
-    ld   hl, wEntitiesSpeedYTable                 ; $6993: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $6993: $21 $50 $C2
     add  hl, bc                                   ; $6996: $09
     ld   [hl], a                                  ; $6997: $77
     pop  af                                       ; $6998: $F1
-    ld   hl, wEntitiesSpeedXTable                 ; $6999: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $6999: $21 $40 $C2
     add  hl, bc                                   ; $699C: $09
     ld   [hl], a                                  ; $699D: $77
     pop  af                                       ; $699E: $F1

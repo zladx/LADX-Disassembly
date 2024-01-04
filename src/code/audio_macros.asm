@@ -80,8 +80,8 @@ macro set_envelope_duty
     db $9d, \1, \2, ((\3<<6) | \4)
 endm
 
-; Takes a pointer to some data which determines the music speed.
-macro set_speed
+; Takes a pointer to some data which determines the music Velocity.
+macro set_Velocity
     db $9e
     dw \1
 endm

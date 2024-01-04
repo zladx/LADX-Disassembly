@@ -44,8 +44,8 @@ jr_006_7C2E:
     ld   hl, wC1AE                                ; $7C2E: $21 $AE $C1
     inc  [hl]                                     ; $7C31: $34
     call ReturnIfNonInteractive_06                ; $7C32: $CD $C6 $64
-    call AddEntityZSpeedToPos_06                  ; $7C35: $CD $7A $65
-    ld   hl, wEntitiesSpeedZTable                 ; $7C38: $21 $20 $C3
+    call AddEntityZVelocityToPos_06               ; $7C35: $CD $7A $65
+    ld   hl, wEntitiesVelocityZTable              ; $7C38: $21 $20 $C3
     add  hl, bc                                   ; $7C3B: $09
     dec  [hl]                                     ; $7C3C: $35
     dec  [hl]                                     ; $7C3D: $35
@@ -58,7 +58,7 @@ jr_006_7C2E:
     jr   z, .jr_7C50                              ; $7C48: $28 $06
 
     ld   [hl], b                                  ; $7C4A: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $7C4B: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $7C4B: $21 $20 $C3
     add  hl, bc                                   ; $7C4E: $09
     ld   [hl], b                                  ; $7C4F: $70
 
@@ -93,11 +93,11 @@ jr_006_7C2E:
     ld   a, [hl]                                  ; $7C77: $7E
     sub  $04                                      ; $7C78: $D6 $04
     ld   [hl], a                                  ; $7C7A: $77
-    call ClearEntitySpeed                         ; $7C7B: $CD $7F $3D
+    call ClearEntityVelocity                      ; $7C7B: $CD $7F $3D
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7C7E: $21 $10 $C4
     add  hl, bc                                   ; $7C81: $09
     ld   [hl], b                                  ; $7C82: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $7C83: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $7C83: $21 $20 $C3
     add  hl, bc                                   ; $7C86: $09
     ld   [hl], $20                                ; $7C87: $36 $20
     ld   a, ENTITY_GEL                            ; $7C89: $3E $1C
@@ -123,7 +123,7 @@ jr_006_7C2E:
     ld   hl, wEntitiesPosZTable                   ; $7CAC: $21 $10 $C3
     add  hl, de                                   ; $7CAF: $19
     ld   [hl], a                                  ; $7CB0: $77
-    ld   hl, wEntitiesSpeedZTable                 ; $7CB1: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $7CB1: $21 $20 $C3
     add  hl, de                                   ; $7CB4: $19
     ld   [hl], $20                                ; $7CB5: $36 $20
 
@@ -174,7 +174,7 @@ ZolState1Handler::
     jr   nz, func_006_7D0F                        ; $7CF5: $20 $18
 
     ld   [hl], $10                                ; $7CF7: $36 $10
-    call ClearEntitySpeed                         ; $7CF9: $CD $7F $3D
+    call ClearEntityVelocity                      ; $7CF9: $CD $7F $3D
     call GetRandomByte                            ; $7CFC: $CD $0D $28
     and  $0F                                      ; $7CFF: $E6 $0F
     jr   nz, .jr_7D0B                             ; $7D01: $20 $08
@@ -188,7 +188,7 @@ ZolState1Handler::
     ld   [hl], b                                  ; $7D0E: $70
 
 func_006_7D0F::
-    call UpdateEntityPosWithSpeed_06              ; $7D0F: $CD $41 $65
+    call UpdateEntityPosWithVelocity_06           ; $7D0F: $CD $41 $65
     call GetEntityPrivateCountdown1               ; $7D12: $CD $00 $0C
     ret  nz                                       ; $7D15: $C0
 
@@ -218,14 +218,14 @@ ZolState2Handler::
     call IncrementEntityState                     ; $7D3B: $CD $12 $3B
     ld   a, $10                                   ; $7D3E: $3E $10
     call ApplyVectorTowardsLink_trampoline        ; $7D40: $CD $AA $3B
-    ld   hl, wEntitiesSpeedZTable                 ; $7D43: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $7D43: $21 $20 $C3
     add  hl, bc                                   ; $7D46: $09
     ld   [hl], $20                                ; $7D47: $36 $20
     ret                                           ; $7D49: $C9
 
 .jr_7D4A
     call GetEntityTransitionCountdown             ; $7D4A: $CD $05 $0C
-    ld   hl, wEntitiesSpeedXTable                 ; $7D4D: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $7D4D: $21 $40 $C2
     add  hl, bc                                   ; $7D50: $09
     and  $04                                      ; $7D51: $E6 $04
     jr   nz, .jr_7D59                             ; $7D53: $20 $04
@@ -237,7 +237,7 @@ ZolState2Handler::
     ld   [hl], $F8                                ; $7D59: $36 $F8
 
 jr_006_7D5B:
-    ld   hl, wEntitiesSpeedYTable                 ; $7D5B: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $7D5B: $21 $50 $C2
     add  hl, bc                                   ; $7D5E: $09
     ld   [hl], b                                  ; $7D5F: $70
     jp   func_006_7D0F                            ; $7D60: $C3 $0F $7D
@@ -263,7 +263,7 @@ ZolState4Handler::
     ld   [hl], $30                                ; $7D79: $36 $30
     ld   a, $10                                   ; $7D7B: $3E $10
     call ApplyVectorTowardsLink_trampoline        ; $7D7D: $CD $AA $3B
-    ld   hl, wEntitiesSpeedZTable                 ; $7D80: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $7D80: $21 $20 $C3
     add  hl, bc                                   ; $7D83: $09
     ld   [hl], $20                                ; $7D84: $36 $20
     ld   hl, wEntitiesPosZTable                   ; $7D86: $21 $10 $C3

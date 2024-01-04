@@ -45,16 +45,16 @@ ThwompRammableState0Handler::
     call ResetSpinAttack                          ; $55BB: $CD $AF $0C
 
 .jr_55BE
-    ldh  a, [hLinkSpeedX]                         ; $55BE: $F0 $9A
+    ldh  a, [hLinkVelocityX]                      ; $55BE: $F0 $9A
     cpl                                           ; $55C0: $2F
     inc  a                                        ; $55C1: $3C
     sra  a                                        ; $55C2: $CB $2F
     sra  a                                        ; $55C4: $CB $2F
-    ldh  [hLinkSpeedX], a                         ; $55C6: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $55C6: $E0 $9A
     ld   a, $E8                                   ; $55C8: $3E $E8
 
 .jr_55CA
-    ldh  [hLinkSpeedY], a                         ; $55CA: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $55CA: $E0 $9B
     call GetEntityTransitionCountdown             ; $55CC: $CD $05 $0C
     ld   [hl], $20                                ; $55CF: $36 $20
     ld   a, $01                                   ; $55D1: $3E $01
@@ -76,8 +76,8 @@ ThwompRammableState1Handler::
     and  a                                        ; $55EC: $A7
     ret  nz                                       ; $55ED: $C0
 
-    call UpdateEntityYPosWithSpeed_19             ; $55EE: $CD $BB $7D
-    ld   hl, wEntitiesSpeedYTable                 ; $55F1: $21 $50 $C2
+    call UpdateEntityYPosWithVelocity_19          ; $55EE: $CD $BB $7D
+    ld   hl, wEntitiesVelocityYTable              ; $55F1: $21 $50 $C2
     add  hl, bc                                   ; $55F4: $09
     ld   a, [hl]                                  ; $55F5: $7E
     cp   $70                                      ; $55F6: $FE $70
@@ -237,7 +237,7 @@ ThwimpState1Handler::
     cp   $30                                      ; $5702: $FE $30
     ret  nc                                       ; $5704: $D0
 
-    call ClearEntitySpeed                         ; $5705: $CD $7F $3D
+    call ClearEntityVelocity                      ; $5705: $CD $7F $3D
     call GetEntityTransitionCountdown             ; $5708: $CD $05 $0C
     ld   [hl], $08                                ; $570B: $36 $08
     jp   IncrementEntityState                     ; $570D: $C3 $12 $3B
@@ -256,8 +256,8 @@ ThwimpState2Handler::
     and  a                                        ; $5721: $A7
     ret  nz                                       ; $5722: $C0
 
-    call UpdateEntityYPosWithSpeed_19             ; $5723: $CD $BB $7D
-    ld   hl, wEntitiesSpeedYTable                 ; $5726: $21 $50 $C2
+    call UpdateEntityYPosWithVelocity_19          ; $5723: $CD $BB $7D
+    ld   hl, wEntitiesVelocityYTable              ; $5726: $21 $50 $C2
     add  hl, bc                                   ; $5729: $09
     ld   a, [hl]                                  ; $572A: $7E
     cp   $70                                      ; $572B: $FE $70
@@ -297,10 +297,10 @@ ThwimpState3Handler::
     ret                                           ; $575E: $C9
 
 .jr_575F
-    ld   hl, wEntitiesSpeedYTable                 ; $575F: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $575F: $21 $50 $C2
     add  hl, bc                                   ; $5762: $09
     ld   [hl], $F8                                ; $5763: $36 $F8
-    jp   UpdateEntityYPosWithSpeed_19             ; $5765: $C3 $BB $7D
+    jp   UpdateEntityYPosWithVelocity_19          ; $5765: $C3 $BB $7D
 
 Data_019_5768::
     db   $00, $00, $70, $07, $00, $08, $72, $07, $00, $10, $72, $27, $00, $18, $70, $27
@@ -389,7 +389,7 @@ ThwompState1Handler::
     cp   $30                                      ; $580A: $FE $30
     jr   nc, .jr_581D                             ; $580C: $30 $0F
 
-    call ClearEntitySpeed                         ; $580E: $CD $7F $3D
+    call ClearEntityVelocity                      ; $580E: $CD $7F $3D
     ld   a, JINGLE_FALL_DOWN                      ; $5811: $3E $08
     ldh  [hJingle], a                             ; $5813: $E0 $F2
     ld   a, $00                                   ; $5815: $3E $00
@@ -414,8 +414,8 @@ ThwompState1Handler::
     jp   SetEntitySpriteVariant                   ; $5834: $C3 $0C $3B
 
 ThwompState2Handler::
-    call UpdateEntityYPosWithSpeed_19             ; $5837: $CD $BB $7D
-    ld   hl, wEntitiesSpeedYTable                 ; $583A: $21 $50 $C2
+    call UpdateEntityYPosWithVelocity_19          ; $5837: $CD $BB $7D
+    ld   hl, wEntitiesVelocityYTable              ; $583A: $21 $50 $C2
     add  hl, bc                                   ; $583D: $09
     ld   a, [hl]                                  ; $583E: $7E
     cp   $70                                      ; $583F: $FE $70
@@ -474,10 +474,10 @@ ThwompState3Handler::
     ret                                           ; $5898: $C9
 
 .jr_5899
-    ld   hl, wEntitiesSpeedYTable                 ; $5899: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $5899: $21 $50 $C2
     add  hl, bc                                   ; $589C: $09
     ld   [hl], $F8                                ; $589D: $36 $F8
-    jp   UpdateEntityYPosWithSpeed_19             ; $589F: $C3 $BB $7D
+    jp   UpdateEntityYPosWithVelocity_19          ; $589F: $C3 $BB $7D
 
 func_019_58A2::
     call CheckLinkCollisionWithEnemy_trampoline   ; $58A2: $CD $5A $3B
@@ -492,13 +492,13 @@ func_019_58A2::
     ld   a, $10                                   ; $58B2: $3E $10
     call GetVectorTowardsLink_trampoline          ; $58B4: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $58B7: $F0 $D7
-    ldh  [hLinkSpeedY], a                         ; $58B9: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $58B9: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $58BB: $F0 $D8
-    ldh  [hLinkSpeedX], a                         ; $58BD: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $58BD: $E0 $9A
     ret                                           ; $58BF: $C9
 
 .jr_58C0
-    ldh  a, [hLinkSpeedY]                         ; $58C0: $F0 $9B
+    ldh  a, [hLinkVelocityY]                      ; $58C0: $F0 $9B
     and  $80                                      ; $58C2: $E6 $80
     jr   nz, .ret_58D8                            ; $58C4: $20 $12
 
@@ -508,7 +508,7 @@ func_019_58A2::
     sub  $10                                      ; $58CB: $D6 $10
     ldh  [hLinkPositionY], a                      ; $58CD: $E0 $99
     ld   a, $02                                   ; $58CF: $3E $02
-    ldh  [hLinkSpeedY], a                         ; $58D1: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $58D1: $E0 $9B
     ld   a, $01                                   ; $58D3: $3E $01
     ld   [wC147], a                               ; $58D5: $EA $47 $C1
 

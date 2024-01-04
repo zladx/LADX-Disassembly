@@ -192,7 +192,7 @@ MasterStalfosEntityHandler::
     jr   nc, .jr_6A84                             ; $6A72: $30 $10
 
     ld   [hl], b                                  ; $6A74: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $6A75: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6A75: $21 $20 $C3
     add  hl, bc                                   ; $6A78: $09
     ld   [hl], b                                  ; $6A79: $70
     call IncrementEntityState                     ; $6A7A: $CD $12 $3B
@@ -208,8 +208,8 @@ MasterStalfosEntityHandler::
 
 jr_007_6A89:
     call ApplyRecoilIfNeeded_07                   ; $6A89: $CD $C3 $7D
-    call AddEntityZSpeedToPos_07                  ; $6A8C: $CD $43 $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $6A8F: $21 $20 $C3
+    call AddEntityZVelocityToPos_07               ; $6A8C: $CD $43 $7E
+    ld   hl, wEntitiesVelocityZTable              ; $6A8F: $21 $20 $C3
     add  hl, bc                                   ; $6A92: $09
     dec  [hl]                                     ; $6A93: $35
     dec  [hl]                                     ; $6A94: $35
@@ -221,7 +221,7 @@ jr_007_6A89:
     jr   z, .jr_6AA6                              ; $6A9E: $28 $06
 
     ld   [hl], b                                  ; $6AA0: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $6AA1: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6AA1: $21 $20 $C3
     add  hl, bc                                   ; $6AA4: $09
     ld   [hl], b                                  ; $6AA5: $70
 
@@ -260,7 +260,7 @@ jr_007_6A89:
 ._0D dw func_007_6E58                             ; $6ADD
 
 func_007_6ADF::
-    ld   hl, wEntitiesSpeedZTable                 ; $6ADF: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6ADF: $21 $20 $C3
     add  hl, bc                                   ; $6AE2: $09
     ld   [hl], b                                  ; $6AE3: $70
     call GetEntityTransitionCountdown             ; $6AE4: $CD $05 $0C
@@ -286,7 +286,7 @@ func_007_6AF5::
     ldh  [hJingle], a                             ; $6B00: $E0 $F2
 
 .jr_6B02
-    ld   hl, wEntitiesSpeedZTable                 ; $6B02: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6B02: $21 $20 $C3
     add  hl, bc                                   ; $6B05: $09
     ld   [hl], b                                  ; $6B06: $70
     ret                                           ; $6B07: $C9
@@ -478,7 +478,7 @@ func_007_6BF4::
     ld   [wD209], a                               ; $6C30: $EA $09 $D2
 
 func_007_6C33::
-    call UpdateEntityPosWithSpeed_07              ; $6C33: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $6C33: $CD $0A $7E
     jp   DefaultEntityPhysics_trampoline          ; $6C36: $C3 $23 $3B
 
 func_007_6C39::
@@ -618,7 +618,7 @@ func_007_6D18::
     ld   hl, wEntitiesPrivateState1Table          ; $6D26: $21 $B0 $C2
     add  hl, bc                                   ; $6D29: $09
     ld   a, [hl]                                  ; $6D2A: $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $6D2B: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6D2B: $21 $20 $C3
     add  hl, bc                                   ; $6D2E: $09
     ld   [hl], $30                                ; $6D2F: $36 $30
     and  a                                        ; $6D31: $A7
@@ -631,7 +631,7 @@ func_007_6D18::
 .jr_6D3B
     ld   a, $08                                   ; $6D3B: $3E $08
     call ApplyVectorTowardsLink_trampoline        ; $6D3D: $CD $AA $3B
-    call GetEntitySpeedYAddress                   ; $6D40: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $6D40: $CD $05 $40
     ld   [hl], $F0                                ; $6D43: $36 $F0
     ret                                           ; $6D45: $C9
 
@@ -856,7 +856,7 @@ func_007_6E58::
     jp   jr_007_6D46                              ; $6E67: $C3 $46 $6D
 
 jr_007_6E6A:
-    ld   hl, wEntitiesSpeedZTable                 ; $6E6A: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6E6A: $21 $20 $C3
     add  hl, bc                                   ; $6E6D: $09
     ld   [hl], $30                                ; $6E6E: $36 $30
     ld   hl, wEntitiesPosZTable                   ; $6E70: $21 $10 $C3
@@ -1187,9 +1187,9 @@ func_007_70B7::
     ld   a, $28                                   ; $70ED: $3E $28
     call GetVectorTowardsLink_trampoline          ; $70EF: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $70F2: $F0 $D7
-    ldh  [hLinkSpeedY], a                         ; $70F4: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $70F4: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $70F6: $F0 $D8
-    ldh  [hLinkSpeedX], a                         ; $70F8: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $70F8: $E0 $9A
     ld   a, $02                                   ; $70FA: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $70FC: $EA $46 $C1
     ld   a, $13                                   ; $70FF: $3E $13

@@ -89,9 +89,9 @@ Entity8CHandler::
     ld   a, $10                                   ; $4F00: $3E $10
     call GetVectorTowardsLink_trampoline          ; $4F02: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $4F05: $F0 $D7
-    ldh  [hLinkSpeedY], a                         ; $4F07: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $4F07: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $4F09: $F0 $D8
-    ldh  [hLinkSpeedX], a                         ; $4F0B: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $4F0B: $E0 $9A
 
 .ret_4F0D
     ret                                           ; $4F0D: $C9

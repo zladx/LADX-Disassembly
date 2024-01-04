@@ -65,13 +65,13 @@ func_007_7996::
     ld   hl, Data_007_7978                        ; $79A0: $21 $78 $79
     add  hl, de                                   ; $79A3: $19
     ld   a, [hl]                                  ; $79A4: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $79A5: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $79A5: $21 $40 $C2
     add  hl, bc                                   ; $79A8: $09
     ld   [hl], a                                  ; $79A9: $77
     ld   hl, Data_007_797C                        ; $79AA: $21 $7C $79
     add  hl, de                                   ; $79AD: $19
     ld   a, [hl]                                  ; $79AE: $7E
-    call GetEntitySpeedYAddress                   ; $79AF: $CD $05 $40
+    call GetEntityVelocityYAddress                ; $79AF: $CD $05 $40
     ld   [hl], a                                  ; $79B2: $77
 
 ret_007_79B3:
@@ -88,7 +88,7 @@ func_007_79B4::
     call func_007_7996                            ; $79BF: $CD $96 $79
 
 .jr_79C2
-    call UpdateEntityPosWithSpeed_07              ; $79C2: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $79C2: $CD $0A $7E
     call DefaultEntityPhysics_trampoline          ; $79C5: $CD $23 $3B
     call func_007_7D1A                            ; $79C8: $CD $1A $7D
     call GetEntityTransitionCountdown             ; $79CB: $CD $05 $0C
@@ -139,7 +139,7 @@ func_007_79D7::
 .jr_7A07
     call func_007_7D1A                            ; $7A07: $CD $1A $7D
     call func_007_7D1A                            ; $7A0A: $CD $1A $7D
-    call UpdateEntityPosWithSpeed_07              ; $7A0D: $CD $0A $7E
+    call UpdateEntityPosWithVelocity_07           ; $7A0D: $CD $0A $7E
     call DefaultEntityPhysics_trampoline          ; $7A10: $CD $23 $3B
     ldh  a, [hFrameCounter]                       ; $7A13: $F0 $E7
     xor  c                                        ; $7A15: $A9

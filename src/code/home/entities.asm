@@ -181,7 +181,7 @@ AnimateEntity::
     ldh  a, [hActiveEntityType]                   ; $3A35: $F0 $EB
     cp   ENTITY_RAFT_RAFT_OWNER                   ; $3A37: $FE $6A
     jr   nz, .raftManEnd                          ; $3A39: $20 $05
-    ldh  a, [hLinkSlowWalkingSpeed]               ; $3A3B: $F0 $B2
+    ldh  a, [hLinkSlowWalkingVelocity]            ; $3A3B: $F0 $B2
     and  a                                        ; $3A3D: $A7
     jr   nz, .entityLifted                        ; $3A3E: $20 $06
 .raftManEnd
@@ -882,11 +882,11 @@ SkipDisabledEntityDuringRoomTransition::
 
 ; Inputs:
 ;   bc   entity slot index
-ClearEntitySpeed::
-    ld   hl, wEntitiesSpeedXTable                 ; $3D7F: $21 $40 $C2
+ClearEntityVelocity::
+    ld   hl, wEntitiesVelocityXTable              ; $3D7F: $21 $40 $C2
     add  hl, bc                                   ; $3D82: $09
     ld   [hl], b                                  ; $3D83: $70
-    ld   hl, wEntitiesSpeedYTable                 ; $3D84: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $3D84: $21 $50 $C2
     add  hl, bc                                   ; $3D87: $09
     ld   [hl], b                                  ; $3D88: $70
     ret                                           ; $3D89: $C9

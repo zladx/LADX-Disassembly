@@ -32,8 +32,8 @@ DogEntityHandler::
     call RenderActiveEntitySpritesPair            ; $48F1: $CD $C0 $3B
     call ReturnIfNonInteractive_19                ; $48F4: $CD $3D $7D
     call DecrementEntityIgnoreHitsCountdown       ; $48F7: $CD $56 $0C
-    call AddEntityZSpeedToPos_19                  ; $48FA: $CD $F1 $7D
-    ld   hl, wEntitiesSpeedZTable                 ; $48FD: $21 $20 $C3
+    call AddEntityZVelocityToPos_19               ; $48FA: $CD $F1 $7D
+    ld   hl, wEntitiesVelocityZTable              ; $48FD: $21 $20 $C3
     add  hl, bc                                   ; $4900: $09
     dec  [hl]                                     ; $4901: $35
     dec  [hl]                                     ; $4902: $35
@@ -45,7 +45,7 @@ DogEntityHandler::
     jr   z, .jr_4914                              ; $490C: $28 $06
 
     ld   [hl], b                                  ; $490E: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $490F: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $490F: $21 $20 $C3
     add  hl, bc                                   ; $4912: $09
     ld   [hl], b                                  ; $4913: $70
 
@@ -77,7 +77,7 @@ DogEntityHandler::
     and  $3F                                      ; $4938: $E6 $3F
     jr   nz, .jr_4942                             ; $493A: $20 $06
 
-    ld   hl, wEntitiesSpeedZTable                 ; $493C: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $493C: $21 $20 $C3
     add  hl, bc                                   ; $493F: $09
     ld   [hl], $0C                                ; $4940: $36 $0C
 
@@ -152,7 +152,7 @@ DogState0Handler::
     ld   hl, Data_019_4990                        ; $49A8: $21 $90 $49
     add  hl, de                                   ; $49AB: $19
     ld   a, [hl]                                  ; $49AC: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $49AD: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $49AD: $21 $40 $C2
     add  hl, bc                                   ; $49B0: $09
     ld   [hl], a                                  ; $49B1: $77
     ld   a, e                                     ; $49B2: $7B
@@ -166,7 +166,7 @@ DogState0Handler::
     ld   hl, Data_019_4990                        ; $49C0: $21 $90 $49
     add  hl, de                                   ; $49C3: $19
     ld   a, [hl]                                  ; $49C4: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $49C5: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $49C5: $21 $50 $C2
     add  hl, bc                                   ; $49C8: $09
     ld   [hl], a                                  ; $49C9: $77
     call GetEntityTransitionCountdown             ; $49CA: $CD $05 $0C
@@ -180,7 +180,7 @@ DogState0Handler::
     jp   func_019_49FD                            ; $49D8: $C3 $FD $49
 
 DogState1Handler::
-    call UpdateEntityPosWithSpeed_19              ; $49DB: $CD $B8 $7D
+    call UpdateEntityPosWithVelocity_19           ; $49DB: $CD $B8 $7D
     call DefaultEntityPhysics_trampoline          ; $49DE: $CD $23 $3B
     ldh  a, [hMultiPurposeG]                      ; $49E1: $F0 $E8
     and  a                                        ; $49E3: $A7
@@ -195,7 +195,7 @@ DogState1Handler::
     ret                                           ; $49F1: $C9
 
 .jr_49F2
-    ld   hl, wEntitiesSpeedZTable                 ; $49F2: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $49F2: $21 $20 $C3
     add  hl, bc                                   ; $49F5: $09
     ld   [hl], $08                                ; $49F6: $36 $08
     ld   hl, wEntitiesPosZTable                   ; $49F8: $21 $10 $C3
@@ -217,7 +217,7 @@ DogState2Handler::
     call IncrementEntityState                     ; $4A0C: $CD $12 $3B
     ld   a, $24                                   ; $4A0F: $3E $24
     call ApplyVectorTowardsLink_trampoline        ; $4A11: $CD $AA $3B
-    ld   hl, wEntitiesSpeedZTable                 ; $4A14: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4A14: $21 $20 $C3
     add  hl, bc                                   ; $4A17: $09
     ld   [hl], $18                                ; $4A18: $36 $18
     call EntityLinkPositionXDifference_19         ; $4A1A: $CD $0B $7E
@@ -234,7 +234,7 @@ DogState2Handler::
     jp   SetEntitySpriteVariant                   ; $4A29: $C3 $0C $3B
 
 DogState3Handler::
-    call UpdateEntityPosWithSpeed_19              ; $4A2C: $CD $B8 $7D
+    call UpdateEntityPosWithVelocity_19           ; $4A2C: $CD $B8 $7D
     call DefaultEntityPhysics_trampoline          ; $4A2F: $CD $23 $3B
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4A32: $21 $40 $C3
     add  hl, bc                                   ; $4A35: $09

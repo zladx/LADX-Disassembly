@@ -51,7 +51,7 @@ You can also read [disassembling How-Tos](https://github.com/zladx/LADX-Disassem
 - [Artemis251's Link's Awakening Cache](http://artemis251.fobby.net/zelda/index.php): ROM map, maps data format
 - [Xkeeper's Link's Awakening depot](https://xkeeper.net/hacking/linksawakening/): maps tilesets and save format infos
 - [LALE](https://github.com/anotak/LALE): level editor, notes on maps data format
-- [The Legend of Zelda Link's Awakening /DX Speedrunning Wiki](http://spiraster.x10host.com/LADXWiki/index.php/) : infos on wrong warps and map data format
+- [The Legend of Zelda Link's Awakening /DX Velocityrunning Wiki](http://spiraster.x10host.com/LADXWiki/index.php/) : infos on wrong warps and map data format
 - [Zelda III Disassembly](http://www.zeldix.net/t143-disassembly-zelda-docs) ([archive](https://web.archive.org/web/20180315181518/http://www.zeldix.net/t143-disassembly-zelda-docs)): good source on Zelda SNES source code, which has many similarities to LADX
 - [Disassembling Link's Awakening](https://zladx.github.io): a series of blog posts and progress reports
 - Discord: [LADX](https://discord.gg/sSHrwdB)

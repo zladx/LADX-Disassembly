@@ -37,10 +37,10 @@ MoblinKingEntityHandler::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $46F3: $21 $40 $C3
     add  hl, bc                                   ; $46F6: $09
     res  ENTITY_PHYSICS_B_HARMLESS, [hl]          ; $46F7: $CB $BE
-    call UpdateEntityPosWithSpeed_15              ; $46F9: $CD $88 $7B
+    call UpdateEntityPosWithVelocity_15           ; $46F9: $CD $88 $7B
     call DefaultEntityPhysics_trampoline          ; $46FC: $CD $23 $3B
-    call AddEntityZSpeedToPos_15                  ; $46FF: $CD $C1 $7B
-    ld   hl, wEntitiesSpeedZTable                 ; $4702: $21 $20 $C3
+    call AddEntityZVelocityToPos_15               ; $46FF: $CD $C1 $7B
+    ld   hl, wEntitiesVelocityZTable              ; $4702: $21 $20 $C3
     add  hl, bc                                   ; $4705: $09
     dec  [hl]                                     ; $4706: $35
     dec  [hl]                                     ; $4707: $35
@@ -53,7 +53,7 @@ MoblinKingEntityHandler::
     jr   z, .jr_471A                              ; $4712: $28 $06
 
     ld   [hl], b                                  ; $4714: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $4715: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4715: $21 $20 $C3
     add  hl, bc                                   ; $4718: $09
     ld   [hl], b                                  ; $4719: $70
 
@@ -160,13 +160,13 @@ func_015_4780::
     ld   hl, Data_015_477A                        ; $47B0: $21 $7A $47
     add  hl, bc                                   ; $47B3: $09
     ld   a, [hl]                                  ; $47B4: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $47B5: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $47B5: $21 $40 $C2
     add  hl, de                                   ; $47B8: $19
     ld   [hl], a                                  ; $47B9: $77
     ld   hl, Data_015_477C                        ; $47BA: $21 $7C $47
     add  hl, bc                                   ; $47BD: $09
     ld   a, [hl]                                  ; $47BE: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $47BF: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $47BF: $21 $50 $C2
     add  hl, de                                   ; $47C2: $19
     ld   [hl], a                                  ; $47C3: $77
     ldh  a, [hMultiPurpose2]                      ; $47C4: $F0 $D9
@@ -189,7 +189,7 @@ func_015_4780::
 .jr_47DC
     ld   a, e                                     ; $47DC: $7B
     call SetEntitySpriteVariant                   ; $47DD: $CD $0C $3B
-    jp   ClearEntitySpeed                         ; $47E0: $C3 $7F $3D
+    jp   ClearEntityVelocity                      ; $47E0: $C3 $7F $3D
 
 jr_015_47E3:
     call GetEntityDropTimer                       ; $47E3: $CD $FB $0B
@@ -197,7 +197,7 @@ jr_015_47E3:
 
     call GetEntityTransitionCountdown             ; $47E8: $CD $05 $0C
     ld   [hl], $30                                ; $47EB: $36 $30
-    call ClearEntitySpeed                         ; $47ED: $CD $7F $3D
+    call ClearEntityVelocity                      ; $47ED: $CD $7F $3D
     jp   IncrementEntityState                     ; $47F0: $C3 $12 $3B
 
 .jr_47F3
@@ -218,7 +218,7 @@ jr_015_47E3:
     call ApplyVectorTowardsLink_trampoline        ; $480A: $CD $AA $3B
     pop  af                                       ; $480D: $F1
     ldh  [hLinkPositionX], a                      ; $480E: $E0 $98
-    ld   hl, wEntitiesSpeedZTable                 ; $4810: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $4810: $21 $20 $C3
     add  hl, bc                                   ; $4813: $09
     ld   [hl], $10                                ; $4814: $36 $10
 
@@ -256,7 +256,7 @@ func_015_483F::
     jr   nz, .jr_485C                             ; $4842: $20 $18
 
     ld   [hl], $22                                ; $4844: $36 $22
-    call ClearEntitySpeed                         ; $4846: $CD $7F $3D
+    call ClearEntityVelocity                      ; $4846: $CD $7F $3D
     ld   hl, wEntitiesDirectionTable              ; $4849: $21 $80 $C3
     add  hl, bc                                   ; $484C: $09
     ld   e, [hl]                                  ; $484D: $5E
@@ -264,7 +264,7 @@ func_015_483F::
     ld   hl, Data_015_483D                        ; $484F: $21 $3D $48
     add  hl, de                                   ; $4852: $19
     ld   a, [hl]                                  ; $4853: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $4854: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4854: $21 $40 $C2
     add  hl, bc                                   ; $4857: $09
     ld   [hl], a                                  ; $4858: $77
     jp   IncrementEntityState                     ; $4859: $C3 $12 $3B
@@ -277,7 +277,7 @@ func_015_483F::
     ldh  [hJingle], a                             ; $4862: $E0 $F2
 
 .jr_4864
-    call ClearEntitySpeed                         ; $4864: $CD $7F $3D
+    call ClearEntityVelocity                      ; $4864: $CD $7F $3D
     ldh  a, [hFrameCounter]                       ; $4867: $F0 $E7
     rra                                           ; $4869: $1F
     rra                                           ; $486A: $1F
@@ -306,7 +306,7 @@ func_015_4873::
     ld   [wC157], a                               ; $488D: $EA $57 $C1
     ld   a, JINGLE_STRONG_BUMP                    ; $4890: $3E $0B
     ldh  [hJingle], a                             ; $4892: $E0 $F2
-    ld   hl, wEntitiesSpeedXTable                 ; $4894: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4894: $21 $40 $C2
     add  hl, bc                                   ; $4897: $09
     sra  [hl]                                     ; $4898: $CB $2E
     sra  [hl]                                     ; $489A: $CB $2E
@@ -314,7 +314,7 @@ func_015_4873::
     cpl                                           ; $489D: $2F
     inc  a                                        ; $489E: $3C
     ld   [hl], a                                  ; $489F: $77
-    ld   hl, wEntitiesSpeedZTable                 ; $48A0: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $48A0: $21 $20 $C3
     add  hl, bc                                   ; $48A3: $09
     ld   [hl], $28                                ; $48A4: $36 $28
     call IncrementEntityState                     ; $48A6: $CD $12 $3B
@@ -362,7 +362,7 @@ func_015_48CF::
     and  a                                        ; $48F2: $A7
     jr   z, .jr_48F8                              ; $48F3: $28 $03
 
-    call ClearEntitySpeed                         ; $48F5: $CD $7F $3D
+    call ClearEntityVelocity                      ; $48F5: $CD $7F $3D
 
 .jr_48F8
     ldh  a, [hFrameCounter]                       ; $48F8: $F0 $E7
@@ -423,19 +423,19 @@ func_015_4928::
     ret                                           ; $494B: $C9
 
 func_015_494C::
-    ld   hl, wEntitiesSpeedXTable                 ; $494C: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $494C: $21 $40 $C2
     add  hl, bc                                   ; $494F: $09
     ld   a, [hl]                                  ; $4950: $7E
     and  $FE                                      ; $4951: $E6 $FE
     jr   nz, .jr_4960                             ; $4953: $20 $0B
 
-    call ClearEntitySpeed                         ; $4955: $CD $7F $3D
+    call ClearEntityVelocity                      ; $4955: $CD $7F $3D
     call GetEntityTransitionCountdown             ; $4958: $CD $05 $0C
     ld   [hl], $40                                ; $495B: $36 $40
     jp   IncrementEntityState                     ; $495D: $C3 $12 $3B
 
 .jr_4960
-    ld   hl, wEntitiesSpeedXTable                 ; $4960: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $4960: $21 $40 $C2
     add  hl, bc                                   ; $4963: $09
     ld   a, [hl]                                  ; $4964: $7E
     and  $80                                      ; $4965: $E6 $80
@@ -454,7 +454,7 @@ func_015_494C::
     jp   SetEntitySpriteVariant                   ; $4974: $C3 $0C $3B
 
 func_015_4977::
-    call ClearEntitySpeed                         ; $4977: $CD $7F $3D
+    call ClearEntityVelocity                      ; $4977: $CD $7F $3D
     call GetEntityTransitionCountdown             ; $497A: $CD $05 $0C
     jr   nz, jr_015_4990                          ; $497D: $20 $11
 
@@ -482,10 +482,10 @@ func_015_499C::
     call IncrementEntityState                     ; $499C: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $499F: $CD $05 $0C
     ld   [hl], $60                                ; $49A2: $36 $60
-    ld   hl, wEntitiesSpeedXTable                 ; $49A4: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $49A4: $21 $40 $C2
     add  hl, bc                                   ; $49A7: $09
     ld   a, [hl]                                  ; $49A8: $7E
-    ldh  [hLinkSpeedX], a                         ; $49A9: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $49A9: $E0 $9A
     ld   a, $28                                   ; $49AB: $3E $28
     ld   [wIgnoreLinkCollisionsCountdown], a      ; $49AD: $EA $3E $C1
     ld   a, $40                                   ; $49B0: $3E $40
@@ -498,7 +498,7 @@ func_015_499C::
     ret                                           ; $49C1: $C9
 
 func_015_49C2::
-    call ClearEntitySpeed                         ; $49C2: $CD $7F $3D
+    call ClearEntityVelocity                      ; $49C2: $CD $7F $3D
     call GetEntityTransitionCountdown             ; $49C5: $CD $05 $0C
     jr   nz, .jr_49CD                             ; $49C8: $20 $03
 

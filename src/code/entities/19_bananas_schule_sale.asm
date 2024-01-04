@@ -7,8 +7,8 @@ Unknown069SpriteVariants::
 label_019_6CE7:
     ld   de, Unknown069SpriteVariants             ; $6CE7: $11 $E3 $6C
     call RenderActiveEntitySpritesPair            ; $6CEA: $CD $C0 $3B
-    call AddEntityZSpeedToPos_19                  ; $6CED: $CD $F1 $7D
-    ld   hl, wEntitiesSpeedZTable                 ; $6CF0: $21 $20 $C3
+    call AddEntityZVelocityToPos_19               ; $6CED: $CD $F1 $7D
+    ld   hl, wEntitiesVelocityZTable              ; $6CF0: $21 $20 $C3
     add  hl, bc                                   ; $6CF3: $09
     dec  [hl]                                     ; $6CF4: $35
     ld   hl, wEntitiesPosZTable                   ; $6CF5: $21 $10 $C3
@@ -127,7 +127,7 @@ BananasSchuleState2Handler::
     ld   hl, wEntitiesPrivateState1Table          ; $6DA5: $21 $B0 $C2
     add  hl, de                                   ; $6DA8: $19
     ld   [hl], $01                                ; $6DA9: $36 $01
-    ld   hl, wEntitiesSpeedZTable                 ; $6DAB: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $6DAB: $21 $20 $C3
     add  hl, de                                   ; $6DAE: $19
     ld   [hl], $20                                ; $6DAF: $36 $20
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6DB1: $21 $40 $C3

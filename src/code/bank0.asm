@@ -122,9 +122,9 @@ PlayAudioStep::
     jr   z, .doAudioStep                          ; $08B5: $28 $0F
     ; … and wMusicTrackTiming != 2…
     cp   $02                                      ; $08B7: $FE $02
-    ; … play two audio steps (double speed)
+    ; … play two audio steps (double Velocity)
     jr   nz, .doAudioStepTwice                    ; $08B9: $20 $08
-    ; Otherwise, play the audio step only on odd frames (half speed)
+    ; Otherwise, play the audio step only on odd frames (half Velocity)
     ldh  a, [hFrameCounter]                       ; $08BB: $F0 $E7
     and  $01                                      ; $08BD: $E6 $01
     jr   nz, .return                              ; $08BF: $20 $15
@@ -2024,17 +2024,17 @@ label_140F::
     ld   c, a                                     ; $1419: $4F
 
 .label_141A::
-    ; a = [data_13AD + hLinkDirection] + [wEntitiesSpeedXTable + hLinkDirecetion] + [wEntitiesSpeedYTable + hLinkDirection]
+    ; a = [data_13AD + hLinkDirection] + [wEntitiesVelocityXTable + hLinkDirecetion] + [wEntitiesVelocityYTable + hLinkDirection]
     ld   hl, data_13AD                            ; $141A: $21 $AD $13
     add  hl, bc                                   ; $141D: $09
     ld   a, [hl]                                  ; $141E: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $141F: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $141F: $21 $40 $C2
     add  hl, de                                   ; $1422: $19
     ld   [hl], a                                  ; $1423: $77
     ld   hl, data_13B5                            ; $1424: $21 $B5 $13
     add  hl, bc                                   ; $1427: $09
     ld   a, [hl]                                  ; $1428: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $1429: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $1429: $21 $50 $C2
     add  hl, de                                   ; $142C: $19
     ld   [hl], a                                  ; $142D: $77
 
@@ -2042,7 +2042,7 @@ label_140F::
     ret                                           ; $142E: $C9
 
 ; Spawn a arrow, liftable rock, hookshot element…
-; with the same X, Y, Z and speed than the player.
+; with the same X, Y, Z and Velocity than the player.
 SpawnPlayerProjectile::
     call SpawnNewEntity_trampoline                ; $142F: $CD $86 $3B
     ret  c                                        ; $1432: $D8
@@ -2076,13 +2076,13 @@ SpawnPlayerProjectile::
     ld   hl, data_13A5                            ; $145E: $21 $A5 $13
     add  hl, bc                                   ; $1461: $09
     ld   a, [hl]                                  ; $1462: $7E
-    ld   hl, wEntitiesSpeedXTable                 ; $1463: $21 $40 $C2
+    ld   hl, wEntitiesVelocityXTable              ; $1463: $21 $40 $C2
     add  hl, de                                   ; $1466: $19
     ld   [hl], a                                  ; $1467: $77
     ld   hl, data_13A9                            ; $1468: $21 $A9 $13
     add  hl, bc                                   ; $146B: $09
     ld   a, [hl]                                  ; $146C: $7E
-    ld   hl, wEntitiesSpeedYTable                 ; $146D: $21 $50 $C2
+    ld   hl, wEntitiesVelocityYTable              ; $146D: $21 $50 $C2
     add  hl, de                                   ; $1470: $19
     ld   [hl], a                                  ; $1471: $77
     ldh  a, [hLinkDirection]                      ; $1472: $F0 $9E
@@ -2133,12 +2133,12 @@ UseMagicPowder::
     ld   [rSelectROMBank], a                      ; $14BF: $EA $00 $21
     ret                                           ; $14C2: $C9
 
-; Horizontal speed boost when jumping while using Pegasus Boots
+; Horizontal Velocity boost when jumping while using Pegasus Boots
 ; Indexed by hLinkDirection
 PegasusBootsJumpBoostXTable::
     db 28, -28, 0, 0                              ; $14C3
 
-; Vertical speed boost when jumping while using Pegasus Boots
+; Vertical Velocity boost when jumping while using Pegasus Boots
 ; Indexed by hLinkDirection
 PegasusBootsJumpBoostYTable::
     db 0, 0, -28, 28                              ; $14C7
@@ -2168,7 +2168,7 @@ UseRocsFeather::
     ld   a, $E8                                   ; $14F6: $3E $E8
 
 .label_14F8
-    ldh  [hLinkSpeedY], a                         ; $14F8: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $14F8: $E0 $9B
     xor  a                                        ; $14FA: $AF
     ldh  [hLinkVelocityZ], a                      ; $14FB: $E0 $A3
     call UpdateFinalLinkPosition                  ; $14FD: $CD $A8 $21
@@ -2189,11 +2189,11 @@ UseRocsFeather::
     ld   hl, PegasusBootsJumpBoostXTable          ; $1515: $21 $C3 $14
     add  hl, de                                   ; $1518: $19
     ld   a, [hl]                                  ; $1519: $7E
-    ldh  [hLinkSpeedX], a                         ; $151A: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $151A: $E0 $9A
     ld   hl, PegasusBootsJumpBoostYTable          ; $151C: $21 $C7 $14
     add  hl, de                                   ; $151F: $19
     ld   a, [hl]                                  ; $1520: $7E
-    ldh  [hLinkSpeedY], a                         ; $1521: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $1521: $E0 $9B
     ret                                           ; $1523: $C9
 
 SwordRandomSfxTable::
@@ -2461,7 +2461,7 @@ label_1653::
     ld   hl, wEntitiesPrivateCountdown1Table      ; $16AD: $21 $F0 $C2
     add  hl, de                                   ; $16B0: $19
     ld   [hl], $18                                ; $16B1: $36 $18
-    ld   hl, wEntitiesSpeedZTable                 ; $16B3: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $16B3: $21 $20 $C3
     add  hl, de                                   ; $16B6: $19
     ld   [hl], $10                                ; $16B7: $36 $10
     ret                                           ; $16B9: $C9
@@ -2577,11 +2577,11 @@ UsePegasusBoots::
     ld   hl, XPositionIncrementPegasusRunning     ; $1743: $21 $FD $16
     add  hl, de                                   ; $1746: $19
     ld   a, [hl]                                  ; $1747: $7E
-    ldh  [hLinkSpeedX], a                         ; $1748: $E0 $9A
+    ldh  [hLinkVelocityX], a                      ; $1748: $E0 $9A
     ld   hl, YPositionIncrementPegasusRunning     ; $174A: $21 $01 $17
     add  hl, de                                   ; $174D: $19
     ld   a, [hl]                                  ; $174E: $7E
-    ldh  [hLinkSpeedY], a                         ; $174F: $E0 $9B
+    ldh  [hLinkVelocityY], a                      ; $174F: $E0 $9B
     xor  a                                        ; $1751: $AF
     ld   [wC1AC], a                               ; $1752: $EA $AC $C1
     ret                                           ; $1755: $C9
@@ -2627,8 +2627,8 @@ DisplayTransientVfxForLinkRunning::
 
 ClearLinkPositionIncrement::
     xor  a                                        ; $178E: $AF
-    ldh  [hLinkSpeedX], a                         ; $178F: $E0 $9A
-    ldh  [hLinkSpeedY], a                         ; $1791: $E0 $9B
+    ldh  [hLinkVelocityX], a                      ; $178F: $E0 $9A
+    ldh  [hLinkVelocityY], a                      ; $1791: $E0 $9B
     ret                                           ; $1793: $C9
 
 ; Animate Link motion?
@@ -3109,7 +3109,7 @@ UpdateLinkWalkingAnimation::
     ld   a, [wIsCarryingLiftedObject]             ; $1A88: $FA $5C $C1
     cp   $01                                      ; $1A8B: $FE $01
     jr   z, .liftingObject                        ; $1A8D: $28 $35
-    ldh  a, [hLinkSlowWalkingSpeed]               ; $1A8F: $F0 $B2
+    ldh  a, [hLinkSlowWalkingVelocity]            ; $1A8F: $F0 $B2
     and  a                                        ; $1A91: $A7
     jr   nz, .label_1A9A                          ; $1A92: $20 $06
     ld   a, [wIsLinkPushing]                      ; $1A94: $FA $44 $C1
@@ -3852,19 +3852,19 @@ UpdateFinalLinkPosition::
     ld   c, $00                                   ; $21B2: $0E $00
     ldh  [hMultiPurpose0], a                      ; $21B4: $E0 $D7
 
-; Update Link position from its speed, in either horizontal
+; Update Link position from its Velocity, in either horizontal
 ; or vertical direction.
 ;
 ; Inputs:
 ;   c : direction (0: horizontal ; 1: vertical)
 ComputeLinkPosition::
-    ; Read hLinkSpeedX or hLinkSpeedY (depending on the direction)
+    ; Read hLinkVelocityX or hLinkVelocityY (depending on the direction)
     ld   b, $00                                   ; $21B6: $06 $00
-    ld   hl, hLinkSpeedX                          ; $21B8: $21 $9A $FF
+    ld   hl, hLinkVelocityX                       ; $21B8: $21 $9A $FF
     add  hl, bc                                   ; $21BB: $09
     ld   a, [hl]                                  ; $21BC: $7E
 
-    ; Write swap(speed) & $F0 to wC11A or wC11B (depending on the direction)
+    ; Write swap(Velocity) & $F0 to wC11A or wC11B (depending on the direction)
     push af                                       ; $21BD: $F5
     swap a                                        ; $21BE: $CB $37
     and  $F0                                      ; $21C0: $E6 $F0
@@ -3881,14 +3881,14 @@ ComputeLinkPosition::
 
     pop  af                                       ; $21CE: $F1
 
-    ; e = speed mask (avoids the speed from overflowing the max speed and wrapping around)
+    ; e = Velocity mask (avoids the Velocity from overflowing the max Velocity and wrapping around)
     ld   e, $00                                   ; $21CF: $1E $00
     bit  7, a                                     ; $21D1: $CB $7F
-    jr   z, .positiveSpeedEnd                     ; $21D3: $28 $02
+    jr   z, .positiveVelocityEnd                  ; $21D3: $28 $02
     ld   e, $F0                                   ; $21D5: $1E $F0
-.positiveSpeedEnd
+.positiveVelocityEnd
 
-    ; Add the speed to the horizontal or vertical position
+    ; Add the Velocity to the horizontal or vertical position
     swap a                                        ; $21D7: $CB $37
     and  $0F                                      ; $21D9: $E6 $0F
     or   e                                        ; $21DB: $B3

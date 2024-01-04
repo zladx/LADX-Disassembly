@@ -17,8 +17,8 @@ WalrusEntityHandler::
 
     call func_018_586B                            ; $5512: $CD $6B $58
     call ReturnIfNonInteractive_18                ; $5515: $CD $E8 $7D
-    call AddEntityZSpeedToPos_18                  ; $5518: $CD $98 $7E
-    ld   hl, wEntitiesSpeedZTable                 ; $551B: $21 $20 $C3
+    call AddEntityZVelocityToPos_18               ; $5518: $CD $98 $7E
+    ld   hl, wEntitiesVelocityZTable              ; $551B: $21 $20 $C3
     add  hl, bc                                   ; $551E: $09
     dec  [hl]                                     ; $551F: $35
     ld   hl, wEntitiesPosZTable                   ; $5520: $21 $10 $C3
@@ -28,7 +28,7 @@ WalrusEntityHandler::
     jr   z, .jr_552F                              ; $5527: $28 $06
 
     ld   [hl], b                                  ; $5529: $70
-    ld   hl, wEntitiesSpeedZTable                 ; $552A: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $552A: $21 $20 $C3
     add  hl, bc                                   ; $552D: $09
     ld   [hl], b                                  ; $552E: $70
 
@@ -221,7 +221,7 @@ WalrusState3Handler::
     and  $0F                                      ; $56AA: $E6 $0F
     jr   nz, .jr_56B8                             ; $56AC: $20 $0A
 
-    ld   hl, wEntitiesSpeedZTable                 ; $56AE: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $56AE: $21 $20 $C3
     add  hl, bc                                   ; $56B1: $09
     ld   [hl], $10                                ; $56B2: $36 $10
     ld   a, JINGLE_JUMP                           ; $56B4: $3E $24
@@ -253,7 +253,7 @@ jr_018_56CE:
     ret  z                                        ; $56D7: $C8
 
     ld   e, $01                                   ; $56D8: $1E $01
-    ld   hl, wEntitiesSpeedZTable                 ; $56DA: $21 $20 $C3
+    ld   hl, wEntitiesVelocityZTable              ; $56DA: $21 $20 $C3
     add  hl, bc                                   ; $56DD: $09
     ld   a, [hl]                                  ; $56DE: $7E
     sub  $F8                                      ; $56DF: $D6 $F8

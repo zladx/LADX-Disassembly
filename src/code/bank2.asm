@@ -6296,6 +6296,13 @@ clearIncrementAndReturn::
     ld   [wIgnoreLinkCollisionsCountdown], a      ; $6E0F: $EA $3E $C1
     jp   CheckForLedgeJumpAndReturn               ; $6E12: $C3 $45 $6E
 
+; The following 16 bytes are coordinates of points on Link's sprite
+; used for collision detection with tiles. The coordinates are
+; measured in pixels from the top left corner of Link's 16 by 16 pixel
+; sprite. The first 8 bytes are x coordinates, the other 8 bytes are y
+; coordinates. The first two points are for case when Link is moving up,
+; the next two for moving right, the next two for moving down and the
+; last two for moving left.
 Data_002_6E15::
     db   $06, $09, $0B, $0B, $06, $09, $04, $04
 
@@ -6355,6 +6362,7 @@ CheckForLedgeJumpAndReturn::
     dec  e                                        ; $6E67: $1D
     inc  bc                                       ; $6E68: $03
 
+; Loop over Link's two collision points to check collision with tiles.
 .jr_6E69
     ld   a, e                                     ; $6E69: $7B
     ldh  [hMultiPurposeC], a                      ; $6E6A: $E0 $E3
@@ -6499,6 +6507,8 @@ Data_002_6F28::
     db   $01, $02, $04, $08
 
 func_002_6F2C::
+    ; e := coordinate of the tile under a certain collision point
+    ; of Link's sprite. The collision point is specified by bc.
     ld   hl, Data_002_6E15                        ; $6F2C: $21 $15 $6E
     add  hl, bc                                   ; $6F2F: $09
     ldh  a, [hLinkPositionX]                      ; $6F30: $F0 $98
@@ -6518,6 +6528,8 @@ func_002_6F2C::
     or   e                                        ; $6F49: $B3
     ld   e, a                                     ; $6F4A: $5F
     ldh  [hDungeonFloorTile], a                   ; $6F4B: $E0 $E9
+
+    ; Get the id of the tile at the calculated position.
     ld   d, $00                                   ; $6F4D: $16 $00
     ld   hl, wRoomObjects                         ; $6F4F: $21 $11 $D7
     ld   a, h                                     ; $6F52: $7C
@@ -6526,6 +6538,9 @@ func_002_6F2C::
     ld   a, [hl]                                  ; $6F55: $7E
     ldh  [hObjectUnderEntity], a                  ; $6F56: $E0 $AF
     ld   e, a                                     ; $6F58: $5F
+
+    ; Get the physics flag for the tile type and compare
+    ; them against a list of different values.
     ld   a, [wIsIndoor]                           ; $6F59: $FA $A5 $DB
     ld   d, a                                     ; $6F5C: $57
     call GetObjectPhysicsFlags_trampoline         ; $6F5D: $CD $26 $2A

@@ -1302,7 +1302,7 @@ LinkMotionUnstuckingHandler::
     ldh  a, [hLinkPositionZ]                      ; $4987: $F0 $A2
     add  $08                                      ; $4989: $C6 $08
     ldh  [hLinkPositionZ], a                      ; $498B: $E0 $A2
-    call CheckForLedgeJump                        ; $498D: $CD $45 $6E
+    call BackgroundCollisionHandler               ; $498D: $CD $45 $6E
     ldh  a, [hObjectUnderEntity]                  ; $4990: $F0 $AF
     cp   $E1                                      ; $4992: $FE $E1
     jr   z, .loop_4978                            ; $4994: $28 $E2
@@ -6289,12 +6289,12 @@ ENDC
     ldh  [hLinkPositionZ], a                      ; $6E07: $E0 $A2
 
 .return
-    jp   CheckForLedgeJumpAndReturn               ; $6E09: $C3 $45 $6E
+    jp   BackgroundCollisionHandler               ; $6E09: $C3 $45 $6E
 
 clearIncrementAndReturn::
     call ClearLinkPositionIncrement               ; $6E0C: $CD $8E $17
     ld   [wIgnoreLinkCollisionsCountdown], a      ; $6E0F: $EA $3E $C1
-    jp   CheckForLedgeJumpAndReturn               ; $6E12: $C3 $45 $6E
+    jp   BackgroundCollisionHandler               ; $6E12: $C3 $45 $6E
 
 ; The following 16 bytes are coordinates of points on Link's sprite
 ; used for collision detection with tiles. The coordinates are
@@ -6336,9 +6336,10 @@ Data_002_6E3D::
 Data_002_6E41::
     db   $00, $00, $F0, $10
 
-; Initiate a jump if Link is passing through a ledge
-CheckForLedgeJump::
-CheckForLedgeJumpAndReturn::
+; Handle collisions between Link and background tiles.
+BackgroundCollisionHandler::
+    ; Skip this collision handler if Link is performing a ledge jump
+    ; or if the game is in free movement mode.
     ld   hl, wC10A                                ; $6E45: $21 $0A $C1
     ld   a, [wFreeMovementMode]                   ; $6E48: $FA $7B $C1
     or   [hl]                                     ; $6E4B: $B6

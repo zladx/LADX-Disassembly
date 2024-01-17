@@ -6310,7 +6310,10 @@ LinkCollisionPointsX::
 .left  db 04, 04
 
 LinkCollisionPointsY::
-    db   $06, $06, $09, $0C, $0F, $0F, $09, $0C
+.up    db 06, 06
+.right db 09, 12
+.down  db 15, 15
+.left  db 09, 12
 
 ; Offsets into the above table for moving down ($04) and up ($00).
 Data_002_6E25::

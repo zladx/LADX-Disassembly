@@ -6304,7 +6304,10 @@ clearIncrementAndReturn::
 ; the next two for moving right, the next two for moving down and the
 ; last two for moving left.
 LinkCollisionPointsX::
-    db   $06, $09, $0B, $0B, $06, $09, $04, $04
+.up    db 06, 09
+.right db 11, 11
+.down  db 06, 09
+.left  db 04, 04
 
 LinkCollisionPointsY::
     db   $06, $06, $09, $0C, $0F, $0F, $09, $0C

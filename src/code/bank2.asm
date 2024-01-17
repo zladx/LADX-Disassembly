@@ -6303,10 +6303,10 @@ clearIncrementAndReturn::
 ; coordinates. The first two points are for case when Link is moving up,
 ; the next two for moving right, the next two for moving down and the
 ; last two for moving left.
-Data_002_6E15::
+LinkCollisionPointsX::
     db   $06, $09, $0B, $0B, $06, $09, $04, $04
 
-Data_002_6E1D::
+LinkCollisionPointsY::
     db   $06, $06, $09, $0C, $0F, $0F, $09, $0C
 
 Data_002_6E25::
@@ -6347,6 +6347,9 @@ CheckForLedgeJumpAndReturn::
 
     jp   label_002_6B66                           ; $6E52: $C3 $66 $6B
 
+; Check if Link has vertical speed and if he is moving up or down.
+; bc = offset into the table of Link's collision points
+; ($04 if Link is moving down, $00 if Link is moving up).
 .jr_6E55
     xor  a                                        ; $6E55: $AF
     ld   [wCollisionType], a                      ; $6E56: $EA $33 $C1
@@ -6362,7 +6365,6 @@ CheckForLedgeJumpAndReturn::
     dec  e                                        ; $6E67: $1D
     inc  bc                                       ; $6E68: $03
 
-; Loop over Link's two collision points to check collision with tiles.
 .jr_6E69
     ld   a, e                                     ; $6E69: $7B
     ldh  [hMultiPurposeC], a                      ; $6E6A: $E0 $E3
@@ -6371,6 +6373,8 @@ CheckForLedgeJumpAndReturn::
     ld   c, a                                     ; $6E6F: $4F
     ld   b, $00                                   ; $6E70: $06 $00
 
+; Loop over Link's two collision points to check collision with tiles.
+; This is the case where Link is moving vertically.
 .loop_6E72
     push de                                       ; $6E72: $D5
     push bc                                       ; $6E73: $C5
@@ -6431,6 +6435,10 @@ jr_002_6EB5:
     ldh  [hLinkPositionY], a                      ; $6EC1: $E0 $99
     jp   ResetPegasusBoots                        ; $6EC3: $C3 $B6 $0C
 
+; Vertical collision smoothening: Link has moved (vertically) into
+; the corner of a solid block. Set his y position to the previous
+; y position and instead adjust his x position so that he moves away
+; from the block he walked into.
 jr_002_6EC6:
     ld   a, [wCollisionType]                      ; $6EC6: $FA $33 $C1
     and  COLLISION_TYPE_VERTICAL                  ; $6EC9: $E6 $03
@@ -6467,6 +6475,8 @@ jr_002_6EDD:
     ld   c, a                                     ; $6EF3: $4F
     ld   b, $00                                   ; $6EF4: $06 $00
 
+; Loop over Link's two collision points to check collision with tiles.
+; This is the case where Link is moving horizontally.
 .loop_6EF6
     push de                                       ; $6EF6: $D5
     push bc                                       ; $6EF7: $C5
@@ -6477,6 +6487,10 @@ jr_002_6EDD:
     dec  e                                        ; $6EFE: $1D
     jr   nz, .loop_6EF6                           ; $6EFF: $20 $F5
 
+; Horizontal collision smoothening: Link has moved (horizontally) into
+; the corner of a solid block. Set his x position to the previous
+; x position and instead adjust his y position so that he moves away
+; from the block he walked into.
     ld   a, [wCollisionType]                      ; $6F01: $FA $33 $C1
     and  COLLISION_TYPE_HORIZONTAL                ; $6F04: $E6 $0C
     jr   z, jr_002_6F1C                           ; $6F06: $28 $14
@@ -6506,10 +6520,11 @@ jr_002_6F1C:
 Data_002_6F28::
     db   $01, $02, $04, $08
 
+; Handle collision between a collision point of Link's sprite and the
+; tile below that pixel. The pixel is specified by bc.
 func_002_6F2C::
-    ; e := coordinate of the tile under a certain collision point
-    ; of Link's sprite. The collision point is specified by bc.
-    ld   hl, Data_002_6E15                        ; $6F2C: $21 $15 $6E
+    ; e := tile coordinate of the tile under the collision point.
+    ld   hl, LinkCollisionPointsX                 ; $6F2C: $21 $15 $6E
     add  hl, bc                                   ; $6F2F: $09
     ldh  a, [hLinkPositionX]                      ; $6F30: $F0 $98
     sub  $08                                      ; $6F32: $D6 $08
@@ -6518,7 +6533,7 @@ func_002_6F2C::
     swap a                                        ; $6F37: $CB $37
     and  $0F                                      ; $6F39: $E6 $0F
     ld   e, a                                     ; $6F3B: $5F
-    ld   hl, Data_002_6E1D                        ; $6F3C: $21 $1D $6E
+    ld   hl, LinkCollisionPointsY                 ; $6F3C: $21 $1D $6E
     add  hl, bc                                   ; $6F3F: $09
     ldh  a, [hLinkPositionY]                      ; $6F40: $F0 $99
     add  [hl]                                     ; $6F42: $86
@@ -6539,7 +6554,7 @@ func_002_6F2C::
     ldh  [hObjectUnderEntity], a                  ; $6F56: $E0 $AF
     ld   e, a                                     ; $6F58: $5F
 
-    ; Get the physics flag for the tile type and compare
+    ; Get the physics flags for the tile type and compare
     ; them against a list of different values.
     ld   a, [wIsIndoor]                           ; $6F59: $FA $A5 $DB
     ld   d, a                                     ; $6F5C: $57

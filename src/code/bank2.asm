@@ -6309,9 +6309,11 @@ LinkCollisionPointsX::
 LinkCollisionPointsY::
     db   $06, $06, $09, $0C, $0F, $0F, $09, $0C
 
+; Offsets into the above table for moving down ($04) and up ($00).
 Data_002_6E25::
     db   $04, $00
 
+; Offsets into the above table for moving right ($02) and left ($06).
 Data_002_6E27::
     db   $02, $06
 
@@ -6324,6 +6326,7 @@ LinkDirectionCompareDirection::
     db  DIRECTION_DOWN,     DIRECTION_DOWN
     db  DIRECTION_LEFT,     DIRECTION_LEFT
 
+; Adjustment values for Link's position in case of collision with a solid tile.
 Data_002_6E39::
     db   $00, $01, $FF, $00
 

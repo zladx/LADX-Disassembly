@@ -6334,7 +6334,7 @@ LinkDirectionCompareDirection::
 
 ; Adjustment values for Link's position in case of collision with a solid tile.
 Data_002_6E39::
-    db   $00, $01, $FF, $00
+    db   0, 1, -1, 0
 
 Data_002_6E3D::
     db   $10, $F0, $00, $00

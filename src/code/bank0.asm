@@ -2789,6 +2789,12 @@ LinkMotionMapFadeOutHandler::
     ld   hl, wWarpPositions                       ; $18B5: $21 $16 $D4
     ld   c, $00                                   ; $18B8: $0E $00
 
+; Loop over the four possible warp tile position in the current room and
+; compare them with Link's position. For Link's tile position, we use
+; the tile that is under the pixel in the center of Link's sprite.
+; If a warp tile is found, the index is stored in c. If not tile is
+; found, then c=4 after this loop, which is an unintended value and
+; a reason for the dog house glitch.
 .loop
     ldh  a, [hLinkPositionX]                      ; $18BA: $F0 $98
     swap a                                        ; $18BC: $CB $37
@@ -2807,12 +2813,14 @@ LinkMotionMapFadeOutHandler::
     jr   nz, .loop                                ; $18D0: $20 $E8
 
 .break
+    ; de = 5*c
     ld   a, c                                     ; $18D2: $79
     sla  a                                        ; $18D3: $CB $27
     sla  a                                        ; $18D5: $CB $27
     add  a, c                                     ; $18D7: $81
     ld   e, a                                     ; $18D8: $5F
     ld   d, $00                                   ; $18D9: $16 $00
+    ; hl = start of the c'th warp struct
     ld   hl, wWarp0MapCategory                    ; $18DB: $21 $01 $D4
     add  hl, de                                   ; $18DE: $19
 
@@ -2850,6 +2858,11 @@ LinkMotionMapFadeOutHandler::
     ld   a, $14                                   ; $190A: $3E $14
     call SwitchBank                               ; $190C: $CD $0C $08
     push hl                                       ; $190F: $E5
+    ; This code tries to set de = 64*[hMapId].
+    ; However, it assumes that [hMapId] < $10, i.e. that the upper
+    ; nibble is 0. If [hMapId] >= $10, the result will be wrong.
+    ; Probably does not matter, since maps with id > $0A do not have
+    ; a map layout.
     ldh  a, [hMapId]                              ; $1910: $F0 $F7
     swap a                                        ; $1912: $CB $37
     ld   e, a                                     ; $1914: $5F
@@ -2877,6 +2890,7 @@ LinkMotionMapFadeOutHandler::
 .label_193C
     ld   e, $00                                   ; $193C: $1E $00
 
+; Search the room with id c in the map layout...
 .loop_193E
     ld   a, [hli]                                 ; $193E: $2A
     cp   c                                        ; $193F: $B9
@@ -2887,8 +2901,10 @@ LinkMotionMapFadeOutHandler::
     jr   nz, .loop_193E                           ; $1946: $20 $F6
 .break_1948
 
+; ...and save the position of the room in [wIndoorRoom].
     ld   a, e                                     ; $1948: $7B
     ld   [wIndoorRoom], a                         ; $1949: $EA $AE $DB
+
     ldh  a, [hFreeWarpDataAddress]                ; $194C: $F0 $E6
     and  a                                        ; $194E: $A7
     jr   nz, .label_196E                          ; $194F: $20 $1D

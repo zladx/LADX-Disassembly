@@ -119,7 +119,7 @@ ApplyRoomTransition::
     ; Initiate a jump if Link landed on a ledge
     ld   a, $01                                   ; $7956: $3E $01
     ldh  [hLinkSpeedY], a                         ; $7958: $E0 $9B
-    call CheckForLedgeJump                        ; $795A: $CD $45 $6E
+    call BackgroundCollisionHandler               ; $795A: $CD $45 $6E
 
     ; If transitioning over an object with collisions, unstuck the player
 
@@ -846,4 +846,4 @@ jr_002_7C8B:
     ld   a, [hl]                                  ; $7C98: $7E
     ldh  [hLinkSpeedY], a                         ; $7C99: $E0 $9B
     call UpdateFinalLinkPosition                  ; $7C9B: $CD $A8 $21
-    jp   CheckForLedgeJump                        ; $7C9E: $C3 $45 $6E
+    jp   BackgroundCollisionHandler               ; $7C9E: $C3 $45 $6E

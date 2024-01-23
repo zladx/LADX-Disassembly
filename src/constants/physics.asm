@@ -11,3 +11,31 @@ DEF COLLISION_TYPE_LEFT         EQU $04
 DEF COLLISION_TYPE_RIGHT        EQU $08
 DEF COLLISION_TYPE_HORIZONTAL   EQU $0C
 DEF COLLISION_TYPE_UNKNOWN_10   EQU $10
+
+; Values for objects physic flags
+; (See GetObjectPhysicsFlags)
+;
+; TODO: this list is incomplete, and the documentation may be inaccurate
+DEF OBJ_PHYSICS_NONE               EQU $00 ; pass-through
+DEF OBJ_PHYSICS_SOLID              EQU $01
+DEF OBJ_PHYSICS_STAIRS             EQU $02
+DEF OBJ_PHYSICS_DOOR               EQU $03
+DEF OBJ_PHYSICS_OCEAN              EQU $04 ; blocks enemies but not projectiles?
+DEF OBJ_PHYSICS_SHALLOW_WATER      EQU $05
+DEF OBJ_PHYSICS_GRASS              EQU $06 ; cuttable
+DEF OBJ_PHYSICS_WATER              EQU $07
+DEF OBJ_PHYSICS_BRIDGE             EQU $08 ; offsets the sprite up a few pixels
+DEF OBJ_PHYSICS_WINDFISH_STAIRS    EQU $0A ; before instrument
+DEF OBJ_PHYSICS_LEDGE_OVERWORLD    EQU $10 ; jumpable
+DEF OBJ_PHYSICS_REMOVABLE_OBSTACLE EQU $30 ; bush/rock/keyblock/cracked block/sword-crystals
+DEF OBJ_PHYSICS_PIT                EQU $50
+DEF OBJ_PHYSICS_PIT_WARP           EQU $51 ; pit with warp to other room (D1 boss, D7)
+DEF OBJ_PHYSICS_HOOKSHOTABLE       EQU $60 ; solid or dash-crystal
+DEF OBJ_PHYSICS_DOOR_OPEN          EQU $7x ; open door/flip door
+DEF OBJ_PHYSICS_FINE_COLLISION     EQU $8x ; for 8x8 tile collision
+DEF OBJ_PHYSICS_KEY_DOOR           EQU $9x ; key doors, bombable walls
+DEF OBJ_PHYSICS_WATER_SIDESCROLL   EQU $B0
+DEF OBJ_PHYSICS_LADDER_SIDESCROLL  EQU $B1
+DEF OBJ_PHYSICS_KEYHOLE            EQU $C0
+DEF OBJ_PHYSICS_LEDGE_INDOOR       EQU $Dx
+DEF OBJ_PHYSICS_CONVEYOR           EQU $F0 ; but not rapids

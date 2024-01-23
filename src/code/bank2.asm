@@ -5969,7 +5969,7 @@ CheckPositionForMapTransition::
     ret  nz                                       ; $6C7C: $C0
 
     ;
-    ; Kanulet Castle underground special case
+    ; Kanalet Castle underground special case
     ;
 
     ; If on MAP_CAVE_WATER…
@@ -6342,7 +6342,7 @@ Data_002_6E3D::
 Data_002_6E41::
     db   $00, $00, $F0, $10
 
-; Handle collisions between Link and background tiles.
+; Check for collisions between Link and background tiles.
 BackgroundCollisionHandler::
     ; Skip this collision handler if Link is performing a ledge jump
     ; or if the game is in free movement mode.
@@ -6388,7 +6388,7 @@ BackgroundCollisionHandler::
 .loop_6E72
     push de                                       ; $6E72: $D5
     push bc                                       ; $6E73: $C5
-    call func_002_6F2C                            ; $6E74: $CD $2C $6F
+    call ApplyCollisionWithObject                 ; $6E74: $CD $2C $6F
     pop  bc                                       ; $6E77: $C1
     pop  de                                       ; $6E78: $D1
     inc  bc                                       ; $6E79: $03
@@ -6490,7 +6490,7 @@ jr_002_6EDD:
 .loop_6EF6
     push de                                       ; $6EF6: $D5
     push bc                                       ; $6EF7: $C5
-    call func_002_6F2C                            ; $6EF8: $CD $2C $6F
+    call ApplyCollisionWithObject                 ; $6EF8: $CD $2C $6F
     pop  bc                                       ; $6EFB: $C1
     pop  de                                       ; $6EFC: $D1
     inc  bc                                       ; $6EFD: $03
@@ -6531,9 +6531,12 @@ Data_002_6F28::
     db   $01, $02, $04, $08
 
 ; Handle collision between a collision point of Link's sprite and the
-; tile below that pixel. The pixel is specified by bc.
-func_002_6F2C::
-    ; e := tile coordinate of the tile under the collision point.
+; tile below that pixel.
+;
+; Input:
+;   bc   direction of the collision relative to Link
+ApplyCollisionWithObject::
+    ; Get the tile under the collision point.
     ld   hl, LinkCollisionPointsX                 ; $6F2C: $21 $15 $6E
     add  hl, bc                                   ; $6F2F: $09
     ldh  a, [hLinkPositionX]                      ; $6F30: $F0 $98
@@ -6554,7 +6557,7 @@ func_002_6F2C::
     ld   e, a                                     ; $6F4A: $5F
     ldh  [hDungeonFloorTile], a                   ; $6F4B: $E0 $E9
 
-    ; Get the id of the tile at the calculated position.
+    ; Get the colliding object
     ld   d, $00                                   ; $6F4D: $16 $00
     ld   hl, wRoomObjects                         ; $6F4F: $21 $11 $D7
     ld   a, h                                     ; $6F52: $7C
@@ -6573,40 +6576,40 @@ func_002_6F2C::
     and  a                                        ; $6F62: $A7
     jp   z, label_002_7461                        ; $6F63: $CA $61 $74
 
-    cp   $01                                      ; $6F66: $FE $01
-    jp   z, label_002_7277                        ; $6F68: $CA $77 $72
+    cp   OBJ_PHYSICS_SOLID                        ; $6F66: $FE $01
+    jp   z, ApplyCollisionWithSolid               ; $6F68: $CA $77 $72
 
-    cp   $02                                      ; $6F6B: $FE $02
-    jp   z, label_002_7260                        ; $6F6D: $CA $60 $72
+    cp   OBJ_PHYSICS_STAIRS                       ; $6F6B: $FE $02
+    jp   z, ApplyCollisionWithStairs              ; $6F6D: $CA $60 $72
 
-    cp   $03                                      ; $6F70: $FE $03
-    jp   z, label_002_71BB                        ; $6F72: $CA $BB $71
+    cp   OBJ_PHYSICS_DOOR                         ; $6F70: $FE $03
+    jp   z, ApplyCollisionWithDoor                ; $6F72: $CA $BB $71
 
-    cp   $10                                      ; $6F75: $FE $10
-    jp   z, label_002_719C                        ; $6F77: $CA $9C $71
+    cp   OBJ_PHYSICS_LEDGE_OVERWORLD              ; $6F75: $FE $10
+    jp   z, ApplyCollisionWithLedge               ; $6F77: $CA $9C $71
 
-    cp   $04                                      ; $6F7A: $FE $04
-    jp   z, label_002_723D                        ; $6F7C: $CA $3D $72
+    cp   OBJ_PHYSICS_OCEAN                        ; $6F7A: $FE $04
+    jp   z, ApplyCollisionWithOcean               ; $6F7C: $CA $3D $72
 
-    cp   $30                                      ; $6F7F: $FE $30
-    jp   z, label_002_7277                        ; $6F81: $CA $77 $72
+    cp   OBJ_PHYSICS_REMOVABLE_OBSTACLE           ; $6F7F: $FE $30
+    jp   z, ApplyCollisionWithSolid               ; $6F81: $CA $77 $72
 
-    cp   $60                                      ; $6F84: $FE $60
-    jp   z, label_002_7277                        ; $6F86: $CA $77 $72
+    cp   OBJ_PHYSICS_HOOKSHOTABLE                 ; $6F84: $FE $60
+    jp   z, ApplyCollisionWithSolid               ; $6F86: $CA $77 $72
 
-    cp   $0A                                      ; $6F89: $FE $0A
-    jp   z, label_002_7260                        ; $6F8B: $CA $60 $72
+    cp   OBJ_PHYSICS_WIDE_STAIRS                  ; $6F89: $FE $0A
+    jp   z, ApplyCollisionWithStairs              ; $6F8B: $CA $60 $72
 
-    cp   $FF                                      ; $6F8E: $FE $FF
+    cp   OBJ_PHYSICS_INVALID                      ; $6F8E: $FE $FF
     jp   z, label_002_7461                        ; $6F90: $CA $61 $74
 
     cp   $E0                                      ; $6F93: $FE $E0
     jp   z, label_002_7461                        ; $6F95: $CA $61 $74
 
-    cp   $F0                                      ; $6F98: $FE $F0
+    cp   OBJ_PHYSICS_CONVEYOR                     ; $6F98: $FE $F0
     jp   nc, label_002_7461                       ; $6F9A: $D2 $61 $74
 
-    cp   $C0                                      ; $6F9D: $FE $C0
+    cp   OBJ_PHYSICS_KEYHOLE                      ; $6F9D: $FE $C0
     jp   nz, label_002_7045                       ; $6F9F: $C2 $45 $70
 
     ldh  a, [hLinkDirection]                      ; $6FA2: $F0 $9E
@@ -6716,12 +6719,12 @@ jr_002_702C:
     ldh  [hRoomStatus], a                         ; $7039: $E0 $F8
 
 label_002_703B:
-    jp   label_002_7277                           ; $703B: $C3 $77 $72
+    jp   ApplyCollisionWithSolid                  ; $703B: $C3 $77 $72
 
 jr_002_703E:
     ld   a, e                                     ; $703E: $7B
     call OpenDialogInTable2AndClearIncrement      ; $703F: $CD $04 $75
-    jp   label_002_7277                           ; $7042: $C3 $77 $72
+    jp   ApplyCollisionWithSolid                  ; $7042: $C3 $77 $72
 
 label_002_7045:
     ldh  a, [hObjectUnderEntity]                  ; $7045: $F0 $AF
@@ -6730,7 +6733,7 @@ label_002_7045:
 
     ld   a, [wLinkMotionState]                    ; $704B: $FA $1C $C1
     cp   $01                                      ; $704E: $FE $01
-    jp   z, label_002_7277                        ; $7050: $CA $77 $72
+    jp   z, ApplyCollisionWithSolid               ; $7050: $CA $77 $72
 
 .jr_7053
     ldh  a, [hMultiPurposeD]                      ; $7053: $F0 $E4
@@ -6799,7 +6802,7 @@ ENDC
     inc  a                                        ; $70AC: $3C
     ld   [wC191], a                               ; $70AD: $EA $91 $C1
     cp   $0C                                      ; $70B0: $FE $0C
-    jp   c, label_002_7277                        ; $70B2: $DA $77 $72
+    jp   c, ApplyCollisionWithSolid               ; $70B2: $DA $77 $72
 
 .jr_70B5
     call ResetPegasusBoots                        ; $70B5: $CD $B6 $0C
@@ -6823,14 +6826,14 @@ ENDC
 label_002_70D8:
     xor  a                                        ; $70D8: $AF
     ld   [wC191], a                               ; $70D9: $EA $91 $C1
-    jp   label_002_7277                           ; $70DC: $C3 $77 $72
+    jp   ApplyCollisionWithSolid                  ; $70DC: $C3 $77 $72
 
 label_002_70DF:
     cp   $90                                      ; $70DF: $FE $90
     jp   c, label_002_715F                        ; $70E1: $DA $5F $71
 
     cp   $99                                      ; $70E4: $FE $99
-    jp   nc, label_002_7277                       ; $70E6: $D2 $77 $72
+    jp   nc, ApplyCollisionWithSolid              ; $70E6: $D2 $77 $72
 
     sub  $90                                      ; $70E9: $D6 $90
     ld   e, a                                     ; $70EB: $5F
@@ -6845,7 +6848,7 @@ label_002_70DF:
     sub  e                                        ; $70F9: $93
     sub  $0C                                      ; $70FA: $D6 $0C
     cp   $08                                      ; $70FC: $FE $08
-    jp   nc, label_002_7277                       ; $70FE: $D2 $77 $72
+    jp   nc, ApplyCollisionWithSolid              ; $70FE: $D2 $77 $72
 
     jr   jr_002_7112                              ; $7101: $18 $0F
 
@@ -6857,12 +6860,12 @@ label_002_70DF:
     sub  e                                        ; $710A: $93
     sub  $14                                      ; $710B: $D6 $14
     cp   $08                                      ; $710D: $FE $08
-    jp   nc, label_002_7277                       ; $710F: $D2 $77 $72
+    jp   nc, ApplyCollisionWithSolid              ; $710F: $D2 $77 $72
 
 jr_002_7112:
     ld   a, [wC188]                               ; $7112: $FA $88 $C1
     and  a                                        ; $7115: $A7
-    jp   nz, label_002_7277                       ; $7116: $C2 $77 $72
+    jp   nz, ApplyCollisionWithSolid              ; $7116: $C2 $77 $72
 
     ldh  a, [hMultiPurposeD]                      ; $7119: $F0 $E4
     cp   $94                                      ; $711B: $FE $94
@@ -6870,7 +6873,7 @@ jr_002_7112:
 
     ld   a, [wSmallKeysCount]                     ; $711F: $FA $D0 $DB
     and  a                                        ; $7122: $A7
-    jp   z, label_002_7277                        ; $7123: $CA $77 $72
+    jp   z, ApplyCollisionWithSolid               ; $7123: $CA $77 $72
 
     dec  a                                        ; $7126: $3D
     ld   [wSmallKeysCount], a                     ; $7127: $EA $D0 $DB
@@ -6884,7 +6887,7 @@ jr_002_7112:
     and  a                                        ; $7133: $A7
     jr   z, jr_002_7147                           ; $7134: $28 $11
 
-    jp   label_002_7277                           ; $7136: $C3 $77 $72
+    jp   ApplyCollisionWithSolid                  ; $7136: $C3 $77 $72
 
 .jr_7139
     ld   a, [wHasDungeonBossKey]                  ; $7139: $FA $CF $DB
@@ -6893,7 +6896,7 @@ jr_002_7112:
 
     ld_dialog_low a, Dialog007 ; "Boss door locked" ; $713F: $3E $07
     call OpenDialogInTable0AndClearIncrement      ; $7141: $CD $FE $74
-    jp   label_002_7277                           ; $7144: $C3 $77 $72
+    jp   ApplyCollisionWithSolid                  ; $7144: $C3 $77 $72
 
 jr_002_7147:
     ldh  a, [hMultiPurposeD]                      ; $7147: $F0 $E4
@@ -6905,7 +6908,7 @@ jr_002_7147:
     ld   [wC188], a                               ; $7153: $EA $88 $C1
     call SynchronizeDungeonsItemFlags_trampoline  ; $7156: $CD $02 $28
     call EnqueueDoorUnlockedSfx                   ; $7159: $CD $20 $54
-    jp   label_002_7277                           ; $715C: $C3 $77 $72
+    jp   ApplyCollisionWithSolid                  ; $715C: $C3 $77 $72
 
 label_002_715F:
     cp   $7C                                      ; $715F: $FE $7C
@@ -6948,11 +6951,11 @@ jr_002_716E:
     add  hl, de                                   ; $7193: $19
     ld   a, [hl]                                  ; $7194: $7E
     and  a                                        ; $7195: $A7
-    jp   nz, label_002_7277                       ; $7196: $C2 $77 $72
+    jp   nz, ApplyCollisionWithSolid              ; $7196: $C2 $77 $72
 
     jp   label_002_7461                           ; $7199: $C3 $61 $74
 
-label_002_719C:
+ApplyCollisionWithLedge:
     ld   a, [wLinkMotionState]                    ; $719C: $FA $1C $C1
     cp   LINK_MOTION_UNSTUCKING                   ; $719F: $FE $02
     jp   z, collisionEnd                          ; $71A1: $CA $54 $74
@@ -6969,7 +6972,7 @@ label_002_719C:
     call func_002_6EA9                            ; $71B5: $CD $A9 $6E
     jp   collisionEnd                             ; $71B8: $C3 $54 $74
 
-label_002_71BB:
+ApplyCollisionWithDoor:
     ld   a, [wIsCarryingLiftedObject]             ; $71BB: $FA $5C $C1
     and  a                                        ; $71BE: $A7
     jp   nz, collisionEnd                         ; $71BF: $C2 $54 $74
@@ -7058,17 +7061,17 @@ jr_002_722C:
 
     jp   ApplyMapFadeOutTransitionWithNoise       ; $723A: $C3 $7D $0C
 
-label_002_723D:
+ApplyCollisionWithOcean:
     ld   a, [wLinkStandingOnSwitchBlock]          ; $723D: $FA $F9 $D6
     and  a                                        ; $7240: $A7
     jp   nz, label_002_7461                       ; $7241: $C2 $61 $74
 
     ldh  a, [hObjectUnderEntity]                  ; $7244: $F0 $AF
     cp   OBJECT_LOWERED_BLOCK                     ; $7246: $FE $DB
-    jr   c, label_002_7277                        ; $7248: $38 $2D
+    jr   c, ApplyCollisionWithSolid               ; $7248: $38 $2D
 
     cp   OBJECT_RAISED_BLOCK + 1                  ; $724A: $FE $DD
-    jr   nc, label_002_7277                       ; $724C: $30 $29
+    jr   nc, ApplyCollisionWithSolid              ; $724C: $30 $29
 
     sub  OBJECT_LOWERED_BLOCK                     ; $724E: $D6 $DB
     ld   e, a                                     ; $7250: $5F
@@ -7077,11 +7080,11 @@ label_002_723D:
     add  hl, de                                   ; $7256: $19
     ld   a, [wSwitchBlocksState]                  ; $7257: $FA $FB $D6
     xor  [hl]                                     ; $725A: $AE
-    jr   nz, label_002_7277                       ; $725B: $20 $1A
+    jr   nz, ApplyCollisionWithSolid              ; $725B: $20 $1A
 
     jp   label_002_7461                           ; $725D: $C3 $61 $74
 
-label_002_7260:
+ApplyCollisionWithStairs:
     ld   hl, wLinkGroundStatus                    ; $7260: $21 $1F $C1
     ld   [hl], $01                                ; $7263: $36 $01
     cp   $0A                                      ; $7265: $FE $0A
@@ -7091,12 +7094,12 @@ label_002_726A:
     ldh  a, [hMultiPurpose4]                      ; $726A: $F0 $DB
     and  $0F                                      ; $726C: $E6 $0F
     cp   $06                                      ; $726E: $FE $06
-    jr   c, label_002_7277                        ; $7270: $38 $05
+    jr   c, ApplyCollisionWithSolid               ; $7270: $38 $05
 
     cp   $0B                                      ; $7272: $FE $0B
     jp   c, label_002_7461                        ; $7274: $DA $61 $74
 
-label_002_7277:
+ApplyCollisionWithSolid:
     ldh  a, [hObjectUnderEntity]                  ; $7277: $F0 $AF
     cp   OBJECT_HURT_TILE                         ; $7279: $FE $69
     jr   nz, jr_002_728E                          ; $727B: $20 $11
@@ -7445,7 +7448,7 @@ interactiveBlock:
     and  a                                        ; $7446: $A7
     jr   nz, collisionEnd                         ; $7447: $20 $0B
 
-    ; … and on room 77 (graveyard with entry to color dungeon)…
+    ; … and on room 77 (graveyard with entry to color dungeon)…
     ldh  a, [hMapRoom]                            ; $7449: $F0 $F6
     cp   ROOM_OW_COLOR_DUNGEON_ENTRANCE           ; $744B: $FE $77
     jr   nz, collisionEnd                         ; $744D: $20 $05

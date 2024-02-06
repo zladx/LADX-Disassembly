@@ -31,11 +31,11 @@ DEF OBJ_PHYSICS_REMOVABLE_OBSTACLE EQU $30 ; bush/rock/keyblock/cracked block/sw
 DEF OBJ_PHYSICS_PIT                EQU $50
 DEF OBJ_PHYSICS_PIT_WARP           EQU $51 ; pit with warp to other room (D1 boss, D7)
 DEF OBJ_PHYSICS_HOOKSHOTABLE       EQU $60 ; solid or dash-crystal
-DEF OBJ_PHYSICS_DOOR_OPEN          EQU $7x ; open door/flip door
-DEF OBJ_PHYSICS_FINE_COLLISION     EQU $8x ; for 8x8 tile collision
-DEF OBJ_PHYSICS_KEY_DOOR           EQU $9x ; key doors, bombable walls
+DEF OBJ_PHYSICS_DOOR_OPEN          EQU $70 ; open door/flip door
+DEF OBJ_PHYSICS_FINE_COLLISION     EQU $80 ; for 8x8 tile collision
+DEF OBJ_PHYSICS_KEY_DOOR           EQU $90 ; key doors, bombable walls
 DEF OBJ_PHYSICS_WATER_SIDESCROLL   EQU $B0
 DEF OBJ_PHYSICS_LADDER_SIDESCROLL  EQU $B1
 DEF OBJ_PHYSICS_KEYHOLE            EQU $C0
-DEF OBJ_PHYSICS_LEDGE_INDOOR       EQU $Dx
+DEF OBJ_PHYSICS_LEDGE_INDOOR       EQU $D0
 DEF OBJ_PHYSICS_CONVEYOR           EQU $F0 ; but not rapids

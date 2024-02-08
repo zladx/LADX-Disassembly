@@ -6603,7 +6603,7 @@ ApplyCollisionWithObject::
     cp   OBJ_PHYSICS_INVALID                      ; $6F8E: $FE $FF
     jp   z, label_002_7461                        ; $6F90: $CA $61 $74
 
-    cp   $E0                                      ; $6F93: $FE $E0
+    cp   OBJ_PHYSICS_SPIKES                       ; $6F93: $FE $E0
     jp   z, label_002_7461                        ; $6F95: $CA $61 $74
 
     cp   OBJ_PHYSICS_CONVEYOR                     ; $6F98: $FE $F0

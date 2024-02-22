@@ -1895,7 +1895,7 @@ ret_002_4D1F:
     ret                                           ; $4D1F: $C9
 
 func_002_4D20::
-    ; jump to label_002_4D95 if one or more is true:
+    ; jump to .done if one or more is true:
     ;   - Link carry somethin
     ;   - Link is in the air
     ;   - Link is in motion
@@ -1907,7 +1907,7 @@ func_002_4D20::
     or   [hl]                                     ; $4D2A: $B6
     ld   hl, hIsSideScrolling                     ; $4D2B: $21 $F9 $FF
     or   [hl]                                     ; $4D2E: $B6
-    jp   nz, label_002_4D95                       ; $4D2F: $C2 $95 $4D
+    jp   nz, .done                                ; $4D2F: $C2 $95 $4D
 
     ldh  a, [hLinkDirection]                      ; $4D32: $F0 $9E
     ld   e, a                                     ; $4D34: $5F
@@ -1935,7 +1935,7 @@ func_002_4D20::
     add  hl, de                                   ; $4D5B: $19
     ld   a, h                                     ; $4D5C: $7C
     cp   $D7                                      ; $4D5D: $FE $D7
-    jp   nz, label_002_4D95                       ; $4D5F: $C2 $95 $4D
+    jp   nz, .done                                ; $4D5F: $C2 $95 $4D
 
     ld   a, [hl]                                  ; $4D62: $7E
     ldh  [hMultiPurpose0], a                      ; $4D63: $E0 $D7
@@ -1944,7 +1944,7 @@ func_002_4D20::
     ld   d, a                                     ; $4D69: $57
     call GetObjectPhysicsFlags_trampoline         ; $4D6A: $CD $26 $2A
     cp   $00                                      ; $4D6D: $FE $00
-    jr   nz, label_002_4D95                       ; $4D6F: $20 $24
+    jr   nz, .done                                ; $4D6F: $20 $24
 
     ld   a, d                                     ; $4D71: $7A
     and  a                                        ; $4D72: $A7
@@ -1952,32 +1952,32 @@ func_002_4D20::
 
     ldh  a, [hMultiPurpose0]                      ; $4D75: $F0 $D7
     cp   $0C                                      ; $4D77: $FE $0C
-    jr   z, label_002_4D95                        ; $4D79: $28 $1A
+    jr   z, .done                                 ; $4D79: $28 $1A
 
     cp   $0D                                      ; $4D7B: $FE $0D
-    jr   z, label_002_4D95                        ; $4D7D: $28 $16
+    jr   z, .done                                 ; $4D7D: $28 $16
 
     cp   $0C                                      ; $4D7F: $FE $0C
-    jr   z, label_002_4D95                        ; $4D81: $28 $12
+    jr   z, .done                                 ; $4D81: $28 $12
 
     cp   $0D                                      ; $4D83: $FE $0D
-    jr   z, label_002_4D95                        ; $4D85: $28 $0E
+    jr   z, .done                                 ; $4D85: $28 $0E
 
     cp   $B9                                      ; $4D87: $FE $B9
-    jr   z, label_002_4D95                        ; $4D89: $28 $0A
+    jr   z, .done                                 ; $4D89: $28 $0A
 
-    jr   jr_002_4D93                              ; $4D8B: $18 $06
+    jr   .jr_002_4D93                             ; $4D8B: $18 $06
 
 .jr_4D8D
     ldh  a, [hMultiPurpose0]                      ; $4D8D: $F0 $D7
     cp   $05                                      ; $4D8F: $FE $05
-    jr   nz, label_002_4D95                       ; $4D91: $20 $02
+    jr   nz, .done                                ; $4D91: $20 $02
 
-jr_002_4D93:
+.jr_002_4D93
     and  a                                        ; $4D93: $A7
     ret                                           ; $4D94: $C9
 
-label_002_4D95:
+.done
     scf                                           ; $4D95: $37
     ret                                           ; $4D96: $C9
 
@@ -5359,8 +5359,9 @@ Data_002_690D::
 LinkSideScrollingDivingPhysicsHandler::
     ldh  a, [hMapId]                              ; $6910: $F0 $F7
     cp   MAP_TURTLE_ROCK                          ; $6912: $FE $07
-    jr   nz, .jr_692B                             ; $6914: $20 $15
+    jr   nz, .lavaEnd                             ; $6914: $20 $15
 
+    ; Water is lava!
     call label_002_7719                           ; $6916: $CD $19 $77
     ld   a, [wSubtractHealthBuffer]               ; $6919: $FA $94 $DB
     add  $04                                      ; $691C: $C6 $04
@@ -5371,7 +5372,8 @@ LinkSideScrollingDivingPhysicsHandler::
     ld   [wInvincibilityCounter], a               ; $6927: $EA $C7 $DB
     ret                                           ; $692A: $C9
 
-.jr_692B
+.lavaEnd
+
     ld   a, [wHasFlippers]                        ; $692B: $FA $0C $DB
     and  a                                        ; $692E: $A7
     jp   z, label_002_7719                        ; $692F: $CA $19 $77

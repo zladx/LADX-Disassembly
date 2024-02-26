@@ -3,7 +3,7 @@ MadBatterEntityHandler::
     add  hl, bc                                   ; $4EE0: $09
     ld   a, [hl]                                  ; $4EE1: $7E
     and  a                                        ; $4EE2: $A7
-    jp   nz, label_018_50E2                       ; $4EE3: $C2 $E2 $50
+    jp   nz, MadBatterApplyFlashingEffect         ; $4EE3: $C2 $E2 $50
 
     ldh  a, [hRoomStatus]                         ; $4EE6: $F0 $F8
     and  ROOM_STATUS_EVENT_2                      ; $4EE8: $E6 $20
@@ -333,7 +333,9 @@ func_018_50D2::
 
     ret                                           ; $50E1: $C9
 
-label_018_50E2:
+; Make the BG palette flash during the upgrade lightning.
+; (Implementation differs between DMG and CGB.)
+MadBatterApplyFlashingEffect::
     call func_018_5174                            ; $50E2: $CD $74 $51
     call GetEntityTransitionCountdown             ; $50E5: $CD $05 $0C
     jp   z, ClearEntityStatusBank18               ; $50E8: $CA $08 $7F
@@ -341,26 +343,25 @@ label_018_50E2:
     ld   d, a                                     ; $50EB: $57
     ldh  a, [hIsGBC]                              ; $50EC: $F0 $FE
     and  a                                        ; $50EE: $A7
-    jr   nz, jr_018_50FE                          ; $50EF: $20 $0D
+    jr   nz, .replaceScenePalettesGBC             ; $50EF: $20 $0D
 
+    ; On DMG, simply alternate the BG palette between $E4 and $44
     ld   a, d                                     ; $50F1: $7A
     bit  1, a                                     ; $50F2: $CB $4F
     ld   a, $E4                                   ; $50F4: $3E $E4
-    jr   z, .jr_50FA                              ; $50F6: $28 $02
-
+    jr   z, .replaceScenePalettesDMG              ; $50F6: $28 $02
     ld   a, $44                                   ; $50F8: $3E $44
-
-.jr_50FA
+.replaceScenePalettesDMG
     ld   [wBGPalette], a                          ; $50FA: $EA $97 $DB
     ret                                           ; $50FD: $C9
 
-jr_018_50FE:
+.replaceScenePalettesGBC
     ld   hl, wFarcallParams                       ; $50FE: $21 $01 $DE
-    ld   a, BANK(func_024_7B77)                   ; $5101: $3E $24
+    ld   a, BANK(MadBatterReplaceScenePalettes)   ; $5101: $3E $24
     ld   [hl+], a                                 ; $5103: $22
-    ld   a, HIGH(func_024_7B77)                   ; $5104: $3E $7B
+    ld   a, HIGH(MadBatterReplaceScenePalettes)   ; $5104: $3E $7B
     ld   [hl+], a                                 ; $5106: $22
-    ld   a, LOW(func_024_7B77)                    ; $5107: $3E $77
+    ld   a, LOW(MadBatterReplaceScenePalettes)    ; $5107: $3E $77
     ld   [hl+], a                                 ; $5109: $22
     ld   a, BANK(@)                               ; $510A: $3E $18
     ld   [hl], a                                  ; $510C: $77

@@ -6161,7 +6161,7 @@ LoadRoomObject::
 
     ; If object is an Overworld macro…
     ld   a, [bc]                                  ; $32C2: $0A
-    sub  a, OBJECT_MACRO_F5                       ; $32C3: $D6 $F5
+    sub  a, OBJECT_MACROS_SECTION                 ; $32C3: $D6 $F5
     jr   c, .loadOverworldObject                  ; $32C5: $38 $3D
     ; d = object type
     ld   a, [bc]                                  ; $32C7: $0A
@@ -6173,7 +6173,7 @@ LoadRoomObject::
     ; (re-increment bc to be at the object type again)
     inc  bc                                       ; $32CC: $03
     ; Handle the macro
-    callsb ApplyOverworldObjectMacro              ; $32CD: $3E $24 $EA $00 $21 $CD $78 $75
+    callsb ExpandOverworldObjectMacro             ; $32CD: $3E $24 $EA $00 $21 $CD $78 $75
     call SetBankForRoom                           ; $32D5: $CD $3B $35
     ; Return early
     ret                                           ; $32D8: $C9
@@ -6825,23 +6825,36 @@ Func_354B::
     pop  bc                                       ; $3589: $C1
     ret                                           ; $358A: $C9
 
-Func_358B::
+; Copy the objects provided by a macro into the room.
+; Inputs:
+;   hl   start location of objects (inside wRoomObjects)
+;   bc   object offsets list, relative to the object start location ($FF-terminated)
+;   de   object ids list (must be the length of bc - 1)
+CopyMacroObjectsToRoom::
+.loop
     push hl                                       ; $358B: $E5
     push de                                       ; $358C: $D5
+
+    ; Read the next object offset from [bc]
     ld   a, [bc]                                  ; $358D: $0A
     ld   e, a                                     ; $358E: $5F
     ld   d, $00                                   ; $358F: $16 $00
+
+    ; Update the target position inside wRoomObjects
     add  hl, de                                   ; $3591: $19
+
+    ; Read the next object id from [de]
     pop  de                                       ; $3592: $D1
     ld   a, [de]                                  ; $3593: $1A
-    cp   $E1                                      ; $3594: $FE $E1
-    jr   z, .label_35A0                           ; $3596: $28 $08
-    cp   $E2                                      ; $3598: $FE $E2
-    jr   z, .label_35A0                           ; $359A: $28 $04
-    cp   $E3                                      ; $359C: $FE $E3
-    jr   nz, .label_35BC                          ; $359E: $20 $1C
 
-.label_35A0
+    ; Setup warp data if the macro contains a door
+    cp   OBJECT_ROCKY_CAVE_DOOR                   ; $3594: $FE $E1
+    jr   z, .setupWarpData                        ; $3596: $28 $08
+    cp   $E2                                      ; $3598: $FE $E2
+    jr   z, .setupWarpData                        ; $359A: $28 $04
+    cp   OBJECT_CAVE_DOOR                         ; $359C: $FE $E3
+    jr   nz, .warpDataEnd                         ; $359E: $20 $1C
+.setupWarpData
     push af                                       ; $35A0: $F5
     push hl                                       ; $35A1: $E5
     push de                                       ; $35A2: $D5
@@ -6861,33 +6874,50 @@ Func_358B::
     pop  de                                       ; $35B9: $D1
     pop  hl                                       ; $35BA: $E1
     pop  af                                       ; $35BB: $F1
+.warpDataEnd
 
-.label_35BC
+    ; Copy the object id to the room objects
     ld   [hl], a                                  ; $35BC: $77
-    call label_35CB                               ; $35BD: $CD $CB $35
+
+    call SetupDestroyableObjectIfNeeded           ; $35BD: $CD $CB $35
+
+    ; Move to the next position and object
     inc  de                                       ; $35C0: $13
     inc  bc                                       ; $35C1: $03
+
+    ; Restore the initial start location
     pop  hl                                       ; $35C2: $E1
+
+    ; Loop while the object is not $FF (list-end sentinel)
     ld   a, [bc]                                  ; $35C3: $0A
     and  a                                        ; $35C4: $A7
     cp   $FF                                      ; $35C5: $FE $FF
-    jr   nz, Func_358B                            ; $35C7: $20 $C2
+    jr   nz, CopyMacroObjectsToRoom.loop          ; $35C7: $20 $C2
+
+    ; Done
     pop  bc                                       ; $35C9: $C1
     ret                                           ; $35CA: $C9
 
-label_35CB::
-    cp   $04                                      ; $35CB: $FE $04
+; Part of the macro objects system
+; Input:
+;   a    object id
+SetupDestroyableObjectIfNeeded::
+    ; Short grass cannot be cut
+    cp   OBJECT_SHORT_GRASS                       ; $35CB: $FE $04
     ret  z                                        ; $35CD: $C8
-    cp   $09                                      ; $35CE: $FE $09
-    jr   nz, .label_35D9                          ; $35D0: $20 $07
+
+    ; On the Stone Pig Head room, setup the rocky ground (under the head) to be destroyable
+    cp   OBJECT_ROCKY_GROUND                      ; $35CE: $FE $09
+    jr   nz, .rockyGroundEnd                      ; $35D0: $20 $07
     ldh  a, [hMapRoom]                            ; $35D2: $F0 $F6
     cp   ROOM_OW_GIANT_SKULL                      ; $35D4: $FE $97
     ret  nz                                       ; $35D6: $C0
-    jr   label_35E8                               ; $35D7: $18 $0F
+    jr   .setupDestroyableObject                  ; $35D7: $18 $0F
+.rockyGroundEnd
 
-.label_35D9
-    cp   $E1                                      ; $35D9: $FE $E1
-    jr   nz, label_35E8                           ; $35DB: $20 $0B
+    cp   OBJECT_ROCKY_CAVE_DOOR                   ; $35D9: $FE $E1
+    jr   nz, .setupDestroyableObject              ; $35DB: $20 $0B
+
     ldh  a, [hMapRoom]                            ; $35DD: $F0 $F6
     cp   ROOM_OW_EAGLE_TOWER                      ; $35DF: $FE $0E
     ret  z                                        ; $35E1: $C8
@@ -6896,7 +6926,7 @@ label_35CB::
     cp   UNKNOWN_ROOM_1B                          ; $35E5: $FE $1B
     ret  z                                        ; $35E7: $C8
 
-label_35E8::
+.setupDestroyableObject
     ld   a, $24                                   ; $35E8: $3E $24
     call BackupObjectInRAM2                       ; $35EA: $CD $2F $0B
     ret                                           ; $35ED: $C9

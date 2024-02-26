@@ -459,6 +459,11 @@ include "data/object_attributes/indoors_b.asm"
 include "code/background_colors.asm"
 include "data/backgrounds/forest_palettes.asm"
 include "code/overworld_macros.asm"
+include "code/palettes_bulk_update.asm"
+IntroBeachAttrmap::
+incbin "data/backgrounds/intro_beach.attrmap.encoded"
+TitleAttrmap::
+incbin "data/backgrounds/title.attrmap.encoded"
 
 section "bank25",romx[$4000],bank[$25]
 include "data/object_attributes/overworld_b.asm"

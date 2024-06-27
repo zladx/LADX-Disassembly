@@ -1050,9 +1050,9 @@ jr_003_4D07:
     jr   nz, jr_003_4D22                          ; $4D17: $20 $09
 
 .jr_4D19
-    call func_003_58FC                            ; $4D19: $CD $FC $58
-    call func_003_58FC                            ; $4D1C: $CD $FC $58
-    call func_003_58FC                            ; $4D1F: $CD $FC $58
+    call RoamingEnemyWalk                         ; $4D19: $CD $FC $58
+    call RoamingEnemyWalk                         ; $4D1C: $CD $FC $58
+    call RoamingEnemyWalk                         ; $4D1F: $CD $FC $58
 
 jr_003_4D22:
     call ExecuteActiveEntityHandler_trampoline    ; $4D22: $CD $81 $3A
@@ -1367,7 +1367,7 @@ EntityInitMoblinSword::
     add  hl, bc                                   ; $4EEF: $09
     ld   [hl], a                                  ; $4EF0: $77
     push hl                                       ; $4EF1: $E5
-    call func_003_58FC                            ; $4EF2: $CD $FC $58
+    call RoamingEnemyWalk                         ; $4EF2: $CD $FC $58
     pop  hl                                       ; $4EF5: $E1
     ld   a, [hl]                                  ; $4EF6: $7E
     xor  $01                                      ; $4EF7: $EE $01
@@ -1542,23 +1542,48 @@ EntityInitGhini::
 .ghiniEnd
     jp   IncrementEntityState                     ; $4FC8: $C3 $12 $3B
 
-Data_003_4FCB::
-    db   $60, $02, $62, $02, $62, $22, $60, $22, $64, $02, $66, $02, $66, $22, $64, $22
-    db   $68, $02, $6A, $02, $6C, $02, $6E, $02, $6A, $22, $68, $22, $6E, $22, $6C, $22
-
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-IronMaskSpriteVariants::
+MaskedIronMaskSpriteVariants::
+; Down
 .variant0
-    db $70, $02
-    db $72, $02
+    db   $60, OAM_GBC_PAL_2 | OAMF_PAL0
+    db   $62, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant1
-    db $72, $22
-    db $70, $22
+    db   $62, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db   $60, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+; Up
+.variant2
+    db   $64, OAM_GBC_PAL_2 | OAMF_PAL0
+    db   $66, OAM_GBC_PAL_2 | OAMF_PAL0
+.variant3
+    db   $66, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db   $64, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+; Left
+.variant4
+    db   $68, OAM_GBC_PAL_2 | OAMF_PAL0
+    db   $6A, OAM_GBC_PAL_2 | OAMF_PAL0
+.variant5
+    db   $6C, OAM_GBC_PAL_2 | OAMF_PAL0
+    db   $6E, OAM_GBC_PAL_2 | OAMF_PAL0
+; Right
+.variant6
+    db   $6A, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db   $68, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+.variant7
+    db   $6E, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db   $6C, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 
-Data_003_4FF3::
+UnmaskedIronMaskSpriteVariants::
+.variant0
+    db $70, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $72, OAM_GBC_PAL_2 | OAMF_PAL0
+.variant1
+    db $72, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $70, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+
+IronMaskSpeedXValues::
     db   $0C, $F4, $00, $00
 
-Data_003_4FF7::
+IronMaskSpeedYValues::
     db   $00, $00, $F4, $0C
 
 IronMaskEntityHandler::
@@ -1566,9 +1591,9 @@ IronMaskEntityHandler::
     add  hl, bc                                   ; $4FFE: $09
     ld   a, [hl]                                  ; $4FFF: $7E
     and  a                                        ; $5000: $A7
-    jr   z, .return                               ; $5001: $28 $45
+    jr   z, .masked                               ; $5001: $28 $45
 
-    ld   de, IronMaskSpriteVariants               ; $5003: $11 $EB $4F
+    ld   de, UnmaskedIronMaskSpriteVariants       ; $5003: $11 $EB $4F
     call RenderActiveEntitySpritesPair            ; $5006: $CD $C0 $3B
     call ReturnIfNonInteractive_03                ; $5009: $CD $78 $7F
     call ApplyRecoilIfNeeded_03                   ; $500C: $CD $A9 $7F
@@ -1576,8 +1601,8 @@ IronMaskEntityHandler::
     call UpdateEntityPosWithSpeed_03              ; $5012: $CD $25 $7F
     call DefaultEntityPhysics                     ; $5015: $CD $93 $78
     call GetEntityTransitionCountdown             ; $5018: $CD $05 $0C
-    jr   nz, .jp_003_503D                         ; $501B: $20 $20
-
+    jr   nz, .changeDirectionEnd                  ; $501B: $20 $20
+    
     call GetRandomByte                            ; $501D: $CD $0D $28
     and  $1F                                      ; $5020: $E6 $1F
     add  $20                                      ; $5022: $C6 $20
@@ -1585,20 +1610,20 @@ IronMaskEntityHandler::
     and  $03                                      ; $5025: $E6 $03
     ld   e, a                                     ; $5027: $5F
     ld   d, b                                     ; $5028: $50
-    ld   hl, Data_003_4FF3                        ; $5029: $21 $F3 $4F
+    ld   hl, IronMaskSpeedXValues                 ; $5029: $21 $F3 $4F
     add  hl, de                                   ; $502C: $19
     ld   a, [hl]                                  ; $502D: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $502E: $21 $40 $C2
     add  hl, bc                                   ; $5031: $09
     ld   [hl], a                                  ; $5032: $77
-    ld   hl, Data_003_4FF7                        ; $5033: $21 $F7 $4F
+    ld   hl, IronMaskSpeedYValues                 ; $5033: $21 $F7 $4F
     add  hl, de                                   ; $5036: $19
     ld   a, [hl]                                  ; $5037: $7E
     ld   hl, wEntitiesSpeedYTable                 ; $5038: $21 $50 $C2
     add  hl, bc                                   ; $503B: $09
     ld   [hl], a                                  ; $503C: $77
 
-.jp_003_503D
+.changeDirectionEnd
     ldh  a, [hFrameCounter]                       ; $503D: $F0 $E7
     rra                                           ; $503F: $1F
     rra                                           ; $5040: $1F
@@ -1607,8 +1632,8 @@ IronMaskEntityHandler::
     and  $01                                      ; $5043: $E6 $01
     jp   SetEntitySpriteVariant                   ; $5045: $C3 $0C $3B
 
-.return
-    ld   de, Data_003_4FCB                        ; $5048: $11 $CB $4F
+.masked
+    ld   de, MaskedIronMaskSpriteVariants         ; $5048: $11 $CB $4F
     call AnimateRoamingEnemy                      ; $504B: $CD $3C $58
     ret                                           ; $504E: $C9
 
@@ -1835,7 +1860,7 @@ Data_003_516A::
     db   $76, $76, $76, $76                       ; $516A
 
 EntityInitPushedBlock::
-    call func_003_7EFE                            ; $516E: $CD $FE $7E
+    call GetEntityDirectionToLink                 ; $516E: $CD $FE $7E
     ld   d, $00                                   ; $5171: $16 $00
     ld   hl, Data_003_523D                        ; $5173: $21 $3D $52
     add  hl, de                                   ; $5176: $19
@@ -9302,6 +9327,12 @@ ApplyVectorTowardsLinkAndReturn::
     ld   [hl], a                                  ; $7ED7: $77
     ret                                           ; $7ED8: $C9
 
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   d   x distance (Link's position - entity's position)
+;   e   $00 if Link is to the right of the entity, $01 otherwise
 GetEntityXDistanceAwayFromLink::
     ld   e, $00                                   ; $7ED9: $1E $00
     ldh  a, [hLinkPositionX]                      ; $7EDB: $F0 $98
@@ -9317,6 +9348,12 @@ GetEntityXDistanceAwayFromLink::
     ld   d, a                                     ; $7EE7: $57
     ret                                           ; $7EE8: $C9
 
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   d   y distance (Link's position - entity's position)
+;   e   $02 if Link is above the entity, $03 otherwise
 GetEntityYDistanceAwayFromLink::
     ld   e, $02                                   ; $7EE9: $1E $02
     ldh  a, [hLinkPositionY]                      ; $7EEB: $F0 $99
@@ -9335,38 +9372,43 @@ GetEntityYDistanceAwayFromLink::
     ld   d, a                                     ; $7EFC: $57
     ret                                           ; $7EFD: $C9
 
-func_003_7EFE::
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   e   entity's direction to Link
+GetEntityDirectionToLink::
     call GetEntityXDistanceAwayFromLink           ; $7EFE: $CD $D9 $7E
     ld   a, e                                     ; $7F01: $7B
     ldh  [hMultiPurpose0], a                      ; $7F02: $E0 $D7
     ld   a, d                                     ; $7F04: $7A
     bit  7, a                                     ; $7F05: $CB $7F
-    jr   z, .jr_7F0B                              ; $7F07: $28 $02
+    jr   z, .positiveX                            ; $7F07: $28 $02
 
     cpl                                           ; $7F09: $2F
     inc  a                                        ; $7F0A: $3C
 
-.jr_7F0B
+.positiveX
     push af                                       ; $7F0B: $F5
     call GetEntityYDistanceAwayFromLink           ; $7F0C: $CD $E9 $7E
     ld   a, e                                     ; $7F0F: $7B
     ldh  [hMultiPurpose1], a                      ; $7F10: $E0 $D8
     ld   a, d                                     ; $7F12: $7A
     bit  7, a                                     ; $7F13: $CB $7F
-    jr   z, .jr_7F19                              ; $7F15: $28 $02
+    jr   z, .positiveY                            ; $7F15: $28 $02
 
     cpl                                           ; $7F17: $2F
     inc  a                                        ; $7F18: $3C
 
-.jr_7F19
+.positiveY
     pop  de                                       ; $7F19: $D1
     cp   d                                        ; $7F1A: $BA
-    jr   nc, .jr_7F21                             ; $7F1B: $30 $04
+    jr   nc, .vertical                            ; $7F1B: $30 $04
 
     ldh  a, [hMultiPurpose0]                      ; $7F1D: $F0 $D7
     jr   jr_003_7F23                              ; $7F1F: $18 $02
 
-.jr_7F21
+.vertical
     ldh  a, [hMultiPurpose1]                      ; $7F21: $F0 $D8
 
 jr_003_7F23:

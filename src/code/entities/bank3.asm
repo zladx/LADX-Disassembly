@@ -9376,7 +9376,7 @@ GetEntityYDistanceAwayFromLink::
 ;   bc   entity index
 ;
 ; Outputs:
-;   e   entity's direction to Link
+;   e   entity's direction to Link (0 = right, 1 = left, 2 = up, 3 = down)
 GetEntityDirectionToLink::
     call GetEntityXDistanceAwayFromLink           ; $7EFE: $CD $D9 $7E
     ld   a, e                                     ; $7F01: $7B

@@ -69,12 +69,12 @@ BooBuddyState0Handler::
     jr   jr_006_7A27                              ; $79F8: $18 $2D
 
 jr_006_79FA:
-    call func_006_6594                            ; $79FA: $CD $94 $65
+    call GetEntityXDistanceToLink_06              ; $79FA: $CD $94 $65
     add  $24                                      ; $79FD: $C6 $24
     cp   $48                                      ; $79FF: $FE $48
     jr   nc, jr_006_7A27                          ; $7A01: $30 $24
 
-    call func_006_65A4                            ; $7A03: $CD $A4 $65
+    call GetEntityYDistanceToLink_06              ; $7A03: $CD $A4 $65
     add  $24                                      ; $7A06: $C6 $24
 
 .jr_7A08
@@ -100,7 +100,7 @@ jr_006_7A21:
     jp   func_006_7AB0                            ; $7A24: $C3 $B0 $7A
 
 jr_006_7A27:
-    call func_006_6594                            ; $7A27: $CD $94 $65
+    call GetEntityXDistanceToLink_06              ; $7A27: $CD $94 $65
     sla  e                                        ; $7A2A: $CB $23
     ldh  a, [hFrameCounter]                       ; $7A2C: $F0 $E7
     rra                                           ; $7A2E: $1F
@@ -210,7 +210,7 @@ func_006_7AB0::
     and  $01                                      ; $7AB4: $E6 $01
     jr   z, jr_006_7AC7                           ; $7AB6: $28 $0F
 
-    call func_006_6594                            ; $7AB8: $CD $94 $65
+    call GetEntityXDistanceToLink_06              ; $7AB8: $CD $94 $65
     srl  e                                        ; $7ABB: $CB $3B
     jr   c, .jr_7AC3                              ; $7ABD: $38 $04
 

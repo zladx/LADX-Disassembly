@@ -87,7 +87,7 @@ Kid72EntityHandler::
 .render:
     call RenderActiveEntitySpritesPair            ; $60C1: $CD $C0 $3B
 
-    call func_006_65A4                            ; $60C4: $CD $A4 $65
+    call GetEntityYDistanceToLink_06              ; $60C4: $CD $A4 $65
     ld   a, e                                     ; $60C7: $7B
     dec  a                                        ; $60C8: $3D
     and  $02                                      ; $60C9: $E6 $02
@@ -125,7 +125,7 @@ IncreasePrivateState3:
 
 KidBowwowKidnapState1::
     call ReturnIfNonInteractive_06                ; $60FD: $CD $C6 $64
-    call func_006_65A4                            ; $6100: $CD $A4 $65
+    call GetEntityYDistanceToLink_06              ; $6100: $CD $A4 $65
     add  $20                                      ; $6103: $C6 $20
     cp   $40                                      ; $6105: $FE $40
     jr   c, .jr_6110                              ; $6107: $38 $07

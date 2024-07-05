@@ -47,12 +47,12 @@ StalfosAggressiveState1Handler::
     call ApplyVectorTowardsLink_trampoline        ; $4AE9: $CD $AA $3B
 
 .jr_4AEC
-    call func_006_6594                            ; $4AEC: $CD $94 $65
+    call GetEntityXDistanceToLink_06              ; $4AEC: $CD $94 $65
     add  $1C                                      ; $4AEF: $C6 $1C
     cp   $38                                      ; $4AF1: $FE $38
     jr   nc, .jr_4B0C                             ; $4AF3: $30 $17
 
-    call func_006_65A4                            ; $4AF5: $CD $A4 $65
+    call GetEntityYDistanceToLink_06              ; $4AF5: $CD $A4 $65
     add  $1C                                      ; $4AF8: $C6 $1C
     cp   $38                                      ; $4AFA: $FE $38
     jr   nc, .jr_4B0C                             ; $4AFC: $30 $0E

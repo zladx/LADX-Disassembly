@@ -35,7 +35,7 @@ RichardEntityHandler::
     and  $1F                                      ; $402F: $E6 $1F
     jr   nz, .jr_403B                             ; $4031: $20 $08
 
-    call func_006_65B4                            ; $4033: $CD $B4 $65
+    call GetEntityDirectionToLink_06              ; $4033: $CD $B4 $65
     ld   hl, wEntitiesDirectionTable              ; $4036: $21 $80 $C3
     add  hl, bc                                   ; $4039: $09
     ld   [hl], e                                  ; $403A: $73

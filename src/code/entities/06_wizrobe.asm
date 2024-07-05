@@ -139,7 +139,7 @@ WizrobeState3Handler::
     jr   z, .jr_76DD                              ; $76CA: $28 $11
 
     ld   [hl], $40                                ; $76CC: $36 $40
-    call func_006_65B4                            ; $76CE: $CD $B4 $65
+    call GetEntityDirectionToLink_06              ; $76CE: $CD $B4 $65
     ld   hl, wEntitiesDirectionTable              ; $76D1: $21 $80 $C3
     add  hl, bc                                   ; $76D4: $09
     ld   [hl], a                                  ; $76D5: $77

@@ -1062,6 +1062,7 @@ wEntitiesCollisionsTable::
 ;  - Butterfly: stores a delta X to move closer to Link
 ;  - Genie: store the substate
 ;  - LikeLike: swallowed item
+;  - Keese: speed table index
 wEntitiesPrivateState1Table::
   ds $10 ; C2B0 - C2BF
 
@@ -1069,15 +1070,15 @@ wEntitiesPrivateState1Table::
 ;
 ; Examples:
 ;  - Butterfly: stores a delta Y to move closer to Link
+;  - Keese: -1 when flying counter-clockwise, 1 otherwise
 wEntitiesPrivateState2Table::
   ds $10 ; C2C0 - C2CF
 
 ; Entity-specific state.
 ;
-; When used by a droppble entity, possible values:
-;   0: ??
-;   1: ??
-;   2: pickable item cannot be picked up by sword
+; Examples:
+; - Droppable entity: 0 if ??, 1 if ??, 2 if cannot be picked up by sword
+; - Keese: speed update timer
 wEntitiesPrivateState3Table::
   ds $10 ; C2D0 - C2DF
 

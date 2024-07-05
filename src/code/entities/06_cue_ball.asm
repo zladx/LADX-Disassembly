@@ -53,7 +53,7 @@ CueBallEntityHandler::
     add  hl, de                                   ; $4BCE: $19
     ld   a, [hl]                                  ; $4BCF: $7E
     push af                                       ; $4BD0: $F5
-    call func_006_65B4                            ; $4BD1: $CD $B4 $65
+    call GetEntityDirectionToLink_06              ; $4BD1: $CD $B4 $65
     pop  af                                       ; $4BD4: $F1
     cp   e                                        ; $4BD5: $BB
     jr   z, .jr_4BDE                              ; $4BD6: $28 $06

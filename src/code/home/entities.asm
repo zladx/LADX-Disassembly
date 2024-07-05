@@ -40,7 +40,7 @@ label_3965::
     jp   ReloadSavedBank                          ; $396D: $C3 $1D $08
 
 GetEntityDirectionToLink_trampoline::
-    callsb GetEntityDirectionToLink               ; $3970: $3E $03 $EA $00 $21 $CD $FE $7E
+    callsb GetEntityDirectionToLink_03            ; $3970: $3E $03 $EA $00 $21 $CD $FE $7E
     jp   ReloadSavedBank                          ; $3978: $C3 $1D $08
 
 label_397B::

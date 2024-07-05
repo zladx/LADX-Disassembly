@@ -222,7 +222,7 @@ jr_006_691A:
     jp   IncrementEntityState                     ; $692C: $C3 $12 $3B
 
 OwlState1Handler::
-    call func_006_65B4                            ; $692F: $CD $B4 $65
+    call GetEntityDirectionToLink_06              ; $692F: $CD $B4 $65
     ld   a, e                                     ; $6932: $7B
     xor  $01                                      ; $6933: $EE $01
     ldh  [hLinkDirection], a                      ; $6935: $E0 $9E

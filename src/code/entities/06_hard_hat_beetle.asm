@@ -40,7 +40,7 @@ HardHatBeetleEntityHandler::
     ldh  a, [hFrameCounter]                       ; $4F64: $F0 $E7
     xor  c                                        ; $4F66: $A9
     and  $03                                      ; $4F67: $E6 $03
-    jr   nz, ret_006_4FAF                         ; $4F69: $20 $44
+    jr   nz, HardhatBeetleUpdateSpeed.return      ; $4F69: $20 $44
 
     call GetRandomByte                            ; $4F6B: $CD $0D $28
     xor  c                                        ; $4F6E: $A9
@@ -49,47 +49,47 @@ HardHatBeetleEntityHandler::
     call GetVectorTowardsLink_trampoline          ; $4F73: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $4F76: $F0 $D7
     ld   hl, wEntitiesSpeedYTable                 ; $4F78: $21 $50 $C2
-    call func_006_4FA3                            ; $4F7B: $CD $A3 $4F
+    call HardhatBeetleUpdateSpeed                 ; $4F7B: $CD $A3 $4F
     ld   hl, wEntitiesCollisionsTable             ; $4F7E: $21 $A0 $C2
     add  hl, bc                                   ; $4F81: $09
     ld   a, [hl]                                  ; $4F82: $7E
     and  $0C                                      ; $4F83: $E6 $0C
-    jr   z, .jr_4F8C                              ; $4F85: $28 $05
+    jr   z, .noCollisionY                         ; $4F85: $28 $05
 
     ld   hl, wEntitiesSpeedYTable                 ; $4F87: $21 $50 $C2
     add  hl, bc                                   ; $4F8A: $09
     ld   [hl], b                                  ; $4F8B: $70
 
-.jr_4F8C
+.noCollisionY
     ldh  a, [hMultiPurpose1]                      ; $4F8C: $F0 $D8
     ld   hl, wEntitiesSpeedXTable                 ; $4F8E: $21 $40 $C2
-    call func_006_4FA3                            ; $4F91: $CD $A3 $4F
+    call HardhatBeetleUpdateSpeed                 ; $4F91: $CD $A3 $4F
     ld   hl, wEntitiesCollisionsTable             ; $4F94: $21 $A0 $C2
     add  hl, bc                                   ; $4F97: $09
     ld   a, [hl]                                  ; $4F98: $7E
     and  $03                                      ; $4F99: $E6 $03
-    jr   z, .ret_4FA2                             ; $4F9B: $28 $05
+    jr   z, .noCollisionX                         ; $4F9B: $28 $05
 
     ld   hl, wEntitiesSpeedXTable                 ; $4F9D: $21 $40 $C2
     add  hl, bc                                   ; $4FA0: $09
     ld   [hl], b                                  ; $4FA1: $70
 
-.ret_4FA2
+.noCollisionX
     ret                                           ; $4FA2: $C9
 
-func_006_4FA3::
+HardhatBeetleUpdateSpeed::
     add  hl, bc                                   ; $4FA3: $09
     sub  [hl]                                     ; $4FA4: $96
-    jr   z, ret_006_4FAF                          ; $4FA5: $28 $08
+    jr   z, .return                               ; $4FA5: $28 $08
 
     bit  7, a                                     ; $4FA7: $CB $7F
-    jr   z, .jr_4FAE                              ; $4FA9: $28 $03
+    jr   z, .positive                             ; $4FA9: $28 $03
 
     dec  [hl]                                     ; $4FAB: $35
-    jr   ret_006_4FAF                             ; $4FAC: $18 $01
+    jr   .return                                  ; $4FAC: $18 $01
 
-.jr_4FAE
+.positive
     inc  [hl]                                     ; $4FAE: $34
 
-ret_006_4FAF:
+.return:
     ret                                           ; $4FAF: $C9

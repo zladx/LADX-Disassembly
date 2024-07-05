@@ -18,7 +18,7 @@ DroppableFairyEntityHandler::
     call UpdateEntityPosWithSpeed_03              ; $617B: $CD $25 $7F
     call func_003_61C0                            ; $617E: $CD $C0 $61
     call DefaultEntityPhysics                     ; $6181: $CD $93 $78
-    call GetEntityXDistanceAwayFromLink           ; $6184: $CD $D9 $7E
+    call GetEntityXDistanceToLink_03              ; $6184: $CD $D9 $7E
     ld   a, d                                     ; $6187: $7A
     bit  7, a                                     ; $6188: $CB $7F
     jr   z, .jr_618C                              ; $618A: $28 $00
@@ -27,7 +27,7 @@ DroppableFairyEntityHandler::
     cp   $20                                      ; $618C: $FE $20
     jr   c, jr_003_619C                           ; $618E: $38 $0C
 
-    call GetEntityYDistanceAwayFromLink           ; $6190: $CD $E9 $7E
+    call GetEntityYDistanceToLink_03              ; $6190: $CD $E9 $7E
     ld   a, d                                     ; $6193: $7A
     bit  7, a                                     ; $6194: $CB $7F
     jr   z, .jr_6198                              ; $6196: $28 $00

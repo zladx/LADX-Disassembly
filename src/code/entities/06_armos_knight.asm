@@ -215,12 +215,12 @@ label_006_5411:
 
 ArmosKnightState0Handler::
     call DecrementEntityIgnoreHitsCountdown       ; $5424: $CD $56 $0C
-    call func_006_6594                            ; $5427: $CD $94 $65
+    call GetEntityXDistanceToLink_06              ; $5427: $CD $94 $65
     add  $20                                      ; $542A: $C6 $20
     cp   $40                                      ; $542C: $FE $40
     jr   nc, .ret_5441                            ; $542E: $30 $11
 
-    call func_006_65A4                            ; $5430: $CD $A4 $65
+    call GetEntityYDistanceToLink_06              ; $5430: $CD $A4 $65
     add  $20                                      ; $5433: $C6 $20
     cp   $40                                      ; $5435: $FE $40
     jr   nc, .ret_5441                            ; $5437: $30 $08

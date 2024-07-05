@@ -210,12 +210,12 @@ func_006_7335::
     cp   SWORD_ANIMATION_STATE_SWING_START        ; $7338: $FE $02
     jr   nz, .ret_7371                            ; $733A: $20 $35
 
-    call func_006_6594                            ; $733C: $CD $94 $65
+    call GetEntityXDistanceToLink_06              ; $733C: $CD $94 $65
     add  $18                                      ; $733F: $C6 $18
     cp   $30                                      ; $7341: $FE $30
     jr   nc, .ret_7371                            ; $7343: $30 $2C
 
-    call func_006_65A4                            ; $7345: $CD $A4 $65
+    call GetEntityYDistanceToLink_06              ; $7345: $CD $A4 $65
     add  $18                                      ; $7348: $C6 $18
     cp   $30                                      ; $734A: $FE $30
     jr   nc, .ret_7371                            ; $734C: $30 $23

@@ -278,7 +278,7 @@ func_020_4303::
     ld   [wC5A0], a                               ; $430A: $EA $A0 $C5
     ld   [wShouldGetLostInMysteriousWoods], a     ; $430D: $EA $0C $C1
     ldh  [hLinkSlowWalkingSpeed], a               ; $4310: $E0 $B2
-    ld   [wC117], a                               ; $4312: $EA $17 $C1
+    ld   [wIsGelClingingToLink], a                ; $4312: $EA $17 $C1
     ld   [wC19D], a                               ; $4315: $EA $9D $C1
     ld   [wC147], a                               ; $4318: $EA $47 $C1
     ld   [wLiftedEntityType], a                   ; $431B: $EA $A8 $C5

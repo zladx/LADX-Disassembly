@@ -332,7 +332,7 @@ jr_007_506E:
     ld   hl, wEntitiesDirectionTable              ; $508F: $21 $80 $C3
     add  hl, bc                                   ; $5092: $09
     ld   [hl], a                                  ; $5093: $77
-    call func_007_7E7D                            ; $5094: $CD $7D $7E
+    call GetEntityDirectionToLink_07              ; $5094: $CD $7D $7E
     ld   a, e                                     ; $5097: $7B
     xor  $01                                      ; $5098: $EE $01
 

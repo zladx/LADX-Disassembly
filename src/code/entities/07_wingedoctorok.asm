@@ -87,7 +87,7 @@ WingedOctorokEntityHandler::
     cp   $0A                                      ; $56A5: $FE $0A
     jr   nz, .jr_56B7                             ; $56A7: $20 $0E
 
-    call func_007_7E7D                            ; $56A9: $CD $7D $7E
+    call GetEntityDirectionToLink_07              ; $56A9: $CD $7D $7E
     ld   hl, wEntitiesDirectionTable              ; $56AC: $21 $80 $C3
     add  hl, bc                                   ; $56AF: $09
     ld   a, e                                     ; $56B0: $7B
@@ -117,7 +117,7 @@ jr_007_56BD:
     cp   $00                                      ; $56D4: $FE $00
     jr   nz, .jr_56DD                             ; $56D6: $20 $05
 
-    call func_007_7E7D                            ; $56D8: $CD $7D $7E
+    call GetEntityDirectionToLink_07              ; $56D8: $CD $7D $7E
     jr   jr_007_56E0                              ; $56DB: $18 $03
 
 .jr_56DD
@@ -173,12 +173,12 @@ label_007_5721:
     and  a                                        ; $5726: $A7
     jr   nz, jr_007_5777                          ; $5727: $20 $4E
 
-    call EntityLinkPositionXDifference_07         ; $5729: $CD $5D $7E
+    call GetEntityXDistanceToLink_07              ; $5729: $CD $5D $7E
     add  $20                                      ; $572C: $C6 $20
     cp   $40                                      ; $572E: $FE $40
     jr   nc, jr_007_5777                          ; $5730: $30 $45
 
-    call EntityLinkPositionYDifference_07         ; $5732: $CD $6D $7E
+    call GetEntityYDistanceToLink_07              ; $5732: $CD $6D $7E
     add  $20                                      ; $5735: $C6 $20
     cp   $40                                      ; $5737: $FE $40
     jr   nc, jr_007_5777                          ; $5739: $30 $3C
@@ -203,7 +203,7 @@ label_007_5721:
     jr   z, jr_007_5777                           ; $5755: $28 $20
 
 jr_007_5757:
-    call func_007_7E7D                            ; $5757: $CD $7D $7E
+    call GetEntityDirectionToLink_07              ; $5757: $CD $7D $7E
     ld   hl, wEntitiesDirectionTable              ; $575A: $21 $80 $C3
     add  hl, bc                                   ; $575D: $09
     ld   a, [hl]                                  ; $575E: $7E
@@ -231,7 +231,7 @@ label_007_577A:
     ld   hl, wEntitiesPrivateState2Table          ; $5780: $21 $C0 $C2
     add  hl, bc                                   ; $5783: $09
     ld   [hl], a                                  ; $5784: $77
-    call func_007_7E7D                            ; $5785: $CD $7D $7E
+    call GetEntityDirectionToLink_07              ; $5785: $CD $7D $7E
     ld   hl, wEntitiesDirectionTable              ; $5788: $21 $80 $C3
     add  hl, bc                                   ; $578B: $09
     ld   [hl], e                                  ; $578C: $73

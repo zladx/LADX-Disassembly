@@ -1438,12 +1438,12 @@ func_014_54F8::
     ld   [wC178], a                               ; $54FF: $EA $78 $C1
 
 .jr_5502
-    ld   a, [wC157]                               ; $5502: $FA $57 $C1
+    ld   a, [wScreenShakeCountdown]               ; $5502: $FA $57 $C1
     and  a                                        ; $5505: $A7
     jr   z, .ret_5525                             ; $5506: $28 $1D
 
     dec  a                                        ; $5508: $3D
-    ld   [wC157], a                               ; $5509: $EA $57 $C1
+    ld   [wScreenShakeCountdown], a               ; $5509: $EA $57 $C1
     and  $03                                      ; $550C: $E6 $03
     ld   hl, wC158                                ; $550E: $21 $58 $C1
     add  [hl]                                     ; $5511: $86

@@ -28,7 +28,7 @@ MonkeyEntityHandler::
     cp   $02                                      ; $769D: $FE $02
     jr   nc, .jr_76EF                             ; $769F: $30 $4E
 
-    ld   a, [wC157]                               ; $76A1: $FA $57 $C1
+    ld   a, [wScreenShakeCountdown]               ; $76A1: $FA $57 $C1
     and  a                                        ; $76A4: $A7
     jr   z, .jr_76EF                              ; $76A5: $28 $48
 

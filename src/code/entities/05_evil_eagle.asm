@@ -776,7 +776,7 @@ jr_005_5E56:
 .jr_5E65
     jr   z, jr_005_5E8A                           ; $5E65: $28 $23
 
-.jr_5E67
+.spawnDebrisEnd
     ld   hl, wEntitiesDirectionTable              ; $5E67: $21 $80 $C3
     add  hl, bc                                   ; $5E6A: $09
     ld   a, [hl]                                  ; $5E6B: $7E

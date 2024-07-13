@@ -35,7 +35,7 @@ CreateFollowingNpcEntity_trampoline::
     ld   a, $02                                   ; $3960: $3E $02
     jp   SwitchBank                               ; $3962: $C3 $0C $08
 
-label_3965::
+ConfigureNewEntity_trampoline::
     callsb ConfigureNewEntity                     ; $3965: $3E $03 $EA $00 $21 $CD $5B $48
     jp   ReloadSavedBank                          ; $396D: $C3 $1D $08
 
@@ -342,6 +342,8 @@ SetEntitySpriteVariant::
 ; Increment the state attribute of the given entity
 ; Input:
 ;   bc   entity index
+; Output:
+;   hl   address of the state for this entity
 IncrementEntityState::
     ld   hl, wEntitiesStateTable                  ; $3B12: $21 $90 $C2
     add  hl, bc                                   ; $3B15: $09

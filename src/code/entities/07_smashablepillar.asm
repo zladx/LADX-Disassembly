@@ -1,17 +1,107 @@
-Data_007_5CF8::
-    db   $00, $00, $4C, $07, $00, $08, $4C, $27, $F0, $00, $4A, $07, $F0, $08, $4A, $27
-    db   $E0, $00, $4A, $07, $E0, $08, $4A, $27, $D0, $00, $4A, $07, $D0, $08, $4A, $27
-    db   $C0, $00, $48, $07, $C0, $08, $48, $27, $00, $00, $4A, $07, $00, $08, $4A, $27
-    db   $F0, $00, $4A, $07, $F0, $08, $4A, $27, $E0, $00, $4A, $07, $E0, $08, $4A, $27
-    db   $D0, $00, $48, $07, $D0, $08, $48, $27, $C0, $00, $FF, $07, $C0, $08, $FF, $27
-    db   $00, $00, $4A, $07, $00, $08, $4A, $27, $F0, $00, $4A, $07, $F0, $08, $4A, $27
-    db   $E0, $00, $48, $07, $E0, $08, $48, $27, $D0, $00, $FF, $07, $D0, $08, $FF, $27
-    db   $C0, $00, $FF, $07, $C0, $08, $FF, $27, $00, $00, $4A, $07, $00, $08, $4A, $27
-    db   $F0, $00, $48, $07, $F0, $08, $48, $27, $E0, $00, $FF, $07, $E0, $08, $FF, $27
-    db   $D0, $00, $FF, $07, $D0, $08, $FF, $27, $C0, $00, $FF, $07, $C0, $08, $FF, $27
-    db   $00, $00, $48, $07, $00, $08, $48, $27, $F0, $00, $FF, $07, $F0, $08, $FF, $27
-    db   $E0, $00, $FF, $07, $E0, $08, $FF, $27, $D0, $00, $FF, $07, $D0, $08, $FF, $27
-    db   $C0, $00, $FF, $07, $C0, $08, $FF, $27
+RenderSmashablePillar::
+    ldh  a, [hActiveEntitySpriteVariant]          ; $5CA5: $F0 $F1
+    inc  a                                        ; $5CA7: $3C
+    jr   z, .invisible                            ; $5CA8: $28 $49
+
+    push hl                                       ; $5CAA: $E5
+    ld   a, [wOAMNextAvailableSlot]               ; $5CAB: $FA $C0 $C3
+    ld   e, a                                     ; $5CAE: $5F
+    ld   d, $00                                   ; $5CAF: $16 $00
+    ld   hl, wDynamicOAMBuffer                    ; $5CB1: $21 $30 $C0
+    add  hl, de                                   ; $5CB4: $19
+    ld   e, l                                     ; $5CB5: $5D
+    ld   d, h                                     ; $5CB6: $54
+    pop  hl                                       ; $5CB7: $E1
+
+.loop:
+    ldh  a, [hActiveEntityVisualPosY]             ; $5CB8: $F0 $EC
+    add  [hl]                                     ; $5CBA: $86
+    cp   $7E                                      ; $5CBB: $FE $7E
+    jr   c, .positiveY                            ; $5CBD: $38 $01
+
+    xor  a                                        ; $5CBF: $AF
+
+.positiveY
+    ld   [de], a                                  ; $5CC0: $12
+    inc  hl                                       ; $5CC1: $23
+    inc  de                                       ; $5CC2: $13
+    push bc                                       ; $5CC3: $C5
+    ld   a, [wScreenShakeHorizontal]              ; $5CC4: $FA $55 $C1
+    ld   c, a                                     ; $5CC7: $4F
+    ldh  a, [hActiveEntityPosX]                   ; $5CC8: $F0 $EE
+    add  [hl]                                     ; $5CCA: $86
+    sub  c                                        ; $5CCB: $91
+    ld   [de], a                                  ; $5CCC: $12
+    inc  hl                                       ; $5CCD: $23
+    inc  de                                       ; $5CCE: $13
+    ldh  a, [hActiveEntityTilesOffset]            ; $5CCF: $F0 $F5
+    ld   c, a                                     ; $5CD1: $4F
+    ld   a, [hl+]                                 ; $5CD2: $2A
+    push af                                       ; $5CD3: $F5
+    add  c                                        ; $5CD4: $81
+    ld   [de], a                                  ; $5CD5: $12
+    pop  af                                       ; $5CD6: $F1
+    cp   $FF                                      ; $5CD7: $FE $FF
+    jr   nz, .visibleSprite                       ; $5CD9: $20 $04
+
+    dec  de                                       ; $5CDB: $1B
+    xor  a                                        ; $5CDC: $AF
+    ld   [de], a                                  ; $5CDD: $12
+    inc  de                                       ; $5CDE: $13
+
+.visibleSprite
+    pop  bc                                       ; $5CDF: $C1
+    inc  de                                       ; $5CE0: $13
+    ldh  a, [hActiveEntityFlipAttribute]          ; $5CE1: $F0 $ED
+    xor  [hl]                                     ; $5CE3: $AE
+    inc  hl                                       ; $5CE4: $23
+    ld   [de], a                                  ; $5CE5: $12
+    inc  de                                       ; $5CE6: $13
+    dec  c                                        ; $5CE7: $0D
+    jr   nz, .loop                                ; $5CE8: $20 $CE
+
+    ld   a, [wActiveEntityIndex]                  ; $5CEA: $FA $23 $C1
+    ld   c, a                                     ; $5CED: $4F
+    ld   a, $0A                                   ; $5CEE: $3E $0A
+    jp   func_015_7964_trampoline                 ; $5CF0: $C3 $A0 $3D
+
+.invisible
+    ld   a, [wActiveEntityIndex]                  ; $5CF3: $FA $23 $C1
+    ld   c, a                                     ; $5CF6: $4F
+    ret                                           ; $5CF7: $C9
+
+; Y position, X position, tile n°, attribute 
+SmashablePillarSpriteVariants::
+.variant0
+    db $00, $00, $4C, OAM_GBC_PAL_7 | OAMF_PAL0, $00, $08, $4C, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $F0, $00, $4A, OAM_GBC_PAL_7 | OAMF_PAL0, $F0, $08, $4A, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $E0, $00, $4A, OAM_GBC_PAL_7 | OAMF_PAL0, $E0, $08, $4A, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $D0, $00, $4A, OAM_GBC_PAL_7 | OAMF_PAL0, $D0, $08, $4A, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $C0, $00, $48, OAM_GBC_PAL_7 | OAMF_PAL0, $C0, $08, $48, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+.variant1
+    db $00, $00, $4A, OAM_GBC_PAL_7 | OAMF_PAL0, $00, $08, $4A, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $F0, $00, $4A, OAM_GBC_PAL_7 | OAMF_PAL0, $F0, $08, $4A, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $E0, $00, $4A, OAM_GBC_PAL_7 | OAMF_PAL0, $E0, $08, $4A, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $D0, $00, $48, OAM_GBC_PAL_7 | OAMF_PAL0, $D0, $08, $48, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $C0, $00, $FF, OAM_GBC_PAL_7 | OAMF_PAL0, $C0, $08, $FF, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+.variant2
+    db $00, $00, $4A, OAM_GBC_PAL_7 | OAMF_PAL0, $00, $08, $4A, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $F0, $00, $4A, OAM_GBC_PAL_7 | OAMF_PAL0, $F0, $08, $4A, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $E0, $00, $48, OAM_GBC_PAL_7 | OAMF_PAL0, $E0, $08, $48, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $D0, $00, $FF, OAM_GBC_PAL_7 | OAMF_PAL0, $D0, $08, $FF, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $C0, $00, $FF, OAM_GBC_PAL_7 | OAMF_PAL0, $C0, $08, $FF, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+.variant3
+    db $00, $00, $4A, OAM_GBC_PAL_7 | OAMF_PAL0, $00, $08, $4A, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $F0, $00, $48, OAM_GBC_PAL_7 | OAMF_PAL0, $F0, $08, $48, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $E0, $00, $FF, OAM_GBC_PAL_7 | OAMF_PAL0, $E0, $08, $FF, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $D0, $00, $FF, OAM_GBC_PAL_7 | OAMF_PAL0, $D0, $08, $FF, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $C0, $00, $FF, OAM_GBC_PAL_7 | OAMF_PAL0, $C0, $08, $FF, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+.variant4
+    db $00, $00, $48, OAM_GBC_PAL_7 | OAMF_PAL0, $00, $08, $48, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $F0, $00, $FF, OAM_GBC_PAL_7 | OAMF_PAL0, $F0, $08, $FF, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $E0, $00, $FF, OAM_GBC_PAL_7 | OAMF_PAL0, $E0, $08, $FF, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $D0, $00, $FF, OAM_GBC_PAL_7 | OAMF_PAL0, $D0, $08, $FF, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
+    db $C0, $00, $FF, OAM_GBC_PAL_7 | OAMF_PAL0, $C0, $08, $FF, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
 
 SmashablePillarEntityHandler::
     ldh  a, [hLinkPositionY]                      ; $5DC0: $F0 $99
@@ -20,20 +110,20 @@ SmashablePillarEntityHandler::
     add  hl, bc                                   ; $5DC6: $09
     ld   a, [hl]                                  ; $5DC7: $7E
     sub  e                                        ; $5DC8: $93
-    jr   c, .jr_5DD0                              ; $5DC9: $38 $05
+    jr   c, .aboveLink                            ; $5DC9: $38 $05
 
     ld   a, $01                                   ; $5DCB: $3E $01
     ld   [wDE00], a                               ; $5DCD: $EA $00 $DE
 
-.jr_5DD0
+.aboveLink
     ld   hl, wEntitiesPrivateState1Table          ; $5DD0: $21 $B0 $C2
     add  hl, bc                                   ; $5DD3: $09
     ld   a, [hl]                                  ; $5DD4: $7E
     cp   $02                                      ; $5DD5: $FE $02
-    jp   z, label_007_5FAB                        ; $5DD7: $CA $AB $5F
+    jp   z, SmashablePillarDebrisHandler          ; $5DD7: $CA $AB $5F
 
     and  a                                        ; $5DDA: $A7
-    jp   nz, label_007_5F4D                       ; $5DDB: $C2 $4D $5F
+    jp   nz, SmashablePillarDustHandler           ; $5DDB: $C2 $4D $5F
 
     ldh  a, [hRoomStatus]                         ; $5DDE: $F0 $F8
     and  ROOM_STATUS_EVENT_2                      ; $5DE0: $E6 $20
@@ -41,7 +131,7 @@ SmashablePillarEntityHandler::
 
     ld   a, [wRoomTransitionState]                ; $5DE5: $FA $24 $C1
     and  a                                        ; $5DE8: $A7
-    jr   nz, .jr_5DF5                             ; $5DE9: $20 $0A
+    jr   nz, .roomTransition                      ; $5DE9: $20 $0A
 
     ld   hl, wEntitiesRoomTable                   ; $5DEB: $21 $E0 $C3
     add  hl, bc                                   ; $5DEE: $09
@@ -49,10 +139,10 @@ SmashablePillarEntityHandler::
     cp   [hl]                                     ; $5DF1: $BE
     jp   nz, ClearEntityStatus_07                 ; $5DF2: $C2 $A4 $7E
 
-.jr_5DF5
+.roomTransition
     ldh  a, [hActiveEntitySpriteVariant]          ; $5DF5: $F0 $F1
     cp   $05                                      ; $5DF7: $FE $05
-    jr   nc, jr_007_5E12                          ; $5DF9: $30 $17
+    jr   nc, .variant5End                             ; $5DF9: $30 $17
 
     rla                                           ; $5DFB: $17
     rla                                           ; $5DFC: $17
@@ -64,55 +154,53 @@ SmashablePillarEntityHandler::
     add  e                                        ; $5E06: $83
     ld   e, a                                     ; $5E07: $5F
     ld   d, b                                     ; $5E08: $50
-
-label_007_5E09:
-    ld   hl, Data_007_5CF8                        ; $5E09: $21 $F8 $5C
+    ld   hl, SmashablePillarSpriteVariants        ; $5E09: $21 $F8 $5C
     add  hl, de                                   ; $5E0C: $19
     ld   c, $0A                                   ; $5E0D: $0E $0A
-    call func_007_5CA5                            ; $5E0F: $CD $A5 $5C
+    call RenderSmashablePillar                    ; $5E0F: $CD $A5 $5C
 
-jr_007_5E12:
+.variant5End
     call DecrementEntityIgnoreHitsCountdown       ; $5E12: $CD $56 $0C
     call label_3B70                               ; $5E15: $CD $70 $3B
     call PushLinkOutOfEntity_07                   ; $5E18: $CD $F0 $7C
     ldh  a, [hActiveEntityState]                  ; $5E1B: $F0 $F0
     JP_TABLE                                      ; $5E1D
-._00 dw func_007_5E2A                             ; $5E1E
-._01 dw func_007_5E2B                             ; $5E20
-._02 dw func_007_5E43                             ; $5E22
-._03 dw func_007_5EC5                             ; $5E24
-._04 dw func_007_5EF2                             ; $5E26
-._05 dw func_007_5F11                             ; $5E28
+._00 dw SmashablePillarState0Handler              ; $5E1E
+._01 dw SmashablePillarState1Handler              ; $5E20
+._02 dw SmashablePillarState2Handler              ; $5E22
+._03 dw SmashablePillarState3Handler              ; $5E24
+._04 dw SmashablePillarState4Handler              ; $5E26
+._05 dw SmashablePillarState5Handler              ; $5E28
 
-func_007_5E2A::
+SmashablePillarState0Handler::
     ret
 
-func_007_5E2B::
+SmashablePillarState1Handler::
     call func_007_5EEA                            ; $5E2B: $CD $EA $5E
     call GetEntityTransitionCountdown             ; $5E2E: $CD $05 $0C
-    jr   nz, func_007_5E36                        ; $5E31: $20 $03
+    jr   nz, SmashablePillarShakeScreen           ; $5E31: $20 $03
 
     jp   IncrementEntityState                     ; $5E33: $C3 $12 $3B
 
-func_007_5E36::
+SmashablePillarShakeScreen::
     ld   e, $00                                   ; $5E36: $1E $00
     and  $04                                      ; $5E38: $E6 $04
-    jr   z, .jr_5E3E                              ; $5E3A: $28 $02
+    jr   z, .shakeRight                           ; $5E3A: $28 $02
 
     ld   e, $02                                   ; $5E3C: $1E $02
 
-.jr_5E3E
+.shakeRight
     ld   a, e                                     ; $5E3E: $7B
     ld   [wScreenShakeHorizontal], a              ; $5E3F: $EA $55 $C1
     ret                                           ; $5E42: $C9
 
-func_007_5E43::
+SmashablePillarState2Handler::
     call func_007_5EEA                            ; $5E43: $CD $EA $5E
     ldh  a, [hFrameCounter]                       ; $5E46: $F0 $E7
-    call func_007_5E36                            ; $5E48: $CD $36 $5E
+    call SmashablePillarShakeScreen               ; $5E48: $CD $36 $5E
     ldh  a, [hFrameCounter]                       ; $5E4B: $F0 $E7
     and  $1F                                      ; $5E4D: $E6 $1F
-    jr   nz, .jr_5E67                             ; $5E4F: $20 $16
+    jr   nz, .spawnDebrisEnd                      ; $5E4F: $20 $16
 
     ld   hl, wEntitiesSpriteVariantTable          ; $5E51: $21 $B0 $C3
     add  hl, bc                                   ; $5E54: $09
@@ -120,22 +208,22 @@ func_007_5E43::
     inc  a                                        ; $5E56: $3C
     ld   [hl], a                                  ; $5E57: $77
     cp   $05                                      ; $5E58: $FE $05
-    jp   z, label_007_5EA7                        ; $5E5A: $CA $A7 $5E
+    jp   z, SmashablePillarDestroyed              ; $5E5A: $CA $A7 $5E
 
     call GetRandomByte                            ; $5E5D: $CD $0D $28
     and  $03                                      ; $5E60: $E6 $03
-    jr   z, .jr_5E67                              ; $5E62: $28 $03
+    jr   z, .spawnDebrisEnd                       ; $5E62: $28 $03
 
-    call func_007_5F61                            ; $5E64: $CD $61 $5F
+    call SmashablePillarSpawnDebris               ; $5E64: $CD $61 $5F
 
-.jr_5E67
+.spawnDebrisEnd
     ldh  a, [hFrameCounter]                       ; $5E67: $F0 $E7
     and  $03                                      ; $5E69: $E6 $03
-    jr   nz, .ret_5EA6                            ; $5E6B: $20 $39
+    jr   nz, .return                              ; $5E6B: $20 $39
 
     ld   a, ENTITY_SMASHABLE_PILLAR               ; $5E6D: $3E $A7
     call SpawnNewEntity_trampoline                ; $5E6F: $CD $86 $3B
-    jr   c, .ret_5EA6                             ; $5E72: $38 $32
+    jr   c, .return                               ; $5E72: $38 $32
 
     call GetRandomByte                            ; $5E74: $CD $0D $28
     and  $07                                      ; $5E77: $E6 $07
@@ -163,29 +251,29 @@ func_007_5E43::
     add  hl, de                                   ; $5EA3: $19
     ld   [hl], $01                                ; $5EA4: $36 $01
 
-.ret_5EA6
+.return
     ret                                           ; $5EA6: $C9
 
-label_007_5EA7:
+SmashablePillarDestroyed:
     ld   a, $00                                   ; $5EA7: $3E $00
     ld   [wScreenShakeHorizontal], a              ; $5EA9: $EA $55 $C1
     ld   a, [wNumberOfDungeon7PillarsDestroyed]   ; $5EAC: $FA $72 $DB
     inc  a                                        ; $5EAF: $3C
     ld   [wNumberOfDungeon7PillarsDestroyed], a   ; $5EB0: $EA $72 $DB
     cp   $04                                      ; $5EB3: $FE $04
-    jr   c, .jr_5EBF                              ; $5EB5: $38 $08
+    jr   c, .lastPillar                           ; $5EB5: $38 $08
 
     call GetEntityTransitionCountdown             ; $5EB7: $CD $05 $0C
     ld   [hl], $20                                ; $5EBA: $36 $20
     jp   IncrementEntityState                     ; $5EBC: $C3 $12 $3B
 
-.jr_5EBF
+.lastPillar
     call func_007_6E7F                            ; $5EBF: $CD $7F $6E
     jp   ClearEntityStatus_07                     ; $5EC2: $C3 $A4 $7E
 
-func_007_5EC5::
+SmashablePillarState3Handler::
     call GetEntityTransitionCountdown             ; $5EC5: $CD $05 $0C
-    jr   nz, .jr_5EDE                             ; $5EC8: $20 $14
+    jr   nz, .skipIncrementState                  ; $5EC8: $20 $14
 
     ld   [hl], $20                                ; $5ECA: $36 $20
     ld   a, GAMEPLAY_CUTSCENE                     ; $5ECC: $3E $08
@@ -196,14 +284,14 @@ func_007_5EC5::
     ld   [wGameplaySubtype], a                    ; $5ED8: $EA $96 $DB
     jp   IncrementEntityState                     ; $5EDB: $C3 $12 $3B
 
-.jr_5EDE
+.skipIncrementState
     ld   e, $00                                   ; $5EDE: $1E $00
     and  $04                                      ; $5EE0: $E6 $04
-    jr   z, .jr_5EE6                              ; $5EE2: $28 $02
+    jr   z, .shakeRight                           ; $5EE2: $28 $02
 
     ld   e, $02                                   ; $5EE4: $1E $02
 
-.jr_5EE6
+.shakeRight
     ld   a, e                                     ; $5EE6: $7B
     ld   [wScreenShakeHorizontal], a              ; $5EE7: $EA $55 $C1
 
@@ -213,32 +301,32 @@ func_007_5EEA::
     ld   [wC111], a                               ; $5EEE: $EA $11 $C1
     ret                                           ; $5EF1: $C9
 
-func_007_5EF2::
+SmashablePillarState4Handler::
     xor  a                                        ; $5EF2: $AF
     ld   [wScreenShakeHorizontal], a              ; $5EF3: $EA $55 $C1
     call GetEntityTransitionCountdown             ; $5EF6: $CD $05 $0C
-    jr   nz, .jr_5F06                             ; $5EF9: $20 $0B
+    jr   nz, .skipCollapseTower                   ; $5EF9: $20 $0B
 
     call func_007_6E7F                            ; $5EFB: $CD $7F $6E
     ld   hl, wHasInstrument7                      ; $5EFE: $21 $6B $DB
     set  2, [hl]                                  ; $5F01: $CB $D6
     jp   ClearEntityStatus_07                     ; $5F03: $C3 $A4 $7E
 
-.jr_5F06
+.skipCollapseTower
     jp   func_007_5EEA                            ; $5F06: $C3 $EA $5E
 
 Data_007_5F09::
     db   $00, $02, $04, $06, $06, $04, $02, $00
 
-func_007_5F11::
+SmashablePillarState5Handler::
     xor  a                                        ; $5F11: $AF
     ld   [wScreenShakeVertical], a                ; $5F12: $EA $56 $C1
     call GetEntityTransitionCountdown             ; $5F15: $CD $05 $0C
-    jr   nz, .jr_5F1D                             ; $5F18: $20 $03
+    jr   nz, .skipClearStatus                     ; $5F18: $20 $03
 
     jp   ClearEntityStatus_07                     ; $5F1A: $C3 $A4 $7E
 
-.jr_5F1D
+.skipClearStatus
     push af                                       ; $5F1D: $F5
     and  $07                                      ; $5F1E: $E6 $07
     ld   e, a                                     ; $5F20: $5F
@@ -249,29 +337,28 @@ func_007_5F11::
     ld   [wScreenShakeVertical], a                ; $5F27: $EA $56 $C1
     pop  af                                       ; $5F2A: $F1
     cp   $20                                      ; $5F2B: $FE $20
-    jr   nc, .jr_5F37                             ; $5F2D: $30 $08
+    jr   nc, .skipSpawnDebris                     ; $5F2D: $30 $08
 
     and  $03                                      ; $5F2F: $E6 $03
-    jr   nz, .jr_5F37                             ; $5F31: $20 $04
+    jr   nz, .skipSpawnDebris                     ; $5F31: $20 $04
 
-    call func_007_5F61                            ; $5F33: $CD $61 $5F
+    call SmashablePillarSpawnDebris               ; $5F33: $CD $61 $5F
     xor  a                                        ; $5F36: $AF
 
-.jr_5F37
+.skipSpawnDebris
     cp   $40                                      ; $5F37: $FE $40
-    jr   c, .ret_5F44                             ; $5F39: $38 $09
+    jr   c, .return                               ; $5F39: $38 $09
 
     and  $07                                      ; $5F3B: $E6 $07
-    jr   nz, .ret_5F44                            ; $5F3D: $20 $05
+    jr   nz, .return                              ; $5F3D: $20 $05
 
     ld   hl, hNoiseSfx                            ; $5F3F: $21 $F4 $FF
     ld   [hl], NOISE_SFX_EXPLOSION                ; $5F42: $36 $0C
 
-.ret_5F44
+.return
     ret                                           ; $5F44: $C9
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-Unknown101SpriteVariants::
+SmashablePillarDustSpriteVariants::
 .variant0
     db $30, OAM_GBC_PAL_1 | OAMF_PAL0
     db $30, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
@@ -279,8 +366,8 @@ Unknown101SpriteVariants::
     db $32, OAM_GBC_PAL_1 | OAMF_PAL0
     db $32, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
-label_007_5F4D:
-    ld   de, Unknown101SpriteVariants             ; $5F4D: $11 $45 $5F
+SmashablePillarDustHandler::
+    ld   de, SmashablePillarDustSpriteVariants    ; $5F4D: $11 $45 $5F
     call RenderActiveEntitySpritesPair            ; $5F50: $CD $C0 $3B
     call GetEntityTransitionCountdown             ; $5F53: $CD $05 $0C
     jp   z, ClearEntityStatus_07                  ; $5F56: $CA $A4 $7E
@@ -291,10 +378,10 @@ label_007_5F4D:
     ld   a, $01                                   ; $5F5C: $3E $01
     jp   SetEntitySpriteVariant                   ; $5F5E: $C3 $0C $3B
 
-func_007_5F61::
+SmashablePillarSpawnDebris::
     ld   a, ENTITY_SMASHABLE_PILLAR               ; $5F61: $3E $A7
     call SpawnNewEntity_trampoline                ; $5F63: $CD $86 $3B
-    jr   c, .ret_5F9A                             ; $5F66: $38 $32
+    jr   c, .return                               ; $5F66: $38 $32
 
     ld   hl, wEntitiesPrivateState1Table          ; $5F68: $21 $B0 $C2
     add  hl, de                                   ; $5F6B: $19
@@ -322,28 +409,30 @@ func_007_5F61::
     add  hl, de                                   ; $5F98: $19
     ld   [hl], a                                  ; $5F99: $77
 
-.ret_5F9A
+.return
     ret                                           ; $5F9A: $C9
 
-Data_007_5F9B::
-    db   $16, $03, $16, $23
+SmashablePillarDebrisSpriteVariants::
+.variant0
+    db $16, OAM_GBC_PAL_3 | OAMF_PAL0
+.variant1
+    db $16, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 
-Data_007_5F9F::
+; Initial z speed is lower for each consecutive bounce
+SmashablePillarDebrisZSpeeds::
     db   $18, $10, $0C, $08
 
-Data_007_5FA3::
+SmashablePillarDebrisXSpeeds::
     db   $0C, $F4, $0C, $F4
 
-Data_007_5FA7::
+SmashablePillarDebrisYSpeeds::
     db   $F4, $F4, $0C, $0C
 
-label_007_5FAB:
+SmashablePillarDebrisHandler::
     ldh  a, [hActiveEntityVisualPosY]             ; $5FAB: $F0 $EC
     add  $08                                      ; $5FAD: $C6 $08
     ldh  [hActiveEntityVisualPosY], a             ; $5FAF: $E0 $EC
-
-.jr_5FB1
-    ld   de, Data_007_5F9B                        ; $5FB1: $11 $9B $5F
+    ld   de, SmashablePillarDebrisSpriteVariants  ; $5FB1: $11 $9B $5F
     call RenderActiveEntitySprite                 ; $5FB4: $CD $77 $3C
     call UpdateEntityPosWithSpeed_07              ; $5FB7: $CD $0A $7E
     call AddEntityZSpeedToPos_07                  ; $5FBA: $CD $43 $7E
@@ -367,7 +456,7 @@ label_007_5FAB:
 
     ld   e, a                                     ; $5FD7: $5F
     ld   d, b                                     ; $5FD8: $50
-    ld   hl, Data_007_5F9F                        ; $5FD9: $21 $9F $5F
+    ld   hl, SmashablePillarDebrisZSpeeds         ; $5FD9: $21 $9F $5F
     add  hl, de                                   ; $5FDC: $19
     ld   a, [hl]                                  ; $5FDD: $7E
     ld   hl, wEntitiesSpeedZTable                 ; $5FDE: $21 $20 $C3
@@ -377,16 +466,14 @@ label_007_5FAB:
     and  $03                                      ; $5FE6: $E6 $03
     ld   e, a                                     ; $5FE8: $5F
     ld   d, b                                     ; $5FE9: $50
-    ld   hl, Data_007_5FA3                        ; $5FEA: $21 $A3 $5F
+    ld   hl, SmashablePillarDebrisXSpeeds         ; $5FEA: $21 $A3 $5F
     add  hl, de                                   ; $5FED: $19
     ld   a, [hl]                                  ; $5FEE: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $5FEF: $21 $40 $C2
     add  hl, bc                                   ; $5FF2: $09
     ld   [hl], a                                  ; $5FF3: $77
-    ld   hl, Data_007_5FA7                        ; $5FF4: $21 $A7 $5F
+    ld   hl, SmashablePillarDebrisYSpeeds         ; $5FF4: $21 $A7 $5F
     add  hl, de                                   ; $5FF7: $19
-
-.jr_5FF8
     ld   a, [hl]                                  ; $5FF8: $7E
     call GetEntitySpeedYAddress                   ; $5FF9: $CD $05 $40
     ld   [hl], a                                  ; $5FFC: $77

@@ -1,5 +1,6 @@
-Data_007_6003::
-    db   $4E, $00, $4E, $20
+WreckingBallSprite::
+    db $4E, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $4E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 WreckingBallEntityHandler::
 IF __PATCH_0__
@@ -22,8 +23,8 @@ ENDC
 
 .default
     ldh  a, [hActiveEntityStatus]                 ; $6007: $F0 $EA
-    cp   $07                                      ; $6009: $FE $07
-    jr   nz, jr_007_602A                          ; $600B: $20 $1D
+    cp   ENTITY_STATUS_LIFTED                     ; $6009: $FE $07
+    jr   nz, notLifted                            ; $600B: $20 $1D
 
     ld   a, [wLinkMotionState]                    ; $600D: $FA $1C $C1
     cp   LINK_MOTION_REVOLVING_DOOR               ; $6010: $FE $05
@@ -44,8 +45,8 @@ ENDC
     add  hl, bc                                   ; $6028: $09
     ld   [hl], b                                  ; $6029: $70
 
-jr_007_602A:
-    ld   de, Data_007_6003                        ; $602A: $11 $03 $60
+notLifted:
+    ld   de, WreckingBallSprite                        ; $602A: $11 $03 $60
     call RenderActiveEntitySpritesPair            ; $602D: $CD $C0 $3B
     ld   a, [wRoomTransitionState]                ; $6030: $FA $24 $C1
     and  a                                        ; $6033: $A7
@@ -62,7 +63,7 @@ jr_007_602A:
     ret  nz                                       ; $6048: $C0
 
     ldh  a, [hActiveEntityStatus]                 ; $6049: $F0 $EA
-    cp   $02                                      ; $604B: $FE $02
+    cp   ENTITY_STATUS_FALLING                    ; $604B: $FE $02
     ret  z                                        ; $604D: $C8
 
     call DecrementEntityIgnoreHitsCountdown       ; $604E: $CD $56 $0C
@@ -79,7 +80,7 @@ jr_007_602A:
     ldh  [hDungeonFloorTile], a                   ; $6065: $E0 $E9
     and  $80                                      ; $6067: $E6 $80
     ldh  [hMultiPurposeG], a                      ; $6069: $E0 $E8
-    jr   z, jr_007_608F                           ; $606B: $28 $22
+    jr   z, .hitGroundEnd                         ; $606B: $28 $22
 
     ld   [hl], b                                  ; $606D: $70
     ld   hl, wEntitiesSpeedZTable                 ; $606E: $21 $20 $C3
@@ -88,18 +89,18 @@ jr_007_602A:
     sra  a                                        ; $6073: $CB $2F
     cpl                                           ; $6075: $2F
     cp   $07                                      ; $6076: $FE $07
-    jr   c, .jr_6082                              ; $6078: $38 $08
+    jr   c, .stopBouncing                         ; $6078: $38 $08
 
     push af                                       ; $607A: $F5
     ld   a, NOISE_SFX_CLINK                       ; $607B: $3E $17
     ldh  [hNoiseSfx], a                           ; $607D: $E0 $F4
     pop  af                                       ; $607F: $F1
-    jr   jr_007_6083                              ; $6080: $18 $01
+    jr   .stopBouncingEnd                         ; $6080: $18 $01
 
-.jr_6082
+.stopBouncing
     xor  a                                        ; $6082: $AF
 
-jr_007_6083:
+.stopBouncingEnd
     ld   [hl], a                                  ; $6083: $77
     ld   hl, wEntitiesSpeedXTable                 ; $6084: $21 $40 $C2
     add  hl, bc                                   ; $6087: $09
@@ -107,7 +108,7 @@ jr_007_6083:
     call GetEntitySpeedYAddress                   ; $608A: $CD $05 $40
     sra  [hl]                                     ; $608D: $CB $2E
 
-jr_007_608F:
+.hitGroundEnd
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $608F: $21 $10 $C4
     add  hl, bc                                   ; $6092: $09
     ld   [hl], $03                                ; $6093: $36 $03
@@ -135,84 +136,85 @@ jr_007_608F:
     ldh  [hActiveEntityPosY], a                   ; $60B6: $E0 $EF
     ldh  a, [hActiveEntityState]                  ; $60B8: $F0 $F0
     JP_TABLE                                      ; $60BA
-._00 dw func_007_60C1                             ; $60BB
-._01 dw func_007_6134                             ; $60BD
-._02 dw func_007_6135                             ; $60BF
+._00 dw WreckingBallState0Handler                 ; $60BB
+._01 dw WreckingBallState1Handler                 ; $60BD
+._02 dw WreckingBallState2Handler                 ; $60BF
 
-func_007_60C1::
+; Idle
+WreckingBallState0Handler::
     ldh  a, [hDungeonFloorTile]                   ; $60C1: $F0 $E9
     dec  a                                        ; $60C3: $3D
     and  $80                                      ; $60C4: $E6 $80
-    jr   z, jr_007_60DD                           ; $60C6: $28 $15
+    jr   z, .notTouchingGround                    ; $60C6: $28 $15
 
     ld   hl, wEntitiesSpeedYTable                 ; $60C8: $21 $50 $C2
-    call func_007_60D1                            ; $60CB: $CD $D1 $60
+    call .updateSpeed                             ; $60CB: $CD $D1 $60
     ld   hl, wEntitiesSpeedXTable                 ; $60CE: $21 $40 $C2
 
-func_007_60D1::
+.updateSpeed
     add  hl, bc                                   ; $60D1: $09
     ld   a, [hl]                                  ; $60D2: $7E
     and  a                                        ; $60D3: $A7
-    jr   z, jr_007_60DD                           ; $60D4: $28 $07
+    jr   z, .notTouchingGround                    ; $60D4: $28 $07
 
     and  $80                                      ; $60D6: $E6 $80
-    jr   z, .jr_60DC                              ; $60D8: $28 $02
+    jr   z, .positiveSpeed                        ; $60D8: $28 $02
 
     inc  [hl]                                     ; $60DA: $34
     inc  [hl]                                     ; $60DB: $34
 
-.jr_60DC
+.positiveSpeed
     dec  [hl]                                     ; $60DC: $35
 
-jr_007_60DD:
+.notTouchingGround
     call CheckLinkCollisionWithEnemy_trampoline   ; $60DD: $CD $5A $3B
-    jr   nc, ret_007_6133                         ; $60E0: $30 $51
+    jr   nc, .return                              ; $60E0: $30 $51
 
     ld   a, [wLinkAttackStepAnimationCountdown]   ; $60E2: $FA $9B $C1
     and  a                                        ; $60E5: $A7
-    jr   nz, ret_007_6133                         ; $60E6: $20 $4B
+    jr   nz, .return                              ; $60E6: $20 $4B
 
     ld   a, [wInventoryItems.BButtonSlot]         ; $60E8: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $60EB: $FE $03
-    jr   nz, .jr_60F7                             ; $60ED: $20 $08
+    jr   nz, .braceletNotOnBSlot                  ; $60ED: $20 $08
 
     ldh  a, [hJoypadState]                        ; $60EF: $F0 $CC
     and  J_B                                      ; $60F1: $E6 $20
-    jr   nz, jr_007_6104                          ; $60F3: $20 $0F
+    jr   nz, .notGrabbing                         ; $60F3: $20 $0F
 
-    jr   ret_007_6133                             ; $60F5: $18 $3C
+    jr   .return                                  ; $60F5: $18 $3C
 
-.jr_60F7
+.braceletNotOnBSlot
     ld   a, [wInventoryItems.AButtonSlot]         ; $60F7: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $60FA: $FE $03
-    jr   nz, ret_007_6133                         ; $60FC: $20 $35
+    jr   nz, .return                              ; $60FC: $20 $35
 
     ldh  a, [hJoypadState]                        ; $60FE: $F0 $CC
     and  J_A                                      ; $6100: $E6 $10
-    jr   z, ret_007_6133                          ; $6102: $28 $2F
+    jr   z, .return                               ; $6102: $28 $2F
 
-jr_007_6104:
+.notGrabbing
     ld   a, [wC3CF]                               ; $6104: $FA $CF $C3
     and  a                                        ; $6107: $A7
-    jr   nz, ret_007_6133                         ; $6108: $20 $29
+    jr   nz, .return                              ; $6108: $20 $29
 
 IF __PATCH_0__
     ldh  a, [hMovingBlockMoverState]
     and  a
-    jr   nz, ret_007_6133
+    jr   nz, .return
 ENDC
 
     inc  a                                        ; $610A: $3C
     ld   [wC3CF], a                               ; $610B: $EA $CF $C3
     ldh  a, [hActiveEntityStatus]                 ; $610E: $F0 $EA
-    cp   $07                                      ; $6110: $FE $07
-    jr   z, ret_007_6133                          ; $6112: $28 $1F
+    cp   ENTITY_STATUS_LIFTED                     ; $6110: $FE $07
+    jr   z, .return                               ; $6112: $28 $1F
 
     call IncrementEntityState                     ; $6114: $CD $12 $3B
     ld   [hl], $02                                ; $6117: $36 $02
     ld   hl, wEntitiesStatusTable                 ; $6119: $21 $80 $C2
     add  hl, bc                                   ; $611C: $09
-    ld   [hl], $07                                ; $611D: $36 $07
+    ld   [hl], ENTITY_STATUS_LIFTED               ; $611D: $36 $07
     ld   hl, wEntitiesLiftedTable                 ; $611F: $21 $90 $C4
     add  hl, bc                                   ; $6122: $09
     ld   [hl], b                                  ; $6123: $70
@@ -223,24 +225,26 @@ ENDC
     ld   hl, hWaveSfx                             ; $612E: $21 $F3 $FF
     ld   [hl], WAVE_SFX_LIFT_UP                   ; $6131: $36 $02
 
-ret_007_6133:
+.return
     ret                                           ; $6133: $C9
 
-func_007_6134::
+; Lifted
+WreckingBallState1Handler::
     ret                                           ; $6134: $C9
 
-func_007_6135::
+; Thrown
+WreckingBallState2Handler::
     ldh  a, [hMultiPurposeG]                      ; $6135: $F0 $E8
     and  a                                        ; $6137: $A7
-    jr   nz, jr_007_6159                          ; $6138: $20 $1F
+    jr   nz, .touchingGround                          ; $6138: $20 $1F
 
     ld   hl, wEntitiesCollisionsTable             ; $613A: $21 $A0 $C2
     add  hl, bc                                   ; $613D: $09
     ld   a, [hl]                                  ; $613E: $7E
     and  a                                        ; $613F: $A7
-    jr   z, jr_007_6164                           ; $6140: $28 $22
+    jr   z, .noCollision                          ; $6140: $28 $22
 
-func_007_6142::
+.collided
     ld   a, JINGLE_SWORD_POKING                   ; $6142: $3E $07
     ldh  [hJingle], a                             ; $6144: $E0 $F2
     ld   hl, wEntitiesSpeedXTable                 ; $6146: $21 $40 $C2
@@ -257,7 +261,8 @@ func_007_6142::
     sra  a                                        ; $6156: $CB $2F
     ld   [hl], a                                  ; $6158: $77
 
-jr_007_6159:
+; negative z position
+.touchingGround
     ld   hl, wC5D0                                ; $6159: $21 $D0 $C5
     add  hl, bc                                   ; $615C: $09
     ld   [hl], $FF                                ; $615D: $36 $FF
@@ -265,7 +270,8 @@ jr_007_6159:
     ld   [hl], b                                  ; $6162: $70
     ret                                           ; $6163: $C9
 
-jr_007_6164:
+; no collision
+.noCollision
     call ReturnIfNonInteractive_07                ; $6164: $CD $96 $7D
     ld   a, $0B                                   ; $6167: $3E $0B
     ld   [wC19E], a                               ; $6169: $EA $9E $C1
@@ -273,34 +279,34 @@ jr_007_6164:
     ld   e, $0F                                   ; $616F: $1E $0F
     ld   d, b                                     ; $6171: $50
 
-jr_007_6172:
+.loop
     ld   hl, wEntitiesStatusTable                 ; $6172: $21 $80 $C2
     add  hl, de                                   ; $6175: $19
     ld   a, [hl]                                  ; $6176: $7E
     and  a                                        ; $6177: $A7
-    jr   z, .jr_6188                              ; $6178: $28 $0E
+    jr   z, .hitPillarEnd                         ; $6178: $28 $0E
 
     ld   hl, wEntitiesTypeTable                   ; $617A: $21 $A0 $C3
     add  hl, de                                   ; $617D: $19
     ld   a, [hl]                                  ; $617E: $7E
-    cp   $A7                                      ; $617F: $FE $A7
-    jr   nz, .jr_6188                             ; $6181: $20 $05
+    cp   ENTITY_SMASHABLE_PILLAR                  ; $617F: $FE $A7
+    jr   nz, .hitPillarEnd                        ; $6181: $20 $05
 
     push de                                       ; $6183: $D5
-    call func_007_618F                            ; $6184: $CD $8F $61
+    call WreckingBallHandlePillarCollision        ; $6184: $CD $8F $61
     pop  de                                       ; $6187: $D1
 
-.jr_6188
+.hitPillarEnd
     dec  e                                        ; $6188: $1D
     ld   a, e                                     ; $6189: $7B
     cp   $FF                                      ; $618A: $FE $FF
-    jr   nz, jr_007_6172                          ; $618C: $20 $E4
+    jr   nz, .loop                                ; $618C: $20 $E4
 
     ret                                           ; $618E: $C9
 
-func_007_618F::
+WreckingBallHandlePillarCollision::
     call GetEntityTransitionCountdown             ; $618F: $CD $05 $0C
-    jr   nz, .ret_61CD                            ; $6192: $20 $39
+    jr   nz, .return                              ; $6192: $20 $39
 
     ld   hl, wEntitiesPosXTable                   ; $6194: $21 $00 $C2
     add  hl, de                                   ; $6197: $19
@@ -308,7 +314,7 @@ func_007_618F::
     sub  [hl]                                     ; $619A: $96
     add  $10                                      ; $619B: $C6 $10
     cp   $20                                      ; $619D: $FE $20
-    jr   nc, .ret_61CD                            ; $619F: $30 $2C
+    jr   nc, .return                              ; $619F: $30 $2C
 
     ld   hl, wEntitiesPosYTable                   ; $61A1: $21 $10 $C2
     add  hl, de                                   ; $61A4: $19
@@ -316,9 +322,9 @@ func_007_618F::
     sub  [hl]                                     ; $61A7: $96
     add  $18                                      ; $61A8: $C6 $18
     cp   $28                                      ; $61AA: $FE $28
-    jr   nc, .ret_61CD                            ; $61AC: $30 $1F
+    jr   nc, .return                              ; $61AC: $30 $1F
 
-    call func_007_6142                            ; $61AE: $CD $42 $61
+    call WreckingBallState2Handler.collided       ; $61AE: $CD $42 $61
     ld   a, NOISE_SFX_D7_PILLAR_COLLAPSE          ; $61B1: $3E $25
     ldh  [hNoiseSfx], a                           ; $61B3: $E0 $F4
     ld   a, JINGLE_STRONG_BUMP                    ; $61B5: $3E $0B
@@ -329,12 +335,12 @@ func_007_618F::
     add  hl, de                                   ; $61C1: $19
     ld   a, [hl]                                  ; $61C2: $7E
     and  a                                        ; $61C3: $A7
-    jr   nz, .ret_61CD                            ; $61C4: $20 $07
+    jr   nz, .return                              ; $61C4: $20 $07
 
     inc  [hl]                                     ; $61C6: $34
     ld   hl, wEntitiesTransitionCountdownTable    ; $61C7: $21 $E0 $C2
     add  hl, de                                   ; $61CA: $19
     ld   [hl], $50                                ; $61CB: $36 $50
 
-.ret_61CD
+.return
     ret                                           ; $61CD: $C9

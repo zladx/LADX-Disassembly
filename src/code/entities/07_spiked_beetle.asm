@@ -133,7 +133,7 @@ func_007_7825::
     and  $06                                      ; $783B: $E6 $06
     jr   nz, .jr_7844                             ; $783D: $20 $05
 
-    call func_007_7E7D                            ; $783F: $CD $7D $7E
+    call GetEntityDirectionToLink_07              ; $783F: $CD $7D $7E
     jr   jr_007_784A                              ; $7842: $18 $06
 
 .jr_7844
@@ -176,18 +176,18 @@ jr_007_786E:
     ld   hl, wEntitiesOptions1Table               ; $7874: $21 $30 $C4
     add  hl, bc                                   ; $7877: $09
     ld   [hl], ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_SPLASH_IN_WATER ; $7878: $36 $48
-    call EntityLinkPositionXDifference_07         ; $787A: $CD $5D $7E
+    call GetEntityXDistanceToLink_07              ; $787A: $CD $5D $7E
     add  $06                                      ; $787D: $C6 $06
     cp   $0A                                      ; $787F: $FE $0A
     jr   c, .jr_788C                              ; $7881: $38 $09
 
-    call EntityLinkPositionYDifference_07         ; $7883: $CD $6D $7E
+    call GetEntityYDistanceToLink_07              ; $7883: $CD $6D $7E
     add  $06                                      ; $7886: $C6 $06
     cp   $0A                                      ; $7888: $FE $0A
     jr   nc, ret_007_789C                         ; $788A: $30 $10
 
 .jr_788C
-    call func_007_7E7D                            ; $788C: $CD $7D $7E
+    call GetEntityDirectionToLink_07              ; $788C: $CD $7D $7E
     ld   hl, wEntitiesDirectionTable              ; $788F: $21 $80 $C3
     add  hl, bc                                   ; $7892: $09
     ld   [hl], e                                  ; $7893: $73

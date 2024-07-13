@@ -48,7 +48,7 @@ func_007_512F::
     jr   nz, ret_007_5173                         ; $5148: $20 $29
 
     call IncrementEntityState                     ; $514A: $CD $12 $3B
-    call func_007_7E7D                            ; $514D: $CD $7D $7E
+    call GetEntityDirectionToLink_07              ; $514D: $CD $7D $7E
     ld   hl, wEntitiesDirectionTable              ; $5150: $21 $80 $C3
     add  hl, bc                                   ; $5153: $09
     ld   a, e                                     ; $5154: $7B

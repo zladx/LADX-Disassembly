@@ -2732,7 +2732,7 @@ LinkMotionMapFadeOutHandler::
 .label_1847
     call func_1A22                                ; $1847: $CD $22 $1A
     xor  a                                        ; $184A: $AF
-    ld   [wC157], a                               ; $184B: $EA $57 $C1
+    ld   [wScreenShakeCountdown], a               ; $184B: $EA $57 $C1
     inc  a                                        ; $184E: $3C
     ld   [wC1A8], a                               ; $184F: $EA $A8 $C1
     ld   a, [wTransitionSequenceCounter]          ; $1852: $FA $6B $C1

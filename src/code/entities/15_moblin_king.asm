@@ -303,7 +303,7 @@ func_015_4873::
     xor  a                                        ; $4887: $AF
     ld   [wC158], a                               ; $4888: $EA $58 $C1
     ld   a, $20                                   ; $488B: $3E $20
-    ld   [wC157], a                               ; $488D: $EA $57 $C1
+    ld   [wScreenShakeCountdown], a               ; $488D: $EA $57 $C1
     ld   a, JINGLE_STRONG_BUMP                    ; $4890: $3E $0B
     ldh  [hJingle], a                             ; $4892: $E0 $F2
     ld   hl, wEntitiesSpeedXTable                 ; $4894: $21 $40 $C2

@@ -386,7 +386,7 @@ func_036_4221::
 
     ld   a, $02                                   ; $423B: $3E $02
     ld   [wC167], a                               ; $423D: $EA $67 $C1
-    ld   a, [wC157]                               ; $4240: $FA $57 $C1
+    ld   a, [wScreenShakeCountdown]               ; $4240: $FA $57 $C1
     and  a                                        ; $4243: $A7
     ret  nz                                       ; $4244: $C0
 
@@ -4067,7 +4067,7 @@ ColorDungeonBookEntityHandler::
 ._05 dw func_036_5930                             ; $589F
 
 func_036_58A1::
-    ld   a, [wC157]                               ; $58A1: $FA $57 $C1
+    ld   a, [wScreenShakeCountdown]               ; $58A1: $FA $57 $C1
     and  a                                        ; $58A4: $A7
     jr   z, .ret_58B8                             ; $58A5: $28 $11
 
@@ -5079,7 +5079,7 @@ jr_036_5E81:
     add  hl, bc                                   ; $5E92: $09
     ld   [hl], a                                  ; $5E93: $77
     ld   a, $30                                   ; $5E94: $3E $30
-    ld   [wC157], a                               ; $5E96: $EA $57 $C1
+    ld   [wScreenShakeCountdown], a               ; $5E96: $EA $57 $C1
     ld   a, $04                                   ; $5E99: $3E $04
     ld   [wC158], a                               ; $5E9B: $EA $58 $C1
     call func_036_5EC2                            ; $5E9E: $CD $C2 $5E

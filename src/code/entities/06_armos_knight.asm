@@ -353,7 +353,7 @@ ArmosKnightState6Handler::
     ret  z                                        ; $54F3: $C8
 
     ld   a, $30                                   ; $54F4: $3E $30
-    ld   [wC157], a                               ; $54F6: $EA $57 $C1
+    ld   [wScreenShakeCountdown], a               ; $54F6: $EA $57 $C1
     ld   a, $04                                   ; $54F9: $3E $04
     ld   [wC158], a                               ; $54FB: $EA $58 $C1
     ld   a, JINGLE_STRONG_BUMP                    ; $54FE: $3E $0B

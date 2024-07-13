@@ -116,7 +116,7 @@ ThwompRammableState1Handler::
     call GetEntityTransitionCountdown             ; $5626: $CD $05 $0C
     ld   [hl], $30                                ; $5629: $36 $30
     ld   a, $30                                   ; $562B: $3E $30
-    ld   [wC157], a                               ; $562D: $EA $57 $C1
+    ld   [wScreenShakeCountdown], a               ; $562D: $EA $57 $C1
     ld   a, $04                                   ; $5630: $3E $04
     ld   [wC158], a                               ; $5632: $EA $58 $C1
     jp   IncrementEntityState                     ; $5635: $C3 $12 $3B
@@ -452,7 +452,7 @@ ThwompState2Handler::
     call GetEntityTransitionCountdown             ; $586F: $CD $05 $0C
     ld   [hl], $30                                ; $5872: $36 $30
     ld   a, $30                                   ; $5874: $3E $30
-    ld   [wC157], a                               ; $5876: $EA $57 $C1
+    ld   [wScreenShakeCountdown], a               ; $5876: $EA $57 $C1
     ld   a, $04                                   ; $5879: $3E $04
     ld   [wC158], a                               ; $587B: $EA $58 $C1
     jp   IncrementEntityState                     ; $587E: $C3 $12 $3B

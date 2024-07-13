@@ -522,7 +522,7 @@ EntityInitBowWow::
 
     ld   a, [wIsBowWowFollowingLink]              ; $4A61: $FA $56 $DB
     cp   BOW_WOW_KIDNAPPED                        ; $4A64: $FE $80
-    jr   z, .return                               ; $4A66: $28 $0A
+    jr   z, .skipUpdateSpeedX                               ; $4A66: $28 $0A
 
     jp   UnloadEntityAndReturn                    ; $4A68: $C3 $8D $3F
 
@@ -531,7 +531,7 @@ EntityInitBowWow::
     and  a                                        ; $4A6E: $A7
     jp   nz, UnloadEntityAndReturn                ; $4A6F: $C2 $8D $3F
 
-.return
+.skipUpdateSpeedX
     ret                                           ; $4A72: $C9
 
 EntityInitOwlEvent::
@@ -662,12 +662,12 @@ EntityInitTarin::
 EntityInitMadamMeowMeow::
     ld   a, [wIsBowWowFollowingLink]              ; $4B0E: $FA $56 $DB
     cp   BOW_WOW_KIDNAPPED                        ; $4B11: $FE $80
-    jr   nz, .return                              ; $4B13: $20 $05
+    jr   nz, .skipUpdateSpeedX                              ; $4B13: $20 $05
 
     ld   a, MUSIC_BOWWOW_KIDNAPPED                ; $4B15: $3E $0E
     ld   [wMusicTrackToPlay], a                   ; $4B17: $EA $68 $D3
 
-.return
+.skipUpdateSpeedX
     ret                                           ; $4B1A: $C9
 
 EntityInitRaftRaftOwner::
@@ -1181,13 +1181,13 @@ ENDC
     ld   hl, wEntitiesSpeedYTable                 ; $4DDF: $21 $50 $C2
     add  hl, bc                                   ; $4DE2: $09
     or   [hl]                                     ; $4DE3: $B6
-    jr   nz, .return                              ; $4DE4: $20 $1E
+    jr   nz, .skipUpdateSpeedX                              ; $4DE4: $20 $1E
 
     call func_003_7267                            ; $4DE6: $CD $67 $72
 
     ldh  a, [hActiveEntityType]                   ; $4DE9: $F0 $EB
     cp   ENTITY_GENIE                             ; $4DEB: $FE $5C
-    jr   nz, .return                              ; $4DED: $20 $15
+    jr   nz, .skipUpdateSpeedX                              ; $4DED: $20 $15
 
 .genie2
     ld   hl, wEntitiesStatusTable                 ; $4DEF: $21 $80 $C2
@@ -1201,7 +1201,7 @@ ENDC
     add  hl, bc                                   ; $4E02: $09
     ld   [hl], b                                  ; $4E03: $70
 
-.return
+.skipUpdateSpeedX
     ret                                           ; $4E04: $C9
 
 Data_003_4E05::
@@ -2779,7 +2779,7 @@ HeartContainerEntityHandler::
 
     ; Start of when item is picked up
     dec  a                                        ; $59E8: $3D
-    jr   nz, HoldEntityAboveLink                  ; $59E9: $20 $2C
+    jr   nz, HoldEntityskipSwimUp                  ; $59E9: $20 $2C
 
     ld   a, MUSIC_AFTER_BOSS                      ; $59EB: $3E $18
     ld   [wMusicTrackToPlay], a                   ; $59ED: $EA $68 $D3
@@ -2823,7 +2823,7 @@ HeartContainerEntityHandler::
     ; Finished setting status bits for rooms, delete this
     jp   UnloadEntityAndReturn
 
-HoldEntityAboveLink::
+HoldEntityskipSwimUp::
     ldh  a, [hLinkPositionX]                      ; $5A17: $F0 $98
     ld   hl, wEntitiesPosXTable                   ; $5A19: $21 $00 $C2
     add  hl, bc                                   ; $5A1C: $09
@@ -2879,7 +2879,7 @@ HeartPieceEntityHandler::
 ._08 dw HeartPieceState8Handler                   ; $5A6B
 
 HeartPieceState1Handler::
-    call HoldEntityAboveLink                      ; $5A6D: $CD $17 $5A
+    call HoldEntityskipSwimUp                      ; $5A6D: $CD $17 $5A
     call GetEntityTransitionCountdown             ; $5A70: $CD $05 $0C
     ret  nz                                       ; $5A73: $C0
 
@@ -2905,7 +2905,7 @@ HeartPieceState4Handler::
     ret                                           ; $5A97: $C9
 
 HeartPieceState5Handler::
-    call HoldEntityAboveLink                      ; $5A98: $CD $17 $5A
+    call HoldEntityskipSwimUp                      ; $5A98: $CD $17 $5A
     ld   de, HeartPieceEntitySprite               ; $5A9B: $11 $4D $5A
     call RenderActiveEntitySpritesPair            ; $5A9E: $CD $C0 $3B
     call DrawHeartPiecesInDialog                  ; $5AA1: $CD $2B $5B
@@ -2927,7 +2927,7 @@ HeartPieceState5Handler::
     ret                                           ; $5ABA: $C9
 
 HeartPieceState6Handler::
-    call HoldEntityAboveLink                      ; $5ABB: $CD $17 $5A
+    call HoldEntityskipSwimUp                      ; $5ABB: $CD $17 $5A
     ld   de, HeartPieceEntitySprite               ; $5ABE: $11 $4D $5A
     call RenderActiveEntitySpritesPair            ; $5AC1: $CD $C0 $3B
     xor  a                                        ; $5AC4: $AF
@@ -2960,7 +2960,7 @@ HeartPieceState6Handler::
     jp   IncrementEntityState                     ; $5AED: $C3 $12 $3B
 
 HeartPieceState7Handler::
-    call HoldEntityAboveLink                      ; $5AF0: $CD $17 $5A
+    call HoldEntityskipSwimUp                      ; $5AF0: $CD $17 $5A
     ld   de, HeartPieceEntitySprite               ; $5AF3: $11 $4D $5A
     call RenderActiveEntitySpritesPair            ; $5AF6: $CD $C0 $3B
     ld   a, [wDialogState]                        ; $5AF9: $FA $9F $C1
@@ -3120,7 +3120,7 @@ SwordShieldPickableState0Handler::
 .playSwordFanfare
     ; Plays a heroic fanfare, when you first retrieve your sword from the beach
     dec  a                                        ; $5BCB: $3D
-    jr   nz, .holdItemAboveLink                   ; $5BCC: $20 $13
+    jr   nz, .holdItemskipSwimUp                   ; $5BCC: $20 $13
 
     ld   a, MUSIC_OVERWORLD_INTRO                 ; $5BCE: $3E $31
     ld   [wMusicTrackToPlay], a                   ; $5BD0: $EA $68 $D3
@@ -3131,11 +3131,11 @@ SwordShieldPickableState0Handler::
     ld   [hl], $52                                ; $5BDC: $36 $52
     call IncrementEntityState                     ; $5BDE: $CD $12 $3B
 
-.holdItemAboveLink
-    jp   HoldEntityAboveLink                      ; $5BE1: $C3 $17 $5A
+.holdItemskipSwimUp
+    jp   HoldEntityskipSwimUp                      ; $5BE1: $C3 $17 $5A
 
 SwordShieldPickableState1Handler::
-    call HoldEntityAboveLink                      ; $5BE4: $CD $17 $5A
+    call HoldEntityskipSwimUp                      ; $5BE4: $CD $17 $5A
     call GetEntityDropTimer                       ; $5BE7: $CD $FB $0B
     ret  nz                                       ; $5BEA: $C0
 
@@ -3161,7 +3161,7 @@ SwordShieldPickableState2Handler::
     jp   IncrementEntityState                     ; $5C0C: $C3 $12 $3B
 
 SwordShieldPickableState3Handler::
-    call HoldEntityAboveLink                      ; $5C0F: $CD $17 $5A
+    call HoldEntityskipSwimUp                      ; $5C0F: $CD $17 $5A
     ld   a, LINK_ANIMATION_STATE_UNKNOWN_6B       ; $5C12: $3E $6B
     ldh  [hLinkAnimationState], a                 ; $5C14: $E0 $9D
     ld   hl, wEntitiesPosXTable                   ; $5C16: $21 $00 $C2
@@ -3184,7 +3184,7 @@ SwordShieldPickableState3Handler::
 .continueToRaiseSword
     ; When the countdown reaches 26…
     cp   26                                       ; $5C37: $FE $1A
-    jr   nz, .return                              ; $5C39: $20 $0B
+    jr   nz, .skipUpdateSpeedX                              ; $5C39: $20 $0B
     ; …activate the sword poke VFX and SFX
     ldh  a, [hActiveEntityPosY]                   ; $5C3B: $F0 $EF
     sub  $0C                                      ; $5C3D: $D6 $0C
@@ -3192,7 +3192,7 @@ SwordShieldPickableState3Handler::
     ld   a, JINGLE_SWORD_POKING                   ; $5C42: $3E $07
     ldh  [hJingle], a                             ; $5C44: $E0 $F2
 
-.return
+.skipUpdateSpeedX
     ret                                           ; $5C46: $C9
 
 HookshotSpriteData::
@@ -3209,18 +3209,18 @@ label_003_5C49:
     jp   z, label_003_60AA                        ; $5C59: $CA $AA $60
 
     cp   $10                                      ; $5C5C: $FE $10
-    jr   nz, .jr_5C67                             ; $5C5E: $20 $07
+    jr   nz, .skipUpdateSpeedY                             ; $5C5E: $20 $07
 
     dec  [hl]                                     ; $5C60: $35
     call_open_dialog Dialog093                    ; $5C61
     xor  a                                        ; $5C66: $AF
 
-.jr_5C67
+.skipUpdateSpeedY
     dec  a                                        ; $5C67: $3D
 IF __OPTIMIZATIONS_3__
-    jp   nz, HoldEntityAboveLink
+    jp   nz, HoldEntityskipSwimUp
 ELSE
-    jr   nz, .jr_5C75                             ; $5C68: $20 $0B
+    jr   nz, .decSpeedX                             ; $5C68: $20 $0B
 ENDC
 
     ld   d, INVENTORY_HOOKSHOT                    ; $5C6A: $16 $06
@@ -3229,8 +3229,8 @@ ENDC
     jp   UnloadEntityAndReturn                    ; $5C72: $C3 $8D $3F
 
 IF !__OPTIMIZATIONS_3__
-.jr_5C75
-    jp   HoldEntityAboveLink                      ; $5C75: $C3 $17 $5A
+.decSpeedX
+    jp   HoldEntityskipSwimUp                      ; $5C75: $C3 $17 $5A
 ENDC
 
 KeyDropSpriteTable:
@@ -3295,7 +3295,7 @@ KeyDropPointEntityHandler::
 .jr_5CCD
     dec  a                                        ; $5CCD: $3D
 IF __OPTIMIZATIONS_3__
-    jp   nz, HoldEntityAboveLink
+    jp   nz, HoldEntityskipSwimUp
     jp   UnloadEntityAndReturn
 ELSE
     jr   nz, .jr_5CD3                             ; $5CCE: $20 $03
@@ -3303,7 +3303,7 @@ ELSE
     jp   UnloadEntityAndReturn                    ; $5CD0: $C3 $8D $3F
 
 .jr_5CD3
-    jp   HoldEntityAboveLink                      ; $5CD3: $C3 $17 $5A
+    jp   HoldEntityskipSwimUp                      ; $5CD3: $C3 $17 $5A
 ENDC
 
 label_003_5CD6:
@@ -3410,7 +3410,7 @@ SleepyToadstoolEntityHandler::
 .jr_5D6C
     dec  a                                        ; $5D6C: $3D
 IF __OPTIMIZATIONS_3__
-    jp   nz, HoldEntityAboveLink
+    jp   nz, HoldEntityskipSwimUp
 ELSE
     jr   nz, .jr_5D80                             ; $5D6D: $20 $11
 ENDC
@@ -3425,7 +3425,7 @@ ENDC
 
 IF !__OPTIMIZATIONS_3__
 .jr_5D80
-    jp   HoldEntityAboveLink                      ; $5D80: $C3 $17 $5A
+    jp   HoldEntityskipSwimUp                      ; $5D80: $C3 $17 $5A
 ENDC
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
@@ -3696,12 +3696,12 @@ ENDC
 .jr_5EFE
     dec  a                                        ; $5EFE: $3D
 IF __OPTIMIZATIONS_1__
-    jp   HoldEntityAboveLink
+    jp   HoldEntityskipSwimUp
 ELSE
     jr   nz, jr_003_5F01                          ; $5EFF: $20 $00
 
 jr_003_5F01:
-    jp   HoldEntityAboveLink                      ; $5F01: $C3 $17 $5A
+    jp   HoldEntityskipSwimUp                      ; $5F01: $C3 $17 $5A
 ENDC
 
 InstrumentMusicTable::
@@ -3735,7 +3735,7 @@ func_003_5F0C::
     ld   [hl], $FF                                ; $5F2A: $36 $FF
 
 .jr_5F2C
-    jp   HoldEntityAboveLink                      ; $5F2C: $C3 $17 $5A
+    jp   HoldEntityskipSwimUp                      ; $5F2C: $C3 $17 $5A
 
 Data_003_5F2F::
     db   $0A, $FA
@@ -3825,20 +3825,20 @@ func_003_5F33::
 
 .jr_5FB9
 IF !__PATCH_0__
-    jp   HoldEntityAboveLink                      ; $5FB9: $C3 $17 $5A
+    jp   HoldEntityskipSwimUp                      ; $5FB9: $C3 $17 $5A
 ENDC
 
 func_003_5FBC::
 IF __PATCH_0__
     ld   a, [wObjPal1 + 1*2]
     inc  a
-    jp   nz, HoldEntityAboveLink
+    jp   nz, HoldEntityskipSwimUp
     ld   a, $80
     ldh  [hLinkPositionZ], a
     ld   a, $02
     ldh  [hLinkInteractiveMotionBlocked], a
 ELSE
-    jp   HoldEntityAboveLink                      ; $5FBC: $C3 $17 $5A
+    jp   HoldEntityskipSwimUp                      ; $5FBC: $C3 $17 $5A
 ENDC
 
 func_003_5FBF::
@@ -3935,14 +3935,14 @@ HidingSlimeKeyEntityHandler::
 jr_003_604C:
     dec  a                                        ; $604C: $3D
 IF __OPTIMIZATIONS_3__
-    jp   nz, HoldEntityAboveLink
+    jp   nz, HoldEntityskipSwimUp
     jp   UnloadEntityAndReturn
 ELSE
     jr   nz, .jr_6052                             ; $604D: $20 $03
     jp   UnloadEntityAndReturn                    ; $604F: $C3 $8D $3F
 
 .jr_6052
-    jp   HoldEntityAboveLink                      ; $6052: $C3 $17 $5A
+    jp   HoldEntityskipSwimUp                      ; $6052: $C3 $17 $5A
 ENDC
 
 Data_003_6055::
@@ -4239,7 +4239,7 @@ jr_003_623B:
     jr   jr_003_626B                              ; $6241: $18 $28
 
 jr_003_6243:
-    ld   a, [wC157]                               ; $6243: $FA $57 $C1
+    ld   a, [wScreenShakeCountdown]               ; $6243: $FA $57 $C1
     and  a                                        ; $6246: $A7
     jr   z, jr_003_629C                           ; $6247: $28 $53
 
@@ -4421,7 +4421,7 @@ collectPickableItem:
 ._2F dw PickDroppableFairy
 ._30 dw PickDroppableKey
 ._31 dw PickSword
-._32 dw MovePickupInTheAir.return
+._32 dw MovePickupInTheAir.skipUpdateSpeedX
 ._33 dw PickPieceOfPower
 ._34 dw PickGuardianAcorn
 ._35 dw PickHeartPiece
@@ -4447,13 +4447,13 @@ PickDroppableMagicPowder::
 jr_003_635F:
     ld   a, [de]                                  ; $635F: $1A
     cp   [hl]                                     ; $6360: $BE
-    jr   nc, .return                              ; $6361: $30 $04
+    jr   nc, .skipUpdateSpeedX                              ; $6361: $30 $04
 
     add  $01                                      ; $6363: $C6 $01
     daa                                           ; $6365: $27
     ld   [de], a                                  ; $6366: $12
 
-.return
+.skipUpdateSpeedX
     ret                                           ; $6367: $C9
 
 PickSecretSeashell::
@@ -4614,7 +4614,7 @@ MovePickupInTheAir::
     cp   $FF                                      ; $6448: $FE $FF
     jr   nz, .movePickupHigher                    ; $644A: $20 $D6
 
-.return::
+.skipUpdateSpeedX::
     ret                                           ; $644C: $C9
 
 PickSword::
@@ -4647,7 +4647,7 @@ GiveInventoryItem::     ; @TODO GivePlayerItem or w/e - inserts item in [d] into
 .checkInventorySlot:                              ; Check if we already have this item:
     ld   a, [hl+]                                 ; Check what item is in this slot
     cp   d                                        ; Is it the item we're trying to add?
-    jr   z, .return                               ; If yes, return
+    jr   z, .skipUpdateSpeedX                               ; If yes, return
 
     dec  e                                        ; Otherwise, have we checked all slots?
     jr   nz, .checkInventorySlot                  ; If no, continue
@@ -4669,7 +4669,7 @@ GiveInventoryItem::     ; @TODO GivePlayerItem or w/e - inserts item in [d] into
     cp   $0C                                      ; If we've checked enough to get back to 0C, we're out
     jr   nz, .checkInventorySlotEmpty             ; Otherwise, go back to check next slot
 
-.return:
+.skipUpdateSpeedX:
     ret                                           ; $648E: $C9
 
 PickDroppableKey::
@@ -5334,7 +5334,7 @@ func_003_68F8::
     add  hl, de                                   ; $691B: $19
     ld   a, h                                     ; $691C: $7C
     cp   $D7                                      ; $691D: $FE $D7
-    jp   nz, .return                              ; $691F: $C2 $A0 $69
+    jp   nz, .skipUpdateSpeedX                              ; $691F: $C2 $A0 $69
 
     ld   a, [wIsIndoor]                           ; $6922: $FA $A5 $DB
     and  a                                        ; $6925: $A7
@@ -5352,11 +5352,11 @@ func_003_68F8::
     cp   $5C                                      ; $6935: $FE $5C
     jr   z, .jr_003_6964                          ; $6937: $28 $2B
 
-    jp   .return                                  ; $6939: $C3 $A0 $69
+    jp   .skipUpdateSpeedX                                  ; $6939: $C3 $A0 $69
 
 .jr_003_693C
     cp   $A9                                      ; $693C: $FE $A9
-    jp   nz, .return                              ; $693E: $C2 $A0 $69
+    jp   nz, .skipUpdateSpeedX                              ; $693E: $C2 $A0 $69
 
     ld   hl, wIndoorARoomStatus                   ; $6941: $21 $00 $D9
     ldh  a, [hMapRoom]                            ; $6944: $F0 $F6
@@ -5390,7 +5390,7 @@ func_003_68F8::
 
     ld   a, ENTITY_LIFTABLE_ROCK                  ; $6967: $3E $05
     call SpawnNewEntity                           ; $6969: $CD $CA $64
-    jr   c, .return                               ; $696C: $38 $32
+    jr   c, .skipUpdateSpeedX                               ; $696C: $38 $32
 
     xor  a                                        ; $696E: $AF
     ld   [wLinkAttackStepAnimationCountdown], a   ; $696F: $EA $9B $C1
@@ -5424,7 +5424,7 @@ func_003_68F8::
     ld   b, d                                     ; $699C: $42
     call func_003_53E4                            ; $699D: $CD $E4 $53
 
-.return
+.skipUpdateSpeedX
     pop  bc                                       ; $69A0: $C1
     ret                                           ; $69A1: $C9
 
@@ -5749,12 +5749,12 @@ CheckLinkCollisionWithProjectile::
     ; If Link is not interactive, return.
     ld   a, [wLinkMotionState]                    ; $6BDE: $FA $1C $C1
     cp   LINK_MOTION_TYPE_NON_INTERACTIVE         ; $6BE1: $FE $02
-    jr   nc, .return                              ; $6BE3: $30 $75
+    jr   nc, .skipUpdateSpeedX                              ; $6BE3: $30 $75
 
     ; If Link is in the air, return.
     ldh  a, [hLinkPositionZ]                      ; $6BE5: $F0 $A2
     and  a                                        ; $6BE7: $A7
-    jr   nz, .return                              ; $6BE8: $20 $70
+    jr   nz, .skipUpdateSpeedX                              ; $6BE8: $20 $70
 
     ; If Link is not touching the entity, return.
     ld   hl, hActiveEntityPosX                    ; $6BEA: $21 $EE $FF
@@ -5762,14 +5762,14 @@ CheckLinkCollisionWithProjectile::
     sub  [hl]                                     ; $6BEF: $96
     add  $06                                      ; $6BF0: $C6 $06
     cp   $0C                                      ; $6BF2: $FE $0C
-    jr   nc, .return                              ; $6BF4: $30 $64
+    jr   nc, .skipUpdateSpeedX                              ; $6BF4: $30 $64
 
     ld   hl, hActiveEntityVisualPosY              ; $6BF6: $21 $EC $FF
     ldh  a, [hLinkPositionY]                      ; $6BF9: $F0 $99
     sub  [hl]                                     ; $6BFB: $96
     add  $06                                      ; $6BFC: $C6 $06
     cp   $0C                                      ; $6BFE: $FE $0C
-    jr   nc, .return                              ; $6C00: $30 $58
+    jr   nc, .skipUpdateSpeedX                              ; $6C00: $30 $58
 
     ;
     ; Check shield usage
@@ -5840,7 +5840,7 @@ CheckLinkCollisionWithProjectile::
     add  hl, bc                                   ; $6C57: $09
     ld   [hl], $FF                                ; $6C58: $36 $FF
 
-.return
+.skipUpdateSpeedX
     ret                                           ; $6C5A: $C9
 
 .shieldEnd
@@ -5872,13 +5872,13 @@ CheckLinkCollisionWithEnemy::
     ; If Link is in the air, skip the collision check
     ldh  a, [hLinkPositionZ]                      ; $6C72: $F0 $A2
     and  a                                        ; $6C74: $A7
-    jr   nz, CheckLinkCollisionWithProjectile.return ; $6C75: $20 $E3
+    jr   nz, CheckLinkCollisionWithProjectile.skipUpdateSpeedX ; $6C75: $20 $E3
 
 .collisionEvenInTheAir
     ; If Link is not interactive, return.
     ld   a, [wLinkMotionState]                    ; $6C77: $FA $1C $C1
     cp   LINK_MOTION_TYPE_NON_INTERACTIVE         ; $6C7A: $FE $02
-    jr   nc, CheckLinkCollisionWithProjectile.return ; $6C7C: $30 $DC
+    jr   nc, CheckLinkCollisionWithProjectile.skipUpdateSpeedX ; $6C7C: $30 $DC
 
     push bc                                       ; $6C7E: $C5
     ; c = (entity index * 4)
@@ -9406,12 +9406,12 @@ GetEntityDirectionToLink_03::
     jr   nc, .vertical                            ; $7F1B: $30 $04
 
     ldh  a, [hMultiPurpose0]                      ; $7F1D: $F0 $D7
-    jr   jr_003_7F23                              ; $7F1F: $18 $02
+    jr   .verticalEnd                             ; $7F1F: $18 $02
 
 .vertical
     ldh  a, [hMultiPurpose1]                      ; $7F21: $F0 $D8
 
-jr_003_7F23:
+.verticalEnd
     ld   e, a                                     ; $7F23: $5F
     ret                                           ; $7F24: $C9
 
@@ -9440,7 +9440,7 @@ AddEntitySpeedToPos_03::
     ld   a, [hl]                                  ; $7F36: $7E
     and  a                                        ; $7F37: $A7
     ; No need to update the position if it's not moving
-    jr   z, .return                               ; $7F38: $28 $23
+    jr   z, .skipUpdateSpeedX                               ; $7F38: $28 $23
 
     push af                                       ; $7F3A: $F5
     ; Multiply speed by 16 so the carry is set if greater than $0F
@@ -9473,7 +9473,7 @@ AddEntitySpeedToPos_03::
     adc  [hl]                                     ; $7F5B: $8E
     ld   [hl], a                                  ; $7F5C: $77
 
-.return
+.skipUpdateSpeedX
     ret                                           ; $7F5D: $C9
 
 AddEntityZSpeedToPos_03::
@@ -9481,7 +9481,7 @@ AddEntityZSpeedToPos_03::
     add  hl, bc                                   ; $7F61: $09
     ld   a, [hl]                                  ; $7F62: $7E
     and  a                                        ; $7F63: $A7
-    jr   z, AddEntitySpeedToPos_03.return         ; $7F64: $28 $F7
+    jr   z, AddEntitySpeedToPos_03.skipUpdateSpeedX         ; $7F64: $28 $F7
 
     push af                                       ; $7F66: $F5
     swap a                                        ; $7F67: $CB $37
@@ -9526,13 +9526,13 @@ ReturnIfNonInteractive_03::
 
     ld   a, [wRoomTransitionState]                ; $7FA1: $FA $24 $C1
     and  a                                        ; $7FA4: $A7
-    jr   z, .return                               ; $7FA5: $28 $01
+    jr   z, .skipUpdateSpeedX                               ; $7FA5: $28 $01
 
 .skip
     ; pop the return address to return to caller
     pop  af                                       ; $7FA7: $F1
 
-.return
+.skipUpdateSpeedX
     ret                                           ; $7FA8: $C9
 
 ; If the entity is ignoring hits, apply its recoil velocity.

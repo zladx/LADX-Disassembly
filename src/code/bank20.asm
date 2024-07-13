@@ -1078,7 +1078,7 @@ func_20_4B1F::
     ld   [wActiveProjectileCount], a              ; $4B23: $EA $4D $C1
     ld   [wC1A4], a                               ; $4B26: $EA $A4 $C1
     ld   [wIsCarryingLiftedObject], a             ; $4B29: $EA $5C $C1
-    ld   [wC1AE], a                               ; $4B2C: $EA $AE $C1
+    ld   [wZolCount], a                           ; $4B2C: $EA $AE $C1
     ld   a, [wIsLinkPushing]                      ; $4B2F: $FA $44 $C1
     and  a                                        ; $4B32: $A7
     jr   z, .ret_4B39                             ; $4B33: $28 $04

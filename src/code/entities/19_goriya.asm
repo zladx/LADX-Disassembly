@@ -76,10 +76,10 @@ Data_019_4634::
     ret  nc                                       ; $4637: $D0
 
     ld   a, [wBoomerangTradedItem]                ; $4638: $FA $7D $DB
-    cp   $00                                      ; $463B: $FE $00
+    cp   INVENTORY_EMPTY                          ; $463B: $FE $00
     jr   z, .jr_4643                              ; $463D: $28 $04
 
-    cp   $0D                                      ; $463F: $FE $0D
+    cp   INVENTORY_BOOMERANG                      ; $463F: $FE $0D
     jr   nz, jr_019_4663                          ; $4641: $20 $20
 
 .jr_4643
@@ -131,6 +131,7 @@ GoriyaState1Handler::
     jr   z, jr_019_46DB                           ; $46A0: $28 $39
 
 .jr_46A2
+; these items are not accepted for trade by the goriya
     cp   INVENTORY_SWORD                          ; $46A2: $FE $01
     jr   z, jr_019_46E1                           ; $46A4: $28 $3B
 
@@ -202,7 +203,7 @@ GoriyaState3Handler::
     ld   hl, wEntitiesPrivateState1Table          ; $470B: $21 $B0 $C2
     add  hl, bc                                   ; $470E: $09
     ld   [hl], a                                  ; $470F: $77
-    ld   a, $0D                                   ; $4710: $3E $0D
+    ld   a, INVENTORY_BOOMERANG                   ; $4710: $3E $0D
     ld   [wBoomerangTradedItem], a                ; $4712: $EA $7D $DB
     call GetEntityTransitionCountdown             ; $4715: $CD $05 $0C
     ld   [hl], $80                                ; $4718: $36 $80
@@ -238,7 +239,7 @@ GoriyaState2Handler::
     ld   hl, wEntitiesPrivateState1Table          ; $475A: $21 $B0 $C2
     add  hl, bc                                   ; $475D: $09
     ld   a, [hl]                                  ; $475E: $7E
-    cp   $0D                                      ; $475F: $FE $0D
+    cp   INVENTORY_BOOMERANG                      ; $475F: $FE $0D
     ld_dialog_low a, Dialog224 ; "Got the Boomerang" ; $4761: $3E $24
     jr   z, .jr_4767                              ; $4763: $28 $02
 

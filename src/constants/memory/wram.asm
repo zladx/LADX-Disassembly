@@ -3091,10 +3091,11 @@ wHasStolenFromShop::
 wDB47::
   ds 1 ; DB47
 
-; Set to 1 as Tarin turns back into human form from the Magic Powder.
-; Set to 2 after getting Instrument 2.
-; primarily used by Tarin to see what he's doing inside the house
-; possible values 01, 02, ..
+; Tarin activity flag possible values:
+; 0 = Zero at game start. Tarin hasn't been cured of Raccoon.
+; 1 = Set to 1 as Tarin turns back into human form from the Magic Powder.
+; 2 = Set to 2 after getting Instrument 2 and being ejected from the dungeon.
+; primarily used by Tarin to determine what he's doing inside his house
 wTarinFlag::
   ds 1 ; DB48
 

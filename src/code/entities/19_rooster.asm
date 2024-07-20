@@ -171,7 +171,7 @@ jr_019_5A9F:
 
     ld   a, [wInventoryItems.BButtonSlot]         ; $5AAB: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $5AAE: $FE $03
-    jr   nz, .jr_5AB9                             ; $5AB0: $20 $07
+    jr   nz, .noBraceletB                         ; $5AB0: $20 $07
 
     ldh  a, [hJoypadState]                        ; $5AB2: $F0 $CC
     and  J_B                                      ; $5AB4: $E6 $20
@@ -179,7 +179,7 @@ jr_019_5A9F:
 
     ret                                           ; $5AB8: $C9
 
-.jr_5AB9
+.noBraceletB
     ld   a, [wInventoryItems.AButtonSlot]         ; $5AB9: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $5ABC: $FE $03
     ret  nz                                       ; $5ABE: $C0

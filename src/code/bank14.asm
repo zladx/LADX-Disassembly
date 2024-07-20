@@ -1165,12 +1165,12 @@ jr_014_5360:
     ld   e, J_A                                   ; $537D: $1E $10
     ld   a, [wInventoryItems.BButtonSlot]         ; $537F: $FA $00 $DB
     cp   d                                        ; $5382: $BA
-    jr   nz, .jr_5389                             ; $5383: $20 $04
+    jr   nz, .checkAButtonSlot                    ; $5383: $20 $04
 
-    sla  e ; J_B                                       ; $5385: $CB $23
+    sla  e ; J_B                                  ; $5385: $CB $23
     jr   jr_014_5391                              ; $5387: $18 $08
 
-.jr_5389
+.checkAButtonSlot
     ld   a, [wInventoryItems.AButtonSlot]         ; $5389: $FA $01 $DB
     cp   d                                        ; $538C: $BA
     jr   z, jr_014_5391                           ; $538D: $28 $02

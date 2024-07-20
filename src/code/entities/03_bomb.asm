@@ -43,7 +43,7 @@ BombEntityHandler::
 
     ld   a, [wInventoryItems.BButtonSlot]         ; $66DB: $FA $00 $DB
     cp   INVENTORY_BOMBS                          ; $66DE: $FE $02
-    jr   nz, .jr_66EA                             ; $66E0: $20 $08
+    jr   nz, .checkAButtonSlot                    ; $66E0: $20 $08
 
     ldh  a, [hJoypadState]                        ; $66E2: $F0 $CC
     and  J_B                                      ; $66E4: $E6 $20
@@ -51,7 +51,7 @@ BombEntityHandler::
 
     jr   jr_003_66FA                              ; $66E8: $18 $10
 
-.jr_66EA
+.checkAButtonSlot
     ld   a, [wInventoryItems.AButtonSlot]         ; $66EA: $FA $01 $DB
     cp   INVENTORY_BOMBS                          ; $66ED: $FE $02
     jr   nz, jr_003_66FA                          ; $66EF: $20 $09

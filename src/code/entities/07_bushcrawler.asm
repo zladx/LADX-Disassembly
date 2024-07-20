@@ -205,7 +205,7 @@ jr_007_4128:
 
     ld   a, [wInventoryItems.BButtonSlot]         ; $4140: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $4143: $FE $03
-    jr   nz, .jr_414E                             ; $4145: $20 $07
+    jr   nz, .checkAButtonSlot                    ; $4145: $20 $07
 
     ldh  a, [hJoypadState]                        ; $4147: $F0 $CC
     and  J_B                                      ; $4149: $E6 $20
@@ -213,7 +213,7 @@ jr_007_4128:
 
     ret                                           ; $414D: $C9
 
-.jr_414E
+.checkAButtonSlot
     ld   a, [wInventoryItems.AButtonSlot]         ; $414E: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $4151: $FE $03
     ret  nz                                       ; $4153: $C0

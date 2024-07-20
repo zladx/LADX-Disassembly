@@ -3414,7 +3414,7 @@ func_036_54B0::
 
     ld   a, [wInventoryItems.BButtonSlot]         ; $54BA: $FA $00 $DB
     cp   INVENTORY_MAGIC_POWDER                   ; $54BD: $FE $0C
-    jr   nz, .jr_54C8                             ; $54BF: $20 $07
+    jr   nz, .noPowderB                           ; $54BF: $20 $07
 
     ldh  a, [hJoypadState]                        ; $54C1: $F0 $CC
     and  J_B                                      ; $54C3: $E6 $20
@@ -3422,7 +3422,7 @@ func_036_54B0::
 
     jr   jr_036_54D3                              ; $54C6: $18 $0B
 
-.jr_54C8
+.noPowderB
     ld   a, [wInventoryItems.AButtonSlot]         ; $54C8: $FA $01 $DB
     cp   INVENTORY_MAGIC_POWDER                   ; $54CB: $FE $0C
     ret  nz                                       ; $54CD: $C0

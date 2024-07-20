@@ -1216,7 +1216,7 @@ EntityStunnedHandler::
     call func_003_6E2B                            ; $4E16: $CD $2B $6E
     ld   a, [wInventoryItems.BButtonSlot]         ; $4E19: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $4E1C: $FE $03
-    jr   nz, .jr_4E28                             ; $4E1E: $20 $08
+    jr   nz, .noBraceletB                         ; $4E1E: $20 $08
 
     ldh  a, [hJoypadState]                        ; $4E20: $F0 $CC
     and  J_B                                      ; $4E22: $E6 $20
@@ -1224,7 +1224,7 @@ EntityStunnedHandler::
 
     jr   jr_003_4E72                              ; $4E26: $18 $4A
 
-.jr_4E28
+.noBraceletB
     ld   a, [wInventoryItems.AButtonSlot]         ; $4E28: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $4E2B: $FE $03
     jr   nz, jr_003_4E72                          ; $4E2D: $20 $43

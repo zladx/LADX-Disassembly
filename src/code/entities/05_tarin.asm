@@ -269,8 +269,9 @@ jr_005_4A46:
     ld   a, [hl]                                  ; $4A94: $7E
     or   OW_ROOM_STATUS_CHANGED                   ; $4A95: $F6 $10
     ld   [hl], a                                  ; $4A97: $77
+    ; set wTarinFlag to $01 as he changes from raccoon to human.
     ld   a, $01                                   ; $4A98: $3E $01
-    ld   [wDB48], a                               ; $4A9A: $EA $48 $DB
+    ld   [wTarinFlag], a                          ; $4A9A: $EA $48 $DB
     ret                                           ; $4A9D: $C9
 
 .jr_4A9E
@@ -537,7 +538,7 @@ jr_005_4BF1:
     jp   nc, ClearEntityStatus_05                 ; $4C04: $D2 $4B $7B
 
 .jr_4C07
-    ld   a, [wDB48]                               ; $4C07: $FA $48 $DB
+    ld   a, [wTarinFlag]                          ; $4C07: $FA $48 $DB
     and  a                                        ; $4C0A: $A7
     jr   nz, .jr_4C14                             ; $4C0B: $20 $07
 
@@ -550,7 +551,7 @@ jr_005_4BF1:
     and  a                                        ; $4C17: $A7
     jr   nz, .jr_4C24                             ; $4C18: $20 $0A
 
-    ld   a, [wDB48]                               ; $4C1A: $FA $48 $DB
+    ld   a, [wTarinFlag]                          ; $4C1A: $FA $48 $DB
     and  a                                        ; $4C1D: $A7
     jr   z, jr_005_4C43                           ; $4C1E: $28 $23
 
@@ -710,7 +711,7 @@ TarinShield2Handler::
     ret                                           ; $4D08: $C9
 
 TarinShield3Handler::
-    ld   a, [wDB48]                               ; $4D09: $FA $48 $DB
+    ld   a, [wTarinFlag]                          ; $4D09: $FA $48 $DB
     and  a                                        ; $4D0C: $A7
     jr   z, jr_005_4D4D                           ; $4D0D: $28 $3E
 
@@ -768,7 +769,7 @@ jr_005_4D4D:
     jp_open_dialog Dialog055                      ; $4D51
 
 jr_005_4D56:
-    ld   a, [wDB48]                               ; $4D56: $FA $48 $DB
+    ld   a, [wTarinFlag]                          ; $4D56: $FA $48 $DB
     cp   $01                                      ; $4D59: $FE $01
     jr   nz, ret_005_4DA2                         ; $4D5B: $20 $45
 
@@ -853,7 +854,8 @@ Tarin5SpriteVariants::
     db $72, OAM_GBC_PAL_0 | OAMF_PAL0
 
 func_005_4DCF::
-    ld   a, [wDB48]                               ; $4DCF: $FA $48 $DB
+; check Tarin flag to see if he has bananas (set to $02 after D2 instrument collect)
+    ld   a, [wTarinFlag]                          ; $4DCF: $FA $48 $DB
     cp   $02                                      ; $4DD2: $FE $02
     ret  nz                                       ; $4DD4: $C0
 

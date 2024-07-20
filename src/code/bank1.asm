@@ -121,7 +121,7 @@ ENDC
     ld   a, $09                                   ; $471A: $3E $09
     ld   [SaveGame1.main + wRupeeCountLow - wOverworldRoomStatus], a ; x09 rupees                  ; $471C: $EA $63 $A4
     ld   a, $01                                   ; $471F: $3E $01
-    ld   [SaveGame1.main + wDB48 - wOverworldRoomStatus], a ; "Tarin at home flag"        ; $4721: $EA $4D $A4
+    ld   [SaveGame1.main + wTarinFlag - wOverworldRoomStatus], a ; "Tarin at home flag"        ; $4721: $EA $4D $A4
     ld   a, $50                                   ; $4724: $3E $50
     ld   [SaveGame1.main + wHealth - wOverworldRoomStatus], a ; 10 hearts of health         ; $4726: $EA $5F $A4
     ld   a, $0A                                   ; $4729: $3E $0A
@@ -855,6 +855,7 @@ func_001_58A8::
     ld   [hl], $3E                                ; $58BF: $36 $3E
     inc  hl                                       ; $58C1: $23
 IF __PATCH_0__
+    ; Patch to make the shallow water ripple animation work on GBC hardware.
     ldh  a, [hIsGBC]
     and  a
     jr   z, .endIfGBC

@@ -3091,9 +3091,11 @@ wHasStolenFromShop::
 wDB47::
   ds 1 ; DB47
 
-; Unlabeled
+; Set to 1 as Tarin turns back into human form from the Magic Powder.
+; Set to 2 after getting Instrument 2.
+; primarily used by Tarin to see what he's doing inside the house
 ; possible values 01, 02, ..
-wDB48::
+wTarinFlag::
   ds 1 ; DB48
 
 ; $0111 means that the player has every song.
@@ -3334,7 +3336,7 @@ wWindFishEggMazeSequenceOffset:
 wBoomerangTradedItem::
   ds 1 ; DB7D
 
-; Switches between 4 different hits for one of the kids throwing the ball
+; Switches between 4 different hints for one of the kids throwing the ball
 wKidSaveHintIndex::
   ds 1 ; DB7E
 

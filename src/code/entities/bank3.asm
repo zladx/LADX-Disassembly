@@ -635,7 +635,7 @@ EntityInitTarin::
     cp   TRADING_ITEM_BANANAS                     ; $4AE9: $FE $04
     jr   nc, EntityInitNpcFacingDown              ; $4AEB: $30 $42
 
-    ld   a, [wDB48]                               ; $4AED: $FA $48 $DB
+    ld   a, [wTarinFlag]                          ; $4AED: $FA $48 $DB
     and  a                                        ; $4AF0: $A7
     jr   z, EntityInitNpcFacingDown               ; $4AF1: $28 $3C
 
@@ -3473,7 +3473,7 @@ AfterSirensInstrumentD1::
 
 AfterSirensInstrumentD2::
     ld   a, $02                                   ; $5E12: $3E $02
-    ld   [wDB48], a                               ; $5E14: $EA $48 $DB
+    ld   [wTarinFlag], a                          ; $5E14: $EA $48 $DB
 IF !__OPTIMIZATIONS_1__
     ret                                           ; $5E17: $C9
 ENDC

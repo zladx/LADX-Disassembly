@@ -290,7 +290,7 @@ func_005_4F64::
 .jr_4FAC
     ld   d, $2F                                   ; $4FAC: $16 $2F
     ld_dialog_low e, Dialog003                    ; $4FAE: $1E $03
-    ld   a, [wDB48]                               ; $4FB0: $FA $48 $DB
+    ld   a, [wTarinFlag]                          ; $4FB0: $FA $48 $DB
     and  a                                        ; $4FB3: $A7
     jr   z, .openDialog                           ; $4FB4: $28 $45
 

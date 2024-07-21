@@ -39,8 +39,8 @@ label_3965::
     callsb ConfigureNewEntity                     ; $3965: $3E $03 $EA $00 $21 $CD $5B $48
     jp   ReloadSavedBank                          ; $396D: $C3 $1D $08
 
-label_3970::
-    callsb func_003_7EFE                          ; $3970: $3E $03 $EA $00 $21 $CD $FE $7E
+GetEntityDirectionToLink_trampoline::
+    callsb GetEntityDirectionToLink               ; $3970: $3E $03 $EA $00 $21 $CD $FE $7E
     jp   ReloadSavedBank                          ; $3978: $C3 $1D $08
 
 label_397B::

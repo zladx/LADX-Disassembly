@@ -264,7 +264,7 @@ jr_021_416C:
     cp   ROOM_INDOOR_B_MARIN_HOUSE                ; $4172: $FE $A3
     jr   nz, jr_021_4191                          ; $4174: $20 $1B
 
-    ld   a, [wDB48]                               ; $4176: $FA $48 $DB
+    ld   a, [wTarinFlag]                          ; $4176: $FA $48 $DB
     cp   $01                                      ; $4179: $FE $01
     jr   z, .jr_418C                              ; $417B: $28 $0F
 

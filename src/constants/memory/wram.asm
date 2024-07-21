@@ -3091,9 +3091,12 @@ wHasStolenFromShop::
 wDB47::
   ds 1 ; DB47
 
-; Unlabeled
-; possible values 01, 02, ..
-wDB48::
+; Tarin activity flag possible values:
+; 0 = Zero at game start. Tarin hasn't been cured of Raccoon.
+; 1 = Set to 1 as Tarin turns back into human form from the Magic Powder.
+; 2 = Set to 2 after getting Instrument 2 and being ejected from the dungeon.
+; primarily used by Tarin to determine what he's doing inside his house
+wTarinFlag::
   ds 1 ; DB48
 
 ; $0111 means that the player has every song.
@@ -3334,7 +3337,7 @@ wWindFishEggMazeSequenceOffset:
 wBoomerangTradedItem::
   ds 1 ; DB7D
 
-; Switches between 4 different hits for one of the kids throwing the ball
+; Switches between 4 different hints for one of the kids throwing the ball
 wKidSaveHintIndex::
   ds 1 ; DB7E
 

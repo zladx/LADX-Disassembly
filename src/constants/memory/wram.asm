@@ -1068,6 +1068,7 @@ wEntitiesCollisionsTable::
 ;  - LikeLike: swallowed item
 ;  - Keese: speed table index
 ;  - Smashable pillar: 0 = pillar, 1 = dust, 2 = debris
+;  - Pincer: hole X position
 wEntitiesPrivateState1Table::
   ds $10 ; C2B0 - C2BF
 
@@ -1076,14 +1077,16 @@ wEntitiesPrivateState1Table::
 ; Examples:
 ;  - Butterfly: stores a delta Y to move closer to Link
 ;  - Keese: -1 when flying counter-clockwise, 1 otherwise
+;  - Pincer: hole Y position
 wEntitiesPrivateState2Table::
   ds $10 ; C2C0 - C2CF
 
 ; Entity-specific state.
 ;
 ; Examples:
-; - Droppable entity: 0 if ??, 1 if ??, 2 if cannot be picked up by sword
-; - Keese: speed update timer
+;  - Droppable entity: 0 if ??, 1 if ??, 2 if cannot be picked up by sword
+;  - Keese: speed update timer
+;  - Pincer: head direction
 wEntitiesPrivateState3Table::
   ds $10 ; C2D0 - C2DF
 

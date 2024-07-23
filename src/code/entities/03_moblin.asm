@@ -86,7 +86,7 @@ AnimateRoamingEnemy::
     call GetEntityPrivateCountdown1               ; $586C: $CD $00 $0C
     jr   nz, .projectileEnd                       ; $586F: $20 $18
 
-    call GetEntityDirectionToLink                 ; $5871: $CD $FE $7E
+    call GetEntityDirectionToLink_03              ; $5871: $CD $FE $7E
     ld   hl, wEntitiesDirectionTable              ; $5874: $21 $80 $C3
     add  hl, bc                                   ; $5877: $09
     ld   a, e                                     ; $5878: $7B
@@ -130,7 +130,7 @@ jr_003_5896:
     cp   $00                                      ; $58AD: $FE $00
     jr   nz, .jr_58B6                             ; $58AF: $20 $05
 
-    call GetEntityDirectionToLink                 ; $58B1: $CD $FE $7E
+    call GetEntityDirectionToLink_03              ; $58B1: $CD $FE $7E
     jr   jr_003_58B9                              ; $58B4: $18 $03
 
 .jr_58B6

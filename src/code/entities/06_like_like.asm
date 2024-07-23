@@ -35,9 +35,7 @@ LikeLikeState0Handler::
 
 .jr_7E06
     call label_3B70                               ; $7E06: $CD $70 $3B
-
-label_006_7E09:
-    jp   label_006_7E9D                           ; $7E09: $C3 $9D $7E
+    jp   LikeLikeGibdoWalk                        ; $7E09: $C3 $9D $7E
 
 LikeLikeState1Handler::
     ldh  a, [hJoypadState]                        ; $7E0C: $F0 $CC

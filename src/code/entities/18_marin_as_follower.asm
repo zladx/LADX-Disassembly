@@ -275,7 +275,7 @@ jr_018_5B3B:
     ld   [hl], JINGLE_STRONG_BUMP                 ; $5B3E: $36 $0B
     ld   hl, hWaveSfx                             ; $5B40: $21 $F3 $FF
     ld   [hl], WAVE_SFX_LINK_HURT                 ; $5B43: $36 $03
-    ld   hl, wC157                                ; $5B45: $21 $57 $C1
+    ld   hl, wScreenShakeCountdown                ; $5B45: $21 $57 $C1
     ld   [hl], $18                                ; $5B48: $36 $18
     ld   hl, wC158                                ; $5B4A: $21 $58 $C1
     ld   [hl], $04                                ; $5B4D: $36 $04

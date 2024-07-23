@@ -37,7 +37,7 @@ AntiKirbyState0Handler::
     call GetEntityDropTimer                       ; $4273: $CD $FB $0B
     jr   nz, .jr_4294                             ; $4276: $20 $1C
 
-    call func_006_6594                            ; $4278: $CD $94 $65
+    call GetEntityXDistanceToLink_06              ; $4278: $CD $94 $65
     ld   hl, wEntitiesDirectionTable              ; $427B: $21 $80 $C3
     add  hl, bc                                   ; $427E: $09
     ld   a, [hl]                                  ; $427F: $7E
@@ -105,9 +105,9 @@ AntiKirbyState1Handler::
     jr   jr_006_42F5                              ; $42E3: $18 $10
 
 .jr_42E5
-    call func_006_6594                            ; $42E5: $CD $94 $65
+    call GetEntityXDistanceToLink_06              ; $42E5: $CD $94 $65
     push de                                       ; $42E8: $D5
-    call func_006_65A4                            ; $42E9: $CD $A4 $65
+    call GetEntityYDistanceToLink_06              ; $42E9: $CD $A4 $65
     ld   a, e                                     ; $42EC: $7B
     and  $03                                      ; $42ED: $E6 $03
     dec  a                                        ; $42EF: $3D
@@ -183,7 +183,7 @@ jr_006_434B:
     cp   LINK_ANIMATION_STATE_NO_UPDATE           ; $434D: $FE $FF
     jr   z, label_006_43B8                        ; $434F: $28 $67
 
-    call func_006_6594                            ; $4351: $CD $94 $65
+    call GetEntityXDistanceToLink_06              ; $4351: $CD $94 $65
     ld   hl, wEntitiesDirectionTable              ; $4354: $21 $80 $C3
     add  hl, bc                                   ; $4357: $09
     ld   a, [hl]                                  ; $4358: $7E
@@ -191,7 +191,7 @@ jr_006_434B:
     cp   e                                        ; $435B: $BB
     jr   nz, label_006_43B8                       ; $435C: $20 $5A
 
-    call func_006_6594                            ; $435E: $CD $94 $65
+    call GetEntityXDistanceToLink_06              ; $435E: $CD $94 $65
     add  $40                                      ; $4361: $C6 $40
     cp   $80                                      ; $4363: $FE $80
     jr   nc, label_006_43B8                       ; $4365: $30 $51
@@ -203,7 +203,7 @@ jr_006_434B:
     push af                                       ; $436D: $F5
     ldh  a, [hActiveEntityVisualPosY]             ; $436E: $F0 $EC
     ld   [hl], a                                  ; $4370: $77
-    call func_006_65A4                            ; $4371: $CD $A4 $65
+    call GetEntityYDistanceToLink_06              ; $4371: $CD $A4 $65
     ld   e, a                                     ; $4374: $5F
     pop  af                                       ; $4375: $F1
     pop  hl                                       ; $4376: $E1

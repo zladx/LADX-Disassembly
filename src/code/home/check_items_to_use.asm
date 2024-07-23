@@ -51,7 +51,7 @@ CheckItemsToUse::
 
 .swordShieldEnd
 
-    ld   a, [wC117]                               ; $11C3: $FA $17 $C1
+    ld   a, [wIsGelClingingToLink]                ; $11C3: $FA $17 $C1
     and  a                                        ; $11C6: $A7
     jp   nz, UseItem.return                       ; $11C7: $C2 $ED $12
     ; if Link does carry something, exit

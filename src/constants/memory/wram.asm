@@ -149,8 +149,11 @@ wC115:
 wC116:
   ds 1 ; C116
 
-; Unlabeled
-wC117:
+; Whether there are Gels clinging to Link
+; Possible values:
+; 0 = false
+; 1 = true
+wIsGelClingingToLink:
   ds 1 ; C117
 
 ; Unlabeled
@@ -457,8 +460,8 @@ wScreenShakeHorizontal::
 wScreenShakeVertical::
   ds 1 ; C156
 
-; Unlabeled
-wC157::
+; While not zero, the screen shakes
+wScreenShakeCountdown::
   ds 1 ; C157
 
 ; Unlabeled
@@ -810,8 +813,9 @@ wC1AC::
 wItemUsageContext::
   ds 1 ; C1AD
 
-; Unlabeled
-wC1AE::
+; Number of regular Zols animated so far on this frame.
+; Used by Slime Eye to know the number of Zols on screen.
+wZolCount::
   ds 2 ; C1AE - C1AF
 
 ; Unlabeled
@@ -1062,6 +1066,9 @@ wEntitiesCollisionsTable::
 ;  - Butterfly: stores a delta X to move closer to Link
 ;  - Genie: store the substate
 ;  - LikeLike: swallowed item
+;  - Keese: speed table index
+;  - Smashable pillar: 0 = pillar, 1 = dust, 2 = debris
+;  - Pincer: hole X position
 wEntitiesPrivateState1Table::
   ds $10 ; C2B0 - C2BF
 
@@ -1069,15 +1076,17 @@ wEntitiesPrivateState1Table::
 ;
 ; Examples:
 ;  - Butterfly: stores a delta Y to move closer to Link
+;  - Keese: -1 when flying counter-clockwise, 1 otherwise
+;  - Pincer: hole Y position
 wEntitiesPrivateState2Table::
   ds $10 ; C2C0 - C2CF
 
 ; Entity-specific state.
 ;
-; When used by a droppble entity, possible values:
-;   0: ??
-;   1: ??
-;   2: pickable item cannot be picked up by sword
+; Examples:
+;  - Droppable entity: 0 if ??, 1 if ??, 2 if cannot be picked up by sword
+;  - Keese: speed update timer
+;  - Pincer: head direction
 wEntitiesPrivateState3Table::
   ds $10 ; C2D0 - C2DF
 

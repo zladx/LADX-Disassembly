@@ -61,7 +61,7 @@ YipYipEntityHandler::
     cp_dialog_low Dialog182                       ; $59F1: $FE $82
     jr   z, .jr_006_5A0D                          ; $59F3: $28 $18
 
-    call func_006_6594                            ; $59F5: $CD $94 $65
+    call GetEntityXDistanceToLink_06              ; $59F5: $CD $94 $65
     ld   hl, wEntitiesDirectionTable              ; $59F8: $21 $80 $C3
     add  hl, bc                                   ; $59FB: $09
     ld   [hl], e                                  ; $59FC: $73

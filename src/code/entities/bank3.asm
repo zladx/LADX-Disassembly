@@ -1860,7 +1860,7 @@ Data_003_516A::
     db   $76, $76, $76, $76                       ; $516A
 
 EntityInitPushedBlock::
-    call GetEntityDirectionToLink                 ; $516E: $CD $FE $7E
+    call GetEntityDirectionToLink_03              ; $516E: $CD $FE $7E
     ld   d, $00                                   ; $5171: $16 $00
     ld   hl, Data_003_523D                        ; $5173: $21 $3D $52
     add  hl, de                                   ; $5176: $19
@@ -3209,18 +3209,18 @@ label_003_5C49:
     jp   z, label_003_60AA                        ; $5C59: $CA $AA $60
 
     cp   $10                                      ; $5C5C: $FE $10
-    jr   nz, .jr_5C67                             ; $5C5E: $20 $07
+    jr   nz, .skipUpdateSpeedY                             ; $5C5E: $20 $07
 
     dec  [hl]                                     ; $5C60: $35
     call_open_dialog Dialog093                    ; $5C61
     xor  a                                        ; $5C66: $AF
 
-.jr_5C67
+.skipUpdateSpeedY
     dec  a                                        ; $5C67: $3D
 IF __OPTIMIZATIONS_3__
     jp   nz, HoldEntityAboveLink
 ELSE
-    jr   nz, .jr_5C75                             ; $5C68: $20 $0B
+    jr   nz, .decSpeedX                             ; $5C68: $20 $0B
 ENDC
 
     ld   d, INVENTORY_HOOKSHOT                    ; $5C6A: $16 $06
@@ -3229,7 +3229,7 @@ ENDC
     jp   UnloadEntityAndReturn                    ; $5C72: $C3 $8D $3F
 
 IF !__OPTIMIZATIONS_3__
-.jr_5C75
+.decSpeedX
     jp   HoldEntityAboveLink                      ; $5C75: $C3 $17 $5A
 ENDC
 
@@ -4239,7 +4239,7 @@ jr_003_623B:
     jr   jr_003_626B                              ; $6241: $18 $28
 
 jr_003_6243:
-    ld   a, [wC157]                               ; $6243: $FA $57 $C1
+    ld   a, [wScreenShakeCountdown]               ; $6243: $FA $57 $C1
     and  a                                        ; $6246: $A7
     jr   z, jr_003_629C                           ; $6247: $28 $53
 
@@ -5967,7 +5967,7 @@ ApplyLinkCollisionWithEnemy::
     cp   ENTITY_CHEEP_CHEEP_JUMPING               ; $6CD7: $FE $AC
     jr   nz, .cheepCheepEnd                       ; $6CD9: $20 $1E
 
-    call GetEntityYDistanceAwayFromLink           ; $6CDB: $CD $E9 $7E
+    call GetEntityYDistanceToLink_03              ; $6CDB: $CD $E9 $7E
     ld   a, e                                     ; $6CDE: $7B
     cp   $02                                      ; $6CDF: $FE $02
     jr   nz, .goombaEnd                           ; $6CE1: $20 $5A
@@ -6194,7 +6194,7 @@ jr_003_6E0E:
     cp   $02                                      ; $6E10: $FE $02
     jr   z, setCarryAndReturn                     ; $6E12: $28 $F6
 
-    call GetEntityXDistanceAwayFromLink           ; $6E14: $CD $D9 $7E
+    call GetEntityXDistanceToLink_03              ; $6E14: $CD $D9 $7E
     ld   d, b                                     ; $6E17: $50
     ld   hl, Data_003_6E0C                        ; $6E18: $21 $0C $6E
     add  hl, de                                   ; $6E1B: $19
@@ -6488,7 +6488,7 @@ func_003_6F93::
 
 label_003_6FA7:
     push de                                       ; $6FA7: $D5
-    call GetEntityXDistanceAwayFromLink           ; $6FA8: $CD $D9 $7E
+    call GetEntityXDistanceToLink_03              ; $6FA8: $CD $D9 $7E
     ld   a, e                                     ; $6FAB: $7B
     and  a                                        ; $6FAC: $A7
     pop  de                                       ; $6FAD: $D1
@@ -9185,10 +9185,10 @@ func_003_7E0E::
 
 ; Compute an (X, Y) vector of length A pointing from an entity position
 ; to the direction of Link.
-; Useful to move an entity in the direction of another.
+; Useful to move an entity in the direction of Link.
 ;
 ; Inputs:
-;   a    vector length
+;   a    vector length (infinity norm)
 ;   bc   entity index
 ;
 ; Outputs:
@@ -9199,7 +9199,7 @@ GetVectorTowardsLink::
     and  a                                        ; $7E47: $A7
     jp   z, .cancelAndReturn                      ; $7E48: $CA $C3 $7E
 
-    call GetEntityYDistanceAwayFromLink           ; $7E4B: $CD $E9 $7E
+    call GetEntityYDistanceToLink_03              ; $7E4B: $CD $E9 $7E
     dec  e                                        ; $7E4E: $1D
     dec  e                                        ; $7E4F: $1D
     ld   a, e                                     ; $7E50: $7B
@@ -9214,7 +9214,7 @@ GetVectorTowardsLink::
 
 .absoluteY
     ldh  [hMultiPurposeC], a                      ; $7E5A: $E0 $E3
-    call GetEntityXDistanceAwayFromLink           ; $7E5C: $CD $D9 $7E
+    call GetEntityXDistanceToLink_03              ; $7E5C: $CD $D9 $7E
     ld   a, e                                     ; $7E5F: $7B
     ; hMultiPurpose3 = dx < 0 ? 1 : 0
     ldh  [hMultiPurpose3], a                      ; $7E60: $E0 $DA
@@ -9332,8 +9332,8 @@ ApplyVectorTowardsLinkAndReturn::
 ;
 ; Outputs:
 ;   d   x distance (Link's position - entity's position)
-;   e   $00 if Link is to the right of the entity, $01 otherwise
-GetEntityXDistanceAwayFromLink::
+;   e   0x01 if Link is to the left of the entity, 0x00 otherwise
+GetEntityXDistanceToLink_03::
     ld   e, $00                                   ; $7ED9: $1E $00
     ldh  a, [hLinkPositionX]                      ; $7EDB: $F0 $98
     ld   hl, wEntitiesPosXTable                   ; $7EDD: $21 $00 $C2
@@ -9353,8 +9353,8 @@ GetEntityXDistanceAwayFromLink::
 ;
 ; Outputs:
 ;   d   y distance (Link's position - entity's position)
-;   e   $02 if Link is above the entity, $03 otherwise
-GetEntityYDistanceAwayFromLink::
+;   e   0x02 if Link is above the entity, 0x03 otherwise
+GetEntityYDistanceToLink_03::
     ld   e, $02                                   ; $7EE9: $1E $02
     ldh  a, [hLinkPositionY]                      ; $7EEB: $F0 $99
     ld   hl, wEntitiesPosYTable                   ; $7EED: $21 $10 $C2
@@ -9377,8 +9377,8 @@ GetEntityYDistanceAwayFromLink::
 ;
 ; Outputs:
 ;   e   entity's direction to Link (0 = right, 1 = left, 2 = up, 3 = down)
-GetEntityDirectionToLink::
-    call GetEntityXDistanceAwayFromLink           ; $7EFE: $CD $D9 $7E
+GetEntityDirectionToLink_03::
+    call GetEntityXDistanceToLink_03              ; $7EFE: $CD $D9 $7E
     ld   a, e                                     ; $7F01: $7B
     ldh  [hMultiPurpose0], a                      ; $7F02: $E0 $D7
     ld   a, d                                     ; $7F04: $7A
@@ -9390,7 +9390,7 @@ GetEntityDirectionToLink::
 
 .positiveX
     push af                                       ; $7F0B: $F5
-    call GetEntityYDistanceAwayFromLink           ; $7F0C: $CD $E9 $7E
+    call GetEntityYDistanceToLink_03              ; $7F0C: $CD $E9 $7E
     ld   a, e                                     ; $7F0F: $7B
     ldh  [hMultiPurpose1], a                      ; $7F10: $E0 $D8
     ld   a, d                                     ; $7F12: $7A
@@ -9406,12 +9406,12 @@ GetEntityDirectionToLink::
     jr   nc, .vertical                            ; $7F1B: $30 $04
 
     ldh  a, [hMultiPurpose0]                      ; $7F1D: $F0 $D7
-    jr   jr_003_7F23                              ; $7F1F: $18 $02
+    jr   .verticalEnd                             ; $7F1F: $18 $02
 
 .vertical
     ldh  a, [hMultiPurpose1]                      ; $7F21: $F0 $D8
 
-jr_003_7F23:
+.verticalEnd
     ld   e, a                                     ; $7F23: $5F
     ret                                           ; $7F24: $C9
 

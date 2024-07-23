@@ -38,7 +38,7 @@ func_005_6D00::
 
     ld   [hl], $80                                ; $6D04: $36 $80
     ld   a, $FF                                   ; $6D06: $3E $FF
-    ld   [wC157], a                               ; $6D08: $EA $57 $C1
+    ld   [wScreenShakeCountdown], a               ; $6D08: $EA $57 $C1
     ld   a, NOISE_SFX_SLIME_EEL_FLOOR_BREAK       ; $6D0B: $3E $3E
     ldh  [hNoiseSfx], a                           ; $6D0D: $E0 $F4
     ld   [wD3E8], a                               ; $6D0F: $EA $E8 $D3

@@ -131,7 +131,7 @@ jr_007_7D4E:
     jr   z, .jr_7D6F                              ; $7D61: $28 $0C
 
     push de                                       ; $7D63: $D5
-    call func_007_7E7D                            ; $7D64: $CD $7D $7E
+    call GetEntityDirectionToLink_07              ; $7D64: $CD $7D $7E
     ldh  a, [hLinkDirection]                      ; $7D67: $F0 $9E
     xor  $01                                      ; $7D69: $EE $01
     cp   e                                        ; $7D6B: $BB
@@ -341,72 +341,89 @@ AddEntityZSpeedToPos_07::
     rl   d                                        ; $7E56: $CB $12
     ld   hl, wEntitiesPosZTable                   ; $7E58: $21 $10 $C3
     jr   AddEntitySpeedToPos_07.updatePosition    ; $7E5B: $18 $D2
-
-EntityLinkPositionXDifference_07::
+    
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   d   x distance (Link's position - entity's position)
+;   e   0x01 if Link is to the left of the entity, 0x00 otherwise
+GetEntityXDistanceToLink_07::
     ld   e, $00                                   ; $7E5D: $1E $00
     ldh  a, [hLinkPositionX]                      ; $7E5F: $F0 $98
     ld   hl, wEntitiesPosXTable                   ; $7E61: $21 $00 $C2
     add  hl, bc                                   ; $7E64: $09
     sub  [hl]                                     ; $7E65: $96
     bit  7, a                                     ; $7E66: $CB $7F
-    jr   z, .jr_7E6B                              ; $7E68: $28 $01
+    jr   z, .positive                             ; $7E68: $28 $01
 
     inc  e                                        ; $7E6A: $1C
 
-.jr_7E6B
+.positive
     ld   d, a                                     ; $7E6B: $57
     ret                                           ; $7E6C: $C9
 
-EntityLinkPositionYDifference_07::
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   d   y distance (Link's position - entity's position)
+;   e   0x02 if Link is above the entity, 0x03 otherwise
+GetEntityYDistanceToLink_07::
     ld   e, $02                                   ; $7E6D: $1E $02
     ldh  a, [hLinkPositionY]                      ; $7E6F: $F0 $99
     ld   hl, wEntitiesPosYTable                   ; $7E71: $21 $10 $C2
     add  hl, bc                                   ; $7E74: $09
     sub  [hl]                                     ; $7E75: $96
     bit  7, a                                     ; $7E76: $CB $7F
-    jr   nz, .jr_7E7B                             ; $7E78: $20 $01
+    jr   nz, .negative                            ; $7E78: $20 $01
 
     inc  e                                        ; $7E7A: $1C
 
-.jr_7E7B
+.negative
     ld   d, a                                     ; $7E7B: $57
     ret                                           ; $7E7C: $C9
 
-func_007_7E7D::
-    call EntityLinkPositionXDifference_07         ; $7E7D: $CD $5D $7E
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   e   entity's direction to Link (0 = right, 1 = left, 2 = up, 3 = down)
+GetEntityDirectionToLink_07::
+    call GetEntityXDistanceToLink_07              ; $7E7D: $CD $5D $7E
     ld   a, e                                     ; $7E80: $7B
     ldh  [hMultiPurpose0], a                      ; $7E81: $E0 $D7
     ld   a, d                                     ; $7E83: $7A
     bit  7, a                                     ; $7E84: $CB $7F
-    jr   z, .jr_7E8A                              ; $7E86: $28 $02
+    jr   z, .positiveX                            ; $7E86: $28 $02
 
     cpl                                           ; $7E88: $2F
     inc  a                                        ; $7E89: $3C
 
-.jr_7E8A
+.positiveX
     push af                                       ; $7E8A: $F5
-    call EntityLinkPositionYDifference_07         ; $7E8B: $CD $6D $7E
+    call GetEntityYDistanceToLink_07              ; $7E8B: $CD $6D $7E
     ld   a, e                                     ; $7E8E: $7B
     ldh  [hMultiPurpose1], a                      ; $7E8F: $E0 $D8
     ld   a, d                                     ; $7E91: $7A
     bit  7, a                                     ; $7E92: $CB $7F
-    jr   z, .jr_7E98                              ; $7E94: $28 $02
+    jr   z, .positiveY                            ; $7E94: $28 $02
 
     cpl                                           ; $7E96: $2F
     inc  a                                        ; $7E97: $3C
 
-.jr_7E98
+.positiveY
     pop  de                                       ; $7E98: $D1
     cp   d                                        ; $7E99: $BA
-    jr   nc, .jr_7EA0                             ; $7E9A: $30 $04
+    jr   nc, .vertical                            ; $7E9A: $30 $04
 
     ldh  a, [hMultiPurpose0]                      ; $7E9C: $F0 $D7
-    jr   jr_007_7EA2                              ; $7E9E: $18 $02
+    jr   .verticalEnd                             ; $7E9E: $18 $02
 
-.jr_7EA0
+.vertical
     ldh  a, [hMultiPurpose1]                      ; $7EA0: $F0 $D8
 
-jr_007_7EA2:
+.verticalEnd
     ld   e, a                                     ; $7EA2: $5F
     ret                                           ; $7EA3: $C9
 

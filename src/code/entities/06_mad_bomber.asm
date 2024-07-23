@@ -16,10 +16,10 @@ MadBomberSpriteVariants::
     db $76, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
     db $74, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 
-Data_006_413A::
+MadBomberPositionXValues::
     db   $28, $38, $58, $58, $78, $88, $28, $88
 
-Data_006_4142::
+MadBomberPositionYValues::
     db   $40, $70, $20, $50, $70, $40, $40, $40
 
 MadBomberEntityHandler::
@@ -50,74 +50,77 @@ MadBomberState0Handler::
     ld   [hl], $40                                ; $4179: $36 $40
     jp   IncrementEntityState                     ; $417B: $C3 $12 $3B
 
+; Choose hole
 MadBomberState1Handler::
     call GetEntityTransitionCountdown             ; $417E: $CD $05 $0C
     ret  nz                                       ; $4181: $C0
 
+    ; Randomly choose a hole to pop out from
     call GetRandomByte                            ; $4182: $CD $0D $28
     and  $07                                      ; $4185: $E6 $07
     ld   e, a                                     ; $4187: $5F
     ld   d, b                                     ; $4188: $50
-    ld   hl, Data_006_413A                        ; $4189: $21 $3A $41
+    ld   hl, MadBomberPositionXValues                        ; $4189: $21 $3A $41
     add  hl, de                                   ; $418C: $19
     ld   a, [hl]                                  ; $418D: $7E
     ld   hl, wEntitiesPosXTable                   ; $418E: $21 $00 $C2
     add  hl, bc                                   ; $4191: $09
     ld   [hl], a                                  ; $4192: $77
-    ld   hl, Data_006_4142                        ; $4193: $21 $42 $41
-
-.jr_4196
+    ld   hl, MadBomberPositionYValues                        ; $4193: $21 $42 $41
     add  hl, de                                   ; $4196: $19
     ld   a, [hl]                                  ; $4197: $7E
     ld   hl, wEntitiesPosYTable                   ; $4198: $21 $10 $C2
-
-.jr_419B
     add  hl, bc                                   ; $419B: $09
     ld   [hl], a                                  ; $419C: $77
-    call func_006_6594                            ; $419D: $CD $94 $65
+
+    call GetEntityXDistanceToLink_06              ; $419D: $CD $94 $65
     add  $20                                      ; $41A0: $C6 $20
     cp   $40                                      ; $41A2: $FE $40
-    jr   nc, .jr_41AE                             ; $41A4: $30 $08
+    jr   nc, .incrementState                      ; $41A4: $30 $08
 
-    call func_006_65A4                            ; $41A6: $CD $A4 $65
+    call GetEntityYDistanceToLink_06              ; $41A6: $CD $A4 $65
     add  $20                                      ; $41A9: $C6 $20
     cp   $40                                      ; $41AB: $FE $40
     ret  c                                        ; $41AD: $D8
 
-.jr_41AE
+.incrementState
+    ; Only increment state if Link's more than 0x20 units away from the enemy (horizontally or vertically)
     call GetEntityTransitionCountdown             ; $41AE: $CD $05 $0C
     ld   [hl], $18                                ; $41B1: $36 $18
     jp   IncrementEntityState                     ; $41B3: $C3 $12 $3B
 
+; Pop out
 MadBomberState2Handler::
     call GetEntityTransitionCountdown             ; $41B6: $CD $05 $0C
-    jr   nz, .jr_41C0                             ; $41B9: $20 $05
+    jr   nz, .skipIncrementState                  ; $41B9: $20 $05
 
     ld   [hl], $30                                ; $41BB: $36 $30
     jp   IncrementEntityState                     ; $41BD: $C3 $12 $3B
 
-.jr_41C0
+.skipIncrementState
     cp   $0C                                      ; $41C0: $FE $0C
     ld   a, $01                                   ; $41C2: $3E $01
-    jr   nc, .jr_41C7                             ; $41C4: $30 $01
+    jr   nc, .spriteVariant1                      ; $41C4: $30 $01
 
     inc  a                                        ; $41C6: $3C
 
-.jr_41C7
+.spriteVariant1
     jp   SetEntitySpriteVariant                   ; $41C7: $C3 $0C $3B
 
+; Wait and then try to throw bomb
 MadBomberState3Handler::
     call DefaultEnemyDamageCollisionHandler_trampoline ; $41CA: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $41CD: $CD $05 $0C
-    jr   nz, jr_006_4218                          ; $41D0: $20 $46
+    jr   nz, .animate                             ; $41D0: $20 $46
 
+    ; If flashing, don't throw a bomb
     ld   [hl], $10                                ; $41D2: $36 $10
     call IncrementEntityState                     ; $41D4: $CD $12 $3B
     ld   hl, wEntitiesFlashCountdownTable         ; $41D7: $21 $20 $C4
     add  hl, bc                                   ; $41DA: $09
     ld   a, [hl]                                  ; $41DB: $7E
     and  a                                        ; $41DC: $A7
-    jr   nz, ret_006_4217                         ; $41DD: $20 $38
+    jr   nz, .return                              ; $41DD: $20 $38
 
     ld   a, ENTITY_BOMB                           ; $41DF: $3E $02
     call SpawnNewEntity_trampoline                ; $41E1: $CD $86 $3B
@@ -133,7 +136,7 @@ MadBomberState3Handler::
     add  hl, de                                   ; $41F5: $19
     ld   [hl], $04                                ; $41F6: $36 $04
 
-label_006_41F8:
+.throwBomb:
     ld   hl, wEntitiesSpeedZTable                 ; $41F8: $21 $20 $C3
     add  hl, de                                   ; $41FB: $19
     ld   [hl], $18                                ; $41FC: $36 $18
@@ -152,34 +155,35 @@ label_006_41F8:
     ld   a, JINGLE_FALL_DOWN                      ; $4213: $3E $08
     ldh  [hJingle], a                             ; $4215: $E0 $F2
 
-ret_006_4217:
+.return:
     ret                                           ; $4217: $C9
 
-jr_006_4218:
+.animate:
     and  $20                                      ; $4218: $E6 $20
     ld   a, $03                                   ; $421A: $3E $03
-    jr   nz, .jr_421F                             ; $421C: $20 $01
+    jr   nz, .spriteVariant3                      ; $421C: $20 $01
 
     inc  a                                        ; $421E: $3C
 
-.jr_421F
+.spriteVariant3
     jp   SetEntitySpriteVariant                   ; $421F: $C3 $0C $3B
 
+; Hide again
 MadBomberState4Handler::
     call GetEntityTransitionCountdown             ; $4222: $CD $05 $0C
-    jr   nz, .jr_4230                             ; $4225: $20 $09
+    jr   nz, .skipIncrementState                  ; $4225: $20 $09
 
     call IncrementEntityState                     ; $4227: $CD $12 $3B
     ld   [hl], b                                  ; $422A: $70
     ld   a, $FF                                   ; $422B: $3E $FF
     jp   SetEntitySpriteVariant                   ; $422D: $C3 $0C $3B
 
-.jr_4230
+.skipIncrementState
     cp   $08                                      ; $4230: $FE $08
     ld   a, $01                                   ; $4232: $3E $01
-    jr   c, .jr_4237                              ; $4234: $38 $01
+    jr   c, .spriteVariant1                       ; $4234: $38 $01
 
     inc  a                                        ; $4236: $3C
 
-.jr_4237
+.spriteVariant1
     jp   SetEntitySpriteVariant                   ; $4237: $C3 $0C $3B

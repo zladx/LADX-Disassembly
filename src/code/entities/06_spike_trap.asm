@@ -48,12 +48,12 @@ SpikeTrapState1Handler::
     jr   nz, ret_006_7599                         ; $7542: $20 $55
 
     call ClearEntitySpeed                         ; $7544: $CD $7F $3D
-    call func_006_65A4                            ; $7547: $CD $A4 $65
+    call GetEntityYDistanceToLink_06              ; $7547: $CD $A4 $65
     add  $12                                      ; $754A: $C6 $12
     cp   $24                                      ; $754C: $FE $24
     jr   nc, .jr_7567                             ; $754E: $30 $17
 
-    call func_006_6594                            ; $7550: $CD $94 $65
+    call GetEntityXDistanceToLink_06              ; $7550: $CD $94 $65
     ld   d, b                                     ; $7553: $50
     ld   hl, Data_006_74FE                        ; $7554: $21 $FE $74
     add  hl, de                                   ; $7557: $19
@@ -68,12 +68,12 @@ SpikeTrapState1Handler::
     jr   jr_006_7585                              ; $7565: $18 $1E
 
 .jr_7567
-    call func_006_6594                            ; $7567: $CD $94 $65
+    call GetEntityXDistanceToLink_06              ; $7567: $CD $94 $65
     add  $12                                      ; $756A: $C6 $12
     cp   $24                                      ; $756C: $FE $24
     jr   nc, ret_006_7599                         ; $756E: $30 $29
 
-    call func_006_65A4                            ; $7570: $CD $A4 $65
+    call GetEntityYDistanceToLink_06              ; $7570: $CD $A4 $65
     ld   d, b                                     ; $7573: $50
     ld   hl, Data_006_7506                        ; $7574: $21 $06 $75
     add  hl, de                                   ; $7577: $19

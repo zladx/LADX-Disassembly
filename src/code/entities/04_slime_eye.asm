@@ -88,7 +88,7 @@ func_004_49DC::
 ._03 dw SlimeEyeState3Handler                     ; $49EB
 
 SlimeEyeState0Handler::
-    ld   a, [wC157]                               ; $49ED: $FA $57 $C1
+    ld   a, [wScreenShakeCountdown]               ; $49ED: $FA $57 $C1
     cp   $05                                      ; $49F0: $FE $05
     jr   nz, .jr_49FB                             ; $49F2: $20 $07
 
@@ -101,7 +101,7 @@ SlimeEyeState0Handler::
     jr   nz, .ret_4A2C                            ; $49FE: $20 $2C
 
     ld   [hl], $50                                ; $4A00: $36 $50
-    ld   a, [wC1AE]                               ; $4A02: $FA $AE $C1
+    ld   a, [wZolCount]                           ; $4A02: $FA $AE $C1
     cp   $02                                      ; $4A05: $FE $02
     jr   nc, .ret_4A2C                            ; $4A07: $30 $23
 
@@ -148,7 +148,7 @@ SlimeEyeState1Handler::
 
     ld   [hl], b                                  ; $4A49: $70
     ld   a, $50                                   ; $4A4A: $3E $50
-    ld   [wC157], a                               ; $4A4C: $EA $57 $C1
+    ld   [wScreenShakeCountdown], a               ; $4A4C: $EA $57 $C1
     ld   a, $04                                   ; $4A4F: $3E $04
     ld   [wC158], a                               ; $4A51: $EA $58 $C1
     call GetEntityTransitionCountdown             ; $4A54: $CD $05 $0C
@@ -692,7 +692,7 @@ func_004_4EEB::
     jr   z, .jr_4F49                              ; $4F2C: $28 $1B
 
     ld   a, $18                                   ; $4F2E: $3E $18
-    ld   [wC157], a                               ; $4F30: $EA $57 $C1
+    ld   [wScreenShakeCountdown], a               ; $4F30: $EA $57 $C1
     ld   a, JINGLE_STRONG_BUMP                    ; $4F33: $3E $0B
     ldh  [hJingle], a                             ; $4F35: $E0 $F2
     ld   a, [wIsLinkInTheAir]                     ; $4F37: $FA $46 $C1

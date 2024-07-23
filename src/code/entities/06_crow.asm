@@ -193,7 +193,7 @@ jr_006_5D4F:
     jr   jr_006_5D9F                              ; $5D88: $18 $15
 
 label_006_5D8A:
-    call func_006_6594                            ; $5D8A: $CD $94 $65
+    call GetEntityXDistanceToLink_06              ; $5D8A: $CD $94 $65
     ld   hl, wEntitiesDirectionTable              ; $5D8D: $21 $80 $C3
     add  hl, bc                                   ; $5D90: $09
     ld   [hl], e                                  ; $5D91: $73
@@ -201,7 +201,7 @@ label_006_5D8A:
     cp   $30                                      ; $5D94: $FE $30
     ret  nc                                       ; $5D96: $D0
 
-    call func_006_65A4                            ; $5D97: $CD $A4 $65
+    call GetEntityYDistanceToLink_06              ; $5D97: $CD $A4 $65
     add  $30                                      ; $5D9A: $C6 $30
     cp   $60                                      ; $5D9C: $FE $60
     ret  nc                                       ; $5D9E: $D0

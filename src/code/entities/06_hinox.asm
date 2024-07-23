@@ -55,7 +55,7 @@ HinoxState1Handler::
     cp   $0A                                      ; $5008: $FE $0A
     jr   nz, .jr_5017                             ; $500A: $20 $0B
 
-    call func_006_65B4                            ; $500C: $CD $B4 $65
+    call GetEntityDirectionToLink_06              ; $500C: $CD $B4 $65
     ld   hl, wEntitiesDirectionTable              ; $500F: $21 $80 $C3
     add  hl, bc                                   ; $5012: $09
     ld   a, e                                     ; $5013: $7B
@@ -101,7 +101,7 @@ jr_006_501A:
     cp   $00                                      ; $504F: $FE $00
     jr   nz, .jr_5058                             ; $5051: $20 $05
 
-    call func_006_65B4                            ; $5053: $CD $B4 $65
+    call GetEntityDirectionToLink_06              ; $5053: $CD $B4 $65
     jr   jr_006_505B                              ; $5056: $18 $03
 
 .jr_5058
@@ -194,12 +194,12 @@ HinoxState3Handler::
 .jr_50D7
     call UpdateEntityPosWithSpeed_06              ; $50D7: $CD $41 $65
     call DefaultEntityPhysics_trampoline          ; $50DA: $CD $23 $3B
-    call func_006_6594                            ; $50DD: $CD $94 $65
+    call GetEntityXDistanceToLink_06              ; $50DD: $CD $94 $65
     add  $18                                      ; $50E0: $C6 $18
     cp   $30                                      ; $50E2: $FE $30
     jr   nc, .jr_5102                             ; $50E4: $30 $1C
 
-    call func_006_65A4                            ; $50E6: $CD $A4 $65
+    call GetEntityYDistanceToLink_06              ; $50E6: $CD $A4 $65
     add  $18                                      ; $50E9: $C6 $18
     cp   $30                                      ; $50EB: $FE $30
     jr   nc, .jr_5102                             ; $50ED: $30 $13
@@ -360,7 +360,7 @@ HinoxState5Handler::
     ld   hl, wEntitiesPosZTable                   ; $51ED: $21 $10 $C3
     add  hl, de                                   ; $51F0: $19
     ld   [hl], $10                                ; $51F1: $36 $10
-    jp   label_006_41F8                           ; $51F3: $C3 $F8 $41
+    jp   MadBomberState3Handler.throwBomb         ; $51F3: $C3 $F8 $41
 
 .jr_51F6
     ld   a, e                                     ; $51F6: $7B

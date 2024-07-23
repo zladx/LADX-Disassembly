@@ -518,7 +518,7 @@ jr_002_4459:
 
 label_002_4464:
     ld   e, $03                                   ; $4464: $1E $03
-    ld   a, [wC117]                               ; $4466: $FA $17 $C1
+    ld   a, [wIsGelClingingToLink]                ; $4466: $FA $17 $C1
     and  a                                        ; $4469: $A7
     jr   nz, jr_002_44A2                          ; $446A: $20 $36
 
@@ -5906,7 +5906,7 @@ jr_002_6BEB:
     call UpdateFinalLinkPosition                  ; $6C16: $CD $A8 $21
     call CheckPositionForMapTransition            ; $6C19: $CD $75 $6C
     ld   a, $20                                   ; $6C1C: $3E $20
-    ld   [wC157], a                               ; $6C1E: $EA $57 $C1
+    ld   [wScreenShakeCountdown], a               ; $6C1E: $EA $57 $C1
     ldh  a, [hLinkDirection]                      ; $6C21: $F0 $9E
     and  DIRECTION_VERTICAL_MASK                  ; $6C23: $E6 $02
     sla  a                                        ; $6C25: $CB $27
@@ -6192,7 +6192,7 @@ CheckPositionForMapTransition::
 
 .jr_002_6D94
     ld   a, [wIgnoreLinkCollisionsCountdown]      ; $6D94: $FA $3E $C1
-    ld   hl, wC157                                ; $6D97: $21 $57 $C1
+    ld   hl, wScreenShakeCountdown                ; $6D97: $21 $57 $C1
     or   [hl]                                     ; $6D9A: $B6
     jr   nz, clearIncrementAndReturn              ; $6D9B: $20 $6F
 
@@ -7574,7 +7574,7 @@ label_002_74AD:
     ld   a, $02                                   ; $74E4: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $74E6: $EA $46 $C1
     ld   a, $20                                   ; $74E9: $3E $20
-    ld   [wC157], a                               ; $74EB: $EA $57 $C1
+    ld   [wScreenShakeCountdown], a               ; $74EB: $EA $57 $C1
     ldh  a, [hLinkDirection]                      ; $74EE: $F0 $9E
     and  $02                                      ; $74F0: $E6 $02
     sla  a                                        ; $74F2: $CB $27

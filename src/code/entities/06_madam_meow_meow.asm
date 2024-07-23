@@ -39,7 +39,7 @@ MadamMeowMeowEntityHandler::
     and  $1F                                      ; $5B85: $E6 $1F
     jr   nz, .jr_5B91                             ; $5B87: $20 $08
 
-    call func_006_65B4                            ; $5B89: $CD $B4 $65
+    call GetEntityDirectionToLink_06              ; $5B89: $CD $B4 $65
     ld   hl, wEntitiesDirectionTable              ; $5B8C: $21 $80 $C3
     add  hl, bc                                   ; $5B8F: $09
     ld   [hl], e                                  ; $5B90: $73

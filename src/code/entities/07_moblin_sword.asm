@@ -150,7 +150,7 @@ func_007_79D7::
     call ApplyVectorTowardsLink_trampoline        ; $7A1B: $CD $AA $3B
 
 jr_007_7A1E:
-    call func_007_7E7D                            ; $7A1E: $CD $7D $7E
+    call GetEntityDirectionToLink_07              ; $7A1E: $CD $7D $7E
     ld   hl, wEntitiesDirectionTable              ; $7A21: $21 $80 $C3
     add  hl, bc                                   ; $7A24: $09
     ld   [hl], a                                  ; $7A25: $77
@@ -164,17 +164,17 @@ func_007_7A2D::
     and  a                                        ; $7A30: $A7
     jr   nz, func_007_7A55                        ; $7A31: $20 $22
 
-    call EntityLinkPositionXDifference_07         ; $7A33: $CD $5D $7E
+    call GetEntityXDistanceToLink_07              ; $7A33: $CD $5D $7E
     add  $30                                      ; $7A36: $C6 $30
     cp   $60                                      ; $7A38: $FE $60
     jr   nc, ret_007_7A6C                         ; $7A3A: $30 $30
 
-    call EntityLinkPositionYDifference_07         ; $7A3C: $CD $6D $7E
+    call GetEntityYDistanceToLink_07              ; $7A3C: $CD $6D $7E
     add  $30                                      ; $7A3F: $C6 $30
     cp   $60                                      ; $7A41: $FE $60
     jr   nc, ret_007_7A6C                         ; $7A43: $30 $27
 
-    call func_007_7E7D                            ; $7A45: $CD $7D $7E
+    call GetEntityDirectionToLink_07              ; $7A45: $CD $7D $7E
     ld   d, b                                     ; $7A48: $50
     ld   hl, Data_007_7A29                        ; $7A49: $21 $29 $7A
     add  hl, de                                   ; $7A4C: $19

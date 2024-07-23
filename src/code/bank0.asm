@@ -3704,13 +3704,13 @@ ENDC
 
     ld   a, [wInventoryItems.BButtonSlot]         ; $20CF: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $20D2: $FE $03
-    jr   nz, .jr_20DD                             ; $20D4: $20 $07
+    jr   nz, .checkAButtonSlot                    ; $20D4: $20 $07
     ldh  a, [hPressedButtonsMask]                 ; $20D6: $F0 $CB
     and  J_B                                      ; $20D8: $E6 $20
     jr   nz, .jr_20EC                             ; $20DA: $20 $10
     ret                                           ; $20DC: $C9
 
-.jr_20DD
+.checkAButtonSlot
     ld   a, [wInventoryItems.AButtonSlot]         ; $20DD: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $20E0: $FE $03
 IF __OPTIMIZATIONS_1__

@@ -92,7 +92,7 @@ func_005_4815::
     ld   hl, wInventoryItems.BButtonSlot          ; $4826: $21 $00 $DB
     ld   a, [hl]                                  ; $4829: $7E
     cp   INVENTORY_MAGIC_POWDER                   ; $482A: $FE $0C
-    jr   nz, .checkASlot                          ; $482C: $20 $0E
+    jr   nz, .checkAButtonSlot                    ; $482C: $20 $0E
 
     ldh  a, [hJoypadState]                        ; $482E: $F0 $CC
     and  J_B                                      ; $4830: $E6 $20
@@ -103,8 +103,8 @@ func_005_4815::
     ld   [wC1A8], a                               ; $4837: $EA $A8 $C1
     jr   jr_005_4847                              ; $483A: $18 $0B
 
-.checkASlot:
-    ; check A slot
+.checkAButtonSlot:
+    ; check A Button slot
     ; improvement: could be done in one command
     inc  hl                                       ; $483C: $23
     ld   a, [hl]                                  ; $483D: $7E

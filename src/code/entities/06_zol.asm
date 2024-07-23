@@ -330,7 +330,7 @@ GelState4Handler::
     call DefaultEntityPhysics_trampoline          ; $7DBC: $CD $23 $3B
     ldh  a, [hJoypadState]                        ; $7DBF: $F0 $CC
     and  a                                        ; $7DC1: $A7
-    jr   z, DecreaseEntityTransitionCountdown.skipUpdateSpeedX ; $7DC2: $28 $0F
+    jr   z, DecreaseEntityTransitionCountdown.return ; $7DC2: $28 $0F
 
     call DecreaseEntityTransitionCountdown        ; $7DC4: $CD $CD $7D
     call DecreaseEntityTransitionCountdown        ; $7DC7: $CD $CD $7D
@@ -338,9 +338,9 @@ GelState4Handler::
 
 DecreaseEntityTransitionCountdown::
     call GetEntityTransitionCountdown             ; $7DCD: $CD $05 $0C
-    jr   z, .skipUpdateSpeedX                               ; $7DD0: $28 $01
+    jr   z, .return                               ; $7DD0: $28 $01
 
     dec  [hl]                                     ; $7DD2: $35
 
-.skipUpdateSpeedX
+.return
     ret                                           ; $7DD3: $C9

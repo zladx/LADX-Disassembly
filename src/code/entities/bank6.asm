@@ -114,14 +114,14 @@ CheckLinkInteractionWithEntity_06::
     cp   $28                                      ; $647C: $FE $28
 
 .label_006_647E
-    jr   nc, .skipUpdateSpeedX                              ; $647E: $30 $44
+    jr   nc, .return                              ; $647E: $30 $44
 
     ldh  a, [hLinkPositionX]                      ; $6480: $F0 $98
     ld   hl, hActiveEntityPosX                    ; $6482: $21 $EE $FF
     sub  [hl]                                     ; $6485: $96
     add  $10                                      ; $6486: $C6 $10
     cp   $20                                      ; $6488: $FE $20
-    jr   nc, .skipUpdateSpeedX                              ; $648A: $30 $38
+    jr   nc, .return                              ; $648A: $30 $38
 
     inc  e                                        ; $648C: $1C
     ldh  a, [hActiveEntityType]                   ; $648D: $F0 $EB
@@ -134,7 +134,7 @@ CheckLinkInteractionWithEntity_06::
     xor  $01                                      ; $6499: $EE $01
     cp   e                                        ; $649B: $BB
     pop  de                                       ; $649C: $D1
-    jr   nz, .skipUpdateSpeedX                              ; $649D: $20 $25
+    jr   nz, .return                              ; $649D: $20 $25
 
 .jr_006_649F
     ld   hl, wItemUsageContext                    ; $649F: $21 $AD $C1
@@ -146,20 +146,20 @@ CheckLinkInteractionWithEntity_06::
     or   [hl]                                     ; $64AE: $B6
     ld   hl, wDialogCooldown                      ; $64AF: $21 $34 $C1
     or   [hl]                                     ; $64B2: $B6
-    jr   nz, .skipUpdateSpeedX                              ; $64B3: $20 $0F
+    jr   nz, .return                              ; $64B3: $20 $0F
 
     ld   a, [wWindowY]                            ; $64B5: $FA $9A $DB
     cp   $80                                      ; $64B8: $FE $80
-    jr   nz, .skipUpdateSpeedX                              ; $64BA: $20 $08
+    jr   nz, .return                              ; $64BA: $20 $08
 
     ldh  a, [hJoypadState]                        ; $64BC: $F0 $CC
     and  J_A                                      ; $64BE: $E6 $10
-    jr   z, .skipUpdateSpeedX                               ; $64C0: $28 $02
+    jr   z, .return                               ; $64C0: $28 $02
 
     scf                                           ; $64C2: $37
     ret                                           ; $64C3: $C9
 
-.skipUpdateSpeedX
+.return
     and  a                                        ; $64C4: $A7
     ret                                           ; $64C5: $C9
 
@@ -195,13 +195,13 @@ ReturnIfNonInteractive_06::
 
     ld   a, [wRoomTransitionState]                ; $64EF: $FA $24 $C1
     and  a                                        ; $64F2: $A7
-    jr   z, .skipUpdateSpeedX                               ; $64F3: $28 $01
+    jr   z, .return                               ; $64F3: $28 $01
 
 .skip
     ; pop the return address to return to caller
     pop  af                                       ; $64F5: $F1
 
-.skipUpdateSpeedX
+.return
     ret                                           ; $64F6: $C9
 
 ; If the entity is ignoring hits, apply its recoil velocity.
@@ -210,7 +210,7 @@ ApplyRecoilIfNeeded_06::
     add  hl, bc                                   ; $64FA: $09
     ld   a, [hl]                                  ; $64FB: $7E
     and  a                                        ; $64FC: $A7
-    jr   z, .skipUpdateSpeedX                               ; $64FD: $28 $41
+    jr   z, .return                               ; $64FD: $28 $41
 
     dec  a                                        ; $64FF: $3D
     ld   [hl], a                                  ; $6500: $77
@@ -266,7 +266,7 @@ ApplyRecoilIfNeeded_06::
     ld   [hl], a                                  ; $653E: $77
     pop  af                                       ; $653F: $F1
 
-.skipUpdateSpeedX
+.return
     ret                                           ; $6540: $C9
 
 UpdateEntityPosWithSpeed_06::
@@ -294,7 +294,7 @@ AddEntitySpeedToPos_06::
     ld   a, [hl]                                  ; $6552: $7E
     and  a                                        ; $6553: $A7
     ; No need to update the position if it's not moving
-    jr   z, .skipUpdateSpeedX                               ; $6554: $28 $23
+    jr   z, .return                               ; $6554: $28 $23
 
     push af                                       ; $6556: $F5
     swap a                                        ; $6557: $CB $37
@@ -326,7 +326,7 @@ AddEntitySpeedToPos_06::
     adc  [hl]                                     ; $6577: $8E
     ld   [hl], a                                  ; $6578: $77
 
-.skipUpdateSpeedX
+.return
     ret                                           ; $6579: $C9
 
 AddEntityZSpeedToPos_06::
@@ -334,7 +334,7 @@ AddEntityZSpeedToPos_06::
     add  hl, bc                                   ; $657D: $09
     ld   a, [hl]                                  ; $657E: $7E
     and  a                                        ; $657F: $A7
-    jr   z, AddEntitySpeedToPos_06.skipUpdateSpeedX         ; $6580: $28 $F7
+    jr   z, AddEntitySpeedToPos_06.return         ; $6580: $28 $F7
 
     push af                                       ; $6582: $F5
     swap a                                        ; $6583: $CB $37

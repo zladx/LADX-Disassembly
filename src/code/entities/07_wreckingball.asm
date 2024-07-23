@@ -176,7 +176,7 @@ WreckingBallState0Handler::
 
     ld   a, [wInventoryItems.BButtonSlot]         ; $60E8: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $60EB: $FE $03
-    jr   nz, .braceletNotOnBSlot                  ; $60ED: $20 $08
+    jr   nz, .checkAButtonSlot                    ; $60ED: $20 $08
 
     ldh  a, [hJoypadState]                        ; $60EF: $F0 $CC
     and  J_B                                      ; $60F1: $E6 $20
@@ -184,7 +184,7 @@ WreckingBallState0Handler::
 
     jr   .return                                  ; $60F5: $18 $3C
 
-.braceletNotOnBSlot
+.checkAButtonSlot
     ld   a, [wInventoryItems.AButtonSlot]         ; $60F7: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $60FA: $FE $03
     jr   nz, .return                              ; $60FC: $20 $35

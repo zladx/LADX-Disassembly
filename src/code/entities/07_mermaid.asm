@@ -303,6 +303,7 @@ func_007_480A::
 
 jr_007_4854:
     ld   a, TRADING_ITEM_SCALE & REPLACE_TILES_TRADING_ITEM ; $4854: $3E $0D
+    ; both of these defines are $0D, so save an ld instruction
     ld   [wTradeSequenceItem], a                  ; $4856: $EA $0E $DB
     ldh  [hReplaceTiles], a                       ; $4859: $E0 $A5
     call CreateTradingItemEntity                  ; $485B: $CD $0C $0C

@@ -635,7 +635,7 @@ EntityInitTarin::
     cp   TRADING_ITEM_BANANAS                     ; $4AE9: $FE $04
     jr   nc, EntityInitNpcFacingDown              ; $4AEB: $30 $42
 
-    ld   a, [wDB48]                               ; $4AED: $FA $48 $DB
+    ld   a, [wTarinFlag]                          ; $4AED: $FA $48 $DB
     and  a                                        ; $4AF0: $A7
     jr   z, EntityInitNpcFacingDown               ; $4AF1: $28 $3C
 
@@ -1216,7 +1216,7 @@ EntityStunnedHandler::
     call func_003_6E2B                            ; $4E16: $CD $2B $6E
     ld   a, [wInventoryItems.BButtonSlot]         ; $4E19: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $4E1C: $FE $03
-    jr   nz, .jr_4E28                             ; $4E1E: $20 $08
+    jr   nz, .noBraceletB                         ; $4E1E: $20 $08
 
     ldh  a, [hJoypadState]                        ; $4E20: $F0 $CC
     and  J_B                                      ; $4E22: $E6 $20
@@ -1224,7 +1224,7 @@ EntityStunnedHandler::
 
     jr   jr_003_4E72                              ; $4E26: $18 $4A
 
-.jr_4E28
+.noBraceletB
     ld   a, [wInventoryItems.AButtonSlot]         ; $4E28: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $4E2B: $FE $03
     jr   nz, jr_003_4E72                          ; $4E2D: $20 $43
@@ -3498,7 +3498,7 @@ AfterSirensInstrumentD1::
 
 AfterSirensInstrumentD2::
     ld   a, $02                                   ; $5E12: $3E $02
-    ld   [wDB48], a                               ; $5E14: $EA $48 $DB
+    ld   [wTarinFlag], a                          ; $5E14: $EA $48 $DB
 IF !__OPTIMIZATIONS_1__
     ret                                           ; $5E17: $C9
 ENDC

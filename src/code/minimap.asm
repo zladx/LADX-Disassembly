@@ -6,7 +6,7 @@ IF !__PATCH_0__
     ; Check if this is room E8, which is Evil Eagle's boss room
     ; If so, don't actually load the map
     ldh  a, [hMapRoom]                            ; $6709: $F0 $F6
-    cp   ROOM_INDOOR_B_EAGLE_TOWER_BOSS           ; $670B: $FE $E8
+    cp   ROOM_INDOOR_B_EAGLES_TOWER_BOSS          ; $670B: $FE $E8
     ret  z                                        ; $670D: $C8
 ENDC
 

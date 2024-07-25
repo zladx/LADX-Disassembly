@@ -348,7 +348,7 @@ jr_021_41B4:
     jr   nz, jr_021_4222                          ; $41FB: $20 $25
 
     ldh  a, [hMapRoom]                            ; $41FD: $F0 $F6
-    cp   ROOM_OW_EAGLE_TOWER                      ; $41FF: $FE $0E
+    cp   ROOM_OW_EAGLES_TOWER                     ; $41FF: $FE $0E
     jr   nz, jr_021_4254                          ; $4201: $20 $51
 
     ld   hl, Data_021_5548                        ; $4203: $21 $48 $55

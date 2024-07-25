@@ -1,20 +1,20 @@
-Data_019_4201:: ; Warp points ?
-    db   UNKNOWN_ROOM_17
-    db   UNKNOWN_ROOM_11
-    db   UNKNOWN_ROOM_36
-    db   UNKNOWN_ROOM_28
-    db   UNKNOWN_ROOM_45
-    db   UNKNOWN_ROOM_52
-    db   MOUNTAIN_CAVE_ROOM_1
-    db   UNKNOWN_ROOM_64
-    db   UNKNOWN_ROOM_93
-    db   UNKNOWN_ROOM_A1
-    db   UNKNOWN_ROOM_C5
-    db   UNKNOWN_ROOM_D4
-    db   UNKNOWN_ROOM_28
-    db   ROOM_OW_EAGLE_TOWER
-    db   UNKNOWN_ROOM_3F
-    db   UNKNOWN_ROOM_5D
+DungeonWarps:: ; Rooms containing miniboss dungeon warp points.
+    db   ROOM_INDOOR_A_TAIL_CAVE_ENTRANCE
+    db   ROOM_INDOOR_A_TAIL_CAVE_ROLLING_BONES
+    db   ROOM_INDOOR_A_BOTTLE_GROTTO_ENTRANCE
+    db   ROOM_INDOOR_A_BOTTLE_GROTTO_HINOX
+    db   ROOM_INDOOR_A_KEY_CAVERN_DODONGO
+    db   ROOM_INDOOR_A_KEY_CAVERN_ENTRANCE
+    db   ROOM_INDOOR_A_ANGLERS_TUNNEL_ENTRANCE
+    db   ROOM_INDOOR_A_ANGLERS_TUNNEL_CUE_BALL
+    db   ROOM_INDOOR_A_CATFISHS_MAW_GOHMA
+    db   ROOM_INDOOR_A_CATFISHS_MAW_ENTRANCE
+    db   ROOM_INDOOR_A_FACE_SHRINE_SMASHER
+    db   ROOM_INDOOR_A_FACE_SHRINE_ENTRANCE
+    db   ROOM_INDOOR_B_EAGLES_TOWER_GRIM_CREEPER
+    db   ROOM_INDOOR_B_EAGLES_TOWER_ENTRANCE
+    db   ROOM_INDOOR_B_TURTLE_ROCK_BLAINO
+    db   ROOM_INDOOR_B_TURTLE_ROCK_ENTRANCE
 
 WarpEntityHandler::
     ld   a, [wIsIndoor]                           ; $4211: $FA $A5 $DB
@@ -177,7 +177,7 @@ WarpState3Handler::
     ld   e, a                                     ; $432E: $5F
     sla  e                                        ; $432F: $CB $23
     ld   d, $00                                   ; $4331: $16 $00
-    ld   hl, Data_019_4201                        ; $4333: $21 $01 $42
+    ld   hl, DungeonWarps                         ; $4333: $21 $01 $42
     add  hl, de                                   ; $4336: $19
     ldh  a, [hMapRoom]                            ; $4337: $F0 $F6
     cp   [hl]                                     ; $4339: $BE

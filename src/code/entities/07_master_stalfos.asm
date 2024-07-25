@@ -30,7 +30,7 @@ func_007_698A::
     call GetEntityTransitionCountdown             ; $698A: $CD $05 $0C
     ret  nz                                       ; $698D: $C0
 
-.jr_698E
+; fallthrough if not zero
     ld   a, MUSIC_OPEN_ANGLERS_TUNNEL             ; $698E: $3E $4C
     ld   [wMusicTrackToPlay], a                   ; $6990: $EA $68 $D3
     jp   IncrementEntityState                     ; $6993: $C3 $12 $3B
@@ -310,11 +310,11 @@ func_007_6B16::
 
     ld_dialog_low e, Dialog112 ; "You found me!"  ; $6B1D: $1E $12
     ldh  a, [hMapRoom]                            ; $6B1F: $F0 $F6
-    cp   ROOM_INDOOR_A_MASTER_STALFOS_2           ; $6B21: $FE $92
+    cp   ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_2    ; $6B21: $FE $92
     jr   z, .jr_6B2F                              ; $6B23: $28 $0A
-    cp   ROOM_INDOOR_A_MASTER_STALFOS_3           ; $6B25: $FE $84
+    cp   ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_3    ; $6B25: $FE $84
     jr   z, .jr_6B2F                              ; $6B27: $28 $06
-    cp   ROOM_INDOOR_A_MASTER_STALFOS_FINAL       ; $6B29: $FE $80
+    cp   ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_4    ; $6B29: $FE $80
     jr   nz, jr_007_6B33                          ; $6B2B: $20 $06
 
     ld_dialog_low e, Dialog114 ; "I can't outlast you" ; $6B2D: $1E $14

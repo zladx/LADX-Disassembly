@@ -145,19 +145,19 @@ notZolChest:
     jr   nz, .jr_7C49                             ; $7C3F: $20 $08
 
     ldh  a, [hMapRoom]                            ; $7C41: $F0 $F6
-    cp   ROOM_INDOOR_A_POWER_BRACELET_LV2         ; $7C43: $FE $CE
-    jr   nz, jr_007_7C58                          ; maybe related to incrementing an item level
-    jr   jr_007_7C53                              ; $7C47: $18 $0A
+    cp   ROOM_INDOOR_A_FACE_SHRINE_PBRACELET_LV2  ; $7C43: $FE $CE
+    jr   nz, jr_007_7C58                          ; use alt sprite for lv2 pickup in these rooms
+    jr   UseAltChestSprite                        ; $7C47: $18 $0A
 
 .jr_7C49
     cp   MAP_EAGLES_TOWER
     jr   nz, jr_007_7C58                          ; $7C4B: $20 $0B
 
     ldh  a, [hMapRoom]                            ; $7C4D: $F0 $F6
-    cp   ROOM_INDOOR_B_SHIELD_LV2                 ; $7C4F: $FE $1A
+    cp   ROOM_INDOOR_B_EAGLES_TOWER_SHIELD_LV2    ; $7C4F: $FE $1A
     jr   nz, jr_007_7C58                          ; $7C51: $20 $05
 
-jr_007_7C53:
+UseAltChestSprite:
     ld   de, ChestItemSpriteTableAlt              ; $7C53: $11 $53 $7B
     jr   jr_007_7C5B                              ; $7C56: $18 $03
 

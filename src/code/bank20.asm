@@ -5377,10 +5377,10 @@ LoadRoomObjectsAttributes::
     ret  nz                                       ; $6DB3: $C0
 
     ldh  a, [hMapRoom]                            ; $6DB4: $F0 $F6
-    cp   ROOM_OW_EAGLE_TOWER                      ; $6DB6: $FE $0E
+    cp   ROOM_OW_EAGLES_TOWER                     ; $6DB6: $FE $0E
     jr   nz, .jr_020_6DC6                         ; $6DB8: $20 $0C
 
-    ld   a, [wOverworldRoomStatus + ROOM_OW_EAGLE_TOWER] ; $6DBA: $FA $0E $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_EAGLES_TOWER] ; $6DBA: $FA $0E $D8
     and  OW_ROOM_STATUS_CHANGED                   ; $6DBD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DBF: $28 $59
     ld   hl, RoomGBCOverlay0EAlt                  ; $6DC1: $21 $90 $50

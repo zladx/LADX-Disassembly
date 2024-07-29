@@ -5,9 +5,9 @@ ZolGelMakeInvisibleBeforeMagnifyingLens::
     ret  nz                                       ; $7BE6: $C0
 
     ldh  a, [hMapRoom]                            ; $7BE7: $F0 $F6
-    cp   ROOM_INDOOR_B_97                         ; $7BE9: $FE $97
+    cp   ROOM_INDOOR_B_UNDER_MERMAID_STATUE       ; $7BE9: $FE $97
     jr   z, .invisible                            ; $7BEB: $28 $03
-    cp   ROOM_INDOOR_B_98                         ; $7BED: $FE $98
+    cp   ROOM_INDOOR_B_MAGNIFYING_GLASS           ; $7BED: $FE $98
     ret  nz                                       ; $7BEF: $C0
 
 .invisible

@@ -1742,7 +1742,7 @@ TurtleRockHints::
     db_dialog_low Dialog293
 
 ; Indexed by hMapId
-Data_036_4A14::
+HintTable::
 ._0 dw TailCaveHints
 ._1 dw BottleGrottoHints
 ._2 dw KeyCavernHints
@@ -1752,39 +1752,39 @@ Data_036_4A14::
 ._6 dw EaglesTowerHints
 ._7 dw TurtleRockHints
 
-Data_036_4A24::
-    db   UNKNOWN_ROOM_03, UNKNOWN_ROOM_0A, UNKNOWN_ROOM_04
+TailCaveHintRooms::
+    db   ROOM_INDOOR_A_TAIL_CAVE_SPIKED_BEETLES, ROOM_INDOOR_A_TAIL_CAVE_THREE_OF_A_KIND, ROOM_INDOOR_A_TAIL_CAVE_MOVABLE_BLOCK
 
-Data_036_4A27::
-    db   UNKNOWN_ROOM_29, UNKNOWN_ROOM_33, UNKNOWN_ROOM_2F
+BottleGrottoHintRooms::
+    db   ROOM_INDOOR_A_BOTTLE_GROTTO_POT_STAIRS, ROOM_INDOOR_A_BOTTLE_GROTTO_FIRST_SWITCH, ROOM_INDOOR_A_BOTTLE_GROTTO_PUSH_BLOCKS
 
-Data_036_4A2A::
-    db   UNKNOWN_ROOM_54, UNKNOWN_ROOM_40, UNKNOWN_ROOM_47
+KeyCavernHintRooms::
+    db   ROOM_INDOOR_A_KEY_CAVERN_SWITCH, ROOM_INDOOR_A_KEY_CAVERN_BOMBITE_CORNER, ROOM_INDOOR_A_KEY_CAVERN_FLOOR_ARROW
 
-Data_036_4A2D::
-    db   UNKNOWN_ROOM_6F, UNKNOWN_ROOM_00, UNKNOWN_ROOM_00
+AnglersTunnelHintRooms::
+    db   ROOM_INDOOR_A_ANGLERS_TUNNEL_HINT_STATUE, ROOM_NULL, ROOM_NULL
 
-Data_036_4A30::
-    db   UNKNOWN_ROOM_8A, UNKNOWN_ROOM_9A, UNKNOWN_ROOM_00
+CatfishsMawHintRooms::
+    db   ROOM_INDOOR_A_CATFISHS_MAW_HINT_CRYSTAL, ROOM_INDOOR_A_CATFISHS_MAW_HINT_STAR, ROOM_NULL
 
-Data_036_4A33::
-    db   UNKNOWN_ROOM_BB, UNKNOWN_ROOM_B6, UNKNOWN_ROOM_D7
+FaceShrineHintRooms::
+    db   ROOM_INDOOR_A_FACE_SHRINE_CORRIDOR_HINT, ROOM_INDOOR_A_FACE_SHRINE_POT_CHEST, ROOM_INDOOR_A_FACE_SHRINE_CRYSTAL_JUMP
 
-Data_036_4A36::
-    db   UNKNOWN_ROOM_16, UNKNOWN_ROOM_1C, UNKNOWN_ROOM_04
+EaglesTowerHintRooms::
+    db   ROOM_INDOOR_B_EAGLES_TOWER_WRECKING_BALL, ROOM_INDOOR_B_EAGLES_TOWER_3_OF_A_KIND, ROOM_INDOOR_B_EAGLES_TOWER_NE_CHEST
 
-Data_036_4A39::
-    db   UNKNOWN_ROOM_53, UNKNOWN_ROOM_45, UNKNOWN_ROOM_41
+TurtleRockHintRooms::
+    db   ROOM_INDOOR_B_TURTLE_ROCK_BEAMOS_HINT, ROOM_INDOOR_B_TURTLE_ROCK_BOMB_ZOL, ROOM_INDOOR_B_TURTLE_ROCK_ARROW_STATUE
 
-Data_036_4A3C::
-    dw   Data_036_4A24
-    dw   Data_036_4A27
-    dw   Data_036_4A2A
-    dw   Data_036_4A2D
-    dw   Data_036_4A30
-    dw   Data_036_4A33
-    dw   Data_036_4A36
-    dw   Data_036_4A39
+HintRoomTable::
+    dw   TailCaveHintRooms
+    dw   BottleGrottoHintRooms
+    dw   KeyCavernHintRooms
+    dw   AnglersTunnelHintRooms
+    dw   CatfishsMawHintRooms
+    dw   FaceShrineHintRooms
+    dw   EaglesTowerHintRooms
+    dw   TurtleRockHintRooms
 
 ; Returns a dialog id for an owl statue hint, depending on the
 ; current map and room.
@@ -1793,7 +1793,7 @@ Data_036_4A3C::
 ;   hMultiPurpose0   the lower part of the dialog id
 GetOwlStatueDialogId::
     push bc                                       ; $4A4C: $C5
-    ld   hl, Data_036_4A3C                        ; $4A4D: $21 $3C $4A
+    ld   hl, HintRoomTable                        ; $4A4D: $21 $3C $4A
     ldh  a, [hMapId]                              ; $4A50: $F0 $F7
     sla  a                                        ; $4A52: $CB $27
     ld   e, a                                     ; $4A54: $5F
@@ -1818,7 +1818,7 @@ GetOwlStatueDialogId::
     jr   nz, .loop_4A5E                           ; $4A68: $20 $F4
 
 .jr_4A6A
-    ld   hl, Data_036_4A14                        ; $4A6A: $21 $14 $4A
+    ld   hl, HintTable                        ; $4A6A: $21 $14 $4A
     add  hl, de                                   ; $4A6D: $19
     ld   a, [hl+]                                 ; $4A6E: $2A
     ld   h, [hl]                                  ; $4A6F: $66
@@ -8500,17 +8500,17 @@ IsInteractiveMotionAllowed::
     ld   a, [wIsIndoor]                           ; $7267: $FA $A5 $DB
     and  a                                        ; $726A: $A7
     jr   nz, jr_036_729E                          ; $726B: $20 $31
-
+    ; Photo locations freezing Link in place
     ldh  a, [hMapRoom]                            ; $726D: $F0 $F6
-    cp   UNKNOWN_ROOM_F0                          ; $726F: $FE $F0
+    cp   ROOM_OW_MARIN_CLIFF_PHOTO                ; $726F: $FE $F0
     jp   z, label_036_7101                        ; $7271: $CA $01 $71
-    cp   UNKNOWN_ROOM_92                          ; $7274: $FE $92
+    cp   ROOM_OW_MABE_VILLAGE_SQUARE              ; $7274: $FE $92
     jp   z, label_036_712D                        ; $7276: $CA $2D $71
-    cp   UNKNOWN_ROOM_A1                          ; $7279: $FE $A1
+    cp   ROOM_OW_BOWWOW                           ; $7279: $FE $A1
     jp   z, label_036_71AD                        ; $727B: $CA $AD $71
-    cp   UNKNOWN_ROOM_79                          ; $727E: $FE $79
+    cp   ROOM_OW_KANALET_GATE                     ; $727E: $FE $79
     jp   z, label_036_71FA                        ; $7280: $CA $FA $71
-    cp   UNKNOWN_ROOM_64                          ; $7283: $FE $64
+    cp   ROOM_OW_GHOST_GRAVE                      ; $7283: $FE $64
     jp   z, label_036_7228                        ; $7285: $CA $28 $72
 
 .allow

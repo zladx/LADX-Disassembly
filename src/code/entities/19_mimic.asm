@@ -46,10 +46,10 @@ MimicEntityHandler::
     jr   nz, jr_019_6ACE                          ; $6ABC: $20 $10
 
     ldh  a, [hMapRoom]                            ; $6ABE: $F0 $F6
-    cp   ROOM_INDOOR_B_97                         ; $6AC0: $FE $97
+    cp   ROOM_INDOOR_B_UNDER_MERMAID_STATUE       ; $6AC0: $FE $97
     jr   z, .jr_6AC8                              ; $6AC2: $28 $04
 
-    cp   ROOM_INDOOR_B_98                         ; $6AC4: $FE $98
+    cp   ROOM_INDOOR_B_MAGNIFYING_GLASS           ; $6AC4: $FE $98
     jr   nz, jr_019_6ACE                          ; $6AC6: $20 $06
 
 .jr_6AC8

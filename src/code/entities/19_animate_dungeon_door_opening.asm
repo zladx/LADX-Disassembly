@@ -578,7 +578,7 @@ Data_019_6839::
 
 AnimateDungeonDoorOpening:
     ldh  a, [hMapRoom]                            ; $6841: $F0 $F6
-    cp   ROOM_OW_EAGLE_TOWER                      ; $6843: $FE $0E
+    cp   ROOM_OW_EAGLES_TOWER                     ; $6843: $FE $0E
     jp   z, AnimateEaglesTowerOpening             ; $6845: $CA $F8 $61
 
     ld   a, $02                                   ; $6848: $3E $02

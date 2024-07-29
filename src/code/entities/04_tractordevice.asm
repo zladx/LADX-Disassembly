@@ -106,12 +106,12 @@ func_004_6848::
     and  a                                        ; $68A2: $A7
     jr   nz, .jr_68D4                             ; $68A3: $20 $2F
 
-    call func_004_6E35                            ; $68A5: $CD $35 $6E
+    call GetEntityXDistanceToLink_04              ; $68A5: $CD $35 $6E
     add  $04                                      ; $68A8: $C6 $04
     cp   $08                                      ; $68AA: $FE $08
     jr   nc, .jr_68D4                             ; $68AC: $30 $26
 
-    call func_004_6E45                            ; $68AE: $CD $45 $6E
+    call GetEntityYDistanceToLink_04              ; $68AE: $CD $45 $6E
     add  $04                                      ; $68B1: $C6 $04
     cp   $08                                      ; $68B3: $FE $08
     jr   nc, .jr_68D4                             ; $68B5: $30 $1D

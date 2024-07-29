@@ -54,12 +54,12 @@ func_004_69F3::
 .jr_6A04
     call UpdateEntityPosWithSpeed_04              ; $6A04: $CD $CA $6D
     call DefaultEntityPhysics_trampoline          ; $6A07: $CD $23 $3B
-    call func_004_6E35                            ; $6A0A: $CD $35 $6E
+    call GetEntityXDistanceToLink_04              ; $6A0A: $CD $35 $6E
     add  $30                                      ; $6A0D: $C6 $30
     cp   $60                                      ; $6A0F: $FE $60
     jr   nc, jr_004_6A25                          ; $6A11: $30 $12
 
-    call func_004_6E45                            ; $6A13: $CD $45 $6E
+    call GetEntityYDistanceToLink_04              ; $6A13: $CD $45 $6E
     add  $30                                      ; $6A16: $C6 $30
     cp   $60                                      ; $6A18: $FE $60
     jr   nc, jr_004_6A25                          ; $6A1A: $30 $09
@@ -94,7 +94,7 @@ func_004_6A3D::
     call GetEntityTransitionCountdown             ; $6A3D: $CD $05 $0C
     jr   nz, .jr_6A67                             ; $6A40: $20 $25
 
-    call func_004_6E55                            ; $6A42: $CD $55 $6E
+    call GetEntityDirectionToLink_04              ; $6A42: $CD $55 $6E
     ld   hl, wEntitiesDirectionTable              ; $6A45: $21 $80 $C3
     add  hl, bc                                   ; $6A48: $09
     ld   [hl], e                                  ; $6A49: $73

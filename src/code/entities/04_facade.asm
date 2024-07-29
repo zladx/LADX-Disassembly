@@ -573,12 +573,12 @@ FacadeState1Handler:
     and  a                                        ; $549A: $A7
     jr   nz, .ret_54F0                            ; $549B: $20 $53
 
-    call func_004_6E35                            ; $549D: $CD $35 $6E
+    call GetEntityXDistanceToLink_04              ; $549D: $CD $35 $6E
     add  $08                                      ; $54A0: $C6 $08
     cp   $10                                      ; $54A2: $FE $10
     jr   nc, .ret_54F0                            ; $54A4: $30 $4A
 
-    call func_004_6E45                            ; $54A6: $CD $45 $6E
+    call GetEntityYDistanceToLink_04              ; $54A6: $CD $45 $6E
     add  $08                                      ; $54A9: $C6 $08
     cp   $10                                      ; $54AB: $FE $10
     jr   nc, .ret_54F0                            ; $54AD: $30 $41
@@ -596,12 +596,12 @@ FacadeState1Handler:
     push bc                                       ; $54C0: $C5
     call UpdateFinalLinkPosition                  ; $54C1: $CD $A8 $21
     pop  bc                                       ; $54C4: $C1
-    call func_004_6E35                            ; $54C5: $CD $35 $6E
+    call GetEntityXDistanceToLink_04              ; $54C5: $CD $35 $6E
     add  $03                                      ; $54C8: $C6 $03
     cp   $06                                      ; $54CA: $FE $06
     jr   nc, .ret_54F0                            ; $54CC: $30 $22
 
-    call func_004_6E45                            ; $54CE: $CD $45 $6E
+    call GetEntityYDistanceToLink_04              ; $54CE: $CD $45 $6E
     add  $03                                      ; $54D1: $C6 $03
     cp   $06                                      ; $54D3: $FE $06
     jr   nc, .ret_54F0                            ; $54D5: $30 $19

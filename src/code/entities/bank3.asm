@@ -3377,8 +3377,8 @@ Data_003_5D36::
     db   $A8, $14
 
 DroppableHeartEntityHandler::
-    call func_003_61DE                            ; $5D38: $CD $DE $61
-    call func_003_608C                            ; $5D3B: $CD $8C $60
+    call DroppableAppearOrReturnIfNeeded          ; $5D38: $CD $DE $61
+    call DroppableDisappearIfNeeded               ; $5D3B: $CD $8C $60
     ld   de, Data_003_5D36                        ; $5D3E: $11 $36 $5D
     call RenderActiveEntitySprite                 ; $5D41: $CD $77 $3C
     jp   label_003_60AA                           ; $5D44: $C3 $AA $60
@@ -3848,8 +3848,8 @@ Data_003_5FC0::
     db   $80, $15
 
 DroppableBombsEntityHandler::
-    call func_003_61DE                            ; $5FC2: $CD $DE $61
-    call func_003_608C                            ; $5FC5: $CD $8C $60
+    call DroppableAppearOrReturnIfNeeded          ; $5FC2: $CD $DE $61
+    call DroppableDisappearIfNeeded               ; $5FC5: $CD $8C $60
     ld   de, Data_003_5FC0                        ; $5FC8: $11 $C0 $5F
     call RenderActiveEntitySprite                 ; $5FCB: $CD $77 $3C
     jp   label_003_60AA                           ; $5FCE: $C3 $AA $60
@@ -3876,7 +3876,7 @@ DroppableSeashellEntityHandler::
     jp   z, UnloadEntityAndReturn                 ; $5FEC: $CA $8D $3F
 
 .jr_5FEF
-    call func_003_61DE                            ; $5FEF: $CD $DE $61
+    call DroppableAppearOrReturnIfNeeded          ; $5FEF: $CD $DE $61
     ld   de, data_003_5FD1                        ; $5FF2: $11 $D1 $5F
     call RenderActiveEntitySprite                 ; $5FF5: $CD $77 $3C
     jp   label_003_60AA                           ; $5FF8: $C3 $AA $60
@@ -3889,7 +3889,7 @@ HidingSlimeKeyEntityHandler::
     and  ROOM_STATUS_EVENT_1                      ; $5FFF: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $6001: $C2 $8D $3F
 
-    call func_003_61DE                            ; $6004: $CD $DE $61
+    call DroppableAppearOrReturnIfNeeded          ; $6004: $CD $DE $61
     ld   de, Data_003_5FFB                        ; $6007: $11 $FB $5F
     call RenderActiveEntitySprite                 ; $600A: $CD $77 $3C
     call GetEntityTransitionCountdown             ; $600D: $CD $05 $0C
@@ -3963,8 +3963,8 @@ DroppableMagicPowderEntityHandler::
     jp   nz, UnloadEntityAndReturn                ; $6067: $C2 $8D $3F
 
 jr_003_606A:
-    call func_003_61DE                            ; $606A: $CD $DE $61
-    call func_003_608C                            ; $606D: $CD $8C $60
+    call DroppableAppearOrReturnIfNeeded          ; $606A: $CD $DE $61
+    call DroppableDisappearIfNeeded               ; $606D: $CD $8C $60
     ld   de, Data_003_6055                        ; $6070: $11 $55 $60
     call RenderActiveEntitySprite                 ; $6073: $CD $77 $3C
     jp   label_003_60AA                           ; $6076: $C3 $AA $60
@@ -3976,13 +3976,13 @@ DroppableArrowSpriteVariants::
     db $2A, $61
 
 DroppableArrowsEntityHandler::
-    call func_003_61DE                            ; $607D: $CD $DE $61
-    call func_003_608C                            ; $6080: $CD $8C $60
+    call DroppableAppearOrReturnIfNeeded          ; $607D: $CD $DE $61
+    call DroppableDisappearIfNeeded               ; $6080: $CD $8C $60
     ld   de, DroppableArrowSpriteVariants         ; $6083: $11 $79 $60
     call RenderActiveEntitySpritesPair            ; $6086: $CD $C0 $3B
     jp   label_003_60AA                           ; $6089: $C3 $AA $60
 
-func_003_608C::
+DroppableDisappearIfNeeded::
     call GetEntityDropTimer                       ; $608C: $CD $FB $0B
     cp   $1C                                      ; $608F: $FE $1C
     ret  nc                                       ; $6091: $D0
@@ -3994,13 +3994,13 @@ func_003_608C::
     dec  a                                        ; $6098: $3D
     jp   SetEntitySpriteVariant                   ; $6099: $C3 $0C $3B
 
-Data_003_609C::
-    db   $A6, $15
+DroppableRupeeSprite::
+    db   $A6, OAM_GBC_PAL_5 | OAMF_PAL1
 
 DroppableRupeeEntityHandler::
-    call func_003_61DE                            ; $609E: $CD $DE $61
-    call func_003_608C                            ; $60A1: $CD $8C $60
-    ld   de, Data_003_609C                        ; $60A4: $11 $9C $60
+    call DroppableAppearOrReturnIfNeeded          ; $609E: $CD $DE $61
+    call DroppableDisappearIfNeeded               ; $60A1: $CD $8C $60
+    ld   de, DroppableRupeeSprite                 ; $60A4: $11 $9C $60
     call RenderActiveEntitySprite                 ; $60A7: $CD $77 $3C
 
 label_003_60AA:
@@ -4169,101 +4169,105 @@ func_003_61C0::
 ret_003_61DD:
     ret                                           ; $61DD: $C9
 
-func_003_61DE::
+DroppableAppearOrReturnIfNeeded::
     ld   hl, wEntitiesPrivateState3Table          ; $61DE: $21 $D0 $C2
     add  hl, bc                                   ; $61E1: $09
     ld   a, [hl]                                  ; $61E2: $7E
     and  a                                        ; $61E3: $A7
-    jp   z, label_003_629D                        ; $61E4: $CA $9D $62
+    jp   z, .return                               ; $61E4: $CA $9D $62
 
     ld   a, [wRoomTransitionState]                ; $61E7: $FA $24 $C1
     and  a                                        ; $61EA: $A7
-    jp   nz, jr_003_629C                          ; $61EB: $C2 $9C $62
+    jp   nz, .remainInvisible                     ; $61EB: $C2 $9C $62
 
     ld   a, [hl]                                  ; $61EE: $7E
     cp   $02                                      ; $61EF: $FE $02
-    jr   nz, jr_003_6243                          ; $61F1: $20 $50
+    jr   nz, .checkPegasusBootsCollision          ; $61F1: $20 $50
 
+    ; If privateState3 = 2 (heart/powder/seashell/leaf/indoor)
     ldh  a, [hActiveEntityType]                   ; $61F3: $F0 $EB
     cp   ENTITY_DROPPABLE_SECRET_SEASHELL         ; $61F5: $FE $3D
-    jr   z, .jr_6200                              ; $61F7: $28 $07 (???: If a seashell, jump?)
+    jr   z, .skipNotActiveIfIndoors               ; $61F7: $28 $07 (???: If a seashell, jump?)
 
+    ; If indoors and not a seashell, can't be dug up nor knocked down with the Pegasus Boots
     ld   a, [wIsIndoor]                           ; $61F9: $FA $A5 $DB
     and  a                                        ; $61FC: $A7
-    jp   nz, jr_003_629C                          ; $61FD: $C2 $9C $62
+    jp   nz, .remainInvisible                     ; $61FD: $C2 $9C $62
 
-.jr_6200
+.skipNotActiveIfIndoors
     call func_003_7E0E                            ; $6200: $CD $0E $7E
     ldh  a, [hActiveEntityType]                   ; $6203: $F0 $EB
     cp   ENTITY_DROPPABLE_HEART                   ; $6205: $FE $2D
-    jr   z, .jr_6227                              ; $6207: $28 $1E
+    jr   z, .activeIfOnShortGrass                 ; $6207: $28 $1E
 
     cp   ENTITY_DROPPABLE_SECRET_SEASHELL         ; $6209: $FE $3D
-    jr   nz, jr_003_622F                          ; $620B: $20 $22
+    jr   nz, .activeIfOnShortGrassEnd             ; $620B: $20 $22
 
+    ; Seashells buried under short grass (some of these don't exist)
     ldh  a, [hMapRoom]                            ; $620D: $F0 $F6
     cp   UNKNOWN_ROOM_DA                          ; Overworld room one north of fisherman under bridge
-    jr   z, jr_003_622F                           ; $6211: $28 $1C
+    jr   z, .activeIfOnShortGrassEnd              ; $6211: $28 $1C
     cp   UNKNOWN_ROOM_A5                          ; Overworld room two east of Mabe bush field
-    jr   z, jr_003_622F                           ; $6215: $28 $18
+    jr   z, .activeIfOnShortGrassEnd              ; $6215: $28 $18
     cp   UNKNOWN_ROOM_74                          ; Overworld room one south of ghost's gravestone (w/zombies)
-    jr   z, jr_003_622F                           ; $6219: $28 $14
+    jr   z, .activeIfOnShortGrassEnd              ; $6219: $28 $14
     cp   UNKNOWN_ROOM_3A                          ; Overworld room with... no seashell?
-    jr   z, jr_003_622F                           ; $621D: $28 $10
+    jr   z, .activeIfOnShortGrassEnd              ; $621D: $28 $10
     cp   UNKNOWN_ROOM_A8                          ; Overworld room northeast-ish of Pothole Field
-    jr   z, jr_003_622F                           ; $6221: $28 $0C
+    jr   z, .activeIfOnShortGrassEnd              ; $6221: $28 $0C
     cp   UNKNOWN_ROOM_B2                          ; Overworld room - Mabe village telephone booth (...no seashell???)
-    jr   z, jr_003_622F                           ; $6225: $28 $08
+    jr   z, .activeIfOnShortGrassEnd              ; $6225: $28 $08
 
-.jr_6227
+.activeIfOnShortGrass
     ldh  a, [hObjectUnderEntity]                  ; $6227: $F0 $AF
-    cp   $04                                      ; $6229: $FE $04
-    jr   z, jr_003_623B                           ; $622B: $28 $0E
+    cp   OBJECT_SHORT_GRASS                       ; $6229: $FE $04
+    jr   z, .setOptionsAndAppear                  ; $622B: $28 $0E
 
-    jr   jr_003_6235                              ; $622D: $18 $06
+    jr   .activeIfOnShovelHole                    ; $622D: $18 $06
 
-jr_003_622F:
+.activeIfOnShortGrassEnd
     ld   hl, wEntitiesPrivateState4Table          ; $622F: $21 $40 $C4
     add  hl, bc                                   ; $6232: $09
     ld   [hl], $01                                ; $6233: $36 $01
 
-jr_003_6235:
+.activeIfOnShovelHole
     ldh  a, [hObjectUnderEntity]                  ; $6235: $F0 $AF
-    cp   $CC                                      ; $6237: $FE $CC
-    jr   nz, jr_003_629C                          ; $6239: $20 $61
+    cp   OBJECT_SHOVEL_HOLE                       ; $6237: $FE $CC
+    jr   nz, .remainInvisible                          ; $6239: $20 $61
 
-jr_003_623B:
+.setOptionsAndAppear
     ld   hl, wEntitiesOptions1Table               ; $623B: $21 $30 $C4
     add  hl, bc                                   ; $623E: $09
     ld   [hl], ENTITY_OPT1_SPLASH_IN_WATER|ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL ; $623F: $36 $0A
-    jr   jr_003_626B                              ; $6241: $18 $28
+    jr   .appear                         ; $6241: $18 $28
 
-jr_003_6243:
+; if privateState3 = 1
+.checkPegasusBootsCollision
     ld   a, [wScreenShakeCountdown]               ; $6243: $FA $57 $C1
     and  a                                        ; $6246: $A7
-    jr   z, jr_003_629C                           ; $6247: $28 $53
+    jr   z, .remainInvisible                           ; $6247: $28 $53
 
-    ld   a, [wC178]                               ; $6249: $FA $78 $C1
+    ld   a, [wPegasusBootsCollisionCountdown]     ; $6249: $FA $78 $C1
     and  a                                        ; $624C: $A7
-    jr   z, jr_003_629C                           ; $624D: $28 $4D
+    jr   z, .remainInvisible                           ; $624D: $28 $4D
 
     ldh  a, [hActiveEntityPosX]                   ; $624F: $F0 $EE
     add  $08                                      ; $6251: $C6 $08
-    ld   hl, wC179                                ; $6253: $21 $79 $C1
+    ld   hl, wPegasusBootsCollisionPosX           ; $6253: $21 $79 $C1
     sub  [hl]                                     ; $6256: $96
     add  $10                                      ; $6257: $C6 $10
     cp   $20                                      ; $6259: $FE $20
-    jr   nc, jr_003_629C                          ; $625B: $30 $3F
+    jr   nc, .remainInvisible                          ; $625B: $30 $3F
 
     ldh  a, [hActiveEntityPosY]                   ; $625D: $F0 $EF
     add  $08                                      ; $625F: $C6 $08
-    ld   hl, wC17A                                ; $6261: $21 $7A $C1
+    ld   hl, wPegasusBootsCollisionPosY           ; $6261: $21 $7A $C1
     sub  [hl]                                     ; $6264: $96
     add  $10                                      ; $6265: $C6 $10
     cp   $20                                      ; $6267: $FE $20
-    jr   nc, jr_003_629C                          ; $6269: $30 $31
+    jr   nc, .remainInvisible                          ; $6269: $30 $31
 
-jr_003_626B:
+.appear
     ld   hl, wEntitiesPrivateState3Table          ; $626B: $21 $D0 $C2
     add  hl, bc                                   ; $626E: $09
     ld   [hl], b                                  ; $626F: $70
@@ -4292,10 +4296,10 @@ jr_003_626B:
     call GetEntityDropTimer                       ; $6297: $CD $FB $0B
     ld   [hl], $80                                ; $629A: $36 $80
 
-jr_003_629C:
+.remainInvisible
     pop  af                                       ; $629C: $F1
 
-label_003_629D:
+.return
     ret                                           ; $629D: $C9
 
 Data_003_629E::

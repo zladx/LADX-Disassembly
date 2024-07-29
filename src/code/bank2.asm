@@ -1810,7 +1810,7 @@ label_002_4C92:
     ld   d, $00                                   ; $4C95: $16 $00
     ld   hl, wRoomObjects                         ; $4C97: $21 $11 $D7
     add  hl, de                                   ; $4C9A: $19
-    ld   [hl], $CC                                ; $4C9B: $36 $CC
+    ld   [hl], OBJECT_SHOVEL_HOLE                 ; $4C9B: $36 $CC
     ld   a, $82                                   ; $4C9D: $3E $82
     call BackupObjectInRAM2                       ; $4C9F: $CD $2F $0B
     call label_2887                               ; $4CA2: $CD $87 $28

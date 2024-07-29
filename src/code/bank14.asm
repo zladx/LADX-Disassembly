@@ -1430,12 +1430,12 @@ Data_014_54F0::
     db   $00, $00, $00, $00, $00, $02, $00, $FE
 
 func_014_54F8::
-    ld   a, [wC178]                               ; $54F8: $FA $78 $C1
+    ld   a, [wPegasusBootsCollisionCountdown]     ; $54F8: $FA $78 $C1
     and  a                                        ; $54FB: $A7
     jr   z, .jr_5502                              ; $54FC: $28 $04
 
     dec  a                                        ; $54FE: $3D
-    ld   [wC178], a                               ; $54FF: $EA $78 $C1
+    ld   [wPegasusBootsCollisionCountdown], a     ; $54FF: $EA $78 $C1
 
 .jr_5502
     ld   a, [wScreenShakeCountdown]               ; $5502: $FA $57 $C1

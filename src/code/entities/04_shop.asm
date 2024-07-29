@@ -44,7 +44,7 @@ ShopOwnerEntityHandler::
     jr   nz, jr_004_770E                          ; $7703: $20 $09
 
 .jr_7705
-    call func_004_6E55                            ; $7705: $CD $55 $6E
+    call GetEntityDirectionToLink_04              ; $7705: $CD $55 $6E
     ld   a, e                                     ; $7708: $7B
     ld   hl, wEntitiesDirectionTable              ; $7709: $21 $80 $C3
     add  hl, bc                                   ; $770C: $09
@@ -901,7 +901,7 @@ func_004_7C06::
     cp   $20                                      ; $7C1A: $FE $20
     jr   nc, .jr_7C49                             ; $7C1C: $30 $2B
 
-    call func_004_6E55                            ; $7C1E: $CD $55 $6E
+    call GetEntityDirectionToLink_04              ; $7C1E: $CD $55 $6E
     ldh  a, [hLinkDirection]                      ; $7C21: $F0 $9E
     xor  $01                                      ; $7C23: $EE $01
     cp   e                                        ; $7C25: $BB

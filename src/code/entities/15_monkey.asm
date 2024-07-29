@@ -32,13 +32,13 @@ MonkeyEntityHandler::
     and  a                                        ; $76A4: $A7
     jr   z, .jr_76EF                              ; $76A5: $28 $48
 
-    ld   a, [wC178]                               ; $76A7: $FA $78 $C1
+    ld   a, [wPegasusBootsCollisionCountdown]     ; $76A7: $FA $78 $C1
     and  a                                        ; $76AA: $A7
     jr   z, .jr_76EF                              ; $76AB: $28 $42
 
     ldh  a, [hActiveEntityPosX]                   ; $76AD: $F0 $EE
     add  $08                                      ; $76AF: $C6 $08
-    ld   hl, wC179                                ; $76B1: $21 $79 $C1
+    ld   hl, wPegasusBootsCollisionPosX           ; $76B1: $21 $79 $C1
     sub  [hl]                                     ; $76B4: $96
     add  $10                                      ; $76B5: $C6 $10
     cp   $20                                      ; $76B7: $FE $20
@@ -46,7 +46,7 @@ MonkeyEntityHandler::
 
     ldh  a, [hActiveEntityPosY]                   ; $76BB: $F0 $EF
     add  $08                                      ; $76BD: $C6 $08
-    ld   hl, wC17A                                ; $76BF: $21 $7A $C1
+    ld   hl, wPegasusBootsCollisionPosY           ; $76BF: $21 $7A $C1
     sub  [hl]                                     ; $76C2: $96
     add  $10                                      ; $76C3: $C6 $10
     cp   $20                                      ; $76C5: $FE $20

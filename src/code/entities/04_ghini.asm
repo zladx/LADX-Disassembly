@@ -30,12 +30,12 @@ jr_004_5C16:
 
     ld   a, $FF                                   ; $5C1B: $3E $FF
     call SetEntitySpriteVariant                   ; $5C1D: $CD $0C $3B
-    call func_004_6E35                            ; $5C20: $CD $35 $6E
+    call GetEntityXDistanceToLink_04              ; $5C20: $CD $35 $6E
     add  $10                                      ; $5C23: $C6 $10
     cp   $20                                      ; $5C25: $FE $20
     jr   nc, .ret_5C42                            ; $5C27: $30 $19
 
-    call func_004_6E45                            ; $5C29: $CD $45 $6E
+    call GetEntityYDistanceToLink_04              ; $5C29: $CD $45 $6E
     add  $10                                      ; $5C2C: $C6 $10
     cp   $20                                      ; $5C2E: $FE $20
     jr   nc, .ret_5C42                            ; $5C30: $30 $10

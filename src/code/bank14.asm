@@ -1633,7 +1633,7 @@ label_014_5630:
     ldh  a, [hObjectUnderEntity]                  ; $5630: $F0 $AF
     cp   $20                                      ; $5632: $FE $20
     jr   nz, jr_014_564E                          ; $5634: $20 $18
-
+    ; likely mad batter entrance rooms
     ldh  a, [hMapRoom]                            ; $5636: $F0 $F6
     cp   UNKNOWN_ROOM_52                          ; $5638: $FE $52
     jr   z, .jr_5640                              ; $563A: $28 $04

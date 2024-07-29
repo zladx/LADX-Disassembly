@@ -5919,9 +5919,9 @@ LoadRoom::
     ;
 
     ldh  a, [hMapRoom]                            ; $31BF: $F0 $F6
-    cp   ROOM_OW_EAGLE_TOWER                      ; $31C1: $FE $0E
+    cp   ROOM_OW_EAGLES_TOWER                     ; $31C1: $FE $0E
     jr   nz, .endEaglesTowerAlt                   ; $31C3: $20 $0C
-    ld   a, [wOverworldRoomStatus + ROOM_OW_EAGLE_TOWER] ; $31C5: $FA $0E $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_EAGLES_TOWER] ; $31C5: $FA $0E $D8
     and  OW_ROOM_STATUS_CHANGED                   ; $31C8: $E6 $10
     jr   z, .altRoomsEnd                          ; $31CA: $28 $55
     ld   bc, Overworld0EAlt ; Eagle's Tower open  ; $31CC: $01 $EC $47
@@ -6716,7 +6716,7 @@ label_350E::
     cp   $E1                                      ; $350E: $FE $E1
     jr   nz, label_351D                           ; $3510: $20 $0B
     ldh  a, [hMapRoom]                            ; $3512: $F0 $F6
-    cp   ROOM_OW_EAGLE_TOWER                      ; $3514: $FE $0E
+    cp   ROOM_OW_EAGLES_TOWER                     ; $3514: $FE $0E
     ret  z                                        ; $3516: $C8
     cp   UNKNOWN_ROOM_0C                          ; $3517: $FE $0C
     ret  z                                        ; $3519: $C8
@@ -6919,7 +6919,7 @@ SetupDestroyableObjectIfNeeded::
     jr   nz, .setupDestroyableObject              ; $35DB: $20 $0B
 
     ldh  a, [hMapRoom]                            ; $35DD: $F0 $F6
-    cp   ROOM_OW_EAGLE_TOWER                      ; $35DF: $FE $0E
+    cp   ROOM_OW_EAGLES_TOWER                     ; $35DF: $FE $0E
     ret  z                                        ; $35E1: $C8
     cp   UNKNOWN_ROOM_0C                          ; $35E2: $FE $0C
     ret  z                                        ; $35E4: $C8

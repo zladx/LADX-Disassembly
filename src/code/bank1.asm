@@ -2087,7 +2087,7 @@ CreateFollowingNpcEntity::
     cp   TRUE                                     ; $5FD6: $FE $01
     jr   nz, .roosterEnd                          ; $5FD8: $20 $3A
 
-    ; Search existing entities for an already loaded Roster
+    ; Search existing entities for an already loaded Rooster
     ld   e, $0F                                   ; $5FDA: $1E $0F
     ld   d, $00                                   ; $5FDC: $16 $00
 .roosterSearchLoop

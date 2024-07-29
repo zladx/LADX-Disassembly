@@ -213,23 +213,23 @@ ENDC
     jr   nz, .masterStalfosEnd                    ; $48CB: $20 $23
 
     ldh  a, [hMapRoom]                            ; $48CD: $F0 $F6
-    cp   ROOM_INDOOR_A_MASTER_STALFOS_1           ; $48CF: $FE $95
+    cp   ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_1    ; $48CF: $FE $95
     jr   z, .masterStalfosEnd                     ; $48D1: $28 $1D
-    cp   ROOM_INDOOR_A_MASTER_STALFOS_2           ; $48D3: $FE $92
+    cp   ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_2    ; $48D3: $FE $92
     jr   z, .masterStalfosEnd                     ; $48D5: $28 $19
-    cp   ROOM_INDOOR_A_MASTER_STALFOS_3           ; $48D7: $FE $84
+    cp   ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_3    ; $48D7: $FE $84
     jr   z, .jr_003_48E2                          ; $48D9: $28 $07
 
-    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_MASTER_STALFOS_3] ; $48DB: $FA $84 $D9
+    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_3] ; $48DB: $FA $84 $D9
     and  $30                                      ; $48DE: $E6 $30
     jr   z, MasterStalfosDefeated                 ; $48E0: $28 $CB
 
 .jr_003_48E2
-    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_MASTER_STALFOS_2] ; $48E2: $FA $92 $D9
+    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_2] ; $48E2: $FA $92 $D9
     and  $30                                      ; $48E5: $E6 $30
     jr   z, MasterStalfosDefeated                 ; $48E7: $28 $C4
 
-    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_MASTER_STALFOS_1] ; $48E9: $FA $95 $D9
+    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_1] ; $48E9: $FA $95 $D9
     and  $30                                      ; $48EC: $E6 $30
     jr   z, MasterStalfosDefeated                 ; $48EE: $28 $BD
 .masterStalfosEnd
@@ -1415,7 +1415,7 @@ jr_003_4F24:
 
 EntityInitKeyDropPoint::
     ldh  a, [hMapRoom]                            ; $4F2D: $F0 $F6
-    cp   UNKNOWN_ROOM_F8                          ; In the Yarna Desert quicksand pit
+    cp   ROOM_INDOOR_A_QUICKSAND_CAVE             ; In the Yarna Desert quicksand pit
     jr   nz, .jr_4F44                             ; $4F31: $20 $11
 
     ; check if the angler key has dropped, and not dropped down the hole yet
@@ -1431,7 +1431,7 @@ EntityInitKeyDropPoint::
 
 .jr_4F44
     ; Handle the sprite change for the bird key
-    cp   MOUNTAIN_CAVE_ROOM_1                     ; $4F44: $FE $7A
+    cp   ROOM_INDOOR_B_MOUNTAIN_CAVE_ROOM_1       ; $4F44: $FE $7A
     jr   nz, .jr_4F54                             ; $4F46: $20 $0C
 
 IF __PATCH_0__
@@ -1450,7 +1450,7 @@ ENDC
 .jr_4F54
     ; handle the key in the sidescroll room in dungeon 4 where
     ; the key drops in the hole down into the sidescrolling room with water
-    cp   MOUNTAIN_CAVE_ROOM_3                     ; $4F54: $FE $7C
+    cp   ROOM_INDOOR_A_ANGLERS_TUNNEL_KEY_FALL    ; $4F54: $FE $7C
     jr   nz, .ret_4F67                            ; $4F56: $20 $0F
 
     ld   a, [wIndoorARoomStatus + ROOM_OW_ANGLERS_TUNNEL] ; $4F58: $FA $69 $D9
@@ -3262,7 +3262,7 @@ KeyDropPointEntityHandler::
 
 .jr_5C99
     ldh  a, [hMapRoom]                            ; $5C99: $F0 $F6
-    cp   ROOM_INDOOR_A_MASTER_STALFOS_FINAL       ; $5C9B: $FE $80
+    cp   ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_4    ; $5C9B: $FE $80
     jp   z, label_003_5C49                        ; $5C9D: $CA $49 $5C
 
     ld   de, KeyDropSpriteTable                   ; $5CA0: $11 $78 $5C
@@ -4678,11 +4678,11 @@ GiveInventoryItem::     ; @TODO GivePlayerItem or w/e - inserts item in [d] into
 
 PickDroppableKey::
     ldh  a, [hMapRoom]                            ; $648F: $F0 $F6
-    cp   ROOM_INDOOR_A_MASTER_STALFOS_FINAL       ; $6491: $FE $80
+    cp   ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_4    ; Hookshot drops after Master Stalfos is defeated.
     jr   z, jr_003_64A5                           ; $6493: $28 $10
 
     ldh  a, [hMapRoom]                            ; $6495: $F0 $F6
-    cp   MOUNTAIN_CAVE_ROOM_3                     ; L4 Side-view room where the key drops
+    cp   ROOM_INDOOR_A_ANGLERS_TUNNEL_KEY_FALL    ; L4 Side-view room where the key drops
     jr   nz, .jr_64A0                             ; $6499: $20 $05
 
     ld   hl, wIndoorARoomStatus + $69             ; $649B: $21 $69 $D9

@@ -80,15 +80,15 @@ TradingItemEntityHandler::
     ldh  a, [hMapRoom]                            ; $5516: $F0 $F6
     cp   UNKNOWN_ROOM_6B                          ; $5518: $FE $6B
     jr   z, .jr_007_5528                          ; $551A: $28 $0C
-    cp   MOUNTAIN_CAVE_ROOM_1                     ; $551C: $FE $7A
+    cp   ROOM_INDOOR_B_MOUNTAIN_CAVE_ROOM_1       ; $551C: $FE $7A
     jr   z, .jr_007_5528                          ; $551E: $28 $08
     cp   UNKNOWN_ROOM_8B                          ; $5520: $FE $8B
     jr   z, .jr_007_5528                          ; $5522: $28 $04
-    cp   MOUNTAIN_CAVE_ROOM_2                     ; $5524: $FE $7B
+    cp   ROOM_INDOOR_B_MOUNTAIN_CAVE_ROOM_2       ; $5524: $FE $7B
     jr   nz, .jr_007_552E                         ; $5526: $20 $06
 
 .jr_007_5528
-    ld   a, [wOverworldRoomStatus + MOUNTAIN_CAVE_ROOM_2] ; $5528: $FA $7B $D8
+    ld   a, [wOverworldRoomStatus + ROOM_INDOOR_B_MOUNTAIN_CAVE_ROOM_2] ; $5528: $FA $7B $D8
     and  OW_ROOM_STATUS_CHANGED                   ; $552B: $E6 $10
     ret  z                                        ; $552D: $C8
 

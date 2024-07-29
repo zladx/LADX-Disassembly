@@ -13,9 +13,7 @@ RGBDS   :=
 
 ASM     := $(RGBDS)rgbasm
 ASFLAGS := \
-  --export-all\
-  --halt-without-nop\
-  --preserve-ld
+  --export-all
 
 LD      := $(RGBDS)rgblink
 LDFLAGS :=

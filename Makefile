@@ -3,6 +3,9 @@
 .PRECIOUS: %.2bpp oam_%.2bpp
 .PHONY: default build build-all test test-all all clean tidy
 
+# Recursive `wildcard` function.
+rwildcard = $(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(subst *,%,$2),$d))
+
 #
 # Dev tools binaries and options
 #
@@ -38,13 +41,10 @@ default: build test
 #
 
 # Dependencies for the base version (English 1.0)
-asm_files :=  $(wildcard src/*.asm)
-asm_files +=  $(wildcard src/*/*.asm)
-asm_files +=  $(wildcard src/*/*/*.asm)
+asm_files :=  $(call rwildcard,src,*.asm)
 # this is the only .inc file in the repo
 asm_files +=  src/constants/hardware.inc
-gfx_files :=  $(wildcard src/gfx/*/*.png)
-gfx_files +=  $(wildcard src/gfx/*/*/*.png)
+gfx_files :=  $(call rwildcard,src/gfx,*.png)
 bin_files :=  $(wildcard src/data/backgrounds/*.tilemap.encoded)
 bin_files +=  $(wildcard src/data/backgrounds/*.attrmap.encoded)
 
@@ -81,9 +81,8 @@ Makefile: ;
 # Japanese
 #
 
-azlj_asm := $(wildcard revisions/J0/src/*/*.asm)
-azlj_asm += $(wildcard revisions/J0/src/*/*/*.asm)
-azlj_gfx := $(wildcard revisions/J0/src/gfx/*/*.png)
+azlj_asm := $(call rwildcard,revisions/J0/src,*.asm)
+azlj_gfx := $(call rwildcard,revisions/J0/src/gfx,*.png)
 azlj_bin := $(wildcard revisions/J0/src/data/backgrounds/*.tilemap.encoded)
 azlj_bin += $(wildcard revisions/J0/src/data/backgrounds/*.attrmap.encoded)
 
@@ -106,9 +105,8 @@ azlj-r2_FXFLAGS = --rom-version 2 --title "ZELDA" --game-id "AZLJ"
 # German
 #
 
-azlg_asm := $(wildcard revisions/G0/src/*/*.asm)
-azlg_asm += $(wildcard revisions/G0/src/*/*/*.asm)
-azlg_gfx := $(wildcard revisions/G0/src/gfx/*/*.png)
+azlg_asm := $(call rwildcard,revisions/G0/src,*.asm)
+azlg_gfx := $(call rwildcard,revisions/G0/src/gfx,*.png)
 azlg_bin := $(wildcard revisions/G0/src/data/backgrounds/*.tilemap.encoded)
 azlg_bin += $(wildcard revisions/G0/src/data/backgrounds/*.attrmap.encoded)
 
@@ -127,9 +125,8 @@ azlg-r1_FXFLAGS = --rom-version 1 --non-japanese --title "ZELDA" --game-id "AZLD
 # French
 #
 
-azlf_asm := $(wildcard revisions/F0/src/*/*.asm)
-azlf_asm += $(wildcard revisions/F0/src/*/*/*.asm)
-azlf_gfx := $(wildcard revisions/F0/src/gfx/*/*.png)
+azlf_asm := $(call rwildcard,revisions/F0/src,*.asm)
+azlf_gfx := $(call rwildcard,revisions/F0/src/gfx,*.png)
 azlf_bin := $(wildcard revisions/F0/src/data/backgrounds/*.tilemap.encoded)
 azlf_bin += $(wildcard revisions/F0/src/data/backgrounds/*.attrmap.encoded)
 

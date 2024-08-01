@@ -73,7 +73,7 @@ BananasSchuleState0Handler::
 
     ld_dialog_low e, Dialog1C6                    ; $6D52: $1E $C6
     ld   a, [wTradeSequenceItem]                  ; $6D54: $FA $0E $DB
-    cp   $03                                      ; $6D57: $FE $03
+    cp   TRADING_ITEM_DOG_FOOD                    ; $6D57: $FE $03
     jr   nz, .jr_6D63                             ; $6D59: $20 $08
 
     call_open_dialog Dialog1C7                    ; $6D5B
@@ -168,7 +168,7 @@ BananasSchuleState3Handler::
 
     xor  a                                        ; $6DEC: $AF
     ld   [wC167], a                               ; $6DED: $EA $67 $C1
-    ld   a, $04                                   ; $6DF0: $3E $04
+    ld   a, TRADING_ITEM_BANANAS                  ; $6DF0: $3E $04
     ld   [wTradeSequenceItem], a                  ; $6DF2: $EA $0E $DB
     ld   a, REPLACE_TILES_TRADING_ITEM            ; $6DF5: $3E $0D
     ldh  [hReplaceTiles], a                       ; $6DF7: $E0 $A5
@@ -244,7 +244,7 @@ func_019_6EC5::
     ld   hl, Data_019_6EA5                        ; $6EEC: $21 $A5 $6E
     ld   c, $08                                   ; $6EEF: $0E $08
     ld   a, [wTradeSequenceItem]                  ; $6EF1: $FA $0E $DB
-    cp   $04                                      ; $6EF4: $FE $04
+    cp   TRADING_ITEM_BANANAS                     ; $6EF4: $FE $04
     jr   nz, .jr_6EFA                             ; $6EF6: $20 $02
 
     dec  c                                        ; $6EF8: $0D
@@ -342,14 +342,14 @@ func_019_6F8C::
     jr   nc, jr_019_6FB8                          ; $6F93: $30 $23
 
     ld   a, [wTradeSequenceItem]                  ; $6F95: $FA $0E $DB
-    cp   $0D                                      ; $6F98: $FE $0D
+    cp   TRADING_ITEM_SCALE                       ; $6F98: $FE $0D
     jr   nz, .jr_6FA0                             ; $6F9A: $20 $04
 
     ld_dialog_low a, Dialog18F                    ; $6F9C: $3E $8F
     jr   jr_019_6FAD                              ; $6F9E: $18 $0D
 
 .jr_6FA0
-    cp   $0E                                      ; $6FA0: $FE $0E
+    cp   TRADING_ITEM_MAGNIFYING_LENS             ; $6FA0: $FE $0E
     jr   nz, .jr_6FAB                             ; $6FA2: $20 $07
 
     call_open_dialog Dialog0D8                    ; $6FA4

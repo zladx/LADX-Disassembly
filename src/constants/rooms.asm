@@ -222,7 +222,6 @@ DEF UNKNOWN_ROOM_8B                          EQU $8B
 DEF UNKNOWN_ROOM_8D                          EQU $8D
 DEF UNKNOWN_ROOM_8F                          EQU $8F
 
-DEF UNKNOWN_ROOM_92                          EQU $92
 DEF UNKNOWN_ROOM_93                          EQU $93
 DEF UNKNOWN_ROOM_95                          EQU $95
 DEF UNKNOWN_ROOM_96                          EQU $96 ; Master Stalfos "screw you" letter chest ?

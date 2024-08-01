@@ -1576,7 +1576,7 @@ PhotographerEntityHandler::
     jp   nz, UnloadEntityAndReturn                ; $4945: $C2 $8D $3F
 
     ld   a, [wTradeSequenceItem]                  ; $4948: $FA $0E $DB
-    cp   $0D                                      ; $494B: $FE $0D
+    cp   TRADING_ITEM_SCALE                       ; $494B: $FE $0D
     jp   c, UnloadEntityAndReturn                 ; $494D: $DA $8D $3F
 
     ld   de, PhotographerOverworldSpriteVariants  ; $4950: $11 $CE $48

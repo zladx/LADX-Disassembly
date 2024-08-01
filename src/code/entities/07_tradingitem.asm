@@ -127,7 +127,7 @@ TradingItemEntityHandler::
 .jr_007_555A
     ld   de, TradingItem2SpriteVariants           ; $555A: $11 $D4 $54
     ld   a, [wTradeSequenceItem]                  ; $555D: $FA $0E $DB
-    cp   $04                                      ; $5560: $FE $04
+    cp   TRADING_ITEM_BANANAS                     ; $5560: $FE $04
     jr   z, .render                               ; $5562: $28 $0E
 
     ldh  a, [hIsSideScrolling]                    ; $5564: $F0 $F9

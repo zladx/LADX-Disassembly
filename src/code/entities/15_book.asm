@@ -154,7 +154,7 @@ func_015_7F04::
     jr   nz, jr_015_7F4F                          ; $7F21: $20 $2C
 
     ld   a, [wTradeSequenceItem]                  ; $7F23: $FA $0E $DB
-    cp   $0E                                      ; $7F26: $FE $0E
+    cp   TRADING_ITEM_MAGNIFYING_LENS             ; $7F26: $FE $0E
     jr   nz, jr_015_7F4F                          ; $7F28: $20 $25
 
     ld   a, [wExchangingTradeSequenceItem]        ; $7F2A: $FA $7F $DB

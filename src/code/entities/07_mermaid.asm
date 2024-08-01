@@ -175,7 +175,7 @@ func_007_4759::
     ret  nc                                       ; $4796: $D0
 
     ld   a, [wTradeSequenceItem]                  ; $4797: $FA $0E $DB
-    cp   $0C                                      ; $479A: $FE $0C
+    cp   TRADING_ITEM_NECKLACE                    ; $479A: $FE $0C
     jr   nz, .jr_47A9                             ; $479C: $20 $0B
 
     call_open_dialog Dialog1F2                    ; $479E

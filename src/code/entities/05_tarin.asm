@@ -578,7 +578,7 @@ jr_005_4BF1:
     jr   jr_005_4C57                              ; $4C41: $18 $14
 
 jr_005_4C43:
-    call func_005_4DCF                            ; $4C43: $CD $CF $4D
+    call TarinBananaCheck                         ; $4C43: $CD $CF $4D
     ldh  a, [hFrameCounter]                       ; $4C46: $F0 $E7
     and  $1F                                      ; $4C48: $E6 $1F
     jr   nz, .jr_4C54                             ; $4C4A: $20 $08
@@ -727,7 +727,7 @@ TarinShield3Handler::
     jr   nz, jr_005_4D35                          ; $4D1E: $20 $15
 
     ld   a, [wTradeSequenceItem]                  ; $4D20: $FA $0E $DB
-    cp   $03                                      ; $4D23: $FE $03
+    cp   TRADING_ITEM_DOG_FOOD                    ; $4D23: $FE $03
     jr   nz, jr_005_4D33                          ; $4D25: $20 $0C
 
     call_open_dialog Dialog1C5                    ; $4D27
@@ -853,14 +853,14 @@ Tarin5SpriteVariants::
     db $70, OAM_GBC_PAL_0 | OAMF_PAL0
     db $72, OAM_GBC_PAL_0 | OAMF_PAL0
 
-func_005_4DCF::
+TarinBananaCheck::
 ; check Tarin flag to see if he has bananas (set to $02 after D2 instrument collect)
     ld   a, [wTarinFlag]                          ; $4DCF: $FA $48 $DB
     cp   $02                                      ; $4DD2: $FE $02
     ret  nz                                       ; $4DD4: $C0
 
     ld   a, [wTradeSequenceItem]                  ; $4DD5: $FA $0E $DB
-    cp   $04                                      ; $4DD8: $FE $04
+    cp   TRADING_ITEM_BANANAS                     ; $4DD8: $FE $04
     jr   nc, .jr_4DE3                             ; $4DDA: $30 $07
 
     ld   a, $78                                   ; $4DDC: $3E $78

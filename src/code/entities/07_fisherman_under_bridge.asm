@@ -82,7 +82,7 @@ jr_007_42DC:
     jp   nz, label_007_4328                       ; $42F5: $C2 $28 $43
 
     ld   a, [wTradeSequenceItem]                  ; $42F8: $FA $0E $DB
-    cp   $0D                                      ; $42FB: $FE $0D
+    cp   TRADING_ITEM_SCALE                       ; $42FB: $FE $0D ; does the photo happen after scale trade?  
     jp   c, label_007_4328                        ; $42FD: $DA $28 $43
 
     ldh  a, [hActiveEntityState]                  ; $4300: $F0 $F0
@@ -374,7 +374,7 @@ func_007_44B0::
 
 .jr_44BF
     ld   a, [wTradeSequenceItem]                  ; $44BF: $FA $0E $DB
-    cp   $0B                                      ; $44C2: $FE $0B
+    cp   TRADING_ITEM_FISHING_HOOK                ; $44C2: $FE $0B
     jr   nz, .jr_44CE                             ; $44C4: $20 $08
 
     call_open_dialog Dialog1E8                    ; $44C6

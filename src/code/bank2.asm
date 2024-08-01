@@ -2446,7 +2446,7 @@ jr_002_5015:
 
 .overworld
     ldh  a, [hMapRoom]                            ; $5035: $F0 $F6
-    cp   ROOM_OW_KANALET_MOAT                     ; $5037: $FE $78
+    cp   ROOM_OW_KANALET_MOAT_HEARTPIECE          ; $5037: $FE $78
     jr   nz, .return                              ; $5039: $20 $3E
 
 .roomHasSunkPieceOfHeart

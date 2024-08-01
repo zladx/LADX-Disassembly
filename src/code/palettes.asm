@@ -179,7 +179,7 @@ func_021_40DB::
     ld   l, a                                     ; $40F5: $6F
     call func_021_41B4                            ; $40F6: $CD $B4 $41
     ldh  a, [hMapRoom]                            ; $40F9: $F0 $F6
-    cp   UNKNOWN_ROOM_92                          ; $40FB: $FE $92
+    cp   ROOM_OW_MABE_VILLAGE_SQUARE              ; $40FB: $FE $92
     ret  nz                                       ; $40FD: $C0
 
     ld   hl, wObjPal8 + 1*2                       ; $40FE: $21 $8A $DC

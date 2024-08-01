@@ -78,17 +78,17 @@ TradingItemEntityHandler::
     jr   nz, .jr_007_552E                         ; $5514: $20 $18
 
     ldh  a, [hMapRoom]                            ; $5516: $F0 $F6
-    cp   UNKNOWN_ROOM_6B                          ; $5518: $FE $6B
+    cp   ROOM_OW_KANALET_KIKI_BRIDGE_NORTH        ; $5518: $FE $6B
     jr   z, .jr_007_5528                          ; $551A: $28 $0C
-    cp   ROOM_INDOOR_B_MOUNTAIN_CAVE_ROOM_1       ; $551C: $FE $7A
+    cp   ROOM_OW_KANALET_MOAT_EAST_OF_GATE        ; $551C: $FE $7A
     jr   z, .jr_007_5528                          ; $551E: $28 $08
-    cp   UNKNOWN_ROOM_8B                          ; $5520: $FE $8B
+    cp   ROOM_OW_SEASHELL_MANSION_EAST_SHELL      ; $5520: $FE $8B
     jr   z, .jr_007_5528                          ; $5522: $28 $04
-    cp   ROOM_INDOOR_B_MOUNTAIN_CAVE_ROOM_2       ; $5524: $FE $7B
+    cp   ROOM_OW_KANALET_KIKI_BRIDGE              ; $5524: $FE $7B
     jr   nz, .jr_007_552E                         ; $5526: $20 $06
 
 .jr_007_5528
-    ld   a, [wOverworldRoomStatus + ROOM_INDOOR_B_MOUNTAIN_CAVE_ROOM_2] ; $5528: $FA $7B $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_KANALET_KIKI_BRIDGE] ; $5528: $FA $7B $D8
     and  OW_ROOM_STATUS_CHANGED                   ; $552B: $E6 $10
     ret  z                                        ; $552D: $C8
 
@@ -127,7 +127,7 @@ TradingItemEntityHandler::
 .jr_007_555A
     ld   de, TradingItem2SpriteVariants           ; $555A: $11 $D4 $54
     ld   a, [wTradeSequenceItem]                  ; $555D: $FA $0E $DB
-    cp   $04                                      ; $5560: $FE $04
+    cp   TRADING_ITEM_BANANAS                     ; $5560: $FE $04
     jr   z, .render                               ; $5562: $28 $0E
 
     ldh  a, [hIsSideScrolling]                    ; $5564: $F0 $F9

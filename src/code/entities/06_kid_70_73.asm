@@ -1,7 +1,7 @@
 Kid70EntityHandler::
 Kid73EntityHandler::
     ldh  a, [hMapRoom]                            ; $620E: $F0 $F6
-    cp   UNKNOWN_ROOM_92                          ; $6210: $FE $92
+    cp   ROOM_OW_MABE_VILLAGE_SQUARE              ; $6210: $FE $92
     jr   nz, .jr_621C                             ; $6212: $20 $08
 
     ld   a, [wTradeSequenceItem]                  ; $6214: $FA $0E $DB
@@ -29,7 +29,7 @@ func_006_6230::
     ret  nc                                       ; $623D: $D0
 
     ld   a, [wTradeSequenceItem]                  ; $623E: $FA $0E $DB
-    cp   $0A                                      ; $6241: $FE $0A
+    cp   TRADING_ITEM_BROOM                       ; $6241: $FE $0A
     jr   nz, .jr_624F                             ; $6243: $20 $0A
 
     ld   a, [wHasInstrument5]                     ; $6245: $FA $69 $DB
@@ -53,7 +53,7 @@ func_006_6230::
 
 .jr_6265
     ldh  a, [hMapRoom]                            ; $6265: $F0 $F6
-    cp   UNKNOWN_ROOM_92                          ; $6267: $FE $92
+    cp   ROOM_OW_MABE_VILLAGE_SQUARE              ; $6267: $FE $92
     jr   nz, .jr_6277                             ; $6269: $20 $0C
 
     ld   a, [wOverworldRoomStatus + $FD]          ; $626B: $FA $FD $D8

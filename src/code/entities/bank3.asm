@@ -1453,7 +1453,7 @@ ENDC
     cp   ROOM_INDOOR_A_ANGLERS_TUNNEL_KEY_FALL    ; $4F54: $FE $7C
     jr   nz, .ret_4F67                            ; $4F56: $20 $0F
 
-    ld   a, [wIndoorARoomStatus + ROOM_OW_ANGLERS_TUNNEL] ; $4F58: $FA $69 $D9
+    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_ANGLERS_TUNNEL_KEY_DROP] ; $4F58: $FA $69 $D9
     and  $10                                      ; $4F5B: $E6 $10
     jp   z, UnloadEntityAndReturn                 ; $4F5D: $CA $8D $3F
 

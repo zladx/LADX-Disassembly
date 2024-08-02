@@ -33,7 +33,7 @@ BearEntityHandler::
     ld   de, Bear2SpriteVariants                  ; $4BC6: $11 $B1 $4B
     call RenderActiveEntitySpritesPair            ; $4BC9: $CD $C0 $3B
     ld   a, [wTradeSequenceItem]                  ; $4BCC: $FA $0E $DB
-    cp   $06                                      ; $4BCF: $FE $06
+    cp   TRADING_ITEM_HONEYCOMB                   ; $4BCF: $FE $06
     jr   nz, .jr_4BE1                             ; $4BD1: $20 $0E
 
     ld   a, $74                                   ; $4BD3: $3E $74
@@ -84,7 +84,7 @@ func_007_4C16::
     jr   nz, func_007_4C43.openDialog             ; $4C21: $20 $22
 
     ld   a, [wTradeSequenceItem]                  ; $4C23: $FA $0E $DB
-    cp   $06                                      ; $4C26: $FE $06
+    cp   TRADING_ITEM_HONEYCOMB                   ; $4C26: $FE $06
     jr   nz, .jr_4C32                             ; $4C28: $20 $08
 
     ld_dialog_low a, Dialog1CF                    ; $4C2A: $3E $CF

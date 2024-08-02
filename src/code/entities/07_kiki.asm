@@ -141,7 +141,7 @@ jr_007_58DE:
     jr   nc, func_007_58FA                        ; $58E4: $30 $14
 
     ld   a, [wTradeSequenceItem]                  ; $58E6: $FA $0E $DB
-    cp   $04                                      ; $58E9: $FE $04
+    cp   TRADING_ITEM_BANANAS                     ; $58E9: $FE $04
     jr   nz, .jr_58F5                             ; $58EB: $20 $08
 
     ld_dialog_low a, Dialog165 ; "Give to Kiki?"  ; $58ED: $3E $65

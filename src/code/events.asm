@@ -151,13 +151,13 @@ MakeEffectObjectAppear::
 DropKeyEffectHandler::
     call EventEffectGuard                         ; $5E03: $CD $AF $5D
     ldh  a, [hMapRoom]                            ; $5E06: $F0 $F6
-    cp   ROOM_OW_ANGLERS_TUNNEL                      ; Is this room 69? (Angler's Tunnel)
-    jr   nz, .jr_5E15                          ; If not, skip ahead...
+    cp   ROOM_INDOOR_A_ANGLERS_TUNNEL_KEY_DROP    ; Is this room 69? (Angler's Tunnel)
+    jr   nz, .jr_5E15                             ; If not, skip ahead...
 
     ; Mark the room as cleared
     call GetRoomStatusAddress                     ; This is the room where the key falls into
     ld   a, [hl]                                  ; a hole in the floor, making it fall into
-    or   ROOM_STATUS_EVENT_1        ; a sidescrolling room.
+    or   ROOM_STATUS_EVENT_1                      ; a sidescrolling room.
     ld   [hl], a                                  ; Since that room handles the key now,
     ldh  [hRoomStatus], a                         ; mark this one.
 
@@ -194,7 +194,7 @@ OpenLockedDoorsEffectHandler::
     cp   TRIGGER_KILL_ALL_ENEMIES | EFFECT_CLEAR_MIDBOSS ; $5E36: $FE $C1
     jr   nz, jr_002_5E6A                          ; $5E38: $20 $30
 
-    ldh  a, [hMapId]                         ; @TODO This sets the miniboss killed flag.
+    ldh  a, [hMapId]                              ; @TODO This sets the miniboss killed flag.
     ld   e, a                                     ; $5E3C: $5F
     ld   d, $00                                   ; $5E3D: $16 $00
     ld   hl, wHasInstrument1                      ; $5E3F: $21 $65 $DB

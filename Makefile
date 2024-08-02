@@ -3,6 +3,9 @@
 .PRECIOUS: %.2bpp oam_%.2bpp
 .PHONY: default build build-all test test-all all clean tidy
 
+# Recursive `wildcard` function.
+rwildcard = $(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(subst *,%,$2),$d))
+
 #
 # Dev tools binaries and options
 #
@@ -38,9 +41,12 @@ default: build test
 #
 
 # Dependencies for the base version (English 1.0)
-asm_files =  $(shell find src     -type f -name '*.asm' -o -name '*.inc')
-gfx_files =  $(shell find src/gfx -type f -name '*.png')
-bin_files =  $(shell find src     -type f -name '*.tilemap.encoded' -o -name '*.attrmap.encoded')
+asm_files :=  $(call rwildcard,src,*.asm)
+# this is the only .inc file in the repo
+asm_files +=  src/constants/hardware.inc
+gfx_files :=  $(call rwildcard,src/gfx,*.png)
+bin_files :=  $(wildcard src/data/backgrounds/*.tilemap.encoded)
+bin_files +=  $(wildcard src/data/backgrounds/*.attrmap.encoded)
 
 # Compile an PNG file for OAM memory to a 2BPP file
 # (inverting the palette and de-interleaving the tiles).
@@ -75,9 +81,10 @@ Makefile: ;
 # Japanese
 #
 
-azlj_asm = $(shell find revisions/J0 -type f -name '*.asm')
-azlj_gfx = $(shell find revisions/J0 -type f -name '*.png')
-azlj_bin = $(shell find revisions/J0 -type f -name '*.tilemap.encoded' -o -name '*.attrmap.encoded')
+azlj_asm := $(call rwildcard,revisions/J0/src,*.asm)
+azlj_gfx := $(call rwildcard,revisions/J0/src/gfx,*.png)
+azlj_bin := $(wildcard revisions/J0/src/data/backgrounds/*.tilemap.encoded)
+azlj_bin += $(wildcard revisions/J0/src/data/backgrounds/*.attrmap.encoded)
 
 games += azlj.gbc
 src/main.azlj.o: $(azlj_asm) $(azlj_gfx:.png=.2bpp) $(azlj_bin)
@@ -98,9 +105,10 @@ azlj-r2_FXFLAGS = --rom-version 2 --title "ZELDA" --game-id "AZLJ"
 # German
 #
 
-azlg_asm = $(shell find revisions/G0 -type f -name '*.asm')
-azlg_gfx = $(shell find revisions/G0 -type f -name '*.png')
-azlg_bin = $(shell find revisions/G0 -type f -name '*.tilemap.encoded' -o -name '*.attrmap.encoded')
+azlg_asm := $(call rwildcard,revisions/G0/src,*.asm)
+azlg_gfx := $(call rwildcard,revisions/G0/src/gfx,*.png)
+azlg_bin := $(wildcard revisions/G0/src/data/backgrounds/*.tilemap.encoded)
+azlg_bin += $(wildcard revisions/G0/src/data/backgrounds/*.attrmap.encoded)
 
 games += azlg.gbc
 src/main.azlg.o: $(azlg_asm) $(azlg_gfx:.png=.2bpp) $(azlg_bin)
@@ -117,9 +125,10 @@ azlg-r1_FXFLAGS = --rom-version 1 --non-japanese --title "ZELDA" --game-id "AZLD
 # French
 #
 
-azlf_asm = $(shell find revisions/F0 -type f -name '*.asm')
-azlf_gfx = $(shell find revisions/F0 -type f -name '*.png')
-azlf_bin = $(shell find revisions/F0 -type f -name '*.tilemap.encoded' -o -name '*.attrmap.encoded')
+azlf_asm := $(call rwildcard,revisions/F0/src,*.asm)
+azlf_gfx := $(call rwildcard,revisions/F0/src/gfx,*.png)
+azlf_bin := $(wildcard revisions/F0/src/data/backgrounds/*.tilemap.encoded)
+azlf_bin += $(wildcard revisions/F0/src/data/backgrounds/*.attrmap.encoded)
 
 games += azlf.gbc
 src/main.azlf.o: $(azlf_asm) $(azlf_gfx:.png=.2bpp) $(azlf_bin)
@@ -183,3 +192,7 @@ clean: tidy
 	rm -f $(azlj_gfx:.png=.2bpp)
 	rm -f $(azlg_gfx:.png=.2bpp)
 	rm -f $(azlf_gfx:.png=.2bpp)
+
+### Debug Print ###
+
+print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true

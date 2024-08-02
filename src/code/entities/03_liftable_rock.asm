@@ -39,7 +39,7 @@ LiftableRockEntityHandler::
     ld   hl, wEntitiesPosZTable                   ; $535E: $21 $10 $C3
     add  hl, de                                   ; $5361: $19
     ld   [hl], a                                  ; $5362: $77
-    ld   hl, wEntitiesDropTimerTable              ; $5363: $21 $50 $C4
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $5363: $21 $50 $C4
     add  hl, de                                   ; $5366: $19
     ld   [hl], $80                                ; $5367: $36 $80
 
@@ -125,7 +125,7 @@ ENDC
     ld   a, $0B                                   ; $53BC: $3E $0B
     ld   [wC19E], a                               ; $53BE: $EA $9E $C1
     call func_003_75A2                            ; $53C1: $CD $A2 $75
-    call func_003_60B3                            ; $53C4: $CD $B3 $60
+    call BouncingEntityPhysics                    ; $53C4: $CD $B3 $60
     ld   hl, wEntitiesStatusTable                 ; $53C7: $21 $80 $C2
     add  hl, bc                                   ; $53CA: $09
     ld   a, [hl]                                  ; $53CB: $7E

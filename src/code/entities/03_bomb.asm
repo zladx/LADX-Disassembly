@@ -31,7 +31,7 @@ BombEntityHandler::
     call func_003_6711                            ; $66BF: $CD $11 $67
     call CheckForEntityFallingDownQuicksandHole   ; $66C2: $CD $EA $5C
     call ReturnIfNonInteractive_03                ; $66C5: $CD $78 $7F
-    call func_003_60B3                            ; $66C8: $CD $B3 $60
+    call BouncingEntityPhysics                    ; $66C8: $CD $B3 $60
     ld   hl, wEntitiesPrivateCountdown2Table      ; $66CB: $21 $00 $C3
     add  hl, bc                                   ; $66CE: $09
     ld   [hl], $FF                                ; $66CF: $36 $FF

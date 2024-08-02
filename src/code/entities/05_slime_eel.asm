@@ -88,7 +88,7 @@ func_005_6D42::
 
 .jr_6D7E
     ld   [hl], $1F                                ; $6D7E: $36 $1F
-    call GetEntityDropTimer                       ; $6D80: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $6D80: $CD $FB $0B
     ld   [hl], $B0                                ; $6D83: $36 $B0
     call label_3E34                               ; $6D85: $CD $34 $3E
     ld   hl, wEntitiesStatusTable                 ; $6D88: $21 $80 $C2
@@ -480,7 +480,7 @@ Data_005_70E7::
     db   $00, $00, $01, $01
 
 func_005_70EB::
-    call GetEntityDropTimer                       ; $70EB: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $70EB: $CD $FB $0B
     ld   a, [wD200]                               ; $70EE: $FA $00 $D2
     and  a                                        ; $70F1: $A7
     jr   z, .jr_70F6                              ; $70F2: $28 $02
@@ -978,7 +978,7 @@ func_005_7363::
     ld   hl, wEntitiesPrivateState1Table          ; $73E6: $21 $B0 $C2
     add  hl, bc                                   ; $73E9: $09
     ld   [hl], $02                                ; $73EA: $36 $02
-    call GetEntityDropTimer                       ; $73EC: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $73EC: $CD $FB $0B
     ld   [hl], $30                                ; $73EF: $36 $30
     ld   hl, wEntitiesPrivateCountdown2Table      ; $73F1: $21 $00 $C3
     add  hl, bc                                   ; $73F4: $09
@@ -1283,7 +1283,7 @@ func_005_75D1::
     call ReturnIfNonInteractive_05                ; $75D7: $CD $3A $7A
     ld   a, $01                                   ; $75DA: $3E $01
     ld   [wD200], a                               ; $75DC: $EA $00 $D2
-    call GetEntityDropTimer                       ; $75DF: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $75DF: $CD $FB $0B
     cp   $10                                      ; $75E2: $FE $10
     jr   nc, jr_005_7621                          ; $75E4: $30 $3B
 

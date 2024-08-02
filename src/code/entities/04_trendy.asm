@@ -370,7 +370,7 @@ jr_004_70A6:
     and  a                                        ; $70AC: $A7
     jr   z, jr_004_70F4                           ; $70AD: $28 $45
 
-    call GetEntityDropTimer                       ; $70AF: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $70AF: $CD $FB $0B
     jr   z, .jr_70B9                              ; $70B2: $28 $05
 
     dec  a                                        ; $70B4: $3D
@@ -403,7 +403,7 @@ jr_004_70A6:
     cp   $28                                      ; $70DC: $FE $28
     ret  nz                                       ; $70DE: $C0
 
-    call GetEntityDropTimer                       ; $70DF: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $70DF: $CD $FB $0B
     ld   [hl], $18                                ; $70E2: $36 $18
     ld   a, [wMarinEntityIndex]                   ; $70E4: $FA $0F $C5
     ld   e, a                                     ; $70E7: $5F
@@ -488,7 +488,7 @@ jr_004_7152:
     and  a                                        ; $7158: $A7
     jr   z, func_004_7160                         ; $7159: $28 $05
 
-    call GetEntityDropTimer                       ; $715B: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $715B: $CD $FB $0B
     ld   [hl], $10                                ; $715E: $36 $10
 
 func_004_7160::
@@ -534,7 +534,7 @@ func_004_7179::
 
 jr_004_7198:
     ld   [wD203], a                               ; $7198: $EA $03 $D2
-    call GetEntityDropTimer                       ; $719B: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $719B: $CD $FB $0B
     ret  nz                                       ; $719E: $C0
 
     ld   a, [wIsMarinFollowingLink]               ; $719F: $FA $73 $DB

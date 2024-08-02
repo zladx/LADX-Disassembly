@@ -185,7 +185,7 @@ func_004_5158::
     call IncrementEntityState                     ; $516C: $CD $12 $3B
     call GetEntityPrivateCountdown1               ; $516F: $CD $00 $0C
     ld   [hl], $A0                                ; $5172: $36 $A0
-    call GetEntityDropTimer                       ; $5174: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $5174: $CD $FB $0B
     ld   [hl], $FF                                ; $5177: $36 $FF
     jp_open_dialog Dialog0B6                      ; $5179
 
@@ -249,7 +249,7 @@ jr_004_51FA:
     add  hl, de                                   ; $5206: $19
     ld   a, [hl]                                  ; $5207: $7E
     ld   [wScreenShakeHorizontal], a              ; $5208: $EA $55 $C1
-    call GetEntityDropTimer                       ; $520B: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $520B: $CD $FB $0B
     jr   nz, jr_004_5273                          ; $520E: $20 $63
 
     call GetRandomByte                            ; $5210: $CD $0D $28

@@ -1865,7 +1865,7 @@ jr_002_4CC1:
     ldh  a, [hIntersectedObjectTop]               ; $4CEF: $F0 $CD
     add  $10                                      ; $4CF1: $C6 $10
     ld   [hl], a                                  ; $4CF3: $77
-    ld   hl, wEntitiesDropTimerTable              ; $4CF4: $21 $50 $C4
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $4CF4: $21 $50 $C4
     add  hl, de                                   ; $4CF7: $19
     ld   [hl], $80                                ; $4CF8: $36 $80
     ld   hl, wEntitiesPrivateCountdown1Table      ; $4CFA: $21 $F0 $C2

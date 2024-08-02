@@ -603,15 +603,15 @@ wC176:
 wDialogAskSelectionIndex:
   ds 1 ; C177
 
-; TODO comment
+; Set to 2 when Link collides with a wall, tree, etc, while running with the Pegasus Boots
 wPegasusBootsCollisionCountdown:
   ds 1 ; C178
 
-; TODO comment
+; X position of the last Pegasus Boots collision 
 wPegasusBootsCollisionPosX:
   ds 1 ; C179
 
-; TODO comment
+; Y position of the last Pegasus Boots collision 
 wPegasusBootsCollisionPosY:
   ds 1 ; C17A
 
@@ -1052,8 +1052,8 @@ wEntitiesStateTable::
 ; 0 = no collisions,
 ; bit 1 = collision on the right,
 ; bit 2 = collision on the left,
-; bit 3 = collision on the bottom,
-; bit 4 = collision on the top
+; bit 3 = collision on the top,
+; bit 4 = collision on the bottom
 wEntitiesCollisionsTable::
   ds $10 ; C2A0 - C2AF
 
@@ -1086,7 +1086,7 @@ wEntitiesPrivateState2Table::
 ; Entity-specific state.
 ;
 ; Examples:
-;  - Droppable entity: 0 if visible, 1 if ??, 2 if ??
+;  - Droppable entity: 0 if visible; 1 if can be revealed with Pegasus Boots; 2 if buried, in bush, etc
 ;  - Keese: speed update timer
 ;  - Peahat: speed update timer
 ;  - Pincer: head direction
@@ -1290,9 +1290,8 @@ wEntitiesOptions1Table::
 wEntitiesPrivateState4Table::
   ds $10 ; C440 - C44F
 
-; Number of frame before a dropped item disappears
-; Also used by Peahat as a transition countdown, and Timer Bombite as countdown for exploding
-wEntitiesDropTimerTable::
+; Frames before the next state transition of the entity (only decremented every four frames)
+wEntitiesSlowTransitionCountdownTable::
   ds $10 ; C450 - C45F
 
 ; TODO comment
@@ -1303,7 +1302,7 @@ wEntitiesLoadOrderTable::
 ;
 ; Possible values:
 ;  0: on standard solid ground
-;  1: ???
+;  1: on deep water/lava
 ;  2: on shallow water (draws ripples)
 ;  3: on tall grass (draws pushed-away grasses)
 wEntitiesGroundStatusTable::

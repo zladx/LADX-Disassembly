@@ -27,16 +27,16 @@ StarEntityHandler::
     ld   hl, wEntitiesCollisionsTable             ; $7270: $21 $A0 $C2
     add  hl, bc                                   ; $7273: $09
     ld   a, [hl]                                  ; $7274: $7E
-    and  COLLISION_TYPE_VERTICAL                  ; $7275: $E6 $03
-    jr   nz, .verticalCollision                   ; $7277: $20 $07
+    and  $03                                      ; $7275: $E6 $03
+    jr   nz, .horizontalCollision                 ; $7277: $20 $07
 
     ld   a, [hl]                                  ; $7279: $7E
-    and  COLLISION_TYPE_HORIZONTAL                ; $727A: $E6 $0C
-    jr   nz, .horizontalCollision                 ; $727C: $20 $0C
+    and  $0C                                      ; $727A: $E6 $0C
+    jr   nz, .verticalCollision                   ; $727C: $20 $0C
 
     jr   .collisionEnd                            ; $727E: $18 $11
 
-.verticalCollision
+.horizontalCollision
     ld   hl, wEntitiesSpeedXTable                 ; $7280: $21 $40 $C2
     add  hl, bc                                   ; $7283: $09
     ld   a, [hl]                                  ; $7284: $7E
@@ -45,7 +45,7 @@ StarEntityHandler::
     ld   [hl], a                                  ; $7287: $77
     jr   .collisionEnd                            ; $7288: $18 $07
 
-.horizontalCollision
+.verticalCollision
     call GetEntitySpeedYAddress                   ; $728A: $CD $05 $40
     ld   a, [hl]                                  ; $728D: $7E
     cpl                                           ; $728E: $2F

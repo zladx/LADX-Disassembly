@@ -227,7 +227,7 @@ func_007_5951::
     ld   a, MUSIC_MONKEYS_BUILDING_BRIDGE         ; $595B: $3E $36
     ld   [wMusicTrackToPlay], a                   ; $595D: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $5960: $E0 $B0
-    call GetEntityDropTimer                       ; $5962: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $5962: $CD $FB $0B
     ld   [hl], $80                                ; $5965: $36 $80
     jp   IncrementEntityState                     ; $5967: $C3 $12 $3B
 
@@ -262,7 +262,7 @@ func_007_5997::
     ld   a, $02                                   ; $5997: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5999: $E0 $A1
     call func_007_58FA                            ; $599B: $CD $FA $58
-    call GetEntityDropTimer                       ; $599E: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $599E: $CD $FB $0B
 
 .jr_59A1
     jr   nz, jr_007_59C8                          ; $59A1: $20 $25
@@ -353,7 +353,7 @@ jr_007_59C8:
     pop  bc                                       ; $5A29: $C1
 
 jr_007_5A2A:
-    call GetEntityDropTimer                       ; $5A2A: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $5A2A: $CD $FB $0B
     cp   $40                                      ; $5A2D: $FE $40
     ret  nc                                       ; $5A2F: $D0
 

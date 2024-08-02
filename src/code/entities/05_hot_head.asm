@@ -179,7 +179,7 @@ func_005_63EB::
     ld   hl, wEntitiesSpeedZTable                 ; $6419: $21 $20 $C3
     add  hl, bc                                   ; $641C: $09
     ld   [hl], b                                  ; $641D: $70
-    call GetEntityDropTimer                       ; $641E: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $641E: $CD $FB $0B
     ld   [hl], $40                                ; $6421: $36 $40
     ldh  a, [hActiveEntityPosX]                   ; $6423: $F0 $EE
     add  $F8                                      ; $6425: $C6 $F8
@@ -276,7 +276,7 @@ func_005_648E::
 
 jr_005_64AF:
     call DefaultEnemyDamageCollisionHandler_trampoline ; $64AF: $CD $39 $3B
-    call GetEntityDropTimer                       ; $64B2: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $64B2: $CD $FB $0B
     jr   nz, .jr_64CC                             ; $64B5: $20 $15
 
     ldh  a, [hActiveEntityPosX]                   ; $64B7: $F0 $EE

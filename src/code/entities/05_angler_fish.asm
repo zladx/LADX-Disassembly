@@ -242,7 +242,7 @@ Data_005_56F7::
     db   $60, $18
 
 func_005_56F9::
-    call GetEntityDropTimer
+    call  GetEntitySlowTransitionCountdown
     jr   nz, .jr_5713                             ; $56FC: $20 $15
 
     call GetEntityTransitionCountdown             ; $56FE: $CD $05 $0C
@@ -335,7 +335,7 @@ func_005_576E::
     cp   [hl]                                     ; $5789: $BE
     jr   c, .ret_579B                             ; $578A: $38 $0F
 
-    call GetEntityDropTimer                       ; $578C: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $578C: $CD $FB $0B
     call GetRandomByte                            ; $578F: $CD $0D $28
     and  $1F                                      ; $5792: $E6 $1F
     add  $40                                      ; $5794: $C6 $40

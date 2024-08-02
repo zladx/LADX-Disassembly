@@ -102,7 +102,7 @@ func_015_4750::
 .jr_475C
     res  DIALOG_BOX_BOTTOM_BIT, [hl]              ; $475C: $CB $BE
     call IncrementEntityState                     ; $475E: $CD $12 $3B
-    call GetEntityDropTimer                       ; $4761: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $4761: $CD $FB $0B
     ld   [hl], $30                                ; $4764: $36 $30
     ld   hl, wEntitiesOptions1Table               ; $4766: $21 $30 $C4
     add  hl, bc                                   ; $4769: $09
@@ -192,7 +192,7 @@ func_015_4780::
     jp   ClearEntitySpeed                         ; $47E0: $C3 $7F $3D
 
 jr_015_47E3:
-    call GetEntityDropTimer                       ; $47E3: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $47E3: $CD $FB $0B
     jr   nz, .jr_47F3                             ; $47E6: $20 $0B
 
     call GetEntityTransitionCountdown             ; $47E8: $CD $05 $0C
@@ -459,7 +459,7 @@ func_015_4977::
     jr   nz, jr_015_4990                          ; $497D: $20 $11
 
 label_015_497F:
-    call GetEntityDropTimer                       ; $497F: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $497F: $CD $FB $0B
     call GetRandomByte                            ; $4982: $CD $0D $28
     and  $1F                                      ; $4985: $E6 $1F
     add  $20                                      ; $4987: $C6 $20

@@ -68,7 +68,7 @@ TimerBombiteEntityHandler::
     jr   nz, .skipIncrementState                  ; $7D47: $20 $08
 
     call IncrementEntityState                     ; $7D49: $CD $12 $3B
-    call GetEntityDropTimer                       ; $7D4C: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $7D4C: $CD $FB $0B
     ld   [hl], $6F                                ; $7D4F: $36 $6F
 
 .skipIncrementState
@@ -161,7 +161,7 @@ TimerBombiteLitHandler::
     call ClearEntitySpeed                         ; $7DD1: $CD $7F $3D
 
 .skipClearSpeed
-    call GetEntityDropTimer                       ; $7DD4: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $7DD4: $CD $FB $0B
     jp   z, BombiteExplodeAndDisappear            ; $7DD7: $CA $BA $7E
 
     cp   $18                                      ; $7DDA: $FE $18
@@ -293,16 +293,16 @@ BouncingBombiteLitHandler::
     ld   hl, wEntitiesCollisionsTable             ; $7E8B: $21 $A0 $C2
     add  hl, bc                                   ; $7E8E: $09
     ld   a, [hl]                                  ; $7E8F: $7E
-    and  COLLISION_TYPE_VERTICAL                  ; $7E90: $E6 $03
-    jr   nz, .verticalCollision                   ; $7E92: $20 $07
+    and  $03                                      ; $7E90: $E6 $03
+    jr   nz, .horizontalCollision                 ; $7E92: $20 $07
 
     ld   a, [hl]                                  ; $7E94: $7E
-    and  COLLISION_TYPE_HORIZONTAL                ; $7E95: $E6 $0C
-    jr   nz, .horizontalCollision                 ; $7E97: $20 $0C
+    and  $0C                                      ; $7E95: $E6 $0C
+    jr   nz, .verticalCollision                   ; $7E97: $20 $0C
 
     jr   .collisionEnd                            ; $7E99: $18 $16
 
-.verticalCollision
+.horizontalCollision
     ld   hl, wEntitiesSpeedXTable                 ; $7E9B: $21 $40 $C2
     add  hl, bc                                   ; $7E9E: $09
     ld   a, [hl]                                  ; $7E9F: $7E
@@ -311,7 +311,7 @@ BouncingBombiteLitHandler::
     ld   [hl], a                                  ; $7EA2: $77
     jr   .playBumpJingle                          ; $7EA3: $18 $08
 
-.horizontalCollision
+.verticalCollision
     ld   hl, wEntitiesSpeedYTable                 ; $7EA5: $21 $50 $C2
     add  hl, bc                                   ; $7EA8: $09
     ld   a, [hl]                                  ; $7EA9: $7E

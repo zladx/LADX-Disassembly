@@ -39,8 +39,8 @@ GiantBubbleEntityHandler::
     ld   hl, wEntitiesCollisionsTable             ; $53BD: $21 $A0 $C2
     add  hl, bc                                   ; $53C0: $09
     ld   a, [hl]                                  ; $53C1: $7E
-    and  COLLISION_TYPE_VERTICAL                  ; $53C2: $E6 $03
-    jr   z, .verticalCollisionEnd                 ; $53C4: $28 $08
+    and  $03                                      ; $53C2: $E6 $03
+    jr   z, .horizontalCollisionEnd               ; $53C4: $28 $08
 
     ld   hl, wEntitiesSpeedXTable                 ; $53C6: $21 $40 $C2
     add  hl, bc                                   ; $53C9: $09
@@ -49,12 +49,12 @@ GiantBubbleEntityHandler::
     inc  a                                        ; $53CC: $3C
     ld   [hl], a                                  ; $53CD: $77
 
-.verticalCollisionEnd
+.horizontalCollisionEnd
     ld   hl, wEntitiesCollisionsTable             ; $53CE: $21 $A0 $C2
     add  hl, bc                                   ; $53D1: $09
     ld   a, [hl]                                  ; $53D2: $7E
-    and  COLLISION_TYPE_HORIZONTAL                ; $53D3: $E6 $0C
-    jr   z, .horizontalCollisionEnd               ; $53D5: $28 $08
+    and  $0C                                      ; $53D3: $E6 $0C
+    jr   z, .verticalCollisionEnd                 ; $53D5: $28 $08
 
     ld   hl, wEntitiesSpeedYTable                 ; $53D7: $21 $50 $C2
     add  hl, bc                                   ; $53DA: $09
@@ -63,5 +63,5 @@ GiantBubbleEntityHandler::
     inc  a                                        ; $53DD: $3C
     ld   [hl], a                                  ; $53DE: $77
 
-.horizontalCollisionEnd
+.verticalCollisionEnd
     ret                                           ; $53DF: $C9

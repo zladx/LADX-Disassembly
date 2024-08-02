@@ -7,9 +7,6 @@ PeaHatSpriteVariants::
     db $42, OAM_GBC_PAL_2 | OAMF_PAL0
     db $42, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 
-; NOTES:
-; - drop timer, used in place of transition countdown, due to decreasing slowly
-
 PeaHatEntityHandler::
     ld   de, PeaHatSpriteVariants                 ; $6709: $11 $01 $67
     call RenderActiveEntitySpritesPair            ; $670C: $CD $C0 $3B
@@ -89,7 +86,7 @@ PeaHatRestingHandler::
     dec  [hl]                                     ; $6775: $35
 
 .updateYSpeedEnd
-    call GetEntityDropTimer                       ; $6776: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $6776: $CD $FB $0B
     jr   nz, .skipIncrementState                  ; $6779: $20 $03
 
     call IncrementEntityState                     ; $677B: $CD $12 $3B
@@ -117,7 +114,7 @@ PeaHatTakingOffHandler::
     cp   $08                                      ; $6795: $FE $08
     jr   c, .skipIncrementState                   ; $6797: $38 $0E
 
-    call GetEntityDropTimer                       ; $6799: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $6799: $CD $FB $0B
     call GetRandomByte                            ; $679C: $CD $0D $28
     and  $1F                                      ; $679F: $E6 $1F
     add  $80                                      ; $67A1: $C6 $80
@@ -173,7 +170,7 @@ PeaHatFlyingHandler::
     ret                                           ; $67EA: $C9
 
 .reachedMaxHeight
-    call GetEntityDropTimer                       ; $67EB: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $67EB: $CD $FB $0B
     jr   nz, .skipIncrementState                  ; $67EE: $20 $06
 
     ld   [hl], $60                                ; $67F0: $36 $60

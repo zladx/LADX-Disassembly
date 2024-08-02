@@ -115,7 +115,7 @@ DropFairyEffectHandler::
     add  hl, de                                   ; $5DD3: $19
     ld   [hl], $30                                ; $5DD4: $36 $30
 
-    ld   hl, wEntitiesDropTimerTable              ; $5DD6: $21 $50 $C4
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $5DD6: $21 $50 $C4
     add  hl, de                                   ; $5DD9: $19
     ld   [hl], $80                                ; $5DDA: $36 $80
 

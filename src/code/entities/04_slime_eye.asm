@@ -158,7 +158,7 @@ SlimeEyeState1Handler::
     and  a                                        ; $4A5F: $A7
     jr   nz, .jr_4A67                             ; $4A60: $20 $05
 
-    call GetEntityDropTimer                       ; $4A62: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $4A62: $CD $FB $0B
     ld   [hl], $14                                ; $4A65: $36 $14
 
 .jr_4A67
@@ -554,7 +554,7 @@ jr_004_4E4F:
     jp   label_004_50EF                           ; $4E4F: $C3 $EF $50
 
 func_004_4E52::
-    call GetEntityDropTimer                       ; $4E52: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $4E52: $CD $FB $0B
     jr   z, .ret_4E5F                             ; $4E55: $28 $08
 
     ld   a, $02                                   ; $4E57: $3E $02
@@ -699,7 +699,7 @@ func_004_4EEB::
     and  a                                        ; $4F3A: $A7
     jr   nz, .jr_4F49                             ; $4F3B: $20 $0C
 
-    call GetEntityDropTimer                       ; $4F3D: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $4F3D: $CD $FB $0B
     ld   [hl], $0E                                ; $4F40: $36 $0E
     ld   hl, wEntitiesSpeedZTable                 ; $4F42: $21 $20 $C3
     add  hl, bc                                   ; $4F45: $09

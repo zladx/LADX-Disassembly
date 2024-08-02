@@ -16,7 +16,7 @@ BlainoEntityHandler::
     jr   nz, .jr_64EA                             ; $64E2: $20 $06
 
     inc  [hl]                                     ; $64E4: $34
-    call GetEntityDropTimer                       ; $64E5: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $64E5: $CD $FB $0B
     ld   [hl], $20                                ; $64E8: $36 $20
 
 .jr_64EA
@@ -136,7 +136,7 @@ func_018_6596::
     jr   label_018_65B8                           ; $659D: $18 $19
 
 .jr_659F
-    call GetEntityDropTimer                       ; $659F: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $659F: $CD $FB $0B
     jr   nz, ret_018_65CE                         ; $65A2: $20 $2A
 
     ld   hl, wEntitiesPrivateState1Table          ; $65A4: $21 $B0 $C2
@@ -350,7 +350,7 @@ ret_018_6729:
 label_018_672A:
     xor  a                                        ; $672A: $AF
     ld   [wD205], a                               ; $672B: $EA $05 $D2
-    call GetEntityDropTimer                       ; $672E: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $672E: $CD $FB $0B
     call GetRandomByte                            ; $6731: $CD $0D $28
     and  $0F                                      ; $6734: $E6 $0F
     add  $0C                                      ; $6736: $C6 $0C

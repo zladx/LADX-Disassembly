@@ -2147,7 +2147,7 @@ jr_017_557A:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $55C9: $21 $40 $C3
     add  hl, de                                   ; $55CC: $19
     ld   [hl], 2 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $55CD: $36 $C2
-    ld   hl, wEntitiesDropTimerTable              ; $55CF: $21 $50 $C4
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $55CF: $21 $50 $C4
     add  hl, de                                   ; $55D2: $19
     ld   [hl], $20                                ; $55D3: $36 $20
     ld   a, c                                     ; $55D5: $79
@@ -6118,7 +6118,7 @@ func_017_79A7::
     call func_017_7A01                            ; $79B0: $CD $01 $7A
     ld   de, Data_017_7987                        ; $79B3: $11 $87 $79
     call func_017_7A29                            ; $79B6: $CD $29 $7A
-    call GetEntityDropTimer                       ; $79B9: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $79B9: $CD $FB $0B
     ret  z                                        ; $79BC: $C8
 
     call UpdateEntityPosWithSpeed_17              ; $79BD: $CD $2D $7E

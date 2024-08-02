@@ -42,7 +42,7 @@ Data_004_6844::
     db   $00, $03, $01, $02
 
 func_004_6848::
-    call GetEntityDropTimer                       ; $6848: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $6848: $CD $FB $0B
     jr   nz, .jr_6852                             ; $684B: $20 $05
 
     ld   [hl], $10                                ; $684D: $36 $10
@@ -163,7 +163,7 @@ label_004_68E4:
     ret                                           ; $68FC: $C9
 
 func_004_68FD::
-    call GetEntityDropTimer                       ; $68FD: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $68FD: $CD $FB $0B
     jr   nz, .jr_6908                             ; $6900: $20 $06
 
     ld   [hl], $40                                ; $6902: $36 $40

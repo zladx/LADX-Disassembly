@@ -715,15 +715,15 @@ UpdateLinkWalkingAnimation_trampoline::
     call UpdateLinkWalkingAnimation               ; $0BF5: $CD $50 $1A
     jp   ReloadSavedBank                          ; $0BF8: $C3 $1D $08
 
-; Retrieve the drop timer for the given entity.
+; Retrieve the slow transition countdown for the given entity.
 ; Input:
 ;   bc   entity index
 ; Output:
-;   hl   address of the drop timer for this entity
-;   a    value of the drop timer for this entity
-;   z    whether the drop timer is zero
-GetEntityDropTimer::
-    ld   hl, wEntitiesDropTimerTable              ; $0BFB: $21 $50 $C4
+;   hl   address of the slow transition countdown for this entity
+;   a    value of the slow transition countdown for this entity
+;   z    whether the slow transition countdown is zero
+GetEntitySlowTransitionCountdown::
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $0BFB: $21 $50 $C4
     jr   IsZero                                   ; $0BFE: $18 $08
 
 ; Retrieve the private counter 1 for the given entity.
@@ -2455,7 +2455,7 @@ label_1653::
     ldh  a, [hIntersectedObjectTop]               ; $16A2: $F0 $CD
     add  a, $10                                   ; $16A4: $C6 $10
     ld   [hl], a                                  ; $16A6: $77
-    ld   hl, wEntitiesDropTimerTable              ; $16A7: $21 $50 $C4
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $16A7: $21 $50 $C4
     add  hl, de                                   ; $16AA: $19
     ld   [hl], $80                                ; $16AB: $36 $80
     ld   hl, wEntitiesPrivateCountdown1Table      ; $16AD: $21 $F0 $C2

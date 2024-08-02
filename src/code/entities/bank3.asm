@@ -409,7 +409,7 @@ EntityInitFireballShooter::
     jp   SetEntitySpriteVariant                   ; $49C5: $C3 $0C $3B
 
 EntityInitAntiKirby::
-    call GetEntityDropTimer                       ; $49C8: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $49C8: $CD $FB $0B
     call GetRandomByte                            ; $49CB: $CD $0D $28
     and  $3F                                      ; $49CE: $E6 $3F
     add  $10                                      ; $49D0: $C6 $10
@@ -929,7 +929,7 @@ EntityDestructionHandler::
     call ExecuteActiveEntityHandler_trampoline    ; $4C67: $CD $81 $3A
     call ReturnIfNonInteractive_03.allowInactiveEntity ; $4C6A: $CD $7E $7F
     call ApplyRecoilIfNeeded_03                   ; $4C6D: $CD $A9 $7F
-    call func_003_60B3                            ; $4C70: $CD $B3 $60
+    call BouncingEntityPhysics                    ; $4C70: $CD $B3 $60
 IF __OPTIMIZATIONS_1__
     jp   ClearEntitySpeed
 ELSE
@@ -1136,7 +1136,7 @@ EntityThrownHandler::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $4D9A: $21 $10 $C4
     add  hl, bc                                   ; $4D9D: $09
     ld   [hl], $02                                ; $4D9E: $36 $02
-    call func_003_60B3                            ; $4DA0: $CD $B3 $60
+    call BouncingEntityPhysics                    ; $4DA0: $CD $B3 $60
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $4DA3: $21 $10 $C4
     add  hl, bc                                   ; $4DA6: $09
     ld   [hl], b                                  ; $4DA7: $70
@@ -1211,7 +1211,7 @@ EntityStunnedHandler::
     call ExecuteActiveEntityHandler_trampoline    ; $4E07: $CD $81 $3A
     call ReturnIfNonInteractive_03.allowInactiveEntity ; $4E0A: $CD $7E $7F
     call ApplyRecoilIfNeeded_03                   ; $4E0D: $CD $A9 $7F
-    call func_003_60B3                            ; $4E10: $CD $B3 $60
+    call BouncingEntityPhysics                    ; $4E10: $CD $B3 $60
     call ClearEntitySpeed                         ; $4E13: $CD $7F $3D
     call func_003_6E2B                            ; $4E16: $CD $2B $6E
     ld   a, [wInventoryItems.BButtonSlot]         ; $4E19: $FA $00 $DB
@@ -1380,17 +1380,17 @@ EntityInitSecretSeashell::
     ld   [hl], $02                                ; $4EFF: $36 $02
     ldh  a, [hMapRoom]                            ; $4F01: $F0 $F6
     cp   UNKNOWN_ROOM_A4                          ; Overworld room A4 (1 east of Mabe's big bush field)
-    jr   z, .jr_4F0B                              ; $4F05: $28 $04
+    jr   z, .treeSeashell                         ; $4F05: $28 $04
 
     cp   UNKNOWN_ROOM_D2                          ; overworld room D2 (1 west of Tail Cave)
-    jr   nz, jr_003_4F0F                          ; $4F09: $20 $04
+    jr   nz, .treeSeashellEnd                     ; $4F09: $20 $04
 
-.jr_4F0B
+.treeSeashell
     dec  [hl]                                     ; $4F0B: $35
     call EntityInitWithShiftedPosition            ; $4F0C: $CD $83 $4F
 
-jr_003_4F0F:
-    jp   jr_003_4F24                              ; $4F0F: $C3 $24 $4F
+.treeSeashellEnd
+    jp   SetHiddenDroppableOptions1               ; $4F0F: $C3 $24 $4F
 
 func_003_4F12::
     ld   hl, wEntitiesPrivateState3Table          ; $4F12: $21 $D0 $C2
@@ -1398,18 +1398,18 @@ func_003_4F12::
     ld   [hl], $01                                ; $4F16: $36 $01
     ld   a, [wIsIndoor]                           ; $4F18: $FA $A5 $DB
     and  a                                        ; $4F1B: $A7
-    jr   z, jr_003_4F24                           ; $4F1C: $28 $06
+    jr   z, SetHiddenDroppableOptions1            ; $4F1C: $28 $06
 
-EntityInitPermanentDroppable::
+EntityInitDiggableBushOrPotDroppable::
     ld   hl, wEntitiesPrivateState3Table          ; $4F1E: $21 $D0 $C2
     add  hl, bc                                   ; $4F21: $09
     ld   [hl], $02                                ; $4F22: $36 $02
 
-jr_003_4F24:
+SetHiddenDroppableOptions1::
     ld   hl, wEntitiesOptions1Table               ; $4F24: $21 $30 $C4
     add  hl, bc                                   ; $4F27: $09
     ld   a, [hl]                                  ; $4F28: $7E
-    or   %00010001                                ; $4F29: $F6 $11
+    or   ENTITY_OPT1_IMMUNE_WATER_PIT|ENTITY_OPT1_MOVE_PIT_WATER ; $4F29: $F6 $11
     ld   [hl], a                                  ; $4F2B: $77
     ret                                           ; $4F2C: $C9
 
@@ -1479,7 +1479,7 @@ EntityInitWarp::
     call IncrementEntityState                     ; $4F75: $CD $12 $3B
     jr   EntityInitWithShiftedPosition            ; $4F78: $18 $09
 
-EntityInitTemporaryDroppable::
+EntityInitTreeOrPotDroppable::
     call func_003_4F12                            ; $4F7A: $CD $12 $4F
     ld   a, [wIsIndoor]                           ; $4F7D: $FA $A5 $DB
     and  a                                        ; $4F80: $A7
@@ -1518,7 +1518,7 @@ EntityInitWithShiftedXPosition::
     jr   EntityShiftPosition.shiftBy8             ; $4FA7: $18 $E9
 
 SetDroppableDefaultTimer::
-    call GetEntityDropTimer                       ; $4FA9: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $4FA9: $CD $FB $0B
     ld   [hl], $80                                ; $4FAC: $36 $80
     ret                                           ; $4FAE: $C9
 
@@ -2526,7 +2526,7 @@ SpawnEnemyDrop::
     add  hl, de                                   ; $568A: $19
     ld   [hl], a                                  ; $568B: $77
     ; configure timers
-    ld   hl, wEntitiesDropTimerTable              ; $568C: $21 $50 $C4
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $568C: $21 $50 $C4
     add  hl, de                                   ; $568F: $19
     ld   [hl], DROP_DESPAWN_TIME                  ; $5690: $36 $80
     ld   hl, wEntitiesPrivateCountdown1Table      ; $5692: $21 $F0 $C2
@@ -2775,7 +2775,7 @@ HeartContainerEntityHandler::
     ld   de, HeartContainerSpriteVariants         ; $59DC: $11 $D8 $59
     call RenderActiveEntitySpritesPair            ; $59DF: $CD $C0 $3B
     call GetEntityTransitionCountdown             ; $59E2: $CD $05 $0C
-    jp   z, label_003_60AA                        ; $59E5: $CA $AA $60
+    jp   z, PickableHandler                       ; $59E5: $CA $AA $60
 
     ; Start of when item is picked up
     dec  a                                        ; $59E8: $3D
@@ -3027,7 +3027,7 @@ DrawHeartPiecesInDialog::
 HeartPieceState0Handler::
     ld   de, HeartPieceEntitySprite               ; $5B52: $11 $4D $5A
     call RenderActiveEntitySpritesPair            ; $5B55: $CD $C0 $3B
-    jp   label_003_60AA                           ; $5B58: $C3 $AA $60
+    jp   PickableHandler                          ; $5B58: $C3 $AA $60
 
 Data_003_5B5B::
     db   $AE, $14
@@ -3040,11 +3040,11 @@ GuardianAcornEntityHandler::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 PieceOfPowerSpriteVariants::
 .variant0
-    db $14, $02
-    db $14, $22
+    db $14, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $14, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $14, $14
-    db $14, $34
+    db $14, OAM_GBC_PAL_4 | OAMF_PAL1
+    db $14, OAM_GBC_PAL_4 | OAMF_PAL1 | OAMF_XFLIP
 
 PieceOfPowerEntityHandler::
     ld   de, PieceOfPowerSpriteVariants           ; $5B6D: $11 $65 $5B
@@ -3057,7 +3057,7 @@ PieceOfPowerEntityHandler::
     call SetEntitySpriteVariant                   ; $5B7A: $CD $0C $3B
 
 jr_003_5B7D:
-    jp   label_003_60AA                           ; $5B7D: $C3 $AA $60
+    jp   PickableHandler                          ; $5B7D: $C3 $AA $60
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 IronMasksMaskSpriteVariants::
@@ -3072,7 +3072,7 @@ IronMasksMaskEntityHandler::
     ld   de, IronMasksMaskSpriteVariants          ; $5B88: $11 $80 $5B
     call RenderActiveEntitySpritesPair            ; $5B8B: $CD $C0 $3B
     call ReturnIfNonInteractive_03                ; $5B8E: $CD $78 $7F
-    call func_003_62AF                            ; $5B91: $CD $AF $62
+    call PickableHandleGrabbedByItemIfNeeded      ; $5B91: $CD $AF $62
     ret                                           ; $5B94: $C9
 
 Data_003_5B95::
@@ -3105,7 +3105,7 @@ SwordShieldPickableEntityHandler::
 
 SwordShieldPickableState0Handler::
     call GetEntityTransitionCountdown             ; $5BBA: $CD $05 $0C
-    jp   z, label_003_60AA                        ; $5BBD: $CA $AA $60
+    jp   z, PickableHandler                       ; $5BBD: $CA $AA $60
 
     cp   $10                                      ; $5BC0: $FE $10
     jr   nz, .playSwordFanfare                    ; $5BC2: $20 $07
@@ -3127,7 +3127,7 @@ SwordShieldPickableState0Handler::
     ld   a, MUSIC_OVERWORLD                       ; $5BD3: $3E $05
     ldh  [hDefaultMusicTrack], a                  ; $5BD5: $E0 $B0
     ldh  [hNextDefaultMusicTrack], a              ; $5BD7: $E0 $BF
-    call GetEntityDropTimer                       ; $5BD9: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $5BD9: $CD $FB $0B
     ld   [hl], $52                                ; $5BDC: $36 $52
     call IncrementEntityState                     ; $5BDE: $CD $12 $3B
 
@@ -3136,7 +3136,7 @@ SwordShieldPickableState0Handler::
 
 SwordShieldPickableState1Handler::
     call HoldEntityAboveLink                      ; $5BE4: $CD $17 $5A
-    call GetEntityDropTimer                       ; $5BE7: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $5BE7: $CD $FB $0B
     ret  nz                                       ; $5BEA: $C0
 
     ; Make Link perform a spin-attack
@@ -3206,7 +3206,7 @@ label_003_5C49:
     ld   de, HookshotSpriteData                   ; $5C50: $11 $47 $5C
     call RenderActiveEntitySprite                 ; $5C53: $CD $77 $3C
     call GetEntityTransitionCountdown             ; $5C56: $CD $05 $0C
-    jp   z, label_003_60AA                        ; $5C59: $CA $AA $60
+    jp   z, PickableHandler                       ; $5C59: $CA $AA $60
 
     cp   $10                                      ; $5C5C: $FE $10
     jr   nz, .skipUpdateSpeedY                             ; $5C5E: $20 $07
@@ -3308,17 +3308,17 @@ ENDC
 
 label_003_5CD6:
     call ReturnIfNonInteractive_03                ; $5CD6: $CD $78 $7F
-    call func_003_62AF                            ; $5CD9: $CD $AF $62
+    call PickableHandleGrabbedByItemIfNeeded      ; $5CD9: $CD $AF $62
     ld   hl, wEntitiesPosZTable                   ; $5CDC: $21 $10 $C3
     add  hl, bc                                   ; $5CDF: $09
     ld   a, [hl]                                  ; $5CE0: $7E
     and  a                                        ; $5CE1: $A7
     jr   nz, .jr_5CE7                             ; $5CE2: $20 $03
 
-    call func_003_62EB                            ; $5CE4: $CD $EB $62
+    call PickableCollectIfNeeded                  ; $5CE4: $CD $EB $62
 
 .jr_5CE7
-    jp   func_003_60B3                            ; $5CE7: $C3 $B3 $60
+    jp   BouncingEntityPhysics                    ; $5CE7: $C3 $B3 $60
 
 CheckForEntityFallingDownQuicksandHole::
     ; This is called from the bomb code as well.
@@ -3373,21 +3373,20 @@ CheckForEntityFallingDownQuicksandHole::
     and  a                                        ; $5D34: $A7
     ret                                           ; $5D35: $C9
 
-Data_003_5D36::
-    db   $A8, $14
+DroppableHeartSprite::
+    db $A8, OAM_GBC_PAL_4 | OAMF_PAL1
 
 DroppableHeartEntityHandler::
-    call DroppableAppearOrReturnIfNeeded          ; $5D38: $CD $DE $61
+    call DroppableRevealOrReturnIfNeeded          ; $5D38: $CD $DE $61
     call DroppableDisappearIfNeeded               ; $5D3B: $CD $8C $60
-    ld   de, Data_003_5D36                        ; $5D3E: $11 $36 $5D
+    ld   de, DroppableHeartSprite                 ; $5D3E: $11 $36 $5D
     call RenderActiveEntitySprite                 ; $5D41: $CD $77 $3C
-    jp   label_003_60AA                           ; $5D44: $C3 $AA $60
+    jp   PickableHandler                          ; $5D44: $C3 $AA $60
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-SleepyToadstoolSpriteVariants::
-.variant0
-    db $5E, $02
-    db $5E, $22
+SleepyToadstoolSprite::
+    db $5E, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $5E, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 
 SleepyToadstoolEntityHandler::
     ld   hl, wHasToadstool                        ; $5D4B: $21 $4B $DB
@@ -3395,10 +3394,10 @@ SleepyToadstoolEntityHandler::
     or   [hl]                                     ; $5D51: $B6
     jp   nz, UnloadEntityAndReturn                ; $5D52: $C2 $8D $3F
 
-    ld   de, SleepyToadstoolSpriteVariants        ; $5D55: $11 $47 $5D
+    ld   de, SleepyToadstoolSprite                ; $5D55: $11 $47 $5D
     call RenderActiveEntitySpritesPair            ; $5D58: $CD $C0 $3B
     call GetEntityTransitionCountdown             ; $5D5B: $CD $05 $0C
-    jp   z, label_003_60AA                        ; $5D5E: $CA $AA $60
+    jp   z, PickableHandler                       ; $5D5E: $CA $AA $60
 
     cp   $10                                      ; $5D61: $FE $10
     jr   nz, .jr_5D6C                             ; $5D63: $20 $07
@@ -3464,7 +3463,7 @@ SirensInstrumentState2Handler::
     call func_006_783C_trampoline                 ; $5DD9: $CD $76 $3E
     ld   a, $01                                   ; $5DDC: $3E $01
     ld   [wC167], a                               ; $5DDE: $EA $67 $C1
-    call GetEntityDropTimer                       ; $5DE1: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $5DE1: $CD $FB $0B
     jr   nz, animateSirensInstrumentPickup        ; $5DE4: $20 $43
 
     call UnloadEntity                             ; $5DE6: $CD $8D $3F
@@ -3650,7 +3649,7 @@ ENDC
 
 func_003_5ED5::
     call GetEntityTransitionCountdown             ; $5ED5: $CD $05 $0C
-    jp   z, label_003_60AA                        ; $5ED8: $CA $AA $60
+    jp   z, PickableHandler                       ; $5ED8: $CA $AA $60
 
     cp   $10                                      ; $5EDB: $FE $10
     jr   nz, .jr_5EFE                             ; $5EDD: $20 $1F
@@ -3764,7 +3763,7 @@ func_003_5F33::
     ld   hl, wEntitiesPrivateState1Table          ; $5F50: $21 $B0 $C2
     add  hl, de                                   ; $5F53: $19
     ld   [hl], $02                                ; $5F54: $36 $02
-    ld   hl, wEntitiesDropTimerTable              ; $5F56: $21 $50 $C4
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $5F56: $21 $50 $C4
     add  hl, de                                   ; $5F59: $19
     ld   [hl], $80                                ; $5F5A: $36 $80
     jp   IncrementEntityState                     ; $5F5C: $C3 $12 $3B
@@ -3844,19 +3843,19 @@ ENDC
 func_003_5FBF::
     ret                                           ; $5FBF: $C9
 
-Data_003_5FC0::
-    db   $80, $15
+DroppableBombsSprite::
+    db $80, OAM_GBC_PAL_5 | OAMF_PAL1
 
 DroppableBombsEntityHandler::
-    call DroppableAppearOrReturnIfNeeded          ; $5FC2: $CD $DE $61
+    call DroppableRevealOrReturnIfNeeded          ; $5FC2: $CD $DE $61
     call DroppableDisappearIfNeeded               ; $5FC5: $CD $8C $60
-    ld   de, Data_003_5FC0                        ; $5FC8: $11 $C0 $5F
+    ld   de, DroppableBombsSprite                 ; $5FC8: $11 $C0 $5F
     call RenderActiveEntitySprite                 ; $5FCB: $CD $77 $3C
-    jp   label_003_60AA                           ; $5FCE: $C3 $AA $60
+    jp   PickableHandler                          ; $5FCE: $C3 $AA $60
 
 ; Data for loading secret seashell when bush is clipped (and when dug from ground)
-data_003_5FD1::
-    db   $9E, $14
+DroppableSeashellSprite::
+    db $9E, OAM_GBC_PAL_4 | OAMF_PAL1
 
 DroppableSeashellEntityHandler::
     ld   a, [wSwordLevel]                         ; $5FD3: $FA $4E $DB
@@ -3876,24 +3875,24 @@ DroppableSeashellEntityHandler::
     jp   z, UnloadEntityAndReturn                 ; $5FEC: $CA $8D $3F
 
 .jr_5FEF
-    call DroppableAppearOrReturnIfNeeded          ; $5FEF: $CD $DE $61
-    ld   de, data_003_5FD1                        ; $5FF2: $11 $D1 $5F
+    call DroppableRevealOrReturnIfNeeded          ; $5FEF: $CD $DE $61
+    ld   de, DroppableSeashellSprite              ; $5FF2: $11 $D1 $5F
     call RenderActiveEntitySprite                 ; $5FF5: $CD $77 $3C
-    jp   label_003_60AA                           ; $5FF8: $C3 $AA $60
+    jp   PickableHandler                          ; $5FF8: $C3 $AA $60
 
-Data_003_5FFB::
-    db   $CA, $14
+HidingSlimeKeySprite::
+    db $CA, OAM_GBC_PAL_4 | OAMF_PAL1
 
 HidingSlimeKeyEntityHandler::
     ldh  a, [hRoomStatus]                         ; $5FFD: $F0 $F8
     and  ROOM_STATUS_EVENT_1                      ; $5FFF: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $6001: $C2 $8D $3F
 
-    call DroppableAppearOrReturnIfNeeded          ; $6004: $CD $DE $61
-    ld   de, Data_003_5FFB                        ; $6007: $11 $FB $5F
+    call DroppableRevealOrReturnIfNeeded          ; $6004: $CD $DE $61
+    ld   de, HidingSlimeKeySprite                 ; $6007: $11 $FB $5F
     call RenderActiveEntitySprite                 ; $600A: $CD $77 $3C
     call GetEntityTransitionCountdown             ; $600D: $CD $05 $0C
-    jp   z, label_003_60AA                        ; $6010: $CA $AA $60
+    jp   z, PickableHandler                       ; $6010: $CA $AA $60
 
     cp   $10                                      ; $6013: $FE $10
     jr   nz, jr_003_604C                          ; $6015: $20 $35
@@ -3945,8 +3944,8 @@ ELSE
     jp   HoldEntityAboveLink                      ; $6052: $C3 $17 $5A
 ENDC
 
-Data_003_6055::
-    db   $8E, $16
+DroppableMagicPowderSprite::
+    db $8E, OAM_GBC_PAL_6 | OAMF_PAL1
 
 DroppableMagicPowderEntityHandler::
     ld   a, [wIsIndoor]                           ; $6057: $FA $A5 $DB
@@ -3963,27 +3962,27 @@ DroppableMagicPowderEntityHandler::
     jp   nz, UnloadEntityAndReturn                ; $6067: $C2 $8D $3F
 
 jr_003_606A:
-    call DroppableAppearOrReturnIfNeeded          ; $606A: $CD $DE $61
+    call DroppableRevealOrReturnIfNeeded          ; $606A: $CD $DE $61
     call DroppableDisappearIfNeeded               ; $606D: $CD $8C $60
-    ld   de, Data_003_6055                        ; $6070: $11 $55 $60
+    ld   de, DroppableMagicPowderSprite           ; $6070: $11 $55 $60
     call RenderActiveEntitySprite                 ; $6073: $CD $77 $3C
-    jp   label_003_60AA                           ; $6076: $C3 $AA $60
+    jp   PickableHandler                          ; $6076: $C3 $AA $60
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-DroppableArrowSpriteVariants::
-.variant0
-    db $2A, $41
-    db $2A, $61
+DroppableArrowSprite::
+    db $2A, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_YFLIP
+    db $2A, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
 
 DroppableArrowsEntityHandler::
-    call DroppableAppearOrReturnIfNeeded          ; $607D: $CD $DE $61
+    call DroppableRevealOrReturnIfNeeded          ; $607D: $CD $DE $61
     call DroppableDisappearIfNeeded               ; $6080: $CD $8C $60
-    ld   de, DroppableArrowSpriteVariants         ; $6083: $11 $79 $60
+    ld   de, DroppableArrowSprite                 ; $6083: $11 $79 $60
     call RenderActiveEntitySpritesPair            ; $6086: $CD $C0 $3B
-    jp   label_003_60AA                           ; $6089: $C3 $AA $60
+    jp   PickableHandler                          ; $6089: $C3 $AA $60
 
+; After enough time, fade away and disappear.
 DroppableDisappearIfNeeded::
-    call GetEntityDropTimer                       ; $608C: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $608C: $CD $FB $0B
     cp   $1C                                      ; $608F: $FE $1C
     ret  nc                                       ; $6091: $D0
 
@@ -3995,32 +3994,35 @@ DroppableDisappearIfNeeded::
     jp   SetEntitySpriteVariant                   ; $6099: $C3 $0C $3B
 
 DroppableRupeeSprite::
-    db   $A6, OAM_GBC_PAL_5 | OAMF_PAL1
+    db $A6, OAM_GBC_PAL_5 | OAMF_PAL1
 
 DroppableRupeeEntityHandler::
-    call DroppableAppearOrReturnIfNeeded          ; $609E: $CD $DE $61
+    call DroppableRevealOrReturnIfNeeded          ; $609E: $CD $DE $61
     call DroppableDisappearIfNeeded               ; $60A1: $CD $8C $60
     ld   de, DroppableRupeeSprite                 ; $60A4: $11 $9C $60
     call RenderActiveEntitySprite                 ; $60A7: $CD $77 $3C
+    ; fallthrough
 
-label_003_60AA:
+PickableHandler::
     call ReturnIfNonInteractive_03                ; $60AA: $CD $78 $7F
-    call func_003_62AF                            ; $60AD: $CD $AF $62
-    call func_003_62EB                            ; $60B0: $CD $EB $62
+    call PickableHandleGrabbedByItemIfNeeded      ; $60AD: $CD $AF $62
+    call PickableCollectIfNeeded                  ; $60B0: $CD $EB $62
+    ; fallthrough
 
-func_003_60B3::
+BouncingEntityPhysics::
     call UpdateEntityPosWithSpeed_03              ; $60B3: $CD $25 $7F
     call func_003_6B7B                            ; $60B6: $CD $7B $6B
     call DefaultEntityPhysics                     ; $60B9: $CD $93 $78
     ldh  a, [hIsSideScrolling]                    ; $60BC: $F0 $F9
     and  a                                        ; $60BE: $A7
-    jr   z, .jr_60E3                              ; $60BF: $28 $22
+    jr   z, .sidescrollingEnd                     ; $60BF: $28 $22
 
+    ; If colliding with the ground, bounce. Otherwise, return.
     ld   hl, wEntitiesCollisionsTable             ; $60C1: $21 $A0 $C2
     add  hl, bc                                   ; $60C4: $09
     ld   a, [hl]                                  ; $60C5: $7E
     and  $08                                      ; $60C6: $E6 $08
-    jp   z, ret_003_6156                          ; $60C8: $CA $56 $61
+    jp   z, .return                               ; $60C8: $CA $56 $61
 
     ld   hl, wEntitiesPosYTable                   ; $60CB: $21 $10 $C2
     add  hl, bc                                   ; $60CE: $09
@@ -4034,16 +4036,17 @@ func_003_60B3::
     cpl                                           ; $60DA: $2F
     sra  a                                        ; $60DB: $CB $2F
     cp   $F8                                      ; $60DD: $FE $F8
-    jr   c, jr_003_6112                           ; $60DF: $38 $31
+    jr   c, .makeBouncingNoise                    ; $60DF: $38 $31
 
-    jr   jr_003_6103                              ; $60E1: $18 $20
+    jr   .clearZSpeedEnd                          ; $60E1: $18 $20
 
-.jr_60E3
+.sidescrollingEnd
+    ; If colliding with the ground, bounce. Otherwise, return.
     ld   hl, wEntitiesPosZTable                   ; $60E3: $21 $10 $C3
     add  hl, bc                                   ; $60E6: $09
     ld   a, [hl]                                  ; $60E7: $7E
     and  $80                                      ; $60E8: $E6 $80
-    jr   z, ret_003_6156                          ; $60EA: $28 $6A
+    jr   z, .return                               ; $60EA: $28 $6A
 
     xor  a                                        ; $60EC: $AF
     ld   [hl], a                                  ; $60ED: $77
@@ -4053,15 +4056,15 @@ func_003_60B3::
     ld   hl, wEntitiesSpeedZTable                 ; $60F3: $21 $20 $C3
     add  hl, bc                                   ; $60F6: $09
     cp   $02                                      ; $60F7: $FE $02
-    jr   z, jr_003_6103                           ; $60F9: $28 $08
+    jr   z, .clearZSpeedEnd                       ; $60F9: $28 $08
 
     ld   a, [hl]                                  ; $60FB: $7E
     sra  a                                        ; $60FC: $CB $2F
     cpl                                           ; $60FE: $2F
     cp   $07                                      ; $60FF: $FE $07
-    jr   nc, jr_003_6112                          ; $6101: $30 $0F
+    jr   nc, .makeBouncingNoise                   ; $6101: $30 $0F
 
-jr_003_6103:
+.clearZSpeedEnd
     xor  a                                        ; $6103: $AF
     push hl                                       ; $6104: $E5
     ld   hl, wEntitiesSpeedXTable                 ; $6105: $21 $40 $C2
@@ -4071,20 +4074,21 @@ jr_003_6103:
     add  hl, bc                                   ; $610D: $09
     ld   [hl], a                                  ; $610E: $77
     pop  hl                                       ; $610F: $E1
-    jr   jr_003_6136                              ; $6110: $18 $24
+    jr   .makeBouncingNoiseEnd                    ; $6110: $18 $24
 
-jr_003_6112:
+.makeBouncingNoise
     push af                                       ; $6112: $F5
     push hl                                       ; $6113: $E5
 
+    ; If key or bomb, make appropriate sound
     ldh  a, [hActiveEntityType]                   ; $6114: $F0 $EB
     cp   ENTITY_KEY_DROP_POINT                    ; $6116: $FE $30
-    jr   nz, .keyDropPointEnd                     ; $6118: $20 $06
+    jr   nz, .keyEnd                              ; $6118: $20 $06
 
     ld   a, NOISE_SFX_CLINK                       ; $611A: $3E $17
     ldh  [hNoiseSfx], a                           ; $611C: $E0 $F4
     jr   .bombEnd                                 ; $611E: $18 $14
-.keyDropPointEnd
+.keyEnd
 
     cp   ENTITY_BOMB                              ; $6120: $FE $02
     jr   nz, .bombEnd                             ; $6122: $20 $10
@@ -4095,7 +4099,7 @@ jr_003_6112:
     and  a                                        ; $6129: $A7
     jr   z, .bombEnd                              ; $612A: $28 $08
 
-    cp   $02                                      ; $612C: $FE $02
+    cp   ENTITY_STATUS_FALLING                    ; $612C: $FE $02
     jr   z, .bombEnd                              ; $612E: $28 $04
 
     ld   a, JINGLE_BUMP                           ; $6130: $3E $09
@@ -4105,36 +4109,38 @@ jr_003_6112:
     pop  hl                                       ; $6134: $E1
     pop  af                                       ; $6135: $F1
 
-jr_003_6136:
+.makeBouncingNoiseEnd
+    ; Halve x speed
     ld   [hl], a                                  ; $6136: $77
     ld   hl, wEntitiesSpeedXTable                 ; $6137: $21 $40 $C2
     add  hl, bc                                   ; $613A: $09
     ld   a, [hl]                                  ; $613B: $7E
     sra  a                                        ; $613C: $CB $2F
     cp   $FF                                      ; $613E: $FE $FF
-    jr   nz, .jr_6143                             ; $6140: $20 $01
+    jr   nz, .clearXSpeedEnd                      ; $6140: $20 $01
 
     xor  a                                        ; $6142: $AF
 
-.jr_6143
+.clearXSpeedEnd
+    ; If not side scrolling, also halve y speed
     ld   [hl], a                                  ; $6143: $77
     ldh  a, [hIsSideScrolling]                    ; $6144: $F0 $F9
     and  a                                        ; $6146: $A7
-    jr   nz, ret_003_6156                         ; $6147: $20 $0D
+    jr   nz, .return                              ; $6147: $20 $0D
 
     ld   hl, wEntitiesSpeedYTable                 ; $6149: $21 $50 $C2
     add  hl, bc                                   ; $614C: $09
     ld   a, [hl]                                  ; $614D: $7E
     sra  a                                        ; $614E: $CB $2F
     cp   $FF                                      ; $6150: $FE $FF
-    jr   nz, .jr_6155                             ; $6152: $20 $01
+    jr   nz, .clearYSpeedEnd                      ; $6152: $20 $01
 
     xor  a                                        ; $6154: $AF
 
-.jr_6155
+.clearYSpeedEnd
     ld   [hl], a                                  ; $6155: $77
 
-ret_003_6156:
+.return
     ret                                           ; $6156: $C9
 
 include "code/entities/03_droppable_fairy.asm"
@@ -4169,7 +4175,8 @@ func_003_61C0::
 ret_003_61DD:
     ret                                           ; $61DD: $C9
 
-DroppableAppearOrReturnIfNeeded::
+; For hidden items, either stay hidden (by returning early), or be revealed if dug up, etc.
+DroppableRevealOrReturnIfNeeded::
     ld   hl, wEntitiesPrivateState3Table          ; $61DE: $21 $D0 $C2
     add  hl, bc                                   ; $61E1: $09
     ld   a, [hl]                                  ; $61E2: $7E
@@ -4184,12 +4191,12 @@ DroppableAppearOrReturnIfNeeded::
     cp   $02                                      ; $61EF: $FE $02
     jr   nz, .checkPegasusBootsCollision          ; $61F1: $20 $50
 
-    ; If privateState3 = 2 (heart/powder/seashell/leaf/indoor)
+    ; Items buried, hidden in bushes, or indoors:
     ldh  a, [hActiveEntityType]                   ; $61F3: $F0 $EB
     cp   ENTITY_DROPPABLE_SECRET_SEASHELL         ; $61F5: $FE $3D
     jr   z, .skipNotActiveIfIndoors               ; $61F7: $28 $07 (???: If a seashell, jump?)
 
-    ; If indoors and not a seashell, can't be dug up nor knocked down with the Pegasus Boots
+    ; If indoors and not a seashell, the item can't be dug up or dropped by bushes.
     ld   a, [wIsIndoor]                           ; $61F9: $FA $A5 $DB
     and  a                                        ; $61FC: $A7
     jp   nz, .remainInvisible                     ; $61FD: $C2 $9C $62
@@ -4221,7 +4228,7 @@ DroppableAppearOrReturnIfNeeded::
 .activeIfOnShortGrass
     ldh  a, [hObjectUnderEntity]                  ; $6227: $F0 $AF
     cp   OBJECT_SHORT_GRASS                       ; $6229: $FE $04
-    jr   z, .setOptionsAndAppear                  ; $622B: $28 $0E
+    jr   z, .setOptionsAndReveal                  ; $622B: $28 $0E
 
     jr   .activeIfOnShovelHole                    ; $622D: $18 $06
 
@@ -4233,23 +4240,23 @@ DroppableAppearOrReturnIfNeeded::
 .activeIfOnShovelHole
     ldh  a, [hObjectUnderEntity]                  ; $6235: $F0 $AF
     cp   OBJECT_SHOVEL_HOLE                       ; $6237: $FE $CC
-    jr   nz, .remainInvisible                          ; $6239: $20 $61
+    jr   nz, .remainInvisible                     ; $6239: $20 $61
 
-.setOptionsAndAppear
+.setOptionsAndReveal
     ld   hl, wEntitiesOptions1Table               ; $623B: $21 $30 $C4
     add  hl, bc                                   ; $623E: $09
     ld   [hl], ENTITY_OPT1_SPLASH_IN_WATER|ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL ; $623F: $36 $0A
-    jr   .appear                         ; $6241: $18 $28
+    jr   .reveal                                  ; $6241: $18 $28
 
-; if privateState3 = 1
 .checkPegasusBootsCollision
+    ; Items knocked down with the Pegasus Boots:
     ld   a, [wScreenShakeCountdown]               ; $6243: $FA $57 $C1
     and  a                                        ; $6246: $A7
-    jr   z, .remainInvisible                           ; $6247: $28 $53
+    jr   z, .remainInvisible                      ; $6247: $28 $53
 
     ld   a, [wPegasusBootsCollisionCountdown]     ; $6249: $FA $78 $C1
     and  a                                        ; $624C: $A7
-    jr   z, .remainInvisible                           ; $624D: $28 $4D
+    jr   z, .remainInvisible                      ; $624D: $28 $4D
 
     ldh  a, [hActiveEntityPosX]                   ; $624F: $F0 $EE
     add  $08                                      ; $6251: $C6 $08
@@ -4257,7 +4264,7 @@ DroppableAppearOrReturnIfNeeded::
     sub  [hl]                                     ; $6256: $96
     add  $10                                      ; $6257: $C6 $10
     cp   $20                                      ; $6259: $FE $20
-    jr   nc, .remainInvisible                          ; $625B: $30 $3F
+    jr   nc, .remainInvisible                     ; $625B: $30 $3F
 
     ldh  a, [hActiveEntityPosY]                   ; $625D: $F0 $EF
     add  $08                                      ; $625F: $C6 $08
@@ -4265,9 +4272,10 @@ DroppableAppearOrReturnIfNeeded::
     sub  [hl]                                     ; $6264: $96
     add  $10                                      ; $6265: $C6 $10
     cp   $20                                      ; $6267: $FE $20
-    jr   nc, .remainInvisible                          ; $6269: $30 $31
+    jr   nc, .remainInvisible                     ; $6269: $30 $31
 
-.appear
+.reveal
+    ; Items revealed are thrown away from Link
     ld   hl, wEntitiesPrivateState3Table          ; $626B: $21 $D0 $C2
     add  hl, bc                                   ; $626E: $09
     ld   [hl], b                                  ; $626F: $70
@@ -4293,7 +4301,7 @@ DroppableAppearOrReturnIfNeeded::
     ld   hl, wEntitiesSpeedZTable                 ; $6291: $21 $20 $C3
     add  hl, bc                                   ; $6294: $09
     ld   [hl], $20                                ; $6295: $36 $20
-    call GetEntityDropTimer                       ; $6297: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $6297: $CD $FB $0B
     ld   [hl], $80                                ; $629A: $36 $80
 
 .remainInvisible
@@ -4302,7 +4310,7 @@ DroppableAppearOrReturnIfNeeded::
 .return
     ret                                           ; $629D: $C9
 
-Data_003_629E::
+PickableCanBeCollectedBySwordTable::
     ; Indexed by entity type
     db   TRUE                                     ; ENTITY_DROPPABLE_HEART
     db   TRUE                                     ; ENTITY_DROPPABLE_RUPEE
@@ -4322,12 +4330,13 @@ Data_003_629E::
     db   FALSE                                    ; ENTITY_HIDING_SLIME_KEY
     db   FALSE                                    ; ENTITY_DROPPABLE_SECRET_SEASHELL
 
-func_003_62AF::
+; If an item has been grabbed with the Boomerang or Hookshot, this function handles that
+PickableHandleGrabbedByItemIfNeeded::
     ld   hl, wEntitiesPrivateState5Table          ; $62AF: $21 $90 $C3
     add  hl, bc                                   ; $62B2: $09
     ld   a, [hl]                                  ; $62B3: $7E
     and  a                                        ; $62B4: $A7
-    jr   z, ret_003_62EA                          ; $62B5: $28 $33
+    jr   z, .return                               ; $62B5: $28 $33
 
     pop  de                                       ; $62B7: $D1
     dec  a                                        ; $62B8: $3D
@@ -4337,18 +4346,18 @@ func_003_62AF::
     add  hl, de                                   ; $62BE: $19
     ld   a, [hl]                                  ; $62BF: $7E
     and  a                                        ; $62C0: $A7
-    jr   z, collectPickableItem                   ; $62C1: $28 $4E
+    jr   z, PickableCollectIfNeeded.collect       ; $62C1: $28 $4E
 
     ld   hl, wEntitiesTypeTable                   ; $62C3: $21 $A0 $C3
     add  hl, de                                   ; $62C6: $19
     ld   a, [hl]                                  ; $62C7: $7E
-    cp   $01                                      ; $62C8: $FE $01
-    jr   z, .jr_62D0                              ; $62CA: $28 $04
+    cp   ENTITY_BOOMERANG                         ; $62C8: $FE $01
+    jr   z, .snapToBoomerangOrHookshot            ; $62CA: $28 $04
 
-    cp   $03                                      ; $62CC: $FE $03
-    jr   nz, collectPickableItem                  ; $62CE: $20 $41
+    cp   ENTITY_HOOKSHOT_CHAIN                    ; $62CC: $FE $03
+    jr   nz, PickableCollectIfNeeded.collect      ; $62CE: $20 $41
 
-.jr_62D0
+.snapToBoomerangOrHookshot
     ld   hl, wEntitiesPosXTable                   ; $62D0: $21 $00 $C2
     add  hl, de                                   ; $62D3: $19
     ld   a, [hl]                                  ; $62D4: $7E
@@ -4366,22 +4375,22 @@ func_003_62AF::
     add  hl, bc                                   ; $62E8: $09
     ld   [hl], a                                  ; $62E9: $77
 
-ret_003_62EA:
+.return
     ret                                           ; $62EA: $C9
 
-func_003_62EB::
+PickableCollectIfNeeded::
     call GetEntityPrivateCountdown1               ; $62EB: $CD $00 $0C
-    jr   nz, ret_003_62EA                         ; $62EE: $20 $FA
+    jr   nz, PickableHandleGrabbedByItemIfNeeded.return ; $62EE: $20 $FA
 
     ldh  a, [hActiveEntityType]                   ; $62F0: $F0 $EB
     sub  $2D                                      ; $62F2: $D6 $2D
     ld   e, a                                     ; $62F4: $5F
     ld   d, b                                     ; $62F5: $50
-    ld   hl, Data_003_629E                        ; $62F6: $21 $9E $62
+    ld   hl, PickableCanBeCollectedBySwordTable   ; $62F6: $21 $9E $62
     add  hl, de                                   ; $62F9: $19
     ld   a, [hl]                                  ; $62FA: $7E
     and  a                                        ; $62FB: $A7
-    jr   z, .jr_630C                              ; $62FC: $28 $0E
+    jr   z, .cannotBeCollectedBySword             ; $62FC: $28 $0E
 
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $62FE: $21 $10 $C4
     add  hl, bc                                   ; $6301: $09
@@ -4394,11 +4403,11 @@ func_003_62EB::
     pop  af                                       ; $630A: $F1
     ld   [hl], a                                  ; $630B: $77
 
-.jr_630C
+.cannotBeCollectedBySword
     call func_003_6C6B                            ; $630C: $CD $6B $6C
-    jr   nc, ret_003_62EA                         ; $630F: $30 $D9
+    jr   nc, PickableHandleGrabbedByItemIfNeeded.return ; $630F: $30 $D9
 
-collectPickableItem:
+.collect
     ld   hl, wEntitiesLoadOrderTable              ; $6311: $21 $60 $C4
     add  hl, bc                                   ; $6314: $09
     ld   a, [hl]                                  ; $6315: $7E
@@ -4409,11 +4418,11 @@ collectPickableItem:
 
     ; Play a sound when picking the item
     cp   ENTITY_DROPPABLE_FAIRY - $2D             ; $631D: $FE $02
-    jr   nc, .notFairy                            ; $631F: $30 $07
+    jr   nc, .heartOrRupeeEnd                     ; $631F: $30 $07
     ld   hl, hJingle                              ; $6321: $21 $F2 $FF
     ld   [hl], JINGLE_GOT_HEART                   ; $6324: $36 $14
     jr   .sfxEnd                                  ; $6326: $18 $05
-.notFairy
+.heartOrRupeeEnd
     ld   hl, hWaveSfx                             ; $6328: $21 $F3 $FF
     ld   [hl], WAVE_SFX_SEASHELL                  ; $632B: $36 $01
 .sfxEnd
@@ -5655,10 +5664,11 @@ Data_003_6B73::
 Data_003_6B77::
     db   $40, $08, $40, $40
 
+; Apply gravity and, if underwater in a sidescrolling section, reduce horizontal speed
 func_003_6B7B::
     ldh  a, [hIsSideScrolling]                    ; $6B7B: $F0 $F9
     and  a                                        ; $6B7D: $A7
-    jr   nz, .jr_6B8C                             ; $6B7E: $20 $0C
+    jr   nz, .sideScrolling                       ; $6B7E: $20 $0C
 
     call AddEntityZSpeedToPos_03                  ; $6B80: $CD $5E $7F
     ld   hl, wEntitiesSpeedZTable                 ; $6B83: $21 $20 $C3
@@ -5668,35 +5678,36 @@ func_003_6B7B::
     ld   [hl], a                                  ; $6B8A: $77
     ret                                           ; $6B8B: $C9
 
-.jr_6B8C
+.sideScrolling
     ld   hl, wEntitiesGroundStatusTable           ; $6B8C: $21 $70 $C4
     add  hl, bc                                   ; $6B8F: $09
     ld   a, [hl]                                  ; $6B90: $7E
     ld   e, a                                     ; $6B91: $5F
     ld   d, b                                     ; $6B92: $50
     and  a                                        ; $6B93: $A7
-    jr   z, jr_003_6BAB                           ; $6B94: $28 $15
+    jr   z, .updateXSpeedEnd                      ; $6B94: $28 $15
 
     ldh  a, [hFrameCounter]                       ; $6B96: $F0 $E7
     and  $07                                      ; $6B98: $E6 $07
-    jr   nz, jr_003_6BAB                          ; $6B9A: $20 $0F
+    jr   nz, .updateXSpeedEnd                     ; $6B9A: $20 $0F
 
     ld   hl, wEntitiesSpeedXTable                 ; $6B9C: $21 $40 $C2
     add  hl, bc                                   ; $6B9F: $09
     ld   a, [hl]                                  ; $6BA0: $7E
     and  a                                        ; $6BA1: $A7
-    jr   z, jr_003_6BAB                           ; $6BA2: $28 $07
+    jr   z, .updateXSpeedEnd                      ; $6BA2: $28 $07
 
     and  $80                                      ; $6BA4: $E6 $80
-    jr   z, .jr_6BAA                              ; $6BA6: $28 $02
+    jr   z, .positiveDifferenceX                  ; $6BA6: $28 $02
 
+; get here every 8 frames, if underwater and X speed is not 0
     inc  [hl]                                     ; $6BA8: $34
     inc  [hl]                                     ; $6BA9: $34
 
-.jr_6BAA
+.positiveDifferenceX
     dec  [hl]                                     ; $6BAA: $35
 
-jr_003_6BAB:
+.updateXSpeedEnd
     ld   hl, Data_003_6B73                        ; $6BAB: $21 $73 $6B
     add  hl, de                                   ; $6BAE: $19
     ld   a, [hl]                                  ; $6BAF: $7E
@@ -5708,14 +5719,14 @@ jr_003_6BAB:
     add  hl, de                                   ; $6BB9: $19
     sub  [hl]                                     ; $6BBA: $96
     and  $80                                      ; $6BBB: $E6 $80
-    jr   nz, .ret_6BC5                            ; $6BBD: $20 $06
+    jr   nz, .return                              ; $6BBD: $20 $06
 
     ld   a, [hl]                                  ; $6BBF: $7E
     ld   hl, wEntitiesSpeedYTable                 ; $6BC0: $21 $50 $C2
     add  hl, bc                                   ; $6BC3: $09
     ld   [hl], a                                  ; $6BC4: $77
 
-.ret_6BC5
+.return
     ret                                           ; $6BC5: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
@@ -6305,7 +6316,7 @@ func_003_6E2B::
     add  hl, bc                                   ; $6E9E: $09
     ld   a, [hl]                                  ; $6E9F: $7E
     and  ENTITY_PHYSICS_GRABBABLE                 ; $6EA0: $E6 $20
-    jp   nz, collectPickableItem                  ; $6EA2: $C2 $11 $63
+    jp   nz, PickableCollectIfNeeded.collect      ; $6EA2: $C2 $11 $63
     ; if sword collision is enabled jump to EnemyCollidedWithSword
     ld   a, [wSwordCollisionEnabled]              ; $6EA5: $FA $B0 $C5
     and  a                                        ; $6EA8: $A7
@@ -7077,7 +7088,7 @@ jr_003_7279:
 jr_003_7293:
     ld   [hl], $2F                                ; $7293: $36 $2F
     call ConfigureNewEntity                       ; $7295: $CD $5B $48
-    call GetEntityDropTimer                       ; $7298: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $7298: $CD $FB $0B
     ld   [hl], $80                                ; $729B: $36 $80
 
 jr_003_729D:
@@ -7813,7 +7824,7 @@ forceCollisionEnd:
     jr   nz, jr_003_76AC                          ; $7690: $20 $1A
 
     inc  [hl]                                     ; $7692: $34
-    ld   hl, wEntitiesDropTimerTable              ; $7693: $21 $50 $C4
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $7693: $21 $50 $C4
     add  hl, de                                   ; $7696: $19
     ld   [hl], $7F                                ; $7697: $36 $7F
     ld   hl, wEntitiesFlashCountdownTable         ; $7699: $21 $20 $C4
@@ -8990,7 +9001,7 @@ ApplySwordIntersectionWithObjects::
     ld   hl, wEntitiesStateTable                  ; $7D39: $21 $90 $C2
     add  hl, bc                                   ; $7D3C: $09
     ld   [hl], $01                                ; $7D3D: $36 $01
-    call GetEntityDropTimer                       ; $7D3F: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $7D3F: $CD $FB $0B
     ld   [hl], $80                                ; $7D42: $36 $80
     pop  bc                                       ; $7D44: $C1
     ld   hl, wC1A2                                ; $7D45: $21 $A2 $C1

@@ -153,12 +153,12 @@ BigFairyWaitingHandler::
     ret  nc                                       ; $7177: $D0
 
     call IncrementEntityState                     ; $7178: $CD $12 $3B
-    call GetEntityDropTimer                       ; $717B: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $717B: $CD $FB $0B
     ld   [hl], $48                                ; $717E: $36 $48
     jp_open_dialog Dialog024                      ; $7180
 
 BigFairyHealingHandler::
-    call GetEntityDropTimer                       ; $7185: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $7185: $CD $FB $0B
     jr   nz, .jr_7197                             ; $7188: $20 $0D
 
     call GetEntityTransitionCountdown             ; $718A: $CD $05 $0C

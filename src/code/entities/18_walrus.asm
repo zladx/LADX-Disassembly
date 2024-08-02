@@ -131,7 +131,7 @@ WalrusWakingUpHandler::
     ld   a, MUSIC_MARIN_SING                      ; $55CA: $3E $2F
     ld   [wMusicTrackToPlay], a                   ; $55CC: $EA $68 $D3
     ld   [wIsMarinSinging], a                     ; $55CF: $EA $C8 $C3
-    call GetEntityDropTimer                       ; $55D2: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $55D2: $CD $FB $0B
     ld   [hl], $50                                ; $55D5: $36 $50
     ret                                           ; $55D7: $C9
 
@@ -144,7 +144,7 @@ WalrusState2Handler::
     ld   [wC167], a                               ; $55E1: $EA $67 $C1
     ld   a, $02                                   ; $55E4: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $55E6: $E0 $A1
-    call GetEntityDropTimer                       ; $55E8: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $55E8: $CD $FB $0B
     jr   nz, .jr_55F2                             ; $55EB: $20 $05
 
     ld   [hl], $C0                                ; $55ED: $36 $C0
@@ -192,7 +192,7 @@ WalrusState3Handler::
     ld   [wC167], a                               ; $5678: $EA $67 $C1
     ld   a, $02                                   ; $567B: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $567D: $E0 $A1
-    call GetEntityDropTimer                       ; $567F: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $567F: $CD $FB $0B
     jr   nz, .jr_5698                             ; $5682: $20 $14
 
     ld   [wIsMarinSinging], a                     ; $5684: $EA $C8 $C3

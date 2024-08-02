@@ -335,7 +335,7 @@ func_019_6F8B::
     ret                                           ; $6F8B: $C9
 
 func_019_6F8C::
-    call GetEntityDropTimer                       ; $6F8C: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $6F8C: $CD $FB $0B
     ret  nz                                       ; $6F8F: $C0
 
     call func_019_7CF0                            ; $6F90: $CD $F0 $7C
@@ -447,7 +447,7 @@ func_019_7039::
     call func_019_7D16                            ; $7081: $CD $16 $7D
     jr   nc, .jr_70A6                             ; $7084: $30 $20
 
-    call GetEntityDropTimer                       ; $7086: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $7086: $CD $FB $0B
     jr   nz, .jr_70A6                             ; $7089: $20 $1B
 
     ld   a, [wTransitionSequenceCounter]          ; $708B: $FA $6B $C1
@@ -460,7 +460,7 @@ func_019_7039::
     ld   [wTransitionSequenceCounter], a          ; $7098: $EA $6B $C1
     ld   [wC16C], a                               ; $709B: $EA $6C $C1
     ld   [wGameplaySubtype], a                    ; $709E: $EA $96 $DB
-    call GetEntityDropTimer                       ; $70A1: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $70A1: $CD $FB $0B
     ld   [hl], $08                                ; $70A4: $36 $08
 
 .jr_70A6

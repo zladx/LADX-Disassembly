@@ -2644,7 +2644,7 @@ func_015_65A6::
     call GetEntityTransitionCountdown             ; $65AB: $CD $05 $0C
     jr   nz, .jr_65BB                             ; $65AE: $20 $0B
 
-    call GetEntityDropTimer                       ; $65B0: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $65B0: $CD $FB $0B
     ld   [hl], $4C                                ; $65B3: $36 $4C
     call func_015_655D                            ; $65B5: $CD $5D $65
     jp   IncrementEntityState                     ; $65B8: $C3 $12 $3B
@@ -2709,7 +2709,7 @@ Data_015_6610::
     db   $10, $18, $10, $F0, $E8, $F0, $10, $18
 
 func_015_6618::
-    call GetEntityDropTimer                       ; $6618: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $6618: $CD $FB $0B
     jr   nz, jr_015_6628                          ; $661B: $20 $0B
 
     ld   [wD221], a                               ; $661D: $EA $21 $D2
@@ -3178,7 +3178,7 @@ func_015_68E7::
     ld   hl, wEntitiesOptions1Table               ; $68FE: $21 $30 $C4
     add  hl, bc                                   ; $6901: $09
     ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF ; $6902: $36 $C0
-    call GetEntityDropTimer                       ; $6904: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $6904: $CD $FB $0B
     ld   [hl], $90                                ; $6907: $36 $90
     xor  a                                        ; $6909: $AF
     ld   [wD223], a                               ; $690A: $EA $23 $D2
@@ -3782,7 +3782,7 @@ func_015_6E66::
     ld   [wD210], a                               ; $6EEA: $EA $10 $D2
     ld   a, $00                                   ; $6EED: $3E $00
     call SetEntitySpriteVariant                   ; $6EEF: $CD $0C $3B
-    call GetEntityDropTimer                       ; $6EF2: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $6EF2: $CD $FB $0B
     jr   nz, .jr_6F0B                             ; $6EF5: $20 $14
 
     call GetRandomByte                            ; $6EF7: $CD $0D $28

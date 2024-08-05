@@ -352,9 +352,9 @@ AddEntityZSpeedToPos_06::
 ;
 ; Outputs:
 ;   d   x distance (Link's position - entity's position)
-;   e   0x01 if Link is to the left of the entity, 0x00 otherwise
+;   e   DIRECTION_LEFT if Link is to the left of the entity, DIRECTION_RIGHT otherwise
 GetEntityXDistanceToLink_06::
-    ld   e, $00                                   ; $6594: $1E $00
+    ld   e, DIRECTION_RIGHT                       ; $6594: $1E $00
     ldh  a, [hLinkPositionX]                      ; $6596: $F0 $98
     ld   hl, wEntitiesPosXTable                   ; $6598: $21 $00 $C2
     add  hl, bc                                   ; $659B: $09
@@ -373,9 +373,9 @@ GetEntityXDistanceToLink_06::
 ;
 ; Outputs:
 ;   d   y distance (Link's position - entity's position)
-;   e   0x02 if Link is above the entity, 0x03 otherwise
+;   e   DIRECTION_UP if Link is above the entity, DIRECTION_DOWN otherwise
 GetEntityYDistanceToLink_06::
-    ld   e, $02                                   ; $65A4: $1E $02
+    ld   e, DIRECTION_UP                          ; $65A4: $1E $02
     ldh  a, [hLinkPositionY]                      ; $65A6: $F0 $99
     ld   hl, wEntitiesPosYTable                   ; $65A8: $21 $10 $C2
     add  hl, bc                                   ; $65AB: $09
@@ -393,7 +393,7 @@ GetEntityYDistanceToLink_06::
 ;   bc   entity index
 ;
 ; Outputs:
-;   e   entity's direction to Link (0 = right, 1 = left, 2 = up, 3 = down)
+;   e   entity's direction to Link (see DIRECTION_* constants for possible values)
 GetEntityDirectionToLink_06::
     call GetEntityXDistanceToLink_06              ; $65B4: $CD $94 $65
     ld   a, e                                     ; $65B7: $7B

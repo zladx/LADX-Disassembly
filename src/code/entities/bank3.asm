@@ -9347,9 +9347,9 @@ ApplyVectorTowardsLinkAndReturn::
 ;
 ; Outputs:
 ;   d   x distance (Link's position - entity's position)
-;   e   0x01 if Link is to the left of the entity, 0x00 otherwise
+;   e   DIRECTION_LEFT if Link is to the left of the entity, DIRECTION_RIGHT otherwise
 GetEntityXDistanceToLink_03::
-    ld   e, $00                                   ; $7ED9: $1E $00
+    ld   e, DIRECTION_RIGHT                       ; $7ED9: $1E $00
     ldh  a, [hLinkPositionX]                      ; $7EDB: $F0 $98
     ld   hl, wEntitiesPosXTable                   ; $7EDD: $21 $00 $C2
     add  hl, bc                                   ; $7EE0: $09
@@ -9368,9 +9368,9 @@ GetEntityXDistanceToLink_03::
 ;
 ; Outputs:
 ;   d   y distance (Link's position - entity's position)
-;   e   0x02 if Link is above the entity, 0x03 otherwise
+;   e   DIRECTION_UP if Link is above the entity, DIRECTION_DOWN otherwise
 GetEntityYDistanceToLink_03::
-    ld   e, $02                                   ; $7EE9: $1E $02
+    ld   e, DIRECTION_UP                          ; $7EE9: $1E $02
     ldh  a, [hLinkPositionY]                      ; $7EEB: $F0 $99
     ld   hl, wEntitiesPosYTable                   ; $7EED: $21 $10 $C2
     add  hl, bc                                   ; $7EF0: $09
@@ -9391,7 +9391,7 @@ GetEntityYDistanceToLink_03::
 ;   bc   entity index
 ;
 ; Outputs:
-;   e   entity's direction to Link (0 = right, 1 = left, 2 = up, 3 = down)
+;   e   entity's direction to Link (see DIRECTION_* constants for possible values)
 GetEntityDirectionToLink_03::
     call GetEntityXDistanceToLink_03              ; $7EFE: $CD $D9 $7E
     ld   a, e                                     ; $7F01: $7B

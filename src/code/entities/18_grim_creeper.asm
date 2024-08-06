@@ -221,13 +221,13 @@ GrimCreeperState5Handler::
 
     ld   a, $FF                                   ; $7128: $3E $FF
     ld   [wD201], a                               ; $712A: $EA $01 $D2
-    ld   hl, wEntitiesDropTimerTable              ; $712D: $21 $50 $C4
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $712D: $21 $50 $C4
     add  hl, bc                                   ; $7130: $09
     ld   [hl], $40                                ; $7131: $36 $40
     jp   IncrementEntityState                     ; $7133: $C3 $12 $3B
 
 GrimCreeperState6Handler::
-    ld   hl, wEntitiesDropTimerTable              ; $7136: $21 $50 $C4
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $7136: $21 $50 $C4
     add  hl, bc                                   ; $7139: $09
     ld   a, [hl]                                  ; $713A: $7E
     and  a                                        ; $713B: $A7
@@ -412,7 +412,7 @@ func_018_7288::
     ld   hl, Data_018_7280                        ; $7295: $21 $80 $72
     add  hl, de                                   ; $7298: $19
     ld   a, [hl]                                  ; $7299: $7E
-    ld   hl, wEntitiesDropTimerTable              ; $729A: $21 $50 $C4
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $729A: $21 $50 $C4
     add  hl, bc                                   ; $729D: $09
     ld   [hl], a                                  ; $729E: $77
     call IncrementEntityState                     ; $729F: $CD $12 $3B
@@ -421,7 +421,7 @@ func_018_7288::
     jp   label_018_7276                           ; $72A2: $C3 $76 $72
 
 func_018_72A5::
-    ld   hl, wEntitiesDropTimerTable              ; $72A5: $21 $50 $C4
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $72A5: $21 $50 $C4
     add  hl, bc                                   ; $72A8: $09
     ld   a, [hl]                                  ; $72A9: $7E
     and  a                                        ; $72AA: $A7

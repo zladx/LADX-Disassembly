@@ -34,7 +34,7 @@ AntiKirbyState0Handler::
     jr   nz, label_006_42A2                       ; $426E: $20 $32
 
     call ClearEntitySpeed                         ; $4270: $CD $7F $3D
-    call GetEntityDropTimer                       ; $4273: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $4273: $CD $FB $0B
     jr   nz, .jr_4294                             ; $4276: $20 $1C
 
     call GetEntityXDistanceToLink_06              ; $4278: $CD $94 $65
@@ -146,7 +146,7 @@ AntiKirbyState2Handler::
 label_006_431B:
     call IncrementEntityState                     ; $431B: $CD $12 $3B
     ld   [hl], b                                  ; $431E: $70
-    call GetEntityDropTimer                       ; $431F: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $431F: $CD $FB $0B
     call GetRandomByte                            ; $4322: $CD $0D $28
     and  $1F                                      ; $4325: $E6 $1F
     add  $08                                      ; $4327: $C6 $08

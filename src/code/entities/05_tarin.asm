@@ -231,7 +231,7 @@ jr_005_4A46:
     add  hl, de                                   ; $4A4F: $19
     ld   a, [hl]                                  ; $4A50: $7E
     call SetEntitySpriteVariant                   ; $4A51: $CD $0C $3B
-    call GetEntityDropTimer                       ; $4A54: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $4A54: $CD $FB $0B
     jr   nz, .jr_4A9E                             ; $4A57: $20 $45
 
     ld   a, ENTITY_BOMB                           ; $4A59: $3E $02
@@ -290,7 +290,7 @@ jr_005_4A46:
 .jr_4AAE
     call UpdateEntityPosWithSpeed_05              ; $4AAE: $CD $B1 $7A
     call DefaultEntityPhysics_trampoline          ; $4AB1: $CD $23 $3B
-    call GetEntityDropTimer                       ; $4AB4: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $4AB4: $CD $FB $0B
     cp   $06                                      ; $4AB7: $FE $06
     jr   nc, jr_005_4AEC                          ; $4AB9: $30 $31
 
@@ -373,7 +373,7 @@ jr_005_4AEC:
     ldh  [hJingle], a                             ; $4B14: $E0 $F2
 
 .jr_4B16
-    call GetEntityDropTimer                       ; $4B16: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $4B16: $CD $FB $0B
     cp   $60                                      ; $4B19: $FE $60
     jr   nc, ret_005_4B40                         ; $4B1B: $30 $23
 

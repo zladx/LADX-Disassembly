@@ -1,20 +1,20 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 StarSpriteVariants::
 .variant0
-    db $74, $01
-    db $74, $21
+    db $74, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $74, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $76, $01
-    db $78, $01
+    db $76, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $78, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant2
-    db $7A, $01
-    db $7A, $21
+    db $7A, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $7A, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant3
-    db $78, $21
-    db $76, $21
+    db $78, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $76, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant4
-    db $7C, $01
-    db $7C, $01
+    db $7C, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $7C, OAM_GBC_PAL_1 | OAMF_PAL0
 
 StarEntityHandler::
     ld   de, StarSpriteVariants                   ; $725B: $11 $47 $72
@@ -28,31 +28,31 @@ StarEntityHandler::
     add  hl, bc                                   ; $7273: $09
     ld   a, [hl]                                  ; $7274: $7E
     and  $03                                      ; $7275: $E6 $03
-    jr   nz, .jr_7280                             ; $7277: $20 $07
+    jr   nz, .horizontalCollision                 ; $7277: $20 $07
 
     ld   a, [hl]                                  ; $7279: $7E
     and  $0C                                      ; $727A: $E6 $0C
-    jr   nz, jr_007_728A                          ; $727C: $20 $0C
+    jr   nz, .verticalCollision                   ; $727C: $20 $0C
 
-    jr   jr_007_7291                              ; $727E: $18 $11
+    jr   .collisionEnd                            ; $727E: $18 $11
 
-.jr_7280
+.horizontalCollision
     ld   hl, wEntitiesSpeedXTable                 ; $7280: $21 $40 $C2
     add  hl, bc                                   ; $7283: $09
     ld   a, [hl]                                  ; $7284: $7E
     cpl                                           ; $7285: $2F
     inc  a                                        ; $7286: $3C
     ld   [hl], a                                  ; $7287: $77
-    jr   jr_007_7291                              ; $7288: $18 $07
+    jr   .collisionEnd                            ; $7288: $18 $07
 
-jr_007_728A:
+.verticalCollision
     call GetEntitySpeedYAddress                   ; $728A: $CD $05 $40
     ld   a, [hl]                                  ; $728D: $7E
     cpl                                           ; $728E: $2F
     inc  a                                        ; $728F: $3C
     ld   [hl], a                                  ; $7290: $77
 
-jr_007_7291:
+.collisionEnd
     ldh  a, [hFrameCounter]                       ; $7291: $F0 $E7
     rra                                           ; $7293: $1F
     rra                                           ; $7294: $1F

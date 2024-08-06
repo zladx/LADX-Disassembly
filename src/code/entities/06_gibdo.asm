@@ -42,11 +42,11 @@ LikeLikeGibdoWalk:
     ld   hl, wEntitiesCollisionsTable             ; $7EA3: $21 $A0 $C2
     add  hl, bc                                   ; $7EA6: $09
     ld   a, [hl]                                  ; $7EA7: $7E
-    and  COLLISION_TYPE_VERTICAL                  ; $7EA8: $E6 $03
-    jr   nz, .verticalCollision                   ; $7EAA: $20 $0F
+    and  $03                                      ; $7EA8: $E6 $03
+    jr   nz, .horizontalCollision                 ; $7EAA: $20 $0F
 
     ld   a, [hl]                                  ; $7EAC: $7E
-    and  COLLISION_TYPE_HORIZONTAL                ; $7EAD: $E6 $0C
+    and  $0C                                      ; $7EAD: $E6 $0C
     jr   z, .noCollision                          ; $7EAF: $28 $12
 
     ld   hl, wEntitiesSpeedYTable                 ; $7EB1: $21 $50 $C2
@@ -56,7 +56,7 @@ LikeLikeGibdoWalk:
     ld   [hl], a                                  ; $7EB8: $77
     jr   .noCollision                             ; $7EB9: $18 $08
 
-.verticalCollision
+.horizontalCollision
     ld   hl, wEntitiesSpeedXTable                 ; $7EBB: $21 $40 $C2
     add  hl, bc                                   ; $7EBE: $09
     ld   a, [hl]                                  ; $7EBF: $7E

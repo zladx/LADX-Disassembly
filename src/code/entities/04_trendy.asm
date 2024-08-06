@@ -41,7 +41,7 @@ func_004_6E92::
     and  $1F                                      ; $6EB5: $E6 $1F
     jr   nz, .jr_6EC1                             ; $6EB7: $20 $08
 
-    call func_004_6E55                            ; $6EB9: $CD $55 $6E
+    call GetEntityDirectionToLink_04              ; $6EB9: $CD $55 $6E
     ld   hl, wEntitiesDirectionTable              ; $6EBC: $21 $80 $C3
     add  hl, bc                                   ; $6EBF: $09
     ld   [hl], e                                  ; $6EC0: $73
@@ -370,7 +370,7 @@ jr_004_70A6:
     and  a                                        ; $70AC: $A7
     jr   z, jr_004_70F4                           ; $70AD: $28 $45
 
-    call GetEntityDropTimer                       ; $70AF: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $70AF: $CD $FB $0B
     jr   z, .jr_70B9                              ; $70B2: $28 $05
 
     dec  a                                        ; $70B4: $3D
@@ -403,7 +403,7 @@ jr_004_70A6:
     cp   $28                                      ; $70DC: $FE $28
     ret  nz                                       ; $70DE: $C0
 
-    call GetEntityDropTimer                       ; $70DF: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $70DF: $CD $FB $0B
     ld   [hl], $18                                ; $70E2: $36 $18
     ld   a, [wMarinEntityIndex]                   ; $70E4: $FA $0F $C5
     ld   e, a                                     ; $70E7: $5F
@@ -488,7 +488,7 @@ jr_004_7152:
     and  a                                        ; $7158: $A7
     jr   z, func_004_7160                         ; $7159: $28 $05
 
-    call GetEntityDropTimer                       ; $715B: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $715B: $CD $FB $0B
     ld   [hl], $10                                ; $715E: $36 $10
 
 func_004_7160::
@@ -534,7 +534,7 @@ func_004_7179::
 
 jr_004_7198:
     ld   [wD203], a                               ; $7198: $EA $03 $D2
-    call GetEntityDropTimer                       ; $719B: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $719B: $CD $FB $0B
     ret  nz                                       ; $719E: $C0
 
     ld   a, [wIsMarinFollowingLink]               ; $719F: $FA $73 $DB
@@ -1181,7 +1181,7 @@ func_004_7554::
     ret                                           ; $755B: $C9
 
 func_004_755C::
-    call func_004_6E55                            ; $755C: $CD $55 $6E
+    call GetEntityDirectionToLink_04              ; $755C: $CD $55 $6E
     ld   a, e                                     ; $755F: $7B
     xor  $01                                      ; $7560: $EE $01
     ld   e, a                                     ; $7562: $5F

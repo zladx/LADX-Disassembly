@@ -185,7 +185,7 @@ func_004_5158::
     call IncrementEntityState                     ; $516C: $CD $12 $3B
     call GetEntityPrivateCountdown1               ; $516F: $CD $00 $0C
     ld   [hl], $A0                                ; $5172: $36 $A0
-    call GetEntityDropTimer                       ; $5174: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $5174: $CD $FB $0B
     ld   [hl], $FF                                ; $5177: $36 $FF
     jp_open_dialog Dialog0B6                      ; $5179
 
@@ -249,7 +249,7 @@ jr_004_51FA:
     add  hl, de                                   ; $5206: $19
     ld   a, [hl]                                  ; $5207: $7E
     ld   [wScreenShakeHorizontal], a              ; $5208: $EA $55 $C1
-    call GetEntityDropTimer                       ; $520B: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $520B: $CD $FB $0B
     jr   nz, jr_004_5273                          ; $520E: $20 $63
 
     call GetRandomByte                            ; $5210: $CD $0D $28
@@ -573,12 +573,12 @@ FacadeState1Handler:
     and  a                                        ; $549A: $A7
     jr   nz, .ret_54F0                            ; $549B: $20 $53
 
-    call func_004_6E35                            ; $549D: $CD $35 $6E
+    call GetEntityXDistanceToLink_04              ; $549D: $CD $35 $6E
     add  $08                                      ; $54A0: $C6 $08
     cp   $10                                      ; $54A2: $FE $10
     jr   nc, .ret_54F0                            ; $54A4: $30 $4A
 
-    call func_004_6E45                            ; $54A6: $CD $45 $6E
+    call GetEntityYDistanceToLink_04              ; $54A6: $CD $45 $6E
     add  $08                                      ; $54A9: $C6 $08
     cp   $10                                      ; $54AB: $FE $10
     jr   nc, .ret_54F0                            ; $54AD: $30 $41
@@ -596,12 +596,12 @@ FacadeState1Handler:
     push bc                                       ; $54C0: $C5
     call UpdateFinalLinkPosition                  ; $54C1: $CD $A8 $21
     pop  bc                                       ; $54C4: $C1
-    call func_004_6E35                            ; $54C5: $CD $35 $6E
+    call GetEntityXDistanceToLink_04              ; $54C5: $CD $35 $6E
     add  $03                                      ; $54C8: $C6 $03
     cp   $06                                      ; $54CA: $FE $06
     jr   nc, .ret_54F0                            ; $54CC: $30 $22
 
-    call func_004_6E45                            ; $54CE: $CD $45 $6E
+    call GetEntityYDistanceToLink_04              ; $54CE: $CD $45 $6E
     add  $03                                      ; $54D1: $C6 $03
     cp   $06                                      ; $54D3: $FE $06
     jr   nc, .ret_54F0                            ; $54D5: $30 $19

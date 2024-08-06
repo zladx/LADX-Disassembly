@@ -16,11 +16,11 @@ KeeseCaveBSpriteVariants::
     db $60, OAM_GBC_PAL_0 | OAMF_PAL0
     db $60, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
-; Approximately 0x0D * sin(pi/8 * index)
+; Approximately 0x0E * sin(pi/8 * index)
 KeeseYSpeeds::
     db   $00, $05, $0A, $0D
 
-; Approximately 0x0D * cos(pi/8 * index)
+; Approximately 0x0E * cos(pi/8 * index)
 KeeseXSpeeds::
     db   $0E, $0D, $0A, $05, $00, $FB, $F6, $F3, $F2, $F3, $F6, $FB, $00, $05, $0A, $0D
 

@@ -603,16 +603,16 @@ wC176:
 wDialogAskSelectionIndex:
   ds 1 ; C177
 
-; Unlabeled
-wC178:
+; Set to 2 when Link collides with a wall, tree, etc, while running with the Pegasus Boots
+wPegasusBootsCollisionCountdown:
   ds 1 ; C178
 
-; Unlabeled
-wC179:
+; X position of the last Pegasus Boots collision 
+wPegasusBootsCollisionPosX:
   ds 1 ; C179
 
-; Unlabeled
-wC17A:
+; Y position of the last Pegasus Boots collision 
+wPegasusBootsCollisionPosY:
   ds 1 ; C17A
 
 ; See https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening#Mono_Pausing_the_Engine_and_Mono.2FDX_Free-Movement_Mode
@@ -1052,8 +1052,8 @@ wEntitiesStateTable::
 ; 0 = no collisions,
 ; bit 1 = collision on the right,
 ; bit 2 = collision on the left,
-; bit 3 = collision on the bottom,
-; bit 4 = collision on the top
+; bit 3 = collision on the top,
+; bit 4 = collision on the bottom
 wEntitiesCollisionsTable::
   ds $10 ; C2A0 - C2AF
 
@@ -1066,9 +1066,10 @@ wEntitiesCollisionsTable::
 ;  - Butterfly: stores a delta X to move closer to Link
 ;  - Genie: store the substate
 ;  - LikeLike: swallowed item
-;  - Keese: speed table index
+;  - Keese: movement angle (0x0 = right ... 0x4 = down ... 0x8 = left ... 0xC = up)
 ;  - Smashable pillar: 0 = pillar, 1 = dust, 2 = debris
 ;  - Pincer: hole X position
+;  - Peahat: animation speed 
 wEntitiesPrivateState1Table::
   ds $10 ; C2B0 - C2BF
 
@@ -1077,6 +1078,7 @@ wEntitiesPrivateState1Table::
 ; Examples:
 ;  - Butterfly: stores a delta Y to move closer to Link
 ;  - Keese: -1 when flying counter-clockwise, 1 otherwise
+;  - Peahat: -1 when flying counter-clockwise, 1 otherwise
 ;  - Pincer: hole Y position
 wEntitiesPrivateState2Table::
   ds $10 ; C2C0 - C2CF
@@ -1084,8 +1086,9 @@ wEntitiesPrivateState2Table::
 ; Entity-specific state.
 ;
 ; Examples:
-;  - Droppable entity: 0 if ??, 1 if ??, 2 if cannot be picked up by sword
+;  - Droppable entity: 0 if visible; 1 if can be revealed with Pegasus Boots; 2 if buried, in bush, etc
 ;  - Keese: speed update timer
+;  - Peahat: speed update timer
 ;  - Pincer: head direction
 wEntitiesPrivateState3Table::
   ds $10 ; C2D0 - C2DF
@@ -1095,6 +1098,9 @@ wEntitiesTransitionCountdownTable::
   ds $10 ; C2E0 - C2EF
 
 ; Entity-specific countdown 1
+;
+; Examples:
+;  - Timer Bombite: flashing timer
 wEntitiesPrivateCountdown1Table::
   ds $10 ; C2F0 - C2FF
 
@@ -1132,7 +1138,7 @@ wEntitiesPhysicsFlagsTable::
 ; bit 0: TODO ???,
 ; bit 1: TODO ???,
 ; bit 2-6: hitbox type (see HitboxPositions),
-; bit 7: force collision (for some entities only)
+; bit 7: ignore hits (and force collision, for some entities)
 wEntitiesHitboxFlagsTable::
   ds $10 ; C350 - C35F
 
@@ -1278,11 +1284,14 @@ wEntitiesOptions1Table::
   ds $10 ; C430 - C43F
 
 ; Entity-specific state.
+;
+; Examples:
+;  - Peahat: movement angle (0x0 = right ... 0x4 = down ... 0x8 = left ... 0xC = up)
 wEntitiesPrivateState4Table::
   ds $10 ; C440 - C44F
 
-; Number of frame before a dropped item disappears
-wEntitiesDropTimerTable::
+; Frames before the next state transition of the entity (only decremented every four frames)
+wEntitiesSlowTransitionCountdownTable::
   ds $10 ; C450 - C45F
 
 ; TODO comment
@@ -1293,7 +1302,7 @@ wEntitiesLoadOrderTable::
 ;
 ; Possible values:
 ;  0: on standard solid ground
-;  1: ???
+;  1: on deep water/lava
 ;  2: on shallow water (draws ripples)
 ;  3: on tall grass (draws pushed-away grasses)
 wEntitiesGroundStatusTable::

@@ -1810,7 +1810,7 @@ label_002_4C92:
     ld   d, $00                                   ; $4C95: $16 $00
     ld   hl, wRoomObjects                         ; $4C97: $21 $11 $D7
     add  hl, de                                   ; $4C9A: $19
-    ld   [hl], $CC                                ; $4C9B: $36 $CC
+    ld   [hl], OBJECT_SHOVEL_HOLE                 ; $4C9B: $36 $CC
     ld   a, $82                                   ; $4C9D: $3E $82
     call BackupObjectInRAM2                       ; $4C9F: $CD $2F $0B
     call label_2887                               ; $4CA2: $CD $87 $28
@@ -1865,7 +1865,7 @@ jr_002_4CC1:
     ldh  a, [hIntersectedObjectTop]               ; $4CEF: $F0 $CD
     add  $10                                      ; $4CF1: $C6 $10
     ld   [hl], a                                  ; $4CF3: $77
-    ld   hl, wEntitiesDropTimerTable              ; $4CF4: $21 $50 $C4
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $4CF4: $21 $50 $C4
     add  hl, de                                   ; $4CF7: $19
     ld   [hl], $80                                ; $4CF8: $36 $80
     ld   hl, wEntitiesPrivateCountdown1Table      ; $4CFA: $21 $F0 $C2

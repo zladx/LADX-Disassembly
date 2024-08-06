@@ -42,7 +42,7 @@ Data_004_6844::
     db   $00, $03, $01, $02
 
 func_004_6848::
-    call GetEntityDropTimer                       ; $6848: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $6848: $CD $FB $0B
     jr   nz, .jr_6852                             ; $684B: $20 $05
 
     ld   [hl], $10                                ; $684D: $36 $10
@@ -106,12 +106,12 @@ func_004_6848::
     and  a                                        ; $68A2: $A7
     jr   nz, .jr_68D4                             ; $68A3: $20 $2F
 
-    call func_004_6E35                            ; $68A5: $CD $35 $6E
+    call GetEntityXDistanceToLink_04              ; $68A5: $CD $35 $6E
     add  $04                                      ; $68A8: $C6 $04
     cp   $08                                      ; $68AA: $FE $08
     jr   nc, .jr_68D4                             ; $68AC: $30 $26
 
-    call func_004_6E45                            ; $68AE: $CD $45 $6E
+    call GetEntityYDistanceToLink_04              ; $68AE: $CD $45 $6E
     add  $04                                      ; $68B1: $C6 $04
     cp   $08                                      ; $68B3: $FE $08
     jr   nc, .jr_68D4                             ; $68B5: $30 $1D
@@ -163,7 +163,7 @@ label_004_68E4:
     ret                                           ; $68FC: $C9
 
 func_004_68FD::
-    call GetEntityDropTimer                       ; $68FD: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $68FD: $CD $FB $0B
     jr   nz, .jr_6908                             ; $6900: $20 $06
 
     ld   [hl], $40                                ; $6902: $36 $40

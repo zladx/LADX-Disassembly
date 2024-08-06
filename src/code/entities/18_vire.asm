@@ -106,7 +106,7 @@ VireState0Handler::
     ld   [hl], $03                                ; $6AAE: $36 $03
     call GetEntityTransitionCountdown             ; $6AB0: $CD $05 $0C
     ld   [hl], $C0                                ; $6AB3: $36 $C0
-    ld   hl, wEntitiesDropTimerTable              ; $6AB5: $21 $50 $C4
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $6AB5: $21 $50 $C4
     add  hl, bc                                   ; $6AB8: $09
     ld   [hl], $80                                ; $6AB9: $36 $80
     call ClearEntitySpeed                         ; $6ABB: $CD $7F $3D
@@ -154,7 +154,7 @@ VireState1Handler::
     ld   [hl], $FF                                ; $6B00: $36 $FF
 
 .jr_6B02
-    ld   hl, wEntitiesDropTimerTable              ; $6B02: $21 $50 $C4
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $6B02: $21 $50 $C4
     add  hl, bc                                   ; $6B05: $09
     ld   a, [hl]                                  ; $6B06: $7E
     and  a                                        ; $6B07: $A7
@@ -283,7 +283,7 @@ VireState2Handler::
     ld   hl, wEntitiesSpeedZTable                 ; $6BB5: $21 $20 $C3
     add  hl, bc                                   ; $6BB8: $09
     ld   [hl], $EC                                ; $6BB9: $36 $EC
-    ld   hl, wEntitiesDropTimerTable              ; $6BBB: $21 $50 $C4
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $6BBB: $21 $50 $C4
     add  hl, bc                                   ; $6BBE: $09
     ld   [hl], $30                                ; $6BBF: $36 $30
     call GetRandomByte                            ; $6BC1: $CD $0D $28
@@ -434,7 +434,7 @@ jr_018_6C63:
     jr   nz, func_018_6CB8                        ; $6C86: $20 $30
 
 jr_018_6C88:
-    ld   hl, wEntitiesDropTimerTable              ; $6C88: $21 $50 $C4
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $6C88: $21 $50 $C4
     add  hl, bc                                   ; $6C8B: $09
     ld   a, [hl]                                  ; $6C8C: $7E
     and  a                                        ; $6C8D: $A7
@@ -542,7 +542,7 @@ VireState5Handler::
 
     call IncrementEntityState                     ; $6D31: $CD $12 $3B
     ld   [hl], $01                                ; $6D34: $36 $01
-    ld   hl, wEntitiesDropTimerTable              ; $6D36: $21 $50 $C4
+    ld   hl, wEntitiesSlowTransitionCountdownTable ; $6D36: $21 $50 $C4
     add  hl, bc                                   ; $6D39: $09
     call GetRandomByte                            ; $6D3A: $CD $0D $28
     and  $3F                                      ; $6D3D: $E6 $3F

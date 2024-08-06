@@ -534,7 +534,7 @@ func_019_756F::
     call GetEntityTransitionCountdown             ; $7579: $CD $05 $0C
     jr   nz, .jr_7586                             ; $757C: $20 $08
 
-    call GetEntityDropTimer                       ; $757E: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $757E: $CD $FB $0B
     ld   [hl], $28                                ; $7581: $36 $28
     jp   IncrementEntityState                     ; $7583: $C3 $12 $3B
 
@@ -578,7 +578,7 @@ func_019_7640::
     ld   hl, wEntitiesFlashCountdownTable         ; $764D: $21 $20 $C4
     add  hl, bc                                   ; $7650: $09
     ld   [hl], a                                  ; $7651: $77
-    call GetEntityDropTimer                       ; $7652: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $7652: $CD $FB $0B
     jr   nz, .jr_765A                             ; $7655: $20 $03
 
     jp   IncrementEntityState                     ; $7657: $C3 $12 $3B

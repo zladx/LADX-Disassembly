@@ -2,13 +2,13 @@ data_003_6157::
     db $20, $21, $20, $01
 
 DroppableFairyEntityHandler::
-    call func_003_61DE                            ; $615B: $CD $DE $61
-    call func_003_608C                            ; $615E: $CD $8C $60
+    call DroppableRevealOrReturnIfNeeded          ; $615B: $CD $DE $61
+    call DroppableDisappearIfNeeded               ; $615E: $CD $8C $60
     ld   de, data_003_6157                        ; $6161: $11 $57 $61
     call RenderActiveEntitySprite                 ; $6164: $CD $77 $3C
     call ReturnIfNonInteractive_03                ; $6167: $CD $78 $7F
-    call func_003_62AF                            ; $616A: $CD $AF $62
-    call func_003_62EB                            ; $616D: $CD $EB $62
+    call PickableHandleGrabbedByItemIfNeeded      ; $616A: $CD $AF $62
+    call PickableCollectIfNeeded                  ; $616D: $CD $EB $62
     ld   hl, wEntitiesSpeedXTable                 ; $6170: $21 $40 $C2
     add  hl, bc                                   ; $6173: $09
     ld   a, [hl]                                  ; $6174: $7E

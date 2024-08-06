@@ -82,12 +82,12 @@ PairoddState0Handler::
 .jr_004_5E4A
     jr   nc, .return                              ; $5E4A: $30 $26
 
-    call func_004_6E35                            ; $5E4C: $CD $35 $6E
+    call GetEntityXDistanceToLink_04              ; $5E4C: $CD $35 $6E
     add  $20                                      ; $5E4F: $C6 $20
     cp   $40                                      ; $5E51: $FE $40
     jr   nc, .return                              ; $5E53: $30 $1D
 
-    call func_004_6E45                            ; $5E55: $CD $45 $6E
+    call GetEntityYDistanceToLink_04              ; $5E55: $CD $45 $6E
     add  $20                                      ; $5E58: $C6 $20
     cp   $40                                      ; $5E5A: $FE $40
     jr   nc, .return                              ; $5E5C: $30 $14

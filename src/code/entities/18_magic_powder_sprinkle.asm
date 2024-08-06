@@ -108,7 +108,7 @@ jr_018_79CF:
     ld   hl, wEntitiesStateTable                  ; $7A02: $21 $90 $C2
     add  hl, bc                                   ; $7A05: $09
     ld   [hl], $01                                ; $7A06: $36 $01
-    call GetEntityDropTimer                       ; $7A08: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $7A08: $CD $FB $0B
     ld   [hl], $80                                ; $7A0B: $36 $80
     ld   hl, wEntitiesPosXTable                   ; $7A0D: $21 $00 $C2
     add  hl, bc                                   ; $7A10: $09
@@ -162,7 +162,7 @@ label_018_7A4B:
     jp   label_3B7B                               ; $7A5A: $C3 $7B $3B
 
 label_018_7A5D:
-    call GetEntityDropTimer                       ; $7A5D: $CD $FB $0B
+    call GetEntitySlowTransitionCountdown         ; $7A5D: $CD $FB $0B
     jr   nz, ret_018_7AB9                         ; $7A60: $20 $57
 
     ld   hl, wEntitiesPosXTable                   ; $7A62: $21 $00 $C2

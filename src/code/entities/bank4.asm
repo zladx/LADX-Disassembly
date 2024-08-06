@@ -188,71 +188,88 @@ func_004_6E1D::
     ld   hl, wEntitiesPrivateState3Table          ; $6E2F: $21 $D0 $C2
     jp   AddEntitySpeedToPos_04.updatePosition    ; $6E32: $C3 $EF $6D
 
-func_004_6E35::
-    ld   e, $00                                   ; $6E35: $1E $00
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   d   x distance (Link's position - entity's position)
+;   e   DIRECTION_LEFT if Link is to the left of the entity, DIRECTION_RIGHT otherwise
+GetEntityXDistanceToLink_04::
+    ld   e, DIRECTION_RIGHT                       ; $6E35: $1E $00
     ldh  a, [hLinkPositionX]                      ; $6E37: $F0 $98
     ld   hl, wEntitiesPosXTable                   ; $6E39: $21 $00 $C2
     add  hl, bc                                   ; $6E3C: $09
     sub  [hl]                                     ; $6E3D: $96
     bit  7, a                                     ; $6E3E: $CB $7F
-    jr   z, .jr_6E43                              ; $6E40: $28 $01
+    jr   z, .positive                             ; $6E40: $28 $01
 
     inc  e                                        ; $6E42: $1C
 
-.jr_6E43
+.positive
     ld   d, a                                     ; $6E43: $57
     ret                                           ; $6E44: $C9
 
-func_004_6E45::
-    ld   e, $02                                   ; $6E45: $1E $02
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   d   y distance (Link's position - entity's position)
+;   e   DIRECTION_UP if Link is above the entity, DIRECTION_DOWN otherwise
+GetEntityYDistanceToLink_04::
+    ld   e, DIRECTION_UP                          ; $6E45: $1E $02
     ldh  a, [hLinkPositionY]                      ; $6E47: $F0 $99
     ld   hl, wEntitiesPosYTable                   ; $6E49: $21 $10 $C2
     add  hl, bc                                   ; $6E4C: $09
     sub  [hl]                                     ; $6E4D: $96
     bit  7, a                                     ; $6E4E: $CB $7F
-    jr   nz, .jr_6E53                             ; $6E50: $20 $01
+    jr   nz, .negative                            ; $6E50: $20 $01
 
     inc  e                                        ; $6E52: $1C
 
-.jr_6E53
+.negative
     ld   d, a                                     ; $6E53: $57
     ret                                           ; $6E54: $C9
 
-func_004_6E55::
-    call func_004_6E35                            ; $6E55: $CD $35 $6E
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   e   entity's direction to Link (see DIRECTION_* constants for possible values)
+GetEntityDirectionToLink_04::
+    call GetEntityXDistanceToLink_04              ; $6E55: $CD $35 $6E
     ld   a, e                                     ; $6E58: $7B
     ldh  [hMultiPurpose0], a                      ; $6E59: $E0 $D7
     ld   a, d                                     ; $6E5B: $7A
     bit  7, a                                     ; $6E5C: $CB $7F
-    jr   z, .jr_6E62                              ; $6E5E: $28 $02
+    jr   z, .positiveX                            ; $6E5E: $28 $02
 
     cpl                                           ; $6E60: $2F
     inc  a                                        ; $6E61: $3C
 
-.jr_6E62
+.positiveX
     push af                                       ; $6E62: $F5
-    call func_004_6E45                            ; $6E63: $CD $45 $6E
+    call GetEntityYDistanceToLink_04              ; $6E63: $CD $45 $6E
     ld   a, e                                     ; $6E66: $7B
     ldh  [hMultiPurpose1], a                      ; $6E67: $E0 $D8
     ld   a, d                                     ; $6E69: $7A
     bit  7, a                                     ; $6E6A: $CB $7F
-    jr   z, .jr_6E70                              ; $6E6C: $28 $02
+    jr   z, .positiveY                            ; $6E6C: $28 $02
 
     cpl                                           ; $6E6E: $2F
     inc  a                                        ; $6E6F: $3C
 
-.jr_6E70
+.positiveY
     pop  de                                       ; $6E70: $D1
     cp   d                                        ; $6E71: $BA
-    jr   nc, .jr_6E78                             ; $6E72: $30 $04
+    jr   nc, .vertical                            ; $6E72: $30 $04
 
     ldh  a, [hMultiPurpose0]                      ; $6E74: $F0 $D7
-    jr   jr_004_6E7A                              ; $6E76: $18 $02
+    jr   .verticalEnd                             ; $6E76: $18 $02
 
-.jr_6E78
+.vertical
     ldh  a, [hMultiPurpose1]                      ; $6E78: $F0 $D8
 
-jr_004_6E7A:
+.verticalEnd
     ld   e, a                                     ; $6E7A: $5F
     ret                                           ; $6E7B: $C9
 
@@ -291,7 +308,7 @@ func_004_7C4B:: ; called only from fishing minigame
     cp   $28                                      ; $7C77: $FE $28
     jr   nc, .jr_7C92                             ; $7C79: $30 $17
 
-    call func_004_6E55                            ; $7C7B: $CD $55 $6E
+    call GetEntityDirectionToLink_04              ; $7C7B: $CD $55 $6E
     ldh  a, [hLinkDirection]                      ; $7C7E: $F0 $9E
     xor  $01                                      ; $7C80: $EE $01
     cp   e                                        ; $7C82: $BB

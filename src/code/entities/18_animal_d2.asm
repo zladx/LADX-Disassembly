@@ -14,29 +14,29 @@ AnimalD2SpriteVariants::
     db $7C, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
 AnimalD2EntityHandler::
-    call func_018_51B0                            ; $526B: $CD $B0 $51
-    ld   de, AnimalD2SpriteVariants               ; $526E: $11 $5B $52
-    call RenderActiveEntitySpritesPair            ; $5271: $CD $C0 $3B
-    ld   a, [wMarinEntityIndex]                   ; $5274: $FA $0F $C5
-    ld   e, a                                     ; $5277: $5F
-    ld   d, b                                     ; $5278: $50
-    ld   hl, wEntitiesPosXTable                   ; $5279: $21 $00 $C2
-    add  hl, de                                   ; $527C: $19
-    ldh  a, [hActiveEntityPosX]                   ; $527D: $F0 $EE
-    ld   e, $00                                   ; $527F: $1E $00
-    cp   [hl]                                     ; $5281: $BE
-    jr   nc, .jr_5286                             ; $5282: $30 $02
+    call func_018_51B0                            ;; 18:526B $CD $B0 $51
+    ld   de, AnimalD2SpriteVariants               ;; 18:526E $11 $5B $52
+    call RenderActiveEntitySpritesPair            ;; 18:5271 $CD $C0 $3B
+    ld   a, [wMarinEntityIndex]                   ;; 18:5274 $FA $0F $C5
+    ld   e, a                                     ;; 18:5277 $5F
+    ld   d, b                                     ;; 18:5278 $50
+    ld   hl, wEntitiesPosXTable                   ;; 18:5279 $21 $00 $C2
+    add  hl, de                                   ;; 18:527C $19
+    ldh  a, [hActiveEntityPosX]                   ;; 18:527D $F0 $EE
+    ld   e, $00                                   ;; 18:527F $1E $00
+    cp   [hl]                                     ;; 18:5281 $BE
+    jr   nc, .jr_5286                             ;; 18:5282 $30 $02
 
-    ld   e, $02                                   ; $5284: $1E $02
+    ld   e, $02                                   ;; 18:5284 $1E $02
 
 .jr_5286
-    ldh  a, [hFrameCounter]                       ; $5286: $F0 $E7
-    rra                                           ; $5288: $1F
-    rra                                           ; $5289: $1F
-    rra                                           ; $528A: $1F
-    rra                                           ; $528B: $1F
-    rra                                           ; $528C: $1F
-    and  $01                                      ; $528D: $E6 $01
-    add  e                                        ; $528F: $83
-    call SetEntitySpriteVariant                   ; $5290: $CD $0C $3B
-    jp   label_018_51A4                           ; $5293: $C3 $A4 $51
+    ldh  a, [hFrameCounter]                       ;; 18:5286 $F0 $E7
+    rra                                           ;; 18:5288 $1F
+    rra                                           ;; 18:5289 $1F
+    rra                                           ;; 18:528A $1F
+    rra                                           ;; 18:528B $1F
+    rra                                           ;; 18:528C $1F
+    and  $01                                      ;; 18:528D $E6 $01
+    add  e                                        ;; 18:528F $83
+    call SetEntitySpriteVariant                   ;; 18:5290 $CD $0C $3B
+    jp   label_018_51A4                           ;; 18:5293 $C3 $A4 $51

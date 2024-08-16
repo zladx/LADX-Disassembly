@@ -60,13 +60,13 @@ MadBomberState1Handler::
     and  $07                                      ;; 06:4185 $E6 $07
     ld   e, a                                     ;; 06:4187 $5F
     ld   d, b                                     ;; 06:4188 $50
-    ld   hl, MadBomberPositionXValues                        ;; 06:4189 $21 $3A $41
+    ld   hl, MadBomberPositionXValues             ;; 06:4189 $21 $3A $41
     add  hl, de                                   ;; 06:418C $19
     ld   a, [hl]                                  ;; 06:418D $7E
     ld   hl, wEntitiesPosXTable                   ;; 06:418E $21 $00 $C2
     add  hl, bc                                   ;; 06:4191 $09
     ld   [hl], a                                  ;; 06:4192 $77
-    ld   hl, MadBomberPositionYValues                        ;; 06:4193 $21 $42 $41
+    ld   hl, MadBomberPositionYValues             ;; 06:4193 $21 $42 $41
     add  hl, de                                   ;; 06:4196 $19
     ld   a, [hl]                                  ;; 06:4197 $7E
     ld   hl, wEntitiesPosYTable                   ;; 06:4198 $21 $10 $C2

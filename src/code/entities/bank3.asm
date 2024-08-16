@@ -3209,7 +3209,7 @@ label_003_5C49:
     jp   z, PickableHandler                       ;; 03:5C59 $CA $AA $60
 
     cp   $10                                      ;; 03:5C5C $FE $10
-    jr   nz, .skipUpdateSpeedY                             ;; 03:5C5E $20 $07
+    jr   nz, .skipUpdateSpeedY                    ;; 03:5C5E $20 $07
 
     dec  [hl]                                     ;; 03:5C60 $35
     call_open_dialog Dialog093                    ;; 03:5C61
@@ -3220,7 +3220,7 @@ label_003_5C49:
 IF __OPTIMIZATIONS_3__
     jp   nz, HoldEntityAboveLink
 ELSE
-    jr   nz, .decSpeedX                             ;; 03:5C68 $20 $0B
+    jr   nz, .decSpeedX                           ;; 03:5C68 $20 $0B
 ENDC
 
     ld   d, INVENTORY_HOOKSHOT                    ;; 03:5C6A $16 $06

@@ -912,22 +912,22 @@ func_020_49F4::
 func_020_4A22::
     ld   a, [wBGUpdateRegionOriginLow]            ;; 20:4A22 $FA $27 $C1
     ld   [wDrawCommand.destinationLow], a         ;; 20:4A25 $EA $02 $D6
-    ld   [wDrawCommandAlt.destinationLow], a      ;; 20:4A28 $EA $92 $DC
+    ld   [wDrawCommandVRAM1.destinationLow], a    ;; 20:4A28 $EA $92 $DC
 
     ld   a, [wBGUpdateRegionOriginHigh]           ;; 20:4A2B $FA $26 $C1
     or   $98                                      ;; 20:4A2E $F6 $98
     ld   [wDrawCommand.destinationHigh], a        ;; 20:4A30 $EA $01 $D6
-    ld   [wDrawCommandAlt.destinationHigh], a     ;; 20:4A33 $EA $91 $DC
+    ld   [wDrawCommandVRAM1.destinationHigh], a   ;; 20:4A33 $EA $91 $DC
 
     ld   hl, Data_020_49F0                        ;; 20:4A36 $21 $F0 $49
     add  hl, bc                                   ;; 20:4A39 $09
     ld   a, [hl]                                  ;; 20:4A3A $7E
     ld   [wDrawCommand.length], a                 ;; 20:4A3B $EA $03 $D6
-    ld   [wDrawCommandAlt.length], a              ;; 20:4A3E $EA $93 $DC
+    ld   [wDrawCommandVRAM1.length], a            ;; 20:4A3E $EA $93 $DC
 
     ld   a, $00                                   ;; 20:4A41 $3E $00
     ld   [wDrawCommand.data + $14], a             ;; 20:4A43 $EA $18 $D6
-    ld   [wDrawCommandAlt.data + $14], a          ;; 20:4A46 $EA $A8 $DC
+    ld   [wDrawCommandVRAM1.data + $14], a        ;; 20:4A46 $EA $A8 $DC
 
     ld   a, $EE                                   ;; 20:4A49 $3E $EE
     ld   [wDrawCommand.data + $10], a             ;; 20:4A4B $EA $14 $D6
@@ -936,17 +936,17 @@ func_020_4A22::
     ld   [wDrawCommand.data + $13], a             ;; 20:4A54 $EA $17 $D6
     ld   b, HIGH(wDrawCommand.data)               ;; 20:4A57 $06 $D6
     ld   c, LOW(wDrawCommand.data)                ;; 20:4A59 $0E $04
-    ld   [wDrawCommandAlt.data + $10], a          ;; 20:4A5B $EA $A4 $DC
-    ld   [wDrawCommandAlt.data + $11], a          ;; 20:4A5E $EA $A5 $DC
-    ld   [wDrawCommandAlt.data + $12], a          ;; 20:4A61 $EA $A6 $DC
-    ld   [wDrawCommandAlt.data + $13], a          ;; 20:4A64 $EA $A7 $DC
-    ld   a, HIGH(wDrawCommandAlt.data)            ;; 20:4A67 $3E $DC
-ASSERT HIGH(wDrawCommandAlt.data) == HIGH(wDrawCommandAlt.data + $17)
+    ld   [wDrawCommandVRAM1.data + $10], a        ;; 20:4A5B $EA $A4 $DC
+    ld   [wDrawCommandVRAM1.data + $11], a        ;; 20:4A5E $EA $A5 $DC
+    ld   [wDrawCommandVRAM1.data + $12], a        ;; 20:4A61 $EA $A6 $DC
+    ld   [wDrawCommandVRAM1.data + $13], a        ;; 20:4A64 $EA $A7 $DC
+    ld   a, HIGH(wDrawCommandVRAM1.data)          ;; 20:4A67 $3E $DC
+ASSERT HIGH(wDrawCommandVRAM1.data) == HIGH(wDrawCommandVRAM1.data + $17)
     ldh  [hMultiPurposeB], a                      ;; 20:4A69 $E0 $E2
     ldh  [hMultiPurposeD], a                      ;; 20:4A6B $E0 $E4
-    ld   a, LOW(wDrawCommandAlt.data)             ;; 20:4A6D $3E $94
+    ld   a, LOW(wDrawCommandVRAM1.data)           ;; 20:4A6D $3E $94
     ldh  [hMultiPurposeC], a                      ;; 20:4A6F $E0 $E3
-    ld   a, LOW(wDrawCommandAlt.data + $17)       ;; 20:4A71 $3E $AB
+    ld   a, LOW(wDrawCommandVRAM1.data + $17)     ;; 20:4A71 $3E $AB
     ldh  [hMultiPurposeE], a                      ;; 20:4A73 $E0 $E5
     ret                                           ;; 20:4A75 $C9
 
@@ -2482,7 +2482,7 @@ InventoryLoad1Handler::
 
 ; GBC Exclusive code
 ; Load 32 bytes from 596A into DC91
-    ld   hl, wDrawCommandAlt                      ;; 20:59E3 $21 $91 $DC
+    ld   hl, wDrawCommandVRAM1                    ;; 20:59E3 $21 $91 $DC
     ld   bc, data_020_596A                        ;; 20:59E6 $01 $6A $59
     ld   e, $1F                                   ;; 20:59E9 $1E $1F
 
@@ -2494,7 +2494,7 @@ InventoryLoad1Handler::
     jr   nz, .loop_59EB                           ;; 20:59EF $20 $FA
 
     ld   a, $1E                                   ;; 20:59F1 $3E $1E
-    ld   [wDrawCommandsAltSize], a                ;; 20:59F3 $EA $90 $DC
+    ld   [wDrawCommandsVRAM1Size], a              ;; 20:59F3 $EA $90 $DC
 
     ; If on the overworld…
     ld   a, [wIsIndoor]                           ;; 20:59F6 $FA $A5 $DB
@@ -2517,8 +2517,8 @@ InventoryLoad1Handler::
 .colorDungeonEnd
 
 ; Set BC and E to point to the end of the "Palette Data?" (12 bytes) above
-    ld   hl, wDrawCommandAlt                      ;; 20:5A06 $21 $91 $DC
-    ld   a, [wDrawCommandsAltSize]                ;; 20:5A09 $FA $90 $DC
+    ld   hl, wDrawCommandVRAM1                    ;; 20:5A06 $21 $91 $DC
+    ld   a, [wDrawCommandsVRAM1Size]              ;; 20:5A09 $FA $90 $DC
     ld   c, a                                     ;; 20:5A0C $4F
     ld   b, $00                                   ;; 20:5A0D $06 $00
     add  hl, bc                                   ;; 20:5A0F $09
@@ -2533,9 +2533,9 @@ InventoryLoad1Handler::
     dec  e                                        ;; 20:5A18 $1D
     jr   nz, .loop_5A15                           ;; 20:5A19 $20 $FA
 
-    ld   a, [wDrawCommandsAltSize]                ;; 20:5A1B $FA $90 $DC
+    ld   a, [wDrawCommandsVRAM1Size]              ;; 20:5A1B $FA $90 $DC
     add  $0A                                      ;; 20:5A1E $C6 $0A
-    ld   [wDrawCommandsAltSize], a                ;; 20:5A20 $EA $90 $DC
+    ld   [wDrawCommandsVRAM1Size], a              ;; 20:5A20 $EA $90 $DC
 
 ; Palette loading complete, start building inventory
 .inventoryDisplayEntryPoint:
@@ -2666,9 +2666,9 @@ InventoryLoad1Handler::
     push af                                       ;; 20:5AB4 $F5
     push hl                                       ;; 20:5AB5 $E5
     ld   b, $00                                   ;; 20:5AB6 $06 $00
-    ld   a, [wDrawCommandsAltSize]                ;; 20:5AB8 $FA $90 $DC
+    ld   a, [wDrawCommandsVRAM1Size]              ;; 20:5AB8 $FA $90 $DC
     ld   c, a                                     ;; 20:5ABB $4F
-    ld   hl, wDrawCommandAlt                      ;; 20:5ABC $21 $91 $DC
+    ld   hl, wDrawCommandVRAM1                    ;; 20:5ABC $21 $91 $DC
     add  hl, bc                                   ;; 20:5ABF $09
     ld   a, l                                     ;; 20:5AC0 $7D
     sub  $11                                      ;; 20:5AC1 $D6 $11
@@ -2736,24 +2736,24 @@ InventoryLoad2Handler::
     ld   a, [hl]                                  ;; 20:5B0C $7E
     ldh  [hMultiPurpose0], a                      ;; 20:5B0D $E0 $D7
     ld   a, HIGH($9C6E)                           ;; 20:5B0F $3E $9C
-    ld   [wDrawCommandAlt.destinationHigh], a     ;; 20:5B11 $EA $91 $DC
-    ld   [wDrawCommandAlt.data+1], a              ;; 20:5B14 $EA $95 $DC
+    ld   [wDrawCommandVRAM1.destinationHigh], a   ;; 20:5B11 $EA $91 $DC
+    ld   [wDrawCommandVRAM1.data+1], a            ;; 20:5B14 $EA $95 $DC
     ld   a, LOW($9C6E)                            ;; 20:5B17 $3E $6E
-    ld   [wDrawCommandAlt.destinationLow], a      ;; 20:5B19 $EA $92 $DC
+    ld   [wDrawCommandVRAM1.destinationLow], a    ;; 20:5B19 $EA $92 $DC
     ld   a, $8E                                   ;; 20:5B1C $3E $8E
-    ld   [wDrawCommandAlt.data+2], a              ;; 20:5B1E $EA $96 $DC
+    ld   [wDrawCommandVRAM1.data+2], a            ;; 20:5B1E $EA $96 $DC
     ld   a, $41                                   ;; 20:5B21 $3E $41
-    ld   [wDrawCommandAlt.length], a              ;; 20:5B23 $EA $93 $DC
-    ld   [wDrawCommandAlt.data+3], a              ;; 20:5B26 $EA $97 $DC
+    ld   [wDrawCommandVRAM1.length], a            ;; 20:5B23 $EA $93 $DC
+    ld   [wDrawCommandVRAM1.data+3], a            ;; 20:5B26 $EA $97 $DC
     ldh  a, [hMultiPurpose0]                      ;; 20:5B29 $F0 $D7
-    ld   [wDrawCommandAlt.data], a                ;; 20:5B2B $EA $94 $DC
-    ld   [wDrawCommandAlt.data+4], a              ;; 20:5B2E $EA $98 $DC
+    ld   [wDrawCommandVRAM1.data], a              ;; 20:5B2B $EA $94 $DC
+    ld   [wDrawCommandVRAM1.data+4], a            ;; 20:5B2E $EA $98 $DC
     xor  a                                        ;; 20:5B31 $AF
-    ld   [wDrawCommandAlt.data+5], a              ;; 20:5B32 $EA $99 $DC
+    ld   [wDrawCommandVRAM1.data+5], a            ;; 20:5B32 $EA $99 $DC
 
-    ld   a, [wDrawCommandsAltSize]                ;; 20:5B35 $FA $90 $DC
+    ld   a, [wDrawCommandsVRAM1Size]              ;; 20:5B35 $FA $90 $DC
     add  $08                                      ;; 20:5B38 $C6 $08
-    ld   [wDrawCommandsAltSize], a                ;; 20:5B3A $EA $90 $DC
+    ld   [wDrawCommandsVRAM1Size], a              ;; 20:5B3A $EA $90 $DC
 
 .jr_5B3D
     ld   a, $03                                   ;; 20:5B3D $3E $03
@@ -2863,13 +2863,13 @@ func_020_5BA8::
 ; Configure request for loading inventory palette
 func_020_5BB9::
     push bc                                       ;; 20:5BB9 $C5
-    ld   a, [wDrawCommandsAltSize]                ;; 20:5BBA $FA $90 $DC
+    ld   a, [wDrawCommandsVRAM1Size]              ;; 20:5BBA $FA $90 $DC
     ld   e, a                                     ;; 20:5BBD $5F
     ld   d, $00                                   ;; 20:5BBE $16 $00
-    ld   hl, wDrawCommandAlt                      ;; 20:5BC0 $21 $91 $DC
+    ld   hl, wDrawCommandVRAM1                    ;; 20:5BC0 $21 $91 $DC
     add  hl, de                                   ;; 20:5BC3 $19
     add  $05                                      ;; 20:5BC4 $C6 $05
-    ld   [wDrawCommandsAltSize], a                ;; 20:5BC6 $EA $90 $DC
+    ld   [wDrawCommandsVRAM1Size], a              ;; 20:5BC6 $EA $90 $DC
     push hl                                       ;; 20:5BC9 $E5
     sla  c                                        ;; 20:5BCA $CB $21
     ld   hl, InventoryTileMapPositions            ;; 20:5BCC $21 $84 $5C
@@ -3149,8 +3149,8 @@ InventoryLoad3Handler::
     xor  a                                        ;; 20:5D3F $AF
     ld   [wDrawCommandsSize], a                   ;; 20:5D40 $EA $00 $D6
     ld   [wDrawCommand]               , a         ;; 20:5D43 $EA $01 $D6
-    ld   [wDrawCommandsAltSize], a                ;; 20:5D46 $EA $90 $DC
-    ld   [wDrawCommandAlt.destinationHigh], a     ;; 20:5D49 $EA $91 $DC
+    ld   [wDrawCommandsVRAM1Size], a              ;; 20:5D46 $EA $90 $DC
+    ld   [wDrawCommandVRAM1.destinationHigh], a   ;; 20:5D49 $EA $91 $DC
     ld   a, [wLCDControl]                         ;; 20:5D4C $FA $FD $D6
     ldh  [rLCDC], a                               ;; 20:5D4F $E0 $40
     ret                                           ;; 20:5D51 $C9

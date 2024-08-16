@@ -749,7 +749,7 @@ func_001_7338::
     ld   a, [hli]                                 ;; 01:7344 $2A
     ld   d, [hl]                                  ;; 01:7345 $56
     ld   e, a                                     ;; 01:7346 $5F
-    ld   hl, wDrawCommandAlt                      ;; 01:7347 $21 $91 $DC
+    ld   hl, wDrawCommandVRAM1                    ;; 01:7347 $21 $91 $DC
     ld   c, $13                                   ;; 01:734A $0E $13
 
 .loop_734C
@@ -820,7 +820,7 @@ Data_001_73AC::
 
 func_001_73B1::
     ld   de, Data_001_73AC                        ;; 01:73B1 $11 $AC $73
-    ld   hl, wDrawCommandAlt                      ;; 01:73B4 $21 $91 $DC
+    ld   hl, wDrawCommandVRAM1                    ;; 01:73B4 $21 $91 $DC
     ld   c, $12                                   ;; 01:73B7 $0E $12
 
 .loop
@@ -2162,7 +2162,7 @@ func_7C60::
     ret                                           ;; 01:7CCA $C9
 
 func_001_7CCB::
-    ld   hl, wDrawCommandAlt                      ;; 01:7CCB $21 $91 $DC
+    ld   hl, wDrawCommandVRAM1                    ;; 01:7CCB $21 $91 $DC
     ld   a, [wD00C]                               ;; 01:7CCE $FA $0C $D0
     ldi  [hl], a                                  ;; 01:7CD1 $22
     ld   a, [wD00B]                               ;; 01:7CD2 $FA $0B $D0

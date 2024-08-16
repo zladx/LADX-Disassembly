@@ -313,7 +313,7 @@ func_023_7E95::
     and  a                                        ;; 23:7EC7 $A7
     ret  z                                        ;; 23:7EC8 $C8
 
-    ld   de, wDrawCommandAlt                      ;; 23:7EC9 $11 $91 $DC
+    ld   de, wDrawCommandVRAM1                    ;; 23:7EC9 $11 $91 $DC
     ld   a, [wD00D]                               ;; 23:7ECC $FA $0D $D0
     cp   $50                                      ;; 23:7ECF $FE $50
     jr   z, .jr_7EEE                              ;; 23:7ED1 $28 $1B

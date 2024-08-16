@@ -3278,12 +3278,12 @@ TunicFairyState9::
     add  hl, bc                                   ;; 36:53FE $09
     ld   c, l                                     ;; 36:53FF $4D
     ld   b, h                                     ;; 36:5400 $44
-    ld   a, [wDrawCommandsAltSize]                ;; 36:5401 $FA $90 $DC
+    ld   a, [wDrawCommandsVRAM1Size]              ;; 36:5401 $FA $90 $DC
     ld   e, a                                     ;; 36:5404 $5F
     add  $08                                      ;; 36:5405 $C6 $08
-    ld   [wDrawCommandsAltSize], a                ;; 36:5407 $EA $90 $DC
+    ld   [wDrawCommandsVRAM1Size], a              ;; 36:5407 $EA $90 $DC
     ld   d, $00                                   ;; 36:540A $16 $00
-    ld   hl, wDrawCommandAlt                      ;; 36:540C $21 $91 $DC
+    ld   hl, wDrawCommandVRAM1                    ;; 36:540C $21 $91 $DC
     add  hl, de                                   ;; 36:540F $19
     ld   e, $08                                   ;; 36:5410 $1E $08
 

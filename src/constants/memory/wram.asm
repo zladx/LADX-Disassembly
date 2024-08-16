@@ -3715,11 +3715,11 @@ wObjPal8::
 
 ; Size of all cumulated wDrawCommandsSize
 ; When 0, no wDrawCommand is executed on vblanks
-wDrawCommandsAltSize::
+wDrawCommandsVRAM1Size::
   ds 1 ; DC90
 
 ; Secondary wDrawCommand destination (higher byte)
-wDrawCommandAlt::
+wDrawCommandVRAM1::
 .destinationHigh
   ds 1 ; DC91
 ; Secondary wDrawCommand destination (lower byte)

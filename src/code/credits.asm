@@ -1486,7 +1486,7 @@ CreditsStairsOwlSpeechHandler::
     ret  z                                        ;; 17:4E4F $C8
 
     ld   bc, wDrawCommand                         ;; 17:4E50 $01 $01 $D6
-    ld   de, wDrawCommandAlt                      ;; 17:4E53 $11 $91 $DC
+    ld   de, wDrawCommandVRAM1                    ;; 17:4E53 $11 $91 $DC
     ld   hl, $9880                                ;; 17:4E56 $21 $80 $98
     swap a                                        ;; 17:4E59 $CB $37
     sla  a                                        ;; 17:4E5B $CB $27
@@ -1681,7 +1681,7 @@ CreditsWindFishPrepare3Handler::
 
     ld   hl, Data_017_4FDF                        ;; 17:5120 $21 $DF $4F
     add  hl, de                                   ;; 17:5123 $19
-    ld   de, wDrawCommandAlt                      ;; 17:5124 $11 $91 $DC
+    ld   de, wDrawCommandVRAM1                    ;; 17:5124 $11 $91 $DC
     ld   c, $18                                   ;; 17:5127 $0E $18
 
 .loop_5129
@@ -2020,7 +2020,7 @@ ENDC
 
     ld   hl, Data_017_5494                        ;; 17:54F7 $21 $94 $54
     add  hl, de                                   ;; 17:54FA $19
-    ld   de, wDrawCommandAlt                      ;; 17:54FB $11 $91 $DC
+    ld   de, wDrawCommandVRAM1                    ;; 17:54FB $11 $91 $DC
     ld   c, $03                                   ;; 17:54FE $0E $03
 
 .loop_5500
@@ -3240,7 +3240,7 @@ CreditsWaterMovingUpHandler::
     and  a                                        ;; 17:5F7E $A7
     ret  z                                        ;; 17:5F7F $C8
 
-    ld   de, wDrawCommandAlt                      ;; 17:5F80 $11 $91 $DC
+    ld   de, wDrawCommandVRAM1                    ;; 17:5F80 $11 $91 $DC
     ld   a, [hl+]                                 ;; 17:5F83 $2A
     ld   [de], a                                  ;; 17:5F84 $12
     inc  de                                       ;; 17:5F85 $13
@@ -4172,7 +4172,7 @@ func_017_67CA::
     ld   a, [hl+]                                 ;; 17:67F8 $2A
     ld   h, [hl]                                  ;; 17:67F9 $66
     ld   l, a                                     ;; 17:67FA $6F
-    ld   de, wDrawCommandAlt                      ;; 17:67FB $11 $91 $DC
+    ld   de, wDrawCommandVRAM1                    ;; 17:67FB $11 $91 $DC
     ld   c, $36                                   ;; 17:67FE $0E $36
 
 .loop_6800
@@ -5025,7 +5025,7 @@ label_017_6F9F:
     ret  z                                        ;; 17:6FB0 $C8
 
     ld   hl, Data_017_6F8E                        ;; 17:6FB1 $21 $8E $6F
-    ld   de, wDrawCommandAlt                      ;; 17:6FB4 $11 $91 $DC
+    ld   de, wDrawCommandVRAM1                    ;; 17:6FB4 $11 $91 $DC
     ld   c, $11                                   ;; 17:6FB7 $0E $11
 
 .loop_6FB9
@@ -5152,7 +5152,7 @@ CreditsTheEnd5Handler::
     jr   nz, .loop_017_70B9                       ;; 17:70BD $20 $FA
 
     ld   hl, Data_017_70A0                        ;; 17:70BF $21 $A0 $70
-    ld   de, wDrawCommandAlt                      ;; 17:70C2 $11 $91 $DC
+    ld   de, wDrawCommandVRAM1                    ;; 17:70C2 $11 $91 $DC
     ld   c, Data_017_70A0.end - Data_017_70A0     ;; 17:70C5 $0E $11
 
 .loop_017_70C7

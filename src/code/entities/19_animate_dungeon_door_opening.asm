@@ -302,8 +302,8 @@ func_019_63B5::
     jr   z, ret_019_63D8                          ;; 19:63B8 $28 $1E
 
     ld   a, $05                                   ;; 19:63BA $3E $05
-    ld   [wDrawCommandsAltSize], a                ;; 19:63BC $EA $90 $DC
-    ld   hl, wDrawCommandAlt                      ;; 19:63BF $21 $91 $DC
+    ld   [wDrawCommandsVRAM1Size], a              ;; 19:63BC $EA $90 $DC
+    ld   hl, wDrawCommandVRAM1                    ;; 19:63BF $21 $91 $DC
     ld   de, Data_019_63A3                        ;; 19:63C2 $11 $A3 $63
     ldh  a, [hBaseScrollX]                        ;; 19:63C5 $F0 $96
     and  a                                        ;; 19:63C7 $A7
@@ -682,7 +682,7 @@ jr_019_68AC:
     ld   e, a                                     ;; 19:68CF $5F
     push bc                                       ;; 19:68D0 $C5
     ld   c, $10                                   ;; 19:68D1 $0E $10
-    ld   hl, wDrawCommandAlt                      ;; 19:68D3 $21 $91 $DC
+    ld   hl, wDrawCommandVRAM1                    ;; 19:68D3 $21 $91 $DC
 
 jr_019_68D6:
     ld   a, [de]                                  ;; 19:68D6 $1A
@@ -765,7 +765,7 @@ jr_019_6910:
     ld   d, [hl]                                  ;; 19:6936 $56
     ld   e, a                                     ;; 19:6937 $5F
     ld   c, $34                                   ;; 19:6938 $0E $34
-    ld   hl, wDrawCommandAlt                      ;; 19:693A $21 $91 $DC
+    ld   hl, wDrawCommandVRAM1                    ;; 19:693A $21 $91 $DC
 
 jr_019_693D:
     ld   a, [de]                                  ;; 19:693D $1A

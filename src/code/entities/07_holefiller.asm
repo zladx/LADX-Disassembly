@@ -20,22 +20,22 @@ HoleFillerEntityHandler::
     call SetEntitySpriteVariant                   ;; 07:511D $CD $0C $3B
     ldh  a, [hActiveEntityState]                  ;; 07:5120 $F0 $F0
     JP_TABLE                                      ;; 07:5122
-._00 dw func_007_512F                             ;; 07:5123
-._01 dw func_007_517C                             ;; 07:5125
+._00 dw HoleFillerIdleState                       ;; 07:5123
+._01 dw HoleFillerMovingState                     ;; 07:5125
 
-Data_007_5127::
+HoleFillerDirectionToXSpeedTable::
     db   $08, $F8, $00, $00
 
-Data_007_512B::
+HoleFillerDirectionToYSpeedTable::
     db   $00, $00, $F8, $08
 
-func_007_512F::
+HoleFillerIdleState::
     call PushLinkOutOfEntity_07                   ;; 07:512F $CD $F0 $7C
-    jr   nc, jr_007_516E                          ;; 07:5132 $30 $3A
+    jr   nc, .doNotStartMovement                  ;; 07:5132 $30 $3A
 
     ldh  a, [hPressedButtonsMask]                 ;; 07:5134 $F0 $CB
     and  $0F                                      ;; 07:5136 $E6 $0F
-    jr   z, jr_007_516E                           ;; 07:5138 $28 $34
+    jr   z, .doNotStartMovement                   ;; 07:5138 $28 $34
 
     ld   a, $01                                   ;; 07:513A $3E $01
     ld   [wIsLinkPushing], a                      ;; 07:513C $EA $44 $C1
@@ -45,7 +45,7 @@ func_007_512F::
     inc  a                                        ;; 07:5144 $3C
     ld   [hl], a                                  ;; 07:5145 $77
     cp   $10                                      ;; 07:5146 $FE $10
-    jr   nz, ret_007_5173                         ;; 07:5148 $20 $29
+    jr   nz, .ret                                 ;; 07:5148 $20 $29
 
     call IncrementEntityState                     ;; 07:514A $CD $12 $3B
     call GetEntityDirectionToLink_07              ;; 07:514D $CD $7D $7E
@@ -55,28 +55,28 @@ func_007_512F::
     xor  $01                                      ;; 07:5155 $EE $01
     ld   e, a                                     ;; 07:5157 $5F
     ld   [hl], e                                  ;; 07:5158 $73
-
-func_007_5159::
+; Set the speed by the direction in register E
+.setSpeedByDirection::
     ld   d, b                                     ;; 07:5159 $50
-    ld   hl, Data_007_5127                        ;; 07:515A $21 $27 $51
+    ld   hl, HoleFillerDirectionToXSpeedTable     ;; 07:515A $21 $27 $51
     add  hl, de                                   ;; 07:515D $19
     ld   a, [hl]                                  ;; 07:515E $7E
     ld   hl, wEntitiesSpeedXTable                 ;; 07:515F $21 $40 $C2
     add  hl, bc                                   ;; 07:5162 $09
     ld   [hl], a                                  ;; 07:5163 $77
-    ld   hl, Data_007_512B                        ;; 07:5164 $21 $2B $51
+    ld   hl, HoleFillerDirectionToYSpeedTable     ;; 07:5164 $21 $2B $51
     add  hl, de                                   ;; 07:5167 $19
     ld   a, [hl]                                  ;; 07:5168 $7E
     call GetEntitySpeedYAddress                   ;; 07:5169 $CD $05 $40
     ld   [hl], a                                  ;; 07:516C $77
     ret                                           ;; 07:516D $C9
 
-jr_007_516E:
+.doNotStartMovement:
     ld   hl, wEntitiesInertiaTable                ;; 07:516E $21 $D0 $C3
     add  hl, bc                                   ;; 07:5171 $09
     ld   [hl], b                                  ;; 07:5172 $70
 
-ret_007_5173:
+.ret:
     ret                                           ;; 07:5173 $C9
 
 Data_007_5174::
@@ -85,7 +85,7 @@ Data_007_5174::
 Data_007_5178::
     db   $00, $00, $F0, $10
 
-func_007_517C::
+HoleFillerMovingState::
     ld   a, $01                                   ;; 07:517C $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ;; 07:517E $E0 $A1
     ld   a, JINGLE_URCHIN_PUSH                    ;; 07:5180 $3E $3E
@@ -134,7 +134,7 @@ jr_007_51AA:
     add  hl, bc                                   ;; 07:51B7 $09
     or   [hl]                                     ;; 07:51B8 $B6
     and  $0F                                      ;; 07:51B9 $E6 $0F
-    jp   nz, ret_007_529F                         ;; 07:51BB $C2 $9F $52
+    jp   nz, .ret                                 ;; 07:51BB $C2 $9F $52
 
     ld   a, [hl]                                  ;; 07:51BE $7E
     sub  $10                                      ;; 07:51BF $D6 $10
@@ -158,16 +158,14 @@ jr_007_51AA:
     call label_2887                               ;; 07:51DE $CD $87 $28
     ldh  a, [hIsGBC]                              ;; 07:51E1 $F0 $FE
     and  a                                        ;; 07:51E3 $A7
-    jr   z, .jr_51F2                              ;; 07:51E4 $28 $0C
-
+    jr   z, .noGBC                                ;; 07:51E4 $28 $0C
     push bc                                       ;; 07:51E6 $C5
     ld   a, $0D                                   ;; 07:51E7 $3E $0D
     ld   [wDDD8], a                               ;; 07:51E9 $EA $D8 $DD
     ld   a, $07                                   ;; 07:51EC $3E $07
     call func_91D                                 ;; 07:51EE $CD $1D $09
     pop  bc                                       ;; 07:51F1 $C1
-
-.jr_51F2
+.noGBC
     ld   hl, wDrawCommand                         ;; 07:51F2 $21 $01 $D6
     ld   a, [wDrawCommandsSize]                   ;; 07:51F5 $FA $00 $D6
     ld   e, a                                     ;; 07:51F8 $5F
@@ -200,7 +198,7 @@ jr_007_51AA:
     ld   hl, wEntitiesDirectionTable              ;; 07:5221 $21 $80 $C3
     add  hl, bc                                   ;; 07:5224 $09
     ld   e, [hl]                                  ;; 07:5225 $5E
-    call func_007_5159                            ;; 07:5226 $CD $59 $51
+    call HoleFillerIdleState.setSpeedByDirection  ;; 07:5226 $CD $59 $51
     ld   hl, wEntitiesDirectionTable              ;; 07:5229 $21 $80 $C3
     add  hl, bc                                   ;; 07:522C $09
     ld   e, [hl]                                  ;; 07:522D $5E
@@ -228,13 +226,13 @@ jr_007_51AA:
     ld   d, $01                                   ;; 07:524E $16 $01
     call GetObjectPhysicsFlags_trampoline         ;; 07:5250 $CD $26 $2A
     cp   $0B                                      ;; 07:5253 $FE $0B
-    jr   z, ret_007_529F                          ;; 07:5255 $28 $48
+    jr   z, .ret                                  ;; 07:5255 $28 $48
 
     cp   $50                                      ;; 07:5257 $FE $50
-    jr   z, ret_007_529F                          ;; 07:5259 $28 $44
+    jr   z, .ret                                  ;; 07:5259 $28 $44
 
     cp   $51                                      ;; 07:525B $FE $51
-    jr   z, ret_007_529F                          ;; 07:525D $28 $40
+    jr   z, .ret                                  ;; 07:525D $28 $40
 
     ldh  a, [hActiveEntityPosX]                   ;; 07:525F $F0 $EE
     ldh  [hMultiPurpose0], a                      ;; 07:5261 $E0 $D7
@@ -251,7 +249,7 @@ jr_007_51AA:
     ld   a, [wRoomEvent]                          ;; 07:5279 $FA $8E $C1
     and  $0F                                      ;; 07:527C $E6 $0F
     cp   TRIGGER_FILL_LAVA_GAPS                   ;; 07:527E $FE $0E
-    jr   nz, ret_007_529F                         ;; 07:5280 $20 $1D
+    jr   nz, .ret                                 ;; 07:5280 $20 $1D
 
     push bc                                       ;; 07:5282 $C5
     ld   c, b                                     ;; 07:5283 $48
@@ -278,5 +276,5 @@ jr_007_51AA:
 .jr_529E
     pop  bc                                       ;; 07:529E $C1
 
-ret_007_529F:
+.ret:
     ret                                           ;; 07:529F $C9

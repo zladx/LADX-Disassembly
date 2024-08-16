@@ -1707,11 +1707,11 @@ jr_002_4C0F:
 func_002_4C14::
     push de                                       ;; 02:4C14 $D5
     push hl                                       ;; 02:4C15 $E5
-    ld   hl, wDrawCommandAlt                      ;; 02:4C16 $21 $91 $DC
-    ld   a, [wDrawCommandsAltSize]                ;; 02:4C19 $FA $90 $DC
+    ld   hl, wDrawCommandVRAM1                    ;; 02:4C16 $21 $91 $DC
+    ld   a, [wDrawCommandsVRAM1Size]              ;; 02:4C19 $FA $90 $DC
     ld   e, a                                     ;; 02:4C1C $5F
     add  $0A                                      ;; 02:4C1D $C6 $0A
-    ld   [wDrawCommandsAltSize], a                ;; 02:4C1F $EA $90 $DC
+    ld   [wDrawCommandsVRAM1Size], a              ;; 02:4C1F $EA $90 $DC
     add  hl, de                                   ;; 02:4C22 $19
     ld   e, l                                     ;; 02:4C23 $5D
     ld   d, h                                     ;; 02:4C24 $54

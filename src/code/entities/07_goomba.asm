@@ -101,10 +101,10 @@ ENDC
     jr   z, jr_007_6596                           ;; 07:6569 $28 $2B
 
     pop  bc                                       ;; 07:656B $C1
-    ld   a, [wDrawCommandsAltSize]                ;; 07:656C $FA $90 $DC
+    ld   a, [wDrawCommandsVRAM1Size]              ;; 07:656C $FA $90 $DC
     ld   e, a                                     ;; 07:656F $5F
     add  $08                                      ;; 07:6570 $C6 $08
-    ld   [wDrawCommandsAltSize], a                ;; 07:6572 $EA $90 $DC
+    ld   [wDrawCommandsVRAM1Size], a              ;; 07:6572 $EA $90 $DC
     ld   d, b                                     ;; 07:6575 $50
     push bc                                       ;; 07:6576 $C5
     ld   hl, wEntitiesInertiaTable                ;; 07:6577 $21 $D0 $C3
@@ -121,7 +121,7 @@ ENDC
     add  hl, bc                                   ;; 07:6585 $09
     ld   c, l                                     ;; 07:6586 $4D
     ld   b, h                                     ;; 07:6587 $44
-    ld   hl, wDrawCommandAlt                      ;; 07:6588 $21 $91 $DC
+    ld   hl, wDrawCommandVRAM1                    ;; 07:6588 $21 $91 $DC
     add  hl, de                                   ;; 07:658B $19
     ld   e, $08                                   ;; 07:658C $1E $08
 

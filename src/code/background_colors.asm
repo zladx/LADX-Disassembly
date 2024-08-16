@@ -33,7 +33,7 @@ ChangeBGColumnPalette::
     ; Select VRAM bank 1 (CGB tile attributes)
     ld   a, 1                                     ;; 24:5C1E $3E $01
     ldh  [rVBK], a                                ;; 24:5C20 $E0 $4F
-    ld   de, wDrawCommandAlt                      ;; 24:5C22 $11 $91 $DC
+    ld   de, wDrawCommandVRAM1                    ;; 24:5C22 $11 $91 $DC
     call ExecuteDrawCommands                      ;; 24:5C25 $CD $27 $29
     ; Select VRAM bank 0
     xor  a                                        ;; 24:5C28 $AF

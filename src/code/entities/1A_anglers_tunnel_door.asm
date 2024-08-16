@@ -117,8 +117,8 @@ AnglersTunnelDoorEntityHandler::
     ld   d, h                                     ;; 1A:7135 $54
     ld   e, l                                     ;; 1A:7136 $5D
     ld   c, $0A                                   ;; 1A:7137 $0E $0A
-    ld   hl, wDrawCommandAlt                      ;; 1A:7139 $21 $91 $DC
-    ld   a, [wDrawCommandsAltSize]                ;; 1A:713C $FA $90 $DC
+    ld   hl, wDrawCommandVRAM1                    ;; 1A:7139 $21 $91 $DC
+    ld   a, [wDrawCommandsVRAM1Size]              ;; 1A:713C $FA $90 $DC
     ldh  a, [hIntersectedObjectBGAddressHigh]     ;; 1A:713F $F0 $CF
     ld   [hl+], a                                 ;; 1A:7141 $22
     ldh  a, [hIntersectedObjectBGAddressLow]      ;; 1A:7142 $F0 $D0

@@ -401,8 +401,8 @@ InterruptVBlank::
     xor  a                                        ;; 00:053E $AF
     ld   [wDrawCommandsSize], a                   ;; 00:053F $EA $00 $D6
     ld   [wDrawCommand], a                        ;; 00:0542 $EA $01 $D6
-    ld   [wDrawCommandsAltSize], a                ;; 00:0545 $EA $90 $DC
-    ld   [wDrawCommandAlt], a                     ;; 00:0548 $EA $91 $DC
+    ld   [wDrawCommandsVRAM1Size], a              ;; 00:0545 $EA $90 $DC
+    ld   [wDrawCommandVRAM1], a                   ;; 00:0548 $EA $91 $DC
 
     ; On Overworld, copy some palette data to OAM buffer
     callsb func_036_72BA                          ;; 00:054B $3E $36 $EA $00 $21 $CD $BA $72
@@ -458,8 +458,8 @@ PhotoAlbumVBlankHandler::
     xor  a                                        ;; 00:059E $AF
     ld   [wDrawCommandsSize], a                   ;; 00:059F $EA $00 $D6
     ld   [wDrawCommand], a                        ;; 00:05A2 $EA $01 $D6
-    ld   [wDrawCommandsAltSize], a                ;; 00:05A5 $EA $90 $DC
-    ld   [wDrawCommandAlt], a                     ;; 00:05A8 $EA $91 $DC
+    ld   [wDrawCommandsVRAM1Size], a              ;; 00:05A5 $EA $90 $DC
+    ld   [wDrawCommandVRAM1], a                   ;; 00:05A8 $EA $91 $DC
 
 .clearBGTilesFlag
     callsw PrinterInterruptVBlank                 ;; 00:05AB $3E $28 $CD $0C $08 $CD $16 $46

@@ -918,8 +918,8 @@ func_019_7921::
 IF __PATCH_0__
     ld   c, Data_019_78FE_B.end - Data_019_78FE_B
     ld   a, $08
-    ld   [wDrawCommandsAltSize], a
-    ld   hl, wDrawCommandAlt
+    ld   [wDrawCommandsVRAM1Size], a
+    ld   hl, wDrawCommandVRAM1
     ld   de, Data_019_78FE_B
 
 .loop_7951

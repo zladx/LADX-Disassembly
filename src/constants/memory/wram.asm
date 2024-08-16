@@ -3709,17 +3709,16 @@ wObjPal7::
 wObjPal8::
   ds 8 ; DC88 - DC8F
 
-; This seems to be some secondary wDrawCommands buffer used during map scrolling.
-;
-; TODO: find a better name
+; This is a 2nd draw to VRAM command. See wDrawCommand for details.
+; This draws to VRAM1 instead of VRAM0, used to update tile attributes on GBC.
 
 ; Size of all cumulated wDrawCommandsSize
 ; When 0, no wDrawCommand is executed on vblanks
-wDrawCommandsAltSize::
+wDrawCommandsVRAM1Size::
   ds 1 ; DC90
 
 ; Secondary wDrawCommand destination (higher byte)
-wDrawCommandAlt::
+wDrawCommandVRAM1::
 .destinationHigh
   ds 1 ; DC91
 ; Secondary wDrawCommand destination (lower byte)

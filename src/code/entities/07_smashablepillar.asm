@@ -142,7 +142,7 @@ SmashablePillarEntityHandler::
 .roomTransition
     ldh  a, [hActiveEntitySpriteVariant]          ;; 07:5DF5 $F0 $F1
     cp   $05                                      ;; 07:5DF7 $FE $05
-    jr   nc, .variant5End                             ;; 07:5DF9 $30 $17
+    jr   nc, .variant5End                         ;; 07:5DF9 $30 $17
 
     rla                                           ;; 07:5DFB $17
     rla                                           ;; 07:5DFC $17

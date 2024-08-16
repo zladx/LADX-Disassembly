@@ -46,7 +46,7 @@ ENDC
     ld   [hl], b                                  ;; 07:6029 $70
 
 notLifted:
-    ld   de, WreckingBallSprite                        ;; 07:602A $11 $03 $60
+    ld   de, WreckingBallSprite                   ;; 07:602A $11 $03 $60
     call RenderActiveEntitySpritesPair            ;; 07:602D $CD $C0 $3B
     ld   a, [wRoomTransitionState]                ;; 07:6030 $FA $24 $C1
     and  a                                        ;; 07:6033 $A7
@@ -236,7 +236,7 @@ WreckingBallState1Handler::
 WreckingBallState2Handler::
     ldh  a, [hMultiPurposeG]                      ;; 07:6135 $F0 $E8
     and  a                                        ;; 07:6137 $A7
-    jr   nz, .touchingGround                          ;; 07:6138 $20 $1F
+    jr   nz, .touchingGround                      ;; 07:6138 $20 $1F
 
     ld   hl, wEntitiesCollisionsTable             ;; 07:613A $21 $A0 $C2
     add  hl, bc                                   ;; 07:613D $09

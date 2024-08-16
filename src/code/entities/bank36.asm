@@ -1818,7 +1818,7 @@ GetOwlStatueDialogId::
     jr   nz, .loop_4A5E                           ;; 36:4A68 $20 $F4
 
 .jr_4A6A
-    ld   hl, HintTable                        ;; 36:4A6A $21 $14 $4A
+    ld   hl, HintTable                            ;; 36:4A6A $21 $14 $4A
     add  hl, de                                   ;; 36:4A6D $19
     ld   a, [hl+]                                 ;; 36:4A6E $2A
     ld   h, [hl]                                  ;; 36:4A6F $66

@@ -286,7 +286,7 @@ PincerSpriteVariants::
 
 RenderPincer::
     ; Render head
-    ld   de, PincerSpriteVariants             ;; 07:5453 $11 $2B $54
+    ld   de, PincerSpriteVariants                 ;; 07:5453 $11 $2B $54
     call RenderActiveEntitySpritesPair            ;; 07:5456 $CD $C0 $3B
     ldh  a, [hActiveEntityState]                  ;; 07:5459 $F0 $F0
     cp   $03                                      ;; 07:545B $FE $03

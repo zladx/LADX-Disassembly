@@ -45,7 +45,7 @@ TektiteEntityHandler::
     add  hl, bc                                   ;; 06:78F8 $09
     ld   a, [hl]                                  ;; 06:78F9 $7E
     and  $80                                      ;; 06:78FA $E6 $80
-    jr   z, .hitGroundEnd                    ;; 06:78FC $28 $1A
+    jr   z, .hitGroundEnd                         ;; 06:78FC $28 $1A
 
     xor  a                                        ;; 06:78FE $AF
     ld   [hl], a                                  ;; 06:78FF $77

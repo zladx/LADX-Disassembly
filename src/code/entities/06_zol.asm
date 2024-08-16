@@ -78,7 +78,7 @@ AnimateZolGel:
     ld   a, [hl]                                  ;; 06:7C43 $7E
     and  $80                                      ;; 06:7C44 $E6 $80
     ldh  [hMultiPurposeG], a                      ;; 06:7C46 $E0 $E8
-    jr   z, .hitGroundEnd                    ;; 06:7C48 $28 $06
+    jr   z, .hitGroundEnd                         ;; 06:7C48 $28 $06
 
     ld   [hl], b                                  ;; 06:7C4A $70
     ld   hl, wEntitiesSpeedZTable                 ;; 06:7C4B $21 $20 $C3
@@ -271,7 +271,7 @@ ZolGelState3Handler::
     call ZolGelPhysics                            ;; 06:7D63 $CD $0F $7D
     ldh  a, [hMultiPurposeG]                      ;; 06:7D66 $F0 $E8
     and  a                                        ;; 06:7D68 $A7
-    jr   z, .hitGroundEnd                    ;; 06:7D69 $28 $04
+    jr   z, .hitGroundEnd                         ;; 06:7D69 $28 $04
 
     call IncrementEntityState                     ;; 06:7D6B $CD $12 $3B
     ld   [hl], b                                  ;; 06:7D6E $70

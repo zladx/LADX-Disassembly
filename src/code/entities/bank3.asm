@@ -4856,7 +4856,7 @@ include "code/entities/03_bomb.asm"
 Data_003_69A2::
     db   $6C, $74, $6D, $75, $00, $00, $00, $00   ;; 03:69A2
 
-include "code/entities/03_hookshot_hit.asm"
+include "code/entities/03_magic_rod_fireball.asm"
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 OctorokRockSpriteVariants::

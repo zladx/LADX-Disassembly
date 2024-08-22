@@ -69,9 +69,9 @@ ENDC
     ld   e, a                                     ;; 03:6609 $5F
     ld   d, b                                     ;; 03:660A $50
     push de                                       ;; 03:660B $D5
-    call func_003_68F8                            ;; 03:660C $CD $F8 $68
+    call CheckForBombDestroyableObjectBasic       ;; 03:660C $CD $F8 $68
     pop  de                                       ;; 03:660F $D1
-    call func_003_6771                            ;; 03:6610 $CD $71 $67
+    call CheckForBombDestroyableObjectPuzzle      ;; 03:6610 $CD $71 $67
     pop  af                                       ;; 03:6613 $F1
 
 .jr_6614
@@ -292,7 +292,10 @@ Data_003_6769::
 Data_003_676D::
     db   $00, $00, $10, $00
 
-func_003_6771::
+; Check if we have a destroyable tile for the bomb.
+; Only "puzzle" objects are checked here, that stay permanently open
+;   Parameter: de, offset into x,y offset table for what tiles to check.
+CheckForBombDestroyableObjectPuzzle::
     ldh  a, [hIsSideScrolling]                    ;; 03:6771 $F0 $F9
     and  a                                        ;; 03:6773 $A7
     jp   nz, label_003_68E5                       ;; 03:6774 $C2 $E5 $68
@@ -330,10 +333,10 @@ func_003_6771::
     ld   a, [hl]                                  ;; 03:67A8 $7E
     ldh  [hObjectUnderEntity], a                  ;; 03:67A9 $E0 $AF
     ld   e, a                                     ;; 03:67AB $5F
-    cp   $BB                                      ;; 03:67AC $FE $BB
+    cp   OBJECT_GIANT_SKULL_TL                    ;; 03:67AC $FE $BB
     jr   c, jr_003_6828                           ;; 03:67AE $38 $78
 
-    cp   $BF                                      ;; 03:67B0 $FE $BF
+    cp   OBJECT_GIANT_SKULL_BR + 1                ;; 03:67B0 $FE $BF
     jr   nc, jr_003_6828                          ;; 03:67B2 $30 $74
 
     ld   a, [wIsIndoor]                           ;; 03:67B4 $FA $A5 $DB
@@ -349,7 +352,7 @@ func_003_6771::
     and  $E0                                      ;; 03:67C6 $E6 $E0
     ldh  [hIntersectedObjectLeft], a              ;; 03:67C8 $E0 $CE
     ld   a, $03                                   ;; 03:67CA $3E $03
-    call func_036_705A_trampoline                 ;; 03:67CC $CD $A7 $0A
+    call Spawn2x2RubbleEntities_trampoline        ;; 03:67CC $CD $A7 $0A
     ld   a, c                                     ;; 03:67CF $79
     and  $EE                                      ;; 03:67D0 $E6 $EE
     ld   c, a                                     ;; 03:67D2 $4F
@@ -553,7 +556,10 @@ Data_003_68EF::
     db   $F8, $F8, $F8, $08, $08, $08, $18        ;; 03:68EF
     db   $18, $18                                 ;; 03:68F6
 
-func_003_68F8::
+; Check if we have a destroyable tile for the bomb.
+; Only "basic" objects are checked here, that reset after you leave the room.
+;   Parameter: de, offset into x,y offset table for what tiles to check.
+CheckForBombDestroyableObjectBasic::
     push bc                                       ;; 03:68F8 $C5
     ld   hl, Data_003_68E6                        ;; 03:68F9 $21 $E6 $68
     add  hl, de                                   ;; 03:68FC $19
@@ -584,22 +590,22 @@ func_003_68F8::
     and  a                                        ;; 03:6925 $A7
     ld   a, [hl]                                  ;; 03:6926 $7E
     ldh  [hObjectUnderEntity], a                  ;; 03:6927 $E0 $AF
-    jr   nz, .jr_003_693C                         ;; 03:6929 $20 $11
+    jr   nz, .indoor                              ;; 03:6929 $20 $11
 
     ldh  [hMultiPurposeH], a                      ;; 03:692B $E0 $E9
-    cp   $0A                                      ;; 03:692D $FE $0A
+    cp   OBJECT_TALL_GRASS                        ;; 03:692D $FE $0A
     jr   z, .jr_003_6964                          ;; 03:692F $28 $33
 
-    cp   $D3                                      ;; 03:6931 $FE $D3
+    cp   OBJECT_BUSH_GROUND_STAIRS                ;; 03:6931 $FE $D3
     jr   z, .jr_003_6964                          ;; 03:6933 $28 $2F
 
-    cp   $5C                                      ;; 03:6935 $FE $5C
+    cp   OBJECT_BUSH                              ;; 03:6935 $FE $5C
     jr   z, .jr_003_6964                          ;; 03:6937 $28 $2B
 
     jp   .return                                  ;; 03:6939 $C3 $A0 $69
 
-.jr_003_693C
-    cp   $A9                                      ;; 03:693C $FE $A9
+.indoor
+    cp   OBJECT_BOMBABLE_BLOCK                    ;; 03:693C $FE $A9
     jp   nz, .return                              ;; 03:693E $C2 $A0 $69
 
     ld   hl, wIndoorARoomStatus                   ;; 03:6941 $21 $00 $D9

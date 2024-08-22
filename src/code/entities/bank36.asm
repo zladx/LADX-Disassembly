@@ -8166,7 +8166,9 @@ Data_036_7052::
 Data_036_7056::
     db   $10, $10, $20, $20
 
-func_036_705A::
+; Spawn 4 (in a 2x2 grid) rouble entitites at hIntersectedObjectLeft, hIntersectedObjectTop.
+; Called when the giant skull is destroyed after Tarin with the bees.
+Spawn2x2RubbleEntities::
     push bc                                       ;; 36:705A $C5
     ld   c, $03                                   ;; 36:705B $0E $03
     ld   b, $00                                   ;; 36:705D $06 $00

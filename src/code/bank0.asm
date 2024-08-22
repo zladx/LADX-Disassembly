@@ -460,9 +460,9 @@ func_A9B::
     call ExecuteDialog                            ;; 00:0AA1 $CD $21 $23
     jp   RestoreStackedBankAndReturn              ;; 00:0AA4 $C3 $73 $09
 
-func_036_705A_trampoline::
+Spawn2x2RubbleEntities_trampoline::
     push af                                       ;; 00:0AA7 $F5
-    callsw func_036_705A                          ;; 00:0AA8 $3E $36 $CD $0C $08 $CD $5A $70
+    callsw Spawn2x2RubbleEntities                 ;; 00:0AA8 $3E $36 $CD $0C $08 $CD $5A $70
 
 RestoreStackedBank::
     pop  af                                       ;; 00:0AB0 $F1

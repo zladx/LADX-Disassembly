@@ -45,10 +45,10 @@ MagicRodFireballEntityHandler::
     jr   ret_003_6A1D                             ;; 03:69EE $18 $2D
 
 .jr_69F0
-    cp   $D3                                      ;; 03:69F0 $FE $D3
+    cp   OBJECT_BUSH_GROUND_STAIRS                ;; 03:69F0 $FE $D3
     jr   z, jr_003_69F8                           ;; 03:69F2 $28 $04
 
-    cp   $5C                                      ;; 03:69F4 $FE $5C
+    cp   OBJECT_BUSH                              ;; 03:69F4 $FE $5C
     jr   nz, ret_003_6A1D                         ;; 03:69F6 $20 $25
 
 jr_003_69F8:

@@ -1465,7 +1465,7 @@ func_014_5526::
     ld   hl, wRoomObjects                         ;; 14:5526 $21 $11 $D7
     add  hl, de                                   ;; 14:5529 $19
     ldh  a, [hObjectUnderEntity]                  ;; 14:552A $F0 $AF
-    cp   $8E                                      ;; 14:552C $FE $8E
+    cp   OBJECT_POT_WITH_SWITCH                   ;; 14:552C $FE $8E
     jr   nz, jr_014_557D                          ;; 14:552E $20 $4D
 
     ld   [hl], $AA                                ;; 14:5530 $36 $AA
@@ -1516,7 +1516,7 @@ func_014_5526::
     jp   label_014_573E                           ;; 14:557A $C3 $3E $57
 
 jr_014_557D:
-    cp   $D3                                      ;; 14:557D $FE $D3
+    cp   OBJECT_BUSH_GROUND_STAIRS                ;; 14:557D $FE $D3
     jr   nz, .jr_5584                             ;; 14:557F $20 $03
 
     jp   label_014_5743                           ;; 14:5581 $C3 $43 $57
@@ -1531,7 +1531,7 @@ jr_014_557D:
     jr   z, jr_014_55E3                           ;; 14:558E $28 $53
 
     ldh  a, [hObjectUnderEntity]                  ;; 14:5590 $F0 $AF
-    cp   $8A                                      ;; 14:5592 $FE $8A
+    cp   OBJECT_FROZEN_BLOCK                      ;; 14:5592 $FE $8A
     jr   nz, jr_014_55E3                          ;; 14:5594 $20 $4D
 
     ld   [hl], $04                                ;; 14:5596 $36 $04
@@ -1826,6 +1826,7 @@ label_014_573E:
     ret                                           ;; 14:5742 $C9
 
 label_014_5743:
+    ; Decide between showing a pit or stairs under a bush
     ldh  a, [hMapRoom]                            ;; 14:5743 $F0 $F6
     cp   UNKNOWN_ROOM_75                          ;; 14:5745 $FE $75
     jr   z, .jr_5756                              ;; 14:5747 $28 $0D

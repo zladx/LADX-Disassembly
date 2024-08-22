@@ -5807,7 +5807,7 @@ label_002_6B66:
 .jr_6B81
     call func_002_6C2F                            ;; 02:6B81 $CD $2F $6C
     ldh  a, [hObjectUnderEntity]                  ;; 02:6B84 $F0 $AF
-    cp   $8A                                      ;; 02:6B86 $FE $8A
+    cp   OBJECT_FROZEN_BLOCK                      ;; 02:6B86 $FE $8A
     jr   nz, .jr_6B99                             ;; 02:6B88 $20 $0F
 
     ld   a, [wC5A6]                               ;; 02:6B8A $FA $A6 $C5

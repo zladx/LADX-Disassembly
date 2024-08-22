@@ -4970,12 +4970,12 @@ jr_003_6ADA:
 
     ldh  a, [hActiveEntityType]                   ;; 03:6AF3 $F0 $EB
     cp   ENTITY_MAGIC_ROD_FIREBALL                ;; 03:6AF5 $FE $04
-    jr   nz, .hookshotHitEnd                      ;; 03:6AF7 $20 $06
+    jr   nz, .fireballEnd                         ;; 03:6AF7 $20 $06
 
     call GetEntityPrivateCountdown1               ;; 03:6AF9 $CD $00 $0C
     ld   [hl], $30                                ;; 03:6AFC $36 $30
     ret                                           ;; 03:6AFE $C9
-.hookshotHitEnd
+.fireballEnd
 
     ld   [hl], $18                                ;; 03:6AFF $36 $18
     ld   hl, wEntitiesSpeedZTable                 ;; 03:6B01 $21 $20 $C3

@@ -148,12 +148,12 @@ func_015_4F5A::
     and  J_A | J_B                                ;; 15:4F62 $E6 $30
     jr   z, .jr_4FAE                              ;; 15:4F64 $28 $48
 
-    call GetEntityToLinkPositionDeltaX_15         ;; 15:4F66 $CD $DB $7B
+    call GetEntityXDistanceToLink_15              ;; 15:4F66 $CD $DB $7B
     add  $24                                      ;; 15:4F69 $C6 $24
     cp   $48                                      ;; 15:4F6B $FE $48
     jr   nc, .jr_4FAE                             ;; 15:4F6D $30 $3F
 
-    call GetEntityToLinkPositionDeltaY_15         ;; 15:4F6F $CD $EB $7B
+    call GetEntityRealYDistanceToLink_15          ;; 15:4F6F $CD $EB $7B
     add  $24                                      ;; 15:4F72 $C6 $24
     cp   $48                                      ;; 15:4F74 $FE $48
     jr   nc, .jr_4FAE                             ;; 15:4F76 $30 $36

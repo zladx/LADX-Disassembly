@@ -7,12 +7,12 @@ DreamShrineBedEntityHandler::
 
 ; Dream Shrine transition sequence?
 func_015_7D01::
-    call GetEntityToLinkPositionDeltaX_15         ;; 15:7D02 $DB
+    call GetEntityXDistanceToLink_15              ;; 15:7D02 $DB
     add  $0E                                      ;; 15:7D04 $C6 $0E
     cp   $1C                                      ;; 15:7D06 $FE $1C
     jr   nc, .ret_7D4F                            ;; 15:7D08 $30 $45
 
-    call GetEntityToLinkPositionDeltaY_15         ;; 15:7D0A $CD $EB $7B
+    call GetEntityRealYDistanceToLink_15          ;; 15:7D0A $CD $EB $7B
     add  $0C                                      ;; 15:7D0D $C6 $0C
     cp   $18                                      ;; 15:7D0F $FE $18
     jr   nc, .ret_7D4F                            ;; 15:7D11 $30 $3C

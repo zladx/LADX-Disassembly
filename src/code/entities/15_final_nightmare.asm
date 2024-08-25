@@ -1061,7 +1061,7 @@ func_015_580B::
     jp   IncrementEntityState                     ;; 15:5816 $C3 $12 $3B
 
 func_015_5819::
-    call func_015_7C0A                            ;; 15:5819 $CD $0A $7C
+    call GetEntityDirectionToLink_15              ;; 15:5819 $CD $0A $7C
     ld   a, e                                     ;; 15:581C $7B
     ld   [wD21E], a                               ;; 15:581D $EA $1E $D2
     ld   d, b                                     ;; 15:5820 $50
@@ -2622,7 +2622,7 @@ func_015_6553::
     jp   IncrementEntityState                     ;; 15:655A $C3 $12 $3B
 
 func_015_655D::
-    call GetEntityToLinkPositionDeltaX_15         ;; 15:655D $CD $DB $7B
+    call GetEntityXDistanceToLink_15              ;; 15:655D $CD $DB $7B
     ld   a, e                                     ;; 15:6560 $7B
     ld   [wD21E], a                               ;; 15:6561 $EA $1E $D2
     ret                                           ;; 15:6564 $C9

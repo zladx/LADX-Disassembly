@@ -638,7 +638,7 @@ ShouldLinkTalkToEntity_15::
 
     inc  e                                        ;; 15:7AD5 $1C
     push de                                       ;; 15:7AD6 $D5
-    call func_015_7C0A                            ;; 15:7AD7 $CD $0A $7C
+    call GetEntityDirectionToLink_15              ;; 15:7AD7 $CD $0A $7C
     ldh  a, [hLinkDirection]                      ;; 15:7ADA $F0 $9E
     xor  $01                                      ;; 15:7ADC $EE $01
     cp   e                                        ;; 15:7ADE $BB
@@ -860,84 +860,103 @@ AddEntityZSpeedToPos_15::
     ld   hl, wEntitiesPosZTable                   ;; 15:7BD6 $21 $10 $C3
     jr   AddEntitySpeedToPos_15.updatePosition    ;; 15:7BD9 $18 $D2
 
-GetEntityToLinkPositionDeltaX_15::
-    ld   e, $00                                   ;; 15:7BDB $1E $00
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   d   x distance (Link's position - entity's position)
+;   e   DIRECTION_LEFT if Link is to the left of the entity, DIRECTION_RIGHT otherwise
+GetEntityXDistanceToLink_15::
+    ld   e, DIRECTION_RIGHT                       ;; 15:7BDB $1E $00
     ldh  a, [hLinkPositionX]                      ;; 15:7BDD $F0 $98
     ld   hl, wEntitiesPosXTable                   ;; 15:7BDF $21 $00 $C2
     add  hl, bc                                   ;; 15:7BE2 $09
     sub  [hl]                                     ;; 15:7BE3 $96
     bit  7, a                                     ;; 15:7BE4 $CB $7F
-    jr   z, .jr_7BE9                              ;; 15:7BE6 $28 $01
+    jr   z, .positive                             ;; 15:7BE6 $28 $01
 
     inc  e                                        ;; 15:7BE8 $1C
 
-.jr_7BE9
+.positive
     ld   d, a                                     ;; 15:7BE9 $57
     ret                                           ;; 15:7BEA $C9
 
-GetEntityToLinkPositionDeltaY_15::
-    ld   e, $02                                   ;; 15:7BEB $1E $02
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   d   y distance (Link's position - entity's position)
+;   e   DIRECTION_UP if Link is above the entity, DIRECTION_DOWN otherwise
+GetEntityRealYDistanceToLink_15::
+    ld   e, DIRECTION_UP                          ;; 15:7BEB $1E $02
     ldh  a, [hLinkPositionY]                      ;; 15:7BED $F0 $99
     ld   hl, wEntitiesPosYTable                   ;; 15:7BEF $21 $10 $C2
     add  hl, bc                                   ;; 15:7BF2 $09
     sub  [hl]                                     ;; 15:7BF3 $96
     bit  7, a                                     ;; 15:7BF4 $CB $7F
-    jr   nz, .jr_7BF9                             ;; 15:7BF6 $20 $01
+    jr   nz, .negative                            ;; 15:7BF6 $20 $01
 
     inc  e                                        ;; 15:7BF8 $1C
 
-.jr_7BF9
+.negative
     ld   d, a                                     ;; 15:7BF9 $57
     ret                                           ;; 15:7BFA $C9
 
-    ld   e, $02                                   ;; 15:7BFB $1E $02
+; Unused
+GetEntityVisualYDistanceToLink_15::
+    ld   e, DIRECTION_UP                          ;; 15:7BFB $1E $02
     ldh  a, [hLinkPositionY]                      ;; 15:7BFD $F0 $99
     ld   hl, hActiveEntityVisualPosY              ;; 15:7BFF $21 $EC $FF
     sub  [hl]                                     ;; 15:7C02 $96
     bit  7, a                                     ;; 15:7C03 $CB $7F
-    jr   nz, .jr_7C08                             ;; 15:7C05 $20 $01
+    jr   nz, .negative                            ;; 15:7C05 $20 $01
 
     inc  e                                        ;; 15:7C07 $1C
 
-.jr_7C08
+.negative
     ld   d, a                                     ;; 15:7C08 $57
     ret                                           ;; 15:7C09 $C9
 
-func_015_7C0A::
-    call GetEntityToLinkPositionDeltaX_15         ;; 15:7C0A $CD $DB $7B
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   e   entity's direction to Link (see DIRECTION_* constants for possible values)
+GetEntityDirectionToLink_15::
+    call GetEntityXDistanceToLink_15              ;; 15:7C0A $CD $DB $7B
     ld   a, e                                     ;; 15:7C0D $7B
     ldh  [hMultiPurpose0], a                      ;; 15:7C0E $E0 $D7
     ld   a, d                                     ;; 15:7C10 $7A
     bit  7, a                                     ;; 15:7C11 $CB $7F
-    jr   z, .jr_7C17                              ;; 15:7C13 $28 $02
+    jr   z, .positiveX                            ;; 15:7C13 $28 $02
 
     cpl                                           ;; 15:7C15 $2F
     inc  a                                        ;; 15:7C16 $3C
 
-.jr_7C17
+.positiveX
     push af                                       ;; 15:7C17 $F5
-    call GetEntityToLinkPositionDeltaY_15         ;; 15:7C18 $CD $EB $7B
+    call GetEntityRealYDistanceToLink_15          ;; 15:7C18 $CD $EB $7B
     ld   a, e                                     ;; 15:7C1B $7B
     ldh  [hMultiPurpose1], a                      ;; 15:7C1C $E0 $D8
     ld   a, d                                     ;; 15:7C1E $7A
     bit  7, a                                     ;; 15:7C1F $CB $7F
-    jr   z, .jr_7C25                              ;; 15:7C21 $28 $02
+    jr   z, .positiveY                            ;; 15:7C21 $28 $02
 
     cpl                                           ;; 15:7C23 $2F
     inc  a                                        ;; 15:7C24 $3C
 
-.jr_7C25
+.positiveY
     pop  de                                       ;; 15:7C25 $D1
     cp   d                                        ;; 15:7C26 $BA
-    jr   nc, .jr_7C2D                             ;; 15:7C27 $30 $04
+    jr   nc, .vertical                            ;; 15:7C27 $30 $04
 
     ldh  a, [hMultiPurpose0]                      ;; 15:7C29 $F0 $D7
-    jr   jr_015_7C2F                              ;; 15:7C2B $18 $02
+    jr   .verticalEnd                             ;; 15:7C2B $18 $02
 
-.jr_7C2D
+.vertical
     ldh  a, [hMultiPurpose1]                      ;; 15:7C2D $F0 $D8
 
-jr_015_7C2F:
+.verticalEnd
     ld   e, a                                     ;; 15:7C2F $5F
     ret                                           ;; 15:7C30 $C9
 

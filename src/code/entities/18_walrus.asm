@@ -1,3 +1,52 @@
+Data_018_54B9::
+    db   $24, $00, $3E, $00
+
+label_018_54BD:
+    ld   de, Data_018_54B9                        ;; 18:54BD $11 $B9 $54
+    call RenderActiveEntitySprite                 ;; 18:54C0 $CD $77 $3C
+    call ReturnIfNonInteractive_18                ;; 18:54C3 $CD $E8 $7D
+    call GetEntityTransitionCountdown             ;; 18:54C6 $CD $05 $0C
+    jp   z, ClearEntityStatusBank18               ;; 18:54C9 $CA $08 $7F
+
+    ld   e, $01                                   ;; 18:54CC $1E $01
+    cp   $40                                      ;; 18:54CE $FE $40
+    jr   c, jr_018_54DF                           ;; 18:54D0 $38 $0D
+
+    jr   nz, .jr_54DE                             ;; 18:54D2 $20 $0A
+
+    ld   hl, wEntitiesPosYTable                   ;; 18:54D4 $21 $10 $C2
+    add  hl, bc                                   ;; 18:54D7 $09
+    ld   a, [hl]                                  ;; 18:54D8 $7E
+    add  $04                                      ;; 18:54D9 $C6 $04
+    ld   [hl], a                                  ;; 18:54DB $77
+    jr   jr_018_54DF                              ;; 18:54DC $18 $01
+
+.jr_54DE
+    dec  e                                        ;; 18:54DE $1D
+
+jr_018_54DF:
+    ld   a, e                                     ;; 18:54DF $7B
+    call SetEntitySpriteVariant                   ;; 18:54E0 $CD $0C $3B
+    call GetEntityTransitionCountdown             ;; 18:54E3 $CD $05 $0C
+    ld   e, $FE                                   ;; 18:54E6 $1E $FE
+    and  $20                                      ;; 18:54E8 $E6 $20
+    jr   z, .jr_54EE                              ;; 18:54EA $28 $02
+
+    ld   e, $FC                                   ;; 18:54EC $1E $FC
+
+.jr_54EE
+    ld   hl, wEntitiesSpeedYTable                 ;; 18:54EE $21 $50 $C2
+    add  hl, bc                                   ;; 18:54F1 $09
+    ld   [hl], e                                  ;; 18:54F2 $73
+    ld   hl, wEntitiesSpeedXTable                 ;; 18:54F3 $21 $40 $C2
+    add  hl, bc                                   ;; 18:54F6 $09
+    ld   [hl], $FF                                ;; 18:54F7 $36 $FF
+    ldh  a, [hFrameCounter]                       ;; 18:54F9 $F0 $E7
+    and  $03                                      ;; 18:54FB $E6 $03
+    ret  nz                                       ;; 18:54FD $C0
+
+    jp   UpdateEntityPosWithSpeed_18              ;; 18:54FE $C3 $5F $7E
+
 ; Note: this entity, unlike most others, use 3 spriteslots:
 ; 2 spriteslots when sleeping, and then another one for Marin singing, so 3.
 ;

@@ -6,12 +6,12 @@ BeetleSpawnerEntityHandler::
     jp   nz, BeetleSpawnerBeetleHandler           ;; 15:7513 $C2 $7F $75
 
     call ReturnIfNonInteractive_15                ;; 15:7516 $CD $0D $7B
-    call GetEntityToLinkPositionDeltaX_15         ;; 15:7519 $CD $DB $7B
+    call GetEntityXDistanceToLink_15              ;; 15:7519 $CD $DB $7B
     add  $20                                      ;; 15:751C $C6 $20
     cp   $40                                      ;; 15:751E $FE $40
     jr   nc, .ret_756E                            ;; 15:7520 $30 $4C
 
-    call GetEntityToLinkPositionDeltaY_15         ;; 15:7522 $CD $EB $7B
+    call GetEntityRealYDistanceToLink_15          ;; 15:7522 $CD $EB $7B
     add  $20                                      ;; 15:7525 $C6 $20
     cp   $40                                      ;; 15:7527 $FE $40
     jr   nc, .ret_756E                            ;; 15:7529 $30 $43

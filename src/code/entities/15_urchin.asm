@@ -53,7 +53,7 @@ UrchinEntityHandler::
     rra                                           ;; 15:73C6 $1F
     and  $03                                      ;; 15:73C7 $E6 $03
     call SetEntitySpriteVariant                   ;; 15:73C9 $CD $0C $3B
-    call func_015_7C0A                            ;; 15:73CC $CD $0A $7C
+    call GetEntityDirectionToLink_15              ;; 15:73CC $CD $0A $7C
     ld   hl, wEntitiesDirectionTable              ;; 15:73CF $21 $80 $C3
     add  hl, bc                                   ;; 15:73D2 $09
     ld   [hl], e                                  ;; 15:73D3 $73

@@ -190,8 +190,8 @@ DEF ENTITY_ARMOS_KNIGHT                  EQU $88
 DEF ENTITY_HINOX                         EQU $89
 DEF ENTITY_TILE_GLINT_SHOWN              EQU $8A
 DEF ENTITY_TILE_GLINT_HIDDEN             EQU $8B
-DEF ENTITY_8C                            EQU $8C ; unknown
-DEF ENTITY_8D                            EQU $8D ; unknown
+DEF ENTITY_RAISABLE_BLOCK_SHIFTED_RIGHT  EQU $8C ; unused
+DEF ENTITY_RAISABLE_BLOCK_SHIFTED_DOWN   EQU $8D ; unused
 DEF ENTITY_CUE_BALL                      EQU $8E
 DEF ENTITY_MASKED_MIMIC_GORIYA           EQU $8F
 DEF ENTITY_THREE_OF_A_KIND               EQU $90

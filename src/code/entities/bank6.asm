@@ -37,7 +37,7 @@ PushLinkOutOfEntity_06::
     call CheckLinkCollisionWithEnemy_trampoline   ;; 06:641A $CD $5A $3B
     jr   nc, ret_006_643C                         ;; 06:641D $30 $1D
 
-label_006_641F:
+.forcePush
     call CopyLinkFinalPositionToPosition          ;; 06:641F $CD $BE $0C
     call ResetPegasusBoots                        ;; 06:6422 $CD $B6 $0C
     ld   a, [wC1A6]                               ;; 06:6425 $FA $A6 $C1

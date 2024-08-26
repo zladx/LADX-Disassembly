@@ -258,9 +258,9 @@ hTileGlintSequence::
 ; State of a pull switch used to move blocks
 ;
 ; Possible values:
-;  0   not moving
-;  1   pulled?
-;  2   moving back to normal position?
+;  0   not grabbed
+;  1   grabbed and pulled
+;  2   grabbed but not pulled
 hMovingBlockMoverState::
   ds 1 ; FFBA
 

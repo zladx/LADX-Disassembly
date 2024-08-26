@@ -1070,6 +1070,8 @@ wEntitiesCollisionsTable::
 ;  - Smashable pillar: 0 = pillar, 1 = dust, 2 = debris
 ;  - Pincer: hole X position
 ;  - Peahat: animation speed 
+;  - Moving blocks (left): Y position when fully closed
+;  - Moving blocks (bottom): X position when fully closed
 wEntitiesPrivateState1Table::
   ds $10 ; C2B0 - C2BF
 
@@ -1080,6 +1082,9 @@ wEntitiesPrivateState1Table::
 ;  - Keese: -1 when flying counter-clockwise, 1 otherwise
 ;  - Peahat: -1 when flying counter-clockwise, 1 otherwise
 ;  - Pincer: hole Y position
+;  - Moving block mover: initial Y position
+;  - Moving blocks (left): Y position when fully open
+;  - Moving blocks (bottom): X position when fully open
 wEntitiesPrivateState2Table::
   ds $10 ; C2C0 - C2CF
 

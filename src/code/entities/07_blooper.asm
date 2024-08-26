@@ -19,8 +19,9 @@ BlooperEntityHandler::
     add  hl, bc                                   ;; 07:5C11 $09
     ld   a, [hl]                                  ;; 07:5C12 $7E
     and  a                                        ;; 07:5C13 $A7
-    jr   nz, .jr_5C2A                             ;; 07:5C14 $20 $14
-
+    jr   nz, .underwater                          ;; 07:5C14 $20 $14
+    
+    ; If moving would put the Blooper out of the water, undo the movement
     ld   hl, wEntitiesPrivateCountdown3Table      ;; 07:5C16 $21 $80 $C4
     add  hl, bc                                   ;; 07:5C19 $09
     ld   [hl], $10                                ;; 07:5C1A $36 $10
@@ -33,7 +34,7 @@ BlooperEntityHandler::
     add  hl, bc                                   ;; 07:5C28 $09
     ld   [hl], a                                  ;; 07:5C29 $77
 
-.jr_5C2A
+.underwater
     xor  a                                        ;; 07:5C2A $AF
     call SetEntitySpriteVariant                   ;; 07:5C2B $CD $0C $3B
     ldh  a, [hActiveEntityState]                  ;; 07:5C2E $F0 $F0

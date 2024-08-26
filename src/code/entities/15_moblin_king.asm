@@ -82,7 +82,7 @@ func_015_4734::
     call IncrementEntityState                     ;; 15:4740 $CD $12 $3B
 
 func_015_4743::
-    call GetEntityToLinkPositionDeltaX_15         ;; 15:4743 $CD $DB $7B
+    call GetEntityXDistanceToLink_15              ;; 15:4743 $CD $DB $7B
     ld   a, e                                     ;; 15:4746 $7B
     ld   [wD227], a                               ;; 15:4747 $EA $27 $D2
     ld   hl, wEntitiesDirectionTable              ;; 15:474A $21 $80 $C3
@@ -207,7 +207,7 @@ jr_015_47E3:
 
     ldh  a, [hLinkPositionX]                      ;; 15:47F8 $F0 $98
     push af                                       ;; 15:47FA $F5
-    call GetEntityToLinkPositionDeltaX_15         ;; 15:47FB $CD $DB $7B
+    call GetEntityXDistanceToLink_15              ;; 15:47FB $CD $DB $7B
     ld   d, b                                     ;; 15:47FE $50
     ld   hl, Data_015_477E                        ;; 15:47FF $21 $7E $47
     add  hl, de                                   ;; 15:4802 $19

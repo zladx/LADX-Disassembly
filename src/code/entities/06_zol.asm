@@ -31,8 +31,7 @@ GelEntityHandler::
     call RenderActiveEntitySprite                 ;; 06:7C04 $CD $77 $3C
     jr   AnimateZolGel                            ;; 06:7C07 $18 $25
 
-; Zols spawned by Slime Eye are green instead of red 
-ZolSlimeEyeSpriteVariants::
+ZolSpriteVariants::
 .variant0
     db $52, OAM_GBC_PAL_2 | OAMF_PAL0
     db $52, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
@@ -40,7 +39,8 @@ ZolSlimeEyeSpriteVariants::
     db $54, OAM_GBC_PAL_2 | OAMF_PAL0
     db $54, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 
-ZolSpriteVariants::
+; Zols spawned by Slime Eye are green instead of red 
+ZolSlimeEyeSpriteVariants::
 .variant0
     db $52, OAM_GBC_PAL_0 | OAMF_PAL0
     db $52, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
@@ -50,15 +50,15 @@ ZolSpriteVariants::
 
 ZolEntityHandler::
     call ZolGelMakeInvisibleBeforeMagnifyingLens  ;; 06:7C19 $CD $E2 $7B
-    ld   de, ZolSlimeEyeSpriteVariants            ;; 06:7C1C $11 $09 $7C
+    ld   de, ZolSpriteVariants                    ;; 06:7C1C $11 $09 $7C
     ld   hl, wEntitiesHealthTable                 ;; 06:7C1F $21 $60 $C3
     add  hl, bc                                   ;; 06:7C22 $09
     ld   a, [hl]                                  ;; 06:7C23 $7E
     and  $02                                      ;; 06:7C24 $E6 $02
     jr   nz, .render                              ;; 06:7C26 $20 $03
 
-    ; load different sprite variants, when health bit 2 is set
-    ld   de, ZolSpriteVariants                    ;; 06:7C28 $11 $11 $7C
+    ; load different sprite variants, when health bit 2 is not set
+    ld   de, ZolSlimeEyeSpriteVariants            ;; 06:7C28 $11 $11 $7C
 
 .render:
     call RenderActiveEntitySpritesPair            ;; 06:7C2B $CD $C0 $3B

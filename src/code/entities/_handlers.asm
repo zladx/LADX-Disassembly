@@ -153,8 +153,8 @@ EntityHandlersTable::
 ._89 far_pointer HinoxEntityHandler
 ._8A far_pointer TileGlintShownEntityHandler
 ._8B far_pointer TileGlintHiddenEntityHandler
-._8C far_pointer Entity8CHandler ; unused moving block?
-._8D far_pointer Entity8DHandler ; unused moving block?
+._8C far_pointer RaisableBlockShiftedRightEntityHandler ; unused
+._8D far_pointer RaisableBlockShiftedDownEntityHandler ; unused
 ._8E far_pointer CueBallEntityHandler
 ._8F far_pointer MaskedMimicGoriyaEntityHandler
 ._90 far_pointer ThreeOfAKindEntityHandler ; $90

@@ -3434,10 +3434,10 @@ SwordAreaYForDirection::
 
 ; Array of constants for Link animation state
 LinkDirectionToLinkAnimationState_2::
-.right: db  LINK_ANIMATION_STATE_UNKNOWN_36
-.left:  db  LINK_ANIMATION_STATE_UNKNOWN_38
-.up:    db  LINK_ANIMATION_STATE_UNKNOWN_3A
-.down:  db  LINK_ANIMATION_STATE_UNKNOWN_3C                       ;; 00:1F51
+.right: db  LINK_ANIMATION_STATE_GRABBING_RIGHT
+.left:  db  LINK_ANIMATION_STATE_GRABBING_LEFT
+.up:    db  LINK_ANIMATION_STATE_GRABBING_UP
+.down:  db  LINK_ANIMATION_STATE_GRABBING_DOWN    ;; 00:1F51
 
 LinkDirectionToLiftDirectionButton::
     db   2, 1, 8, 4                               ;; 00:1F55

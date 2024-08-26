@@ -1,11 +1,11 @@
 
-Data_019_4838::
+CatfishMawSwimWarpDataLeft::
     db   $02, $11, $C0, $30, $14
 
-Data_019_483D::
+CatfishMawSwimWarpDataRight::
     db   $02, $11, $C1, $50, $14
 
-Data_019_4842::
+FisherUnderBridgeWarpData::
     db   $02, $0F, $F5, $94, $52
 
 DivableWaterEntityHandler::
@@ -56,17 +56,17 @@ jr_019_4869:
     ret                                           ;; 19:4890 $C9
 
 func_019_4891::
-    ld   de, Data_019_4842                        ;; 19:4891 $11 $42 $48
+    ld   de, FisherUnderBridgeWarpData            ;; 19:4891 $11 $42 $48
     ldh  a, [hMapRoom]                            ;; 19:4894 $F0 $F6
-    cp   UNKNOWN_ROOM_EA                          ;; 19:4896 $FE $EA
+    cp   ROOM_OW_FISHER_UNDER_BRIDGE              ;; 19:4896 $FE $EA
     jr   z, .jr_48A6                              ;; 19:4898 $28 $0C
 
-    ld   de, Data_019_4838                        ;; 19:489A $11 $38 $48
+    ld   de, CatfishMawSwimWarpDataLeft           ;; 19:489A $11 $38 $48
     ldh  a, [hLinkPositionX]                      ;; 19:489D $F0 $98
     cp   $30                                      ;; 19:489F $FE $30
     jr   c, .jr_48A6                              ;; 19:48A1 $38 $03
 
-    ld   de, Data_019_483D                        ;; 19:48A3 $11 $3D $48
+    ld   de, CatfishMawSwimWarpDataRight          ;; 19:48A3 $11 $3D $48
 
 .jr_48A6
     ld   hl, wWarpStructs                         ;; 19:48A6 $21 $01 $D4

@@ -55,6 +55,7 @@ DEF ROOM_OW_YARNA_LANMOLA                    EQU $CE
 DEF ROOM_OW_TAIL_CAVE_ENTRANCE               EQU $D3
 DEF ROOM_OW_CATFISHS_MAW_ENTRANCE            EQU $D9
 
+DEF ROOM_OW_FISHER_UNDER_BRIDGE              EQU $EA
 DEF ROOM_OW_ANIMAL_VILLAGE_WARP_HOLE         EQU $EC
 
 DEF ROOM_OW_MARIN_CLIFF_PHOTO                EQU $F0
@@ -267,7 +268,6 @@ DEF UNKNOWN_ROOM_E1                          EQU $E1
 DEF UNKNOWN_ROOM_E2                          EQU $E2
 DEF UNKNOWN_ROOM_E3                          EQU $E3 ; House by the Bay -> indoor or overworld?
 DEF UNKNOWN_ROOM_E4                          EQU $E4
-DEF UNKNOWN_ROOM_EA                          EQU $EA
 DEF UNKNOWN_ROOM_EB                          EQU $EB
 DEF UNKNOWN_ROOM_EC                          EQU $EC
 DEF UNKNOWN_ROOM_EE                          EQU $EE ; Yarna Desert

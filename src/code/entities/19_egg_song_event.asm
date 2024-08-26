@@ -123,7 +123,7 @@ EggSongEventState3Handler::
     call GetEntityTransitionCountdown             ;; 19:4B43 $CD $05 $0C
     ret  nz                                       ;; 19:4B46 $C0
 
-    ld   e, $41                                   ;; 19:4B47 $1E $41
+    ld   e, MUSIC_EGG_BALLAD_DEFAULT              ;; 19:4B47 $1E $41
     ld   hl, wHasInstrument3                      ;; 19:4B49 $21 $67 $DB
 
 
@@ -134,7 +134,7 @@ EggSongEventState3Handler::
 
     inc  e                                        ;; 19:4B51 $1C
     ld   a, e                                     ;; 19:4B52 $7B
-    cp   $47                                      ;; 19:4B53 $FE $47
+    cp   MUSIC_EGG_BALLAD_ALL                     ;; 19:4B53 $FE $47
     jr   nz, .loop_4B4C                           ;; 19:4B55 $20 $F5
 
 .jr_4B57

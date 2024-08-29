@@ -2995,7 +2995,7 @@ func_036_51DF::
     ld   hl, Data_036_51BF                        ;; 36:51EA $21 $BF $51
     add  hl, de                                   ;; 36:51ED $19
     ld   e, [hl]                                  ;; 36:51EE $5E
-    ld   hl, wDCC0                                ;; 36:51EF $21 $C0 $DC
+    ld   hl, wAnimatedScrollingTilesStorage       ;; 36:51EF $21 $C0 $DC
     add  hl, de                                   ;; 36:51F2 $19
     ld   [hl], $00                                ;; 36:51F3 $36 $00
     ret                                           ;; 36:51F5 $C9

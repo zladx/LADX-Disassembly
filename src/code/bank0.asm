@@ -407,7 +407,7 @@ CopyColorDungeonSymbols::
     ld   a, BANK(ColorDungeonNpcTiles)            ;; 00:0A33 $3E $35
     ld   [rSelectROMBank], a                      ;; 00:0A35 $EA $00 $21
     ld   hl, ColorDungeonNpcTiles + $F00          ;; 00:0A38 $21 $00 $4F
-    ld   de, wDCC0                                ;; 00:0A3B $11 $C0 $DC
+    ld   de, wAnimatedScrollingTilesStorage       ;; 00:0A3B $11 $C0 $DC
     ld   bc, $20                                  ;; 00:0A3E $01 $20 $00
     call CopyData                                 ;; 00:0A41 $CD $14 $29
     jp   RestoreStackedBankAndReturn              ;; 00:0A44 $C3 $73 $09
@@ -4909,7 +4909,7 @@ LoadIndoorTiles::
     call AdjustBankNumberForGBC                   ;; 00:2C9C $CD $0B $0B
     ld   [rSelectROMBank], a                      ;; 00:2C9F $EA $00 $21
     ld   hl, Items1Tiles + $3C0                   ;; 00:2CA2 $21 $C0 $47
-    ld   de, wDCC0                                ;; 00:2CA5 $11 $C0 $DC
+    ld   de, wAnimatedScrollingTilesStorage       ;; 00:2CA5 $11 $C0 $DC
     ld   bc, TILE_SIZE * $4                       ;; 00:2CA8 $01 $40 $00
     call CopyData                                 ;; 00:2CAB $CD $14 $29
 

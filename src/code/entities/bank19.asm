@@ -413,8 +413,8 @@ Data_019_7AB6:
 ._03 dw func_019_7B04
 
 func_019_7ABE:
-    ld   hl, wDCCF                                ;; 19:7ABE $21 $CF $DC
-    ld   de, wDCCF                                ;; 19:7AC1 $11 $CF $DC
+    ld   hl, wAnimatedScrollingTilesStorage + 15  ;; 19:7ABE $21 $CF $DC
+    ld   de, wAnimatedScrollingTilesStorage + 15  ;; 19:7AC1 $11 $CF $DC
     ld   a, [hl-]                                 ;; 19:7AC4 $3A
     push af                                       ;; 19:7AC5 $F5
     ld   a, [hl-]                                 ;; 19:7AC6 $3A
@@ -441,8 +441,8 @@ func_019_7ABE:
     ret                                           ;; 19:7ADA $C9
 
 func_019_7ADB:
-    ld   hl, wDCD0                                ;; 19:7ADB $21 $D0 $DC
-    ld   de, wDCD0                                ;; 19:7ADE $11 $D0 $DC
+    ld   hl, wAnimatedScrollingTilesStorage.tile1 ;; 19:7ADB $21 $D0 $DC
+    ld   de, wAnimatedScrollingTilesStorage.tile1 ;; 19:7ADE $11 $D0 $DC
     ld   a, [hl+]                                 ;; 19:7AE1 $2A
     push af                                       ;; 19:7AE2 $F5
     ld   a, [hl+]                                 ;; 19:7AE3 $2A
@@ -469,7 +469,7 @@ func_019_7ADB:
     ret                                           ;; 19:7AF7 $C9
 
 func_019_7AF8:
-    ld   hl, wDCE0                                ;; 19:7AF8 $21 $E0 $DC
+    ld   hl, wAnimatedScrollingTilesStorage.tile2 ;; 19:7AF8 $21 $E0 $DC
     ld   e, $10                                   ;; 19:7AFB $1E $10
 
 .loop_7AFD
@@ -481,7 +481,7 @@ func_019_7AF8:
     ret                                           ;; 19:7B03 $C9
 
 func_019_7B04:
-    ld   hl, wDCF0                                ;; 19:7B04 $21 $F0 $DC
+    ld   hl, wAnimatedScrollingTilesStorage.tile3 ;; 19:7B04 $21 $F0 $DC
     ld   e, $10                                   ;; 19:7B07 $1E $10
 
 .loop_7B09

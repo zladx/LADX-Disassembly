@@ -3738,25 +3738,20 @@ wDrawCommandVRAM1::
 .data
   ds $2C ; DC93 - DCBF
 
-; Unlabeled
-wDCC0::
-  ds 15 ; DCC0 - DCCE
+; Stores the 4 animated tiles for belts that are scrolled for the animation.
+wAnimatedScrollingTilesStorage::
+  ds $10 ; DCC0 - DCCE
 
-; Unlabeled
-wDCCF::
-  ds 1 ; DCCF
+.tile1::
+  ds $10 ; DCD0 - DCDF
 
-; Unlabeled
-wDCD0::
-  ds $10 ; DCD0 -DCDF
+.tile2::
+  ds $10 ; DCE0 - DCEF
+.tile3::
+  ds $10 ; DCF0 - DCFF
 
-; Unlabeled
-wDCE0::
-  ds $10 ; DCE0 -DCEF
-
-; Unlabeled
-wDCF0::
-  ds $E1 ; DCF0 -DDD0
+; Unused data?
+  ds $D1 ; DD00 - DDD0
 
 ; Palette flags for copying palettes to hardware.
 ; bit 0: If set, copy background palette to hardware during vblank

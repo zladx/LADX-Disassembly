@@ -73,7 +73,7 @@ MoldormDestructionFlash2Handler::
     jr   z, .jr_5705                              ;; 04:56FF $28 $04
 
     inc  [hl]                                     ;; 04:5701 $34
-    jp   func_004_5A05                            ;; 04:5702 $C3 $05 $5A
+    jp   CreatePoofVfx                            ;; 04:5702 $C3 $05 $5A
 
 .jr_5705
     call GetEntityTransitionCountdown             ;; 04:5705 $CD $05 $0C
@@ -111,7 +111,7 @@ BossDestructionHandler_04::
     ldh  a, [hActiveEntityVisualPosY]             ;; 04:573B $F0 $EC
     add  [hl]                                     ;; 04:573D $86
     ldh  [hActiveEntityVisualPosY], a             ;; 04:573E $E0 $EC
-    call func_004_5A05                            ;; 04:5740 $CD $05 $5A
+    call CreatePoofVfx                            ;; 04:5740 $CD $05 $5A
     call GetEntityTransitionCountdown             ;; 04:5743 $CD $05 $0C
     cp   $10                                      ;; 04:5746 $FE $10
     jr   nz, .return                              ;; 04:5748 $20 $06
@@ -441,7 +441,7 @@ func_004_5902::
 ret_004_5A04:
     ret                                           ;; 04:5A04 $C9
 
-func_004_5A05::
+CreatePoofVfx::  ; Create a visual effect for boss destruction (called from multiple bosses)
     call ReturnIfNonInteractive_04.allowInactiveEntity ;; 04:5A05 $CD $A9 $7F
     ldh  a, [hActiveEntityPosX]                   ;; 04:5A08 $F0 $EE
     ldh  [hMultiPurpose0], a                      ;; 04:5A0A $E0 $D7

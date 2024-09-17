@@ -551,7 +551,7 @@ jr_004_4E4C:
     jp   ClearEntityStatusBank04                  ;; 04:4E4C $C3 $7A $6D
 
 jr_004_4E4F:
-    jp   label_004_50EF                           ;; 04:4E4F $C3 $EF $50
+    jp   BossDeathRandomExplosion                 ;; 04:4E4F $C3 $EF $50
 
 func_004_4E52::
     call GetEntitySlowTransitionCountdown         ;; 04:4E52 $CD $FB $0B

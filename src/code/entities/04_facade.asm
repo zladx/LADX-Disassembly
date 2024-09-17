@@ -27,20 +27,20 @@ FacadeEntityHandler::
     add  hl, bc                                   ;; 04:5073 $09
     ld   a, [hl]                                  ;; 04:5074 $7E
     JP_TABLE                                      ;; 04:5075
-._00 dw FacadeState0Handler                       ;; 04:5076
-._01 dw FacadeState1Handler                       ;; 04:5078
-._02 dw FacadeState2Handler                       ;; 04:507A
-._03 dw FacadeState3Handler                       ;; 04:507C
+._00 dw FacadeMainBossHandler                     ;; 04:5076
+._01 dw FacadePitHandler                          ;; 04:5078
+._02 dw FacadeFlyingTileHandler                   ;; 04:507A
+._03 dw FacadeFlyingPotHandler                    ;; 04:507C
 
-FacadeState0Handler::
+FacadeMainBossHandler::
     xor  a                                        ;; 04:507E $AF
     ld   [wScreenShakeHorizontal], a              ;; 04:507F $EA $55 $C1
     call BossIntro                                ;; 04:5082 $CD $E8 $3E
     call label_394D                               ;; 04:5085 $CD $4D $39
-    call func_004_542F                            ;; 04:5088 $CD $2F $54
+    call FacadeRenderFace                         ;; 04:5088 $CD $2F $54
     ldh  a, [hActiveEntityStatus]                 ;; 04:508B $F0 $EA
-    cp   $05                                      ;; 04:508D $FE $05
-    jp   z, label_004_510F                        ;; 04:508F $CA $0F $51
+    cp   ENTITY_STATUS_ACTIVE                     ;; 04:508D $FE $05
+    jp   z, FacadeMainBossNotDead                 ;; 04:508F $CA $0F $51
 
     ld   hl, wEntitiesFlashCountdownTable         ;; 04:5092 $21 $20 $C4
     add  hl, bc                                   ;; 04:5095 $09
@@ -50,17 +50,17 @@ FacadeState0Handler::
     add  hl, bc                                   ;; 04:509C $09
     ld   a, [hl]                                  ;; 04:509D $7E
     JP_TABLE                                      ;; 04:509E
-._00 dw func_004_50A5                             ;; 04:509F
-._01 dw func_004_50E1                             ;; 04:50A1
-._02 dw func_004_50E9                             ;; 04:50A3
+._00 dw FacadeDeathState0                         ;; 04:509F
+._01 dw FacadeDeathState1                         ;; 04:50A1
+._02 dw FacadeDeathState2                         ;; 04:50A3
 
-func_004_50A5::
+FacadeDeathState0::
     call GetEntityTransitionCountdown             ;; 04:50A5 $CD $05 $0C
     ld   [hl], $80                                ;; 04:50A8 $36 $80
     ld   e, $0F                                   ;; 04:50AA $1E $0F
     ld   d, b                                     ;; 04:50AC $50
 
-jr_004_50AD:
+.jr_50AD
     ld   a, c                                     ;; 04:50AD $79
     cp   e                                        ;; 04:50AE $BB
     jr   z, .jr_50D5                              ;; 04:50AF $28 $24
@@ -93,7 +93,7 @@ jr_004_50AD:
     dec  e                                        ;; 04:50D5 $1D
     ld   a, e                                     ;; 04:50D6 $7B
     cp   $FF                                      ;; 04:50D7 $FE $FF
-    jr   nz, jr_004_50AD                          ;; 04:50D9 $20 $D2
+    jr   nz, .jr_50AD                          ;; 04:50D9 $20 $D2
 
 jr_004_50DB:
     ld   hl, wEntitiesPrivateState4Table          ;; 04:50DB $21 $40 $C4
@@ -101,18 +101,18 @@ jr_004_50DB:
     inc  [hl]                                     ;; 04:50DF $34
     ret                                           ;; 04:50E0 $C9
 
-func_004_50E1::
+FacadeDeathState1::
     call GetEntityTransitionCountdown             ;; 04:50E1 $CD $05 $0C
     ret  nz                                       ;; 04:50E4 $C0
 
     ld   [hl], $FF                                ;; 04:50E5 $36 $FF
     jr   jr_004_50DB                              ;; 04:50E7 $18 $F2
 
-func_004_50E9::
+FacadeDeathState2::
     call GetEntityTransitionCountdown             ;; 04:50E9 $CD $05 $0C
     jp   z, DropHeartContainer_04                 ;; 04:50EC $CA $51 $57
 
-label_004_50EF:
+BossDeathRandomExplosion: ; Also called from genie and slime eye
     and  $07                                      ;; 04:50EF $E6 $07
     ret  nz                                       ;; 04:50F1 $C0
 
@@ -130,32 +130,33 @@ label_004_50EF:
     ld   hl, hActiveEntityVisualPosY              ;; 04:5107 $21 $EC $FF
     add  [hl]                                     ;; 04:510A $86
     ld   [hl], a                                  ;; 04:510B $77
-    jp   func_004_5A05                            ;; 04:510C $C3 $05 $5A
+    jp   CreatePoofVfx                            ;; 04:510C $C3 $05 $5A
 
-label_004_510F:
+FacadeMainBossNotDead:
     call ReturnIfNonInteractive_04                ;; 04:510F $CD $A3 $7F
     ld   hl, wEntitiesFlashCountdownTable         ;; 04:5112 $21 $20 $C4
     add  hl, bc                                   ;; 04:5115 $09
     ld   a, [hl]                                  ;; 04:5116 $7E
     and  a                                        ;; 04:5117 $A7
-    jr   z, .jr_5120                              ;; 04:5118 $28 $06
+    jr   z, .notFlashing                          ;; 04:5118 $28 $06
 
     ld   hl, wEntitiesPrivateState5Table          ;; 04:511A $21 $90 $C3
     add  hl, bc                                   ;; 04:511D $09
     ld   [hl], $FF                                ;; 04:511E $36 $FF
 
-.jr_5120
+.notFlashing
     ld   hl, wEntitiesPhysicsFlagsTable           ;; 04:5120 $21 $40 $C3
     add  hl, bc                                   ;; 04:5123 $09
     ld   [hl], 8                                  ;; 04:5124 $36 $08
 
     ldh  a, [hActiveEntityState]                  ;; 04:5126 $F0 $F0
     JP_TABLE                                      ;; 04:5128
-._00 dw func_004_512F                             ;; 04:5129
-._01 dw func_004_5158                             ;; 04:512B
-._02 dw func_004_51E8                             ;; 04:512D
+._00 dw FacadeMainBossState0                      ;; 04:5129
+._01 dw FacadeMainBossState1                      ;; 04:512B
+._02 dw FacadeMainBossState2                      ;; 04:512D
 
-func_004_512F::
+; First state of facade is just a delay where he is hidden.
+FacadeMainBossState0::
     call GetEntityTransitionCountdown             ;; 04:512F $CD $05 $0C
     ret  nz                                       ;; 04:5132 $C0
 
@@ -166,7 +167,8 @@ Data_004_5138::
     db   $03, $03, $03, $03, $03, $02, $01, $00, $01, $00, $01, $01, $01, $01, $01, $01
     db   $01, $01, $01, $01, $01, $01, $01, $00, $00, $00, $00, $00, $00, $00, $00, $00
 
-func_004_5158::
+; Second spawning state, showing up and opening eyes, ends with the dialog.
+FacadeMainBossState1::
     call GetEntityTransitionCountdown             ;; 04:5158 $CD $05 $0C
     jr   z, .countdownReachedZero                 ;; 04:515B $28 $0F
 
@@ -220,7 +222,7 @@ Data_004_51E6::
     db   $00, $FF
 
 ; Facade-entity related code
-func_004_51E8::
+FacadeMainBossState2::
     ldh  a, [hFrameCounter]                       ;; 04:51E8 $F0 $E7
 
 .jr_51EA
@@ -503,7 +505,7 @@ Data_004_538F::
     db   $F8, $F0, $70, $03, $F8, $F8, $72, $03, $F8, $10, $72, $23, $F8, $18, $70, $23
     db   $08, $F8, $60, $03, $08, $00, $62, $03, $08, $08, $62, $23, $08, $10, $60, $23
 
-func_004_542F::
+FacadeRenderFace::
     ld   hl, wEntitiesSpriteVariantTable          ;; 04:542F $21 $B0 $C3
     add  hl, bc                                   ;; 04:5432 $09
     ld   a, [hl]                                  ;; 04:5433 $7E
@@ -521,7 +523,7 @@ func_004_542F::
     jp   RenderActiveEntitySpritesRect            ;; 04:5443 $C3 $E6 $3C
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-Facade1SpriteVariants::
+FacadePitSpriteVariants::
 .variant0
     db $68, OAM_GBC_PAL_6 | OAMF_PAL0
     db $68, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP
@@ -538,8 +540,9 @@ Facade1SpriteVariants::
 Data_004_5456::
     db   $00, $01, $02, $03, $03, $03, $03, $03, $03, $02, $01, $00, $00, $00, $00, $00
 
-FacadeState1Handler:
-    ld   de, Facade1SpriteVariants                ;; 04:5466 $11 $46 $54
+; The pit that randomly spawns after all flying tiles are done.
+FacadePitHandler:
+    ld   de, FacadePitSpriteVariants              ;; 04:5466 $11 $46 $54
     call RenderActiveEntitySpritesPair            ;; 04:5469 $CD $C0 $3B
     call ReturnIfNonInteractive_04                ;; 04:546C $CD $A3 $7F
     call GetEntityTransitionCountdown             ;; 04:546F $CD $05 $0C
@@ -621,7 +624,7 @@ FacadeState1Handler:
     ret                                           ;; 04:54F0 $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-Facade2SpriteVariants::
+FacadeFlyingTileSpriteVariants0::
 .variant0
     db $40, OAM_GBC_PAL_6 | OAMF_PAL0
     db $40, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP
@@ -630,7 +633,7 @@ Facade2SpriteVariants::
     db $42, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-Facade3SpriteVariants::
+FacadeFlyingTileSpriteVariants1::
 .variant0
     db $70, OAM_GBC_PAL_6 | OAMF_PAL0
     db $70, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP
@@ -638,20 +641,20 @@ Facade3SpriteVariants::
     db $72, OAM_GBC_PAL_6 | OAMF_PAL0
     db $72, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP
 
-Data_004_5501::
+FacadeFlyingTileSpriteVariants2::
     db   $40, $07, $40, $27, $42, $07, $42, $27
 
-FacadeState2Handler:
-    ld   de, Data_004_5501                        ;; 04:5509 $11 $01 $55
+FacadeFlyingTileHandler:
+    ld   de, FacadeFlyingTileSpriteVariants2      ;; 04:5509 $11 $01 $55
     ldh  a, [hMapId]                              ;; 04:550C $F0 $F7
     cp   MAP_EAGLES_TOWER                         ; @TODO ??? Is this right?
     jr   z, .jr_551C                              ;; 04:5510 $28 $0A
 
-    ld   de, Facade2SpriteVariants                ;; 04:5512 $11 $F1 $54
+    ld   de, FacadeFlyingTileSpriteVariants0      ;; 04:5512 $11 $F1 $54
     cp   $01                                      ;; 04:5515 $FE $01
     jr   nz, .jr_551C                             ;; 04:5517 $20 $03
 
-    ld   de, Facade3SpriteVariants                ;; 04:5519 $11 $F9 $54
+    ld   de, FacadeFlyingTileSpriteVariants1      ;; 04:5519 $11 $F9 $54
 
 .jr_551C
     call RenderActiveEntitySpritesPair            ;; 04:551C $CD $C0 $3B
@@ -743,7 +746,7 @@ Facade4SpriteVariants::
     db $F0, OAM_GBC_PAL_6 | OAMF_PAL1
     db $F0, OAM_GBC_PAL_6 | OAMF_PAL1 | OAMF_XFLIP
 
-FacadeState3Handler::
+FacadeFlyingPotHandler::
     ld   de, Facade4SpriteVariants                ;; 04:559D $11 $99 $55
     call RenderActiveEntitySpritesPair            ;; 04:55A0 $CD $C0 $3B
     ld   hl, wEntitiesFlashCountdownTable         ;; 04:55A3 $21 $20 $C4

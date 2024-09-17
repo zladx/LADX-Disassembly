@@ -484,7 +484,7 @@ GenieKilledHandler2::
     call GetEntityTransitionCountdown             ;; 04:4311 $CD $05 $0C
     jp   z, DropHeartContainer_04                 ;; 04:4314 $CA $51 $57
 
-    jp   label_004_50EF                           ;; 04:4317 $C3 $EF $50
+    jp   BossDeathRandomExplosion                 ;; 04:4317 $C3 $EF $50
 
 jr_004_431A:
     call ReturnIfNonInteractive_04                ;; 04:431A $CD $A3 $7F

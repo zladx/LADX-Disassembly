@@ -3595,16 +3595,16 @@ jr_002_568C:
     ldh  [hMultiPurpose0], a                      ;; 02:56A1 $E0 $D7
     ld   a, [hl]                                  ;; 02:56A3 $7E
     ldh  [hMultiPurpose1], a                      ;; 02:56A4 $E0 $D8
-    ld   a, $60                                   ;; 02:56A6 $3E $60
+    ld   a, $50                                   ;; 02:56A6 $3E $60
     ldh  [hIntersectedObjectLeft], a              ;; 02:56A8 $E0 $CE
     ldh  a, [hMapRoom]                            ;; 02:56AA $F0 $F6
     cp   ROOM_INDOOR_B_CAMERA_SHOP                ;; 02:56AC $FE $B5
-    ld   a, $10                                   ;; 02:56AE $3E $10
+    ld   a, $20                                   ;; 02:56AE $3E $10
     jr   nz, .jr_56B8                             ;; 02:56B0 $20 $06
 
-    ld   a, $60                                   ;; 02:56B2 $3E $60
+    ld   a, $50                                   ;; 02:56B2 $3E $60
     ldh  [hIntersectedObjectLeft], a              ;; 02:56B4 $E0 $CE
-    ld   a, $10                                   ;; 02:56B6 $3E $10
+    ld   a, $20                                   ;; 02:56B6 $3E $10
 
 .jr_56B8
     ldh  [hIntersectedObjectTop], a               ;; 02:56B8 $E0 $CD
@@ -3641,12 +3641,12 @@ jr_002_568C:
     cp   $08                                      ;; 02:56EC $FE $08
     jr   nz, label_002_5707                       ;; 02:56EE $20 $17
 
-    ld   hl, wRoomObjectsArea + $27               ;; 02:56F0 $21 $27 $D7
+    ld   hl, wRoomObjectsArea + $36               ;; 02:56F0 $21 $27 $D7
     ldh  a, [hMapRoom]                            ;; 02:56F3 $F0 $F6
     cp   ROOM_INDOOR_B_CAMERA_SHOP                ;; 02:56F5 $FE $B5
     jr   nz, .jr_56FC                             ;; 02:56F7 $20 $03
 
-    ld   hl, wRoomObjectsArea + $27               ;; 02:56F9 $21 $27 $D7
+    ld   hl, wRoomObjectsArea + $36               ;; 02:56F9 $21 $27 $D7
 
 .jr_56FC
     ld   [hl], $E3                                ;; 02:56FC $36 $E3

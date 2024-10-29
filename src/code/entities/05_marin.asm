@@ -1,5 +1,5 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-MarinIndoor2SpriteVariants::
+MarinIndoorSpriteVariants::
 .variant0
     db $60, OAM_GBC_PAL_1 | OAMF_PAL0
     db $62, OAM_GBC_PAL_1 | OAMF_PAL0
@@ -722,7 +722,7 @@ MarinEntityHandler_Indoor::
 
 .jr_5245
     call func_005_54EA                            ;; 05:5245 $CD $EA $54
-    ld   de, MarinIndoor2SpriteVariants           ;; 05:5248 $11 $0A $4E
+    ld   de, MarinIndoorSpriteVariants            ;; 05:5248 $11 $0A $4E
     call RenderActiveEntitySpritesPair            ;; 05:524B $CD $C0 $3B
     ldh  a, [hActiveEntityState]                  ;; 05:524E $F0 $F0
     dec  a                                        ;; 05:5250 $3D

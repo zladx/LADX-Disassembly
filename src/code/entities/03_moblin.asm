@@ -34,8 +34,11 @@ RoamingEnemySpeedXPerDirection::
 RoamingEnemySpeedYPerDirection::
     db   $00, $00, $F8, $08
 
-SpriteVariantOffsetPerDirection::
-    db   $06, $04, $02, $00
+EntityVariantForDirection_03::
+.right db 6
+.left  db 4
+.up    db 2
+.down  db 0
 
 MoblinEntityHandler::
     ldh  a, [hMapId]                              ;; 03:5827 $F0 $F7
@@ -181,12 +184,17 @@ StopWalkingEnd:
     call UpdateEntityPosWithSpeed_03              ;; 03:58F6 $CD $25 $7F
     call DefaultEntityPhysics                     ;; 03:58F9 $CD $93 $78
 
-RoamingEnemyWalk::
+; Set the entity sprite variant to match the preset entity direction.
+; Some inertia is added, so that after a direction change the entity waits for a bit before turning again.
+;
+; Inputs:
+;   bc   entity index
+SetEntityVariantForDirection_03::
     ld   hl, wEntitiesDirectionTable              ;; 03:58FC $21 $80 $C3
     add  hl, bc                                   ;; 03:58FF $09
     ld   e, [hl]                                  ;; 03:5900 $5E
     ld   d, b                                     ;; 03:5901 $50
-    ld   hl, SpriteVariantOffsetPerDirection      ;; 03:5902 $21 $23 $58
+    ld   hl, EntityVariantForDirection_03         ;; 03:5902 $21 $23 $58
     add  hl, de                                   ;; 03:5905 $19
     push hl                                       ;; 03:5906 $E5
     ld   hl, wEntitiesInertiaTable                ;; 03:5907 $21 $D0 $C3

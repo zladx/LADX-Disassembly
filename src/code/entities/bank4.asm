@@ -327,15 +327,23 @@ func_004_7C4B:: ; called only from fishing minigame
     and  a                                        ;; 04:7C92 $A7
     ret                                           ;; 04:7C93 $C9
 
-Data_004_7C94::
-    db   $06, $04, $02, $00
+EntityVariantForDirection_04::
+.right db 6
+.left  db 4
+.up    db 2
+.down  db 0
 
-func_004_7C98::
+; Set the entity sprite variant to match the preset entity direction.
+; Some inertia is added, so that after a direction change the entity waits for a bit before turning again.
+;
+; Inputs:
+;   bc   entity index
+SetEntityVariantForDirection_04::
     ld   hl, wEntitiesDirectionTable              ;; 04:7C98 $21 $80 $C3
     add  hl, bc                                   ;; 04:7C9B $09
     ld   e, [hl]                                  ;; 04:7C9C $5E
     ld   d, b                                     ;; 04:7C9D $50
-    ld   hl, Data_004_7C94                        ;; 04:7C9E $21 $94 $7C
+    ld   hl, EntityVariantForDirection_04         ;; 04:7C9E $21 $94 $7C
     add  hl, de                                   ;; 04:7CA1 $19
     push hl                                       ;; 04:7CA2 $E5
     ld   hl, wEntitiesInertiaTable                ;; 04:7CA3 $21 $D0 $C3
@@ -349,6 +357,7 @@ func_004_7C98::
     and  $01                                      ;; 04:7CAD $E6 $01
     or   [hl]                                     ;; 04:7CAF $B6
     jp   SetEntitySpriteVariant                   ;; 04:7CB0 $C3 $0C $3B
+
 
     ld   hl, wEntitiesSpeedXTable                 ;; 04:7CB3 $21 $40 $C2
     add  hl, bc                                   ;; 04:7CB6 $09

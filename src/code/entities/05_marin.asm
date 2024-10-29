@@ -721,7 +721,8 @@ MarinEntityHandler_Indoor::
     ld   [hl], e                                  ;; 05:5244 $73
 
 .jr_5245
-    call func_005_54EA                            ;; 05:5245 $CD $EA $54
+
+    call SetEntityVariantForDirection_05          ;; 05:5245 $CD $EA $54
     ld   de, MarinIndoorSpriteVariants            ;; 05:5248 $11 $0A $4E
     call RenderActiveEntitySpritesPair            ;; 05:524B $CD $C0 $3B
     ldh  a, [hActiveEntityState]                  ;; 05:524E $F0 $F0

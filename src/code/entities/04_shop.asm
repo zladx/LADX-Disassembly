@@ -51,7 +51,7 @@ ShopOwnerEntityHandler::
     ld   [hl], a                                  ;; 04:770D $77
 
 jr_004_770E:
-    call func_004_7C98                            ;; 04:770E $CD $98 $7C
+    call SetEntityVariantForDirection_04          ;; 04:770E $CD $98 $7C
     ld   de, ShopOwnerSpriteVariants              ;; 04:7711 $11 $CB $76
     call RenderActiveEntitySpritesPair            ;; 04:7714 $CD $C0 $3B
     call func_004_7B70                            ;; 04:7717 $CD $70 $7B

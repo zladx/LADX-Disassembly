@@ -44,7 +44,7 @@ GoriyaEntityHandler::
     ld   [hl], $50                                ;; 19:45FF $36 $50
     ld   de, GoriyaSpriteVariants                 ;; 19:4601 $11 $C4 $45
     call RenderActiveEntitySpritesPair            ;; 19:4604 $CD $C0 $3B
-    call func_019_7CD4                            ;; 19:4607 $CD $D4 $7C
+    call SetEntityVariantForDirection_19          ;; 19:4607 $CD $D4 $7C
     ldh  a, [hFrameCounter]                       ;; 19:460A $F0 $E7
     and  $3F                                      ;; 19:460C $E6 $3F
     jr   nz, .jr_4618                             ;; 19:460E $20 $08

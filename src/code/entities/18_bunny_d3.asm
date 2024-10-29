@@ -42,7 +42,7 @@ BunnyD3EntityHandler::
     ld   [hl], e                                  ;; 18:51F2 $73
 
 .jr_51F3
-    call func_018_7D60                            ;; 18:51F3 $CD $60 $7D
+    call SetEntityVariantForDirection_18          ;; 18:51F3 $CD $60 $7D
     call ReturnIfNonInteractive_18                ;; 18:51F6 $CD $E8 $7D
     call AddEntityZSpeedToPos_18                  ;; 18:51F9 $CD $98 $7E
     ld   hl, wEntitiesSpeedZTable                 ;; 18:51FC $21 $20 $C3

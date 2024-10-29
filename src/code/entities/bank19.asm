@@ -625,15 +625,23 @@ jr_019_7CCE:
     and  a                                        ;; 19:7CCE $A7
     ret                                           ;; 19:7CCF $C9
 
-Data_019_7CD0::
-    db   $06, $04, $02, $00
+EntityVariantForDirection_19::
+.right db 6
+.left  db 4
+.up    db 2
+.down  db 0
 
-func_019_7CD4::
+; Set the entity sprite variant to match the preset entity direction.
+; Some inertia is added, so that after a direction change the entity waits for a bit before turning again.
+;
+; Inputs:
+;   bc   entity index
+SetEntityVariantForDirection_19::
     ld   hl, wEntitiesDirectionTable              ;; 19:7CD4 $21 $80 $C3
     add  hl, bc                                   ;; 19:7CD7 $09
     ld   e, [hl]                                  ;; 19:7CD8 $5E
     ld   d, b                                     ;; 19:7CD9 $50
-    ld   hl, Data_019_7CD0                        ;; 19:7CDA $21 $D0 $7C
+    ld   hl, EntityVariantForDirection_19         ;; 19:7CDA $21 $D0 $7C
     add  hl, de                                   ;; 19:7CDD $19
     push hl                                       ;; 19:7CDE $E5
     ld   hl, wEntitiesInertiaTable                ;; 19:7CDF $21 $D0 $C3

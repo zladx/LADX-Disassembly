@@ -1050,9 +1050,9 @@ jr_003_4D07:
     jr   nz, jr_003_4D22                          ;; 03:4D17 $20 $09
 
 .jr_4D19
-    call RoamingEnemyWalk                         ;; 03:4D19 $CD $FC $58
-    call RoamingEnemyWalk                         ;; 03:4D1C $CD $FC $58
-    call RoamingEnemyWalk                         ;; 03:4D1F $CD $FC $58
+    call SetEntityVariantForDirection_03          ;; 03:4D19 $CD $FC $58
+    call SetEntityVariantForDirection_03          ;; 03:4D1C $CD $FC $58
+    call SetEntityVariantForDirection_03          ;; 03:4D1F $CD $FC $58
 
 jr_003_4D22:
     call ExecuteActiveEntityHandler_trampoline    ;; 03:4D22 $CD $81 $3A
@@ -1367,7 +1367,7 @@ EntityInitMoblinSword::
     add  hl, bc                                   ;; 03:4EEF $09
     ld   [hl], a                                  ;; 03:4EF0 $77
     push hl                                       ;; 03:4EF1 $E5
-    call RoamingEnemyWalk                         ;; 03:4EF2 $CD $FC $58
+    call SetEntityVariantForDirection_03          ;; 03:4EF2 $CD $FC $58
     pop  hl                                       ;; 03:4EF5 $E1
     ld   a, [hl]                                  ;; 03:4EF6 $7E
     xor  $01                                      ;; 03:4EF7 $EE $01

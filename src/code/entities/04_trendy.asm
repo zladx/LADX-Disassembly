@@ -47,7 +47,7 @@ func_004_6E92::
     ld   [hl], e                                  ;; 04:6EC0 $73
 
 .jr_6EC1
-    call func_004_7C98                            ;; 04:6EC1 $CD $98 $7C
+    call SetEntityVariantForDirection_04          ;; 04:6EC1 $CD $98 $7C
     ld   de, ShopOwnerSpriteVariants              ;; 04:6EC4 $11 $CB $76
     call RenderActiveEntitySpritesPair            ;; 04:6EC7 $CD $C0 $3B
 

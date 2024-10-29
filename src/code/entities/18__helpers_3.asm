@@ -34,17 +34,28 @@ PushLinkOutOfEntity_18::
     and  a                                        ;; 18:7D5A $A7
     ret                                           ;; 18:7D5B $C9
 
-Data_018_7D5C::
-    db   $06, $04, $02, $00
+EntityVariantForDirection_18::
+.right db 6
+.left  db 4
+.up    db 2
+.down  db 0
 
-func_018_7D60::
+; Set the entity sprite variant to match the preset entity direction.
+; Some inertia is added, so that after a direction change the entity waits for a bit before turning again.
+;
+; Inputs:
+;   bc   entity index
+SetEntityVariantForDirection_18::
+    ; e = entity direction
     ld   hl, wEntitiesDirectionTable              ;; 18:7D60 $21 $80 $C3
     add  hl, bc                                   ;; 18:7D63 $09
     ld   e, [hl]                                  ;; 18:7D64 $5E
+
     ld   d, b                                     ;; 18:7D65 $50
-    ld   hl, Data_018_7D5C                        ;; 18:7D66 $21 $5C $7D
+    ld   hl, EntityVariantForDirection_18         ;; 18:7D66 $21 $5C $7D
     add  hl, de                                   ;; 18:7D69 $19
     push hl                                       ;; 18:7D6A $E5
+
     ld   hl, wEntitiesInertiaTable                ;; 18:7D6B $21 $D0 $C3
     add  hl, bc                                   ;; 18:7D6E $09
     inc  [hl]                                     ;; 18:7D6F $34
@@ -53,9 +64,11 @@ func_018_7D60::
     rra                                           ;; 18:7D72 $1F
     rra                                           ;; 18:7D73 $1F
     rra                                           ;; 18:7D74 $1F
+
     pop  hl                                       ;; 18:7D75 $E1
     and  $01                                      ;; 18:7D76 $E6 $01
     or   [hl]                                     ;; 18:7D78 $B6
+
     jp   SetEntitySpriteVariant                   ;; 18:7D79 $C3 $0C $3B
 
 func_018_7D7C::

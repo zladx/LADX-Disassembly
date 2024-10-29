@@ -48,7 +48,7 @@ MarinAtTalTalHeightsEntityHandler::
     ld   [wMarinEntityIndex], a                   ;; 18:5EF7 $EA $0F $C5
     ld   de, MarinAtTalTalAndInStoreSpriteVariants ;; 18:5EFA $11 $B7 $5E
     call RenderActiveEntitySpritesPair            ;; 18:5EFD $CD $C0 $3B
-    call func_018_7D60                            ;; 18:5F00 $CD $60 $7D
+    call SetEntityVariantForDirection_18          ;; 18:5F00 $CD $60 $7D
     call AddEntityZSpeedToPos_18                  ;; 18:5F03 $CD $98 $7E
     ld   hl, wEntitiesSpeedZTable                 ;; 18:5F06 $21 $20 $C3
     add  hl, bc                                   ;; 18:5F09 $09
@@ -362,7 +362,7 @@ MarinAtTalTal2SpriteVariants::
 TarinAtTalTalHeights:
     ld   de, MarinAtTalTal2SpriteVariants         ;; 18:60F5 $11 $D5 $60
     call RenderActiveEntitySpritesPair            ;; 18:60F8 $CD $C0 $3B
-    call func_018_7D60                            ;; 18:60FB $CD $60 $7D
+    call SetEntityVariantForDirection_18          ;; 18:60FB $CD $60 $7D
     ldh  a, [hActiveEntityState]                  ;; 18:60FE $F0 $F0
     JP_TABLE                                      ;; 18:6100
 ._00 dw TarinAtTalTalHeightsState0Handler         ;; 18:6101

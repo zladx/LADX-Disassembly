@@ -41,7 +41,7 @@ RichardEntityHandler::
     ld   [hl], e                                  ;; 06:403A $73
 
 .jr_403B
-    call SetEntitySpriteVariantForDirection       ;; 06:403B $CD $41 $64
+    call SetEntityVariantForDirection_06          ;; 06:403B $CD $41 $64
     ld   hl, wEntitiesPrivateState1Table          ;; 06:403E $21 $B0 $C2
     add  hl, bc                                   ;; 06:4041 $09
     ld   a, [hl]                                  ;; 06:4042 $7E

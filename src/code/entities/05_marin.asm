@@ -732,25 +732,25 @@ MarinEntityHandler_Indoor::
 ._02 dw func_005_5312                             ;; 05:5256
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-MarinDropSpriteVariants::
-.variant0
+LinksBedSpriteVariants::
+.variant0 ; tossing right
     db $40, OAM_GBC_PAL_7 | OAMF_PAL0
     db $42, OAM_GBC_PAL_7 | OAMF_PAL0
-.variant1
+.variant1 ; tossing left
     db $42, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
     db $40, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
-.variant2
+.variant2 ; raised
     db $44, OAM_GBC_PAL_0 | OAMF_PAL0
     db $46, OAM_GBC_PAL_0 | OAMF_PAL0
-.variant3
+.variant3 ; looking at Marin
     db $48, OAM_GBC_PAL_0 | OAMF_PAL0
     db $4A, OAM_GBC_PAL_0 | OAMF_PAL0
-.variant4
+.variant4 ; looking at Marin, blinking
     db $48, OAM_GBC_PAL_0 | OAMF_PAL0
     db $4C, OAM_GBC_PAL_0 | OAMF_PAL0
 
 ; define sprites and there OAM Attributes in a list
-MarinDropGBCSpriteList::
+LinksBedMattressSpriteRect::
     ;  x    y    n°   OAM
     db $00, $00, $4E, OAM_GBC_PAL_6 | OAMF_PAL0
     db $00, $08, $4E, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP
@@ -790,13 +790,13 @@ func_005_52AF::
     ldh  [hLinkInteractiveMotionBlocked], a       ;; 05:52BF $E0 $A1
     ld   a, LINK_ANIMATION_STATE_NO_UPDATE        ;; 05:52C1 $3E $FF
     ldh  [hLinkAnimationState], a                 ;; 05:52C3 $E0 $9D
-    ld   de, MarinDropSpriteVariants              ;; 05:52C5 $11 $58 $52
+    ld   de, LinksBedSpriteVariants               ;; 05:52C5 $11 $58 $52
     call RenderActiveEntitySpritesPair            ;; 05:52C8 $CD $C0 $3B
     ldh  a, [hIsGBC]                              ;; 05:52CB $F0 $FE
     and  a                                        ;; 05:52CD $A7
     jr   z, .jr_52D8                              ;; 05:52CE $28 $08
 
-    ld   hl, MarinDropGBCSpriteList               ;; 05:52D0 $21 $6C $52
+    ld   hl, LinksBedMattressSpriteRect           ;; 05:52D0 $21 $6C $52
     ld   c, $02                                   ;; 05:52D3 $0E $02
     call RenderActiveEntitySpritesRect            ;; 05:52D5 $CD $E6 $3C
 

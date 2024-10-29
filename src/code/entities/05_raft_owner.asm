@@ -35,7 +35,7 @@ EntityRaftOwnerHandler::
     and  $1F                                      ;; 05:5366 $E6 $1F
     jr   nz, .jr_5372                             ;; 05:5368 $20 $08
 
-    call func_005_7B24                            ;; 05:536A $CD $24 $7B
+    call GetEntityDirectionToLink_05              ;; 05:536A $CD $24 $7B
     ld   hl, wEntitiesDirectionTable              ;; 05:536D $21 $80 $C3
     add  hl, bc                                   ;; 05:5370 $09
     ld   [hl], e                                  ;; 05:5371 $73
@@ -369,7 +369,7 @@ ShouldLinkTalkToEntity_05::
     jr   z, .bowWowEnd                            ;; 05:5536 $28 $0C
 
     push de                                       ;; 05:5538 $D5
-    call func_005_7B24                            ;; 05:5539 $CD $24 $7B
+    call GetEntityDirectionToLink_05              ;; 05:5539 $CD $24 $7B
     ldh  a, [hLinkDirection]                      ;; 05:553C $F0 $9E
     xor  $01                                      ;; 05:553E $EE $01
     cp   e                                        ;; 05:5540 $BB

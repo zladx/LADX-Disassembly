@@ -134,7 +134,7 @@ MarinEntityHandler::
     cp   $28                                      ;; 05:4EC5 $FE $28
     jr   nc, .jr_4ED1                             ;; 05:4EC7 $30 $08
 
-    call func_005_7B24                            ;; 05:4EC9 $CD $24 $7B
+    call GetEntityDirectionToLink_05              ;; 05:4EC9 $CD $24 $7B
     ld   hl, wEntitiesDirectionTable              ;; 05:4ECC $21 $80 $C3
     add  hl, bc                                   ;; 05:4ECF $09
     ld   [hl], e                                  ;; 05:4ED0 $73
@@ -438,7 +438,7 @@ func_005_5059::
     jp   IncrementEntityState                     ;; 05:5087 $C3 $12 $3B
 
 .jr_508A
-    call func_005_7B24                            ;; 05:508A $CD $24 $7B
+    call GetEntityDirectionToLink_05              ;; 05:508A $CD $24 $7B
     ld   a, e                                     ;; 05:508D $7B
     xor  $01                                      ;; 05:508E $EE $01
     ldh  [hLinkDirection], a                      ;; 05:5090 $E0 $9E
@@ -715,7 +715,7 @@ MarinEntityHandler_Indoor::
     and  $1F                                      ;; 05:5239 $E6 $1F
     jr   nz, .jr_5245                             ;; 05:523B $20 $08
 
-    call func_005_7B24                            ;; 05:523D $CD $24 $7B
+    call GetEntityDirectionToLink_05              ;; 05:523D $CD $24 $7B
     ld   hl, wEntitiesDirectionTable              ;; 05:5240 $21 $80 $C3
     add  hl, bc                                   ;; 05:5243 $09
     ld   [hl], e                                  ;; 05:5244 $73

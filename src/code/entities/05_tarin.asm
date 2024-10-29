@@ -193,7 +193,7 @@ func_005_4A17::
     xor  a                                        ;; 05:4A1B $AF
     ld   [wLinkAttackStepAnimationCountdown], a   ;; 05:4A1C $EA $9B $C1
 
-    call func_005_7B24                            ;; 05:4A1F $CD $24 $7B
+    call GetEntityDirectionToLink_05              ;; 05:4A1F $CD $24 $7B
     ld   a, e                                     ;; 05:4A22 $7B
     xor  $01                                      ;; 05:4A23 $EE $01
     ldh  [hLinkDirection], a                      ;; 05:4A25 $E0 $9E
@@ -428,7 +428,7 @@ func_005_4B41::
     call label_27DD                               ;; 05:4B5E $CD $DD $27
     call GetEntityTransitionCountdown             ;; 05:4B61 $CD $05 $0C
     ld   [hl], $40                                ;; 05:4B64 $36 $40
-    call func_005_7B24                            ;; 05:4B66 $CD $24 $7B
+    call GetEntityDirectionToLink_05              ;; 05:4B66 $CD $24 $7B
     add  $08                                      ;; 05:4B69 $C6 $08
     call SetEntitySpriteVariant                   ;; 05:4B6B $CD $0C $3B
     call GetEntityToLinkPositionDeltaX_05         ;; 05:4B6E $CD $04 $7B
@@ -468,7 +468,7 @@ func_005_4B89::
     and  $1F                                      ;; 05:4B9F $E6 $1F
     jr   nz, .jr_4BAB                             ;; 05:4BA1 $20 $08
 
-    call func_005_7B24                            ;; 05:4BA3 $CD $24 $7B
+    call GetEntityDirectionToLink_05              ;; 05:4BA3 $CD $24 $7B
     add  $08                                      ;; 05:4BA6 $C6 $08
     call SetEntitySpriteVariant                   ;; 05:4BA8 $CD $0C $3B
 
@@ -583,7 +583,7 @@ jr_005_4C43:
     and  $1F                                      ;; 05:4C48 $E6 $1F
     jr   nz, .jr_4C54                             ;; 05:4C4A $20 $08
 
-    call func_005_7B24                            ;; 05:4C4C $CD $24 $7B
+    call GetEntityDirectionToLink_05              ;; 05:4C4C $CD $24 $7B
     ld   hl, wEntitiesSpriteVariantTable          ;; 05:4C4F $21 $B0 $C3
     add  hl, bc                                   ;; 05:4C52 $09
     ld   [hl], e                                  ;; 05:4C53 $73

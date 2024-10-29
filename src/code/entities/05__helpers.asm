@@ -219,41 +219,46 @@ GetEntityToLinkPositionDeltaY_05::
     ld   d, a                                     ;; 05:7B22 $57
     ret                                           ;; 05:7B23 $C9
 
-func_005_7B24::
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   e   entity's direction to Link (see DIRECTION_* constants for possible values)
+GetEntityDirectionToLink_05::
     call GetEntityToLinkPositionDeltaX_05         ;; 05:7B24 $CD $04 $7B
     ld   a, e                                     ;; 05:7B27 $7B
     ldh  [hMultiPurpose0], a                      ;; 05:7B28 $E0 $D7
     ld   a, d                                     ;; 05:7B2A $7A
     bit  7, a                                     ;; 05:7B2B $CB $7F
-    jr   z, .jr_7B31                              ;; 05:7B2D $28 $02
+    jr   z, .positiveX                            ;; 05:7B2D $28 $02
 
     cpl                                           ;; 05:7B2F $2F
     inc  a                                        ;; 05:7B30 $3C
 
-.jr_7B31
+.positiveX
     push af                                       ;; 05:7B31 $F5
     call GetEntityToLinkPositionDeltaY_05         ;; 05:7B32 $CD $14 $7B
     ld   a, e                                     ;; 05:7B35 $7B
     ldh  [hMultiPurpose1], a                      ;; 05:7B36 $E0 $D8
     ld   a, d                                     ;; 05:7B38 $7A
     bit  7, a                                     ;; 05:7B39 $CB $7F
-    jr   z, .jr_7B3F                              ;; 05:7B3B $28 $02
+    jr   z, .positiveY                            ;; 05:7B3B $28 $02
 
     cpl                                           ;; 05:7B3D $2F
     inc  a                                        ;; 05:7B3E $3C
 
-.jr_7B3F
+.positiveY
     pop  de                                       ;; 05:7B3F $D1
     cp   d                                        ;; 05:7B40 $BA
-    jr   nc, .jr_7B47                             ;; 05:7B41 $30 $04
+    jr   nc, .vertical                            ;; 05:7B41 $30 $04
 
     ldh  a, [hMultiPurpose0]                      ;; 05:7B43 $F0 $D7
-    jr   jr_005_7B49                              ;; 05:7B45 $18 $02
+    jr   .verticalEnd                             ;; 05:7B45 $18 $02
 
-.jr_7B47
+.vertical
     ldh  a, [hMultiPurpose1]                      ;; 05:7B47 $F0 $D8
 
-jr_005_7B49:
+.verticalEnd
     ld   e, a                                     ;; 05:7B49 $5F
     ret                                           ;; 05:7B4A $C9
 

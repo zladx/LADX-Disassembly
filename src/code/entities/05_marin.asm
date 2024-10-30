@@ -660,11 +660,11 @@ MarinLetterSpritesPair::
     db $5C, OAM_GBC_PAL_0 | OAMF_PAL0
     db $5C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
-; Marin entity states
-DEF MARIN_STATE_INITIAL EQU 0
-DEF MARIN_STATE_1 EQU 1
-DEF MARIN_STATE_2 EQU 2
-DEF MARIN_STATE_3 EQU 3
+; State of the entity during the "Link waking up" animation
+DEF MARIN_LINK_INITIAL_STATE    EQU 0
+DEF MARIN_LINK_TOSSING_STATE    EQU 1
+DEF MARIN_LINK_AWAKE_STATE      EQU 2
+DEF MARIN_LINK_OUT_OF_BED_STATE EQU 3
 
 MarinEntityHandler_Indoor::
     ;
@@ -710,13 +710,13 @@ MarinEntityHandler_Indoor::
     jr   z, .shieldEnd                            ;; 05:5206 $28 $09
     ld   hl, wEntitiesStateTable                  ;; 05:5208 $21 $90 $C2
     add  hl, bc                                   ;; 05:520B $09
-    ld   a, MARIN_STATE_3                         ;; 05:520C $3E $03
+    ld   a, MARIN_LINK_OUT_OF_BED_STATE           ;; 05:520C $3E $03
     ld   [hl], a                                  ;; 05:520E $77
     ldh  [hActiveEntityState], a                  ;; 05:520F $E0 $F0
 .shieldEnd
 
     ;
-    ; If the state is MARIN_STATE_INITIAL, set the initial state and return.
+    ; If the state is MARIN_LINK_STATE_INITIAL, set the initial state and return.
     ;
 
     ldh  a, [hActiveEntityState]                  ;; 05:5211 $F0 $F0
@@ -741,7 +741,7 @@ MarinEntityHandler_Indoor::
     sub  8                                        ;; 05:522E $D6 $08
     ld   [hl], a                                  ;; 05:5230 $77
     ld   [wC167], a                               ;; 05:5231 $EA $67 $C1
-    ; Move to MARIN_STATE_1
+    ; Move to MARIN_LINK_TOSSING_STATE
     jp   IncrementEntityState                     ;; 05:5234 $C3 $12 $3B
 .initialStateEnd
 
@@ -759,7 +759,7 @@ MarinEntityHandler_Indoor::
     ld   de, MarinIndoorSpriteVariants            ;; 05:5248 $11 $0A $4E
     call RenderActiveEntitySpritesPair            ;; 05:524B $CD $C0 $3B
 
-    ; Animate and render Link in the bed
+    ; Animate and render Link in the bed (see MARIN_LINK_*_STATE constants)
     ldh  a, [hActiveEntityState]                  ;; 05:524E $F0 $F0
     dec  a                                        ;; 05:5250 $3D
     JP_TABLE                                      ;; 05:5251
@@ -802,6 +802,7 @@ MarinLinkTossingHandler::
     jr   nz, .dialogEnd                           ;; 05:5297 $20 $0B
     call_open_dialog Dialog001 ; "What a relief!" ;; 05:5299 $3E $01
     ld   [hl], $40                                ;; 05:529E $36 $40
+    ; Move to MARIN_LINK_AWAKE_STATE state
     call IncrementEntityState                     ;; 05:52A0 $CD $12 $3B
     xor  a                                        ;; 05:52A3 $AF
 .dialogEnd
@@ -864,8 +865,10 @@ MarinLinkAwakeInBedHandler::
     and  J_RIGHT | J_LEFT | J_UP | J_DOWN         ;; 05:52EB $E6 $0F
     jr   z, .return                               ;; 05:52ED $28 $22
 
-    ; Make Link jump out of the bed
+    ; Move to MARIN_LINK_OUT_OF_BED_STATE
     call IncrementEntityState                     ;; 05:52EF $CD $12 $3B
+
+    ; Make Link jump out of the bed
     ld   a, $01                                   ;; 05:52F2 $3E $01
     ldh  [hLinkPositionZ], a                      ;; 05:52F4 $E0 $A2
     ld   a, $02                                   ;; 05:52F6 $3E $02

@@ -85,7 +85,7 @@ MarinEntityHandler::
     and  a                                        ;; 05:4E74 $A7
     jp   nz, MarinEntityHandler_Indoor            ;; 05:4E75 $C2 $CE $51
 
-    ; Didn't found sword yet: remove the outdoor entity
+    ; Didn't find sword yet: remove the outdoor entity
     ld   a, [wSwordLevel]                         ;; 05:4E78 $FA $4E $DB
     and  a                                        ;; 05:4E7B $A7
     jp   z, ClearEntityStatus_05                  ;; 05:4E7C $CA $4B $7B
@@ -141,7 +141,7 @@ MarinEntityHandler::
 .jr_4ED1
 
     ;
-    ; Spaw music notes when Marin is singing
+    ; Spawn music notes when Marin is singing
     ;
 
     call SetEntityVariantForDirection_05          ;; 05:4ED1 $CD $EA $54
@@ -698,13 +698,13 @@ MarinEntityHandler_Indoor::
 .letterEnd
 
     ;
-    ; After Link retrieved its sword, Marin is no longer home. Remove the entity.
+    ; After Link retrieves his sword, Marin is no longer home. Remove the entity.
     ;
     ld   a, [wSwordLevel]                         ;; 05:51FB $FA $4E $DB
     and  a                                        ;; 05:51FE $A7
     jp   nz, ClearEntityStatus_05                 ;; 05:51FF $C2 $4B $7B
 
-    ; After Link retrieved its shield, set the state directly to MARIN_STATE_3
+    ; After Link retrieves his shield, set the state directly to MARIN_LINK_OUT_OF_BED_STATE
     ld   a, [wShieldLevel]                        ;; 05:5202 $FA $44 $DB
     and  a                                        ;; 05:5205 $A7
     jr   z, .shieldEnd                            ;; 05:5206 $28 $09

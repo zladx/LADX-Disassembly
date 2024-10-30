@@ -70,7 +70,7 @@ SetEntityVariantForDirection_05::
 
 ShouldLinkTalkToEntity_05::
     ;
-    ; Check if Link is vertically close from the entity
+    ; Check if Link is vertically close to the entity
     ;
 
     ld   e, b                                     ;; 05:5506 $58
@@ -97,7 +97,7 @@ ShouldLinkTalkToEntity_05::
     jr   nc, .dontTalk                            ;; 05:5523 $30 $44
 
     ;
-    ; Check if Link is horizontally close from the entity
+    ; Check if Link is horizontally close to the entity
     ;
 
     ldh  a, [hLinkPositionX]                      ;; 05:5525 $F0 $98

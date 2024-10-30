@@ -2538,12 +2538,17 @@ LinkMotionUnknownHandler::
     ld   [wDBC8], a                               ;; 02:50C6 $EA $C8 $DB
     ret                                           ;; 02:50C9 $C9
 
-Unknown2ToLinkAnimationState::
-    db  LINK_ANIMATION_STATE_UNKNOWN_55, LINK_ANIMATION_STATE_UNKNOWN_56
-    db  LINK_ANIMATION_STATE_UNKNOWN_57, LINK_ANIMATION_STATE_UNKNOWN_57
-    db  LINK_ANIMATION_STATE_HIDDEN, LINK_ANIMATION_STATE_HIDDEN
-    db  LINK_ANIMATION_STATE_HIDDEN, LINK_ANIMATION_STATE_HIDDEN
-    db  LINK_ANIMATION_STATE_HIDDEN, LINK_ANIMATION_STATE_HIDDEN
+LinkFallingDownAnimation::
+    db  LINK_ANIMATION_STATE_FALLING_PIT_1
+    db  LINK_ANIMATION_STATE_FALLING_PIT_2
+    db  LINK_ANIMATION_STATE_FALLING_PIT_3
+    db  LINK_ANIMATION_STATE_FALLING_PIT_3
+    db  LINK_ANIMATION_STATE_HIDDEN
+    db  LINK_ANIMATION_STATE_HIDDEN
+    db  LINK_ANIMATION_STATE_HIDDEN
+    db  LINK_ANIMATION_STATE_HIDDEN
+    db  LINK_ANIMATION_STATE_HIDDEN
+    db  LINK_ANIMATION_STATE_HIDDEN
 
 LinkMotionFallingDownHandler::
     ld   a, $01                                   ;; 02:50D4 $3E $01
@@ -2562,7 +2567,7 @@ LinkMotionFallingDownHandler::
 
     ld   e, a                                     ;; 02:50EB $5F
     ld   d, $00                                   ;; 02:50EC $16 $00
-    ld   hl, Unknown2ToLinkAnimationState         ;; 02:50EE $21 $CA $50
+    ld   hl, LinkFallingDownAnimation             ;; 02:50EE $21 $CA $50
     add  hl, de                                   ;; 02:50F1 $19
     ld   a, [hl]                                  ;; 02:50F2 $7E
     ldh  [hLinkAnimationState], a                 ;; 02:50F3 $E0 $9D

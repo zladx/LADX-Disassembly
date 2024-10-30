@@ -57,7 +57,7 @@ LikeLikeState1Handler::
     ret                                           ;; 06:7E26 $C9
 
 .jr_7E27
-    ld   a, LINK_ANIMATION_STATE_NO_UPDATE        ;; 06:7E27 $3E $FF
+    ld   a, LINK_ANIMATION_STATE_HIDDEN           ;; 06:7E27 $3E $FF
     ldh  [hLinkAnimationState], a                 ;; 06:7E29 $E0 $9D
     ld   hl, wEntitiesPrivateState1Table          ;; 06:7E2B $21 $B0 $C2
     add  hl, bc                                   ;; 06:7E2E $09

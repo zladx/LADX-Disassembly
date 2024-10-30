@@ -806,11 +806,11 @@ LinkDirectionToSwordDirection::
 LinkDirectionToLinkAnimationState1::
     ;   right                                       left                                        up                                          down
     db  LINK_ANIMATION_STATE_STANDING_DOWN,         LINK_ANIMATION_STATE_UNKNOWN_18,            LINK_ANIMATION_STATE_UNKNOWN_19,            LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_RIGHT
-    db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_RIGHT,  LINK_ANIMATION_STATE_NO_UPDATE,             LINK_ANIMATION_STATE_STANDING_DOWN,         LINK_ANIMATION_STATE_UNKNOWN_16
-    db  LINK_ANIMATION_STATE_UNKNOWN_17,            LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_LEFT,   LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_LEFT,   LINK_ANIMATION_STATE_NO_UPDATE
+    db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_RIGHT,  LINK_ANIMATION_STATE_HIDDEN,             LINK_ANIMATION_STATE_STANDING_DOWN,         LINK_ANIMATION_STATE_UNKNOWN_16
+    db  LINK_ANIMATION_STATE_UNKNOWN_17,            LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_LEFT,   LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_LEFT,   LINK_ANIMATION_STATE_HIDDEN
     db  LINK_ANIMATION_STATE_STANDING_DOWN,         LINK_ANIMATION_STATE_UNKNOWN_14,            LINK_ANIMATION_STATE_UNKNOWN_15,            LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_UP
-    db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_UP,     LINK_ANIMATION_STATE_NO_UPDATE,             LINK_ANIMATION_STATE_STANDING_DOWN,         LINK_ANIMATION_STATE_UNKNOWN_12
-    db  LINK_ANIMATION_STATE_UNKNOWN_13,            LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_DOWN,   LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_DOWN,   LINK_ANIMATION_STATE_NO_UPDATE
+    db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_UP,     LINK_ANIMATION_STATE_HIDDEN,             LINK_ANIMATION_STATE_STANDING_DOWN,         LINK_ANIMATION_STATE_UNKNOWN_12
+    db  LINK_ANIMATION_STATE_UNKNOWN_13,            LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_DOWN,   LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_DOWN,   LINK_ANIMATION_STATE_HIDDEN
 
 ; convert the direction link is facing to wC13A
 LinkDirectionTo_wC13A::
@@ -1082,11 +1082,11 @@ label_002_4827:
     add  hl, bc                                   ;; 02:483A $09
     ld   a, [hl]                                  ;; 02:483B $7E
     ld   [wSwordDirection], a                     ;; 02:483C $EA $36 $C1
-    ; if value is not LINK_ANIMATION_STATE_NO_UPDATE then update hLinkAnimationState
+    ; if value is not LINK_ANIMATION_STATE_HIDDEN then update hLinkAnimationState
     ld   hl, LinkDirectionToLinkAnimationState1   ;; 02:483F $21 $36 $46
     add  hl, bc                                   ;; 02:4842 $09
     ld   a, [hl]                                  ;; 02:4843 $7E
-    cp   LINK_ANIMATION_STATE_NO_UPDATE           ;; 02:4844 $FE $FF
+    cp   LINK_ANIMATION_STATE_HIDDEN              ;; 02:4844 $FE $FF
     jr   z, .noUpdate                             ;; 02:4846 $28 $02
     ldh  [hLinkAnimationState], a                 ;; 02:4848 $E0 $9D
 
@@ -2538,12 +2538,17 @@ LinkMotionUnknownHandler::
     ld   [wDBC8], a                               ;; 02:50C6 $EA $C8 $DB
     ret                                           ;; 02:50C9 $C9
 
-Unknown2ToLinkAnimationState::
-    db  LINK_ANIMATION_STATE_UNKNOWN_55, LINK_ANIMATION_STATE_UNKNOWN_56
-    db  LINK_ANIMATION_STATE_UNKNOWN_57, LINK_ANIMATION_STATE_UNKNOWN_57
-    db  LINK_ANIMATION_STATE_NO_UPDATE, LINK_ANIMATION_STATE_NO_UPDATE
-    db  LINK_ANIMATION_STATE_NO_UPDATE, LINK_ANIMATION_STATE_NO_UPDATE
-    db  LINK_ANIMATION_STATE_NO_UPDATE, LINK_ANIMATION_STATE_NO_UPDATE
+LinkFallingDownAnimation::
+    db  LINK_ANIMATION_STATE_FALLING_PIT_1
+    db  LINK_ANIMATION_STATE_FALLING_PIT_2
+    db  LINK_ANIMATION_STATE_FALLING_PIT_3
+    db  LINK_ANIMATION_STATE_FALLING_PIT_3
+    db  LINK_ANIMATION_STATE_HIDDEN
+    db  LINK_ANIMATION_STATE_HIDDEN
+    db  LINK_ANIMATION_STATE_HIDDEN
+    db  LINK_ANIMATION_STATE_HIDDEN
+    db  LINK_ANIMATION_STATE_HIDDEN
+    db  LINK_ANIMATION_STATE_HIDDEN
 
 LinkMotionFallingDownHandler::
     ld   a, $01                                   ;; 02:50D4 $3E $01
@@ -2562,7 +2567,7 @@ LinkMotionFallingDownHandler::
 
     ld   e, a                                     ;; 02:50EB $5F
     ld   d, $00                                   ;; 02:50EC $16 $00
-    ld   hl, Unknown2ToLinkAnimationState         ;; 02:50EE $21 $CA $50
+    ld   hl, LinkFallingDownAnimation             ;; 02:50EE $21 $CA $50
     add  hl, de                                   ;; 02:50F1 $19
     ld   a, [hl]                                  ;; 02:50F2 $7E
     ldh  [hLinkAnimationState], a                 ;; 02:50F3 $E0 $9D
@@ -2850,7 +2855,7 @@ LinkMotionRecoverHandler::
     jp   label_002_52B9                           ;; 02:529C $C3 $B9 $52
 
 jr_002_529F:
-    ld   e, LINK_ANIMATION_STATE_NO_UPDATE        ;; 02:529F $1E $FF
+    ld   e, LINK_ANIMATION_STATE_HIDDEN           ;; 02:529F $1E $FF
     ldh  a, [hLinkCountdown]                      ;; 02:52A1 $F0 $B7
     cp   $30                                      ;; 02:52A3 $FE $30
     jr   c, .jr_002_52B5                          ;; 02:52A5 $38 $0E

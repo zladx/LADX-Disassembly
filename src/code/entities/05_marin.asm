@@ -1,5 +1,5 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-MarinIndoor2SpriteVariants::
+MarinIndoorSpriteVariants::
 .variant0
     db $60, OAM_GBC_PAL_1 | OAMF_PAL0
     db $62, OAM_GBC_PAL_1 | OAMF_PAL0
@@ -73,7 +73,7 @@ Data_005_4E60::
 MarinEntityHandler::
     ld   a, [wGameplayType]                       ;; 05:4E62 $FA $95 $DB
     cp   GAMEPLAY_CREDITS                         ;; 05:4E65 $FE $01
-    jp   z, MarinCreditsHandler                   ;; 05:4E67 $CA $E0 $4E
+    jp   z, .renderSinging                        ;; 05:4E67 $CA $E0 $4E
 
     ; Marin is handled by the follower system: remove the entity
     ld   a, [wIsMarinFollowingLink]               ;; 05:4E6A $FA $73 $DB
@@ -85,25 +85,25 @@ MarinEntityHandler::
     and  a                                        ;; 05:4E74 $A7
     jp   nz, MarinEntityHandler_Indoor            ;; 05:4E75 $C2 $CE $51
 
-    ; Didn't found sword yet: remove the entity
+    ; Didn't find sword yet: remove the outdoor entity
     ld   a, [wSwordLevel]                         ;; 05:4E78 $FA $4E $DB
     and  a                                        ;; 05:4E7B $A7
     jp   z, ClearEntityStatus_05                  ;; 05:4E7C $CA $4B $7B
 
-    ; Not in a village, saved Marin and found the Pineapple: remove the entity
+    ; Not in a village, saved Marin and found the Pineapple: remove the outdoor entity
     ldh  a, [hMapRoom]                            ;; 05:4E7F $F0 $F6
     cp   ROOM_SECTION_OW_VILLAGES                 ;; 05:4E81 $FE $C0
     jr   c, .notInAnyVillage                      ;; 05:4E83 $38 $02
-    jr   .continue                                ;; 05:4E85 $18 $0F
+    jr   .villagesEnd                             ;; 05:4E85 $18 $0F
 .notInAnyVillage
     ld   a, [wOverworldRoomStatus + ROOM_OW_MARIN_BRIDGE] ;; 05:4E87 $FA $08 $D8
     and  OW_ROOM_STATUS_CHANGED                   ;; 05:4E8A $E6 $10
-    jr   nz, .continue                            ;; 05:4E8C $20 $08
+    jr   nz, .villagesEnd                         ;; 05:4E8C $20 $08
     ld   a, [wTradeSequenceItem]                  ;; 05:4E8E $FA $0E $DB
     cp   TRADING_ITEM_PINEAPPLE                   ;; 05:4E91 $FE $07
     jp   nc, ClearEntityStatus_05                 ;; 05:4E93 $D2 $4B $7B
+.villagesEnd
 
-.continue
     push bc                                       ;; 05:4E96 $C5
     sla  c                                        ;; 05:4E97 $CB $21
     rl   b                                        ;; 05:4E99 $CB $10
@@ -134,21 +134,25 @@ MarinEntityHandler::
     cp   $28                                      ;; 05:4EC5 $FE $28
     jr   nc, .jr_4ED1                             ;; 05:4EC7 $30 $08
 
-    call func_005_7B24                            ;; 05:4EC9 $CD $24 $7B
+    call GetEntityDirectionToLink_05              ;; 05:4EC9 $CD $24 $7B
     ld   hl, wEntitiesDirectionTable              ;; 05:4ECC $21 $80 $C3
     add  hl, bc                                   ;; 05:4ECF $09
     ld   [hl], e                                  ;; 05:4ED0 $73
-
 .jr_4ED1
-    call func_005_54EA                            ;; 05:4ED1 $CD $EA $54
+
+    ;
+    ; Spawn music notes when Marin is singing
+    ;
+
+    call SetEntityVariantForDirection_05          ;; 05:4ED1 $CD $EA $54
     ld   a, [wIsMarinSinging]                     ;; 05:4ED4 $FA $C8 $C3
     cp   $01                                      ;; 05:4ED7 $FE $01
-    jr   nz, jr_005_4F39                          ;; 05:4ED9 $20 $5E
+    jr   nz, .singingEnd                          ;; 05:4ED9 $20 $5E
 
     call GetEntityPrivateCountdown1               ;; 05:4EDB $CD $00 $0C
-    jr   nz, jr_005_4F39                          ;; 05:4EDE $20 $59
+    jr   nz, .singingEnd                          ;; 05:4EDE $20 $59
 
-MarinCreditsHandler:
+.renderSinging
     ldh  a, [hFrameCounter]                       ;; 05:4EE0 $F0 $E7
     rra                                           ;; 05:4EE2 $1F
     rra                                           ;; 05:4EE3 $1F
@@ -164,11 +168,11 @@ MarinCreditsHandler:
     ldh  a, [hFrameCounter]                       ;; 05:4EF1 $F0 $E7
     add  $10                                      ;; 05:4EF3 $C6 $10
     and  $1F                                      ;; 05:4EF5 $E6 $1F
-    jr   nz, jr_005_4F39                          ;; 05:4EF7 $20 $40
+    jr   nz, .singingEnd                          ;; 05:4EF7 $20 $40
 
     ld   a, ENTITY_MUSICAL_NOTE                   ;; 05:4EF9 $3E $C9
     call SpawnNewEntity_trampoline                ;; 05:4EFB $CD $86 $3B
-    jr   c, jr_005_4F39                           ;; 05:4EFE $38 $39
+    jr   c, .singingEnd                           ;; 05:4EFE $38 $39
 
     ldh  a, [hMultiPurpose1]                      ;; 05:4F00 $F0 $D8
     ld   hl, wEntitiesPosYTable                   ;; 05:4F02 $21 $10 $C2
@@ -205,15 +209,23 @@ MarinCreditsHandler:
     add  hl, de                                   ;; 05:4F35 $19
     ld   [hl], $40                                ;; 05:4F36 $36 $40
     pop  bc                                       ;; 05:4F38 $C1
+.singingEnd
 
-jr_005_4F39:
     ; Save Marin's entity index
     ld   a, c                                     ;; 05:4F39 $79
     ld   [wMarinEntityIndex], a                   ;; 05:4F3A $EA $0F $C5
 
+    ; Render Marin
     ld   de, MarinCreditsSpriteVariants           ;; 05:4F3D $11 $2A $4E
     call RenderActiveEntitySpritesPair            ;; 05:4F40 $CD $C0 $3B
+
+    ; Do physics
     call PushLinkOutOfEntity_05                   ;; 05:4F43 $CD $C3 $54
+
+    ;
+    ; Do behavior
+    ;
+
     ld   a, [wGameplayType]                       ;; 05:4F46 $FA $95 $DB
     cp   GAMEPLAY_WORLD_MAP                       ;; 05:4F49 $FE $07
     ret  z                                        ;; 05:4F4B $C8
@@ -438,7 +450,7 @@ func_005_5059::
     jp   IncrementEntityState                     ;; 05:5087 $C3 $12 $3B
 
 .jr_508A
-    call func_005_7B24                            ;; 05:508A $CD $24 $7B
+    call GetEntityDirectionToLink_05              ;; 05:508A $CD $24 $7B
     ld   a, e                                     ;; 05:508D $7B
     xor  $01                                      ;; 05:508E $EE $01
     ldh  [hLinkDirection], a                      ;; 05:5090 $E0 $9E
@@ -644,141 +656,172 @@ func_005_51BC::
     jp_open_dialog Dialog197
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-MarinIndoor1SpriteVariants::
-.variant0
+MarinLetterSpritesPair::
     db $5C, OAM_GBC_PAL_0 | OAMF_PAL0
     db $5C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
+; State of the entity during the "Link waking up" animation
+DEF MARIN_LINK_INITIAL_STATE    EQU 0
+DEF MARIN_LINK_TOSSING_STATE    EQU 1
+DEF MARIN_LINK_AWAKE_STATE      EQU 2
+DEF MARIN_LINK_OUT_OF_BED_STATE EQU 3
+
 MarinEntityHandler_Indoor::
+    ;
+    ; In Marin's house, when Marin is at the beach, display a letter instead.
+    ;
+
+    ; If not got the pineapple yet…
     ld   a, [wTradeSequenceItem]                  ;; 05:51CE $FA $0E $DB
     cp   TRADING_ITEM_PINEAPPLE                   ;; 05:51D1 $FE $07
-    jr   c, .jr_51FB                              ;; 05:51D3 $38 $26
-
-    ld   a, [wOverworldRoomStatus + $FD]          ;; 05:51D5 $FA $FD $D8
+    jr   c, .letterEnd                            ;; 05:51D3 $38 $26
+    ; … and the Walrus is sleeping,
+    ld   a, [wOverworldRoomStatus + ROOM_OW_WALRUS] ;; 05:51D5 $FA $FD $D8
     and  OW_ROOM_STATUS_CHANGED | OW_ROOM_STATUS_OWL_TALKED ;; 05:51D8 $E6 $30
     jp   nz, ClearEntityStatus_05                 ;; 05:51DA $C2 $4B $7B
 
+    ; Display the letter on the table
     ld   hl, wEntitiesPosYTable                   ;; 05:51DD $21 $10 $C2
     add  hl, bc                                   ;; 05:51E0 $09
     ld   [hl], $60                                ;; 05:51E1 $36 $60
     ld   hl, wEntitiesPosXTable                   ;; 05:51E3 $21 $00 $C2
     add  hl, bc                                   ;; 05:51E6 $09
     ld   [hl], $7A                                ;; 05:51E7 $36 $7A
-    ld   de, MarinIndoor1SpriteVariants           ;; 05:51E9 $11 $CA $51
+    ld   de, MarinLetterSpritesPair               ;; 05:51E9 $11 $CA $51
     call RenderActiveEntitySpritesPair            ;; 05:51EC $CD $C0 $3B
+
+    ; Open a dialog with the letter content if needed
     call ReturnIfNonInteractive_05                ;; 05:51EF $CD $3A $7A
     call ShouldLinkTalkToEntity_05                ;; 05:51F2 $CD $06 $55
     ret  nc                                       ;; 05:51F5 $D0
+    jp_open_dialog Dialog1D7 ; "At the beach..."  ;; 05:51F6 $3E $D7
+.letterEnd
 
-    jp_open_dialog Dialog1D7                      ;; 05:51F6 $3E $D7
-
-.jr_51FB
+    ;
+    ; After Link retrieves his sword, Marin is no longer home. Remove the entity.
+    ;
     ld   a, [wSwordLevel]                         ;; 05:51FB $FA $4E $DB
     and  a                                        ;; 05:51FE $A7
     jp   nz, ClearEntityStatus_05                 ;; 05:51FF $C2 $4B $7B
 
+    ; After Link retrieves his shield, set the state directly to MARIN_LINK_OUT_OF_BED_STATE
     ld   a, [wShieldLevel]                        ;; 05:5202 $FA $44 $DB
     and  a                                        ;; 05:5205 $A7
-    jr   z, .jr_5211                              ;; 05:5206 $28 $09
-
+    jr   z, .shieldEnd                            ;; 05:5206 $28 $09
     ld   hl, wEntitiesStateTable                  ;; 05:5208 $21 $90 $C2
     add  hl, bc                                   ;; 05:520B $09
-    ld   a, $03                                   ;; 05:520C $3E $03
+    ld   a, MARIN_LINK_OUT_OF_BED_STATE           ;; 05:520C $3E $03
     ld   [hl], a                                  ;; 05:520E $77
     ldh  [hActiveEntityState], a                  ;; 05:520F $E0 $F0
+.shieldEnd
 
-.jr_5211
+    ;
+    ; If the state is MARIN_LINK_STATE_INITIAL, set the initial state and return.
+    ;
+
     ldh  a, [hActiveEntityState]                  ;; 05:5211 $F0 $F0
     and  a                                        ;; 05:5213 $A7
-    jr   nz, .jr_5237                             ;; 05:5214 $20 $21
-
+    jr   nz, .initialStateEnd                     ;; 05:5214 $20 $21
+    ; Set a countdown for 127 frames
     call GetEntitySlowTransitionCountdown         ;; 05:5216 $CD $FB $0B
-    ld   [hl], $7F                                ;; 05:5219 $36 $7F
+    ld   [hl], 127                                ;; 05:5219 $36 $7F
+    ; Marin looks to the left
     ld   hl, wEntitiesDirectionTable              ;; 05:521B $21 $80 $C3
     add  hl, bc                                   ;; 05:521E $09
-    ld   [hl], $01                                ;; 05:521F $36 $01
+    ld   [hl], DIRECTION_LEFT                     ;; 05:521F $36 $01
+    ; Shift Marin's position 8px to the bottom and to the right
     ld   hl, wEntitiesPosXTable                   ;; 05:5221 $21 $00 $C2
     add  hl, bc                                   ;; 05:5224 $09
     ld   a, [hl]                                  ;; 05:5225 $7E
-    sub  $08                                      ;; 05:5226 $D6 $08
+    sub  8                                        ;; 05:5226 $D6 $08
     ld   [hl], a                                  ;; 05:5228 $77
     ld   hl, wEntitiesPosYTable                   ;; 05:5229 $21 $10 $C2
     add  hl, bc                                   ;; 05:522C $09
     ld   a, [hl]                                  ;; 05:522D $7E
-    sub  $08                                      ;; 05:522E $D6 $08
+    sub  8                                        ;; 05:522E $D6 $08
     ld   [hl], a                                  ;; 05:5230 $77
     ld   [wC167], a                               ;; 05:5231 $EA $67 $C1
+    ; Move to MARIN_LINK_TOSSING_STATE
     jp   IncrementEntityState                     ;; 05:5234 $C3 $12 $3B
+.initialStateEnd
 
-.jr_5237
     ldh  a, [hFrameCounter]                       ;; 05:5237 $F0 $E7
     and  $1F                                      ;; 05:5239 $E6 $1F
-    jr   nz, .jr_5245                             ;; 05:523B $20 $08
-
-    call func_005_7B24                            ;; 05:523D $CD $24 $7B
+    jr   nz, .directionEnd                        ;; 05:523B $20 $08
+    call GetEntityDirectionToLink_05              ;; 05:523D $CD $24 $7B
     ld   hl, wEntitiesDirectionTable              ;; 05:5240 $21 $80 $C3
     add  hl, bc                                   ;; 05:5243 $09
     ld   [hl], e                                  ;; 05:5244 $73
+.directionEnd
 
-.jr_5245
-    call func_005_54EA                            ;; 05:5245 $CD $EA $54
-    ld   de, MarinIndoor2SpriteVariants           ;; 05:5248 $11 $0A $4E
+    ; Render Marin's sprite
+    call SetEntityVariantForDirection_05          ;; 05:5245 $CD $EA $54
+    ld   de, MarinIndoorSpriteVariants            ;; 05:5248 $11 $0A $4E
     call RenderActiveEntitySpritesPair            ;; 05:524B $CD $C0 $3B
+
+    ; Animate and render Link in the bed (see MARIN_LINK_*_STATE constants)
     ldh  a, [hActiveEntityState]                  ;; 05:524E $F0 $F0
     dec  a                                        ;; 05:5250 $3D
     JP_TABLE                                      ;; 05:5251
-._00 dw func_005_5294                             ;; 05:5252
-._01 dw func_005_52DB                             ;; 05:5254
-._02 dw func_005_5312                             ;; 05:5256
+._01 dw MarinLinkTossingHandler                   ;; 05:5252
+._02 dw MarinLinkAwakeInBedHandler                ;; 05:5254
+._03 dw MarinLinkOutOfBedHandler                  ;; 05:5256
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-MarinDropSpriteVariants::
-.variant0
+LinksBedSpriteVariants::
+.variant0 ; turning right
     db $40, OAM_GBC_PAL_7 | OAMF_PAL0
     db $42, OAM_GBC_PAL_7 | OAMF_PAL0
-.variant1
+.variant1 ; turning left
     db $42, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
     db $40, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
-.variant2
+.variant2 ; raised
     db $44, OAM_GBC_PAL_0 | OAMF_PAL0
     db $46, OAM_GBC_PAL_0 | OAMF_PAL0
-.variant3
+.variant3 ; looking at Marin
     db $48, OAM_GBC_PAL_0 | OAMF_PAL0
     db $4A, OAM_GBC_PAL_0 | OAMF_PAL0
-.variant4
+.variant4 ; looking at Marin, blinking
     db $48, OAM_GBC_PAL_0 | OAMF_PAL0
     db $4C, OAM_GBC_PAL_0 | OAMF_PAL0
 
 ; define sprites and there OAM Attributes in a list
-MarinDropGBCSpriteList::
+LinksBedMattressSpriteRect::
     ;  x    y    n°   OAM
     db $00, $00, $4E, OAM_GBC_PAL_6 | OAMF_PAL0
     db $00, $08, $4E, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP
 
-Data_005_5274::
+; List of variants for playing the animation of Link tossing and turning in bed.
+LinkInBedVariantsAnimation::
     db   $03, $03, $03, $03, $03, $04, $03, $04, $03, $03, $03, $02, $02, $02, $02, $02
     db   $00, $00, $01, $01, $00, $00, $01, $01, $00, $00, $01, $01, $00, $00, $01, $01
 
-func_005_5294::
+MarinLinkTossingHandler::
+    ; On countdown end, open the "What a relief!" dialog and move to the next state
     call GetEntitySlowTransitionCountdown         ;; 05:5294 $CD $FB $0B
-    jr   nz, .jr_52A4                             ;; 05:5297 $20 $0B
-
-    call_open_dialog Dialog001                    ;; 05:5299 $3E $01
+    jr   nz, .dialogEnd                           ;; 05:5297 $20 $0B
+    call_open_dialog Dialog001 ; "What a relief!" ;; 05:5299 $3E $01
     ld   [hl], $40                                ;; 05:529E $36 $40
+    ; Move to MARIN_LINK_AWAKE_STATE state
     call IncrementEntityState                     ;; 05:52A0 $CD $12 $3B
     xor  a                                        ;; 05:52A3 $AF
+.dialogEnd
 
-.jr_52A4
     rra                                           ;; 05:52A4 $1F
     rra                                           ;; 05:52A5 $1F
     and  $1F                                      ;; 05:52A6 $E6 $1F
     ld   e, a                                     ;; 05:52A8 $5F
     ld   d, b                                     ;; 05:52A9 $50
-    ld   hl, Data_005_5274                        ;; 05:52AA $21 $74 $52
+    ld   hl, LinkInBedVariantsAnimation           ;; 05:52AA $21 $74 $52
     add  hl, de                                   ;; 05:52AD $19
     ld   a, [hl]                                  ;; 05:52AE $7E
+    ; fallthrough
 
-func_005_52AF::
+; Render Link in bed
+;
+; Inputs:
+;   a    sprite variant
+RenderLinkInBedSprites::
     ldh  [hActiveEntitySpriteVariant], a          ;; 05:52AF $E0 $F1
     ld   a, $38                                   ;; 05:52B1 $3E $38
     ldh  [hActiveEntityPosX], a                   ;; 05:52B3 $E0 $EE
@@ -786,36 +829,46 @@ func_005_52AF::
     ld   a, $34                                   ;; 05:52B7 $3E $34
     ldh  [hActiveEntityVisualPosY], a             ;; 05:52B9 $E0 $EC
     ldh  [hLinkPositionY], a                      ;; 05:52BB $E0 $99
+
     ld   a, $02                                   ;; 05:52BD $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ;; 05:52BF $E0 $A1
-    ld   a, LINK_ANIMATION_STATE_NO_UPDATE        ;; 05:52C1 $3E $FF
+
+    ld   a, LINK_ANIMATION_STATE_HIDDEN           ;; 05:52C1 $3E $FF
     ldh  [hLinkAnimationState], a                 ;; 05:52C3 $E0 $9D
-    ld   de, MarinDropSpriteVariants              ;; 05:52C5 $11 $58 $52
+
+    ld   de, LinksBedSpriteVariants               ;; 05:52C5 $11 $58 $52
     call RenderActiveEntitySpritesPair            ;; 05:52C8 $CD $C0 $3B
+
     ldh  a, [hIsGBC]                              ;; 05:52CB $F0 $FE
     and  a                                        ;; 05:52CD $A7
-    jr   z, .jr_52D8                              ;; 05:52CE $28 $08
-
-    ld   hl, MarinDropGBCSpriteList               ;; 05:52D0 $21 $6C $52
+    jr   z, .gbcEnd                               ;; 05:52CE $28 $08
+    ; Render Link's mattress, as a sprite under Link
+    ld   hl, LinksBedMattressSpriteRect           ;; 05:52D0 $21 $6C $52
     ld   c, $02                                   ;; 05:52D3 $0E $02
     call RenderActiveEntitySpritesRect            ;; 05:52D5 $CD $E6 $3C
+.gbcEnd
 
-.jr_52D8
     jp   CopyEntityPositionToActivePosition       ;; 05:52D8 $C3 $8A $3D
 
-func_005_52DB::
+MarinLinkAwakeInBedHandler::
     ld   a, $03                                   ;; 05:52DB $3E $03
-    call func_005_52AF                            ;; 05:52DD $CD $AF $52
+    call RenderLinkInBedSprites                   ;; 05:52DD $CD $AF $52
+
+    ; The dialog is still visible: return
     call GetEntityTransitionCountdown             ;; 05:52E0 $CD $05 $0C
     ld   hl, wDialogState                         ;; 05:52E3 $21 $9F $C1
     or   [hl]                                     ;; 05:52E6 $B6
-    jr   nz, .ret_5311                            ;; 05:52E7 $20 $28
+    jr   nz, .return                              ;; 05:52E7 $20 $28
 
+    ; No direction button pressed: return
     ldh  a, [hPressedButtonsMask]                 ;; 05:52E9 $F0 $CB
-    and  $0F                                      ;; 05:52EB $E6 $0F
-    jr   z, .ret_5311                             ;; 05:52ED $28 $22
+    and  J_RIGHT | J_LEFT | J_UP | J_DOWN         ;; 05:52EB $E6 $0F
+    jr   z, .return                               ;; 05:52ED $28 $22
 
+    ; Move to MARIN_LINK_OUT_OF_BED_STATE
     call IncrementEntityState                     ;; 05:52EF $CD $12 $3B
+
+    ; Make Link jump out of the bed
     ld   a, $01                                   ;; 05:52F2 $3E $01
     ldh  [hLinkPositionZ], a                      ;; 05:52F4 $E0 $A2
     ld   a, $02                                   ;; 05:52F6 $3E $02
@@ -826,22 +879,21 @@ func_005_52DB::
     ldh  [hLinkSpeedX], a                         ;; 05:5301 $E0 $9A
     xor  a                                        ;; 05:5303 $AF
     ldh  [hLinkSpeedY], a                         ;; 05:5304 $E0 $9B
-    ld   a, $00                                   ;; 05:5306 $3E $00
+    ld   a, DIRECTION_RIGHT                       ;; 05:5306 $3E $00
     ldh  [hLinkDirection], a                      ;; 05:5308 $E0 $9E
     ldh  [hLinkInteractiveMotionBlocked], a       ;; 05:530A $E0 $A1
     ld   a, $01                                   ;; 05:530C $3E $01
     ld   [wC10A], a                               ;; 05:530E $EA $0A $C1
 
-.ret_5311
+.return
     ret                                           ;; 05:5311 $C9
 
-func_005_5312::
+MarinLinkOutOfBedHandler::
     call ReturnIfNonInteractive_05                ;; 05:5312 $CD $3A $7A
     call PushLinkOutOfEntity_05                   ;; 05:5315 $CD $C3 $54
     call ShouldLinkTalkToEntity_05                ;; 05:5318 $CD $06 $55
     ret  nc                                       ;; 05:531B $D0
-
-    jp_open_dialog Dialog002                      ;; 05:531C
+    jp_open_dialog Dialog002 ; "Follow the lane south" ;; 05:531C
 
 ; Add item to inventory slot (used for assigning the shield)
 AssignItemToSlot:

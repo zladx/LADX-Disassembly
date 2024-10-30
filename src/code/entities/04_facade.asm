@@ -93,7 +93,7 @@ FacadeDeathState0::
     dec  e                                        ;; 04:50D5 $1D
     ld   a, e                                     ;; 04:50D6 $7B
     cp   $FF                                      ;; 04:50D7 $FE $FF
-    jr   nz, .jr_50AD                          ;; 04:50D9 $20 $D2
+    jr   nz, .jr_50AD                             ;; 04:50D9 $20 $D2
 
 jr_004_50DB:
     ld   hl, wEntitiesPrivateState4Table          ;; 04:50DB $21 $40 $C4

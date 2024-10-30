@@ -45,7 +45,7 @@ MadamMeowMeowEntityHandler::
     ld   [hl], e                                  ;; 06:5B90 $73
 
 .jr_5B91
-    call SetEntitySpriteVariantForDirection       ;; 06:5B91 $CD $41 $64
+    call SetEntityVariantForDirection_06          ;; 06:5B91 $CD $41 $64
     ld   de, MadamMeowMeowSpriteVariants          ;; 06:5B94 $11 $56 $5B
     call RenderActiveEntitySpritesPair            ;; 06:5B97 $CD $C0 $3B
     ld   a, [wIsBowWowFollowingLink]              ;; 06:5B9A $FA $56 $DB

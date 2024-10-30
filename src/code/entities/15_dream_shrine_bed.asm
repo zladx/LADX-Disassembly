@@ -185,7 +185,7 @@ func_015_7DF5::
     ldh  [hLinkPositionY], a                      ;; 15:7E01 $E0 $99
     ld   a, $02                                   ;; 15:7E03 $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ;; 15:7E05 $E0 $A1
-    ld   a, LINK_ANIMATION_STATE_NO_UPDATE        ;; 15:7E07 $3E $FF
+    ld   a, LINK_ANIMATION_STATE_HIDDEN           ;; 15:7E07 $3E $FF
     ldh  [hLinkAnimationState], a                 ;; 15:7E09 $E0 $9D
     ld   de, Unknown061SpriteVariants             ;; 15:7E0B $11 $50 $7D
     ld   a, [wTunicType]                          ;; 15:7E0E $FA $0F $DC

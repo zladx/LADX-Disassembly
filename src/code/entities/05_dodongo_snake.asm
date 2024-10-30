@@ -228,7 +228,7 @@ func_005_6957::
     ld   [hl], a                                  ;; 05:6970 $77
     jr   nz, jr_005_6978                          ;; 05:6971 $20 $05
 
-    call func_005_7B24                            ;; 05:6973 $CD $24 $7B
+    call GetEntityDirectionToLink_05              ;; 05:6973 $CD $24 $7B
     jr   jr_005_697E                              ;; 05:6976 $18 $06
 
 jr_005_6978:

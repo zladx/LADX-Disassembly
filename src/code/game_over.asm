@@ -45,7 +45,7 @@ LinkPassOutHandler::
     ld   a, TILESET_0F                            ; $4217: $3E $0F ;; 01:4217 $3E $0F
     ld   [wTilesetToLoad], a                      ; $4219: $EA $FE $D6 ;; 01:4219 $EA $FE $D6
 
-    ld   a, LINK_ANIMATION_STATE_NO_UPDATE        ; $421C: $3E $FF ;; 01:421C $3E $FF
+    ld   a, LINK_ANIMATION_STATE_HIDDEN        ; $421C: $3E $FF ;; 01:421C $3E $FF
     ldh  [hLinkAnimationState], a                 ; $421E: $E0 $9D ;; 01:421E $E0 $9D
 
     ; Increment the death count

@@ -59,20 +59,23 @@ PushLinkOutOfEntity_06::
 ret_006_643C:
     ret                                           ;; 06:643C $C9
 
-; Array indexed by direction
-Data_006_643D::
-    db   $06, $04, $02, $00
+EntityVariantForDirection_06::
+.right db 6
+.left  db 4
+.up    db 2
+.down  db 0
 
-; Set sprite variant for entity direction.
+; Set the entity sprite variant to match the preset entity direction.
+; Some inertia is added, so that after a direction change the entity waits for a bit before turning again.
 ;
 ; Inputs:
 ;   bc   entity index
-SetEntitySpriteVariantForDirection::
+SetEntityVariantForDirection_06::
     ld   hl, wEntitiesDirectionTable              ;; 06:6441 $21 $80 $C3
     add  hl, bc                                   ;; 06:6444 $09
     ld   e, [hl]                                  ;; 06:6445 $5E
     ld   d, b                                     ;; 06:6446 $50
-    ld   hl, Data_006_643D                        ;; 06:6447 $21 $3D $64
+    ld   hl, EntityVariantForDirection_06         ;; 06:6447 $21 $3D $64
     add  hl, de                                   ;; 06:644A $19
     push hl                                       ;; 06:644B $E5
     ld   hl, wEntitiesInertiaTable                ;; 06:644C $21 $D0 $C3

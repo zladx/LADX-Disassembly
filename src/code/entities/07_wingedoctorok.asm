@@ -164,7 +164,7 @@ jr_007_56FF:
     call ClearEntitySpeed                         ;; 07:571B $CD $7F $3D
 
 jr_007_571E:
-    call func_007_7D1A                            ;; 07:571E $CD $1A $7D
+    call SetEntityVariantForDirection_07          ;; 07:571E $CD $1A $7D
 
 label_007_5721:
     ld   hl, wEntitiesPrivateCountdown2Table      ;; 07:5721 $21 $00 $C3
@@ -235,7 +235,7 @@ label_007_577A:
     ld   hl, wEntitiesDirectionTable              ;; 07:5788 $21 $80 $C3
     add  hl, bc                                   ;; 07:578B $09
     ld   [hl], e                                  ;; 07:578C $73
-    call func_007_7D1A                            ;; 07:578D $CD $1A $7D
+    call SetEntityVariantForDirection_07          ;; 07:578D $CD $1A $7D
     ldh  a, [hMultiPurposeG]                      ;; 07:5790 $F0 $E8
     and  a                                        ;; 07:5792 $A7
     jr   z, .ret_579F                             ;; 07:5793 $28 $0A

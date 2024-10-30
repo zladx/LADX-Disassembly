@@ -511,7 +511,7 @@ ENDC
     ldh  a, [hLinkAnimationState]                 ;; 00:1D7C $F0 $9D
     cp   LINK_ANIMATION_STATE_UNKNOWN_50          ;; 00:1D7E $FE $50
     jr   c, label_1D8C                            ;; 00:1D80 $38 $0A
-    cp   LINK_ANIMATION_STATE_UNKNOWN_55          ;; 00:1D82 $FE $55
+    cp   LINK_ANIMATION_STATE_FALLING_PIT_1       ;; 00:1D82 $FE $55
     jr   nc, label_1D8C                           ;; 00:1D84 $30 $06
     ld   a, [hl]                                  ;; 00:1D86 $7E
     or   $07                                      ;; 00:1D87 $F6 $07

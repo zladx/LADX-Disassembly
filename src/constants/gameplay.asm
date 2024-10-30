@@ -215,7 +215,7 @@ DEF LINK_ANIMATION_STATE_UNKNOWN_6A                        EQU $6A
 DEF LINK_ANIMATION_STATE_UNKNOWN_6B                        EQU $6B
 DEF LINK_ANIMATION_STATE_GOT_ITEM                          EQU $6C
 DEF LINK_ANIMATION_STATE_UNKNOWN_75                        EQU $75
-DEF LINK_ANIMATION_STATE_NO_UPDATE                         EQU $FF
+DEF LINK_ANIMATION_STATE_HIDDEN                            EQU $FF
 
 ; Values for wSwordDirection
 DEF SWORD_DIRECTION_RIGHT        EQU $00

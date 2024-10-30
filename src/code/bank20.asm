@@ -1906,7 +1906,7 @@ data_020_5407::
 
 func_020_54F5::
     ldh  a, [hLinkAnimationState]                 ;; 20:54F5 $F0 $9D
-    cp   LINK_ANIMATION_STATE_NO_UPDATE           ;; 20:54F7 $FE $FF
+    cp   LINK_ANIMATION_STATE_HIDDEN              ;; 20:54F7 $FE $FF
     ret  z                                        ;; 20:54F9 $C8
 
     ; Read the first byte in LinkAnimationStateTable

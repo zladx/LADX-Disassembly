@@ -1656,7 +1656,7 @@ InitGotItemSequence::
     cp   $02                                      ;; 00:1098 $FE $02
     jr   z, .jp_10DB                              ;; 00:109A $28 $3F
     ldh  a, [hLinkAnimationState]                 ;; 00:109C $F0 $9D
-    cp   LINK_ANIMATION_STATE_NO_UPDATE           ;; 00:109E $FE $FF
+    cp   LINK_ANIMATION_STATE_HIDDEN              ;; 00:109E $FE $FF
     jr   z, .jp_10DB                              ;; 00:10A0 $28 $39
     ld   a, [wLinkMotionState]                    ;; 00:10A2 $FA $1C $C1
     cp   LINK_MOTION_TYPE_NON_INTERACTIVE         ;; 00:10A5 $FE $02

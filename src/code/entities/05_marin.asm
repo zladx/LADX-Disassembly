@@ -833,7 +833,7 @@ RenderLinkInBedSprites::
     ld   a, $02                                   ;; 05:52BD $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ;; 05:52BF $E0 $A1
 
-    ld   a, LINK_ANIMATION_STATE_NO_UPDATE        ;; 05:52C1 $3E $FF
+    ld   a, LINK_ANIMATION_STATE_HIDDEN           ;; 05:52C1 $3E $FF
     ldh  [hLinkAnimationState], a                 ;; 05:52C3 $E0 $9D
 
     ld   de, LinksBedSpriteVariants               ;; 05:52C5 $11 $58 $52

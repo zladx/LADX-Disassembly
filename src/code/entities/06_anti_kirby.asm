@@ -180,7 +180,7 @@ jr_006_432B:
 
 jr_006_434B:
     ldh  a, [hLinkAnimationState]                 ;; 06:434B $F0 $9D
-    cp   LINK_ANIMATION_STATE_NO_UPDATE           ;; 06:434D $FE $FF
+    cp   LINK_ANIMATION_STATE_HIDDEN              ;; 06:434D $FE $FF
     jr   z, label_006_43B8                        ;; 06:434F $28 $67
 
     call GetEntityXDistanceToLink_06              ;; 06:4351 $CD $94 $65
@@ -281,7 +281,7 @@ AntiKirbyState3Handler::
     ld   a, [hl]                                  ;; 06:43E6 $7E
     add  $08                                      ;; 06:43E7 $C6 $08
     call SetEntitySpriteVariant                   ;; 06:43E9 $CD $0C $3B
-    ld   a, LINK_ANIMATION_STATE_NO_UPDATE        ;; 06:43EC $3E $FF
+    ld   a, LINK_ANIMATION_STATE_HIDDEN           ;; 06:43EC $3E $FF
     ldh  [hLinkAnimationState], a                 ;; 06:43EE $E0 $9D
     ld   a, $02                                   ;; 06:43F0 $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ;; 06:43F2 $E0 $A1

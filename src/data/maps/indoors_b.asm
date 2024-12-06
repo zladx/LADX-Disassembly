@@ -255,4 +255,4 @@ dw IndoorsBFB  ; $2FCE9
 dw IndoorsBFC  ; $2FD1C
 dw IndoorsBFD  ; $2FD88
 dw IndoorsBFE  ; $2FDCA
-dw $7E01  ; Invalid room pointer
+dw IndoorsBFF  ; Points to broken room data

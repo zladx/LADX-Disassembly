@@ -7316,3 +7316,6 @@ IndoorsBFE::
   db   $E0, $00, $E3, $48, $30 ; object
   db   ROOM_END
 
+IndoorsBFF:
+  ; There is not actual room data here, loading this room causes a crash due to no ROOM_END marker.
+

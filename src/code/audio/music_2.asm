@@ -101,7 +101,7 @@ jr_01E_4072:
 
 .loop_4076
     ld   a, [hl+]                                 ;; 1E:4076 $2A
-    ld   [c], a                                   ;; 1E:4077 $E2
+    ldh  [c], a                                   ;; 1E:4077 $E2
     inc  c                                        ;; 1E:4078 $0C
     dec  b                                        ;; 1E:4079 $05
     jr   nz, .loop_4076                           ;; 1E:407A $20 $FA
@@ -204,7 +204,7 @@ func_01E_410E::
 
 .loop_4111
     ld   a, [hl+]                                 ;; 1E:4111 $2A
-    ld   [c], a                                   ;; 1E:4112 $E2
+    ldh  [c], a                                   ;; 1E:4112 $E2
     inc  c                                        ;; 1E:4113 $0C
     ld   a, c                                     ;; 1E:4114 $79
     cp   $40                                      ;; 1E:4115 $FE $40
@@ -393,7 +393,7 @@ label_01E_432F:
 
 .loop_4348
     ld   a, [hl+]                                 ;; 1E:4348 $2A
-    ld   [c], a                                   ;; 1E:4349 $E2
+    ldh  [c], a                                   ;; 1E:4349 $E2
     inc  c                                        ;; 1E:434A $0C
     ld   a, c                                     ;; 1E:434B $79
     cp   $40                                      ;; 1E:434C $FE $40
@@ -1123,9 +1123,9 @@ jr_01E_46EE:
     jr   nz, .jr_470A                             ;; 1E:4703 $20 $05
 
     xor  a                                        ;; 1E:4705 $AF
-    ld   [c], a                                   ;; 1E:4706 $E2
+    ldh  [c], a                                   ;; 1E:4706 $E2
     ld   a, $80                                   ;; 1E:4707 $3E $80
-    ld   [c], a                                   ;; 1E:4709 $E2
+    ldh  [c], a                                   ;; 1E:4709 $E2
 
 .jr_470A
     inc  c                                        ;; 1E:470A $0C
@@ -1182,17 +1182,17 @@ jr_01E_4723:
 label_01E_473F:
     ld   a, d                                     ;; 1E:473F $7A
     or   b                                        ;; 1E:4740 $B0
-    ld   [c], a                                   ;; 1E:4741 $E2
+    ldh  [c], a                                   ;; 1E:4741 $E2
     inc  c                                        ;; 1E:4742 $0C
     ld   a, e                                     ;; 1E:4743 $7B
-    ld   [c], a                                   ;; 1E:4744 $E2
+    ldh  [c], a                                   ;; 1E:4744 $E2
     inc  c                                        ;; 1E:4745 $0C
     ld   a, [hl+]                                 ;; 1E:4746 $2A
-    ld   [c], a                                   ;; 1E:4747 $E2
+    ldh  [c], a                                   ;; 1E:4747 $E2
     inc  c                                        ;; 1E:4748 $0C
     ld   a, [hl]                                  ;; 1E:4749 $7E
     or   $80                                      ;; 1E:474A $F6 $80
-    ld   [c], a                                   ;; 1E:474C $E2
+    ldh  [c], a                                   ;; 1E:474C $E2
 
 label_01E_474D:
 jr_01E_474D:
@@ -1370,12 +1370,12 @@ func_01E_4841::
     add  hl, bc                                   ;; 1E:4849 $09
     ld   a, [hl]                                  ;; 1E:484A $7E
     pop  bc                                       ;; 1E:484B $C1
-    ld   [c], a                                   ;; 1E:484C $E2
+    ldh  [c], a                                   ;; 1E:484C $E2
     inc  c                                        ;; 1E:484D $0C
     inc  c                                        ;; 1E:484E $0C
     ld   a, [de]                                  ;; 1E:484F $1A
     or   $80                                      ;; 1E:4850 $F6 $80
-    ld   [c], a                                   ;; 1E:4852 $E2
+    ldh  [c], a                                   ;; 1E:4852 $E2
     ret                                           ;; 1E:4853 $C9
 
 ContinueCurrentScreenMusic_1E:
@@ -1442,7 +1442,7 @@ label_01E_4882:
 label_01E_48AF:
 jr_01E_48AF:
     ld   a, b                                     ;; 1E:48AF $78
-    ld   [c], a                                   ;; 1E:48B0 $E2
+    ldh  [c], a                                   ;; 1E:48B0 $E2
     jp   label_01E_4770                           ;; 1E:48B1 $C3 $70 $47
 
 func_01E_48B4::
@@ -1533,13 +1533,13 @@ func_01E_492B::
     ld   de, wD3A4                                ;; 1E:492B $11 $A4 $D3
     call func_01E_493C                            ;; 1E:492E $CD $3C $49
     ld   a, l                                     ;; 1E:4931 $7D
-    ld   [c], a                                   ;; 1E:4932 $E2
+    ldh  [c], a                                   ;; 1E:4932 $E2
     ld   [de], a                                  ;; 1E:4933 $12
     inc  c                                        ;; 1E:4934 $0C
     inc  e                                        ;; 1E:4935 $1C
     ld   a, h                                     ;; 1E:4936 $7C
     and  $0F                                      ;; 1E:4937 $E6 $0F
-    ld   [c], a                                   ;; 1E:4939 $E2
+    ldh  [c], a                                   ;; 1E:4939 $E2
     ld   [de], a                                  ;; 1E:493A $12
     ret                                           ;; 1E:493B $C9
 

@@ -173,7 +173,7 @@ AddEntityZSpeedToPos_04::
     ld   hl, wEntitiesPosZTable                   ;; 04:6E18 $21 $10 $C3
     jr   AddEntitySpeedToPos_04.updatePosition    ;; 04:6E1B $18 $D2
 
-func_004_6E1D::
+KnightAddIronBallSpeedToPos::
     ld   hl, wEntitiesPrivateState1Table          ;; 04:6E1D $21 $B0 $C2
     add  hl, bc                                   ;; 04:6E20 $09
     ld   a, [hl]                                  ;; 04:6E21 $7E
@@ -398,6 +398,22 @@ SetEntityVariantForDirection_04::
 
 include "code/entities/04_bombite.asm"
 include "code/entities/04_leever.asm"
+
+GhiniUpdateFlipAttribute::
+    ld   hl, wEntitiesSpeedXTable                 ;; 04:7F90 $21 $40 $C2
+    add  hl, bc                                   ;; 04:7F93 $09
+    ld   a, [hl]                                  ;; 04:7F94 $7E
+    rl   a                                        ;; 04:7F95 $CB $17
+    ld   a, OAM_NO_FLIP                           ;; 04:7F97 $3E $00
+    jr   c, .negative                             ;; 04:7F99 $38 $02
+
+    ld   a, OAMF_XFLIP                            ;; 04:7F9B $3E $20
+
+.negative
+    ld   hl, hActiveEntityFlipAttribute           ;; 04:7F9D $21 $ED $FF
+    xor  [hl]                                     ;; 04:7FA0 $AE
+    ld   [hl], a                                  ;; 04:7FA1 $77
+    ret                                           ;; 04:7FA2 $C9
 
 ; If the entity is disabled or the game is in a dialog or transition,
 ; return to the caller directly, skipping the rest of the code.

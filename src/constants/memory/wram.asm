@@ -1072,6 +1072,9 @@ wEntitiesCollisionsTable::
 ;  - Peahat: animation speed 
 ;  - Moving blocks (left): Y position when fully closed
 ;  - Moving blocks (bottom): X position when fully closed
+;  - Knight: when attacking, iron ball speed parallel to attack direction
+;  - Mini-Moldorm & Moldorm: movement angle (0x0 = right ... 0x4 = down ... 0x8 = left ... 0xC = up)
+;  - Ghini: 0 if trying to move right, 1 if left
 wEntitiesPrivateState1Table::
   ds $10 ; C2B0 - C2BF
 
@@ -1085,6 +1088,9 @@ wEntitiesPrivateState1Table::
 ;  - Moving block mover: initial Y position
 ;  - Moving blocks (left): Y position when fully open
 ;  - Moving blocks (bottom): X position when fully open
+;  - Knight: when attacking, iron ball speed accumulator parallel to attack direction
+;  - Mini-Moldorm & Moldorm: -1 when moving counter-clockwise, 1 otherwise
+;  - Ghini: 0 if trying to move down, 1 if up
 wEntitiesPrivateState2Table::
   ds $10 ; C2C0 - C2CF
 
@@ -1095,6 +1101,8 @@ wEntitiesPrivateState2Table::
 ;  - Keese: speed update timer
 ;  - Peahat: speed update timer
 ;  - Pincer: head direction
+;  - Knight: when attacking, iron ball position parallel to attack direction
+;  - Ghinis: 0 if originally hidden, 1 otherwise
 wEntitiesPrivateState3Table::
   ds $10 ; C2D0 - C2DF
 
@@ -1106,10 +1114,14 @@ wEntitiesTransitionCountdownTable::
 ;
 ; Examples:
 ;  - Timer Bombite: flashing timer
+;  - Mini-Moldorm & Moldorm: counts down to next speed update
 wEntitiesPrivateCountdown1Table::
   ds $10 ; C2F0 - C2FF
 
 ; Entity-specific countdown 2
+;
+; Examples:
+;  - Ghini: countdown before starting xy movement
 wEntitiesPrivateCountdown2Table::
   ds $10 ; C300 - C30F
 
@@ -1292,6 +1304,7 @@ wEntitiesOptions1Table::
 ;
 ; Examples:
 ;  - Peahat: movement angle (0x0 = right ... 0x4 = down ... 0x8 = left ... 0xC = up)
+;  - Knight: when attacking, iron ball position perpendicular to attack direction
 wEntitiesPrivateState4Table::
   ds $10 ; C440 - C44F
 
@@ -1556,6 +1569,8 @@ wIntroLightningVisibleCountdown::
 wCreditsScratch0::
 ; Is the arrow on the File Selection screen on the COPY item
 wIsFileSelectionArrowShifted::
+; Histories of up to 8 Mini-Moldorms' last 32 horizontal positions
+wMiniMoldormPositionXHistoryTable::
   ds 1 ; D000
 
 ; TODO comment
@@ -1720,6 +1735,8 @@ wD060::
 wD070::
   ds $90 ; D070 - D0FF
 
+; Histories of up to 8 Mini-Moldorms' last 32 vertical positions
+wMiniMoldormPositionYHistoryTable::
 ; Unlabeled
 wD100::
   ds 1 ; D100

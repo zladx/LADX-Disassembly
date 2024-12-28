@@ -1530,7 +1530,7 @@ EntityInitWithCountdown::
 EntityInitGhini::
     ldh  a, [hActiveEntityType]                   ;; 03:4FB5 $F0 $EB
     cp   ENTITY_GHINI                             ;; 03:4FB7 $FE $12
-    jr   nz, .ghiniEnd                            ;; 03:4FB9 $20 $0D
+    jr   nz, .hiding                              ;; 03:4FB9 $20 $0D
 
     ld   hl, wEntitiesPrivateState3Table          ;; 03:4FBB $21 $D0 $C2
     add  hl, bc                                   ;; 03:4FBE $09
@@ -1539,7 +1539,7 @@ EntityInitGhini::
     add  hl, bc                                   ;; 03:4FC4 $09
     ld   [hl], $10                                ;; 03:4FC5 $36 $10
     ret                                           ;; 03:4FC7 $C9
-.ghiniEnd
+.hiding
     jp   IncrementEntityState                     ;; 03:4FC8 $C3 $12 $3B
 
 MaskedIronMaskSpriteVariants::
@@ -5788,7 +5788,7 @@ func_003_6E2B::
 
     ld   hl, wEntitiesOptions1Table               ;; 03:6EFB $21 $30 $C4
     add  hl, bc                                   ;; 03:6EFE $09
-    and  $40                                      ;; 03:6EFF $E6 $40
+    and  ENTITY_OPT1_SWORD_CLINK_OFF              ;; 03:6EFF $E6 $40
     jp   z, func_003_6F93                         ;; 03:6F01 $CA $93 $6F
 
 label_003_6F04:

@@ -8058,7 +8058,7 @@ IF __PATCH_0__
 
 .gbc
     ldh  a, [hFrameCounter]
-    and  OAMF_XFLIP << 1
+    and  $02 << 1
     srl  a
     add  OAMF_PAL0 | OAM_GBC_PAL_3
     jr   .anyGB

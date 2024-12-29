@@ -26,7 +26,7 @@ GhiniEntityHandler::
 .sharedGhiniBehavior
     ldh  a, [hActiveEntityState]                  ;; 04:5C16 $F0 $F0
     and  a                                        ;; 04:5C18 $A7
-    jr   z, GhiniVisibleHandler                    ;; 04:5C19 $28 $28
+    jr   z, GhiniVisibleHandler                   ;; 04:5C19 $28 $28
 
     ; Hiding
     ld   a, $FF                                   ;; 04:5C1B $3E $FF

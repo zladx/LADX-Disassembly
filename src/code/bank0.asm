@@ -2605,8 +2605,8 @@ DisplayTransientVfxForLinkRunning::
     ldh  a, [hLinkPositionX]                      ;; 00:1767 $F0 $98
     ldh  [hMultiPurpose0], a                      ;; 00:1769 $E0 $D7
 
-    ld   a, [wLinkGroundVfx]                      ;; 00:176B $FA $81 $C1
-    cp   GROUND_VFX_SHALLOW_WATER                 ;; 00:176E $FE $05
+    ld   a, [wLinkObjectPhysics]                  ;; 00:176B $FA $81 $C1
+    cp   OBJ_PHYSICS_SHALLOW_WATER                ;; 00:176E $FE $05
     jr   z, .shallowWater                         ;; 00:1770 $28 $0F
 
     ld   a, NOISE_SFX_FOOTSTEP                    ;; 00:1772 $3E $07

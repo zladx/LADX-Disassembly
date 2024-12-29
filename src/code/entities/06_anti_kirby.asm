@@ -225,7 +225,7 @@ jr_006_434B:
     ldh  [hLinkSpeedX], a                         ;; 06:438E $E0 $9A
     push bc                                       ;; 06:4390 $C5
     call UpdateFinalLinkPosition                  ;; 06:4391 $CD $A8 $21
-    call label_3E19                               ;; 06:4394 $CD $19 $3E
+    call CheckPositionForMapTransition_trampoline ;; 06:4394 $CD $19 $3E
     pop  bc                                       ;; 06:4397 $C1
     ld   hl, hActiveEntityPosX                    ;; 06:4398 $21 $EE $FF
     ldh  a, [hLinkPositionX]                      ;; 06:439B $F0 $98

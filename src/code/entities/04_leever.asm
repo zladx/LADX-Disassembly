@@ -111,4 +111,4 @@ LeeverBurrowingHandler::
 
 .skipIncrementState
     ld   hl, LeeverBurrowingSpriteVariantIndexes  ;; 04:7F8A $21 $73 $7F
-    jp   LeeverEmergingHandler.setSpriteVariant     ;; 04:7F8D $C3 $3A $7F
+    jp   LeeverEmergingHandler.setSpriteVariant   ;; 04:7F8D $C3 $3A $7F

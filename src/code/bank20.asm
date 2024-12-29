@@ -1397,7 +1397,7 @@ ResetRoomVariables::
     ldh  [hFreeWarpDataAddress], a                ;; 20:4CA4 $E0 $E6
     ld   [wC19C], a                               ;; 20:4CA6 $EA $9C $C1
     ld   [wC504], a                               ;; 20:4CA9 $EA $04 $C5
-    ld   [wDBC8], a                               ;; 20:4CAC $EA $C8 $DB
+    ld   [wMapEntrancePositionZ], a               ;; 20:4CAC $EA $C8 $DB
     ld   [wTorchesCount], a                       ;; 20:4CAF $EA $C9 $DB
     ld   [wC1A2], a                               ;; 20:4CB2 $EA $A2 $C1
     ld   [wC1C6], a                               ;; 20:4CB5 $EA $C6 $C1

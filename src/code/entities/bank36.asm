@@ -857,7 +857,7 @@ jr_036_452D:
     ldh  [hLinkSpeedX], a                         ;; 36:4537 $E0 $9A
     push bc                                       ;; 36:4539 $C5
     call UpdateFinalLinkPosition                  ;; 36:453A $CD $A8 $21
-    call label_3E19                               ;; 36:453D $CD $19 $3E
+    call CheckPositionForMapTransition_trampoline ;; 36:453D $CD $19 $3E
     pop  bc                                       ;; 36:4540 $C1
     ret                                           ;; 36:4541 $C9
 
@@ -981,7 +981,7 @@ jr_036_45E6:
     ldh  [hLinkSpeedY], a                         ;; 36:45F0 $E0 $9B
     push bc                                       ;; 36:45F2 $C5
     call UpdateFinalLinkPosition                  ;; 36:45F3 $CD $A8 $21
-    call label_3E19                               ;; 36:45F6 $CD $19 $3E
+    call CheckPositionForMapTransition_trampoline ;; 36:45F6 $CD $19 $3E
     pop  bc                                       ;; 36:45F9 $C1
     ret                                           ;; 36:45FA $C9
 

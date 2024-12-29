@@ -614,11 +614,11 @@ FacadePitHandler:
     ld   a, LINK_MOTION_FALLING_DOWN              ;; 04:54DB $3E $06
     ld   [wLinkMotionState], a                    ;; 04:54DD $EA $1C $C1
     call ResetSpinAttack                          ;; 04:54E0 $CD $AF $0C
-    ld   [wC198], a                               ;; 04:54E3 $EA $98 $C1
+    ld   [wLinkAnimationFrame], a                 ;; 04:54E3 $EA $98 $C1
     call GetEntityTransitionCountdown             ;; 04:54E6 $CD $05 $0C
     ld   [hl], $40                                ;; 04:54E9 $36 $40
-    ld   a, $50                                   ;; 04:54EB $3E $50
-    ld   [wDBCB], a                               ;; 04:54ED $EA $CB $DB
+    ld   a, OBJ_PHYSICS_PIT                       ;; 04:54EB $3E $50
+    ld   [wLinkFallingDownObjectPhysics], a       ;; 04:54ED $EA $CB $DB
 
 .ret_54F0
     ret                                           ;; 04:54F0 $C9

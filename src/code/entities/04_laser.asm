@@ -136,13 +136,13 @@ LaserSpinningHandler:
     push bc                                       ;; 04:6CF5 $C5
     ldh  a, [hMultiPurpose2]                      ;; 04:6CF6 $F0 $D9
     ld   c, a                                     ;; 04:6CF8 $4F
-    ld   hl, LaserLinkSensorXSpeeds                        ;; 04:6CF9 $21 $51 $6C
+    ld   hl, LaserLinkSensorXSpeeds               ;; 04:6CF9 $21 $51 $6C
     add  hl, bc                                   ;; 04:6CFC $09
     ld   a, [hl]                                  ;; 04:6CFD $7E
     ld   hl, wEntitiesSpeedXTable                 ;; 04:6CFE $21 $40 $C2
     add  hl, de                                   ;; 04:6D01 $19
     ld   [hl], a                                  ;; 04:6D02 $77
-    ld   hl, LaserLinkSensorYSpeeds                        ;; 04:6D03 $21 $4D $6C
+    ld   hl, LaserLinkSensorYSpeeds               ;; 04:6D03 $21 $4D $6C
     add  hl, bc                                   ;; 04:6D06 $09
     ld   a, [hl]                                  ;; 04:6D07 $7E
     ld   hl, wEntitiesSpeedYTable                 ;; 04:6D08 $21 $50 $C2

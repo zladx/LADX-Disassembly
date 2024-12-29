@@ -191,7 +191,7 @@ wC11E:
 ; The condition of the ground Link is standing on:
 ; See GROUND_STATUS_* constants for possible values.
 ;
-; Also see: wLinkGroundVfx
+; Also see: wLinkObjectPhysics
 wLinkGroundStatus::
   ds 1 ; C11F
 
@@ -640,10 +640,9 @@ wTransitionGfx::
 wTransitionGfxFrameCount::
   ds 1 ; C180
 
-; Environmental visual effect displayed depending on which ground Link is standing.
-; This may also affect the sound effects, or Link's position.
-; See GROUND_VFX_* constants for possible values.
-wLinkGroundVfx::
+; Physics flags of the object under Link.
+; See OBJ_PHYSICS_* constants for possible values.
+wLinkObjectPhysics::
   ds 1 ; C181
 
 ; Unlabeled
@@ -717,8 +716,8 @@ wLoadedEntitySpritesheets::
 wEntityTilesSpriteslotIndexA::
   ds 1 ; C197
 
-; Unlabeled
-wC198::
+; Used during the falling and revolving door animations.
+wLinkAnimationFrame::
   ds 1 ; C198
 
 ; Unlabeled
@@ -3576,8 +3575,8 @@ wKillOrder::
 wInvincibilityCounter::
   ds 1 ; DBC7
 
-; Unlabeled
-wDBC8::
+; Initial position of Link when loading a new map
+wMapEntrancePositionZ::
   ds 1
 
 ; TODO comment
@@ -3588,9 +3587,10 @@ wTorchesCount::
 wDBCA::
   ds 1 ; DBCA
 
-; Unlabeled
-; (wGroundVfx is sometimes copied there)
-wDBCB::
+; Physics flags of the object under Link when falling down.
+; Also set by entities that make Link fall down, such as Facade's pits
+; See OBJ_PHYSICS_* constants for possible values.
+wLinkFallingDownObjectPhysics::
   ds 1 ; DBCB
 
 ; A table of five items flags for the current dungeon

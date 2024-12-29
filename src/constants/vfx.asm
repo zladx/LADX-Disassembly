@@ -16,15 +16,3 @@ DEF TRANSCIENT_VFX_PEGASUS_SPLASH EQU $0C
 DEF TRANSCIENT_VFX_SWORD_BEAM     EQU $0D
 DEF TRANSCIENT_VFX_UNUSED_1       EQU $0E
 DEF TRANSCIENT_VFX_UNUSED_2       EQU $0F
-
-; Values for wLinkGroundVfx
-; (maybe a better label would be wLinkGroundPhysics? But wLinkGroundStatus
-; already exists.)
-DEF GROUND_VFX_NONE          EQU $00
-DEF GROUND_VFX_SHALLOW_WATER EQU $05
-DEF GROUND_VFX_GRASS         EQU $06
-DEF GROUND_VFX_PIT           EQU $50
-DEF GROUND_VFX_51            EQU $51
-DEF GROUND_VFX_SPIKES        EQU $E0 ; spikes?
-DEF GROUND_VFX_F0            EQU $F0
-DEF GROUND_VFX_FF            EQU $FF

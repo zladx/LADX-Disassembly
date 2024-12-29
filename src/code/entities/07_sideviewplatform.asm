@@ -85,7 +85,7 @@ func_007_639E::
     add  [hl]                                     ;; 07:63DD $86
     ld   [hl], a                                  ;; 07:63DE $77
     push bc                                       ;; 07:63DF $C5
-    call label_3E19                               ;; 07:63E0 $CD $19 $3E
+    call CheckPositionForMapTransition_trampoline ;; 07:63E0 $CD $19 $3E
     pop  bc                                       ;; 07:63E3 $C1
     pop  af                                       ;; 07:63E4 $F1
     ldh  [hLinkSpeedX], a                         ;; 07:63E5 $E0 $9A

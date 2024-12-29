@@ -953,7 +953,7 @@ Entity67Handler_trampoline::
     callhl Entity67Handler                        ;; 00:3E0E $21 $00 $21 $36 $05 $CD $6B $55
     jp   ReloadSavedBank                          ;; 00:3E16 $C3 $1D $08
 
-label_3E19::
+CheckPositionForMapTransition_trampoline::
     ld   a, [wCurrentBank]                        ;; 00:3E19 $FA $AF $DB
     push af                                       ;; 00:3E1C $F5
     callsw CheckPositionForMapTransition          ;; 00:3E1D $3E $02 $CD $0C $08 $CD $75 $6C

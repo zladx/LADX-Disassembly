@@ -24,8 +24,8 @@ DEF OBJ_PHYSICS_OCEAN              EQU $04 ; blocks enemies but not projectiles?
 DEF OBJ_PHYSICS_SHALLOW_WATER      EQU $05
 DEF OBJ_PHYSICS_GRASS              EQU $06 ; cuttable
 DEF OBJ_PHYSICS_DEEP_WATER         EQU $07
-DEF OBJ_PHYSICS_BRIDGE             EQU $08 ; offsets the sprite up a few pixels
-DEF OBJ_PHYSICS_STAIRS_DOWN        EQU $09
+DEF OBJ_PHYSICS_RAISED             EQU $08
+DEF OBJ_PHYSICS_LOWERED            EQU $09
 DEF OBJ_PHYSICS_WIDE_STAIRS        EQU $0A
 DEF OBJ_PHYSICS_LAVA               EQU $0B
 DEF OBJ_PHYSICS_LEDGE_OVERWORLD    EQU $10 ; jumpable, only downwards
@@ -43,4 +43,4 @@ DEF OBJ_PHYSICS_LEDGE              EQU $D0 ; jumpable, 0-3: direction
 DEF OBJ_PHYSICS_SPIKES             EQU $E0
 DEF OBJ_PHYSICS_CONVEYOR           EQU $F0 ; but not rapids. 0-3: side; 4-7: diagonal
 DEF OBJ_PHYSICS_UNUSED             EQU $FE
-DEF OBJ_PHYSICS_INVALID            EQU $FF
+DEF OBJ_PHYSICS_TRACTOR_DEVICE     EQU $FF

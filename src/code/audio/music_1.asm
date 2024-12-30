@@ -95,7 +95,7 @@ jr_01B_406A:
 
 .loop_406E
     ld   a, [hl+]                                 ;; 1B:406E $2A
-    ld   [c], a                                   ;; 1B:406F $E2
+    ldh  [c], a                                   ;; 1B:406F $E2
     inc  c                                        ;; 1B:4070 $0C
     dec  b                                        ;; 1B:4071 $05
     jr   nz, .loop_406E                           ;; 1B:4072 $20 $FA
@@ -191,7 +191,7 @@ SetWaveform_1B::
 
 .loop
     ld   a, [hl+]                                 ;; 1B:40E9 $2A
-    ld   [c], a                                   ;; 1B:40EA $E2
+    ldh  [c], a                                   ;; 1B:40EA $E2
     inc  c                                        ;; 1B:40EB $0C
     ld   a, c                                     ;; 1B:40EC $79
     cp   $40                                      ;; 1B:40ED $FE $40
@@ -370,7 +370,7 @@ label_01B_42AB:
 
 .loop_42C4
     ld   a, [hl+]                                 ;; 1B:42C4 $2A
-    ld   [c], a                                   ;; 1B:42C5 $E2
+    ldh  [c], a                                   ;; 1B:42C5 $E2
     inc  c                                        ;; 1B:42C6 $0C
     ld   a, c                                     ;; 1B:42C7 $79
     cp   $40                                      ;; 1B:42C8 $FE $40
@@ -1148,9 +1148,9 @@ HandleNote::
     jr   nz, .jr_01B_4696                         ;; 1B:468F $20 $05
 
     xor  a                                        ;; 1B:4691 $AF
-    ld   [c], a                                   ;; 1B:4692 $E2
+    ldh  [c], a                                   ;; 1B:4692 $E2
     ld   a, $80                                   ;; 1B:4693 $3E $80
-    ld   [c], a                                   ;; 1B:4695 $E2
+    ldh  [c], a                                   ;; 1B:4695 $E2
 
 .jr_01B_4696
     inc  c                                        ;; 1B:4696 $0C
@@ -1213,17 +1213,17 @@ HandleNote::
 WriteChannelRegisters::
     ld   a, d                                     ;; 1B:46CB $7A
     or   b                                        ;; 1B:46CC $B0
-    ld   [c], a ; rNRx1                           ;; 1B:46CD $E2
+    ldh  [c], a ; rNRx1                           ;; 1B:46CD $E2
     inc  c                                        ;; 1B:46CE $0C
     ld   a, e                                     ;; 1B:46CF $7B
-    ld   [c], a ; rNRx2                           ;; 1B:46D0 $E2
+    ldh  [c], a ; rNRx2                           ;; 1B:46D0 $E2
     inc  c                                        ;; 1B:46D1 $0C
     ld   a, [hl+]                                 ;; 1B:46D2 $2A
-    ld   [c], a ; rNRx3                           ;; 1B:46D3 $E2
+    ldh  [c], a ; rNRx3                           ;; 1B:46D3 $E2
     inc  c                                        ;; 1B:46D4 $0C
     ld   a, [hl]                                  ;; 1B:46D5 $7E
     or   $80                                      ;; 1B:46D6 $F6 $80
-    ld   [c], a ; rNRx4                           ;; 1B:46D8 $E2
+    ldh  [c], a ; rNRx4                           ;; 1B:46D8 $E2
 
 label_01B_46D9:
     pop  hl                                       ;; 1B:46D9 $E1
@@ -1405,12 +1405,12 @@ func_01B_47D2::
     add  hl, bc                                   ;; 1B:47DA $09
     ld   a, [hl]                                  ;; 1B:47DB $7E
     pop  bc                                       ;; 1B:47DC $C1
-    ld   [c], a ; NRx2                            ;; 1B:47DD $E2
+    ldh  [c], a ; NRx2                            ;; 1B:47DD $E2
     inc  c                                        ;; 1B:47DE $0C
     inc  c                                        ;; 1B:47DF $0C
     ld   a, [de]                                  ;; 1B:47E0 $1A
     or   $80                                      ;; 1B:47E1 $F6 $80
-    ld   [c], a                                   ;; 1B:47E3 $E2
+    ldh  [c], a                                   ;; 1B:47E3 $E2
     ret                                           ;; 1B:47E4 $C9
 
 ; Continues playing the music after a fanfare has played when you find your sword/weapon/heart container.
@@ -1478,7 +1478,7 @@ label_01B_4810:
 label_01B_483D:
 jr_01B_483D:
     ld   a, b                                     ;; 1B:483D $78
-    ld   [c], a                                   ;; 1B:483E $E2
+    ldh  [c], a                                   ;; 1B:483E $E2
     jp   label_01B_46FC                           ;; 1B:483F $C3 $FC $46
 
 func_01B_4842::
@@ -1540,13 +1540,13 @@ func_01B_4884::
     ld   de, wD3A4                                ;; 1B:4884 $11 $A4 $D3
     call IndexChannelArray                        ;; 1B:4887 $CD $95 $48
     ld   a, l                                     ;; 1B:488A $7D
-    ld   [c], a                                   ;; 1B:488B $E2
+    ldh  [c], a                                   ;; 1B:488B $E2
     ld   [de], a                                  ;; 1B:488C $12
     inc  c                                        ;; 1B:488D $0C
     inc  e                                        ;; 1B:488E $1C
     ld   a, h                                     ;; 1B:488F $7C
     and  $0F                                      ;; 1B:4890 $E6 $0F
-    ld   [c], a                                   ;; 1B:4892 $E2
+    ldh  [c], a                                   ;; 1B:4892 $E2
     ld   [de], a                                  ;; 1B:4893 $12
     ret                                           ;; 1B:4894 $C9
 

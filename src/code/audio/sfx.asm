@@ -4691,7 +4691,7 @@ WriteWavePattern::
     ld   c, $30                                   ;; 1F:6348 $0E $30
 .loop
     ld   a, [hl+]                                 ;; 1F:634A $2A
-    ld   [c], a                                   ;; 1F:634B $E2
+    ldh  [c], a                                   ;; 1F:634B $E2
     inc  c                                        ;; 1F:634C $0C
     ld   a, c                                     ;; 1F:634D $79
     cp   $40                                      ;; 1F:634E $FE $40
@@ -8471,7 +8471,7 @@ WriteChannel4AndDE::
 WriteIOAndDE::
 .loop
     ld   a, [hl+]                                 ;; 1F:7A91 $2A
-    ld   [c], a                                   ;; 1F:7A92 $E2
+    ldh  [c], a                                   ;; 1F:7A92 $E2
     inc  c                                        ;; 1F:7A93 $0C
     dec  b                                        ;; 1F:7A94 $05
     jr   nz, .loop                                ;; 1F:7A95 $20 $FA
@@ -8579,12 +8579,12 @@ jr_01F_7AF5:
     add  hl, bc                                   ;; 1F:7B05 $09
     pop  bc                                       ;; 1F:7B06 $C1
     ld   a, l                                     ;; 1F:7B07 $7D
-    ld   [c], a                                   ;; 1F:7B08 $E2
+    ldh  [c], a                                   ;; 1F:7B08 $E2
     ld   [de], a                                  ;; 1F:7B09 $12
     inc  c                                        ;; 1F:7B0A $0C
     inc  e                                        ;; 1F:7B0B $1C
     ld   a, h                                     ;; 1F:7B0C $7C
-    ld   [c], a                                   ;; 1F:7B0D $E2
+    ldh  [c], a                                   ;; 1F:7B0D $E2
     ld   [de], a                                  ;; 1F:7B0E $12
     pop  de                                       ;; 1F:7B0F $D1
     ret                                           ;; 1F:7B10 $C9

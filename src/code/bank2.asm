@@ -734,20 +734,20 @@ ApplyLinkGroundMotion::
     cp   $61                                      ;; 02:458D $FE $61
     jr   z, .return                               ;; 02:458F $28 $1B
 
-    ld   a, [wLinkGroundVfx]                      ;; 02:4591 $FA $81 $C1
-    cp   GROUND_VFX_SHALLOW_WATER                 ;; 02:4594 $FE $05
+    ld   a, [wLinkObjectPhysics]                  ;; 02:4591 $FA $81 $C1
+    cp   OBJ_PHYSICS_SHALLOW_WATER                ;; 02:4594 $FE $05
     jr   z, shallowWaterVfx                       ;; 02:4596 $28 $15
 
-    cp   $07                                      ;; 02:4598 $FE $07
+    cp   OBJ_PHYSICS_DEEP_WATER                   ;; 02:4598 $FE $07
     jr   z, .return                               ;; 02:459A $28 $10
 
-    cp   $0B                                      ;; 02:459C $FE $0B
+    cp   OBJ_PHYSICS_LAVA                         ;; 02:459C $FE $0B
     jr   z, .return                               ;; 02:459E $28 $0C
 
-    cp   $50                                      ;; 02:45A0 $FE $50
+    cp   OBJ_PHYSICS_PIT                          ;; 02:45A0 $FE $50
     jr   z, .return                               ;; 02:45A2 $28 $08
 
-    cp   $51                                      ;; 02:45A4 $FE $51
+    cp   OBJ_PHYSICS_PIT_WARP                     ;; 02:45A4 $FE $51
     jr   z, .return                               ;; 02:45A6 $28 $04
 
     ld   a, NOISE_SFX_FOOTSTEP                    ;; 02:45A8 $3E $07
@@ -2125,14 +2125,14 @@ func_002_4E48::
     ld   [wPaletteDataFlags], a                   ;; 02:4E62 $EA $D1 $DD
     ret                                           ;; 02:4E65 $C9
 
-UnknownToLinkAnimationState::
-    db  LINK_ANIMATION_STATE_UNKNOWN_50
-    db  LINK_ANIMATION_STATE_UNKNOWN_51
-    db  LINK_ANIMATION_STATE_UNKNOWN_52
-    db  LINK_ANIMATION_STATE_UNKNOWN_53
-    db  LINK_ANIMATION_STATE_UNKNOWN_53
-    db  LINK_ANIMATION_STATE_UNKNOWN_54
-    db  LINK_ANIMATION_STATE_UNKNOWN_52
+LinkRevolvingDoorAnimation::
+    db  LINK_ANIMATION_STATE_REVOLVING_DOOR_1
+    db  LINK_ANIMATION_STATE_REVOLVING_DOOR_2
+    db  LINK_ANIMATION_STATE_REVOLVING_DOOR_3
+    db  LINK_ANIMATION_STATE_REVOLVING_DOOR_4
+    db  LINK_ANIMATION_STATE_REVOLVING_DOOR_4
+    db  LINK_ANIMATION_STATE_REVOLVING_DOOR_5
+    db  LINK_ANIMATION_STATE_REVOLVING_DOOR_3
 
 LinkMotionRevolvingDoorHandler::
     ld   a, $10                                   ;; 02:4E6D $3E $10
@@ -2140,7 +2140,7 @@ LinkMotionRevolvingDoorHandler::
     ld   a, $50                                   ;; 02:4E71 $3E $50
     ldh  [hLinkPositionX], a                      ;; 02:4E73 $E0 $98
     ld   [wC167], a                               ;; 02:4E75 $EA $67 $C1
-    ld   a, [wC198]                               ;; 02:4E78 $FA $98 $C1
+    ld   a, [wLinkAnimationFrame]                 ;; 02:4E78 $FA $98 $C1
     push af                                       ;; 02:4E7B $F5
     ld   d, $00                                   ;; 02:4E7C $16 $00
     ld   e, $08                                   ;; 02:4E7E $1E $08
@@ -2177,13 +2177,13 @@ jr_002_4E9D:
     and  $07                                      ;; 02:4EA1 $E6 $07
     ld   e, a                                     ;; 02:4EA3 $5F
     ld   d, $00                                   ;; 02:4EA4 $16 $00
-    ld   hl, UnknownToLinkAnimationState          ;; 02:4EA6 $21 $66 $4E
+    ld   hl, LinkRevolvingDoorAnimation           ;; 02:4EA6 $21 $66 $4E
     add  hl, de                                   ;; 02:4EA9 $19
     ld   a, [hl]                                  ;; 02:4EAA $7E
     ldh  [hLinkAnimationState], a                 ;; 02:4EAB $E0 $9D
-    ld   a, [wC198]                               ;; 02:4EAD $FA $98 $C1
+    ld   a, [wLinkAnimationFrame]                 ;; 02:4EAD $FA $98 $C1
     inc  a                                        ;; 02:4EB0 $3C
-    ld   [wC198], a                               ;; 02:4EB1 $EA $98 $C1
+    ld   [wLinkAnimationFrame], a                 ;; 02:4EB1 $EA $98 $C1
     cp   $38                                      ;; 02:4EB4 $FE $38
     jr   c, .jr_4EC4                              ;; 02:4EB6 $38 $0C
 
@@ -2195,7 +2195,7 @@ jr_002_4E9D:
     ldh  [hLinkAnimationState], a                 ;; 02:4EC2 $E0 $9D
 
 .jr_4EC4
-    ld   a, [wC198]                               ;; 02:4EC4 $FA $98 $C1
+    ld   a, [wLinkAnimationFrame]                 ;; 02:4EC4 $FA $98 $C1
     cp   $48                                      ;; 02:4EC7 $FE $48
     jr   nz, ret_002_4EEF                         ;; 02:4EC9 $20 $24
 
@@ -2213,7 +2213,7 @@ jr_002_4E9D:
 
 func_002_4EDD::
     xor  a                                        ;; 02:4EDD $AF
-    ld   [wC198], a                               ;; 02:4EDE $EA $98 $C1
+    ld   [wLinkAnimationFrame], a                 ;; 02:4EDE $EA $98 $C1
     ld   [wC167], a                               ;; 02:4EE1 $EA $67 $C1
 
 IF !__PATCH_0__
@@ -2535,7 +2535,7 @@ LinkMotionUnknownHandler::
     ldh  [hLinkPositionZ], a                      ;; 02:50C0 $E0 $A2
     ldh  [hLinkVelocityZ], a                      ;; 02:50C2 $E0 $A3
     ld   a, $70                                   ;; 02:50C4 $3E $70
-    ld   [wDBC8], a                               ;; 02:50C6 $EA $C8 $DB
+    ld   [wMapEntrancePositionZ], a               ;; 02:50C6 $EA $C8 $DB
     ret                                           ;; 02:50C9 $C9
 
 LinkFallingDownAnimation::
@@ -2553,9 +2553,9 @@ LinkFallingDownAnimation::
 LinkMotionFallingDownHandler::
     ld   a, $01                                   ;; 02:50D4 $3E $01
     ld   [wC167], a                               ;; 02:50D6 $EA $67 $C1
-    ld   a, [wC198]                               ;; 02:50D9 $FA $98 $C1
+    ld   a, [wLinkAnimationFrame]                 ;; 02:50D9 $FA $98 $C1
     inc  a                                        ;; 02:50DC $3C
-    ld   [wC198], a                               ;; 02:50DD $EA $98 $C1
+    ld   [wLinkAnimationFrame], a                 ;; 02:50DD $EA $98 $C1
     rra                                           ;; 02:50E0 $1F
     rra                                           ;; 02:50E1 $1F
     rra                                           ;; 02:50E2 $1F
@@ -2608,11 +2608,11 @@ LinkMotionFallingDownHandler::
     ret                                           ;; 02:512A $C9
 
 jr_002_512B:
-    ld   a, [wDBCB]                               ;; 02:512B $FA $CB $DB
-    cp   $50                                      ;; 02:512E $FE $50
+    ld   a, [wLinkFallingDownObjectPhysics]       ;; 02:512B $FA $CB $DB
+    cp   OBJ_PHYSICS_PIT                          ;; 02:512E $FE $50
     jr   z, jr_002_516A                           ;; 02:5130 $28 $38
 
-    cp   $FF                                      ;; 02:5132 $FE $FF
+    cp   OBJ_PHYSICS_TRACTOR_DEVICE               ;; 02:5132 $FE $FF
     jr   z, jr_002_5155                           ;; 02:5134 $28 $1F
 
     ld   a, [wWarp0MapCategory]                   ;; 02:5136 $FA $01 $D4
@@ -2639,7 +2639,7 @@ jr_002_5155:
     ld   a, $70                                   ;; 02:515A $3E $70
 
 jr_002_515C:
-    ld   [wDBC8], a                               ;; 02:515C $EA $C8 $DB
+    ld   [wMapEntrancePositionZ], a               ;; 02:515C $EA $C8 $DB
     call ClearLinkPositionIncrement               ;; 02:515F $CD $8E $17
     ldh  [hLinkVelocityZ], a                      ;; 02:5162 $E0 $A3
     ld   [wIsLinkInTheAir], a                     ;; 02:5164 $EA $46 $C1
@@ -2682,7 +2682,7 @@ jr_002_516A:
     ld   a, $56                                   ;; 02:519D $3E $56
     ld   [hl+], a                                 ;; 02:519F $22
     ld   a, $24                                   ;; 02:51A0 $3E $24
-    ld   [wDBC8], a                               ;; 02:51A2 $EA $C8 $DB
+    ld   [wMapEntrancePositionZ], a               ;; 02:51A2 $EA $C8 $DB
     ld   a, DIRECTION_DOWN                        ;; 02:51A5 $3E $03
     ldh  [hLinkDirection], a                      ;; 02:51A7 $E0 $9E
     jp   ApplyMapFadeOutTransition                ;; 02:51A9 $C3 $83 $0C
@@ -6164,15 +6164,15 @@ CheckPositionForMapTransition::
 
     call CopyLinkFinalPositionToPosition          ;; 02:6D5C $CD $BE $0C
 
-    ld   a, [wLinkGroundVfx]                      ;; 02:6D5F $FA $81 $C1
-    cp   $50                                      ;; 02:6D62 $FE $50
+    ld   a, [wLinkObjectPhysics]                  ;; 02:6D5F $FA $81 $C1
+    cp   OBJ_PHYSICS_PIT                          ;; 02:6D62 $FE $50
     jp   z, clearIncrementAndReturn               ;; 02:6D64 $CA $0C $6E
 
-    cp   $51                                      ;; 02:6D67 $FE $51
+    cp   OBJ_PHYSICS_PIT_WARP                     ;; 02:6D67 $FE $51
     jp   z, clearIncrementAndReturn               ;; 02:6D69 $CA $0C $6E
 
     ld   a, [wLinkGroundStatus]                   ;; 02:6D6C $FA $1F $C1
-    cp   $07                                      ;; 02:6D6F $FE $07
+    cp   GROUND_STATUS_PIT                        ;; 02:6D6F $FE $07
     jp   z, clearIncrementAndReturn               ;; 02:6D71 $CA $0C $6E
 
     ld   a, [wLinkMotionState]                    ;; 02:6D74 $FA $1C $C1
@@ -6608,7 +6608,7 @@ ApplyCollisionWithObject::
     cp   OBJ_PHYSICS_WIDE_STAIRS                  ;; 02:6F89 $FE $0A
     jp   z, ApplyCollisionWithStairs              ;; 02:6F8B $CA $60 $72
 
-    cp   OBJ_PHYSICS_INVALID                      ;; 02:6F8E $FE $FF
+    cp   OBJ_PHYSICS_TRACTOR_DEVICE               ;; 02:6F8E $FE $FF
     jp   z, label_002_7461                        ;; 02:6F90 $CA $61 $74
 
     cp   OBJ_PHYSICS_SPIKES                       ;; 02:6F93 $FE $E0
@@ -7515,7 +7515,7 @@ func_002_7468::
 
     call ClearLinkPositionIncrement               ;; 02:7483 $CD $8E $17
     ld   [wInvincibilityCounter], a               ;; 02:7486 $EA $C7 $DB
-    ld   [wC198], a                               ;; 02:7489 $EA $98 $C1
+    ld   [wLinkAnimationFrame], a                 ;; 02:7489 $EA $98 $C1
     ldh  [hLinkPositionZ], a                      ;; 02:748C $E0 $A2
     ldh  [hLinkVelocityZ], a                      ;; 02:748E $E0 $A3
     jp   ResetSpinAttack                          ;; 02:7490 $C3 $AF $0C
@@ -7771,11 +7771,11 @@ ApplyLinkGroundPhysics::
 .specialCasesEnd
 
     call GetObjectPhysicsFlags_trampoline         ;; 02:75E7 $CD $26 $2A
-    ld   [wLinkGroundVfx], a                      ;; 02:75EA $EA $81 $C1
+    ld   [wLinkObjectPhysics], a                  ;; 02:75EA $EA $81 $C1
     and  a                                        ;; 02:75ED $A7
     jp   z, ApplyLinkGroundPhysics_Default        ;; 02:75EE $CA $A2 $77
 
-    cp   GROUND_VFX_SPIKES                        ;; 02:75F1 $FE $E0
+    cp   OBJ_PHYSICS_SPIKES                       ;; 02:75F1 $FE $E0
     jr   nz, ApplyLinkGroundPhysics_part2         ;; 02:75F3 $20 $40
     ; fallthrough
 
@@ -7835,20 +7835,20 @@ HurtBySpikes::
     ret                                           ;; 02:7634 $C9
 
 ApplyLinkGroundPhysics_part2::
-    ld   a, [wLinkGroundVfx]                      ;; 02:7635 $FA $81 $C1
-    cp   GROUND_VFX_FF                            ;; 02:7638 $FE $FF
+    ld   a, [wLinkObjectPhysics]                  ;; 02:7635 $FA $81 $C1
+    cp   OBJ_PHYSICS_TRACTOR_DEVICE               ;; 02:7638 $FE $FF
     jp   z, ApplyLinkGroundPhysics_Default        ;; 02:763A $CA $A2 $77
 
-    cp   GROUND_VFX_F0                            ;; 02:763D $FE $F0
+    cp   OBJ_PHYSICS_CONVEYOR                     ;; 02:763D $FE $F0
     jr   c, .jr_002_7644                          ;; 02:763F $38 $03
 
     jp   label_002_7C14                           ;; 02:7641 $C3 $14 $7C
 
 .jr_002_7644
-    cp   GROUND_VFX_51                            ;; 02:7644 $FE $51
+    cp   OBJ_PHYSICS_PIT_WARP                     ;; 02:7644 $FE $51
     jr   z, .slipIntoPit                          ;; 02:7646 $28 $04
 
-    cp   GROUND_VFX_PIT                           ;; 02:7648 $FE $50
+    cp   OBJ_PHYSICS_PIT                          ;; 02:7648 $FE $50
     jr   nz, label_002_76C0                       ;; 02:764A $20 $74
 
 ; handle pit physics
@@ -7925,10 +7925,10 @@ ApplyLinkGroundPhysics_part2::
 
     call ResetSpinAttack                          ;; 02:76AF $CD $AF $0C
 
-    ld   [wC198], a                               ;; 02:76B2 $EA $98 $C1
+    ld   [wLinkAnimationFrame], a                 ;; 02:76B2 $EA $98 $C1
 
-    ld   a, [wLinkGroundVfx]                      ;; 02:76B5 $FA $81 $C1
-    ld   [wDBCB], a                               ;; 02:76B8 $EA $CB $DB
+    ld   a, [wLinkObjectPhysics]                  ;; 02:76B5 $FA $81 $C1
+    ld   [wLinkFallingDownObjectPhysics], a       ;; 02:76B8 $EA $CB $DB
 
     ld   a, WAVE_SFX_LINK_FALL                    ;; 02:76BB $3E $0C
     ldh  [hWaveSfx], a                            ;; 02:76BD $E0 $F3
@@ -7939,8 +7939,8 @@ ApplyLinkGroundPhysics_part2::
 ; Link ground physics during dialog or room transitions
 label_002_76C0:
     ld   hl, wLinkOAMBuffer                       ;; 02:76C0 $21 $00 $C0
-    ld   a, [wLinkGroundVfx]                      ;; 02:76C3 $FA $81 $C1
-    cp   $08                                      ;; 02:76C6 $FE $08
+    ld   a, [wLinkObjectPhysics]                  ;; 02:76C3 $FA $81 $C1
+    cp   OBJ_PHYSICS_RAISED                       ;; 02:76C6 $FE $08
     jr   nz, .jr_76D5                             ;; 02:76C8 $20 $0B
 
     ld   a, [wC13B]                               ;; 02:76CA $FA $3B $C1
@@ -7949,7 +7949,7 @@ label_002_76C0:
     jp   ApplyLinkGroundPhysics_Default           ;; 02:76D2 $C3 $A2 $77
 
 .jr_76D5
-    cp   $09                                      ;; 02:76D5 $FE $09
+    cp   OBJ_PHYSICS_LOWERED                      ;; 02:76D5 $FE $09
     jr   nz, .jr_76E4                             ;; 02:76D7 $20 $0B
 
     ld   a, [wC13B]                               ;; 02:76D9 $FA $3B $C1
@@ -7958,10 +7958,10 @@ label_002_76C0:
     jp   ApplyLinkGroundPhysics_Default           ;; 02:76E1 $C3 $A2 $77
 
 .jr_76E4
-    cp   $0B                                      ;; 02:76E4 $FE $0B
+    cp   OBJ_PHYSICS_LAVA                         ;; 02:76E4 $FE $0B
     jr   z, .jr_76EC                              ;; 02:76E6 $28 $04
 
-    cp   $07                                      ;; 02:76E8 $FE $07
+    cp   OBJ_PHYSICS_DEEP_WATER                   ;; 02:76E8 $FE $07
     jr   nz, jr_002_7750                          ;; 02:76EA $20 $64
 
 .jr_76EC
@@ -8036,10 +8036,10 @@ ret_002_774F:
     ret                                           ;; 02:774F $C9
 
 jr_002_7750:
-    cp   $06                                      ;; 02:7750 $FE $06
+    cp   OBJ_PHYSICS_GRASS                        ;; 02:7750 $FE $06
     jp   z, label_002_787D                        ;; 02:7752 $CA $7D $78
 
-    cp   $05                                      ;; 02:7755 $FE $05
+    cp   OBJ_PHYSICS_SHALLOW_WATER                ;; 02:7755 $FE $05
     jr   nz, ApplyLinkGroundPhysics_Default       ;; 02:7757 $20 $49
 
     ldh  a, [hLinkPositionY]                      ;; 02:7759 $F0 $99
@@ -8058,9 +8058,9 @@ IF __PATCH_0__
 
 .gbc
     ldh  a, [hFrameCounter]
-    and  $04
+    and  $02 << 1
     srl  a
-    add  $03
+    add  OAMF_PAL0 | OAM_GBC_PAL_3
     jr   .anyGB
 ENDC
 
@@ -8068,7 +8068,7 @@ ENDC
     ldh  a, [hFrameCounter]                       ;; 02:7766 $F0 $E7
     rla                                           ;; 02:7768 $17
     rla                                           ;; 02:7769 $17
-    and  $10                                      ;; 02:776A $E6 $10
+    and  OAMF_PAL1                                ;; 02:776A $E6 $10
 
 .anyGB
     push af                                       ;; 02:776C $F5
@@ -8084,7 +8084,7 @@ ENDC
     pop  af                                       ;; 02:777B $F1
     or   $20                                      ;; 02:777C $F6 $20
     ld   [hl], a                                  ;; 02:777E $77
-    ld   a, $03                                   ;; 02:777F $3E $03
+    ld   a, GROUND_STATUS_SLOW                    ;; 02:777F $3E $03
     ld   [wLinkGroundStatus], a                   ;; 02:7781 $EA $1F $C1
     ldh  a, [hFrameCounter]                       ;; 02:7784 $F0 $E7
     and  $0F                                      ;; 02:7786 $E6 $0F
@@ -8126,8 +8126,8 @@ ApplyLinkGroundPhysics_Default::
     ld   [wLinkMotionState], a                    ;; 02:77AF $EA $1C $C1
 .swimmingEnd
 
-    ld   a, [wLinkGroundVfx]                      ;; 02:77B2 $FA $81 $C1
-    cp   $04                                      ;; 02:77B5 $FE $04
+    ld   a, [wLinkObjectPhysics]                  ;; 02:77B2 $FA $81 $C1
+    cp   OBJ_PHYSICS_OCEAN                        ;; 02:77B5 $FE $04
     jr   nz, .grassVfxEnd                         ;; 02:77B7 $20 $30
 
     ldh  a, [hObjectUnderEntity]                  ;; 02:77B9 $F0 $AF
@@ -8278,7 +8278,7 @@ label_002_787D:
     ld   a, [wConsecutiveStepsCount]              ;; 02:788A $FA $20 $C1
     rla                                           ;; 02:788D $17
     rla                                           ;; 02:788E $17
-    and  $20                                      ;; 02:788F $E6 $20
+    and  OAMF_XFLIP                               ;; 02:788F $E6 $20
     push af                                       ;; 02:7891 $F5
     push af                                       ;; 02:7892 $F5
     ldh  a, [hIsGBC]                              ;; 02:7893 $F0 $FE
@@ -8294,7 +8294,7 @@ label_002_787D:
     jr   nz, .jr_78A9                             ;; 02:78A2 $20 $05
 
     pop  af                                       ;; 02:78A4 $F1
-    or   $06                                      ;; 02:78A5 $F6 $06
+    or   OAMF_PAL0 | OAM_GBC_PAL_6                ;; 02:78A5 $F6 $06
     jr   jr_002_78AA                              ;; 02:78A7 $18 $01
 
 .jr_78A9
@@ -8323,7 +8323,7 @@ jr_002_78AA:
     jr   nz, .jr_78CE                             ;; 02:78C7 $20 $05
 
     pop  af                                       ;; 02:78C9 $F1
-    or   $06                                      ;; 02:78CA $F6 $06
+    or   OAMF_PAL0 | OAM_GBC_PAL_6                ;; 02:78CA $F6 $06
     jr   jr_002_78CF                              ;; 02:78CC $18 $01
 
 .jr_78CE
@@ -8332,7 +8332,7 @@ jr_002_78AA:
 jr_002_78CF:
     xor  $20                                      ;; 02:78CF $EE $20
     ld   [hl], a                                  ;; 02:78D1 $77
-    ld   a, $03                                   ;; 02:78D2 $3E $03
+    ld   a, GROUND_STATUS_SLOW                    ;; 02:78D2 $3E $03
     ld   [wLinkGroundStatus], a                   ;; 02:78D4 $EA $1F $C1
     ret                                           ;; 02:78D7 $C9
 

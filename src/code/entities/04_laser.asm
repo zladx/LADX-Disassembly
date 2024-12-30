@@ -1,40 +1,50 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 LaserSpriteVariants::
+; Down
 .variant0
     db $70, OAM_GBC_PAL_3 | OAMF_PAL0
     db $70, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
+; Down-left
 .variant1
     db $78, OAM_GBC_PAL_3 | OAMF_PAL0
     db $7A, OAM_GBC_PAL_3 | OAMF_PAL0
+; Left
 .variant2
     db $74, OAM_GBC_PAL_3 | OAMF_PAL0
     db $76, OAM_GBC_PAL_3 | OAMF_PAL0
+; Up-left
 .variant3
     db $7C, OAM_GBC_PAL_3 | OAMF_PAL0
     db $7E, OAM_GBC_PAL_3 | OAMF_PAL0
+; Up
 .variant4
     db $72, OAM_GBC_PAL_3 | OAMF_PAL0
     db $72, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
+; Up-right
 .variant5
     db $7E, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
     db $7C, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
+; Right
 .variant6
     db $76, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
     db $74, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
+; Down-right
 .variant7
     db $7A, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
     db $78, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 
-Data_004_6C4D::
+; Approximately 0x10 * cos(pi/8 * index)
+LaserLinkSensorYSpeeds::
     db   $10, $0E, $0C, $06
 
-Data_004_6C51::
+; Approximately 0x10 * sin(pi/8 * index)
+LaserLinkSensorXSpeeds::
     db   $00, $FA, $F4, $F2, $F0, $F2, $F4, $FA, $00, $06, $0C, $0E, $10, $0E, $0C, $06
 
 LaserEntityHandler::
     ldh  a, [hActiveEntityState]                  ;; 04:6C61 $F0 $F0
     and  a                                        ;; 04:6C63 $A7
-    jp   nz, label_004_6D0F                       ;; 04:6C64 $C2 $0F $6D
+    jp   nz, LaserLinkSensorHandler               ;; 04:6C64 $C2 $0F $6D
 
     ld   de, LaserSpriteVariants                  ;; 04:6C67 $11 $2D $6C
     call RenderActiveEntitySpritesPair            ;; 04:6C6A $CD $C0 $3B
@@ -42,14 +52,14 @@ LaserEntityHandler::
     call label_3B44                               ;; 04:6C70 $CD $44 $3B
     call DefaultEntityPhysics_trampoline          ;; 04:6C73 $CD $23 $3B
     call GetEntityTransitionCountdown             ;; 04:6C76 $CD $05 $0C
-    jr   z, jr_004_6CB4                           ;; 04:6C79 $28 $39
+    jr   z, LaserSpinningHandler                  ;; 04:6C79 $28 $39
 
     cp   $10                                      ;; 04:6C7B $FE $10
-    jr   nz, .ret_6CB3                            ;; 04:6C7D $20 $34
+    jr   nz, .return                              ;; 04:6C7D $20 $34
 
     ld   a, ENTITY_LASER_BEAM                     ;; 04:6C7F $3E $2B
     call SpawnNewEntity_trampoline                ;; 04:6C81 $CD $86 $3B
-    jr   c, .ret_6CB3                             ;; 04:6C84 $38 $2D
+    jr   c, .return                               ;; 04:6C84 $38 $2D
 
     ld   a, NOISE_SFX_BEAMOS_LASER                ;; 04:6C86 $3E $08
     ldh  [hNoiseSfx], a                           ;; 04:6C88 $E0 $F4
@@ -78,18 +88,20 @@ LaserEntityHandler::
     add  hl, de                                   ;; 04:6CB1 $19
     ld   [hl], a                                  ;; 04:6CB2 $77
 
-.ret_6CB3
+.return  
     ret                                           ;; 04:6CB3 $C9
 
-jr_004_6CB4:
+LaserSpinningHandler:
+    ; Every 8 frames...
     ld   hl, wEntitiesInertiaTable                ;; 04:6CB4 $21 $D0 $C3
     add  hl, bc                                   ;; 04:6CB7 $09
     ld   a, [hl]                                  ;; 04:6CB8 $7E
     inc  a                                        ;; 04:6CB9 $3C
     ld   [hl], a                                  ;; 04:6CBA $77
     and  $07                                      ;; 04:6CBB $E6 $07
-    jr   nz, .ret_6D0E                            ;; 04:6CBD $20 $4F
+    jr   nz, .return                              ;; 04:6CBD $20 $4F
 
+    ; ...update direction and spawn an invisible and intangible Link-sensing entity
     ld   hl, wEntitiesDirectionTable              ;; 04:6CBF $21 $80 $C3
     add  hl, bc                                   ;; 04:6CC2 $09
     ld   a, [hl]                                  ;; 04:6CC3 $7E
@@ -102,7 +114,7 @@ jr_004_6CB4:
     ld   [hl], a                                  ;; 04:6CCE $77
     ld   a, ENTITY_LASER                          ;; 04:6CCF $3E $2A
     call SpawnNewEntity_trampoline                ;; 04:6CD1 $CD $86 $3B
-    jr   c, .ret_6D0E                             ;; 04:6CD4 $38 $38
+    jr   c, .return                               ;; 04:6CD4 $38 $38
 
     ldh  a, [hMultiPurpose0]                      ;; 04:6CD6 $F0 $D7
     ld   hl, wEntitiesPosXTable                   ;; 04:6CD8 $21 $00 $C2
@@ -124,13 +136,13 @@ jr_004_6CB4:
     push bc                                       ;; 04:6CF5 $C5
     ldh  a, [hMultiPurpose2]                      ;; 04:6CF6 $F0 $D9
     ld   c, a                                     ;; 04:6CF8 $4F
-    ld   hl, Data_004_6C51                        ;; 04:6CF9 $21 $51 $6C
+    ld   hl, LaserLinkSensorXSpeeds               ;; 04:6CF9 $21 $51 $6C
     add  hl, bc                                   ;; 04:6CFC $09
     ld   a, [hl]                                  ;; 04:6CFD $7E
     ld   hl, wEntitiesSpeedXTable                 ;; 04:6CFE $21 $40 $C2
     add  hl, de                                   ;; 04:6D01 $19
     ld   [hl], a                                  ;; 04:6D02 $77
-    ld   hl, Data_004_6C4D                        ;; 04:6D03 $21 $4D $6C
+    ld   hl, LaserLinkSensorYSpeeds               ;; 04:6D03 $21 $4D $6C
     add  hl, bc                                   ;; 04:6D06 $09
     ld   a, [hl]                                  ;; 04:6D07 $7E
     ld   hl, wEntitiesSpeedYTable                 ;; 04:6D08 $21 $50 $C2
@@ -138,10 +150,12 @@ jr_004_6CB4:
     ld   [hl], a                                  ;; 04:6D0C $77
     pop  bc                                       ;; 04:6D0D $C1
 
-.ret_6D0E
+.return  
     ret                                           ;; 04:6D0E $C9
 
-label_004_6D0F:
+; When entity state = 1, the entity is instead an invisible, intangible sensor
+; used to detect Link and tell the parent Laser entity to fire a beam.
+LaserLinkSensorHandler:
     call label_3B2E                               ;; 04:6D0F $CD $2E $3B
     ld   hl, wEntitiesCollisionsTable             ;; 04:6D12 $21 $A0 $C2
     add  hl, bc                                   ;; 04:6D15 $09
@@ -149,6 +163,7 @@ label_004_6D0F:
     and  a                                        ;; 04:6D17 $A7
     jp   nz, ClearEntityStatusBank04              ;; 04:6D18 $C2 $7A $6D
 
+    ; If  horizontally...
     ldh  a, [hActiveEntityPosX]                   ;; 04:6D1B $F0 $EE
     ld   hl, hLinkPositionX                       ;; 04:6D1D $21 $98 $FF
     sub  [hl]                                     ;; 04:6D20 $96
@@ -156,6 +171,7 @@ label_004_6D0F:
     cp   $20                                      ;; 04:6D23 $FE $20
     jr   nc, .jr_6D5C                             ;; 04:6D25 $30 $35
 
+    ; ...and vertically near Link...
     ldh  a, [hActiveEntityPosY]                   ;; 04:6D27 $F0 $EF
     ld   hl, hLinkPositionY                       ;; 04:6D29 $21 $99 $FF
     sub  [hl]                                     ;; 04:6D2C $96
@@ -163,11 +179,13 @@ label_004_6D0F:
     cp   $20                                      ;; 04:6D2F $FE $20
     jr   nc, .jr_6D5C                             ;; 04:6D31 $30 $29
 
+    ; ...and Link is not invincible...
     call ClearEntityStatusBank04                  ;; 04:6D33 $CD $7A $6D
     ld   a, [wInvincibilityCounter]               ;; 04:6D36 $FA $C7 $DB
     and  a                                        ;; 04:6D39 $A7
     jr   nz, .jr_6D5C                             ;; 04:6D3A $20 $20
 
+    ; ...and the transition countdown of the parent Laser entity is zero (isn't firing)...
     ld   hl, wEntitiesPrivateState1Table          ;; 04:6D3C $21 $B0 $C2
     add  hl, bc                                   ;; 04:6D3F $09
     ld   e, [hl]                                  ;; 04:6D40 $5E
@@ -178,6 +196,8 @@ label_004_6D0F:
     and  a                                        ;; 04:6D47 $A7
     jr   nz, .jr_6D5C                             ;; 04:6D48 $20 $12
 
+    ; ...make the parent Laser entity start flashing (about to fire)
+    ; and update its speed.
     ld   [hl], $20                                ;; 04:6D4A $36 $20
     ld   hl, wEntitiesFlashCountdownTable         ;; 04:6D4C $21 $20 $C4
     add  hl, de                                   ;; 04:6D4F $19
@@ -191,6 +211,7 @@ label_004_6D0F:
     ret                                           ;; 04:6D5B $C9
 
 .jr_6D5C
+    ; Otherwise, keep moving.
     ld   hl, wEntitiesSpeedXTable                 ;; 04:6D5C $21 $40 $C2
     add  hl, bc                                   ;; 04:6D5F $09
     ld   a, [hl]                                  ;; 04:6D60 $7E

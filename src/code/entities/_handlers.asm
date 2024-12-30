@@ -54,7 +54,7 @@ EntityHandlersTable::
 ._26 far_pointer EntityExplosionSpriteVariants ; small exploding ennemy 2
 ._27 far_pointer SpikeTrapEntityHandler
 ._28 far_pointer MimicEntityHandler ; $28
-._29 far_pointer MiniMoldromEntityHandler
+._29 far_pointer MiniMoldormEntityHandler
 ._2A far_pointer LaserEntityHandler
 ._2B far_pointer LaserBeamEntityHandler
 ._2C far_pointer SpikedBeetleEntityHandler ; $2C
@@ -333,7 +333,7 @@ EntityInitHandlersTable::
 ._26 dw   EntityExplosionSpriteVariants
 ._27 dw   EntityInitWithRandomDirection
 ._28 dw   EntityInitWithRandomDirection
-._29 dw   label_3DAB
+._29 dw   EntityInitMiniMoldorm_trampoline
 ._2A dw   EntityInitWithRandomDirection
 ._2B dw   EntityInitWithRandomDirection
 ._2C dw   EntityInitWithRandomDirection

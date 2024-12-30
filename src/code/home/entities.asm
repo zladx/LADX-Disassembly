@@ -39,6 +39,7 @@ ConfigureNewEntity_trampoline::
     callsb ConfigureNewEntity                     ;; 00:3965 $3E $03 $EA $00 $21 $CD $5B $48
     jp   ReloadSavedBank                          ;; 00:396D $C3 $1D $08
 
+; Unused
 GetEntityDirectionToLink_trampoline::
     callsb GetEntityDirectionToLink_03            ;; 00:3970 $3E $03 $EA $00 $21 $CD $FE $7E
     jp   ReloadSavedBank                          ;; 00:3978 $C3 $1D $08
@@ -912,8 +913,8 @@ func_015_7964_trampoline::
     callhl func_015_7964                          ;; 00:3DA0 $21 $00 $21 $36 $15 $CD $64 $79
     jp   ReloadSavedBank                          ;; 00:3DA8 $C3 $1D $08
 
-label_3DAB::
-    callhl func_004_5A1A                          ;; 00:3DAB $21 $00 $21 $36 $04 $CD $1A $5A
+EntityInitMiniMoldorm_trampoline::
+    callhl EntityInitMiniMoldorm                  ;; 00:3DAB $21 $00 $21 $36 $04 $CD $1A $5A
     jp   ReloadSavedBank                          ;; 00:3DB3 $C3 $1D $08
 
 EntityInitMoldorm_trampoline::
@@ -952,15 +953,16 @@ Entity67Handler_trampoline::
     callhl Entity67Handler                        ;; 00:3E0E $21 $00 $21 $36 $05 $CD $6B $55
     jp   ReloadSavedBank                          ;; 00:3E16 $C3 $1D $08
 
-label_3E19::
+CheckPositionForMapTransition_trampoline::
     ld   a, [wCurrentBank]                        ;; 00:3E19 $FA $AF $DB
     push af                                       ;; 00:3E1C $F5
     callsw CheckPositionForMapTransition          ;; 00:3E1D $3E $02 $CD $0C $08 $CD $75 $6C
     pop  af                                       ;; 00:3E25 $F1
     jp   SwitchBank                               ;; 00:3E26 $C3 $0C $08
 
-label_3E29::
-    callhl func_004_5C63                          ;; 00:3E29 $21 $00 $21 $36 $04 $CD $63 $5C
+; Unused
+GhiniMovement_trampoline::
+    callhl GhiniVisibleHandler.move               ;; 00:3E29 $21 $00 $21 $36 $04 $CD $63 $5C
     jp   ReloadSavedBank                          ;; 00:3E31 $C3 $1D $08
 
 label_3E34::

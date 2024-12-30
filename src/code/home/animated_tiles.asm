@@ -509,7 +509,7 @@ ENDC
     and  $04                                      ;; 00:1D78 $E6 $04
     jr   nz, label_1DA1                           ;; 00:1D7A $20 $25
     ldh  a, [hLinkAnimationState]                 ;; 00:1D7C $F0 $9D
-    cp   LINK_ANIMATION_STATE_UNKNOWN_50          ;; 00:1D7E $FE $50
+    cp   LINK_ANIMATION_STATE_REVOLVING_DOOR_1    ;; 00:1D7E $FE $50
     jr   c, label_1D8C                            ;; 00:1D80 $38 $0A
     cp   LINK_ANIMATION_STATE_FALLING_PIT_1       ;; 00:1D82 $FE $55
     jr   nc, label_1D8C                           ;; 00:1D84 $30 $06

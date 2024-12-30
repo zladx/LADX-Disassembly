@@ -97,7 +97,7 @@ func_019_5DAC::
     cp   $78                                      ;; 19:5DB5 $FE $78
     jr   c, ret_019_5DF7                          ;; 19:5DB7 $38 $3E
 
-    ld   [wDBC8], a                               ;; 19:5DB9 $EA $C8 $DB
+    ld   [wMapEntrancePositionZ], a               ;; 19:5DB9 $EA $C8 $DB
     ldh  a, [hMapRoom]                            ;; 19:5DBC $F0 $F6
     ld   e, a                                     ;; 19:5DBE $5F
     ld   d, $00                                   ;; 19:5DBF $16 $00

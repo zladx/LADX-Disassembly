@@ -183,7 +183,7 @@ GameplayWorldLoadRoomHandler::
     ld   a, [wMapEntrancePositionY]               ;; 01:443D $FA $9E $DB
     ldh  [hLinkPositionY], a                      ;; 01:4440 $E0 $99
     ld   [wLinkMapEntryPositionY], a              ;; 01:4442 $EA $B2 $DB
-    ld   a, [wDBC8]                               ;; 01:4445 $FA $C8 $DB
+    ld   a, [wMapEntrancePositionZ]               ;; 01:4445 $FA $C8 $DB
     ldh  [hLinkPositionZ], a                      ;; 01:4448 $E0 $A2
     and  a                                        ;; 01:444A $A7
     jr   z, .jr_4452                              ;; 01:444B $28 $05

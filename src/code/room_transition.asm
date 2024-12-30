@@ -774,8 +774,8 @@ label_002_7C14:
     or   [hl]                                     ;; 02:7C23 $B6
     ret  nz                                       ;; 02:7C24 $C0
 
-    ld   a, [wLinkGroundVfx]                      ;; 02:7C25 $FA $81 $C1
-    sub  $F0                                      ;; 02:7C28 $D6 $F0
+    ld   a, [wLinkObjectPhysics]                  ;; 02:7C25 $FA $81 $C1
+    sub  OBJ_PHYSICS_CONVEYOR                     ;; 02:7C28 $D6 $F0
     ld   e, a                                     ;; 02:7C2A $5F
     ld   d, $00                                   ;; 02:7C2B $16 $00
     ld   hl, Data_002_7C04                        ;; 02:7C2D $21 $04 $7C

@@ -66,9 +66,9 @@ WarpEntityHandler::
     ld   a, LINK_MOTION_FALLING_DOWN              ;; 19:4262 $3E $06
     ld   [wLinkMotionState], a                    ;; 19:4264 $EA $1C $C1
     call ResetSpinAttack                          ;; 19:4267 $CD $AF $0C
-    ld   [wC198], a                               ;; 19:426A $EA $98 $C1
-    ld   a, $51                                   ;; 19:426D $3E $51
-    ld   [wDBCB], a                               ;; 19:426F $EA $CB $DB
+    ld   [wLinkAnimationFrame], a                 ;; 19:426A $EA $98 $C1
+    ld   a, OBJ_PHYSICS_PIT_WARP                  ;; 19:426D $3E $51
+    ld   [wLinkFallingDownObjectPhysics], a       ;; 19:426F $EA $CB $DB
     ld   a, WAVE_SFX_LINK_FALL                    ;; 19:4272 $3E $0C
     ldh  [hWaveSfx], a                            ;; 19:4274 $E0 $F3
     jp   ClearEntityStatus_19                     ;; 19:4276 $C3 $61 $7E

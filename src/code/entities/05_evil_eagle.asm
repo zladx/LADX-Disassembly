@@ -817,7 +817,7 @@ jr_005_5E8A:
     ldh  [hLinkSpeedX], a                         ;; 05:5E99 $E0 $9A
     push bc                                       ;; 05:5E9B $C5
     call UpdateFinalLinkPosition.horizontal       ;; 05:5E9C $CD $B2 $21
-    call label_3E19                               ;; 05:5E9F $CD $19 $3E
+    call CheckPositionForMapTransition_trampoline ;; 05:5E9F $CD $19 $3E
     pop  bc                                       ;; 05:5EA2 $C1
 
 jr_005_5EA3:

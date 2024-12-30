@@ -26,9 +26,10 @@ PairoddSpriteVariants::
     db $76, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
 PairoddEntityHandler::
+    ; If the sprite variant is 3, draw sprite variants 6 and 7 side-by-side instead.
     ldh  a, [hActiveEntitySpriteVariant]          ;; 04:5DF1 $F0 $F1
     cp   $03                                      ;; 04:5DF3 $FE $03
-    jr   nz, jr_004_5E1C                          ;; 04:5DF5 $20 $25
+    jr   nz, .spriteVariant3SpecialCaseEnd        ;; 04:5DF5 $20 $25
 
     ldh  a, [hActiveEntityPosX]                   ;; 04:5DF7 $F0 $EE
     sub  $08                                      ;; 04:5DF9 $D6 $08
@@ -38,8 +39,6 @@ PairoddEntityHandler::
     ld   de, PairoddSpriteVariants                ;; 04:5E01 $11 $D1 $5D
     call RenderActiveEntitySpritesPair            ;; 04:5E04 $CD $C0 $3B
     ldh  a, [hActiveEntityPosX]                   ;; 04:5E07 $F0 $EE
-
-label_004_5E09:
     add  $10                                      ;; 04:5E09 $C6 $10
     ldh  [hActiveEntityPosX], a                   ;; 04:5E0B $E0 $EE
     ld   a, $07                                   ;; 04:5E0D $3E $07
@@ -47,23 +46,23 @@ label_004_5E09:
     ld   de, PairoddSpriteVariants                ;; 04:5E11 $11 $D1 $5D
     call RenderActiveEntitySpritesPair            ;; 04:5E14 $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ;; 04:5E17 $CD $8A $3D
-    jr   jr_004_5E22                              ;; 04:5E1A $18 $06
+    jr   .renderEnd                               ;; 04:5E1A $18 $06
 
-jr_004_5E1C:
+.spriteVariant3SpecialCaseEnd
     ld   de, PairoddSpriteVariants                ;; 04:5E1C $11 $D1 $5D
     call RenderActiveEntitySpritesPair            ;; 04:5E1F $CD $C0 $3B
 
-jr_004_5E22:
+.renderEnd
     call ReturnIfNonInteractive_04                ;; 04:5E22 $CD $A3 $7F
     call ApplyRecoilIfNeeded_04                   ;; 04:5E25 $CD $80 $6D
 
     ldh  a, [hActiveEntityState]                  ;; 04:5E28 $F0 $F0
     JP_TABLE                                      ;; 04:5E2A
-._00 dw PairoddState0Handler                      ;; 04:5E2B
-._01 dw PairoddState1Handler                      ;; 04:5E2D
-._02 dw PairoddState2Handler                      ;; 04:5E2F
+._00 dw PairoddRestingHandler                     ;; 04:5E2B
+._01 dw PairoddDisappearingHandler                ;; 04:5E2D
+._02 dw PairoddReappearingHandler                 ;; 04:5E2F
 
-PairoddState0Handler::
+PairoddRestingHandler::
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 04:5E31 $CD $39 $3B
     ldh  a, [hFrameCounter]                       ;; 04:5E34 $F0 $E7
     rra                                           ;; 04:5E36 $1F
@@ -74,12 +73,12 @@ PairoddState0Handler::
     call SetEntitySpriteVariant                   ;; 04:5E3C $CD $0C $3B
     call GetEntityTransitionCountdown             ;; 04:5E3F $CD $05 $0C
     cp   $18                                      ;; 04:5E42 $FE $18
-    jr   nz, .jr_004_5E4A                         ;; 04:5E44 $20 $04
+    jr   nz, .projectileEnd                       ;; 04:5E44 $20 $04
 
     call SpawnPairoddProjectile                   ;; 04:5E46 $CD $C6 $5E
     and  a                                        ;; 04:5E49 $A7
 
-.jr_004_5E4A
+.projectileEnd
     jr   nc, .return                              ;; 04:5E4A $30 $26
 
     call GetEntityXDistanceToLink_04              ;; 04:5E4C $CD $35 $6E
@@ -107,16 +106,17 @@ PairoddState0Handler::
 .return
     ret                                           ;; 04:5E72 $C9
 
-Data_004_5E73::
+; Indexed by transition countdown / 8
+PairoddDisappearingSpriteVariantIndexes::
     db   $04, $03, $02
 
-PairoddState1Handler::
+PairoddDisappearingHandler::
     call GetEntityTransitionCountdown             ;; 04:5E76 $CD $05 $0C
     cp   $18                                      ;; 04:5E79 $FE $18
     jp   nc, DefaultEnemyDamageCollisionHandler_trampoline ;; 04:5E7B $D2 $39 $3B
 
     and  a                                        ;; 04:5E7E $A7
-    jr   nz, .jr_5EA4                             ;; 04:5E7F $20 $23
+    jr   nz, .skipIncrementState                  ;; 04:5E7F $20 $23
 
     ld   [hl], $40                                ;; 04:5E81 $36 $40
     call IncrementEntityState                     ;; 04:5E83 $CD $12 $3B
@@ -140,28 +140,29 @@ PairoddState1Handler::
     ld   [hl], a                                  ;; 04:5EA2 $77
     ret                                           ;; 04:5EA3 $C9
 
-.jr_5EA4
+.skipIncrementState
     rra                                           ;; 04:5EA4 $1F
     rra                                           ;; 04:5EA5 $1F
     rra                                           ;; 04:5EA6 $1F
     and  $03                                      ;; 04:5EA7 $E6 $03
     ld   e, a                                     ;; 04:5EA9 $5F
     ld   d, b                                     ;; 04:5EAA $50
-    ld   hl, Data_004_5E73                        ;; 04:5EAB $21 $73 $5E
+    ld   hl, PairoddDisappearingSpriteVariantIndexes ;; 04:5EAB $21 $73 $5E
     add  hl, de                                   ;; 04:5EAE $19
     ld   a, [hl]                                  ;; 04:5EAF $7E
     jp   SetEntitySpriteVariant                   ;; 04:5EB0 $C3 $0C $3B
 
-Data_004_5EB3::
+; Indexed by transition countdown / 8
+PairoddReappearingSpriteVariantIndexes::
     db   $02, $03, $04
 
-PairoddState2Handler::
+PairoddReappearingHandler::
     call GetEntityTransitionCountdown             ;; 04:5EB6 $CD $05 $0C
     cp   $18                                      ;; 04:5EB9 $FE $18
     ret  nc                                       ;; 04:5EBB $D0
 
     and  a                                        ;; 04:5EBC $A7
-    jr   nz, jr_004_5EE5                          ;; 04:5EBD $20 $26
+    jr   nz, PairoddReappearingAnimation          ;; 04:5EBD $20 $26
 
     ld   [hl], $30                                ;; 04:5EBF $36 $30
     call IncrementEntityState                     ;; 04:5EC1 $CD $12 $3B
@@ -191,14 +192,14 @@ SpawnPairoddProjectile::
 .return
     ret                                           ;; 04:5EE4 $C9
 
-jr_004_5EE5:
+PairoddReappearingAnimation:
     rra                                           ;; 04:5EE5 $1F
     rra                                           ;; 04:5EE6 $1F
     rra                                           ;; 04:5EE7 $1F
     and  $03                                      ;; 04:5EE8 $E6 $03
     ld   e, a                                     ;; 04:5EEA $5F
     ld   d, b                                     ;; 04:5EEB $50
-    ld   hl, Data_004_5EB3                        ;; 04:5EEC $21 $B3 $5E
+    ld   hl, PairoddReappearingSpriteVariantIndexes ;; 04:5EEC $21 $B3 $5E
     add  hl, de                                   ;; 04:5EEF $19
     ld   a, [hl]                                  ;; 04:5EF0 $7E
     jp   SetEntitySpriteVariant                   ;; 04:5EF1 $C3 $0C $3B
@@ -206,11 +207,11 @@ jr_004_5EE5:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 PairoddProjectileSpriteVariants::
 .variant0
-    db $7C, $00
-    db $7C, $20
+    db $7C, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $7C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $7E, $00
-    db $7E, $20
+    db $7E, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $7E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 PairoddProjectileEntityHandler::
     ld   de, PairoddProjectileSpriteVariants      ;; 04:5EFC $11 $F4 $5E
@@ -233,4 +234,4 @@ PairoddProjectileEntityHandler::
     ret  z                                        ;; 04:5F21 $C8
 
     call ClearEntityStatusBank04                  ;; 04:5F22 $CD $7A $6D
-    jp   label_004_6C20                           ;; 04:5F25 $C3 $20 $6C
+    jp   func_004_6BE1.createSwordPokeVfx         ;; 04:5F25 $C3 $20 $6C

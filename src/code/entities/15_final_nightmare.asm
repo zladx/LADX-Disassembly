@@ -1,14 +1,20 @@
 
-Data_015_5058::
-    db   $EA, $EB, $EA, $EB, $EC, $ED, $EE, $EF, $F0, $F1, $F2, $F3
+FinalNightmareSpritesheetsPerForm::
+    ; Which two spritesheets to load per nightmare form.
+    db   $EA, $EB
+    db   $EA, $EB
+    db   $EC, $ED
+    db   $EE, $EF
+    db   $F0, $F1
+    db   $F2, $F3
 
-func_015_5064::
+FinalNightmareLoadsheetForForm::
     ld   a, [wFinalNightmareForm]                 ;; 15:5064 $FA $19 $D2
     rla                                           ;; 15:5067 $17
     and  $FE                                      ;; 15:5068 $E6 $FE
     ld   e, a                                     ;; 15:506A $5F
     ld   d, b                                     ;; 15:506B $50
-    ld   hl, Data_015_5058                        ;; 15:506C $21 $58 $50
+    ld   hl, FinalNightmareSpritesheetsPerForm    ;; 15:506C $21 $58 $50
     add  hl, de                                   ;; 15:506F $19
     ld   a, [hl+]                                 ;; 15:5070 $2A
     ld   [wLoadedEntitySpritesheets+2], a         ;; 15:5071 $EA $95 $C1
@@ -28,36 +34,36 @@ func_015_5064::
 FinalNightmareEntityHandler::
     ld   a, [wRoomTransitionState]                ;; 15:5080 $FA $24 $C1
     and  a                                        ;; 15:5083 $A7
-    jr   nz, .jr_5093                             ;; 15:5084 $20 $0D
+    jr   nz, .skipGraphicsLoad                    ;; 15:5084 $20 $0D
 
     ld   a, [wC116]                               ;; 15:5086 $FA $16 $C1
     and  a                                        ;; 15:5089 $A7
-    jr   nz, .jr_5093                             ;; 15:508A $20 $07
+    jr   nz, .skipGraphicsLoad                    ;; 15:508A $20 $07
 
     inc  a                                        ;; 15:508C $3C
     ld   [wC116], a                               ;; 15:508D $EA $16 $C1
-    call func_015_5064                            ;; 15:5090 $CD $64 $50
+    call FinalNightmareLoadsheetForForm           ;; 15:5090 $CD $64 $50
 
-.jr_5093
+.skipGraphicsLoad
     ld   hl, wEntitiesPrivateState5Table          ;; 15:5093 $21 $90 $C3
     add  hl, bc                                   ;; 15:5096 $09
     ld   a, [hl]                                  ;; 15:5097 $7E
     cp   $02                                      ;; 15:5098 $FE $02
-    jp   z, label_015_45CB                        ;; 15:509A $CA $CB $45
+    jp   z, FinalNightmareStairsHandler           ;; 15:509A $CA $CB $45
 
     and  a                                        ;; 15:509D $A7
-    jp   nz, label_015_54D6                       ;; 15:509E $C2 $D6 $54
+    jp   nz, FinalNightmareExplosionEffectHandler ;; 15:509E $C2 $D6 $54
 
     ld   a, [wFinalNightmareForm]                 ;; 15:50A1 $FA $19 $D2
     JP_TABLE                                      ;; 15:50A4 $C7
-._00 dw FinalNightmareForm1Handler
-._01 dw FinalNightmareForm2Handler
-._02 dw FinalNightmareForm3Handler
-._03 dw FinalNightmareForm4Handler
-._04 dw FinalNightmareForm5Handler
-._05 dw FinalNightmareForm6Handler
+._00 dw FinalNightmareFormIntroHandler
+._01 dw FinalNightmareFormGiantGelHandler
+._02 dw FinalNightmareFormAgahnimHandler
+._03 dw FinalNightmareFormMoldormHandler
+._04 dw FinalNightmareFormGanonLanmolaHandler
+._05 dw FinalNightmareFormDethlHandler
 
-FinalNightmareForm1Handler::
+FinalNightmareFormIntroHandler::
     ldh  a, [hActiveEntityState]                  ;; 15:50B1 $F0 $F0
     JP_TABLE                                      ;; 15:50B3
 ._00 dw func_015_50C2                             ;; 15:50B4
@@ -261,7 +267,7 @@ func_015_51B5::
     ld   a, [hl]                                  ;; 15:51DB $7E
     jp   SetEntitySpriteVariant                   ;; 15:51DC $C3 $0C $3B
 
-FinalNightmareForm2Handler::
+FinalNightmareFormGiantGelHandler::
     call func_015_572B                            ;; 15:51DF $CD $2B $57
     call ReturnIfNonInteractive_15                ;; 15:51E2 $CD $0D $7B
     call DecrementEntityIgnoreHitsCountdown       ;; 15:51E5 $CD $56 $0C
@@ -405,7 +411,7 @@ func_015_52BB::
     ld   a, [wFinalNightmareForm]                 ;; 15:52BB $FA $19 $D2
     inc  a                                        ;; 15:52BE $3C
     ld   [wFinalNightmareForm], a                 ;; 15:52BF $EA $19 $D2
-    call func_015_5064                            ;; 15:52C2 $CD $64 $50
+    call FinalNightmareLoadsheetForForm           ;; 15:52C2 $CD $64 $50
     xor  a                                        ;; 15:52C5 $AF
     ld   [wD221], a                               ;; 15:52C6 $EA $21 $D2
     ld   [wD222], a                               ;; 15:52C9 $EA $22 $D2
@@ -754,7 +760,8 @@ Data_015_54CA::
 Data_015_54D0::
     db   $0F, $07, $03, $01, $00, $00
 
-label_015_54D6:
+; The 8 balls that explode out from Agahnim/Moldorm/Ganon/Lanmola/Dethl after he is defeated.
+FinalNightmareExplosionEffectHandler:
     ld   de, Unknown047SpriteVariants             ;; 15:54D6 $11 $BE $54
     call RenderActiveEntitySpritesPair            ;; 15:54D9 $CD $C0 $3B
     call ReturnIfNonInteractive_15                ;; 15:54DC $CD $0D $7B
@@ -934,7 +941,7 @@ func_015_572B::
     ld   a, $04                                   ;; 15:573E $3E $04
     jp   func_015_7964_trampoline                 ;; 15:5740 $C3 $A0 $3D
 
-FinalNightmareForm3Handler::
+FinalNightmareFormAgahnimHandler::
     ld   hl, wEntitiesPrivateState4Table          ;; 15:5743 $21 $40 $C4
     add  hl, bc                                   ;; 15:5746 $09
     ld   a, [hl]                                  ;; 15:5747 $7E
@@ -1988,7 +1995,7 @@ func_015_5FD1::
     call ReturnIfNonInteractive_15                ;; 15:5FD1 $CD $0D $7B
     jp   DefaultEnemyDamageCollisionHandler_trampoline ;; 15:5FD4 $C3 $39 $3B
 
-FinalNightmareForm4Handler::
+FinalNightmareFormMoldormHandler::
     ldh  a, [hActiveEntityState]                  ;; 15:5FD7 $F0 $F0
     JP_TABLE                                      ;; 15:5FD9
 ._00 dw func_015_604A                             ;; 15:5FDA
@@ -2442,18 +2449,18 @@ jr_015_6379:
 .ret_63C7
     ret                                           ;; 15:63C7 $C9
 
-FinalNightmareForm5Handler::
+FinalNightmareFormGanonLanmolaHandler::
     ld   hl, wEntitiesPrivateState1Table          ;; 15:63C8 $21 $B0 $C2
     add  hl, bc                                   ;; 15:63CB $09
     ld   a, [hl]                                  ;; 15:63CC $7E
     cp   $03                                      ;; 15:63CD $FE $03
-    jp   z, label_015_6D40                        ;; 15:63CF $CA $40 $6D
+    jp   z, FinalNightmareFormLanmolaHandler      ;; 15:63CF $CA $40 $6D
 
     cp   $02                                      ;; 15:63D2 $FE $02
-    jp   z, label_015_6D6E                        ;; 15:63D4 $CA $6E $6D
+    jp   z, FinalNightmareGanonBatHandler         ;; 15:63D4 $CA $6E $6D
 
     and  a                                        ;; 15:63D7 $A7
-    jp   nz, label_015_6C61                       ;; 15:63D8 $C2 $61 $6C
+    jp   nz, FinalNightmareGanonTridentHandler    ;; 15:63D8 $C2 $61 $6C
 
     ldh  a, [hActiveEntityState]                  ;; 15:63DB $F0 $F0
     cp   $02                                      ;; 15:63DD $FE $02
@@ -3367,7 +3374,7 @@ Data_015_6C59::
 Data_015_6C5D::
     db   $00, $01, $02, $03
 
-label_015_6C61:
+FinalNightmareGanonTridentHandler:
     ld   a, [wD201]                               ;; 15:6C61 $FA $01 $D2
     ld   e, a                                     ;; 15:6C64 $5F
     ld   d, b                                     ;; 15:6C65 $50
@@ -3519,7 +3526,7 @@ Unknown054SpriteVariants:: ;; 15:6D30
 Data_015_6D3C::
     db   $00, $00, $01, $01
 
-label_015_6D40:
+FinalNightmareFormLanmolaHandler:
     ld   de, Unknown054SpriteVariants             ;; 15:6D40 $11 $30 $6D
     call RenderActiveEntitySpritesPair            ;; 15:6D43 $CD $C0 $3B
     call ReturnIfNonInteractive_15                ;; 15:6D46 $CD $0D $7B
@@ -3552,7 +3559,7 @@ Unknown055SpriteVariants::
     db $56, $00
     db $56, $20
 
-label_015_6D6E:
+FinalNightmareGanonBatHandler:
     ldh  a, [hFrameCounter]                       ;; 15:6D6E $F0 $E7
     rla                                           ;; 15:6D70 $17
     rla                                           ;; 15:6D71 $17
@@ -3645,7 +3652,7 @@ Data_015_6E0B::
 Data_015_6E23::
     db   $03, $02, $01, $00, $00, $00, $00, $00
 
-FinalNightmareForm6Handler::
+FinalNightmareFormDethlHandler::
     ld   hl, wEntitiesPrivateCountdown2Table      ;; 15:6E2B $21 $00 $C3
     add  hl, bc                                   ;; 15:6E2E $09
     ld   a, [hl]                                  ;; 15:6E2F $7E

@@ -145,7 +145,7 @@ wNoiseSfxSeaWavesCounter::
 wC115:
   ds 1 ; C115
 
-; Unlabeled
+; Used by Mamu and the final nightmare to indicate if required extra graphics have been loaded
 wC116:
   ds 1 ; C116
 
@@ -2223,6 +2223,12 @@ wD218::
   ds 1 ; D218
 
 ; Current form of the Final Nightmare (0-5)
+; 0=Intro
+; 1=Giant Gel
+; 2=Agahnim
+; 3=Moldorm
+; 4=Ganon/Lanmola
+; 5=Dethl
 wFinalNightmareForm::
   ds 1 ; D219
 

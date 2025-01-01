@@ -17,7 +17,9 @@ Data_015_45A3::
     db   $E0, $00, $46, $07, $E0, $08, $7E, $07, $D0, $00, $46, $07, $D0, $08, $7E, $07
     db   $C0, $00, $46, $07, $C0, $08, $7E, $07
 
-label_015_45CB:
+; This is called after Dethl is defeated, gives the victory message and shows the stairs
+; And waits for link to climb the stairs and finally switches the gameplay mode to credits
+FinalNightmareStairsHandler:
     ld   hl, wEntitiesInertiaTable                ;; 15:45CB $21 $D0 $C3
     add  hl, bc                                   ;; 15:45CE $09
     ld   a, [hl]                                  ;; 15:45CF $7E

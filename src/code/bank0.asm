@@ -2235,7 +2235,7 @@ label_1562::
     ld   a, [wActiveProjectileCount]              ;; 00:1562 $FA $4D $C1
     and  a                                        ;; 00:1565 $A7
     ret  nz                                       ;; 00:1566 $C0
-    ld   a, [wC5A9]                               ;; 00:1567 $FA $A9 $C5
+    ld   a, [wFullHearts]                         ;; 00:1567 $FA $A9 $C5
     and  a                                        ;; 00:156A $A7
     ret  z                                        ;; 00:156B $C8
     ld   a, [wSwordLevel]                         ;; 00:156C $FA $4E $DB

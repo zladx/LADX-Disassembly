@@ -1492,8 +1492,9 @@ wBossAgonySFXCountdown::
 wLiftedEntityType::
   ds 1 ; C5A8
 
-; Unlabeled
-wC5A9::
+; 0 = Link has been damaged
+; 1 = Link's hearts are full (full health)
+wFullHearts::
   ds 1 ; C5A9
 
 ; Number of rooms progressed correctly in the Wind Fish's Egg maze

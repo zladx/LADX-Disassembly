@@ -502,7 +502,7 @@ EntityInitBigFairy::
     jr   z, jr_003_4A4D                           ;; 03:4A44 $28 $07
 .indoorEnd
 
-    ld   a, [wC5A9]                               ;; 03:4A46 $FA $A9 $C5
+    ld   a, [wFullHearts]                         ;; 03:4A46 $FA $A9 $C5
     and  a                                        ;; 03:4A49 $A7
     jp   nz, UnloadEntityAndReturn                ;; 03:4A4A $C2 $8D $3F
 

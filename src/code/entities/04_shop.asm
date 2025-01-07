@@ -466,7 +466,7 @@ jr_004_79AB:
     cp   $02                                      ;; 04:79AF $FE $02
     jr   nz, .jr_79BB                             ;; 04:79B1 $20 $08
 
-    ld   a, [wC5A9]                               ;; 04:79B3 $FA $A9 $C5
+    ld   a, [wFullHearts]                         ;; 04:79B3 $FA $A9 $C5
     and  a                                        ;; 04:79B6 $A7
     jr   nz, jr_004_7A05                          ;; 04:79B7 $20 $4C
 

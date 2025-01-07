@@ -259,7 +259,7 @@ jr_014_4AE7:
     inc  a                                        ;; 14:4B1D $3C
 
 .jr_4B1E
-    ld   [wC5A9], a                               ;; 14:4B1E $EA $A9 $C5
+    ld   [wFullHearts], a                         ;; 14:4B1E $EA $A9 $C5
     ld   a, [wC5AC]                               ;; 14:4B21 $FA $AC $C5
     inc  a                                        ;; 14:4B24 $3C
     cp   $1A                                      ;; 14:4B25 $FE $1A

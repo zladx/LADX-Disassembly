@@ -8929,7 +8929,7 @@ ReturnIfNonInteractive_03::
     jr   nz, .skip                                ;; 03:7F7C $20 $29
 
 .allowInactiveEntity
-    ld   a, [wGameplayType]                       ; $7D43: $FA $95 $DB                       ;; 03:7F7E $FA $95 $DB
+    ld   a, [wGameplayType]                       ;; 03:7F7E $FA $95 $DB
     cp   GAMEPLAY_WORLD_MAP                       ;; 03:7F81 $FE $07
     jr   z, .skip                                 ;; 03:7F83 $28 $22
 

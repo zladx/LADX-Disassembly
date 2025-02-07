@@ -149,7 +149,7 @@ CatfishMawMacroHandler::
     call func_024_7625                            ;; 24:7619 $CD $25 $76
     ld   bc, CatfishMawObjectOffsets              ;; 24:761C $01 $0B $76
     ld   de, CatfishMawObjectIds                  ;; 24:761F $11 $12 $76
-    jp   CopyMacroObjectsToRoom                   ;; 24:7622 $C3 $8B $35
+    jp   CopyOutdoorsMacroObjectsToRoom           ;; 24:7622 $C3 $8B $35
 
 func_024_7625::
     dec  bc                                       ;; 24:7625 $0B
@@ -175,7 +175,7 @@ TwoDoorsHouseMacroHandler::
     call func_024_7625                            ;; 24:764E $CD $25 $76
     ld   bc, TwoDoorsHouseObjectOffsets           ;; 24:7651 $01 $2E $76
     ld   de, TwoDoorsHouseObjectIds               ;; 24:7654 $11 $3E $76
-    jp   CopyMacroObjectsToRoom                   ;; 24:7657 $C3 $8B $35
+    jp   CopyOutdoorsMacroObjectsToRoom           ;; 24:7657 $C3 $8B $35
 
 LargeHouseObjectOffsets::
     db   $00, $01, $02
@@ -193,7 +193,7 @@ LargeHouseMacroHandler::
     call func_024_7625                            ;; 24:766E $CD $25 $76
     ld   bc, LargeHouseObjectOffsets              ;; 24:7671 $01 $5A $76
     ld   de, LargeHouseObjectIds                  ;; 24:7674 $11 $64 $76
-    jp   CopyMacroObjectsToRoom                   ;; 24:7677 $C3 $8B $35
+    jp   CopyOutdoorsMacroObjectsToRoom           ;; 24:7677 $C3 $8B $35
 
 PalaceDoorObjectOffsets::
     db   $00, $01, $02
@@ -209,7 +209,7 @@ PalaceDoorMacroHandler::
     call func_024_7625                            ;; 24:7688 $CD $25 $76
     ld   bc, PalaceDoorObjectOffsets              ;; 24:768B $01 $7A $76
     ld   de, PalaceDoorObjectIds                  ;; 24:768E $11 $81 $76
-    jp   CopyMacroObjectsToRoom                   ;; 24:7691 $C3 $8B $35
+    jp   CopyOutdoorsMacroObjectsToRoom           ;; 24:7691 $C3 $8B $35
 
 StonePigHeadObjectOffsets::
     db   $00, $01
@@ -235,7 +235,7 @@ StonePigHeadMacroHandler::
     ld   de, StonePigHeadObjectIds_Blasted        ;; 24:76B1 $11 $9D $76
 .jr_76B4
 
-    jp   CopyMacroObjectsToRoom                   ;; 24:76B4 $C3 $8B $35
+    jp   CopyOutdoorsMacroObjectsToRoom           ;; 24:76B4 $C3 $8B $35
 
 PalmTreeObjectOffsets::
     db   $00, $01
@@ -251,7 +251,7 @@ PalmTreeMacroHandler::
     call func_024_7625                            ;; 24:76C1 $CD $25 $76
     ld   bc, PalmTreeObjectOffsets                ;; 24:76C4 $01 $B7 $76
     ld   de, PalmTreeObjectIds                    ;; 24:76C7 $11 $BC $76
-    jp   CopyMacroObjectsToRoom                   ;; 24:76CA $C3 $8B $35
+    jp   CopyOutdoorsMacroObjectsToRoom           ;; 24:76CA $C3 $8B $35
 
 WalledPitObjectOffsets::
     db        $00, $01, $02,
@@ -271,7 +271,7 @@ WalledPitMacroHandler::
     call func_024_7625                            ;; 24:76EB $CD $25 $76
     ld   bc, WalledPitObjectOffsets               ;; 24:76EE $01 $CD $76
     ld   de, WalledPitObjectIds                   ;; 24:76F1 $11 $DC $76
-    jp   CopyMacroObjectsToRoom                   ;; 24:76F4 $C3 $8B $35
+    jp   CopyOutdoorsMacroObjectsToRoom           ;; 24:76F4 $C3 $8B $35
 
 SmallHouseObjectOffsets::
     db   $00, $01, $02
@@ -287,4 +287,4 @@ SmallHouseMacroHandler::
     call func_024_7625                            ;; 24:7705 $CD $25 $76
     ld   bc, SmallHouseObjectOffsets              ;; 24:7708 $01 $F7 $76
     ld   de, SmallHouseObjectIds                  ;; 24:770B $11 $FE $76
-    jp   CopyMacroObjectsToRoom                   ;; 24:770E $C3 $8B $35
+    jp   CopyOutdoorsMacroObjectsToRoom           ;; 24:770E $C3 $8B $35

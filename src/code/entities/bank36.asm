@@ -2076,7 +2076,7 @@ func_036_4BE8::
     cp   $01                                      ;; 36:4BF3 $FE $01
     jr   nz, .jr_4BFE                             ;; 36:4BF5 $20 $07
 
-    call func_036_6C89                            ;; 36:4BF7 $CD $89 $6C
+    call ClearEntityStatus_36                     ;; 36:4BF7 $CD $89 $6C
     call func_036_5CAB                            ;; 36:4BFA $CD $AB $5C
     ret                                           ;; 36:4BFD $C9
 
@@ -2153,7 +2153,7 @@ func_036_4C5C::
 
     ld   [hl], $C0                                ;; 36:4C6F $36 $C0
     ld   a, $10                                   ;; 36:4C71 $3E $10
-    call func_036_6C83                            ;; 36:4C73 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:4C73 $CD $83 $6C
     call ClearEntitySpeed                         ;; 36:4C76 $CD $7F $3D
     call IncrementEntityState                     ;; 36:4C79 $CD $12 $3B
 
@@ -2174,7 +2174,7 @@ func_036_4C82::
 
     ld   [hl], b                                  ;; 36:4C90 $70
     ld   a, $20                                   ;; 36:4C91 $3E $20
-    call func_036_6C83                            ;; 36:4C93 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:4C93 $CD $83 $6C
     xor  a                                        ;; 36:4C96 $AF
     call SetEntityState                           ;; 36:4C97 $CD $07 $6C
     ld   hl, wEntitiesSpeedZTable                 ;; 36:4C9A $21 $20 $C3
@@ -2653,7 +2653,7 @@ func_036_4F9B::
     cp   $01                                      ;; 36:4FA6 $FE $01
     jr   nz, .jr_4FB1                             ;; 36:4FA8 $20 $07
 
-    call func_036_6C89                            ;; 36:4FAA $CD $89 $6C
+    call ClearEntityStatus_36                     ;; 36:4FAA $CD $89 $6C
     call func_036_5CAB                            ;; 36:4FAD $CD $AB $5C
     ret                                           ;; 36:4FB0 $C9
 
@@ -2739,7 +2739,7 @@ func_036_501C::
     ret                                           ;; 36:503B $C9
 
 func_036_503C::
-    call func_036_6C89                            ;; 36:503C $CD $89 $6C
+    call ClearEntityStatus_36                     ;; 36:503C $CD $89 $6C
     ld   a, WAVE_SFX_SEASHELL                     ;; 36:503F $3E $01
     ldh  [hWaveSfx], a                            ;; 36:5041 $E0 $F3
     ld   d, $0C                                   ;; 36:5043 $16 $0C
@@ -2950,7 +2950,7 @@ TunicFairyState3::
     ld   [hl], a                                  ;; 36:5184 $77
     call func_036_5153                            ;; 36:5185 $CD $53 $51
     ld   a, $60                                   ;; 36:5188 $3E $60
-    call func_036_6C83                            ;; 36:518A $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:518A $CD $83 $6C
     ld   hl, wEntitiesPrivateState3Table          ;; 36:518D $21 $D0 $C2
     add  hl, bc                                   ;; 36:5190 $09
     ld   [hl], e                                  ;; 36:5191 $73
@@ -3519,7 +3519,7 @@ func_036_5537::
     xor  a                                        ;; 36:5556 $AF
     ld   [hl], a                                  ;; 36:5557 $77
     ld   a, $20                                   ;; 36:5558 $3E $20
-    call func_036_6C83                            ;; 36:555A $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:555A $CD $83 $6C
     call IncrementEntityState                     ;; 36:555D $CD $12 $3B
     ret                                           ;; 36:5560 $C9
 
@@ -3543,7 +3543,7 @@ func_036_5575::
     ret  nz                                       ;; 36:5580 $C0
 
     ld   a, $20                                   ;; 36:5581 $3E $20
-    call func_036_6C83                            ;; 36:5583 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:5583 $CD $83 $6C
     xor  a                                        ;; 36:5586 $AF
     ld   [wC167], a                               ;; 36:5587 $EA $67 $C1
     call IncrementEntityState                     ;; 36:558A $CD $12 $3B
@@ -3601,7 +3601,7 @@ func_036_55B1::
     add  hl, bc                                   ;; 36:55D2 $09
     ld   [hl], $01                                ;; 36:55D3 $36 $01
     ld   a, $20                                   ;; 36:55D5 $3E $20
-    call func_036_6C83                            ;; 36:55D7 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:55D7 $CD $83 $6C
     ld   a, $07                                   ;; 36:55DA $3E $07
     call SetEntityState                           ;; 36:55DC $CD $07 $6C
     ret                                           ;; 36:55DF $C9
@@ -3837,7 +3837,7 @@ func_036_573E::
     ld   [hl], a                                  ;; 36:574C $77
     call IncrementEntityState                     ;; 36:574D $CD $12 $3B
     ld   a, $F0                                   ;; 36:5750 $3E $F0
-    call func_036_6C83                            ;; 36:5752 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:5752 $CD $83 $6C
     ret                                           ;; 36:5755 $C9
 
 func_036_5756::
@@ -3875,7 +3875,7 @@ func_036_5779::
     add  hl, bc                                   ;; 36:5782 $09
     ld   [hl], a                                  ;; 36:5783 $77
     ld   a, $20                                   ;; 36:5784 $3E $20
-    call func_036_6C83                            ;; 36:5786 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:5786 $CD $83 $6C
     ld   a, $03                                   ;; 36:5789 $3E $03
     call SetEntityState                           ;; 36:578B $CD $07 $6C
     ret                                           ;; 36:578E $C9
@@ -4554,7 +4554,7 @@ BouncingBoulderEntityHandler::
     cp   $01                                      ;; 36:5B69 $FE $01
     jr   nz, .jr_5B73                             ;; 36:5B6B $20 $06
 
-    call func_036_6C89                            ;; 36:5B6D $CD $89 $6C
+    call ClearEntityStatus_36                     ;; 36:5B6D $CD $89 $6C
     call func_036_5CAB                            ;; 36:5B70 $CD $AB $5C
 
 .jr_5B73
@@ -4625,11 +4625,11 @@ BouncingBoulderEntityHandler::
 label_036_5BE8:
     ldh  a, [hActiveEntityPosX]                   ;; 36:5BE8 $F0 $EE
     cp   $A8                                      ;; 36:5BEA $FE $A8
-    jp   nc, func_036_6C89                        ;; 36:5BEC $D2 $89 $6C
+    jp   nc, ClearEntityStatus_36                 ;; 36:5BEC $D2 $89 $6C
 
     ldh  a, [hActiveEntityVisualPosY]             ;; 36:5BEF $F0 $EC
     cp   $84                                      ;; 36:5BF1 $FE $84
-    jp   nc, func_036_6C89                        ;; 36:5BF3 $D2 $89 $6C
+    jp   nc, ClearEntityStatus_36                 ;; 36:5BF3 $D2 $89 $6C
 
     ret                                           ;; 36:5BF6 $C9
 
@@ -4797,7 +4797,7 @@ ENDC
 
 .jr_5CD9
     ld   a, $30                                   ;; 36:5CD9 $3E $30
-    call func_036_6C83                            ;; 36:5CDB $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:5CDB $CD $83 $6C
     ld   hl, wEntitiesPrivateState2Table          ;; 36:5CDE $21 $C0 $C2
     add  hl, bc                                   ;; 36:5CE1 $09
     ld   [hl], $06                                ;; 36:5CE2 $36 $06
@@ -4808,7 +4808,7 @@ ENDC
 
 AvalaunchState0Handler::
     ld   a, $10                                   ;; 36:5CEB $3E $10
-    call func_036_6C83                            ;; 36:5CED $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:5CED $CD $83 $6C
     call IncrementEntityState                     ;; 36:5CF0 $CD $12 $3B
     ret                                           ;; 36:5CF3 $C9
 
@@ -4822,7 +4822,7 @@ AvalaunchState2Handler::
     ret  nz                                       ;; 36:5D01 $C0
 
     ld   a, $10                                   ;; 36:5D02 $3E $10
-    call func_036_6C83                            ;; 36:5D04 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:5D04 $CD $83 $6C
     call IncrementEntityState                     ;; 36:5D07 $CD $12 $3B
     ret                                           ;; 36:5D0A $C9
 
@@ -4856,7 +4856,7 @@ AvalaunchState3Handler::
 
 .jr_5D39
     ld   a, $20                                   ;; 36:5D39 $3E $20
-    call func_036_6C83                            ;; 36:5D3B $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:5D3B $CD $83 $6C
     ld   hl, wEntitiesPrivateState1Table          ;; 36:5D3E $21 $B0 $C2
     add  hl, bc                                   ;; 36:5D41 $09
     ld   [hl], $06                                ;; 36:5D42 $36 $06
@@ -4894,7 +4894,7 @@ AvalaunchState4Handler::
     call DefaultEntityPhysics_trampoline          ;; 36:5D74 $CD $23 $3B
     call func_036_6C0D                            ;; 36:5D77 $CD $0D $6C
     ld   a, $20                                   ;; 36:5D7A $3E $20
-    call func_036_6C83                            ;; 36:5D7C $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:5D7C $CD $83 $6C
     ld   hl, wEntitiesPrivateState1Table          ;; 36:5D7F $21 $B0 $C2
     add  hl, bc                                   ;; 36:5D82 $09
     dec  [hl]                                     ;; 36:5D83 $35
@@ -4906,7 +4906,7 @@ AvalaunchState4Handler::
     call PointHLToEntitySpeedY                    ;; 36:5D8A $CD $F3 $6B
     ld   [hl], $C0                                ;; 36:5D8D $36 $C0
     ld   a, $30                                   ;; 36:5D8F $3E $30
-    call func_036_6C83                            ;; 36:5D91 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:5D91 $CD $83 $6C
     call IncrementEntityState                     ;; 36:5D94 $CD $12 $3B
 
 .ret_5D97
@@ -4923,7 +4923,7 @@ AvalaunchState5Handler::
     call DefaultEntityPhysics_trampoline          ;; 36:5DA4 $CD $23 $3B
     call func_036_6C0D                            ;; 36:5DA7 $CD $0D $6C
     ld   a, $20                                   ;; 36:5DAA $3E $20
-    call func_036_6C83                            ;; 36:5DAC $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:5DAC $CD $83 $6C
     ld   hl, wEntitiesPrivateState1Table          ;; 36:5DAF $21 $B0 $C2
     add  hl, bc                                   ;; 36:5DB2 $09
     dec  [hl]                                     ;; 36:5DB3 $35
@@ -4932,7 +4932,7 @@ AvalaunchState5Handler::
     jr   nz, .ret_5DC2                            ;; 36:5DB6 $20 $0A
 
     ld   a, $30                                   ;; 36:5DB8 $3E $30
-    call func_036_6C83                            ;; 36:5DBA $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:5DBA $CD $83 $6C
     ld   a, $03                                   ;; 36:5DBD $3E $03
     call SetEntityState                           ;; 36:5DBF $CD $07 $6C
 
@@ -4950,7 +4950,7 @@ AvalaunchState6Handler::
     call DefaultEntityPhysics_trampoline          ;; 36:5DCE $CD $23 $3B
     call func_036_6C0D                            ;; 36:5DD1 $CD $0D $6C
     ld   a, $20                                   ;; 36:5DD4 $3E $20
-    call func_036_6C83                            ;; 36:5DD6 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:5DD6 $CD $83 $6C
     ld   hl, wEntitiesPrivateState1Table          ;; 36:5DD9 $21 $B0 $C2
     add  hl, bc                                   ;; 36:5DDC $09
     dec  [hl]                                     ;; 36:5DDD $35
@@ -4965,7 +4965,7 @@ AvalaunchState6Handler::
     inc  a                                        ;; 36:5DE8 $3C
     ld   [hl], a                                  ;; 36:5DE9 $77
     ld   a, $30                                   ;; 36:5DEA $3E $30
-    call func_036_6C83                            ;; 36:5DEC $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:5DEC $CD $83 $6C
     call IncrementEntityState                     ;; 36:5DEF $CD $12 $3B
     ret                                           ;; 36:5DF2 $C9
 
@@ -4980,7 +4980,7 @@ AvalaunchState7Handler::
     call DefaultEntityPhysics_trampoline          ;; 36:5DFE $CD $23 $3B
     call func_036_6C0D                            ;; 36:5E01 $CD $0D $6C
     ld   a, $20                                   ;; 36:5E04 $3E $20
-    call func_036_6C83                            ;; 36:5E06 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:5E06 $CD $83 $6C
     ld   hl, wEntitiesPrivateState1Table          ;; 36:5E09 $21 $B0 $C2
     add  hl, bc                                   ;; 36:5E0C $09
     dec  [hl]                                     ;; 36:5E0D $35
@@ -4989,7 +4989,7 @@ AvalaunchState7Handler::
     ret  nz                                       ;; 36:5E10 $C0
 
     ld   a, $30                                   ;; 36:5E11 $3E $30
-    call func_036_6C83                            ;; 36:5E13 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:5E13 $CD $83 $6C
     ld   a, $03                                   ;; 36:5E16 $3E $03
     call SetEntityState                           ;; 36:5E18 $CD $07 $6C
     ret                                           ;; 36:5E1B $C9
@@ -5000,7 +5000,7 @@ AvalaunchState8Handler::
 
     call func_036_6C0D                            ;; 36:5E20 $CD $0D $6C
     ld   a, $08                                   ;; 36:5E23 $3E $08
-    call func_036_6C83                            ;; 36:5E25 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:5E25 $CD $83 $6C
     ld   hl, wEntitiesPrivateState2Table          ;; 36:5E28 $21 $C0 $C2
     add  hl, bc                                   ;; 36:5E2B $09
     dec  [hl]                                     ;; 36:5E2C $35
@@ -5103,7 +5103,7 @@ jr_036_5E81:
     and  $80                                      ;; 36:5EB6 $E6 $80
     ld   [hl], a                                  ;; 36:5EB8 $77
     ld   a, $20                                   ;; 36:5EB9 $3E $20
-    call func_036_6C83                            ;; 36:5EBB $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:5EBB $CD $83 $6C
     call IncrementEntityState                     ;; 36:5EBE $CD $12 $3B
 
 ret_036_5EC1:
@@ -5187,7 +5187,7 @@ AvalaunchStateAHandler::
     xor  a                                        ;; 36:5F2A $AF
     ld   [wC167], a                               ;; 36:5F2B $EA $67 $C1
     ld   a, $04                                   ;; 36:5F2E $3E $04
-    call func_036_6C83                            ;; 36:5F30 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:5F30 $CD $83 $6C
     call PointHLToEntitySpriteVariant             ;; 36:5F33 $CD $02 $6C
     inc  [hl]                                     ;; 36:5F36 $34
     ld   a, [hl]                                  ;; 36:5F37 $7E
@@ -5651,7 +5651,7 @@ HopperState2Handler::
     jr   nz, jr_036_6205                          ;; 36:61B3 $20 $50
 
     ld   a, $10                                   ;; 36:61B5 $3E $10
-    call func_036_6C83                            ;; 36:61B7 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:61B7 $CD $83 $6C
     xor  a                                        ;; 36:61BA $AF
     call SetEntityState                           ;; 36:61BB $CD $07 $6C
     ld   a, [wHasPlacedBomb]                      ;; 36:61BE $FA $4E $C1
@@ -5731,311 +5731,7 @@ func_036_6219::
     call func_015_7964_trampoline                 ;; 36:623D $CD $A0 $3D
     ret                                           ;; 36:6240 $C9
 
-RotoswitchRedEntityHandler::
-RotoswitchYellowEntityHandler::
-RotoswitchBlueEntityHandler::
-    ld   hl, wEntitiesHealthTable                 ;; 36:6241 $21 $60 $C3
-    add  hl, bc                                   ;; 36:6244 $09
-    ld   [hl], $FF                                ;; 36:6245 $36 $FF
-    call func_036_63C2                            ;; 36:6247 $CD $C2 $63
-    call PushLinkOutOfEntity_36                   ;; 36:624A $CD $5C $6B
-    ld   a, [wRoomEventEffectExecuted]            ;; 36:624D $FA $8F $C1
-    and  a                                        ;; 36:6250 $A7
-    jr   z, .jr_625F                              ;; 36:6251 $28 $0C
-
-    xor  a                                        ;; 36:6253 $AF
-    ld   hl, wEntitiesFlashCountdownTable         ;; 36:6254 $21 $20 $C4
-    add  hl, bc                                   ;; 36:6257 $09
-    ld   [hl], a                                  ;; 36:6258 $77
-    ld   hl, wEntitiesIgnoreHitsCountdownTable    ;; 36:6259 $21 $10 $C4
-    add  hl, bc                                   ;; 36:625C $09
-    ld   [hl], a                                  ;; 36:625D $77
-    ret                                           ;; 36:625E $C9
-
-.jr_625F
-    ldh  a, [hActiveEntityState]                  ;; 36:625F $F0 $F0
-    bit  7, a                                     ;; 36:6261 $CB $7F
-    ret  nz                                       ;; 36:6263 $C0
-
-    ldh  a, [hActiveEntityState]                  ;; 36:6264 $F0 $F0
-    JP_TABLE                                      ;; 36:6266
-._00 dw RotoswitchState0Handler
-._01 dw RotoswitchState1Handler
-._02 dw RotoswitchState2Handler
-
-RotoswitchState0Handler::
-    call ReturnIfNonInteractive_36                ;; 36:626D $CD $40 $6A
-    call label_3B70                               ;; 36:6270 $CD $70 $3B
-
-.jr_6273
-    call DefaultEntityPhysics_trampoline          ;; 36:6273 $CD $23 $3B
-    call PointHLToEntitySpriteVariant             ;; 36:6276 $CD $02 $6C
-    ld   a, [hl]                                  ;; 36:6279 $7E
-    and  $03                                      ;; 36:627A $E6 $03
-    jr   nz, .ret_629E                            ;; 36:627C $20 $20
-
-    ld   hl, wEntitiesIgnoreHitsCountdownTable    ;; 36:627E $21 $10 $C4
-    add  hl, bc                                   ;; 36:6281 $09
-    ld   a, [hl]                                  ;; 36:6282 $7E
-    and  a                                        ;; 36:6283 $A7
-    jr   z, .ret_629E                             ;; 36:6284 $28 $18
-
-    ld   a, $04                                   ;; 36:6286 $3E $04
-    call func_036_6C83                            ;; 36:6288 $CD $83 $6C
-    call PointHLToEntitySpriteVariant             ;; 36:628B $CD $02 $6C
-    inc  [hl]                                     ;; 36:628E $34
-    xor  a                                        ;; 36:628F $AF
-    ld   hl, wEntitiesFlashCountdownTable         ;; 36:6290 $21 $20 $C4
-    add  hl, bc                                   ;; 36:6293 $09
-    ld   [hl], a                                  ;; 36:6294 $77
-    call func_036_629F                            ;; 36:6295 $CD $9F $62
-    call IncrementEntityState                     ;; 36:6298 $CD $12 $3B
-    call IncrementEntityState                     ;; 36:629B $CD $12 $3B
-
-.ret_629E
-    ret                                           ;; 36:629E $C9
-
-func_036_629F::
-    call PointHLToEntityPosX                      ;; 36:629F $CD $23 $6C
-    ld   a, [hl]                                  ;; 36:62A2 $7E
-    ldh  [hMultiPurpose0], a                      ;; 36:62A3 $E0 $D7
-    call PointHLToEntityPosY                      ;; 36:62A5 $CD $28 $6C
-    ld   a, [hl]                                  ;; 36:62A8 $7E
-    ldh  [hMultiPurpose1], a                      ;; 36:62A9 $E0 $D8
-    ld   de, $00                                  ;; 36:62AB $11 $00 $00
-
-jr_036_62AE:
-    ld   a, e                                     ;; 36:62AE $7B
-    sub  c                                        ;; 36:62AF $91
-    jr   z, jr_036_631A                           ;; 36:62B0 $28 $68
-
-    ld   hl, wEntitiesTypeTable                   ;; 36:62B2 $21 $A0 $C3
-    add  hl, de                                   ;; 36:62B5 $19
-    ld   a, [hl]                                  ;; 36:62B6 $7E
-    cp   $EF                                      ;; 36:62B7 $FE $EF
-    jr   z, .jr_62C3                              ;; 36:62B9 $28 $08
-
-    cp   $F0                                      ;; 36:62BB $FE $F0
-    jr   z, .jr_62C3                              ;; 36:62BD $28 $04
-
-    cp   $F1                                      ;; 36:62BF $FE $F1
-    jr   nz, jr_036_631A                          ;; 36:62C1 $20 $57
-
-.jr_62C3
-    ld   hl, wEntitiesStateTable                  ;; 36:62C3 $21 $90 $C2
-    add  hl, de                                   ;; 36:62C6 $19
-    inc  [hl]                                     ;; 36:62C7 $34
-    ld   hl, wEntitiesPosXTable                   ;; 36:62C8 $21 $00 $C2
-    add  hl, de                                   ;; 36:62CB $19
-    ldh  a, [hMultiPurpose0]                      ;; 36:62CC $F0 $D7
-    cp   [hl]                                     ;; 36:62CE $BE
-    jr   nz, jr_036_62EA                          ;; 36:62CF $20 $19
-
-    ldh  a, [hMapRoom]                            ;; 36:62D1 $F0 $F6
-    cp   UNKNOWN_ROOM_0A                          ;; 36:62D3 $FE $0A
-    jr   nz, jr_036_630A                          ;; 36:62D5 $20 $33
-
-    ld   hl, wEntitiesPosYTable                   ;; 36:62D7 $21 $10 $C2
-    add  hl, de                                   ;; 36:62DA $19
-    ldh  a, [hMultiPurpose1]                      ;; 36:62DB $F0 $D8
-    sub  [hl]                                     ;; 36:62DD $96
-    bit  7, a                                     ;; 36:62DE $CB $7F
-    jr   z, .jr_62E4                              ;; 36:62E0 $28 $02
-
-    cpl                                           ;; 36:62E2 $2F
-    inc  a                                        ;; 36:62E3 $3C
-
-.jr_62E4
-    cp   $20                                      ;; 36:62E4 $FE $20
-    jr   nz, jr_036_62EA                          ;; 36:62E6 $20 $02
-
-    jr   jr_036_630A                              ;; 36:62E8 $18 $20
-
-jr_036_62EA:
-    ld   hl, wEntitiesPosYTable                   ;; 36:62EA $21 $10 $C2
-    add  hl, de                                   ;; 36:62ED $19
-    ldh  a, [hMultiPurpose1]                      ;; 36:62EE $F0 $D8
-    cp   [hl]                                     ;; 36:62F0 $BE
-    jr   nz, jr_036_631A                          ;; 36:62F1 $20 $27
-
-    ldh  a, [hMapRoom]                            ;; 36:62F3 $F0 $F6
-    cp   UNKNOWN_ROOM_0A                          ;; 36:62F5 $FE $0A
-    jr   nz, jr_036_630A                          ;; 36:62F7 $20 $11
-
-    ld   hl, wEntitiesPosXTable                   ;; 36:62F9 $21 $00 $C2
-    add  hl, de                                   ;; 36:62FC $19
-    ldh  a, [hMultiPurpose0]                      ;; 36:62FD $F0 $D7
-    sub  [hl]                                     ;; 36:62FF $96
-    bit  7, a                                     ;; 36:6300 $CB $7F
-    jr   z, .jr_6306                              ;; 36:6302 $28 $02
-
-    cpl                                           ;; 36:6304 $2F
-    inc  a                                        ;; 36:6305 $3C
-
-.jr_6306
-    cp   $20                                      ;; 36:6306 $FE $20
-    jr   nz, jr_036_631A                          ;; 36:6308 $20 $10
-
-jr_036_630A:
-    ld   hl, wEntitiesSpriteVariantTable          ;; 36:630A $21 $B0 $C3
-    add  hl, de                                   ;; 36:630D $19
-    inc  [hl]                                     ;; 36:630E $34
-    ld   hl, wEntitiesTransitionCountdownTable    ;; 36:630F $21 $E0 $C2
-    add  hl, de                                   ;; 36:6312 $19
-    ld   [hl], $04                                ;; 36:6313 $36 $04
-    ld   hl, wEntitiesStateTable                  ;; 36:6315 $21 $90 $C2
-    add  hl, de                                   ;; 36:6318 $19
-    inc  [hl]                                     ;; 36:6319 $34
-
-jr_036_631A:
-    inc  de                                       ;; 36:631A $13
-    ld   a, e                                     ;; 36:631B $7B
-    and  $0F                                      ;; 36:631C $E6 $0F
-    jr   nz, jr_036_62AE                          ;; 36:631E $20 $8E
-
-    ret                                           ;; 36:6320 $C9
-
-RotoswitchState1Handler::
-    ld   de, $00                                  ;; 36:6321 $11 $00 $00
-
-jr_036_6324:
-    ld   hl, wEntitiesTypeTable                   ;; 36:6324 $21 $A0 $C3
-    add  hl, de                                   ;; 36:6327 $19
-    ld   a, [hl]                                  ;; 36:6328 $7E
-    cp   $EF                                      ;; 36:6329 $FE $EF
-    jr   z, .jr_6335                              ;; 36:632B $28 $08
-
-    cp   $F0                                      ;; 36:632D $FE $F0
-    jr   z, .jr_6335                              ;; 36:632F $28 $04
-
-    cp   $F1                                      ;; 36:6331 $FE $F1
-    jr   nz, jr_036_634A                          ;; 36:6333 $20 $15
-
-.jr_6335
-    ld   hl, wEntitiesStateTable                  ;; 36:6335 $21 $90 $C2
-    add  hl, de                                   ;; 36:6338 $19
-    ld   a, [hl]                                  ;; 36:6339 $7E
-    cp   $00                                      ;; 36:633A $FE $00
-    jr   nz, jr_036_634A                          ;; 36:633C $20 $0C
-
-    ld   hl, wEntitiesIgnoreHitsCountdownTable    ;; 36:633E $21 $10 $C4
-    add  hl, bc                                   ;; 36:6341 $09
-    xor  a                                        ;; 36:6342 $AF
-    ld   [hl], a                                  ;; 36:6343 $77
-    ld   a, $00                                   ;; 36:6344 $3E $00
-    call SetEntityState                           ;; 36:6346 $CD $07 $6C
-    ret                                           ;; 36:6349 $C9
-
-jr_036_634A:
-    inc  de                                       ;; 36:634A $13
-    ld   a, e                                     ;; 36:634B $7B
-    and  $0F                                      ;; 36:634C $E6 $0F
-    jr   nz, jr_036_6324                          ;; 36:634E $20 $D4
-
-    ret                                           ;; 36:6350 $C9
-
-RotoswitchState2Handler::
-    call GetEntityTransitionCountdown             ;; 36:6351 $CD $05 $0C
-    jr   nz, ret_036_6381                         ;; 36:6354 $20 $2B
-
-    call PointHLToEntitySpriteVariant             ;; 36:6356 $CD $02 $6C
-    ldh  a, [hMapRoom]                            ;; 36:6359 $F0 $F6
-    cp   ROOM_OW_MARIN_BRIDGE                     ;; 36:635B $FE $08
-    jr   z, .jr_6364                              ;; 36:635D $28 $05
-
-    call func_036_6382                            ;; 36:635F $CD $82 $63
-    jr   jr_036_6366                              ;; 36:6362 $18 $02
-
-.jr_6364
-    ld   a, [hl]                                  ;; 36:6364 $7E
-    inc  a                                        ;; 36:6365 $3C
-
-jr_036_6366:
-    ld   [hl], a                                  ;; 36:6366 $77
-    cp   $0C                                      ;; 36:6367 $FE $0C
-    jr   nz, .jr_636C                             ;; 36:6369 $20 $01
-
-    xor  a                                        ;; 36:636B $AF
-
-.jr_636C
-    ld   [hl], a                                  ;; 36:636C $77
-    and  $03                                      ;; 36:636D $E6 $03
-    jr   nz, .jr_637C                             ;; 36:636F $20 $0B
-
-    ld   hl, wEntitiesIgnoreHitsCountdownTable    ;; 36:6371 $21 $10 $C4
-    add  hl, bc                                   ;; 36:6374 $09
-    xor  a                                        ;; 36:6375 $AF
-    ld   [hl], a                                  ;; 36:6376 $77
-    ld   a, $00                                   ;; 36:6377 $3E $00
-    call SetEntityState                           ;; 36:6379 $CD $07 $6C
-
-.jr_637C
-    ld   a, $04                                   ;; 36:637C $3E $04
-    call func_036_6C83                            ;; 36:637E $CD $83 $6C
-
-ret_036_6381:
-    ret                                           ;; 36:6381 $C9
-
-func_036_6382::
-    ld   a, [hl]                                  ;; 36:6382 $7E
-    inc  a                                        ;; 36:6383 $3C
-    cp   $02                                      ;; 36:6384 $FE $02
-    ret  nz                                       ;; 36:6386 $C0
-
-    ld   a, $06                                   ;; 36:6387 $3E $06
-    ret                                           ;; 36:6389 $C9
-
-    ld   a, [hl]                                  ;; 36:638A $7E
-    inc  a                                        ;; 36:638B $3C
-    cp   $0A                                      ;; 36:638C $FE $0A
-    ret  nz                                       ;; 36:638E $C0
-
-    ld   a, $02                                   ;; 36:638F $3E $02
-    ret                                           ;; 36:6391 $C9
-
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-Unknown090SpriteVariants::
-.variant0
-    db $70, $02
-    db $70, $22
-.variant1
-    db $72, $02
-    db $74, $02
-.variant2
-    db $76, $01
-    db $76, $21
-.variant3
-    db $74, $21
-    db $72, $21
-.variant4
-    db $70, $01
-    db $70, $21
-.variant5
-    db $72, $01
-    db $74, $01
-.variant6
-    db $76, $03
-    db $76, $23
-.variant7
-    db $74, $23
-    db $72, $23
-.variant8
-    db $70, $03
-    db $70, $23
-.variant9
-    db $72, $03
-    db $74, $03
-.variant10
-    db $76, $02
-    db $76, $22
-.variant11
-    db $74, $22
-    db $72, $22
-
-func_036_63C2::
-    ld   de, Unknown090SpriteVariants             ;; 36:63C2 $11 $92 $63
-    call RenderActiveEntitySpritesPair            ;; 36:63C5 $CD $C0 $3B
-    ret                                           ;; 36:63C8 $C9
+include "code/entities/36_rotoswitch.asm"
 
 ColorGhoulRedEntityHandler::
 ColorGhoulGreenEntityHandler::
@@ -6167,7 +5863,7 @@ ColorGhoulState2Handler::
     jr   nz, .jr_64A4                             ;; 36:6481 $20 $21
 
     ld   a, $08                                   ;; 36:6483 $3E $08
-    call func_036_6C83                            ;; 36:6485 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:6485 $CD $83 $6C
     ld   a, $01                                   ;; 36:6488 $3E $01
     call SetEntitySpriteVariant                   ;; 36:648A $CD $0C $3B
     call IncrementEntityState                     ;; 36:648D $CD $12 $3B
@@ -6209,7 +5905,7 @@ ColorGhoulState3Handler::
     jr   nz, .ret_64E6                            ;; 36:64C0 $20 $24
 
     ld   a, $08                                   ;; 36:64C2 $3E $08
-    call func_036_6C83                            ;; 36:64C4 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:64C4 $CD $83 $6C
     call PointHLToEntitySpriteVariant             ;; 36:64C7 $CD $02 $6C
     inc  [hl]                                     ;; 36:64CA $34
     ld   a, [hl]                                  ;; 36:64CB $7E
@@ -6217,7 +5913,7 @@ ColorGhoulState3Handler::
     jr   nz, .ret_64E6                            ;; 36:64CE $20 $16
 
     ld   a, $10                                   ;; 36:64D0 $3E $10
-    call func_036_6C83                            ;; 36:64D2 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:64D2 $CD $83 $6C
     ld   hl, Data_036_64BA                        ;; 36:64D5 $21 $BA $64
     ldh  a, [hActiveEntityType]                   ;; 36:64D8 $F0 $EB
     sub  ENTITY_COLOR_GHOUL_RED                   ;; 36:64DA $D6 $EC
@@ -6242,7 +5938,7 @@ ColorGhoulCommonStateHandler::
     xor  $01                                      ;; 36:64F2 $EE $01
     ld   [hl], a                                  ;; 36:64F4 $77
     ld   a, $08                                   ;; 36:64F5 $3E $08
-    call func_036_6C83                            ;; 36:64F7 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:64F7 $CD $83 $6C
     ldh  a, [hActiveEntityState]                  ;; 36:64FA $F0 $F0
     cp   $0A                                      ;; 36:64FC $FE $0A
     jr   c, .jr_6504                              ;; 36:64FE $38 $04
@@ -6263,7 +5959,7 @@ ColorGhoulStateBHandler::
     jp   nz, label_036_6528                       ;; 36:650B $C2 $28 $65
 
     ld   a, $08                                   ;; 36:650E $3E $08
-    call func_036_6C83                            ;; 36:6510 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:6510 $CD $83 $6C
     call PointHLToEntitySpriteVariant             ;; 36:6513 $CD $02 $6C
     dec  [hl]                                     ;; 36:6516 $35
     ld   a, [hl]                                  ;; 36:6517 $7E
@@ -6470,7 +6166,7 @@ ColorShellState0Handler::
     call PointHLToEntityDirection                 ;; 36:66A2 $CD $FD $6B
     ld   [hl], a                                  ;; 36:66A5 $77
     ld   a, $40                                   ;; 36:66A6 $3E $40
-    call func_036_6C83                            ;; 36:66A8 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:66A8 $CD $83 $6C
     ld   a, $01                                   ;; 36:66AB $3E $01
     call SetEntityState                           ;; 36:66AD $CD $07 $6C
 
@@ -6609,7 +6305,7 @@ ColorShellState1Handler::
     jr   nz, label_036_679F                       ;; 36:6762 $20 $3B
 
     ld   a, $10                                   ;; 36:6764 $3E $10
-    call func_036_6C83                            ;; 36:6766 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:6766 $CD $83 $6C
     ld   a, $00                                   ;; 36:6769 $3E $00
     jr   .jr_677F                                 ;; 36:676B $18 $12
 
@@ -6636,7 +6332,7 @@ ColorShellState1Handler::
     ld   a, $0E                                   ;; 36:6790 $3E $0E
     call ApplyVectorTowardsLink_trampoline        ;; 36:6792 $CD $AA $3B
     ld   a, $20                                   ;; 36:6795 $3E $20
-    call func_036_6C83                            ;; 36:6797 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:6797 $CD $83 $6C
     ld   a, $02                                   ;; 36:679A $3E $02
     call SetEntityState                           ;; 36:679C $CD $07 $6C
 
@@ -6878,7 +6574,7 @@ ColorShellState8Handler::
     call PointHLToEntitySpeedZ                    ;; 36:68DC $CD $F8 $6B
     ld   [hl], $10                                ;; 36:68DF $36 $10
     ld   a, $18                                   ;; 36:68E1 $3E $18
-    call func_036_6C83                            ;; 36:68E3 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:68E3 $CD $83 $6C
     ld   a, $09                                   ;; 36:68E6 $3E $09
     call SetEntityState                           ;; 36:68E8 $CD $07 $6C
 
@@ -6932,7 +6628,7 @@ ColorShellStateAHandler::
     jr   z, .ret_693E                             ;; 36:6934 $28 $08
 
     ld   a, $20                                   ;; 36:6936 $3E $20
-    call func_036_6C83                            ;; 36:6938 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:6938 $CD $83 $6C
     call IncrementEntityState                     ;; 36:693B $CD $12 $3B
 
 .ret_693E
@@ -6996,7 +6692,7 @@ jr_036_6981:
     jr   nz, jr_036_695F                          ;; 36:6985 $20 $D8
 
     ld   a, $18                                   ;; 36:6987 $3E $18
-    call func_036_6C83                            ;; 36:6989 $CD $83 $6C
+    call SetEntityTransitionCountdown_36          ;; 36:6989 $CD $83 $6C
     call IncrementEntityState                     ;; 36:698C $CD $12 $3B
     call func_036_6BCF                            ;; 36:698F $CD $CF $6B
     ldh  a, [hActiveEntityType]                   ;; 36:6992 $F0 $EB
@@ -7613,13 +7309,13 @@ func_036_6C7E::
     ld   l, a                                     ;; 36:6C81 $6F
     ret                                           ;; 36:6C82 $C9
 
-func_036_6C83::
+SetEntityTransitionCountdown_36::
     ld   hl, wEntitiesTransitionCountdownTable    ;; 36:6C83 $21 $E0 $C2
     add  hl, bc                                   ;; 36:6C86 $09
     ld   [hl], a                                  ;; 36:6C87 $77
     ret                                           ;; 36:6C88 $C9
 
-func_036_6C89::
+ClearEntityStatus_36::
     ld   hl, wEntitiesStatusTable                 ;; 36:6C89 $21 $80 $C2
     add  hl, bc                                   ;; 36:6C8C $09
     ld   [hl], $00                                ;; 36:6C8D $36 $00
@@ -7823,7 +7519,7 @@ TileGlintShownEntityHandler::
     jr   z, jr_036_6E3F                           ;; 36:6E22 $28 $1B
 
     call GetEntityTransitionCountdown             ;; 36:6E24 $CD $05 $0C
-    jp   z, func_036_6C89                         ;; 36:6E27 $CA $89 $6C
+    jp   z, ClearEntityStatus_36                  ;; 36:6E27 $CA $89 $6C
 
     rla                                           ;; 36:6E2A $17
     rla                                           ;; 36:6E2B $17
@@ -7912,7 +7608,7 @@ jr_036_6E3F:
     cp   $04                                      ;; 36:6E94 $FE $04
     jr   nz, .puzzleSolvedEnd                     ;; 36:6E96 $20 $08
 
-    call func_036_6C89                            ;; 36:6E98 $CD $89 $6C
+    call ClearEntityStatus_36                     ;; 36:6E98 $CD $89 $6C
     call MarkTriggerAsResolved                    ;; 36:6E9B $CD $60 $0C
     jr   .done                                    ;; 36:6E9E $18 $2D
 .puzzleSolvedEnd

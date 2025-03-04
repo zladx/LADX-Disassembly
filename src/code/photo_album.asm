@@ -150,7 +150,8 @@ PhotoAlbumInit2Handler:
     call func_028_45CD                            ; $40DD: PhotoAlbumInit2Handler $CD $CD $45
     jp   PhotoAlbumIncrementState                 ; $40E0: PhotoAlbumInit2Handler $C3 $DB $44
 
-Data_028_40E3::
+; VRAM memory addresses for the top left corner of each photo
+PhotoAlbumMapLookupTable::
     db   $E1, $98, $E5, $98, $EC, $98, $F0, $98 ; $40E3 |........|
     db   $61, $99, $65, $99, $6C, $99, $70, $99 ; $40EB |a.e.l.p.|
     db   $E1, $99, $E5, $99, $EC, $99, $F0, $99 ; $40F3 |........|
@@ -204,7 +205,7 @@ ENDC
     ld   hl, PhotoAlbumBackgroundMap              ; $4150: PhotoAlbumInit3Handler $21 $E0 $79
     call CopyBGMapFromBank                        ; $4153: PhotoAlbumInit3Handler $CD $69 $0B
 
-    call func_028_4185                            ; $4156: PhotoAlbumInit3Handler $CD $85 $41
+    call PhotoAlbumImageHandler                   ; $4156: PhotoAlbumInit3Handler $CD $85 $41
     call func_028_41FC                            ; $4159: PhotoAlbumInit3Handler $CD $FC $41
 
     ld   bc, $80                                  ; $415C: PhotoAlbumInit3Handler $01 $80 $00
@@ -231,19 +232,22 @@ func_028_4176::
     ret                                           ;; 28:4184 $C9
 
 
-func_028_4185::
+; Loads in the "OK" tiles for the unlocked photos
+PhotoAlbumImageHandler::
+    ; If Debug3 is set, set all photos enabled
     ld   a, [ROM_DebugTool3]                      ;; 28:4185 $FA $05 $00
     and  a                                        ;; 28:4188 $A7
-    jr   z, .else_4195_28                         ;; 28:4189 $28 $0A
+    jr   z, .notDebug                             ;; 28:4189 $28 $0A
 
     ld   a, $FF                                   ;; 28:418B $3E $FF
     ld   [wPhotos1], a                            ;; 28:418D $EA $0C $DC
     ld   a, $0F                                   ;; 28:4190 $3E $0F
     ld   [wPhotos2], a                            ;; 28:4192 $EA $0D $DC
-.else_4195_28:
+.notDebug:
     ld   bc, $01                                  ;; 28:4195 $01 $01 $00
 .loop_4198_28
-    ld   hl, Data_028_4265                        ;; 28:4198 $21 $65 $42
+    ; Fetch the appropriate mask, check if that photo is unlocked
+    ld   hl, PhotoAlbumOffsetLookupTable          ;; 28:4198 $21 $65 $42
     add  hl, bc                                   ;; 28:419B $09
     ld   a, [hl]                                  ;; 28:419C $7E
     ld   e, a                                     ;; 28:419D $5F
@@ -251,13 +255,13 @@ func_028_4185::
     ld   hl, wPhotos1                             ;; 28:41A0 $21 $0C $DC
     add  hl, de                                   ;; 28:41A3 $19
     ld   a, [hl]                                  ;; 28:41A4 $7E
-    ld   hl, Data_028_4259                        ;; 28:41A5 $21 $59 $42
+    ld   hl, PhotoAlbumMaskLookupTable            ;; 28:41A5 $21 $59 $42
     add  hl, bc                                   ;; 28:41A8 $09
     and  [hl]                                     ;; 28:41A9 $A6
-    jr   z, .else_41F5_28                         ;; 28:41AA $28 $49
+    jr   z, .incrementLoop                        ;; 28:41AA $28 $49
 
     ld   d, $00                                   ;; 28:41AC $16 $00
-    ld   hl, Data_028_40E3                        ;; 28:41AE $21 $E3 $40
+    ld   hl, PhotoAlbumMapLookupTable             ;; 28:41AE $21 $E3 $40
     ld   a, c                                     ;; 28:41B1 $79
     sla  a                                        ;; 28:41B2 $CB $27
     ld   e, a                                     ;; 28:41B4 $5F
@@ -289,7 +293,7 @@ func_028_4185::
     pop  hl                                       ;; 28:41D6 $E1
     ldh  a, [hIsGBC]                              ;; 28:41D7 $F0 $FE
     and  a                                        ;; 28:41D9 $A7
-    jr   z, .else_41F5_28                         ;; 28:41DA $28 $19
+    jr   z, .incrementLoop                        ;; 28:41DA $28 $19
 
     ld   a, $01                                   ;; 28:41DC $3E $01
     ldh  [rVBK], a                                ;; 28:41DE $E0 $4F
@@ -309,7 +313,7 @@ func_028_4185::
     ld   [hl], a                                  ;; 28:41F1 $77
     xor  a                                        ;; 28:41F2 $AF
     ldh  [rVBK], a                                ;; 28:41F3 $E0 $4F
-.else_41F5_28:
+.incrementLoop:
     inc  c                                        ;; 28:41F5 $0C
     ld   a, c                                     ;; 28:41F6 $79
     cp   $0C                                      ;; 28:41F7 $FE $0C
@@ -375,11 +379,12 @@ Data_028_424D::
     db   $50, $50, $50, $50, $70, $70, $70, $70   ;; 28:424D
     db   $90, $90, $90, $90
 
-Data_028_4259::
+PhotoAlbumMaskLookupTable::
     db   $01, $02, $40, $80
     db   $04, $08, $01, $02, $10, $20, $04, $08   ;; 28:425D
 
-Data_028_4265::
+; Values of $00 indicate that photo's bit is stored in wPhotos1, $01 are stored in wPhotos2
+PhotoAlbumOffsetLookupTable::
     db   $00, $00, $00, $00, $00, $00, $01, $01   ;; 28:4265
     db   $00, $00, $01, $01
 
@@ -494,7 +499,7 @@ func_028_427D::
     ld   a, [wD1CC]                               ;; 28:4302 $FA $CC $D1
     ld   c, a                                     ;; 28:4305 $4F
     ld   d, a                                     ;; 28:4306 $57
-    ld   hl, Data_028_4265                        ;; 28:4307 $21 $65 $42
+    ld   hl, PhotoAlbumOffsetLookupTable          ;; 28:4307 $21 $65 $42
     add  hl, bc                                   ;; 28:430A $09
     ld   a, [hl]                                  ;; 28:430B $7E
     ld   c, a                                     ;; 28:430C $4F
@@ -502,7 +507,7 @@ func_028_427D::
     add  hl, bc                                   ;; 28:4310 $09
     ld   a, [hl]                                  ;; 28:4311 $7E
     ld   c, d                                     ;; 28:4312 $4A
-    ld   hl, Data_028_4259                        ;; 28:4313 $21 $59 $42
+    ld   hl, PhotoAlbumMaskLookupTable            ;; 28:4313 $21 $59 $42
     add  hl, bc                                   ;; 28:4316 $09
     and  [hl]                                     ;; 28:4317 $A6
     jr   nz, .else_4322_28                        ;; 28:4318 $20 $08

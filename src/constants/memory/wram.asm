@@ -1074,6 +1074,7 @@ wEntitiesCollisionsTable::
 ;  - Knight: when attacking, iron ball speed parallel to attack direction
 ;  - Mini-Moldorm & Moldorm: movement angle (0x0 = right ... 0x4 = down ... 0x8 = left ... 0xC = up)
 ;  - Ghini: 0 if trying to move right, 1 if left
+;  - Dodongo Snake: offset to the index of the position history, used for the head
 wEntitiesPrivateState1Table::
   ds $10 ; C2B0 - C2BF
 
@@ -1090,6 +1091,7 @@ wEntitiesPrivateState1Table::
 ;  - Knight: when attacking, iron ball speed accumulator parallel to attack direction
 ;  - Mini-Moldorm & Moldorm: -1 when moving counter-clockwise, 1 otherwise
 ;  - Ghini: 0 if trying to move down, 1 if up
+;  - Dodongo Snake: offset to the index of the position history, used for the body
 wEntitiesPrivateState2Table::
   ds $10 ; C2C0 - C2CF
 
@@ -1121,6 +1123,7 @@ wEntitiesPrivateCountdown1Table::
 ;
 ; Examples:
 ;  - Ghini: countdown before starting xy movement
+;  - Dodongo Snake: countdown after eating a bomb
 wEntitiesPrivateCountdown2Table::
   ds $10 ; C300 - C30F
 
@@ -1251,6 +1254,8 @@ wC3CF::
 ; will be updated every 4 frames.
 ;
 ; Each entity uses this value differently.
+; 
+; In segmented entities (Mini-Moldorm, Dodongo Snake...), the most recent position's index in the position history
 wEntitiesInertiaTable::
   ds $10 ; C3D0 - C3DF
 
@@ -1569,8 +1574,10 @@ wIntroLightningVisibleCountdown::
 wCreditsScratch0::
 ; Is the arrow on the File Selection screen on the COPY item
 wIsFileSelectionArrowShifted::
-; Histories of up to 8 Mini-Moldorms' last 32 horizontal positions
-wMiniMoldormPositionXHistoryTable::
+; Histories of either:
+; - up to 8 Mini-Moldorms' last 32 horizontal positions (indexed by load order)
+; - up to 4 Dodongo Snakes' last 64 horizontal positions (indexed by load order)
+wEntitiesPositionXHistoryTable::
   ds 1 ; D000
 
 ; TODO comment
@@ -1735,8 +1742,8 @@ wD060::
 wD070::
   ds $90 ; D070 - D0FF
 
-; Histories of up to 8 Mini-Moldorms' last 32 vertical positions
-wMiniMoldormPositionYHistoryTable::
+; See wEntitiesPositionXHistoryTable
+wEntitiesPositionYHistoryTable::
 ; Unlabeled
 wD100::
   ds 1 ; D100

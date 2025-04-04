@@ -1566,6 +1566,20 @@ wEntitiesClearedRooms::
 
 section "WRAM Bank1", wramx[$D000], bank[1]
 
+UNION
+
+; Histories of either:
+; - up to 8 Mini-Moldorms' last 32 horizontal positions (indexed by load order)
+; - up to 4 Dodongo Snakes' last 64 horizontal positions (indexed by load order)
+wEntitiesPositionXHistoryTable::
+  ds $100 ; D000 - D0FF
+
+; See wEntitiesPositionXHistoryTable
+wEntitiesPositionYHistoryTable::
+  ds $100 ; D100 - D1FF
+
+NEXTU
+
 ; This location has multiple uses.
 ; Time during which the palette is modified by lightning during
 ; the intro sequence (both on sea and on Link's face).
@@ -1574,10 +1588,6 @@ wIntroLightningVisibleCountdown::
 wCreditsScratch0::
 ; Is the arrow on the File Selection screen on the COPY item
 wIsFileSelectionArrowShifted::
-; Histories of either:
-; - up to 8 Mini-Moldorms' last 32 horizontal positions (indexed by load order)
-; - up to 4 Dodongo Snakes' last 64 horizontal positions (indexed by load order)
-wEntitiesPositionXHistoryTable::
   ds 1 ; D000
 
 ; TODO comment
@@ -1742,8 +1752,6 @@ wD060::
 wD070::
   ds $90 ; D070 - D0FF
 
-; See wEntitiesPositionXHistoryTable
-wEntitiesPositionYHistoryTable::
 ; Unlabeled
 wD100::
   ds 1 ; D100
@@ -2126,6 +2134,8 @@ wD1D1::
 
 ; Unused
 ds ($D200 - $D1D2)
+
+ENDU
 
 ENDU
 

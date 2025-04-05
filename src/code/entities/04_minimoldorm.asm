@@ -8,7 +8,7 @@ EntityInitMiniMoldorm::
     sla  e                                        ;; 04:5A25 $CB $23
     sla  e                                        ;; 04:5A27 $CB $23
     ld   d, b                                     ;; 04:5A29 $50
-    ld   hl, wMiniMoldormPositionXHistoryTable    ;; 04:5A2A $21 $00 $D0
+    ld   hl, wEntitiesPositionXHistoryTable       ;; 04:5A2A $21 $00 $D0
     add  hl, de                                   ;; 04:5A2D $19
     push de                                       ;; 04:5A2E $D5
     ld   e, $20                                   ;; 04:5A2F $1E $20
@@ -22,7 +22,7 @@ EntityInitMiniMoldorm::
     jr   nz, .initXHistoryTableLoop               ;; 04:5A37 $20 $F8
 
     pop  de                                       ;; 04:5A39 $D1
-    ld   hl, wMiniMoldormPositionYHistoryTable    ;; 04:5A3A $21 $00 $D1
+    ld   hl, wEntitiesPositionYHistoryTable       ;; 04:5A3A $21 $00 $D1
     add  hl, de                                   ;; 04:5A3D $19
     ld   e, $20                                   ;; 04:5A3E $1E $20
 
@@ -126,7 +126,7 @@ MiniMoldormEntityHandler::
     sla  e                                        ;; 04:5AC4 $CB $23
     ld   d, $00                                   ;; 04:5AC6 $16 $00
     push de                                       ;; 04:5AC8 $D5
-    ld   hl, wMiniMoldormPositionXHistoryTable    ;; 04:5AC9 $21 $00 $D0
+    ld   hl, wEntitiesPositionXHistoryTable       ;; 04:5AC9 $21 $00 $D0
     add  hl, de                                   ;; 04:5ACC $19
     ldh  a, [hMultiPurpose0]                      ;; 04:5ACD $F0 $D7
     ld   e, a                                     ;; 04:5ACF $5F
@@ -134,7 +134,7 @@ MiniMoldormEntityHandler::
     ldh  a, [hActiveEntityPosX]                   ;; 04:5AD1 $F0 $EE
     ld   [hl], a                                  ;; 04:5AD3 $77
     pop  de                                       ;; 04:5AD4 $D1
-    ld   hl, wMiniMoldormPositionYHistoryTable    ;; 04:5AD5 $21 $00 $D1
+    ld   hl, wEntitiesPositionYHistoryTable       ;; 04:5AD5 $21 $00 $D1
     add  hl, de                                   ;; 04:5AD8 $19
     ldh  a, [hMultiPurpose0]                      ;; 04:5AD9 $F0 $D7
     ld   e, a                                     ;; 04:5ADB $5F
@@ -274,7 +274,7 @@ RenderMiniMoldorm::
     ld   d, b                                     ;; 04:5B9E $50
     push de                                       ;; 04:5B9F $D5
     push de                                       ;; 04:5BA0 $D5
-    ld   hl, wMiniMoldormPositionXHistoryTable    ;; 04:5BA1 $21 $00 $D0
+    ld   hl, wEntitiesPositionXHistoryTable       ;; 04:5BA1 $21 $00 $D0
     add  hl, de                                   ;; 04:5BA4 $19
     ldh  a, [hMultiPurpose0]                      ;; 04:5BA5 $F0 $D7
     sub  $09                                      ;; 04:5BA7 $D6 $09
@@ -285,7 +285,7 @@ RenderMiniMoldorm::
     ld   a, [hl]                                  ;; 04:5BAE $7E
     ldh  [hActiveEntityPosX], a                   ;; 04:5BAF $E0 $EE
     pop  de                                       ;; 04:5BB1 $D1
-    ld   hl, wMiniMoldormPositionYHistoryTable    ;; 04:5BB2 $21 $00 $D1
+    ld   hl, wEntitiesPositionYHistoryTable       ;; 04:5BB2 $21 $00 $D1
     add  hl, de                                   ;; 04:5BB5 $19
     ldh  a, [hMultiPurpose0]                      ;; 04:5BB6 $F0 $D7
     sub  $09                                      ;; 04:5BB8 $D6 $09
@@ -301,7 +301,7 @@ RenderMiniMoldorm::
     call RenderActiveEntitySpritesPair            ;; 04:5BC9 $CD $C0 $3B
     pop  de                                       ;; 04:5BCC $D1
     push de                                       ;; 04:5BCD $D5
-    ld   hl, wMiniMoldormPositionXHistoryTable    ;; 04:5BCE $21 $00 $D0
+    ld   hl, wEntitiesPositionXHistoryTable       ;; 04:5BCE $21 $00 $D0
     add  hl, de                                   ;; 04:5BD1 $19
     ldh  a, [hMultiPurpose0]                      ;; 04:5BD2 $F0 $D7
     sub  $10                                      ;; 04:5BD4 $D6 $10
@@ -312,7 +312,7 @@ RenderMiniMoldorm::
     ld   a, [hl]                                  ;; 04:5BDB $7E
     ldh  [hActiveEntityPosX], a                   ;; 04:5BDC $E0 $EE
     pop  de                                       ;; 04:5BDE $D1
-    ld   hl, wMiniMoldormPositionYHistoryTable    ;; 04:5BDF $21 $00 $D1
+    ld   hl, wEntitiesPositionYHistoryTable       ;; 04:5BDF $21 $00 $D1
     add  hl, de                                   ;; 04:5BE2 $19
     ldh  a, [hMultiPurpose0]                      ;; 04:5BE3 $F0 $D7
     sub  $10                                      ;; 04:5BE5 $D6 $10

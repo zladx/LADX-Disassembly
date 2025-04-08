@@ -1382,7 +1382,7 @@ SprinkleMagicPowder::
     ret                                           ;; 20:4C97 $C9
 
 PlayBoomerangSfx::
-    ld   a, [wC5AC]                               ;; 20:4C98 $FA $AC $C5
+    ld   a, [wBoomerangSFXCounter]                ;; 20:4C98 $FA $AC $C5
     and  a                                        ;; 20:4C9B $A7
     jr   nz, PlayBoomerangSfx.return              ;; 20:4C9C $20 $04
 

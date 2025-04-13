@@ -329,7 +329,7 @@ jr_007_6B33:
 
     ld   [hl], $A0                                ;; 07:6B38 $36 $A0
     ldh  a, [hMapRoom]                            ;; 07:6B3A $F0 $F6
-    cp   UNKNOWN_ROOM_95                          ;; 07:6B3C $FE $95
+    cp   ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_1    ;; 07:6B3C $FE $95
     jr   z, jr_007_6B42                           ;; 07:6B3E $28 $02
 
 .jr_6B40
@@ -779,10 +779,10 @@ func_007_6DF6::
 
     ld   e, $FF                                   ;; 07:6E06 $1E $FF
     ldh  a, [hMapRoom]                            ;; 07:6E08 $F0 $F6
-    cp   UNKNOWN_ROOM_80                          ;; 07:6E0A $FE $80
+    cp   ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_4    ;; 07:6E0A $FE $80
     jr   z, .jr_6E16                              ;; 07:6E0C $28 $08
     ld   e, $03                                   ;; 07:6E0E $1E $03
-    cp   UNKNOWN_ROOM_95                          ;; 07:6E10 $FE $95
+    cp   ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_1    ;; 07:6E10 $FE $95
     jr   z, .jr_6E16                              ;; 07:6E12 $28 $02
     ld   e, $02                                   ;; 07:6E14 $1E $02
 
@@ -944,7 +944,7 @@ func_007_6ED0::
     add  hl, bc                                   ;; 07:6EE5 $09
     ld   [hl], $FF                                ;; 07:6EE6 $36 $FF
     ldh  a, [hMapRoom]                            ;; 07:6EE8 $F0 $F6
-    cp   UNKNOWN_ROOM_80                          ;; 07:6EEA $FE $80
+    cp   ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_4    ;; 07:6EEA $FE $80
     jr   nz, func_007_6EF0                        ;; 07:6EEC $20 $02
 
     ld   [hl], $C0                                ;; 07:6EEE $36 $C0

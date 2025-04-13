@@ -216,7 +216,6 @@ DEF UNKNOWN_ROOM_75                          EQU $75
 DEF UNKNOWN_ROOM_79                          EQU $79
 DEF UNKNOWN_ROOM_7F                          EQU $7F
 
-DEF UNKNOWN_ROOM_80                          EQU $80 ; Mysterious Forest enterance from Mabe ?, Master Stalfos final room ?, could also be both
 DEF UNKNOWN_ROOM_83                          EQU $83
 DEF UNKNOWN_ROOM_8A                          EQU $8A
 DEF UNKNOWN_ROOM_8B                          EQU $8B
@@ -224,7 +223,6 @@ DEF UNKNOWN_ROOM_8D                          EQU $8D
 DEF UNKNOWN_ROOM_8F                          EQU $8F
 
 DEF UNKNOWN_ROOM_93                          EQU $93
-DEF UNKNOWN_ROOM_95                          EQU $95
 DEF UNKNOWN_ROOM_96                          EQU $96 ; Master Stalfos "screw you" letter chest ?
 DEF UNKNOWN_ROOM_98                          EQU $98
 DEF UNKNOWN_ROOM_9A                          EQU $9A

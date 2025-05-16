@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ghcr.io/gbdev/rgbds:v0.9.2
+      - image: ghcr.io/gbdev/rgbds:master
     steps:
       - checkout
       - run:

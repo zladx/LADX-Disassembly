@@ -513,7 +513,7 @@ FOR INDEX, 5
     IF CHARLEN("{THIEF_NAME}") < INDEX + 1
         db 0
     ELSE
-        db CHARSUB("{THIEF_NAME}", INDEX + 1) + 1 ;; 00:25B8
+        db STRCHAR("{THIEF_NAME}", INDEX) + 1     ;; 00:25B8
     ENDC
 ENDR
 

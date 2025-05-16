@@ -10,7 +10,7 @@ RUN apt-get install -y build-essential bison pkg-config libpng-dev
 # Retrieve rgbds
 RUN git clone https://github.com/gbdev/rgbds.git && \
   cd rgbds && \
-  git fetch --tags && git checkout v0.8.0
+  git fetch --tags && git checkout v0.9.3
 
 # Build rgbds
 RUN cd rgbds && make install

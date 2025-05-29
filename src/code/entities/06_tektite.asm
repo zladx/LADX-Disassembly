@@ -20,7 +20,7 @@ TektiteEntityHandler::
     call ApplyRecoilIfNeeded_06                   ;; 06:78D0 $CD $F7 $64
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 06:78D3 $CD $39 $3B
     call UpdateEntityPosWithSpeed_06              ;; 06:78D6 $CD $41 $65
-    call DefaultEntityPhysics_trampoline          ;; 06:78D9 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:78D9 $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 06:78DC $21 $A0 $C2
     add  hl, bc                                   ;; 06:78DF $09
     ld   a, [hl]                                  ;; 06:78E0 $7E

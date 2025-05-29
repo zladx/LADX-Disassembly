@@ -34,7 +34,7 @@ ThreeOfAKindEntityHandler::
     call ReturnIfNonInteractive_06                ;; 06:493D $CD $C6 $64
     call DecrementEntityIgnoreHitsCountdown       ;; 06:4940 $CD $56 $0C
     call UpdateEntityPosWithSpeed_06              ;; 06:4943 $CD $41 $65
-    call DefaultEntityPhysics_trampoline          ;; 06:4946 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:4946 $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ;; 06:4949 $F0 $F0
     JP_TABLE                                      ;; 06:494B
 ._00 dw ThreeOfAKindState0Handler

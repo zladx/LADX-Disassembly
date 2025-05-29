@@ -262,7 +262,7 @@ YipYipState0Handler::
 
 YipYipState1Handler::
     call UpdateEntityPosWithSpeed_06              ;; 06:5B2A $CD $41 $65
-    call DefaultEntityPhysics_trampoline          ;; 06:5B2D $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:5B2D $CD $23 $3B
     ldh  a, [hMultiPurposeG]                      ;; 06:5B30 $F0 $E8
     and  a                                        ;; 06:5B32 $A7
     jr   z, label_006_5B4C                        ;; 06:5B33 $28 $17

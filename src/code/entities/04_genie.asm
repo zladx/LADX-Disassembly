@@ -278,7 +278,7 @@ jr_004_41A6:
     call UpdateEntityPosWithSpeed_04              ;; 04:41A6 $CD $CA $6D
 
 jr_004_41A9:
-    call DefaultEntityPhysics_trampoline          ;; 04:41A9 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 04:41A9 $CD $23 $3B
 
 jr_004_41AC:
     call DecrementEntityIgnoreHitsCountdown       ;; 04:41AC $CD $56 $0C
@@ -387,7 +387,7 @@ func_004_4214::
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 04:425A $CD $39 $3B
     ld   hl, wEntitiesOptions1Table               ;; 04:425D $21 $30 $C4
     add  hl, bc                                   ;; 04:4260 $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IMMUNE_WATER_PIT ;; 04:4261 $36 $D0
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_NO_GROUND_INTERACTION ;; 04:4261 $36 $D0
     ldh  a, [hMultiPurposeG]                      ;; 04:4263 $F0 $E8
     and  $80                                      ;; 04:4265 $E6 $80
     jr   z, .jr_4278                              ;; 04:4267 $28 $0F
@@ -402,7 +402,7 @@ func_004_4214::
 
 .jr_4278
     call UpdateEntityPosWithSpeed_04              ;; 04:4278 $CD $CA $6D
-    call DefaultEntityPhysics_trampoline          ;; 04:427B $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 04:427B $CD $23 $3B
     jp   label_004_4144                           ;; 04:427E $C3 $44 $41
 
 Data_004_4281::
@@ -829,7 +829,7 @@ func_004_4517::
     ld   [hl], $0C                                ;; 04:451B $36 $0C
     ld   hl, wEntitiesOptions1Table               ;; 04:451D $21 $30 $C4
     add  hl, bc                                   ;; 04:4520 $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_MOVE_PIT_WATER ;; 04:4521 $36 $81
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_NO_WALL_COLLISION ;; 04:4521 $36 $81
     ld   hl, wEntitiesFlashCountdownTable         ;; 04:4523 $21 $20 $C4
     add  hl, bc                                   ;; 04:4526 $09
     ld   a, [hl]                                  ;; 04:4527 $7E
@@ -845,7 +845,7 @@ func_004_4517::
     call ApplyRecoilIfNeeded_04                   ;; 04:4535 $CD $80 $6D
     call label_3B70                               ;; 04:4538 $CD $70 $3B
     call UpdateEntityPosWithSpeed_04              ;; 04:453B $CD $CA $6D
-    call DefaultEntityPhysics_trampoline          ;; 04:453E $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 04:453E $CD $23 $3B
     ldh  a, [hFrameCounter]                       ;; 04:4541 $F0 $E7
     and  $03                                      ;; 04:4543 $E6 $03
     jr   nz, jr_004_4568                          ;; 04:4545 $20 $21

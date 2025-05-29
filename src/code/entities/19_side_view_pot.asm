@@ -119,7 +119,7 @@ SideViewPotState1And2Handler::
     inc  [hl]                                     ;; 19:598A $34
 
 jr_019_598B:
-    call DefaultEntityPhysics_trampoline          ;; 19:598B $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 19:598B $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 19:598E $21 $A0 $C2
     add  hl, bc                                   ;; 19:5991 $09
     ld   a, [hl]                                  ;; 19:5992 $7E

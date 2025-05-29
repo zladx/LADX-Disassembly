@@ -93,7 +93,7 @@ ResetEntity::
     ld   hl, wEntitiesUnknowTableJ                ;; 15:408E $21 $F0 $C4
     add  hl, bc                                   ;; 15:4091 $09
     ld   [hl], b                                  ;; 15:4092 $70
-    ld   hl, wC5D0                                ;; 15:4093 $21 $D0 $C5
+    ld   hl, wEntitiesThrownDirectionTable        ;; 15:4093 $21 $D0 $C5
     add  hl, bc                                   ;; 15:4096 $09
     ld   [hl], $FF                                ;; 15:4097 $36 $FF
     ld   hl, wEntitiesPowerRecoilingTable         ;; 15:4099 $21 $A0 $C4

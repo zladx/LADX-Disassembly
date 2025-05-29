@@ -61,7 +61,7 @@ jr_007_620E:
     ld   a, [hl]                                  ;; 07:621F $7E
     push hl                                       ;; 07:6220 $E5
     push af                                       ;; 07:6221 $F5
-    call DefaultEntityPhysics_trampoline          ;; 07:6222 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 07:6222 $CD $23 $3B
     pop  af                                       ;; 07:6225 $F1
     pop  hl                                       ;; 07:6226 $E1
     ld   [hl], a                                  ;; 07:6227 $77

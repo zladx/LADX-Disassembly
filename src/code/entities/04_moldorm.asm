@@ -432,11 +432,11 @@ func_004_5902::
 
     ld   hl, wEntitiesOptions1Table               ;; 04:59F5 $21 $30 $C4
     add  hl, bc                                   ;; 04:59F8 $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IMMUNE_WATER_PIT ;; 04:59F9 $36 $90
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_NO_GROUND_INTERACTION ;; 04:59F9 $36 $90
     call label_3B70                               ;; 04:59FB $CD $70 $3B
     ld   hl, wEntitiesOptions1Table               ;; 04:59FE $21 $30 $C4
     add  hl, bc                                   ;; 04:5A01 $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IMMUNE_WATER_PIT ;; 04:5A02 $36 $D0
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_NO_GROUND_INTERACTION ;; 04:5A02 $36 $D0
 
 ret_004_5A04:
     ret                                           ;; 04:5A04 $C9

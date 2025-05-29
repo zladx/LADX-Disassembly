@@ -106,7 +106,7 @@ AnimateRoamingEnemy::
     call SpawnMoblinArrow                         ;; 03:5886 $CD $47 $59
 
 .projectileEnd
-    call DefaultEntityPhysics                     ;; 03:5889 $CD $93 $78
+    call ApplyEntityInteractionWithBackground     ;; 03:5889 $CD $93 $78
     ret                                           ;; 03:588C $C9
 
 jr_003_588D:
@@ -182,7 +182,7 @@ RoamingEnemyState0Handler:
 
 StopWalkingEnd:
     call UpdateEntityPosWithSpeed_03              ;; 03:58F6 $CD $25 $7F
-    call DefaultEntityPhysics                     ;; 03:58F9 $CD $93 $78
+    call ApplyEntityInteractionWithBackground     ;; 03:58F9 $CD $93 $78
 
 ; Set the entity sprite variant to match the preset entity direction.
 ; Some inertia is added, so that after a direction change the entity waits for a bit before turning again.

@@ -431,7 +431,7 @@ jr_004_5273:
     ld   hl, wEntitiesSpeedXTable                 ;; 04:532B $21 $40 $C2
     add  hl, bc                                   ;; 04:532E $09
     ld   [hl], $01                                ;; 04:532F $36 $01
-    call DefaultEntityPhysics_trampoline          ;; 04:5331 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 04:5331 $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 04:5334 $21 $A0 $C2
     add  hl, bc                                   ;; 04:5337 $09
     ld   a, [hl]                                  ;; 04:5338 $7E
@@ -729,7 +729,7 @@ jr_004_557E:
 
 func_004_5586::
     call UpdateEntityPosWithSpeed_04              ;; 04:5586 $CD $CA $6D
-    call DefaultEntityPhysics_trampoline          ;; 04:5589 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 04:5589 $CD $23 $3B
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 04:558C $CD $39 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 04:558F $21 $A0 $C2
     add  hl, bc                                   ;; 04:5592 $09
@@ -794,7 +794,7 @@ jr_004_55D8:
 
 func_004_55E0::
     call UpdateEntityPosWithSpeed_04              ;; 04:55E0 $CD $CA $6D
-    call DefaultEntityPhysics_trampoline          ;; 04:55E3 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 04:55E3 $CD $23 $3B
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 04:55E6 $CD $39 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 04:55E9 $21 $A0 $C2
     add  hl, bc                                   ;; 04:55EC $09

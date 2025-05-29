@@ -35,7 +35,7 @@ RotoswitchState0Handler::
     call label_3B70                               ;; 36:6270 $CD $70 $3B
 
 .jr_6273
-    call DefaultEntityPhysics_trampoline          ;; 36:6273 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 36:6273 $CD $23 $3B
     call PointHLToEntitySpriteVariant             ;; 36:6276 $CD $02 $6C
     ld   a, [hl]                                  ;; 36:6279 $7E
     and  $03                                      ;; 36:627A $E6 $03

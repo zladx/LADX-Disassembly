@@ -77,7 +77,7 @@ ApplyRecoilIfNeeded_04::
     and  $20                                      ;; 04:6DB5 $E6 $20
     jr   nz, .restoreOriginalVelocity             ;; 04:6DB7 $20 $03
 
-    call DefaultEntityPhysics_trampoline          ;; 04:6DB9 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 04:6DB9 $CD $23 $3B
 
 .restoreOriginalVelocity
     ld   hl, wEntitiesSpeedYTable                 ;; 04:6DBC $21 $50 $C2
@@ -369,7 +369,7 @@ SetEntityVariantForDirection_04::
     ld   a, [hl]                                  ;; 04:7CBF $7E
     push af                                       ;; 04:7CC0 $F5
     ld   [hl], $01                                ;; 04:7CC1 $36 $01
-    call DefaultEntityPhysics_trampoline          ;; 04:7CC3 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 04:7CC3 $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 04:7CC6 $21 $A0 $C2
     add  hl, bc                                   ;; 04:7CC9 $09
     ld   a, [hl]                                  ;; 04:7CCA $7E
@@ -380,7 +380,7 @@ SetEntityVariantForDirection_04::
     ld   hl, wEntitiesSpeedYTable                 ;; 04:7CD2 $21 $50 $C2
     add  hl, bc                                   ;; 04:7CD5 $09
     ld   [hl], $FF                                ;; 04:7CD6 $36 $FF
-    call DefaultEntityPhysics_trampoline          ;; 04:7CD8 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 04:7CD8 $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 04:7CDB $21 $A0 $C2
     add  hl, bc                                   ;; 04:7CDE $09
     pop  af                                       ;; 04:7CDF $F1

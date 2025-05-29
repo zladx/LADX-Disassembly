@@ -36,7 +36,7 @@ HookshotBridgeHandler::
     add  hl, bc                                   ;; 15:7449 $09
     ld   [hl], a                                  ;; 15:744A $77
     call UpdateEntityYPosWithSpeed_15             ;; 15:744B $CD $8B $7B
-    call DefaultEntityPhysics_trampoline          ;; 15:744E $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 15:744E $CD $23 $3B
     ldh  a, [hObjectUnderEntity]                  ;; 15:7451 $F0 $AF
     cp   $9D                                      ;; 15:7453 $FE $9D
     jr   z, .jr_746A                              ;; 15:7455 $28 $13
@@ -235,10 +235,10 @@ func_015_7995::
     ld   hl, wEntitiesGroundStatusTable           ;; 15:799A $21 $70 $C4
     add  hl, bc                                   ;; 15:799D $09
     ld   a, [hl]                                  ;; 15:799E $7E
-    cp   $02                                      ;; 15:799F $FE $02
+    cp   ENTITY_GROUND_STATUS_SHALLOW_WATER       ;; 15:799F $FE $02
     jp   z, label_015_79DF                        ;; 15:79A1 $CA $DF $79
 
-    cp   $03                                      ;; 15:79A4 $FE $03
+    cp   ENTITY_GROUND_STATUS_TALL_GRASS          ;; 15:79A4 $FE $03
     jp   z, label_015_7A27                        ;; 15:79A6 $CA $27 $7A
 
     ld   hl, wEntitiesPosZTable                   ;; 15:79A9 $21 $10 $C3
@@ -614,7 +614,7 @@ ApplyRecoilIfNeeded_15::
     and  $20                                      ;; 15:7B73 $E6 $20
     jr   nz, .restoreOriginalSpeed                ;; 15:7B75 $20 $03
 
-    call DefaultEntityPhysics_trampoline          ;; 15:7B77 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 15:7B77 $CD $23 $3B
 
 .restoreOriginalSpeed
     ld   hl, wEntitiesSpeedYTable                 ;; 15:7B7A $21 $50 $C2

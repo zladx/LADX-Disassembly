@@ -106,7 +106,7 @@ UrchinEntityHandler::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ;; 15:741A $21 $10 $C4
     add  hl, bc                                   ;; 15:741D $09
     ld   [hl], $03                                ;; 15:741E $36 $03
-    call DefaultEntityPhysics_trampoline          ;; 15:7420 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 15:7420 $CD $23 $3B
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ;; 15:7423 $21 $10 $C4
     add  hl, bc                                   ;; 15:7426 $09
     ld   [hl], b                                  ;; 15:7427 $70

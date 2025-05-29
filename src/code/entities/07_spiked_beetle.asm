@@ -52,7 +52,7 @@ SpikedBeetleEntityHandler::
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 07:77C4 $CD $39 $3B
     call UpdateEntityPosWithSpeed_07              ;; 07:77C7 $CD $0A $7E
     call AddEntityZSpeedToPos_07                  ;; 07:77CA $CD $43 $7E
-    call DefaultEntityPhysics_trampoline          ;; 07:77CD $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 07:77CD $CD $23 $3B
     ld   hl, wEntitiesSpeedZTable                 ;; 07:77D0 $21 $20 $C3
     add  hl, bc                                   ;; 07:77D3 $09
     dec  [hl]                                     ;; 07:77D4 $35
@@ -312,7 +312,7 @@ SpikedBeetleFlippedHandler::
     ld   a, [hl]                                  ;; 07:792F $7E
     push af                                       ;; 07:7930 $F5
     ld   [hl], $01                                ;; 07:7931 $36 $01
-    call DefaultEntityPhysics_trampoline          ;; 07:7933 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 07:7933 $CD $23 $3B
     pop  af                                       ;; 07:7936 $F1
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ;; 07:7937 $21 $10 $C4
     add  hl, bc                                   ;; 07:793A $09

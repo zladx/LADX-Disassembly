@@ -249,7 +249,7 @@ jr_005_4137:
     ld   [de], a                                  ;; 05:415F $12
 
 .jr_4160
-    call DefaultEntityPhysics_trampoline          ;; 05:4160 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 05:4160 $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ;; 05:4163 $F0 $F0
     JP_TABLE                                      ;; 05:4165
 ._00 dw func_005_4180                             ;; 05:4166

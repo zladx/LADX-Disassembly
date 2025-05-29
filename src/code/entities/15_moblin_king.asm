@@ -38,7 +38,7 @@ MoblinKingEntityHandler::
     add  hl, bc                                   ;; 15:46F6 $09
     res  ENTITY_PHYSICS_B_HARMLESS, [hl]          ;; 15:46F7 $CB $BE
     call UpdateEntityPosWithSpeed_15              ;; 15:46F9 $CD $88 $7B
-    call DefaultEntityPhysics_trampoline          ;; 15:46FC $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 15:46FC $CD $23 $3B
     call AddEntityZSpeedToPos_15                  ;; 15:46FF $CD $C1 $7B
     ld   hl, wEntitiesSpeedZTable                 ;; 15:4702 $21 $20 $C3
     add  hl, bc                                   ;; 15:4705 $09

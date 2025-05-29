@@ -54,7 +54,7 @@ KnightWalkingHandler::
 
 .skipUpdateSpeed
     call UpdateEntityPosWithSpeed_04              ;; 04:6A04 $CD $CA $6D
-    call DefaultEntityPhysics_trampoline          ;; 04:6A07 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 04:6A07 $CD $23 $3B
     call GetEntityXDistanceToLink_04              ;; 04:6A0A $CD $35 $6E
     add  $30                                      ;; 04:6A0D $C6 $30
     cp   $60                                      ;; 04:6A0F $FE $60
@@ -240,7 +240,7 @@ RenderKnightAndHandleIronBall::
     add  [hl]                                     ;; 04:6B05 $86
     add  $F3                                      ;; 04:6B06 $C6 $F3
     ld   [hl], a                                  ;; 04:6B08 $77
-    jr   calcIronBallPosEnd                       ;; 04:6B09 $18 $46
+    jr   .calcIronBallPosEnd                      ;; 04:6B09 $18 $46
 
 .verticalAttack
     ; Vertical attack (hMultiPurpose0 = 1 if attacking up, else 0)
@@ -272,7 +272,7 @@ RenderKnightAndHandleIronBall::
     add  [hl]                                     ;; 04:6B2B $86
     add  $F8                                      ;; 04:6B2C $C6 $F8
     ld   [hl], a                                  ;; 04:6B2E $77
-    jr   calcIronBallPosEnd                       ;; 04:6B2F $18 $20
+    jr   .calcIronBallPosEnd                      ;; 04:6B2F $18 $20
 
 .notAttacking
     ld   hl, wEntitiesInertiaTable                ;; 04:6B31 $21 $D0 $C3
@@ -294,7 +294,7 @@ RenderKnightAndHandleIronBall::
     add  $F3                                      ;; 04:6B4D $C6 $F3
     ldh  [hActiveEntityPosX], a                   ;; 04:6B4F $E0 $EE
 
-calcIronBallPosEnd:
+.calcIronBallPosEnd
     ; Draw iron ball
     ld   a, $02                                   ;; 04:6B51 $3E $02
     ldh  [hActiveEntitySpriteVariant], a          ;; 04:6B53 $E0 $F1

@@ -155,7 +155,7 @@ MiniMoldormEntityHandler::
     call UpdateEntityPosWithSpeed_04              ;; 04:5AEE $CD $CA $6D
 
 .skipPosUpdate
-    call DefaultEntityPhysics_trampoline          ;; 04:5AF1 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 04:5AF1 $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 04:5AF4 $21 $A0 $C2
     add  hl, bc                                   ;; 04:5AF7 $09
     ld   a, [hl]                                  ;; 04:5AF8 $7E

@@ -123,7 +123,7 @@ PokeyEntityHandler::
 
 .jr_4C7F
     call UpdateEntityPosWithSpeed_15              ;; 15:4C7F $CD $88 $7B
-    jp   DefaultEntityPhysics_trampoline          ;; 15:4C82 $C3 $23 $3B
+    jp   ApplyEntityInteractionWithBackground_trampoline ;; 15:4C82 $C3 $23 $3B
 
 func_015_4C85::
     ld   d, b                                     ;; 15:4C85 $50
@@ -198,7 +198,7 @@ label_015_4CD9:
 
 .jr_4CED
     call UpdateEntityPosWithSpeed_15              ;; 15:4CED $CD $88 $7B
-    call DefaultEntityPhysics_trampoline          ;; 15:4CF0 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 15:4CF0 $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 15:4CF3 $21 $A0 $C2
     add  hl, bc                                   ;; 15:4CF6 $09
     ld   a, [hl]                                  ;; 15:4CF7 $7E

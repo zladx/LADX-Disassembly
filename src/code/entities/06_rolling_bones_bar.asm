@@ -92,7 +92,7 @@ jr_006_6F48:
 
 .jr_6F53
     call AddEntitySpeedToPos_06                   ;; 06:6F53 $CD $4E $65
-    call DefaultEntityPhysics_trampoline          ;; 06:6F56 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:6F56 $CD $23 $3B
     ld   hl, wEntitiesSpeedXTable                 ;; 06:6F59 $21 $40 $C2
     add  hl, bc                                   ;; 06:6F5C $09
     ld   a, [hl]                                  ;; 06:6F5D $7E

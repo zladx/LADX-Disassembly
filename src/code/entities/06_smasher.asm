@@ -94,7 +94,7 @@ SmasherState0Handler::
     ld   a, $10                                   ;; 06:459F $3E $10
     call ApplyVectorTowardsLink_trampoline        ;; 06:45A1 $CD $AA $3B
     call UpdateEntityPosWithSpeed_06              ;; 06:45A4 $CD $41 $65
-    call DefaultEntityPhysics_trampoline          ;; 06:45A7 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:45A7 $CD $23 $3B
     call GetEntityXDistanceToLink_06              ;; 06:45AA $CD $94 $65
     ld   hl, wEntitiesDirectionTable              ;; 06:45AD $21 $80 $C3
     add  hl, bc                                   ;; 06:45B0 $09
@@ -195,7 +195,7 @@ SmasherState1Handler::
 
 .jr_463E
     call UpdateEntityPosWithSpeed_06              ;; 06:463E $CD $41 $65
-    call DefaultEntityPhysics_trampoline          ;; 06:4641 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:4641 $CD $23 $3B
     call func_006_45E5                            ;; 06:4644 $CD $E5 $45
     ldh  a, [hFrameCounter]                       ;; 06:4647 $F0 $E7
     and  $08                                      ;; 06:4649 $E6 $08
@@ -315,7 +315,7 @@ SmasherState3Handler::
     ld   [hl], e                                  ;; 06:470A $73
     call func_006_46BD                            ;; 06:470B $CD $BD $46
     call UpdateEntityPosWithSpeed_06              ;; 06:470E $CD $41 $65
-    jp   DefaultEntityPhysics_trampoline          ;; 06:4711 $C3 $23 $3B
+    jp   ApplyEntityInteractionWithBackground_trampoline ;; 06:4711 $C3 $23 $3B
 
 SmasherState4Handler::
     call GetEntityTransitionCountdown             ;; 06:4714 $CD $05 $0C
@@ -364,7 +364,7 @@ label_006_4781:
     ld   hl, wEntitiesPhysicsFlagsTable           ;; 06:4781 $21 $40 $C3
     add  hl, bc                                   ;; 06:4784 $09
     ld   [hl], 2 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_SHADOW ;; 06:4785 $36 $92
-    ld   hl, wC5D0                                ;; 06:4787 $21 $D0 $C5
+    ld   hl, wEntitiesThrownDirectionTable        ;; 06:4787 $21 $D0 $C5
     add  hl, bc                                   ;; 06:478A $09
     ld   [hl], $FF                                ;; 06:478B $36 $FF
     ld   de, SmasherSpriteVariants                ;; 06:478D $11 $7D $47
@@ -414,7 +414,7 @@ jr_006_47C9:
     sra  [hl]                                     ;; 06:47D8 $CB $2E
 
 jr_006_47DA:
-    call DefaultEntityPhysics_trampoline          ;; 06:47DA $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:47DA $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ;; 06:47DD $F0 $F0
     JP_TABLE                                      ;; 06:47DF
 ._00 dw func_006_47EA                             ;; 06:47E0

@@ -309,7 +309,7 @@ jr_018_5B6A:
     and  a                                        ;; 18:5B75 $A7
     jp   z, label_018_5C6A                        ;; 18:5B76 $CA $6A $5C
 
-    call DefaultEntityPhysics_trampoline          ;; 18:5B79 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 18:5B79 $CD $23 $3B
     ld   a, $02                                   ;; 18:5B7C $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ;; 18:5B7E $E0 $A1
     ld   [wC167], a                               ;; 18:5B80 $EA $67 $C1
@@ -606,7 +606,7 @@ jr_018_5CEF:
     and  a                                        ;; 18:5D41 $A7
     jr   nz, jr_018_5D7A                          ;; 18:5D42 $20 $36
 
-    call DefaultEntityPhysics_trampoline          ;; 18:5D44 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 18:5D44 $CD $23 $3B
     ld   hl, wEntitiesStatusTable                 ;; 18:5D47 $21 $80 $C2
     add  hl, bc                                   ;; 18:5D4A $09
     ld   a, [hl]                                  ;; 18:5D4B $7E
@@ -617,7 +617,7 @@ jr_018_5CEF:
     add  hl, bc                                   ;; 18:5D52 $09
     ld   a, [hl]                                  ;; 18:5D53 $7E
     dec  a                                        ;; 18:5D54 $3D
-    cp   $02                                      ;; 18:5D55 $FE $02
+    cp   ENTITY_GROUND_STATUS_SHALLOW_WATER       ;; 18:5D55 $FE $02
     jr   c, .jr_5D5E                              ;; 18:5D57 $38 $05
 
     ld   a, NOISE_SFX_FOOTSTEP                    ;; 18:5D59 $3E $07
@@ -646,7 +646,7 @@ jr_018_5D6F:
     ldh  [hJingle], a                             ;; 18:5D78 $E0 $F2
 
 jr_018_5D7A:
-    jp   DefaultEntityPhysics_trampoline          ;; 18:5D7A $C3 $23 $3B
+    jp   ApplyEntityInteractionWithBackground_trampoline ;; 18:5D7A $C3 $23 $3B
 
 jr_018_5D7D:
     pop  af                                       ;; 18:5D7D $F1

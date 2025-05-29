@@ -169,7 +169,7 @@ jr_015_773A:
     ld   [hl], 2 | ENTITY_PHYSICS_SHADOW          ;; 15:777A $36 $12
     ld   hl, wEntitiesOptions1Table               ;; 15:777C $21 $30 $C4
     add  hl, de                                   ;; 15:777F $19
-    set  ENTITY_OPT1_B_MOVE_PIT_WATER, [hl]       ;; 15:7780 $CB $C6
+    set  ENTITY_OPT1_B_NO_WALL_COLLISION, [hl]    ;; 15:7780 $CB $C6
     ld   a, JINGLE_FALL_DOWN                      ;; 15:7782 $3E $08
     ldh  [hJingle], a                             ;; 15:7784 $E0 $F2
     ld   hl, wEntitiesTransitionCountdownTable    ;; 15:7786 $21 $E0 $C2

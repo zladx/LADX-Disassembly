@@ -59,7 +59,7 @@ func_007_639E::
     ld   a, [hl]                                  ;; 07:63AF $7E
     sub  e                                        ;; 07:63B0 $93
     ldh  [hMultiPurposeG], a                      ;; 07:63B1 $E0 $E8
-    call DefaultEntityPhysics_trampoline          ;; 07:63B3 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 07:63B3 $CD $23 $3B
     call CheckLinkCollisionWithEnemy_trampoline   ;; 07:63B6 $CD $5A $3B
     jr   nc, .ret_63F6                            ;; 07:63B9 $30 $3B
 

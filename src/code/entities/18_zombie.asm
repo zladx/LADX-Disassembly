@@ -138,7 +138,7 @@ ZombieState1Handler::
 
 ZombieState2Handler::
     call UpdateEntityPosWithSpeed_18              ;; 18:6450 $CD $5F $7E
-    call DefaultEntityPhysics_trampoline          ;; 18:6453 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 18:6453 $CD $23 $3B
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 18:6456 $CD $39 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 18:6459 $21 $A0 $C2
     add  hl, bc                                   ;; 18:645C $09

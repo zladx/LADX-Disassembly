@@ -43,7 +43,7 @@ Data_007_797C::
     db   $00, $00, $FA, $06
 
 func_007_7980::
-    call DefaultEntityPhysics_trampoline          ;; 07:7980 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 07:7980 $CD $23 $3B
     ld   hl, wEntitiesInertiaTable                ;; 07:7983 $21 $D0 $C3
     add  hl, bc                                   ;; 07:7986 $09
     ld   [hl], $00                                ;; 07:7987 $36 $00
@@ -89,7 +89,7 @@ func_007_79B4::
 
 .jr_79C2
     call UpdateEntityPosWithSpeed_07              ;; 07:79C2 $CD $0A $7E
-    call DefaultEntityPhysics_trampoline          ;; 07:79C5 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 07:79C5 $CD $23 $3B
     call SetEntityVariantForDirection_07          ;; 07:79C8 $CD $1A $7D
     call GetEntityTransitionCountdown             ;; 07:79CB $CD $05 $0C
     jr   nz, ret_007_79D6                         ;; 07:79CE $20 $06
@@ -140,7 +140,7 @@ func_007_79D7::
     call SetEntityVariantForDirection_07          ;; 07:7A07 $CD $1A $7D
     call SetEntityVariantForDirection_07          ;; 07:7A0A $CD $1A $7D
     call UpdateEntityPosWithSpeed_07              ;; 07:7A0D $CD $0A $7E
-    call DefaultEntityPhysics_trampoline          ;; 07:7A10 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 07:7A10 $CD $23 $3B
     ldh  a, [hFrameCounter]                       ;; 07:7A13 $F0 $E7
     xor  c                                        ;; 07:7A15 $A9
     and  $0F                                      ;; 07:7A16 $E6 $0F

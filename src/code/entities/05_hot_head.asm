@@ -336,7 +336,7 @@ ENDC
     ret  nc                                       ;; 05:64FE $D0
 
     call UpdateEntityPosWithSpeed_05              ;; 05:64FF $CD $B1 $7A
-    call DefaultEntityPhysics_trampoline          ;; 05:6502 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 05:6502 $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 05:6505 $21 $A0 $C2
     add  hl, bc                                   ;; 05:6508 $09
     ld   a, [hl]                                  ;; 05:6509 $7E

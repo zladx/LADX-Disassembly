@@ -39,7 +39,7 @@ StalfosEvasiveEntityHandler::
     and  $01                                      ;; 15:4EAC $E6 $01
     call SetEntitySpriteVariant                   ;; 15:4EAE $CD $0C $3B
     call UpdateEntityPosWithSpeed_15              ;; 15:4EB1 $CD $88 $7B
-    call DefaultEntityPhysics_trampoline          ;; 15:4EB4 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 15:4EB4 $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 15:4EB7 $21 $A0 $C2
     add  hl, bc                                   ;; 15:4EBA $09
     ld   a, [hl]                                  ;; 15:4EBB $7E
@@ -143,7 +143,7 @@ jr_015_4EEE:
 
 func_015_4F5A::
     call UpdateEntityPosWithSpeed_15              ;; 15:4F5A $CD $88 $7B
-    call DefaultEntityPhysics_trampoline          ;; 15:4F5D $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 15:4F5D $CD $23 $3B
     ldh  a, [hJoypadState]                        ;; 15:4F60 $F0 $CC
     and  J_A | J_B                                ;; 15:4F62 $E6 $30
     jr   z, .jr_4FAE                              ;; 15:4F64 $28 $48
@@ -274,7 +274,7 @@ func_015_501A::
     ld   a, [hl]                                  ;; 15:5021 $7E
     push hl                                       ;; 15:5022 $E5
     ld   [hl], $01                                ;; 15:5023 $36 $01
-    call DefaultEntityPhysics_trampoline          ;; 15:5025 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 15:5025 $CD $23 $3B
     pop  hl                                       ;; 15:5028 $E1
     ld   [hl], b                                  ;; 15:5029 $70
     call AddEntityZSpeedToPos_15                  ;; 15:502A $CD $C1 $7B

@@ -401,7 +401,7 @@ func_004_4BC7::
     ret  nz                                       ;; 04:4BCE $C0
 
     call UpdateEntityPosWithSpeed_04              ;; 04:4BCF $CD $CA $6D
-    jp   DefaultEntityPhysics_trampoline          ;; 04:4BD2 $C3 $23 $3B
+    jp   ApplyEntityInteractionWithBackground_trampoline ;; 04:4BD2 $C3 $23 $3B
 
 .jr_4BD5
     ld   [hl], $30                                ;; 04:4BD5 $36 $30
@@ -655,7 +655,7 @@ func_004_4EEB::
     jr   nz, jr_004_4F60                          ;; 04:4EEF $20 $6F
 
     call UpdateEntityPosWithSpeed_04              ;; 04:4EF1 $CD $CA $6D
-    call DefaultEntityPhysics_trampoline          ;; 04:4EF4 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 04:4EF4 $CD $23 $3B
     call AddEntityZSpeedToPos_04                  ;; 04:4EF7 $CD $03 $6E
     ld   hl, wEntitiesSpeedZTable                 ;; 04:4EFA $21 $20 $C3
     add  hl, bc                                   ;; 04:4EFD $09

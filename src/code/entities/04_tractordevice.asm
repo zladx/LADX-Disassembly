@@ -267,7 +267,7 @@ TractorDeviceAffectOtherEntities::
     ; Update the entity's position.
     call CopyEntityPositionToActivePosition       ;; 04:696E $CD $8A $3D
     call UpdateEntityPosWithSpeed_04              ;; 04:6971 $CD $CA $6D
-    call DefaultEntityPhysics_trampoline          ;; 04:6974 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 04:6974 $CD $23 $3B
 
     ; If the entity is close enough to the device...
     ldh  a, [hActiveEntityPosX]                   ;; 04:6977 $F0 $EE

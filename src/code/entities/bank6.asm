@@ -256,7 +256,7 @@ ApplyRecoilIfNeeded_06::
     and  $20                                      ;; 06:652C $E6 $20
     jr   nz, .restoreOriginalSpeed                ;; 06:652E $20 $03
 
-    call DefaultEntityPhysics_trampoline          ;; 06:6530 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:6530 $CD $23 $3B
 
 .restoreOriginalSpeed
     ld   hl, wEntitiesSpeedYTable                 ;; 06:6533 $21 $50 $C2

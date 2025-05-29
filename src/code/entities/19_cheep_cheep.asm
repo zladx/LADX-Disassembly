@@ -201,7 +201,7 @@ CheepCheepJumpingState2Handler::
 
 .jr_6C68
     call AddEntitySpeedToPos_19                   ;; 19:6C68 $CD $C5 $7D
-    jp   DefaultEntityPhysics_trampoline          ;; 19:6C6B $C3 $23 $3B
+    jp   ApplyEntityInteractionWithBackground_trampoline ;; 19:6C6B $C3 $23 $3B
 
 CheepCheepJumpingState3Handler::
     call GetEntityTransitionCountdown             ;; 19:6C6E $CD $05 $0C
@@ -237,11 +237,11 @@ CheepCheepJumpingState4Handler::
 func_019_6C99::
     ld   hl, wEntitiesOptions1Table               ;; 19:6C99 $21 $30 $C4
     add  hl, bc                                   ;; 19:6C9C $09
-    set  ENTITY_OPT1_B_MOVE_PIT_WATER, [hl]       ;; 19:6C9D $CB $C6
-    call DefaultEntityPhysics_trampoline          ;; 19:6C9F $CD $23 $3B
+    set  ENTITY_OPT1_B_NO_WALL_COLLISION, [hl]    ;; 19:6C9D $CB $C6
+    call ApplyEntityInteractionWithBackground_trampoline ;; 19:6C9F $CD $23 $3B
     ld   hl, wEntitiesOptions1Table               ;; 19:6CA2 $21 $30 $C4
     add  hl, bc                                   ;; 19:6CA5 $09
-    res  ENTITY_OPT1_B_MOVE_PIT_WATER, [hl]       ;; 19:6CA6 $CB $86
+    res  ENTITY_OPT1_B_NO_WALL_COLLISION, [hl]    ;; 19:6CA6 $CB $86
     ret                                           ;; 19:6CA8 $C9
 
 CheepCheepJumpingState5Handler::

@@ -34,7 +34,7 @@ WizrobeEntityHandler::
     call ReturnIfNonInteractive_06                ;; 06:762E $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ;; 06:7631 $CD $F7 $64
     call UpdateEntityPosWithSpeed_06              ;; 06:7634 $CD $41 $65
-    call DefaultEntityPhysics_trampoline          ;; 06:7637 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:7637 $CD $23 $3B
     ld   hl, wEntitiesStateTable                  ;; 06:763A $21 $90 $C2
     add  hl, bc                                   ;; 06:763D $09
     ld   a, [hl]                                  ;; 06:763E $7E

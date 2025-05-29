@@ -53,7 +53,7 @@ LiftableStatueEntityHandler::
 ._02 dw LiftableStatueState_Lifted_Thrown
 
 LiftableStatueState_Standing::
-    call DefaultEntityPhysics_trampoline          ;; 19:4070 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 19:4070 $CD $23 $3B
     call PushLinkOutOfEntity_19                   ;; 19:4073 $CD $A2 $7C
     call EntityLinkPositionXDifference_19         ;; 19:4076 $CD $0B $7E
     add  $10                                      ;; 19:4079 $C6 $10
@@ -163,7 +163,7 @@ LiftableStatueState_Standing::
 LiftableStatueState_Lifted_Thrown::
     call UpdateEntityPosWithSpeed_19              ;; 19:4123 $CD $B8 $7D
     call AddEntityZSpeedToPos_19                  ;; 19:4126 $CD $F1 $7D
-    call DefaultEntityPhysics_trampoline          ;; 19:4129 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 19:4129 $CD $23 $3B
     ld   hl, wEntitiesSpeedZTable                 ;; 19:412C $21 $20 $C3
     add  hl, bc                                   ;; 19:412F $09
     dec  [hl]                                     ;; 19:4130 $35
@@ -187,7 +187,7 @@ LiftableStatueState_Lifted_Thrown::
     cp   TRIGGER_THROW_AT_DOOR                    ;; 19:414B $FE $0B
     ret  nz                                       ;; 19:414D $C0
 
-    ld   a, [wC50D]                               ;; 19:414E $FA $0D $C5
+    ld   a, [wEntityVerticallyCollidedObject]     ;; 19:414E $FA $0D $C5
     cp   $35                                      ;; 19:4151 $FE $35
     jr   c, .jr_4159                              ;; 19:4153 $38 $04
 
@@ -195,7 +195,7 @@ LiftableStatueState_Lifted_Thrown::
     jr   c, jr_019_4162                           ;; 19:4157 $38 $09
 
 .jr_4159
-    ld   a, [wC503]                               ;; 19:4159 $FA $03 $C5
+    ld   a, [wEntityHorizontallyCollidedObject]   ;; 19:4159 $FA $03 $C5
     cp   $35                                      ;; 19:415C $FE $35
     ret  c                                        ;; 19:415E $D8
 

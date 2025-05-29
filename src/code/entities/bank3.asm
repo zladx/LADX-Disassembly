@@ -191,7 +191,7 @@ EntityInitHandler::
     ld   hl, wEntitiesOptions1Table               ;; 03:48B5 $21 $30 $C4
     add  hl, bc                                   ;; 03:48B8 $09
     ld   a, [hl]                                  ;; 03:48B9 $7E
-    and  $80                                      ;; 03:48BA $E6 $80
+    and  ENTITY_OPT1_IS_BOSS                      ;; 03:48BA $E6 $80
     jr   z, .callEntityInitHandler                ; $48BC: $28 $5
     ldh  a, [hRoomStatus]                         ;; 03:48BE $F0 $F8
     and  ROOM_STATUS_EVENT_2|ROOM_STATUS_EVENT_1  ;; 03:48C0 $E6 $30
@@ -245,7 +245,7 @@ ENDC
     ld   hl, wEntitiesOptions1Table               ;; 03:48FC $21 $30 $C4
     add  hl, bc                                   ;; 03:48FF $09
     ld   a, [hl]                                  ;; 03:4900 $7E
-    and  $04                                      ;; 03:4901 $E6 $04
+    and  ENTITY_OPT1_IS_MINI_BOSS                 ;; 03:4901 $E6 $04
     jr   z, .indoorEnd                            ;; 03:4903 $28 $03
 
     ld   [wC1CF], a                               ;; 03:4905 $EA $CF $C1
@@ -1112,13 +1112,13 @@ jr_003_4D57:
     ld   e, [hl]                                  ;; 03:4D72 $5E
     ldh  a, [hLinkPositionX]                      ;; 03:4D73 $F0 $98
     push af                                       ;; 03:4D75 $F5
-    ld   hl, wC4B0                                ;; 03:4D76 $21 $B0 $C4
+    ld   hl, wEntitiesFallingTargetXTable         ;; 03:4D76 $21 $B0 $C4
     add  hl, bc                                   ;; 03:4D79 $09
     ld   a, [hl]                                  ;; 03:4D7A $7E
     ldh  [hLinkPositionX], a                      ;; 03:4D7B $E0 $98
     ldh  a, [hLinkPositionY]                      ;; 03:4D7D $F0 $99
     push af                                       ;; 03:4D7F $F5
-    ld   hl, wC4C0                                ;; 03:4D80 $21 $C0 $C4
+    ld   hl, wEntitiesFallingTargetYTable         ;; 03:4D80 $21 $C0 $C4
     add  hl, bc                                   ;; 03:4D83 $09
     ld   a, [hl]                                  ;; 03:4D84 $7E
     ldh  [hLinkPositionY], a                      ;; 03:4D85 $E0 $99
@@ -1409,7 +1409,7 @@ SetHiddenDroppableOptions1::
     ld   hl, wEntitiesOptions1Table               ;; 03:4F24 $21 $30 $C4
     add  hl, bc                                   ;; 03:4F27 $09
     ld   a, [hl]                                  ;; 03:4F28 $7E
-    or   ENTITY_OPT1_IMMUNE_WATER_PIT|ENTITY_OPT1_MOVE_PIT_WATER ;; 03:4F29 $F6 $11
+    or   ENTITY_OPT1_NO_GROUND_INTERACTION|ENTITY_OPT1_NO_WALL_COLLISION ;; 03:4F29 $F6 $11
     ld   [hl], a                                  ;; 03:4F2B $77
     ret                                           ;; 03:4F2C $C9
 
@@ -1599,7 +1599,7 @@ IronMaskEntityHandler::
     call ApplyRecoilIfNeeded_03                   ;; 03:500C $CD $A9 $7F
     call DefaultEnemyDamageCollisionHandler       ;; 03:500F $CD $28 $6E
     call UpdateEntityPosWithSpeed_03              ;; 03:5012 $CD $25 $7F
-    call DefaultEntityPhysics                     ;; 03:5015 $CD $93 $78
+    call ApplyEntityInteractionWithBackground     ;; 03:5015 $CD $93 $78
     call GetEntityTransitionCountdown             ;; 03:5018 $CD $05 $0C
     jr   nz, .changeDirectionEnd                  ;; 03:501B $20 $20
     
@@ -1875,7 +1875,7 @@ EntityInitPushedBlock::
     add  hl, bc                                   ;; 03:5185 $09
     ld   [hl], a                                  ;; 03:5186 $77
     call PushedBlockEntityHandler                 ;; 03:5187 $CD $49 $52
-    call DefaultEntityPhysics                     ;; 03:518A $CD $93 $78
+    call ApplyEntityInteractionWithBackground     ;; 03:518A $CD $93 $78
     ld   hl, wEntitiesCollisionsTable             ;; 03:518D $21 $A0 $C2
     add  hl, bc                                   ;; 03:5190 $09
     ld   a, [hl]                                  ;; 03:5191 $7E
@@ -2133,11 +2133,11 @@ func_003_5438::
     cp   TRIGGER_THROW_POT_AT_CHEST               ;; 03:5444 $FE $0D
     jr   nz, jr_003_5467                          ;; 03:5446 $20 $1F
 
-    ld   a, [wC503]                               ;; 03:5448 $FA $03 $C5
+    ld   a, [wEntityHorizontallyCollidedObject]   ;; 03:5448 $FA $03 $C5
     cp   $A0                                      ;; 03:544B $FE $A0
     jr   z, .jr_5455                              ;; 03:544D $28 $06
 
-    ld   a, [wC50D]                               ;; 03:544F $FA $0D $C5
+    ld   a, [wEntityVerticallyCollidedObject]     ;; 03:544F $FA $0D $C5
     cp   $A0                                      ;; 03:5452 $FE $A0
     ret  nz                                       ;; 03:5454 $C0
 
@@ -2155,14 +2155,14 @@ jr_003_5467:
     cp   $0B                                      ;; 03:5467 $FE $0B
     ret  nz                                       ;; 03:5469 $C0
 
-    ld   a, [wC50D]                               ;; 03:546A $FA $0D $C5
+    ld   a, [wEntityVerticallyCollidedObject]     ;; 03:546A $FA $0D $C5
     cp   $35                                      ;; 03:546D $FE $35
     ret  c                                        ;; 03:546F $D8
 
     cp   $3D                                      ;; 03:5470 $FE $3D
     jr   c, .jr_547D                              ;; 03:5472 $38 $09
 
-    ld   a, [wC503]                               ;; 03:5474 $FA $03 $C5
+    ld   a, [wEntityHorizontallyCollidedObject]   ;; 03:5474 $FA $03 $C5
     cp   $35                                      ;; 03:5477 $FE $35
     ret  c                                        ;; 03:5479 $D8
 
@@ -2200,7 +2200,7 @@ EntityDeathHandler::
     ld   hl, wEntitiesOptions1Table               ;; 03:5518 $21 $30 $C4
     add  hl, bc                                   ;; 03:551B $09
     ld   a, [hl]                                  ;; 03:551C $7E
-    and  $80                                      ;; 03:551D $E6 $80
+    and  ENTITY_OPT1_IS_BOSS                      ;; 03:551D $E6 $80
 IF __OPTIMIZATIONS_1__
     jp   nz, ExecuteActiveEntityHandler
 ELSE
@@ -3356,10 +3356,10 @@ CheckForEntityFallingDownQuicksandHole::
     jr   nz, .jr_5D34                             ;; 03:5D19 $20 $19
 
     ld   [hl], $02                                ;; 03:5D1B $36 $02
-    ld   hl, wC4B0                                ;; 03:5D1D $21 $B0 $C4
+    ld   hl, wEntitiesFallingTargetXTable         ;; 03:5D1D $21 $B0 $C4
     add  hl, bc                                   ;; 03:5D20 $09
     ld   [hl], $50                                ;; 03:5D21 $36 $50
-    ld   hl, wC4C0                                ;; 03:5D23 $21 $C0 $C4
+    ld   hl, wEntitiesFallingTargetYTable         ;; 03:5D23 $21 $C0 $C4
     add  hl, bc                                   ;; 03:5D26 $09
     ld   [hl], $48                                ;; 03:5D27 $36 $48
     call GetEntityTransitionCountdown             ;; 03:5D29 $CD $05 $0C
@@ -4012,7 +4012,7 @@ PickableHandler::
 BouncingEntityPhysics::
     call UpdateEntityPosWithSpeed_03              ;; 03:60B3 $CD $25 $7F
     call func_003_6B7B                            ;; 03:60B6 $CD $7B $6B
-    call DefaultEntityPhysics                     ;; 03:60B9 $CD $93 $78
+    call ApplyEntityInteractionWithBackground     ;; 03:60B9 $CD $93 $78
     ldh  a, [hIsSideScrolling]                    ;; 03:60BC $F0 $F9
     and  a                                        ;; 03:60BE $A7
     jr   z, .sidescrollingEnd                     ;; 03:60BF $28 $22
@@ -4038,10 +4038,10 @@ BouncingEntityPhysics::
     cp   $F8                                      ;; 03:60DD $FE $F8
     jr   c, .makeBouncingNoise                    ;; 03:60DF $38 $31
 
-    jr   .clearZSpeedEnd                          ;; 03:60E1 $18 $20
+    jr   .shallowWaterEnd                         ;; 03:60E1 $18 $20
 
 .sidescrollingEnd
-    ; If colliding with the ground, bounce. Otherwise, return.
+    ; If colliding with the ground (and not on shallow water), bounce. Otherwise, return.
     ld   hl, wEntitiesPosZTable                   ;; 03:60E3 $21 $10 $C3
     add  hl, bc                                   ;; 03:60E6 $09
     ld   a, [hl]                                  ;; 03:60E7 $7E
@@ -4055,8 +4055,8 @@ BouncingEntityPhysics::
     ld   a, [hl]                                  ;; 03:60F2 $7E
     ld   hl, wEntitiesSpeedZTable                 ;; 03:60F3 $21 $20 $C3
     add  hl, bc                                   ;; 03:60F6 $09
-    cp   $02                                      ;; 03:60F7 $FE $02
-    jr   z, .clearZSpeedEnd                       ;; 03:60F9 $28 $08
+    cp   ENTITY_GROUND_STATUS_SHALLOW_WATER       ;; 03:60F7 $FE $02
+    jr   z, .shallowWaterEnd                      ;; 03:60F9 $28 $08
 
     ld   a, [hl]                                  ;; 03:60FB $7E
     sra  a                                        ;; 03:60FC $CB $2F
@@ -4064,7 +4064,7 @@ BouncingEntityPhysics::
     cp   $07                                      ;; 03:60FF $FE $07
     jr   nc, .makeBouncingNoise                   ;; 03:6101 $30 $0F
 
-.clearZSpeedEnd
+.shallowWaterEnd
     xor  a                                        ;; 03:6103 $AF
     push hl                                       ;; 03:6104 $E5
     ld   hl, wEntitiesSpeedXTable                 ;; 03:6105 $21 $40 $C2
@@ -6452,7 +6452,7 @@ label_003_71C0:
     ld   hl, wEntitiesOptions1Table               ;; 03:7257 $21 $30 $C4
     add  hl, bc                                   ;; 03:725A $09
     ld   a, [hl]                                  ;; 03:725B $7E
-    and  $C2                                      ;; 03:725C $E6 $C2
+    and  ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IS_BOSS ;; 03:725C $E6 $C2
     ld   [hl], a                                  ;; 03:725E $77
     ret                                           ;; 03:725F $C9
 
@@ -6536,10 +6536,10 @@ jr_003_72B5:
     ld   hl, wEntitiesOptions1Table               ;; 03:72C8 $21 $30 $C4
     add  hl, bc                                   ;; 03:72CB $09
     ld   a, [hl]                                  ;; 03:72CC $7E
-    bit  7, a                                     ;; 03:72CD $CB $7F
+    bit  ENTITY_OPT1_B_IS_BOSS, a                 ;; 03:72CD $CB $7F
     jr   z, jr_003_733E                           ;; 03:72CF $28 $6D
 
-    bit  2, a                                     ;; 03:72D1 $CB $57
+    bit  ENTITY_OPT1_B_IS_MINI_BOSS, a            ;; 03:72D1 $CB $57
     jr   nz, jr_003_7304                          ;; 03:72D3 $20 $2F
 
     ld   e, $0F                                   ;; 03:72D5 $1E $0F
@@ -6559,7 +6559,7 @@ jr_003_72D8:
     ld   hl, wEntitiesOptions1Table               ;; 03:72E5 $21 $30 $C4
     add  hl, de                                   ;; 03:72E8 $19
     ld   a, [hl]                                  ;; 03:72E9 $7E
-    and  $80                                      ;; 03:72EA $E6 $80
+    and  ENTITY_OPT1_IS_BOSS                      ;; 03:72EA $E6 $80
     jr   nz, jr_003_7304                          ;; 03:72EC $20 $16
 
 .jr_72EE
@@ -6635,7 +6635,7 @@ jr_003_733E:
     ld   hl, wEntitiesOptions1Table               ;; 03:734E $21 $30 $C4
     add  hl, bc                                   ;; 03:7351 $09
     ld   a, [hl]                                  ;; 03:7352 $7E
-    and  $80                                      ;; 03:7353 $E6 $80
+    and  ENTITY_OPT1_IS_BOSS                      ;; 03:7353 $E6 $80
     jr   nz, .jr_7361                             ;; 03:7355 $20 $0A
 
     ld   hl, wEntitiesPhysicsFlagsTable           ;; 03:7357 $21 $40 $C3
@@ -7395,7 +7395,7 @@ jr_003_775A:
     ld   a, [hl]                                  ;; 03:7777 $7E
     cpl                                           ;; 03:7778 $2F
     ld   [hl], a                                  ;; 03:7779 $77
-    ld   hl, wC5D0                                ;; 03:777A $21 $D0 $C5
+    ld   hl, wEntitiesThrownDirectionTable        ;; 03:777A $21 $D0 $C5
     add  hl, bc                                   ;; 03:777D $09
     ld   [hl], $FF                                ;; 03:777E $36 $FF
     jr   jr_003_779A                              ;; 03:7780 $18 $18
@@ -7561,25 +7561,37 @@ func_003_783B::
     ldh  [hLinkPositionX], a                      ;; 03:785C $E0 $98
     ret                                           ;; 03:785E $C9
 
-; Entities collision mask?
-Data_003_785F::
-    db   $0D, $02, $08, $08, $0A, $06, $08, $08, $10, $FF, $08, $08, $0D, $02, $08, $08
+; Added to an entity's x position when checking for collisions with walls.
+; Unlike Link, an entity only has one collision point.
+; Indexed by:
+;  - Row: entity's collision box type
+;  - Column: movement direction (right, left, up, down)
+EntityCollisionPointsX::
+    db   13,  02,  08,  08
+    db   10,  06,  08,  08
+    db   16, -01,  08,  08
+    db   13,  02,  08,  08
 
-Data_003_786F::
-    db   $08, $08, $02, $0D, $08, $08, $06, $0A, $08, $08, $FF, $10, $08, $08, $02, $0D
+; Added to an entity's y position when checking for collisions with walls.
+EntityCollisionPointsY::
+    db   08,  08,  02,  13
+    db   08,  08,  06,  10
+    db   08,  08, -01,  16
+    db   08,  08,  02,  13
 
-Data_003_787F::
+CollisionsTableFlagPerDirection::
     db   $01, $02, $04, $08
 
-Data_003_7883::
-    db   $00, $00, $FF, $01, $01, $FF, $01, $FF
+; Indexed by: object id - OBJ_PHYSICS_CONVEYOR.
+EntityOnConveyorMovementX::
+    db    0,  0, -1, +1, +1, -1, +1, -1
 
-Data_003_788B::
-    db   $01, $FF, $00, $00, $01, $01, $FF, $FF
+EntityOnConveyorMovementY::
+    db   +1, -1,  0,  0, +1, +1, -1, -1
 
 ; Handle physics between an entity and the Background / objects.
 ; This includes not being able to clip walls, falling in pits and stuff.
-DefaultEntityPhysics::
+ApplyEntityInteractionWithBackground::
     ld   hl, wEntitiesGroundStatusTable           ;; 03:7893 $21 $70 $C4
     add  hl, bc                                   ;; 03:7896 $09
     ld   a, [hl]                                  ;; 03:7897 $7E
@@ -7588,146 +7600,154 @@ DefaultEntityPhysics::
     xor  a                                        ;; 03:789A $AF
     ld   [hl], a                                  ;; 03:789B $77
     ldh  [hMultiPurpose1], a                      ;; 03:789C $E0 $D8
-    ld   [wC503], a                               ;; 03:789E $EA $03 $C5
-    ld   [wC50D], a                               ;; 03:78A1 $EA $0D $C5
+    ld   [wEntityHorizontallyCollidedObject], a   ;; 03:789E $EA $03 $C5
+    ld   [wEntityVerticallyCollidedObject], a     ;; 03:78A1 $EA $0D $C5
 
-    ; If entity Z & $80 == 0…
+    ; If entity z position is positive (and not zero), skip handling water and tall grass
     ld   hl, wEntitiesPosZTable                   ;; 03:78A4 $21 $10 $C3
     add  hl, bc                                   ;; 03:78A7 $09
     ld   a, [hl]                                  ;; 03:78A8 $7E
     bit  7, a                                     ;; 03:78A9 $CB $7F
-    jr   nz, .jr_78B1                             ;; 03:78AB $20 $04
-    ; … but entity Z != 0…
-    and  a                                        ;; 03:78AD $A7
-    jp   nz, jr_003_7A18                          ;; 03:78AE $C2 $18 $7A
+    jr   nz, .negativeZ                           ;; 03:78AB $20 $04
 
-.jr_78B1
+    and  a                                        ;; 03:78AD $A7
+    jp   nz, .interactWithGroundEnd               ;; 03:78AE $C2 $18 $7A
+
+.negativeZ
     ld   hl, wEntitiesUnknowTableJ                ;; 03:78B1 $21 $F0 $C4
     add  hl, bc                                   ;; 03:78B4 $09
     ld   [hl], b                                  ;; 03:78B5 $70
     ld   hl, wEntitiesOptions1Table               ;; 03:78B6 $21 $30 $C4
     add  hl, bc                                   ;; 03:78B9 $09
     ld   a, [hl]                                  ;; 03:78BA $7E
-    bit  4, a                                     ;; 03:78BB $CB $67
-    jp   nz, jr_003_7A18                          ;; 03:78BD $C2 $18 $7A
+    bit  ENTITY_OPT1_B_NO_GROUND_INTERACTION, a   ;; 03:78BB $CB $67
+    jp   nz, .interactWithGroundEnd               ;; 03:78BD $C2 $18 $7A
 
     call func_003_7E0E                            ;; 03:78C0 $CD $0E $7E
-    jr   jr_003_78E3                              ;; 03:78C3 $18 $1E
+    jr   .skipTouchedDeepWater                    ;; 03:78C3 $18 $1E
 
-jr_003_78C5:
+.touchedDeepWater
     ld   e, $02                                   ;; 03:78C5 $1E $02
     ldh  a, [hActiveEntityType]                   ;; 03:78C7 $F0 $EB
     cp   ENTITY_FISH                              ;; 03:78C9 $FE $CC
-    jr   z, jr_003_7907                           ;; 03:78CB $28 $3A
+    jr   z, .setGroundStatus                      ;; 03:78CB $28 $3A
 
     cp   ENTITY_PEAHAT                            ;; 03:78CD $FE $A0
-    jr   z, jr_003_7907                           ;; 03:78CF $28 $36
+    jr   z, .setGroundStatus                      ;; 03:78CF $28 $36
 
     cp   ENTITY_ROOSTER                           ;; 03:78D1 $FE $D5
-    jr   z, jr_003_7907                           ;; 03:78D3 $28 $32
+    jr   z, .setGroundStatus                      ;; 03:78D3 $28 $32
 
     cp   ENTITY_BOW_WOW                           ;; 03:78D5 $FE $6D
-    jr   z, jr_003_7907                           ;; 03:78D7 $28 $2E
+    jr   z, .setGroundStatus                      ;; 03:78D7 $28 $2E
 
     cp   ENTITY_MARIN_AT_THE_SHORE                ;; 03:78D9 $FE $C1
-    jr   z, jr_003_7907                           ;; 03:78DB $28 $2A
+    jr   z, .setGroundStatus                      ;; 03:78DB $28 $2A
 
     call UnloadEntity                             ;; 03:78DD $CD $8D $3F
-    jp   label_003_795C                           ;; 03:78E0 $C3 $5C $79
+    jp   .createWaterSplash                       ;; 03:78E0 $C3 $5C $79
 
-jr_003_78E3:
-    ld   e, $01                                   ;; 03:78E3 $1E $01
+.skipTouchedDeepWater
+    ; Deep water/lava
+    ld   e, ENTITY_GROUND_STATUS_DEEP_WATER       ;; 03:78E3 $1E $01
     ldh  a, [hObjectUnderEntity]                  ;; 03:78E5 $F0 $AF
-    cp   $67                                      ;; 03:78E7 $FE $67
-    jr   z, jr_003_7907                           ;; 03:78E9 $28 $1C
+    cp   OBJECT_WATER_LADDER_SIDESCROLL           ;; 03:78E7 $FE $67
+    jr   z, .setGroundStatus                      ;; 03:78E9 $28 $1C
 
     ldh  a, [hMultiPurpose3]                      ;; 03:78EB $F0 $DA
     and  a                                        ;; 03:78ED $A7
-    jp   z, jr_003_7A18                           ;; 03:78EE $CA $18 $7A
+    jp   z, .interactWithGroundEnd                ;; 03:78EE $CA $18 $7A
 
-    cp   $0B                                      ;; 03:78F1 $FE $0B
-    jr   z, jr_003_78C5                           ;; 03:78F3 $28 $D0
+    cp   OBJ_PHYSICS_LAVA                         ;; 03:78F1 $FE $0B
+    jr   z, .touchedDeepWater                     ;; 03:78F3 $28 $D0
 
-    cp   $07                                      ;; 03:78F5 $FE $07
-    jr   z, jr_003_78C5                           ;; 03:78F7 $28 $CC
+    cp   OBJ_PHYSICS_DEEP_WATER                   ;; 03:78F5 $FE $07
+    jr   z, .touchedDeepWater                     ;; 03:78F7 $28 $CC
 
-    cp   $B0                                      ;; 03:78F9 $FE $B0
-    jr   z, jr_003_7907                           ;; 03:78FB $28 $0A
+    cp   OBJ_PHYSICS_WATER_SIDESCROLL             ;; 03:78F9 $FE $B0
+    jr   z, .setGroundStatus                      ;; 03:78FB $28 $0A
 
+    ; Shallow water
     inc  e                                        ;; 03:78FD $1C
-    cp   $05                                      ;; 03:78FE $FE $05
-    jr   z, jr_003_7907                           ;; 03:7900 $28 $05
+    cp   OBJ_PHYSICS_SHALLOW_WATER                ;; 03:78FE $FE $05
+    jr   z, .setGroundStatus                      ;; 03:7900 $28 $05
 
-    cp   $06                                      ;; 03:7902 $FE $06
-    jr   nz, jr_003_790C                          ;; 03:7904 $20 $06
+    ; Tall grass
+    cp   OBJ_PHYSICS_GRASS                        ;; 03:7902 $FE $06
+    jr   nz, .setGroundStatusEnd                  ;; 03:7904 $20 $06
 
     inc  e                                        ;; 03:7906 $1C
 
-jr_003_7907:
+.setGroundStatus
     ld   hl, wEntitiesGroundStatusTable           ;; 03:7907 $21 $70 $C4
     add  hl, bc                                   ;; 03:790A $09
     ld   [hl], e                                  ;; 03:790B $73
 
-jr_003_790C:
+.setGroundStatusEnd
+    ; Create water splash if entity has fallen into water or lava.
     ld   hl, wEntitiesOptions1Table               ;; 03:790C $21 $30 $C4
     add  hl, bc                                   ;; 03:790F $09
     ld   a, [hl]                                  ;; 03:7910 $7E
-    and  $08                                      ;; 03:7911 $E6 $08
-    jr   z, jr_003_7973                           ;; 03:7913 $28 $5E
+    and  ENTITY_OPT1_SPLASH_IN_WATER              ;; 03:7911 $E6 $08
+    jr   z, .createWaterSplashEnd                 ;; 03:7913 $28 $5E
 
+    ; If ground status has changed...
     ld   hl, wEntitiesGroundStatusTable           ;; 03:7915 $21 $70 $C4
     add  hl, bc                                   ;; 03:7918 $09
     ldh  a, [hMultiPurpose0]                      ;; 03:7919 $F0 $D7
     cp   [hl]                                     ;; 03:791B $BE
-    jr   z, jr_003_7973                           ;; 03:791C $28 $55
+    jr   z, .createWaterSplashEnd                 ;; 03:791C $28 $55
 
+    ; ...and neither the previous or current status is "tall grass"...
     ld   a, [hl]                                  ;; 03:791E $7E
-    cp   $03                                      ;; 03:791F $FE $03
-    jr   z, jr_003_7973                           ;; 03:7921 $28 $50
+    cp   ENTITY_GROUND_STATUS_TALL_GRASS          ;; 03:791F $FE $03
+    jr   z, .createWaterSplashEnd                 ;; 03:7921 $28 $50
 
     ldh  a, [hMultiPurpose0]                      ;; 03:7923 $F0 $D7
-    cp   $03                                      ;; 03:7925 $FE $03
-    jr   z, jr_003_7973                           ;; 03:7927 $28 $4A
+    cp   ENTITY_GROUND_STATUS_TALL_GRASS          ;; 03:7925 $FE $03
+    jr   z, .createWaterSplashEnd                 ;; 03:7927 $28 $4A
 
     ldh  a, [hIsSideScrolling]                    ;; 03:7929 $F0 $F9
     and  a                                        ;; 03:792B $A7
-    jr   nz, .jr_793D                             ;; 03:792C $20 $0F
+    jr   nz, .sidescrolling                       ;; 03:792C $20 $0F
 
+    ; ...and moving down...
     ld   hl, wEntitiesSpeedZTable                 ;; 03:792E $21 $20 $C3
     add  hl, bc                                   ;; 03:7931 $09
     ld   a, [hl]                                  ;; 03:7932 $7E
     bit  7, a                                     ;; 03:7933 $CB $7F
-    jr   z, jr_003_7973                           ;; 03:7935 $28 $3C
+    jr   z, .createWaterSplashEnd                 ;; 03:7935 $28 $3C
 
+    ; ...fast enough...
     cp   $E7                                      ;; 03:7937 $FE $E7
-    jr   nc, jr_003_7973                          ;; 03:7939 $30 $38
+    jr   nc, .createWaterSplashEnd                ;; 03:7939 $30 $38
 
-    jr   jr_003_7954                              ;; 03:793B $18 $17
+    jr   .sidescrollingEnd                        ;; 03:793B $18 $17
 
-.jr_793D
+.sidescrolling
     ldh  a, [hActiveEntityType]                   ;; 03:793D $F0 $EB
     cp   ENTITY_CHEEP_CHEEP_JUMPING               ;; 03:793F $FE $AC
-    jr   z, jr_003_7954                           ;; 03:7941 $28 $11
+    jr   z, .sidescrollingEnd                     ;; 03:7941 $28 $11
 
     ld   hl, wEntitiesSpeedYTable                 ;; 03:7943 $21 $50 $C2
     add  hl, bc                                   ;; 03:7946 $09
     ld   a, [hl]                                  ;; 03:7947 $7E
     bit  7, a                                     ;; 03:7948 $CB $7F
-    jr   nz, jr_003_7954                          ;; 03:794A $20 $08
+    jr   nz, .sidescrollingEnd                    ;; 03:794A $20 $08
 
     ld   [hl], $00                                ;; 03:794C $36 $00
     ld   hl, wEntitiesSpeedXTable                 ;; 03:794E $21 $40 $C2
     add  hl, bc                                   ;; 03:7951 $09
     sra  [hl]                                     ;; 03:7952 $CB $2E
 
-jr_003_7954:
+.sidescrollingEnd
     ld   hl, wEntitiesPrivateCountdown3Table      ;; 03:7954 $21 $80 $C4
     add  hl, bc                                   ;; 03:7957 $09
     ld   a, [hl]                                  ;; 03:7958 $7E
     and  a                                        ;; 03:7959 $A7
-    jr   nz, jr_003_7973                          ;; 03:795A $20 $17
+    jr   nz, .createWaterSplashEnd                ;; 03:795A $20 $17
 
-label_003_795C:
+.createWaterSplash
     ld   hl, wEntitiesPosXTable                   ;; 03:795C $21 $00 $C2
     add  hl, bc                                   ;; 03:795F $09
     ld   a, [hl]                                  ;; 03:7960 $7E
@@ -7741,27 +7761,28 @@ label_003_795C:
     ld   a, TRANSCIENT_VFX_WATER_SPLASH           ;; 03:796E $3E $01
     call AddTranscientVfx                         ;; 03:7970 $CD $C7 $0C
 
-jr_003_7973:
+.createWaterSplashEnd
     ldh  a, [hMultiPurpose3]                      ;; 03:7973 $F0 $DA
     inc  a                                        ;; 03:7975 $3C
-    cp   $F1                                      ;; 03:7976 $FE $F1
-    jr   c, jr_003_799C                           ;; 03:7978 $38 $22
+    cp   OBJ_PHYSICS_CONVEYOR + 1                 ;; 03:7976 $FE $F1
+    jr   c, .conveyorEnd                          ;; 03:7978 $38 $22
 
-    sub  $F1                                      ;; 03:797A $D6 $F1
+    ; If OBJ_PHYSICS_COVEYOR <= object physics < 0xFF, move entity every 4 frames.
+    sub  OBJ_PHYSICS_CONVEYOR + 1                 ;; 03:797A $D6 $F1
     ld   e, a                                     ;; 03:797C $5F
     ld   d, b                                     ;; 03:797D $50
     ldh  a, [hFrameCounter]                       ;; 03:797E $F0 $E7
     and  $03                                      ;; 03:7980 $E6 $03
-    jr   nz, .jr_799A                             ;; 03:7982 $20 $16
+    jr   nz, .conveyorMovementEnd                 ;; 03:7982 $20 $16
 
-    ld   hl, Data_003_7883                        ;; 03:7984 $21 $83 $78
+    ld   hl, EntityOnConveyorMovementX            ;; 03:7984 $21 $83 $78
     add  hl, de                                   ;; 03:7987 $19
     ld   a, [hl]                                  ;; 03:7988 $7E
     ld   hl, wEntitiesPosXTable                   ;; 03:7989 $21 $00 $C2
     add  hl, bc                                   ;; 03:798C $09
     add  [hl]                                     ;; 03:798D $86
     ld   [hl], a                                  ;; 03:798E $77
-    ld   hl, Data_003_788B                        ;; 03:798F $21 $8B $78
+    ld   hl, EntityOnConveyorMovementY            ;; 03:798F $21 $8B $78
     add  hl, de                                   ;; 03:7992 $19
     ld   a, [hl]                                  ;; 03:7993 $7E
     ld   hl, wEntitiesPosYTable                   ;; 03:7994 $21 $10 $C2
@@ -7769,49 +7790,51 @@ jr_003_7973:
     add  [hl]                                     ;; 03:7998 $86
     ld   [hl], a                                  ;; 03:7999 $77
 
-.jr_799A
-    jr   jr_003_7A18                              ;; 03:799A $18 $7C
+.conveyorMovementEnd
+    jr   .interactWithGroundEnd                   ;; 03:799A $18 $7C
 
-jr_003_799C:
+.conveyorEnd
     ldh  a, [hObjectUnderEntity]                  ;; 03:799C $F0 $AF
-    cp   $61                                      ;; 03:799E $FE $61
-    jr   z, .jr_79AC                              ;; 03:79A0 $28 $0A
+    cp   OBJECT_WELL                              ;; 03:799E $FE $61
+    jr   z, .onPit                                ;; 03:79A0 $28 $0A
 
     ldh  a, [hMultiPurpose3]                      ;; 03:79A2 $F0 $DA
-    cp   $50                                      ;; 03:79A4 $FE $50
-    jr   z, .jr_79AC                              ;; 03:79A6 $28 $04
+    cp   OBJ_PHYSICS_PIT                          ;; 03:79A4 $FE $50
+    jr   z, .onPit                                ;; 03:79A6 $28 $04
 
-    cp   $51                                      ;; 03:79A8 $FE $51
-    jr   nz, jr_003_7A18                          ;; 03:79AA $20 $6C
+    cp   OBJ_PHYSICS_PIT_WARP                     ;; 03:79A8 $FE $51
+    jr   nz, .interactWithGroundEnd               ;; 03:79AA $20 $6C
 
-.jr_79AC
+.onPit
+    ; BowWow, the Rooster, Heart Containers and Marin don't fall down pits.
     ldh  a, [hActiveEntityType]                   ;; 03:79AC $F0 $EB
     cp   ENTITY_BOW_WOW                           ;; 03:79AE $FE $6D
-    jr   z, jr_003_7A18                           ;; 03:79B0 $28 $66
+    jr   z, .interactWithGroundEnd                ;; 03:79B0 $28 $66
 
     cp   ENTITY_ROOSTER                           ;; 03:79B2 $FE $D5
-    jr   z, jr_003_7A18                           ;; 03:79B4 $28 $62
+    jr   z, .interactWithGroundEnd                ;; 03:79B4 $28 $62
 
     cp   ENTITY_HEART_CONTAINER                   ;; 03:79B6 $FE $36
-    jr   z, jr_003_7A18                           ;; 03:79B8 $28 $5E
+    jr   z, .interactWithGroundEnd                ;; 03:79B8 $28 $5E
 
     cp   ENTITY_MARIN_AT_THE_SHORE                ;; 03:79BA $FE $C1
-    jr   nz, .jr_79CB                             ;; 03:79BC $20 $0D
+    jr   nz, .fall                                ;; 03:79BC $20 $0D
 
+    ; But if Marin is on a well, and Link is falling down, Marin falls down too.
     ld   a, [wLinkMotionState]                    ;; 03:79BE $FA $1C $C1
     cp   LINK_MOTION_FALLING_DOWN                 ;; 03:79C1 $FE $06
-    jr   nz, jr_003_7A18                          ;; 03:79C3 $20 $53
+    jr   nz, .interactWithGroundEnd               ;; 03:79C3 $20 $53
 
     ldh  a, [hObjectUnderEntity]                  ;; 03:79C5 $F0 $AF
-    cp   $61                                      ;; 03:79C7 $FE $61
-    jr   nz, jr_003_7A18                          ;; 03:79C9 $20 $4D
+    cp   OBJECT_WELL                              ;; 03:79C7 $FE $61
+    jr   nz, .interactWithGroundEnd               ;; 03:79C9 $20 $4D
 
-.jr_79CB
+.fall
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ;; 03:79CB $21 $10 $C4
     add  hl, bc                                   ;; 03:79CE $09
     ld   a, [hl]                                  ;; 03:79CF $7E
     and  a                                        ;; 03:79D0 $A7
-    jr   z, jr_003_7A18                           ;; 03:79D1 $28 $45
+    jr   z, .interactWithGroundEnd                ;; 03:79D1 $28 $45
 
     dec  [hl]                                     ;; 03:79D3 $35
     ld   hl, wEntitiesFlashCountdownTable         ;; 03:79D4 $21 $20 $C4
@@ -7819,15 +7842,15 @@ jr_003_799C:
     ld   [hl], $00                                ;; 03:79D8 $36 $00
     ld   hl, wEntitiesStatusTable                 ;; 03:79DA $21 $80 $C2
     add  hl, bc                                   ;; 03:79DD $09
-    ld   [hl], $02                                ;; 03:79DE $36 $02
+    ld   [hl], ENTITY_STATUS_FALLING              ;; 03:79DE $36 $02
     ldh  a, [hIntersectedObjectLeft]              ;; 03:79E0 $F0 $CE
     add  $08                                      ;; 03:79E2 $C6 $08
-    ld   hl, wC4B0                                ;; 03:79E4 $21 $B0 $C4
+    ld   hl, wEntitiesFallingTargetXTable         ;; 03:79E4 $21 $B0 $C4
     add  hl, bc                                   ;; 03:79E7 $09
     ld   [hl], a                                  ;; 03:79E8 $77
     ldh  a, [hIntersectedObjectTop]               ;; 03:79E9 $F0 $CD
     add  $10                                      ;; 03:79EB $C6 $10
-    ld   hl, wC4C0                                ;; 03:79ED $21 $C0 $C4
+    ld   hl, wEntitiesFallingTargetYTable         ;; 03:79ED $21 $C0 $C4
     add  hl, bc                                   ;; 03:79F0 $09
     ld   [hl], a                                  ;; 03:79F1 $77
     call GetEntityTransitionCountdown             ;; 03:79F2 $CD $05 $0C
@@ -7835,33 +7858,34 @@ jr_003_799C:
 
     ldh  a, [hActiveEntityType]                   ;; 03:79F7 $F0 $EB
     cp   ENTITY_MOBLIN_SWORD                      ;; 03:79F9 $FE $14
-    jr   z, jr_003_7A18                           ;; 03:79FB $28 $1B
+    jr   z, .interactWithGroundEnd                ;; 03:79FB $28 $1B
 
     cp   ENTITY_MOBLIN                            ;; 03:79FD $FE $0B
-    jr   z, jr_003_7A18                           ;; 03:79FF $28 $17
+    jr   z, .interactWithGroundEnd                ;; 03:79FF $28 $17
 
     cp   ENTITY_OCTOROK                           ;; 03:7A01 $FE $09
-    jr   z, jr_003_7A18                           ;; 03:7A03 $28 $13
+    jr   z, .interactWithGroundEnd                ;; 03:7A03 $28 $13
 
     ld   [hl], $48                                ;; 03:7A05 $36 $48
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ;; 03:7A07 $21 $10 $C4
     add  hl, bc                                   ;; 03:7A0A $09
     ld   a, [hl]                                  ;; 03:7A0B $7E
     and  a                                        ;; 03:7A0C $A7
-    jr   nz, jr_003_7A18                          ;; 03:7A0D $20 $09
+    jr   nz, .interactWithGroundEnd               ;; 03:7A0D $20 $09
 
     call GetEntityTransitionCountdown             ;; 03:7A0F $CD $05 $0C
     ld   [hl], $2F                                ;; 03:7A12 $36 $2F
     ld   a, JINGLE_ITEM_FALLING                   ;; 03:7A14 $3E $18
     ldh  [hJingle], a                             ;; 03:7A16 $E0 $F2
 
-jr_003_7A18:
+.interactWithGroundEnd
+    ; BowWow doesn't collide with walls, etc.
     ldh  a, [hActiveEntityType]                   ;; 03:7A18 $F0 $EB
     cp   ENTITY_BOW_WOW                           ;; 03:7A1A $FE $6D
-    jp   z, ret_003_7A84                          ;; 03:7A1C $CA $84 $7A
+    jp   z, .return                               ;; 03:7A1C $CA $84 $7A
 
     xor  a                                        ;; 03:7A1F $AF
-    ld   [wC503], a                               ;; 03:7A20 $EA $03 $C5
+    ld   [wEntityHorizontallyCollidedObject], a   ;; 03:7A20 $EA $03 $C5
     ld   hl, wEntitiesHitboxFlagsTable            ;; 03:7A23 $21 $50 $C3
     add  hl, bc                                   ;; 03:7A26 $09
     ld   a, [hl]                                  ;; 03:7A27 $7E
@@ -7877,82 +7901,131 @@ jr_003_7A18:
     add  hl, bc                                   ;; 03:7A39 $09
     ld   a, [hl]                                  ;; 03:7A3A $7E
     cp   $00                                      ;; 03:7A3B $FE $00
-    jr   z, jr_003_7A5D                           ;; 03:7A3D $28 $1E
+    jr   z, .collisionXEnd                        ;; 03:7A3D $28 $1E
 
     ld   de, $00                                  ;; 03:7A3F $11 $00 $00
     and  $80                                      ;; 03:7A42 $E6 $80
-    jr   z, .jr_7A47                              ;; 03:7A44 $28 $01
+    jr   z, .positiveX                            ;; 03:7A44 $28 $01
 
     inc  e                                        ;; 03:7A46 $1C
 
-.jr_7A47
-    call ApplyEntityPhysics                       ;; 03:7A47 $CD $CD $7A
-    jr   c, jr_003_7A5D                           ;; 03:7A4A $38 $11
+.positiveX
+    call ApplyEntityCollisionWithObject           ;; 03:7A47 $CD $CD $7A
+    jr   c, .collisionXEnd                        ;; 03:7A4A $38 $11
 
     ldh  a, [hObjectUnderEntity]                  ;; 03:7A4C $F0 $AF
-    ld   [wC503], a                               ;; 03:7A4E $EA $03 $C5
+    ld   [wEntityHorizontallyCollidedObject], a   ;; 03:7A4E $EA $03 $C5
 
     ldh  a, [hActiveEntityNoBGCollision]          ;; 03:7A51 $F0 $BE
     and  a                                        ;; 03:7A53 $A7
-    jr   nz, jr_003_7A5D                          ;; 03:7A54 $20 $07
+    jr   nz, .collisionXEnd                       ;; 03:7A54 $20 $07
 
     ld   hl, wEntitiesPosXTable                   ;; 03:7A56 $21 $00 $C2
     add  hl, bc                                   ;; 03:7A59 $09
     ldh  a, [hActiveEntityPosX]                   ;; 03:7A5A $F0 $EE
     ld   [hl], a                                  ;; 03:7A5C $77
 
-jr_003_7A5D:
+.collisionXEnd
     ld   hl, wEntitiesSpeedYTable                 ;; 03:7A5D $21 $50 $C2
     add  hl, bc                                   ;; 03:7A60 $09
     ld   a, [hl]                                  ;; 03:7A61 $7E
     cp   $00                                      ;; 03:7A62 $FE $00
-    jr   z, ret_003_7A84                          ;; 03:7A64 $28 $1E
+    jr   z, .return                               ;; 03:7A64 $28 $1E
 
     ld   de, $02                                  ;; 03:7A66 $11 $02 $00
     and  $80                                      ;; 03:7A69 $E6 $80
-    jr   nz, .jr_7A6E                             ;; 03:7A6B $20 $01
+    jr   nz, .negativeY                           ;; 03:7A6B $20 $01
 
     inc  e                                        ;; 03:7A6D $1C
 
-.jr_7A6E
-    call ApplyEntityPhysics                       ;; 03:7A6E $CD $CD $7A
-    jr   c, ret_003_7A84                          ;; 03:7A71 $38 $11
+.negativeY
+    call ApplyEntityCollisionWithObject           ;; 03:7A6E $CD $CD $7A
+    jr   c, .return                               ;; 03:7A71 $38 $11
 
     ldh  a, [hObjectUnderEntity]                  ;; 03:7A73 $F0 $AF
-    ld   [wC50D], a                               ;; 03:7A75 $EA $0D $C5
+    ld   [wEntityVerticallyCollidedObject], a     ;; 03:7A75 $EA $0D $C5
     ldh  a, [hActiveEntityNoBGCollision]          ;; 03:7A78 $F0 $BE
     and  a                                        ;; 03:7A7A $A7
-    jr   nz, ret_003_7A84                         ;; 03:7A7B $20 $07
+    jr   nz, .return                              ;; 03:7A7B $20 $07
 
     ld   hl, wEntitiesPosYTable                   ;; 03:7A7D $21 $10 $C2
     add  hl, bc                                   ;; 03:7A80 $09
     ldh  a, [hActiveEntityPosY]                   ;; 03:7A81 $F0 $EF
     ld   [hl], a                                  ;; 03:7A83 $77
 
-ret_003_7A84:
+.return
     ret                                           ;; 03:7A84 $C9
 
-Data_003_7A85::
-    db   $01, $00, $01, $00, $00, $01, $00, $01, $01, $01, $00, $00, $00, $00, $01, $01
-    db   $01, $00, $01, $00, $00, $01, $00, $01, $01, $01, $00, $00, $00, $00, $01, $01
-    db   $00, $01, $01, $01, $01, $00, $01, $01, $01, $01, $00, $01, $01, $01, $01, $00
-    db   $01, $00, $00, $00, $00, $01, $00, $00, $00, $00, $01, $00, $00, $00, $00, $01
-    db   $00, $01, $01, $00, $01, $00, $00, $01
+FineCollisionShapes::
+; Open door
+._7C
+    db 1, 0
+    db 1, 0
+._7D
+    db 0, 1
+    db 0, 1
+._7E
+    db 1, 1
+    db 0, 0
+._7F
+    db 0, 0
+    db 1, 1
+; Fine collision
+._80
+    db 1, 0
+    db 1, 0
+._81
+    db 0, 1
+    db 0, 1
+._82
+    db 1, 1
+    db 0, 0
+._83
+    db 0, 0
+    db 1, 1
+._84
+    db 0, 1
+    db 1, 1
+._85
+    db 1, 0
+    db 1, 1
+._86
+    db 1, 1
+    db 0, 1
+._87
+    db 1, 1
+    db 1, 0
+._88
+    db 1, 0
+    db 0, 0
+._89
+    db 0, 1
+    db 0, 0
+._8A
+    db 0, 0
+    db 1, 0
+._8B
+    db 0, 0
+    db 0, 1
+._8C
+    db 0, 1
+    db 1, 0
+._8D
+    db 1, 0
+    db 0, 1
 
-; Entities collision physics?
-;
-; Does several things:
-; - Compute the type of the object under an entity
-; - Special cases depending on entity type
-; - Hookshot chain
+; Handle collision between a collision point an entity and
+; the tile below that pixel.
 ;
 ; Inputs:
-;   bc   entity index
+;   bc             entity index
+;   de             movement direction
+;   hMultiPurpose0 entity's collision box type * 4
 ;
 ; Output:
-;   c                  wether the physics changes should be ignored (?)
-;   hObjectUnderEntity type of the object under the entity
-ApplyEntityPhysics::
+;   c                  set carry flag if no collision took place
+;   hObjectUnderEntity type of the object the entity collided with
+ApplyEntityCollisionWithObject::
     ;
     ; Compute the type of the object under the given entity
     ;
@@ -7965,7 +8038,7 @@ ApplyEntityPhysics::
     ldh  a, [hMultiPurpose0]                      ;; 03:7AD6 $F0 $D7
     ld   c, a                                     ;; 03:7AD8 $4F
     pop  af                                       ;; 03:7AD9 $F1
-    ld   hl, Data_003_785F                        ;; 03:7ADA $21 $5F $78
+    ld   hl, EntityCollisionPointsX               ;; 03:7ADA $21 $5F $78
     add  hl, bc                                   ;; 03:7ADD $09
     add  hl, de                                   ;; 03:7ADE $19
     add  [hl]                                     ;; 03:7ADF $86
@@ -7977,16 +8050,17 @@ ApplyEntityPhysics::
     push bc                                       ;; 03:7AE9 $C5
     ld   a, e                                     ;; 03:7AEA $7B
     cp   $03                                      ;; 03:7AEB $FE $03
-    jr   nz, jr_003_7B0E                          ;; 03:7AED $20 $1F
+    jr   nz, .jr_7B0E                             ;; 03:7AED $20 $1F
 
     ldh  a, [hActiveEntityType]                   ;; 03:7AEF $F0 $EB
     cp   ENTITY_WRECKING_BALL                     ;; 03:7AF1 $FE $A8
     jr   z, .jr_7AF9                              ;; 03:7AF3 $28 $04
 
     cp   ENTITY_LIFTABLE_ROCK                     ;; 03:7AF5 $FE $05
-    jr   nz, jr_003_7B0E                          ;; 03:7AF7 $20 $15
+    jr   nz, .jr_7B0E                             ;; 03:7AF7 $20 $15
 
 .jr_7AF9
+    ; If wrecking ball or liftable rock, use: pos_y - max(0, pos_z) / 2
     ld   hl, wEntitiesPosYTable                   ;; 03:7AF9 $21 $10 $C2
     add  hl, bc                                   ;; 03:7AFC $09
     ld   a, [hl]                                  ;; 03:7AFD $7E
@@ -7994,27 +8068,27 @@ ApplyEntityPhysics::
     add  hl, bc                                   ;; 03:7B01 $09
     ld   c, [hl]                                  ;; 03:7B02 $4E
     bit  7, c                                     ;; 03:7B03 $CB $79
-    jr   z, .jr_7B09                              ;; 03:7B05 $28 $02
+    jr   z, .positiveZ                            ;; 03:7B05 $28 $02
 
     ld   c, $00                                   ;; 03:7B07 $0E $00
 
-.jr_7B09
+.positiveZ
     srl  c                                        ;; 03:7B09 $CB $39
     sub  c                                        ;; 03:7B0B $91
-    jr   jr_003_7B13                              ;; 03:7B0C $18 $05
+    jr   .jr_7B13                                 ;; 03:7B0C $18 $05
 
-jr_003_7B0E:
+.jr_7B0E
     ld   hl, wEntitiesPosYTable                   ;; 03:7B0E $21 $10 $C2
     add  hl, bc                                   ;; 03:7B11 $09
     ld   a, [hl]                                  ;; 03:7B12 $7E
 
-jr_003_7B13:
+.jr_7B13
     sub  $10                                      ;; 03:7B13 $D6 $10
     push af                                       ;; 03:7B15 $F5
     ldh  a, [hMultiPurpose0]                      ;; 03:7B16 $F0 $D7
     ld   c, a                                     ;; 03:7B18 $4F
     pop  af                                       ;; 03:7B19 $F1
-    ld   hl, Data_003_786F                        ;; 03:7B1A $21 $6F $78
+    ld   hl, EntityCollisionPointsY               ;; 03:7B1A $21 $6F $78
     add  hl, bc                                   ;; 03:7B1D $09
     add  hl, de                                   ;; 03:7B1E $19
     add  [hl]                                     ;; 03:7B1F $86
@@ -8033,13 +8107,8 @@ jr_003_7B13:
     ; Save it into hObjectUnderEntity
     ld   a, [hl]                                  ;; 03:7B30 $7E
     ldh  [hObjectUnderEntity], a                  ;; 03:7B31 $E0 $AF
-
-    ;
-    ; Entities special cases
-    ;
-
     cp   OBJECT_LIFTABLE_ROCK ; or liftable pot   ;; 03:7B33 $FE $20
-    jp   z, label_003_7C7B                        ;; 03:7B35 $CA $7B $7C
+    jp   z, .isHookshottable                      ;; 03:7B35 $CA $7B $7C
 
     push de                                       ;; 03:7B38 $D5
     ld   e, a                                     ;; 03:7B39 $5F
@@ -8051,95 +8120,100 @@ jr_003_7B13:
 
     ldh  a, [hActiveEntityType]                   ;; 03:7B44 $F0 $EB
     cp   ENTITY_FISH                              ;; 03:7B46 $FE $CC
-    jr   z, .jr_7B4E                              ;; 03:7B48 $28 $04
+    jr   z, .waterEntity                          ;; 03:7B48 $28 $04
 
     cp   ENTITY_WATER_TEKTITE                     ;; 03:7B4A $FE $99
-    jr   nz, jr_003_7B5D                          ;; 03:7B4C $20 $0F
+    jr   nz, .waterEntityEnd                      ;; 03:7B4C $20 $0F
 
-.jr_7B4E
+.waterEntity
+    ; Fish and Water Tektites treat everything but water as a wall.
     ldh  a, [hMultiPurpose3]                      ;; 03:7B4E $F0 $DA
-    cp   $05                                      ;; 03:7B50 $FE $05
-    jp   z, setCarryFlagAndReturn                 ;; 03:7B52 $CA $A7 $7C
+    cp   OBJ_PHYSICS_SHALLOW_WATER                ;; 03:7B50 $FE $05
+    jp   z, .setCarryFlagAndReturn                ;; 03:7B52 $CA $A7 $7C
 
-    cp   $07                                      ;; 03:7B55 $FE $07
-    jp   z, setCarryFlagAndReturn                 ;; 03:7B57 $CA $A7 $7C
+    cp   OBJ_PHYSICS_DEEP_WATER                   ;; 03:7B55 $FE $07
+    jp   z, .setCarryFlagAndReturn                ;; 03:7B57 $CA $A7 $7C
 
-    jp   jr_003_7C75                              ;; 03:7B5A $C3 $75 $7C
+    jp   .doesCollide                             ;; 03:7B5A $C3 $75 $7C
 
-jr_003_7B5D:
+.waterEntityEnd
     ldh  a, [hMultiPurpose3]                      ;; 03:7B5D $F0 $DA
     and  a                                        ;; 03:7B5F $A7
-    jp   z, setCarryFlagAndReturn                 ;; 03:7B60 $CA $A7 $7C
+    jp   z, .setCarryFlagAndReturn                ;; 03:7B60 $CA $A7 $7C
 
-    cp   $0B                                      ;; 03:7B63 $FE $0B
-    jr   z, .jr_7B6F                              ;; 03:7B65 $28 $08
+    cp   OBJ_PHYSICS_LAVA                         ;; 03:7B63 $FE $0B
+    jr   z, .pit                                  ;; 03:7B65 $28 $08
 
-    cp   $50                                      ;; 03:7B67 $FE $50
-    jr   z, .jr_7B6F                              ;; 03:7B69 $28 $04
+    cp   OBJ_PHYSICS_PIT                          ;; 03:7B67 $FE $50
+    jr   z, .pit                                  ;; 03:7B69 $28 $04
 
-    cp   $51                                      ;; 03:7B6B $FE $51
-    jr   nz, jr_003_7B8B                          ;; 03:7B6D $20 $1C
+    cp   OBJ_PHYSICS_PIT_WARP                     ;; 03:7B6B $FE $51
+    jr   nz, .pitEnd                              ;; 03:7B6D $20 $1C
 
-.jr_7B6F
+.pit
+    ; Entities treat lava and pits as walls, unless they're in the air or are ignoring hits.
     ld   hl, wEntitiesPosZTable                   ;; 03:7B6F $21 $10 $C3
     add  hl, bc                                   ;; 03:7B72 $09
     ld   a, [hl]                                  ;; 03:7B73 $7E
     and  a                                        ;; 03:7B74 $A7
-    jp   nz, setCarryFlagAndReturn                ;; 03:7B75 $C2 $A7 $7C
+    jp   nz, .setCarryFlagAndReturn               ;; 03:7B75 $C2 $A7 $7C
 
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ;; 03:7B78 $21 $10 $C4
     add  hl, bc                                   ;; 03:7B7B $09
     ld   a, [hl]                                  ;; 03:7B7C $7E
     and  a                                        ;; 03:7B7D $A7
-    jp   z, jr_003_7C75                           ;; 03:7B7E $CA $75 $7C
+    jp   z, .doesCollide                          ;; 03:7B7E $CA $75 $7C
 
+    ; Moldorm always treats pits as walls.
     ldh  a, [hActiveEntityType]                   ;; 03:7B81 $F0 $EB
     cp   ENTITY_MOLDORM                           ;; 03:7B83 $FE $59
-    jp   z, jr_003_7C75                           ;; 03:7B85 $CA $75 $7C
+    jp   z, .doesCollide                          ;; 03:7B85 $CA $75 $7C
 
-    jp   setCarryFlagAndReturn                    ;; 03:7B88 $C3 $A7 $7C
+    jp   .setCarryFlagAndReturn                   ;; 03:7B88 $C3 $A7 $7C
 
-jr_003_7B8B:
-    cp   $7C                                      ;; 03:7B8B $FE $7C
-    jp   c, label_003_7BE4                        ;; 03:7B8D $DA $E4 $7B
+.pitEnd
+    cp   OBJ_PHYSICS_DOOR_OPEN | $0C              ;; 03:7B8B $FE $7C
+    jp   c, .fineCollisionEnd                     ;; 03:7B8D $DA $E4 $7B
 
-    cp   $90                                      ;; 03:7B90 $FE $90
-    jp   nc, label_003_7BE4                       ;; 03:7B92 $D2 $E4 $7B
+    cp   OBJ_PHYSICS_DOOR_CLOSED                  ;; 03:7B90 $FE $90
+    jp   nc, .fineCollisionEnd                    ;; 03:7B92 $D2 $E4 $7B
 
-    cp   $80                                      ;; 03:7B95 $FE $80
+    cp   OBJ_PHYSICS_FINE_COLLISION               ;; 03:7B95 $FE $80
     ldh  a, [hActiveEntityType]                   ;; 03:7B97 $F0 $EB
-    jr   c, .jr_7BA7                              ;; 03:7B99 $38 $0C
+    jr   c, .openDoor                             ;; 03:7B99 $38 $0C
 
     cp   ENTITY_WRECKING_BALL                     ;; 03:7B9B $FE $A8
-    jp   z, setCarryFlagAndReturn                 ;; 03:7B9D $CA $A7 $7C
+    jp   z, .setCarryFlagAndReturn                ;; 03:7B9D $CA $A7 $7C
 
     cp   ENTITY_BOMB                              ;; 03:7BA0 $FE $02
-    jp   z, setCarryFlagAndReturn                 ;; 03:7BA2 $CA $A7 $7C
+    jp   z, .setCarryFlagAndReturn                ;; 03:7BA2 $CA $A7 $7C
 
-    jr   jr_003_7BBB                              ;; 03:7BA5 $18 $14
+    jr   .fineCollision                           ;; 03:7BA5 $18 $14
 
-.jr_7BA7
+.openDoor
+    ; Sparks and bosses treat open doors as solid walls.
     cp   ENTITY_SPARK_COUNTER_CLOCKWISE           ;; 03:7BA7 $FE $16
-    jp   z, jr_003_7C9A                           ;; 03:7BA9 $CA $9A $7C
+    jp   z, .setCollisionsTableFlagsAndReturn     ;; 03:7BA9 $CA $9A $7C
 
     cp   ENTITY_SPARK_CLOCKWISE                   ;; 03:7BAC $FE $17
-    jp   z, jr_003_7C9A                           ;; 03:7BAE $CA $9A $7C
+    jp   z, .setCollisionsTableFlagsAndReturn     ;; 03:7BAE $CA $9A $7C
 
     ld   hl, wEntitiesOptions1Table               ;; 03:7BB1 $21 $30 $C4
     add  hl, bc                                   ;; 03:7BB4 $09
     ld   a, [hl]                                  ;; 03:7BB5 $7E
-    and  $80                                      ;; 03:7BB6 $E6 $80
-    jp   nz, jr_003_7C9A                          ;; 03:7BB8 $C2 $9A $7C
+    and  ENTITY_OPT1_IS_BOSS                      ;; 03:7BB6 $E6 $80
+    jp   nz, .setCollisionsTableFlagsAndReturn    ;; 03:7BB8 $C2 $9A $7C
 
-jr_003_7BBB:
+.fineCollision
+    ; Handle collisions with open doors and fine collision objects.
     push de                                       ;; 03:7BBB $D5
     ldh  a, [hMultiPurpose3]                      ;; 03:7BBC $F0 $DA
-    sub  $7C                                      ;; 03:7BBE $D6 $7C
+    sub  OBJ_PHYSICS_DOOR_OPEN | $0C              ;; 03:7BBE $D6 $7C
     sla  a                                        ;; 03:7BC0 $CB $27
     sla  a                                        ;; 03:7BC2 $CB $27
     ld   e, a                                     ;; 03:7BC4 $5F
     ld   d, $00                                   ;; 03:7BC5 $16 $00
-    ld   hl, Data_003_7A85                        ;; 03:7BC7 $21 $85 $7A
+    ld   hl, FineCollisionShapes                  ;; 03:7BC7 $21 $85 $7A
     add  hl, de                                   ;; 03:7BCA $19
     ldh  a, [hMultiPurpose4]                      ;; 03:7BCB $F0 $DB
     rra                                           ;; 03:7BCD $1F
@@ -8158,35 +8232,36 @@ jr_003_7BBB:
     ld   a, [hl]                                  ;; 03:7BDE $7E
     pop  de                                       ;; 03:7BDF $D1
     and  a                                        ;; 03:7BE0 $A7
-    jp   z, setCarryFlagAndReturn                 ;; 03:7BE1 $CA $A7 $7C
+    jp   z, .setCarryFlagAndReturn                ;; 03:7BE1 $CA $A7 $7C
 
-label_003_7BE4:
+.fineCollisionEnd
     ldh  a, [hMultiPurpose3]                      ;; 03:7BE4 $F0 $DA
-    cp   $D0                                      ;; 03:7BE6 $FE $D0
-    jr   c, jr_003_7C2B                           ;; 03:7BE8 $38 $41
+    cp   OBJ_PHYSICS_LEDGE                        ;; 03:7BE6 $FE $D0
+    jr   c, .ledgeEnd                             ;; 03:7BE8 $38 $41
 
-    cp   $D4                                      ;; 03:7BEA $FE $D4
-    jr   nc, jr_003_7C2B                          ;; 03:7BEC $30 $3D
+    cp   OBJ_PHYSICS_LEDGE | $04                  ;; 03:7BEA $FE $D4
+    jr   nc, .ledgeEnd                            ;; 03:7BEC $30 $3D
 
-    sub  $D0                                      ;; 03:7BEE $D6 $D0
-    ld   hl, wC5D0                                ;; 03:7BF0 $21 $D0 $C5
+    ; Handle collisions with ledges (not cliffs)
+    sub  OBJ_PHYSICS_LEDGE                        ;; 03:7BEE $D6 $D0
+    ld   hl, wEntitiesThrownDirectionTable        ;; 03:7BF0 $21 $D0 $C5
     add  hl, bc                                   ;; 03:7BF3 $09
     cp   [hl]                                     ;; 03:7BF4 $BE
-    jr   z, jr_003_7C1A                           ;; 03:7BF5 $28 $23
+    jr   z, .jr_7C1A                              ;; 03:7BF5 $28 $23
 
     ldh  a, [hActiveEntityType]                   ;; 03:7BF7 $F0 $EB
     cp   ENTITY_WRECKING_BALL                     ;; 03:7BF9 $FE $A8
-    jr   z, jr_003_7C75                           ;; 03:7BFB $28 $78
+    jr   z, .doesCollide                          ;; 03:7BFB $28 $78
 
     ld   hl, wEntitiesUnknowTableJ                ;; 03:7BFD $21 $F0 $C4
     add  hl, bc                                   ;; 03:7C00 $09
     ld   a, [hl]                                  ;; 03:7C01 $7E
     and  a                                        ;; 03:7C02 $A7
-    jr   z, jr_003_7C75                           ;; 03:7C03 $28 $70
+    jr   z, .doesCollide                          ;; 03:7C03 $28 $70
 
     ldh  a, [hFrameCounter]                       ;; 03:7C05 $F0 $E7
     and  $03                                      ;; 03:7C07 $E6 $03
-    jr   z, jr_003_7C28                           ;; 03:7C09 $28 $1D
+    jr   z, .jr_7C28                              ;; 03:7C09 $28 $1D
 
     ld   a, [wIsIndoor]                           ;; 03:7C0B $FA $A5 $DB
     and  a                                        ;; 03:7C0E $A7
@@ -8194,88 +8269,93 @@ label_003_7BE4:
 
     ldh  a, [hFrameCounter]                       ;; 03:7C11 $F0 $E7
     and  $01                                      ;; 03:7C13 $E6 $01
-    jr   z, jr_003_7C28                           ;; 03:7C15 $28 $11
+    jr   z, .jr_7C28                              ;; 03:7C15 $28 $11
 
 .jr_7C17
     dec  [hl]                                     ;; 03:7C17 $35
-    jr   jr_003_7C28                              ;; 03:7C18 $18 $0E
+    jr   .jr_7C28                                 ;; 03:7C18 $18 $0E
 
-jr_003_7C1A:
+.jr_7C1A
+    ; Entity thrown off a ledge.
     ld   hl, wEntitiesPosZTable                   ;; 03:7C1A $21 $10 $C3
     add  hl, bc                                   ;; 03:7C1D $09
     ld   a, [hl]                                  ;; 03:7C1E $7E
     and  a                                        ;; 03:7C1F $A7
-    jp   z, jr_003_7C75                           ;; 03:7C20 $CA $75 $7C
+    jp   z, .doesCollide                          ;; 03:7C20 $CA $75 $7C
 
     ld   hl, wEntitiesUnknowTableJ                ;; 03:7C23 $21 $F0 $C4
     add  hl, bc                                   ;; 03:7C26 $09
     inc  [hl]                                     ;; 03:7C27 $34
 
-jr_003_7C28:
-    jp   setCarryFlagAndReturn                    ;; 03:7C28 $C3 $A7 $7C
+.jr_7C28
+    jp   .setCarryFlagAndReturn                   ;; 03:7C28 $C3 $A7 $7C
 
-jr_003_7C2B:
-    cp   $FF                                      ;; 03:7C2B $FE $FF
-    jr   z, jr_003_7C9A                           ;; 03:7C2D $28 $6B
+.ledgeEnd
+    cp   OBJ_PHYSICS_TRACTOR_DEVICE               ;; 03:7C2B $FE $FF
+    jr   z, .setCollisionsTableFlagsAndReturn     ;; 03:7C2D $28 $6B
 
     cp   $A0                                      ;; 03:7C2F $FE $A0
-    jr   nc, setCarryFlagAndReturn                ;; 03:7C31 $30 $74
+    jr   nc, .setCarryFlagAndReturn               ;; 03:7C31 $30 $74
 
-    cp   $10                                      ;; 03:7C33 $FE $10
-    jr   nc, jr_003_7C75                          ;; 03:7C35 $30 $3E
+    cp   OBJ_PHYSICS_LEDGE_OVERWORLD              ;; 03:7C33 $FE $10
+    jr   nc, .doesCollide                         ;; 03:7C35 $30 $3E
 
-    cp   $01                                      ;; 03:7C37 $FE $01
-    jr   z, hookshotEnd                           ;; 03:7C39 $28 $56
+    cp   OBJ_PHYSICS_SOLID                        ;; 03:7C37 $FE $01
+    jr   z, .hookshotEnd                          ;; 03:7C39 $28 $56
 
-    cp   $03                                      ;; 03:7C3B $FE $03
-    jr   z, hookshotEnd                           ;; 03:7C3D $28 $52
+    cp   OBJ_PHYSICS_DOOR                         ;; 03:7C3B $FE $03
+    jr   z, .hookshotEnd                          ;; 03:7C3D $28 $52
 
-    cp   $04                                      ;; 03:7C3F $FE $04
-    jr   nz, setCarryFlagAndReturn                ;; 03:7C41 $20 $64
+    cp   OBJ_PHYSICS_OCEAN_SWITCH_BLOCK           ;; 03:7C3F $FE $04
+    jr   nz, .setCarryFlagAndReturn               ;; 03:7C41 $20 $64
 
+    ; Handle collisions with ocean or swich blocks.
+    ; The wrecking ball and bombs don't collide with switch blocks.
     ldh  a, [hActiveEntityType]                   ;; 03:7C43 $F0 $EB
     cp   ENTITY_WRECKING_BALL                     ;; 03:7C45 $FE $A8
-    jp   z, setCarryFlagAndReturn                 ;; 03:7C47 $CA $A7 $7C
+    jp   z, .setCarryFlagAndReturn                ;; 03:7C47 $CA $A7 $7C
 
     cp   ENTITY_BOMB                              ;; 03:7C4A $FE $02
-    jp   z, setCarryFlagAndReturn                 ;; 03:7C4C $CA $A7 $7C
+    jp   z, .setCarryFlagAndReturn                ;; 03:7C4C $CA $A7 $7C
 
     cp   ENTITY_HOOKSHOT_CHAIN                    ;; 03:7C4F $FE $03
-    jr   nz, .jr_7C5A                             ;; 03:7C51 $20 $07
+    jr   nz, .hookshotOnSwitchBlockEnd            ;; 03:7C51 $20 $07
 
+    ; Hookshot chain doesn't collide with switch blocks if Link is standing on one.
     ld   a, [wLinkStandingOnSwitchBlock]          ;; 03:7C53 $FA $F9 $D6
     and  a                                        ;; 03:7C56 $A7
-    jp   nz, setCarryFlagAndReturn                ;; 03:7C57 $C2 $A7 $7C
+    jp   nz, .setCarryFlagAndReturn               ;; 03:7C57 $C2 $A7 $7C
 
-.jr_7C5A
+.hookshotOnSwitchBlockEnd
+    ; Entities treat the ocean as a wall.
     ldh  a, [hObjectUnderEntity]                  ;; 03:7C5A $F0 $AF
-    cp   $DB                                      ;; 03:7C5C $FE $DB
-    jr   c, jr_003_7C9A                           ;; 03:7C5E $38 $3A
+    cp   OBJECT_LOWERED_BLOCK                     ;; 03:7C5C $FE $DB
+    jr   c, .setCollisionsTableFlagsAndReturn     ;; 03:7C5E $38 $3A
 
-    cp   $DD                                      ;; 03:7C60 $FE $DD
-    jr   nc, jr_003_7C9A                          ;; 03:7C62 $30 $36
+    cp   OBJECT_RAISED_BLOCK + 1                  ;; 03:7C60 $FE $DD
+    jr   nc, .setCollisionsTableFlagsAndReturn    ;; 03:7C62 $30 $36
 
+    ; Handle collisions with swich blocks.
     push de                                       ;; 03:7C64 $D5
-    sub  $DB                                      ;; 03:7C65 $D6 $DB
+    sub  OBJECT_LOWERED_BLOCK                     ;; 03:7C65 $D6 $DB
     ld   e, a                                     ;; 03:7C67 $5F
     ld   d, $00                                   ;; 03:7C68 $16 $00
-    ld   hl, Data_003_7CA9                        ;; 03:7C6A $21 $A9 $7C
+    ld   hl, SwitchBlockLoweredStatePerObject     ;; 03:7C6A $21 $A9 $7C
     add  hl, de                                   ;; 03:7C6D $19
     pop  de                                       ;; 03:7C6E $D1
     ld   a, [wSwitchBlocksState]                  ;; 03:7C6F $FA $FB $D6
     xor  [hl]                                     ;; 03:7C72 $AE
-    jr   z, setCarryFlagAndReturn                 ;; 03:7C73 $28 $32
+    jr   z, .setCarryFlagAndReturn                ;; 03:7C73 $28 $32
 
-jr_003_7C75:
+.doesCollide
     ldh  a, [hMultiPurpose3]                      ;; 03:7C75 $F0 $DA
-    cp   $60                                      ;; 03:7C77 $FE $60
-    jr   nz, hookshotEnd                          ;; 03:7C79 $20 $16
+    cp   OBJ_PHYSICS_HOOKSHOTABLE                 ;; 03:7C77 $FE $60
+    jr   nz, .hookshotEnd                         ;; 03:7C79 $20 $16
 
-; liftable rock or pot
-label_003_7C7B:
+.isHookshottable
     ldh  a, [hActiveEntityType]                   ;; 03:7C7B $F0 $EB
     cp   ENTITY_HOOKSHOT_CHAIN                    ;; 03:7C7D $FE $03
-    jr   nz, hookshotEnd                          ;; 03:7C7F $20 $10
+    jr   nz, .hookshotEnd                         ;; 03:7C7F $20 $10
 
     call GetEntityTransitionCountdown             ;; 03:7C81 $CD $05 $0C
     cp   $26                                      ;; 03:7C84 $FE $26
@@ -8285,24 +8365,24 @@ label_003_7C7B:
 IF __PATCH_0__
     xor  a
     ld   [wC1C6], a
-    jr   hookshotEnd
+    jr   .hookshotEnd
 ENDC
 .hookshotClearEnd
 
     ld   hl, wEntitiesStateTable                  ;; 03:7C8B $21 $90 $C2
     add  hl, bc                                   ;; 03:7C8E $09
     ld   [hl], $01                                ;; 03:7C8F $36 $01
-hookshotEnd:
+.hookshotEnd
 
     ld   hl, wEntitiesOptions1Table               ;; 03:7C91 $21 $30 $C4
     add  hl, bc                                   ;; 03:7C94 $09
     ld   a, [hl]                                  ;; 03:7C95 $7E
-    and  $01                                      ;; 03:7C96 $E6 $01
-    jr   nz, setCarryFlagAndReturn                ;; 03:7C98 $20 $0D
+    and  ENTITY_OPT1_NO_WALL_COLLISION            ;; 03:7C96 $E6 $01
+    jr   nz, .setCarryFlagAndReturn               ;; 03:7C98 $20 $0D
 
-jr_003_7C9A:
-    ; wEntitiesCollisionsTable[bc] |= Data_003_787F[de]
-    ld   hl, Data_003_787F                        ;; 03:7C9A $21 $7F $78
+.setCollisionsTableFlagsAndReturn
+    ; wEntitiesCollisionsTable[bc] |= CollisionsTableFlagPerDirection[de]
+    ld   hl, CollisionsTableFlagPerDirection      ;; 03:7C9A $21 $7F $78
     add  hl, de                                   ;; 03:7C9D $19
     ld   a, [hl]                                  ;; 03:7C9E $7E
     ld   hl, wEntitiesCollisionsTable             ;; 03:7C9F $21 $A0 $C2
@@ -8312,11 +8392,11 @@ jr_003_7C9A:
     and  a                                        ;; 03:7CA5 $A7
     ret                                           ;; 03:7CA6 $C9
 
-setCarryFlagAndReturn:
+.setCarryFlagAndReturn
     scf                                           ;; 03:7CA7 $37
     ret                                           ;; 03:7CA8 $C9
-
-Data_003_7CA9::
+ 
+SwitchBlockLoweredStatePerObject::
     db   $00, $02
 
 ApplySwordIntersectionWithObjects::
@@ -8462,7 +8542,7 @@ jr_003_7D6B:
     jr   nc, jr_003_7DC0                          ;; 03:7D87 $30 $37
 
     sub  $D0                                      ;; 03:7D89 $D6 $D0
-    ld   hl, wC5D0                                ;; 03:7D8B $21 $D0 $C5
+    ld   hl, wEntitiesThrownDirectionTable        ;; 03:7D8B $21 $D0 $C5
     add  hl, bc                                   ;; 03:7D8E $09
     cp   [hl]                                     ;; 03:7D8F $BE
     jr   z, jr_003_7DB0                           ;; 03:7D90 $28 $1E
@@ -8567,6 +8647,15 @@ label_003_7E09:
 
     jp   UnloadEntityAndReturn                    ;; 03:7E0B $C3 $8D $3F
 
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   hMultiPurpose3           physics flags for the object intersected by the entity
+;   hMultiPurpose4           entityPosX - 1
+;   hMultiPurpose5           entityPosY - 7
+;   hIntersectedObjectLeft   leftmost corner of the object intersected by the entity
+;   hIntersectedObjectTop    topmost corner of the object intersected by the entity
 func_003_7E0E::
     push bc                                       ;; 03:7E0E $C5
 
@@ -8582,7 +8671,7 @@ func_003_7E0E::
 
     swap a                                        ;; 03:7E1C $CB $37
 
-    ; hMultiPurpose5 = entityPosX - 7
+    ; hMultiPurpose5 = entityPosY - 7
     ; hIntersectedObjectTop = hMultiPurpose5 - (hMultiPurpose5 % $10)
     ld   hl, wEntitiesPosYTable                   ;; 03:7E1E $21 $10 $C2
     add  hl, bc                                   ;; 03:7E21 $09
@@ -9008,10 +9097,10 @@ ApplyRecoilIfNeeded_03::
     ld   hl, wEntitiesOptions1Table               ;; 03:7FD8 $21 $30 $C4
     add  hl, bc                                   ;; 03:7FDB $09
     ld   a, [hl]                                  ;; 03:7FDC $7E
-    and  $20                                      ;; 03:7FDD $E6 $20
+    and  ENTITY_OPT1_ALLOW_OUT_OF_BOUNDS          ;; 03:7FDD $E6 $20
     jr   nz, .restoreOriginalSpeed                ;; 03:7FDF $20 $03
 
-    call DefaultEntityPhysics                     ;; 03:7FE1 $CD $93 $78
+    call ApplyEntityInteractionWithBackground     ;; 03:7FE1 $CD $93 $78
 
 .restoreOriginalSpeed
     ld   hl, wEntitiesSpeedYTable                 ;; 03:7FE4 $21 $50 $C2

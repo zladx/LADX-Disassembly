@@ -95,7 +95,7 @@ BuzzBlobState0Handler::
 
 .jr_77A9
     call UpdateEntityPosWithSpeed_18              ;; 18:77A9 $CD $5F $7E
-    call DefaultEntityPhysics_trampoline          ;; 18:77AC $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 18:77AC $CD $23 $3B
     ld   hl, wEntitiesPrivateState1Table          ;; 18:77AF $21 $B0 $C2
     add  hl, bc                                   ;; 18:77B2 $09
     ld   a, [hl]                                  ;; 18:77B3 $7E

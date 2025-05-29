@@ -832,7 +832,7 @@ jr_004_63DE:
     ld   [hl], b                                  ;; 04:63FB $70
 
 .jr_63FC
-    call DefaultEntityPhysics_trampoline          ;; 04:63FC $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 04:63FC $CD $23 $3B
     pop  hl                                       ;; 04:63FF $E1
     pop  af                                       ;; 04:6400 $F1
     ld   [hl], a                                  ;; 04:6401 $77

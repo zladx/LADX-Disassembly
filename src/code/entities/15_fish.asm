@@ -41,7 +41,7 @@ jr_015_44D7:
     call ReturnIfNonInteractive_15                ;; 15:44D7 $CD $0D $7B
     call ApplyRecoilIfNeeded_15                   ;; 15:44DA $CD $3E $7B
     call UpdateEntityPosWithSpeed_15              ;; 15:44DD $CD $88 $7B
-    call DefaultEntityPhysics_trampoline          ;; 15:44E0 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 15:44E0 $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ;; 15:44E3 $F0 $F0
     JP_TABLE                                      ;; 15:44E5
 ._00 dw func_015_44EC                             ;; 15:44E6

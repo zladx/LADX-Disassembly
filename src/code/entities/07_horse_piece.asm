@@ -33,7 +33,7 @@ HorsePieceEntityHandler::
     call UpdateEntityPosWithSpeed_07              ;; 07:7607 $CD $0A $7E
     call AddEntityZSpeedToPos_07                  ;; 07:760A $CD $43 $7E
     ; Apply collision physics
-    call DefaultEntityPhysics_trampoline          ;; 07:760D $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 07:760D $CD $23 $3B
     ; Add gravity.
     ld   hl, wEntitiesSpeedZTable                 ;; 07:7610 $21 $20 $C3
     add  hl, bc                                   ;; 07:7613 $09
@@ -186,7 +186,7 @@ HorsePieceStateThrowing:
     ld   [hl], a                                  ;; 07:76E6 $77
 
 .func_76E7
-    ld   hl, wC5D0                                ;; 07:76E7 $21 $D0 $C5
+    ld   hl, wEntitiesThrownDirectionTable        ;; 07:76E7 $21 $D0 $C5
     add  hl, bc                                   ;; 07:76EA $09
     ld   [hl], $FF                                ;; 07:76EB $36 $FF
 

@@ -22,7 +22,7 @@ WaterTektiteEntityHandler::
     and  $01                                      ;; 07:7547 $E6 $01
     call SetEntitySpriteVariant                   ;; 07:7549 $CD $0C $3B
     call UpdateEntityPosWithSpeed_07              ;; 07:754C $CD $0A $7E
-    call DefaultEntityPhysics_trampoline          ;; 07:754F $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 07:754F $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 07:7552 $21 $A0 $C2
     add  hl, bc                                   ;; 07:7555 $09
     ld   a, [hl]                                  ;; 07:7556 $7E

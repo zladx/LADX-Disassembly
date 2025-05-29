@@ -324,7 +324,7 @@ hJoypadState::
 hIntersectedObjectTop::
   ds 1 ; FFCD
 
-; Topmost corner of the object intersected by Link or Link's sword
+; Leftmost corner of the object intersected by Link or Link's sword
 ; Vary from $00 to $A0 by increments of $10
 hIntersectedObjectLeft::
   ds 1 ; FFCE

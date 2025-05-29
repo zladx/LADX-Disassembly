@@ -87,7 +87,7 @@ MaskedMimicGoriyaEntityHandler::
     add  hl, bc                                   ;; 19:4813 $09
     ld   [hl], a                                  ;; 19:4814 $77
     call UpdateEntityPosWithSpeed_19              ;; 19:4815 $CD $B8 $7D
-    call DefaultEntityPhysics_trampoline          ;; 19:4818 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 19:4818 $CD $23 $3B
     ldh  a, [hLinkDirection]                      ;; 19:481B $F0 $9E
     xor  $01                                      ;; 19:481D $EE $01
     ld   hl, wEntitiesDirectionTable              ;; 19:481F $21 $80 $C3

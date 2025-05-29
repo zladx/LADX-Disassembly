@@ -25,7 +25,7 @@ SnakeEntityHandler::
     call ApplyRecoilIfNeeded_07                   ;; 07:6860 $CD $C3 $7D
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 07:6863 $CD $39 $3B
     call UpdateEntityPosWithSpeed_07              ;; 07:6866 $CD $0A $7E
-    call DefaultEntityPhysics_trampoline          ;; 07:6869 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 07:6869 $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 07:686C $21 $A0 $C2
     add  hl, bc                                   ;; 07:686F $09
     ld   a, [hl]                                  ;; 07:6870 $7E

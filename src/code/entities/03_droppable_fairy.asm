@@ -17,7 +17,7 @@ DroppableFairyEntityHandler::
     call SetEntitySpriteVariant                   ;; 03:6178 $CD $0C $3B
     call UpdateEntityPosWithSpeed_03              ;; 03:617B $CD $25 $7F
     call func_003_61C0                            ;; 03:617E $CD $C0 $61
-    call DefaultEntityPhysics                     ;; 03:6181 $CD $93 $78
+    call ApplyEntityInteractionWithBackground     ;; 03:6181 $CD $93 $78
     call GetEntityXDistanceToLink_03              ;; 03:6184 $CD $D9 $7E
     ld   a, d                                     ;; 03:6187 $7A
     bit  7, a                                     ;; 03:6188 $CB $7F

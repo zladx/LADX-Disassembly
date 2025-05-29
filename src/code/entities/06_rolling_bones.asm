@@ -293,7 +293,7 @@ RollingBonesState3Handler::
 
 jr_006_6E04:
     call UpdateEntityPosWithSpeed_06              ;; 06:6E04 $CD $41 $65
-    call DefaultEntityPhysics_trampoline          ;; 06:6E07 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:6E07 $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 06:6E0A $21 $A0 $C2
     add  hl, bc                                   ;; 06:6E0D $09
     ld   a, [hl]                                  ;; 06:6E0E $7E

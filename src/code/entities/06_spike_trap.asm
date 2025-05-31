@@ -89,7 +89,7 @@ SpikeTrapState1Handler::
 jr_006_7585:
     call GetEntityTransitionCountdown             ;; 06:7585 $CD $05 $0C
     ld   [hl], e                                  ;; 06:7588 $73
-    call DefaultEntityPhysics_trampoline          ;; 06:7589 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:7589 $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 06:758C $21 $A0 $C2
     add  hl, bc                                   ;; 06:758F $09
     ld   a, [hl]                                  ;; 06:7590 $7E
@@ -120,7 +120,7 @@ jr_006_75A9:
     jp   IncrementEntityState                     ;; 06:75B2 $C3 $12 $3B
 
 jr_006_75B5:
-    call DefaultEntityPhysics_trampoline          ;; 06:75B5 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:75B5 $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 06:75B8 $21 $A0 $C2
     add  hl, bc                                   ;; 06:75BB $09
     ld   a, [hl]                                  ;; 06:75BC $7E

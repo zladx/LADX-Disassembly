@@ -14,7 +14,7 @@ BlooperEntityHandler::
     call ApplyRecoilIfNeeded_07                   ;; 07:5C02 $CD $C3 $7D
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 07:5C05 $CD $39 $3B
     call UpdateEntityPosWithSpeed_07              ;; 07:5C08 $CD $0A $7E
-    call DefaultEntityPhysics_trampoline          ;; 07:5C0B $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 07:5C0B $CD $23 $3B
     ld   hl, wEntitiesGroundStatusTable           ;; 07:5C0E $21 $70 $C4
     add  hl, bc                                   ;; 07:5C11 $09
     ld   a, [hl]                                  ;; 07:5C12 $7E

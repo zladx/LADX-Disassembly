@@ -89,7 +89,7 @@ BeetleSpawnerBeetleHandler:
     call GetEntityPrivateCountdown1               ;; 15:7598 $CD $00 $0C
     jr   nz, .jr_75A0                             ;; 15:759B $20 $03
 
-    call DefaultEntityPhysics_trampoline          ;; 15:759D $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 15:759D $CD $23 $3B
 
 .jr_75A0
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 15:75A0 $CD $39 $3B

@@ -150,7 +150,7 @@ MrWriteBirdState0Handler::
 MrWriteBirdState1Handler::
     call func_006_7335                            ;; 06:72E3 $CD $35 $73
     call UpdateEntityPosWithSpeed_06              ;; 06:72E6 $CD $41 $65
-    call DefaultEntityPhysics_trampoline          ;; 06:72E9 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:72E9 $CD $23 $3B
     ldh  a, [hMultiPurposeG]                      ;; 06:72EC $F0 $E8
     and  a                                        ;; 06:72EE $A7
     jr   z, label_006_7308                        ;; 06:72EF $28 $17
@@ -181,7 +181,7 @@ label_006_7308:
 
 MrWriteBirdState2Handler::
     call UpdateEntityPosWithSpeed_06              ;; 06:7312 $CD $41 $65
-    call DefaultEntityPhysics_trampoline          ;; 06:7315 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:7315 $CD $23 $3B
     ldh  a, [hFrameCounter]                       ;; 06:7318 $F0 $E7
     and  $01                                      ;; 06:731A $E6 $01
     jr   nz, .jr_7323                             ;; 06:731C $20 $05

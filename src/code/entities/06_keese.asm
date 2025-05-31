@@ -81,7 +81,7 @@ KeeseRestingHandler::
 
 KeeseFlyingHandler::
     call UpdateEntityPosWithSpeed_06              ;; 06:678F $CD $41 $65
-    call DefaultEntityPhysics_trampoline          ;; 06:6792 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:6792 $CD $23 $3B
     call GetEntityTransitionCountdown             ;; 06:6795 $CD $05 $0C
     jr   nz, .skipIncrementState                  ;; 06:6798 $20 $08
 

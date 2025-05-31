@@ -72,7 +72,7 @@ label_006_42A2:
 
 .jr_42AD
     call UpdateEntityPosWithSpeed_06              ;; 06:42AD $CD $41 $65
-    call DefaultEntityPhysics_trampoline          ;; 06:42B0 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:42B0 $CD $23 $3B
     ld   hl, wEntitiesDirectionTable              ;; 06:42B3 $21 $80 $C3
     add  hl, bc                                   ;; 06:42B6 $09
     ld   a, [hl]                                  ;; 06:42B7 $7E

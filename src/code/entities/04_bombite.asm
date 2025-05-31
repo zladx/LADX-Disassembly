@@ -74,7 +74,7 @@ TimerBombiteEntityHandler::
 .skipIncrementState
     call ApplyRecoilIfNeeded_04                   ;; 04:7D51 $CD $80 $6D
     call UpdateEntityPosWithSpeed_04              ;; 04:7D54 $CD $CA $6D
-    call DefaultEntityPhysics_trampoline          ;; 04:7D57 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 04:7D57 $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ;; 04:7D5A $F0 $F0
     JP_TABLE                                      ;; 04:7D5C
 ._00 dw TimerBombiteWalkingHandler                ;; 04:7D5D
@@ -227,7 +227,7 @@ BouncingBombiteEntityHandler::
 
 .jr_7E2A
     call UpdateEntityPosWithSpeed_04              ;; 04:7E2A $CD $CA $6D
-    call DefaultEntityPhysics_trampoline          ;; 04:7E2D $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 04:7E2D $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ;; 04:7E30 $F0 $F0
     JP_TABLE                                      ;; 04:7E32
 ._00 dw BouncingBombiteWalkingHandler             ;; 04:7E33

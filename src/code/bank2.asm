@@ -6596,8 +6596,8 @@ ApplyCollisionWithObject::
     cp   OBJ_PHYSICS_LEDGE_OVERWORLD              ;; 02:6F75 $FE $10
     jp   z, ApplyCollisionWithLedge               ;; 02:6F77 $CA $9C $71
 
-    cp   OBJ_PHYSICS_OCEAN                        ;; 02:6F7A $FE $04
-    jp   z, ApplyCollisionWithOcean               ;; 02:6F7C $CA $3D $72
+    cp   OBJ_PHYSICS_OCEAN_SWITCH_BLOCK           ;; 02:6F7A $FE $04
+    jp   z, ApplyCollisionWithOceanOrSwitchBlock  ;; 02:6F7C $CA $3D $72
 
     cp   OBJ_PHYSICS_REMOVABLE_OBSTACLE           ;; 02:6F7F $FE $30
     jp   z, ApplyCollisionWithSolid               ;; 02:6F81 $CA $77 $72
@@ -7069,7 +7069,7 @@ jr_002_722C:
 
     jp   ApplyMapFadeOutTransitionWithNoise       ;; 02:723A $C3 $7D $0C
 
-ApplyCollisionWithOcean:
+ApplyCollisionWithOceanOrSwitchBlock:
     ld   a, [wLinkStandingOnSwitchBlock]          ;; 02:723D $FA $F9 $D6
     and  a                                        ;; 02:7240 $A7
     jp   nz, label_002_7461                       ;; 02:7241 $C2 $61 $74
@@ -8127,7 +8127,7 @@ ApplyLinkGroundPhysics_Default::
 .swimmingEnd
 
     ld   a, [wLinkObjectPhysics]                  ;; 02:77B2 $FA $81 $C1
-    cp   OBJ_PHYSICS_OCEAN                        ;; 02:77B5 $FE $04
+    cp   OBJ_PHYSICS_OCEAN_SWITCH_BLOCK           ;; 02:77B5 $FE $04
     jr   nz, .grassVfxEnd                         ;; 02:77B7 $20 $30
 
     ldh  a, [hObjectUnderEntity]                  ;; 02:77B9 $F0 $AF

@@ -47,7 +47,7 @@ PolsVoiceEntityHandler::
     add  hl, bc                                   ;; 06:73BF $09
     ld   [hl], $01                                ;; 06:73C0 $36 $01
     push hl                                       ;; 06:73C2 $E5
-    call DefaultEntityPhysics_trampoline          ;; 06:73C3 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:73C3 $CD $23 $3B
     pop  hl                                       ;; 06:73C6 $E1
     ld   [hl], b                                  ;; 06:73C7 $70
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 06:73C8 $CD $39 $3B

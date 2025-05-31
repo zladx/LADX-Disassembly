@@ -479,7 +479,7 @@ func_007_6BF4::
 
 func_007_6C33::
     call UpdateEntityPosWithSpeed_07              ;; 07:6C33 $CD $0A $7E
-    jp   DefaultEntityPhysics_trampoline          ;; 07:6C36 $C3 $23 $3B
+    jp   ApplyEntityInteractionWithBackground_trampoline ;; 07:6C36 $C3 $23 $3B
 
 func_007_6C39::
     call GetEntityTransitionCountdown             ;; 07:6C39 $CD $05 $0C

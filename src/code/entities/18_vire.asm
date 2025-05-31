@@ -722,7 +722,7 @@ func_018_6E3B::
     ldh  a, [hActiveEntityPosY]                   ;; 18:6E43 $F0 $EF
     sub  $28                                      ;; 18:6E45 $D6 $28
     ldh  [hActiveEntityPosY], a                   ;; 18:6E47 $E0 $EF
-    call DefaultEntityPhysics_trampoline          ;; 18:6E49 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 18:6E49 $CD $23 $3B
     ld   hl, wEntitiesPosYTable                   ;; 18:6E4C $21 $10 $C2
     add  hl, bc                                   ;; 18:6E4F $09
     ld   a, [hl]                                  ;; 18:6E50 $7E
@@ -893,7 +893,7 @@ jr_018_6F54:
     call GetEntityTransitionCountdown             ;; 18:6F57 $CD $05 $0C
     ret  nz                                       ;; 18:6F5A $C0
 
-    call DefaultEntityPhysics_trampoline          ;; 18:6F5B $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 18:6F5B $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 18:6F5E $21 $A0 $C2
     add  hl, bc                                   ;; 18:6F61 $09
     ld   a, [hl]                                  ;; 18:6F62 $7E
@@ -970,7 +970,7 @@ func_018_6FC2::
     call GetEntityTransitionCountdown             ;; 18:6FC5 $CD $05 $0C
     ret  nz                                       ;; 18:6FC8 $C0
 
-    call DefaultEntityPhysics_trampoline          ;; 18:6FC9 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 18:6FC9 $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 18:6FCC $21 $A0 $C2
     add  hl, bc                                   ;; 18:6FCF $09
     ld   a, [hl]                                  ;; 18:6FD0 $7E

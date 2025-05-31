@@ -235,7 +235,7 @@ func_007_73F7::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ;; 07:73F7 $21 $10 $C4
     add  hl, bc                                   ;; 07:73FA $09
     ld   [hl], $03                                ;; 07:73FB $36 $03
-    call DefaultEntityPhysics_trampoline          ;; 07:73FD $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 07:73FD $CD $23 $3B
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ;; 07:7400 $21 $10 $C4
     add  hl, bc                                   ;; 07:7403 $09
     ld   [hl], b                                  ;; 07:7404 $70

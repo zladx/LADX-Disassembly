@@ -23,7 +23,7 @@ StarEntityHandler::
     call ApplyRecoilIfNeeded_07                   ;; 07:7264 $CD $C3 $7D
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 07:7267 $CD $39 $3B
     call UpdateEntityPosWithSpeed_07              ;; 07:726A $CD $0A $7E
-    call DefaultEntityPhysics_trampoline          ;; 07:726D $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 07:726D $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 07:7270 $21 $A0 $C2
     add  hl, bc                                   ;; 07:7273 $09
     ld   a, [hl]                                  ;; 07:7274 $7E

@@ -127,7 +127,7 @@ func_006_66CC::
     ld   a, [hl]                                  ;; 06:66D8 $7E
     push af                                       ;; 06:66D9 $F5
     ld   [hl], $01                                ;; 06:66DA $36 $01
-    call DefaultEntityPhysics_trampoline          ;; 06:66DC $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:66DC $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 06:66DF $21 $A0 $C2
     add  hl, bc                                   ;; 06:66E2 $09
     ld   a, [hl]                                  ;; 06:66E3 $7E
@@ -138,7 +138,7 @@ func_006_66CC::
     ld   hl, wEntitiesSpeedYTable                 ;; 06:66EB $21 $50 $C2
     add  hl, bc                                   ;; 06:66EE $09
     ld   [hl], $FF                                ;; 06:66EF $36 $FF
-    call DefaultEntityPhysics_trampoline          ;; 06:66F1 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:66F1 $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 06:66F4 $21 $A0 $C2
     add  hl, bc                                   ;; 06:66F7 $09
     pop  af                                       ;; 06:66F8 $F1

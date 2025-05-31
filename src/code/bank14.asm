@@ -1183,7 +1183,7 @@ jr_014_5391:
     jp   z, label_014_5443                        ;; 14:5394 $CA $43 $54
 
     ldh  a, [hLinkDirection]                      ;; 14:5397 $F0 $9E
-    ld   hl, wC5D0                                ;; 14:5399 $21 $D0 $C5
+    ld   hl, wEntitiesThrownDirectionTable        ;; 14:5399 $21 $D0 $C5
     add  hl, bc                                   ;; 14:539C $09
     ld   [hl], a                                  ;; 14:539D $77
     ld   hl, hJingle                              ;; 14:539E $21 $F2 $FF
@@ -1384,27 +1384,31 @@ func_014_54AC::
     or   [hl]                                     ;; 14:54B2 $B6
     jr   nz, ret_014_54E7                         ;; 14:54B3 $20 $32
 
+    ; Move Link horizontally if not 0x11 <= pox_x < 0x8F
     ldh  a, [hLinkPositionX]                      ;; 14:54B5 $F0 $98
     sub  $11                                      ;; 14:54B7 $D6 $11
     cp   $7E                                      ;; 14:54B9 $FE $7E
-    jr   c, jr_014_54D1                           ;; 14:54BB $38 $14
+    jr   c, .jr_014_54D1                          ;; 14:54BB $38 $14
 
     ldh  a, [hLinkPositionX]                      ;; 14:54BD $F0 $98
     cp   $50                                      ;; 14:54BF $FE $50
     jr   nc, .jr_54CA                             ;; 14:54C1 $30 $07
 
+    ; If Link is on the left half of the screen, move right.
     ldh  a, [hLinkPositionX]                      ;; 14:54C3 $F0 $98
     inc  a                                        ;; 14:54C5 $3C
     ldh  [hLinkPositionX], a                      ;; 14:54C6 $E0 $98
     jr   jr_014_54DE                              ;; 14:54C8 $18 $14
 
 .jr_54CA
+    ; If Link is on the right half of the screen, move left.
     ldh  a, [hLinkPositionX]                      ;; 14:54CA $F0 $98
     dec  a                                        ;; 14:54CC $3D
     ldh  [hLinkPositionX], a                      ;; 14:54CD $E0 $98
     jr   jr_014_54DE                              ;; 14:54CF $18 $0D
 
-jr_014_54D1:
+.jr_014_54D1
+    ; Move Link up if not 0x16 <= pox_y < 0x74
     ldh  a, [hLinkPositionY]                      ;; 14:54D1 $F0 $99
     sub  $16                                      ;; 14:54D3 $D6 $16
     cp   $5E                                      ;; 14:54D5 $FE $5E

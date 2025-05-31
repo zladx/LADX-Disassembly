@@ -143,7 +143,7 @@ DodongoSnakeCrawlingHandler::
     ldh  a, [hActiveEntityVisualPosY]             ;; 05:68EA $F0 $EC
     ld   [hl], a                                  ;; 05:68EC $77
     call UpdateEntityPosWithSpeed_05              ;; 05:68ED $CD $B1 $7A
-    call DefaultEntityPhysics_trampoline          ;; 05:68F0 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 05:68F0 $CD $23 $3B
 
     ; Loop through all entities in the room.
     ld   e, $0F                                   ;; 05:68F3 $1E $0F

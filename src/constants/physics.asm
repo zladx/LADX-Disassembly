@@ -20,7 +20,7 @@ DEF OBJ_PHYSICS_NONE               EQU $00 ; pass-through
 DEF OBJ_PHYSICS_SOLID              EQU $01
 DEF OBJ_PHYSICS_STAIRS             EQU $02
 DEF OBJ_PHYSICS_DOOR               EQU $03
-DEF OBJ_PHYSICS_OCEAN              EQU $04 ; blocks enemies but not projectiles?
+DEF OBJ_PHYSICS_OCEAN_SWITCH_BLOCK EQU $04 ; blocks enemies but not projectiles?
 DEF OBJ_PHYSICS_SHALLOW_WATER      EQU $05
 DEF OBJ_PHYSICS_GRASS              EQU $06 ; cuttable
 DEF OBJ_PHYSICS_DEEP_WATER         EQU $07

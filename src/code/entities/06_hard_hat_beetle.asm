@@ -30,7 +30,7 @@ HardHatBeetleEntityHandler::
     call ApplyRecoilIfNeeded_06                   ;; 06:4F4E $CD $F7 $64
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 06:4F51 $CD $39 $3B
     call UpdateEntityPosWithSpeed_06              ;; 06:4F54 $CD $41 $65
-    call DefaultEntityPhysics_trampoline          ;; 06:4F57 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:4F57 $CD $23 $3B
     ldh  a, [hFrameCounter]                       ;; 06:4F5A $F0 $E7
     rra                                           ;; 06:4F5C $1F
     rra                                           ;; 06:4F5D $1F

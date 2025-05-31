@@ -2092,7 +2092,7 @@ SpawnPlayerProjectile::
     ld   hl, wEntitiesDirectionTable              ;; 00:1479 $21 $80 $C3
     add  hl, de                                   ;; 00:147C $19
     ld   [hl], a                                  ;; 00:147D $77
-    ld   hl, wC5D0                                ;; 00:147E $21 $D0 $C5
+    ld   hl, wEntitiesThrownDirectionTable        ;; 00:147E $21 $D0 $C5
     add  hl, de                                   ;; 00:1481 $19
     ld   [hl], a                                  ;; 00:1482 $77
     ld   hl, wEntitiesUnknowTableJ                ;; 00:1483 $21 $F0 $C4

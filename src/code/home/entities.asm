@@ -355,8 +355,8 @@ HurtBySpikes_trampoline::
     callsb HurtBySpikes                           ;; 00:3B18 $3E $02 $EA $00 $21 $CD $F5 $75
     jp   ReloadSavedBank                          ;; 00:3B20 $C3 $1D $08
 
-DefaultEntityPhysics_trampoline::
-    callsb DefaultEntityPhysics                   ;; 00:3B23 $3E $03 $EA $00 $21 $CD $93 $78
+ApplyEntityInteractionWithBackground_trampoline::
+    callsb ApplyEntityInteractionWithBackground   ;; 00:3B23 $3E $03 $EA $00 $21 $CD $93 $78
     jp   ReloadSavedBank                          ;; 00:3B2B $C3 $1D $08
 
 label_3B2E::

@@ -19,7 +19,7 @@ LeeverEntityHandler::
     call ReturnIfNonInteractive_04                ;; 04:7EFB $CD $A3 $7F
     call ApplyRecoilIfNeeded_04                   ;; 04:7EFE $CD $80 $6D
     call UpdateEntityPosWithSpeed_04              ;; 04:7F01 $CD $CA $6D
-    call DefaultEntityPhysics_trampoline          ;; 04:7F04 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 04:7F04 $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ;; 04:7F07 $F0 $F0
     and  $03                                      ;; 04:7F09 $E6 $03
     JP_TABLE                                      ;; 04:7F0B

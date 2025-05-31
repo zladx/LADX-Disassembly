@@ -63,7 +63,7 @@ HinoxState1Handler::
     jr   nz, .jr_5017                             ;; 06:5015 $20 $00
 
 .jr_5017
-    jp   DefaultEntityPhysics_trampoline          ;; 06:5017 $C3 $23 $3B
+    jp   ApplyEntityInteractionWithBackground_trampoline ;; 06:5017 $C3 $23 $3B
 
 jr_006_501A:
     ld   hl, wEntitiesPrivateState3Table          ;; 06:501A $21 $D0 $C2
@@ -146,7 +146,7 @@ HinoxState0Handler::
 
 jr_006_5093:
     call UpdateEntityPosWithSpeed_06              ;; 06:5093 $CD $41 $65
-    call DefaultEntityPhysics_trampoline          ;; 06:5096 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:5096 $CD $23 $3B
 
 func_006_5099::
     ld   hl, wEntitiesInertiaTable                ;; 06:5099 $21 $D0 $C3
@@ -193,7 +193,7 @@ HinoxState3Handler::
 
 .jr_50D7
     call UpdateEntityPosWithSpeed_06              ;; 06:50D7 $CD $41 $65
-    call DefaultEntityPhysics_trampoline          ;; 06:50DA $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:50DA $CD $23 $3B
     call GetEntityXDistanceToLink_06              ;; 06:50DD $CD $94 $65
     add  $18                                      ;; 06:50E0 $C6 $18
     cp   $30                                      ;; 06:50E2 $FE $30

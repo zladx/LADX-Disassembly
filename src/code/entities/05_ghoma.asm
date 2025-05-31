@@ -54,7 +54,7 @@ GhomaEntityHandler::
     call BossIntro                                ;; 05:7C1C $CD $E8 $3E
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 05:7C1F $CD $39 $3B
     call UpdateEntityPosWithSpeed_05              ;; 05:7C22 $CD $B1 $7A
-    call DefaultEntityPhysics_trampoline          ;; 05:7C25 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 05:7C25 $CD $23 $3B
     call DecrementEntityIgnoreHitsCountdown       ;; 05:7C28 $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ;; 05:7C2B $F0 $F0
     JP_TABLE                                      ;; 05:7C2D

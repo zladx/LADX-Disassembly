@@ -289,7 +289,7 @@ jr_005_4A46:
 
 .jr_4AAE
     call UpdateEntityPosWithSpeed_05              ;; 05:4AAE $CD $B1 $7A
-    call DefaultEntityPhysics_trampoline          ;; 05:4AB1 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 05:4AB1 $CD $23 $3B
     call GetEntitySlowTransitionCountdown         ;; 05:4AB4 $CD $FB $0B
     cp   $06                                      ;; 05:4AB7 $FE $06
     jr   nc, jr_005_4AEC                          ;; 05:4AB9 $30 $31

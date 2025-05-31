@@ -18,7 +18,7 @@ CrystalSwitchEntityHandler::
     call DecrementEntityIgnoreHitsCountdown       ;; 15:433B $CD $56 $0C
     call label_3B70                               ;; 15:433E $CD $70 $3B
     call PushLinkOutOfEntity_15                   ;; 15:4341 $CD $6E $7A
-    call DefaultEntityPhysics_trampoline          ;; 15:4344 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 15:4344 $CD $23 $3B
     ld   hl, wEntitiesFlashCountdownTable         ;; 15:4347 $21 $20 $C4
     add  hl, bc                                   ;; 15:434A $09
     ld   a, [hl]                                  ;; 15:434B $7E

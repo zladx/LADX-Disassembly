@@ -66,7 +66,7 @@ jr_019_6AD4:
     call ApplyRecoilIfNeeded_19                   ;; 19:6AD7 $CD $6E $7D
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 19:6ADA $CD $39 $3B
     call UpdateEntityPosWithSpeed_19              ;; 19:6ADD $CD $B8 $7D
-    call DefaultEntityPhysics_trampoline          ;; 19:6AE0 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 19:6AE0 $CD $23 $3B
     ld   a, [wCollisionType]                      ;; 19:6AE3 $FA $33 $C1
     and  a                                        ;; 19:6AE6 $A7
     jr   nz, jr_019_6B41                          ;; 19:6AE7 $20 $58

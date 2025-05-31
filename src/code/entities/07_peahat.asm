@@ -15,7 +15,7 @@ PeaHatEntityHandler::
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 07:6715 $CD $39 $3B
     call UpdateEntityPosWithSpeed_07              ;; 07:6718 $CD $0A $7E
     call AddEntityZSpeedToPos_07                  ;; 07:671B $CD $43 $7E
-    call DefaultEntityPhysics_trampoline          ;; 07:671E $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 07:671E $CD $23 $3B
     ld   hl, wEntitiesHitboxFlagsTable            ;; 07:6721 $21 $50 $C3
     add  hl, bc                                   ;; 07:6724 $09
     set  7, [hl]                                  ;; 07:6725 $CB $FE

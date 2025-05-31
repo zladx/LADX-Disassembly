@@ -69,7 +69,7 @@ jr_003_5286:
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ;; 03:5290 $21 $10 $C4
     add  hl, bc                                   ;; 03:5293 $09
     ld   [hl], a                                  ;; 03:5294 $77
-    call DefaultEntityPhysics                     ;; 03:5295 $CD $93 $78
+    call ApplyEntityInteractionWithBackground     ;; 03:5295 $CD $93 $78
     ld   hl, wEntitiesStatusTable                 ;; 03:5298 $21 $80 $C2
     add  hl, bc                                   ;; 03:529B $09
     ld   a, [hl]                                  ;; 03:529C $7E
@@ -99,8 +99,8 @@ jr_003_5286:
     cp   TRIGGER_PUSH_BLOCKS                      ;; 03:52C1 $FE $07
     ret  nz                                       ;; 03:52C3 $C0
 
-    call DefaultEntityPhysics                     ;; 03:52C4 $CD $93 $78
-    ld   a, [wC503]                               ;; 03:52C7 $FA $03 $C5
+    call ApplyEntityInteractionWithBackground     ;; 03:52C4 $CD $93 $78
+    ld   a, [wEntityHorizontallyCollidedObject]   ;; 03:52C7 $FA $03 $C5
     cp   $A7                                      ;; 03:52CA $FE $A7
     jr   z, .jr_52D1                              ;; 03:52CC $28 $03
 

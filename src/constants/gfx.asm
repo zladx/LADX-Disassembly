@@ -278,6 +278,7 @@ DEF OBJECT_DUNGEON_ENTRANCE            EQU $FC
 DEF OBJECT_INDOOR_ENTRANCE             EQU $FD
 
 ; Values for sidescroll objects
+DEF OBJECT_WATER_LADDER_SIDESCROLL     EQU $67
 DEF OBJECT_FROZEN_BLOCK                EQU $8A
 
 ; Room header constants

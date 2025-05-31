@@ -97,7 +97,7 @@ ThwompRammableState1Handler::
     ldh  [hActiveEntityPosY], a                   ;; 19:5609 $E0 $EF
 
 .jr_560B
-    call DefaultEntityPhysics_trampoline          ;; 19:560B $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 19:560B $CD $23 $3B
     ld   hl, wEntitiesPosYTable                   ;; 19:560E $21 $10 $C2
     add  hl, bc                                   ;; 19:5611 $09
     ld   a, [hl]                                  ;; 19:5612 $7E
@@ -267,7 +267,7 @@ ThwimpState2Handler::
     ld   [hl], a                                  ;; 19:5731 $77
 
 .jr_5732
-    call DefaultEntityPhysics_trampoline          ;; 19:5732 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 19:5732 $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 19:5735 $21 $A0 $C2
     add  hl, bc                                   ;; 19:5738 $09
     ld   a, [hl]                                  ;; 19:5739 $7E
@@ -433,7 +433,7 @@ ThwompState2Handler::
     ldh  a, [hActiveEntityPosY]                   ;; 19:584E $F0 $EF
     add  $10                                      ;; 19:5850 $C6 $10
     ldh  [hActiveEntityPosY], a                   ;; 19:5852 $E0 $EF
-    call DefaultEntityPhysics_trampoline          ;; 19:5854 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 19:5854 $CD $23 $3B
     ld   hl, wEntitiesPosYTable                   ;; 19:5857 $21 $10 $C2
     add  hl, bc                                   ;; 19:585A $09
     ld   a, [hl]                                  ;; 19:585B $7E

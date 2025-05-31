@@ -38,7 +38,7 @@ GibdoEntityHandler::
 
 LikeLikeGibdoWalk:
     call UpdateEntityPosWithSpeed_06              ;; 06:7E9D $CD $41 $65
-    call DefaultEntityPhysics_trampoline          ;; 06:7EA0 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:7EA0 $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 06:7EA3 $21 $A0 $C2
     add  hl, bc                                   ;; 06:7EA6 $09
     ld   a, [hl]                                  ;; 06:7EA7 $7E

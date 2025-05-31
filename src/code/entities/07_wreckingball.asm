@@ -123,7 +123,7 @@ notLifted:
     ldh  a, [hActiveEntityPosY]                   ;; 07:60A1 $F0 $EF
     add  e                                        ;; 07:60A3 $83
     ldh  [hActiveEntityPosY], a                   ;; 07:60A4 $E0 $EF
-    call DefaultEntityPhysics_trampoline          ;; 07:60A6 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 07:60A6 $CD $23 $3B
     ldh  a, [hActiveEntityFlipAttribute]          ;; 07:60A9 $F0 $ED
     ld   e, a                                     ;; 07:60AB $5F
     ld   hl, wEntitiesPosYTable                   ;; 07:60AC $21 $10 $C2
@@ -261,16 +261,14 @@ WreckingBallState2Handler::
     sra  a                                        ;; 07:6156 $CB $2F
     ld   [hl], a                                  ;; 07:6158 $77
 
-; negative z position
 .touchingGround
-    ld   hl, wC5D0                                ;; 07:6159 $21 $D0 $C5
+    ld   hl, wEntitiesThrownDirectionTable        ;; 07:6159 $21 $D0 $C5
     add  hl, bc                                   ;; 07:615C $09
     ld   [hl], $FF                                ;; 07:615D $36 $FF
     call IncrementEntityState                     ;; 07:615F $CD $12 $3B
     ld   [hl], b                                  ;; 07:6162 $70
     ret                                           ;; 07:6163 $C9
 
-; no collision
 .noCollision
     call ReturnIfNonInteractive_07                ;; 07:6164 $CD $96 $7D
     ld   a, $0B                                   ;; 07:6167 $3E $0B

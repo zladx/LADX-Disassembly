@@ -73,7 +73,7 @@ WingedOctorokEntityHandler::
     ld   [hl], b                                  ;; 07:5692 $70
 
 .jr_5693
-    call DefaultEntityPhysics_trampoline          ;; 07:5693 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 07:5693 $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ;; 07:5696 $F0 $F0
     cp   $02                                      ;; 07:5698 $FE $02
     jp   z, label_007_577A                        ;; 07:569A $CA $7A $57

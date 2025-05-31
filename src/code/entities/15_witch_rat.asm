@@ -108,7 +108,7 @@ func_015_78DE::
 
 func_015_792E::
     call UpdateEntityPosWithSpeed_15              ;; 15:792E $CD $88 $7B
-    call DefaultEntityPhysics_trampoline          ;; 15:7931 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 15:7931 $CD $23 $3B
     ldh  a, [hMultiPurposeG]                      ;; 15:7934 $F0 $E8
     and  a                                        ;; 15:7936 $A7
     jr   z, jr_015_7950                           ;; 15:7937 $28 $17

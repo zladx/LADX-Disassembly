@@ -318,7 +318,7 @@ func_015_522C::
     call func_015_5435                            ;; 15:522C $CD $35 $54
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 15:522F $CD $39 $3B
     call UpdateEntityPosWithSpeed_15              ;; 15:5232 $CD $88 $7B
-    call DefaultEntityPhysics_trampoline          ;; 15:5235 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 15:5235 $CD $23 $3B
     call AddEntityZSpeedToPos_15                  ;; 15:5238 $CD $C1 $7B
     ld   hl, wEntitiesSpeedZTable                 ;; 15:523B $21 $20 $C3
     add  hl, bc                                   ;; 15:523E $09
@@ -1722,7 +1722,7 @@ label_015_5DED:
 
 jr_015_5E24:
     call UpdateEntityPosWithSpeed_15              ;; 15:5E24 $CD $88 $7B
-    call DefaultEntityPhysics_trampoline          ;; 15:5E27 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 15:5E27 $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ;; 15:5E2A $F0 $F0
     JP_TABLE                                      ;; 15:5E2C
 ._00 dw func_015_5E35                             ;; 15:5E2D
@@ -2080,7 +2080,7 @@ func_015_608C::
     ld   [hl], $0A                                ;; 15:60AA $36 $0A
     ld   hl, wEntitiesOptions1Table               ;; 15:60AC $21 $30 $C4
     add  hl, bc                                   ;; 15:60AF $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IMMUNE_WATER_PIT ;; 15:60B0 $36 $90
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_NO_GROUND_INTERACTION ;; 15:60B0 $36 $90
     jp   ConfigureEntityHitbox                    ;; 15:60B2 $C3 $EA $3A
 
 .jr_60B5
@@ -2322,11 +2322,11 @@ ENDC
 
     ld   hl, wEntitiesOptions1Table               ;; 15:630F $21 $30 $C4
     add  hl, bc                                   ;; 15:6312 $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IMMUNE_WATER_PIT ;; 15:6313 $36 $90
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_NO_GROUND_INTERACTION ;; 15:6313 $36 $90
     call label_3B70                               ;; 15:6315 $CD $70 $3B
     ld   hl, wEntitiesOptions1Table               ;; 15:6318 $21 $30 $C4
     add  hl, bc                                   ;; 15:631B $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IMMUNE_WATER_PIT ;; 15:631C $36 $D0
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_NO_GROUND_INTERACTION ;; 15:631C $36 $D0
 
 .jr_6324
     ld   hl, wEntitiesHealthTable                 ;; 15:631E $21 $60 $C3
@@ -2357,7 +2357,7 @@ func_015_6331::
     call UpdateEntityPosWithSpeed_15              ;; 15:633F $CD $88 $7B
 
 .jr_6342
-    call DefaultEntityPhysics_trampoline          ;; 15:6342 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 15:6342 $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 15:6345 $21 $A0 $C2
     add  hl, bc                                   ;; 15:6348 $09
     ld   a, [hl]                                  ;; 15:6349 $7E
@@ -3037,7 +3037,7 @@ func_015_67FA::
 func_015_6811::
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 15:6811 $CD $39 $3B
     call UpdateEntityPosWithSpeed_15              ;; 15:6814 $CD $88 $7B
-    call DefaultEntityPhysics_trampoline          ;; 15:6817 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 15:6817 $CD $23 $3B
     ldh  a, [hFrameCounter]                       ;; 15:681A $F0 $E7
     and  $01                                      ;; 15:681C $E6 $01
     jr   nz, jr_015_683F                          ;; 15:681E $20 $1F
@@ -3879,7 +3879,7 @@ func_015_6E66::
 
 jr_015_6F70:
     call UpdateEntityPosWithSpeed_15              ;; 15:6F70 $CD $88 $7B
-    call DefaultEntityPhysics_trampoline          ;; 15:6F73 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 15:6F73 $CD $23 $3B
     ld   hl, wEntitiesPrivateState1Table          ;; 15:6F76 $21 $B0 $C2
     add  hl, bc                                   ;; 15:6F79 $09
     ld   e, [hl]                                  ;; 15:6F7A $5E

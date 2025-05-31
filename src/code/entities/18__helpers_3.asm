@@ -232,7 +232,7 @@ ApplyRecoilIfNeeded_18::
     and  $20                                      ;; 18:7E4A $E6 $20
     jr   nz, .restoreOriginalSpeed                ;; 18:7E4C $20 $03
 
-    call DefaultEntityPhysics_trampoline          ;; 18:7E4E $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 18:7E4E $CD $23 $3B
 
 .restoreOriginalSpeed
     ld   hl, wEntitiesSpeedYTable                 ;; 18:7E51 $21 $50 $C2

@@ -2132,7 +2132,7 @@ func_036_4C25::
 
 .jr_4C4C
     call UpdateEntityPosWithSpeed_36              ;; 36:4C4C $CD $62 $6A
-    call DefaultEntityPhysics_trampoline          ;; 36:4C4F $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 36:4C4F $CD $23 $3B
     ldh  a, [hFrameCounter]                       ;; 36:4C52 $F0 $E7
     rra                                           ;; 36:4C54 $1F
     rra                                           ;; 36:4C55 $1F
@@ -2142,7 +2142,7 @@ func_036_4C25::
 
 func_036_4C5C::
     call UpdateEntityPosWithSpeed_36              ;; 36:4C5C $CD $62 $6A
-    call DefaultEntityPhysics_trampoline          ;; 36:4C5F $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 36:4C5F $CD $23 $3B
     call func_036_6AEC                            ;; 36:4C62 $CD $EC $6A
     call PointHLToEntitySpeedZ                    ;; 36:4C65 $CD $F8 $6B
     dec  [hl]                                     ;; 36:4C68 $35
@@ -2721,7 +2721,7 @@ func_036_5007::
     ret                                           ;; 36:501B $C9
 
 func_036_501C::
-    call DefaultEntityPhysics_trampoline          ;; 36:501C $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 36:501C $CD $23 $3B
     call GetEntityTransitionCountdown             ;; 36:501F $CD $05 $0C
     ret  nz                                       ;; 36:5022 $C0
 
@@ -4891,7 +4891,7 @@ AvalaunchState4Handler::
     jr   nz, .ret_5D97                            ;; 36:5D6F $20 $26
 
     call UpdateEntityPosWithSpeed_36              ;; 36:5D71 $CD $62 $6A
-    call DefaultEntityPhysics_trampoline          ;; 36:5D74 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 36:5D74 $CD $23 $3B
     call func_036_6C0D                            ;; 36:5D77 $CD $0D $6C
     ld   a, $20                                   ;; 36:5D7A $3E $20
     call SetEntityTransitionCountdown_36          ;; 36:5D7C $CD $83 $6C
@@ -4920,7 +4920,7 @@ AvalaunchState5Handler::
     jr   nz, .ret_5DC2                            ;; 36:5D9F $20 $21
 
     call UpdateEntityPosWithSpeed_36              ;; 36:5DA1 $CD $62 $6A
-    call DefaultEntityPhysics_trampoline          ;; 36:5DA4 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 36:5DA4 $CD $23 $3B
     call func_036_6C0D                            ;; 36:5DA7 $CD $0D $6C
     ld   a, $20                                   ;; 36:5DAA $3E $20
     call SetEntityTransitionCountdown_36          ;; 36:5DAC $CD $83 $6C
@@ -4947,7 +4947,7 @@ AvalaunchState6Handler::
     ret  nz                                       ;; 36:5DCA $C0
 
     call UpdateEntityPosWithSpeed_36              ;; 36:5DCB $CD $62 $6A
-    call DefaultEntityPhysics_trampoline          ;; 36:5DCE $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 36:5DCE $CD $23 $3B
     call func_036_6C0D                            ;; 36:5DD1 $CD $0D $6C
     ld   a, $20                                   ;; 36:5DD4 $3E $20
     call SetEntityTransitionCountdown_36          ;; 36:5DD6 $CD $83 $6C
@@ -4977,7 +4977,7 @@ AvalaunchState7Handler::
     ret  nz                                       ;; 36:5DFA $C0
 
     call UpdateEntityPosWithSpeed_36              ;; 36:5DFB $CD $62 $6A
-    call DefaultEntityPhysics_trampoline          ;; 36:5DFE $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 36:5DFE $CD $23 $3B
     call func_036_6C0D                            ;; 36:5E01 $CD $0D $6C
     ld   a, $20                                   ;; 36:5E04 $3E $20
     call SetEntityTransitionCountdown_36          ;; 36:5E06 $CD $83 $6C
@@ -5037,7 +5037,7 @@ jr_036_5E56:
 
 AvalaunchState9Handler::
     call UpdateEntityPosWithSpeed_36              ;; 36:5E59 $CD $62 $6A
-    call DefaultEntityPhysics_trampoline          ;; 36:5E5C $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 36:5E5C $CD $23 $3B
     call PointHLToEntitySpeedX                    ;; 36:5E5F $CD $EE $6B
     ld   a, [hl]                                  ;; 36:5E62 $7E
     and  a                                        ;; 36:5E63 $A7
@@ -5290,7 +5290,7 @@ HopperEntityHandler::
     ld   [hl], $01                                ;; 36:5FC6 $36 $01
 
 .jr_5FC8
-    call DefaultEntityPhysics_trampoline          ;; 36:5FC8 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 36:5FC8 $CD $23 $3B
     pop  hl                                       ;; 36:5FCB $E1
     pop  af                                       ;; 36:5FCC $F1
     ld   [hl], a                                  ;; 36:5FCD $77
@@ -5856,7 +5856,7 @@ ColorGhoulState2Handler::
     push af                                       ;; 36:6476 $F5
     push de                                       ;; 36:6477 $D5
     call UpdateEntityPosWithSpeed_36              ;; 36:6478 $CD $62 $6A
-    call DefaultEntityPhysics_trampoline          ;; 36:647B $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 36:647B $CD $23 $3B
     pop  de                                       ;; 36:647E $D1
     pop  af                                       ;; 36:647F $F1
     or   e                                        ;; 36:6480 $B3
@@ -6299,7 +6299,7 @@ ColorShellState1Handler::
     call PointHLToEntitySpeedY                    ;; 36:6752 $CD $F3 $6B
     ld   [hl], a                                  ;; 36:6755 $77
     call UpdateEntityPosWithSpeed_36              ;; 36:6756 $CD $62 $6A
-    call DefaultEntityPhysics_trampoline          ;; 36:6759 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 36:6759 $CD $23 $3B
     call func_036_66C6                            ;; 36:675C $CD $C6 $66
     call GetEntityTransitionCountdown             ;; 36:675F $CD $05 $0C
     jr   nz, label_036_679F                       ;; 36:6762 $20 $3B
@@ -6366,7 +6366,7 @@ ColorShellState3Handler::
 
 .jr_67C8
     call UpdateEntityPosWithSpeed_36              ;; 36:67C8 $CD $62 $6A
-    call DefaultEntityPhysics_trampoline          ;; 36:67CB $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 36:67CB $CD $23 $3B
     call func_036_66C6                            ;; 36:67CE $CD $C6 $66
 
 jr_036_67D1:
@@ -6441,7 +6441,7 @@ ColorShellState4Handler::
     ret                                           ;; 36:6824 $C9
 
 ColorShellState5Handler::
-    call DefaultEntityPhysics_trampoline          ;; 36:6825 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 36:6825 $CD $23 $3B
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ;; 36:6828 $21 $10 $C4
     add  hl, bc                                   ;; 36:682B $09
     ld   a, [hl]                                  ;; 36:682C $7E
@@ -6596,7 +6596,7 @@ ColorShellState9Handler::
     call PointHLToEntitySpeedZ                    ;; 36:68FB $CD $F8 $6B
     dec  [hl]                                     ;; 36:68FE $35
     call func_036_6AEC                            ;; 36:68FF $CD $EC $6A
-    call DefaultEntityPhysics_trampoline          ;; 36:6902 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 36:6902 $CD $23 $3B
     call PointHLToEntityPosZ                      ;; 36:6905 $CD $2D $6C
     ld   a, [hl]                                  ;; 36:6908 $7E
     bit  7, a                                     ;; 36:6909 $CB $7F
@@ -6620,7 +6620,7 @@ ColorShellStateAHandler::
     dec  [hl]                                     ;; 36:6925 $35
     call func_036_6AEC                            ;; 36:6926 $CD $EC $6A
     push bc                                       ;; 36:6929 $C5
-    call DefaultEntityPhysics_trampoline          ;; 36:692A $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 36:692A $CD $23 $3B
     pop  bc                                       ;; 36:692D $C1
     call PointHLToEntityPosZ                      ;; 36:692E $CD $2D $6C
     ld   a, [hl]                                  ;; 36:6931 $7E
@@ -7046,7 +7046,7 @@ ApplyRecoilIfNeeded_36::
     and  $20                                      ;; 36:6B46 $E6 $20
     jr   nz, .restoreOriginalSpeed                ;; 36:6B48 $20 $03
 
-    call DefaultEntityPhysics_trampoline          ;; 36:6B4A $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 36:6B4A $CD $23 $3B
 
 .restoreOriginalSpeed
     call PointHLToEntitySpeedY                    ;; 36:6B4D $CD $F3 $6B

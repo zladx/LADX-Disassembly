@@ -52,7 +52,7 @@ jr_018_650A:
 
 .jr_6519
     call UpdateEntityPosWithSpeed_18              ;; 18:6519 $CD $5F $7E
-    call DefaultEntityPhysics_trampoline          ;; 18:651C $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 18:651C $CD $23 $3B
     call AddEntityZSpeedToPos_18                  ;; 18:651F $CD $98 $7E
     ld   hl, wEntitiesSpeedZTable                 ;; 18:6522 $21 $20 $C3
     add  hl, bc                                   ;; 18:6525 $09

@@ -291,7 +291,7 @@ jr_007_41BE:
 
 jr_007_41C8:
     call UpdateEntityPosWithSpeed_07              ;; 07:41C8 $CD $0A $7E
-    call DefaultEntityPhysics_trampoline          ;; 07:41CB $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 07:41CB $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ;; 07:41CE $21 $A0 $C2
     add  hl, bc                                   ;; 07:41D1 $09
     ld   a, [hl]                                  ;; 07:41D2 $7E
@@ -326,7 +326,7 @@ label_007_41F0:
     and  $01                                      ;; 07:4201 $E6 $01
     call SetEntitySpriteVariant                   ;; 07:4203 $CD $0C $3B
     call UpdateEntityPosWithSpeed_07              ;; 07:4206 $CD $0A $7E
-    call DefaultEntityPhysics_trampoline          ;; 07:4209 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 07:4209 $CD $23 $3B
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 07:420C $CD $39 $3B
     call GetEntityTransitionCountdown             ;; 07:420F $CD $05 $0C
     jr   nz, .ret_4233                            ;; 07:4212 $20 $1F

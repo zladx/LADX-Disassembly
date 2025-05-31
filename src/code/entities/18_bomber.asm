@@ -40,7 +40,7 @@ BomberEntityHandler::
     ld   [hl], a                                  ;; 18:7852 $77
     call ApplyRecoilIfNeeded_18                   ;; 18:7853 $CD $15 $7E
     call UpdateEntityPosWithSpeed_18              ;; 18:7856 $CD $5F $7E
-    call DefaultEntityPhysics_trampoline          ;; 18:7859 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 18:7859 $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ;; 18:785C $F0 $F0
     JP_TABLE                                      ;; 18:785E
 ._00 dw BomberState0Handler

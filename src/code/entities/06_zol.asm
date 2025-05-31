@@ -217,7 +217,7 @@ ZolGelPhysics::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ;; 06:7D16 $21 $10 $C4
     add  hl, bc                                   ;; 06:7D19 $09
     ld   [hl], $02                                ;; 06:7D1A $36 $02
-    call DefaultEntityPhysics_trampoline          ;; 06:7D1C $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:7D1C $CD $23 $3B
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ;; 06:7D1F $21 $10 $C4
     add  hl, bc                                   ;; 06:7D22 $09
     ld   [hl], b                                  ;; 06:7D23 $70
@@ -327,7 +327,7 @@ GelState4Handler::
     ld   [hl], a                                  ;; 06:7DB6 $77
     ld   a, $01                                   ;; 06:7DB7 $3E $01
     ld   [wIsGelClingingToLink], a                ;; 06:7DB9 $EA $17 $C1
-    call DefaultEntityPhysics_trampoline          ;; 06:7DBC $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 06:7DBC $CD $23 $3B
     ldh  a, [hJoypadState]                        ;; 06:7DBF $F0 $CC
     and  a                                        ;; 06:7DC1 $A7
     jr   z, DecreaseEntityTransitionCountdown.return ;; 06:7DC2 $28 $0F

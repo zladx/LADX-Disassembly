@@ -1153,11 +1153,11 @@ wEntitiesSpeedZAccTable::
 wEntitiesPhysicsFlagsTable::
   ds $10 ; C340 - C34F
 
-; Type of hitbox (plus maybe other flags):
-; bit 0: TODO ???,
-; bit 1: TODO ???,
-; bit 2-6: hitbox type (see HitboxPositions),
+; Type of hitbox:
+; bits 0-1: collision box type
+; bits 2-6: hitbox type (see HitboxPositions),
 ; bit 7: ignore hits (and force collision, for some entities)
+; See HITFLAGS_ constants for possible values.
 wEntitiesHitboxFlagsTable::
   ds $10 ; C350 - C35F
 
@@ -1327,6 +1327,7 @@ wEntitiesLoadOrderTable::
 ;  1: on deep water/lava
 ;  2: on shallow water (draws ripples)
 ;  3: on tall grass (draws pushed-away grasses)
+; See ENTITY_GROUND_STATUS* for possible values
 wEntitiesGroundStatusTable::
   ds $10 ; C470 - C47F
 
@@ -1348,11 +1349,12 @@ wEntitiesLiftedTable::
 wEntitiesPowerRecoilingTable::
   ds $10 ; C4A0 - C4AF
 
-; Unlabeled
-wC4B0::
+; When an entity is falling, it moves toward this x position
+wEntitiesFallingTargetXTable::
   ds $10 ; C4B0 - C4BF
 
-wC4C0::
+; When an entity is falling, it moves toward this y position
+wEntitiesFallingTargetYTable::
   ds $10 ; C4C0 - C4CF
 
 ; Entities health group
@@ -1386,8 +1388,8 @@ wOwlEntityIndex::
 wC502::
   ds 1 ; C502
 
-; Unlabeled
-wC503::
+; Type of the object the active entity collided with horizontally
+wEntityHorizontallyCollidedObject::
   ds 1 ; C503
 
 ; Unused? (only written to zero, not read anywhere)
@@ -1414,8 +1416,8 @@ wIndexPickedUpInShop::
 wPickedUpRockIndex::
   ds 1 ; C50C
 
-; Unlabeled
-wC50D::
+; Type of the object the active entity collided with vertically
+wEntityVerticallyCollidedObject::
   ds 1 ; C50D
 
 ; Unlabeled
@@ -1540,10 +1542,14 @@ wC5B1::
 wC5C0::
   ds $10 ; C5C0 - C5CF
 
-; Unlabeled
-; check for not used addresses
-wC5D0::
-  ds $8B0 ; C5D0 - CE7F
+; Direction the entity was thrown.
+; See DIRECTION_* constants for possible values.
+; 0xFF = not thrown
+wEntitiesThrownDirectionTable::
+  ds $10 ; C5D0 - C5DF
+  
+wC5E0::
+  ds $8A0 ; C5E0 - CE7F
 
 ; Index of the next slot to use in wRecentRooms
 wRecentRoomsIndex::

@@ -219,7 +219,7 @@ func_005_4624::
 
 func_005_4663::
     call UpdateEntityPosWithSpeed_05              ;; 05:4663 $CD $B1 $7A
-    call DefaultEntityPhysics_trampoline          ;; 05:4666 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 05:4666 $CD $23 $3B
     ldh  a, [hMultiPurposeG]                      ;; 05:4669 $F0 $E8
     and  a                                        ;; 05:466B $A7
     jr   z, jr_005_4685                           ;; 05:466C $28 $17
@@ -282,7 +282,7 @@ func_005_46AF::
 
 jr_005_46D2:
     call UpdateEntityPosWithSpeed_05              ;; 05:46D2 $CD $B1 $7A
-    call DefaultEntityPhysics_trampoline          ;; 05:46D5 $CD $23 $3B
+    call ApplyEntityInteractionWithBackground_trampoline ;; 05:46D5 $CD $23 $3B
     ldh  a, [hFrameCounter]                       ;; 05:46D8 $F0 $E7
     rra                                           ;; 05:46DA $1F
     rra                                           ;; 05:46DB $1F

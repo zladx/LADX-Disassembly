@@ -1157,6 +1157,7 @@ wEntitiesPhysicsFlagsTable::
 ; bits 0-1: collision box type
 ; bits 2-6: hitbox type (see HitboxPositions),
 ; bit 7: ignore hits (and force collision, for some entities)
+; See HITFLAGS_ constants for possible values.
 wEntitiesHitboxFlagsTable::
   ds $10 ; C350 - C35F
 

@@ -27,143 +27,159 @@ LoadRoomTemplate::
 RoomTemplateTopRightBottomLeftHandler::
     push bc                                       ;; 14:48A1 $C5
     ld   hl, wRoomObjects                         ;; 14:48A2 $21 $11 $D7
-    ld   bc, Data_014_4917                        ;; 14:48A5 $01 $17 $49
-    ld   de, Data_014_4938                        ;; 14:48A8 $11 $38 $49
-    jp   Func_354B                                ;; 14:48AB $C3 $4B $35
+    ld   bc, RoomTemplateTopRightBottomLeftOffsets ;; 14:48A5 $01 $17 $49
+    ld   de, RoomTemplateTopRightBottomLeftIds    ;; 14:48A8 $11 $38 $49
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 14:48AB $C3 $4B $35
 
 RoomTemplateRightBottomLeftHandler::
     push bc                                       ;; 14:48AE $C5
     ld   hl, wRoomObjects                         ;; 14:48AF $21 $11 $D7
-    ld   bc, Data_014_4958                        ;; 14:48B2 $01 $58 $49
-    ld   de, Data_014_4971                        ;; 14:48B5 $11 $71 $49
-    jp   Func_354B                                ;; 14:48B8 $C3 $4B $35
+    ld   bc, RoomTemplateRightBottomLeftOffsets   ;; 14:48B2 $01 $58 $49
+    ld   de, RoomTemplateRightBottomLeftIds       ;; 14:48B5 $11 $71 $49
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 14:48B8 $C3 $4B $35
 
 RoomTemplateTopLeftBottomHandler::
     push bc                                       ;; 14:48BB $C5
     ld   hl, wRoomObjects                         ;; 14:48BC $21 $11 $D7
-    ld   bc, Data_014_4989                        ;; 14:48BF $01 $89 $49
-    ld   de, Data_014_49A4                        ;; 14:48C2 $11 $A4 $49
-    jp   Func_354B                                ;; 14:48C5 $C3 $4B $35
+    ld   bc, RoomTemplateTopLeftBottomOffsets     ;; 14:48BF $01 $89 $49
+    ld   de, RoomTemplateTopLeftBottomIds         ;; 14:48C2 $11 $A4 $49
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 14:48C5 $C3 $4B $35
 
 RoomTemplateLeftTopRightHandler::
     push bc                                       ;; 14:48C8 $C5
     ld   hl, wRoomObjects                         ;; 14:48C9 $21 $11 $D7
-    ld   bc, Data_014_49BE                        ;; 14:48CC $01 $BE $49
-    ld   de, Data_014_49D7                        ;; 14:48CF $11 $D7 $49
-    jp   Func_354B                                ;; 14:48D2 $C3 $4B $35
+    ld   bc, RoomTemplateLeftTopRightOffsets      ;; 14:48CC $01 $BE $49
+    ld   de, RoomTemplateLeftTopRightIds          ;; 14:48CF $11 $D7 $49
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 14:48D2 $C3 $4B $35
 
 RoomTemplateTopRightBottomHandler::
     push bc                                       ;; 14:48D5 $C5
     ld   hl, wRoomObjects                         ;; 14:48D6 $21 $11 $D7
-    ld   bc, Data_014_49EF                        ;; 14:48D9 $01 $EF $49
-    ld   de, Data_014_4A0A                        ;; 14:48DC $11 $0A $4A
-    jp   Func_354B                                ;; 14:48DF $C3 $4B $35
+    ld   bc, RoomTemplateTopRightBottomOffsets    ;; 14:48D9 $01 $EF $49
+    ld   de, RoomTemplateTopRightBottomIds        ;; 14:48DC $11 $0A $4A
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 14:48DF $C3 $4B $35
 
 RoomTemplateBottomLeftHandler::
     push bc                                       ;; 14:48E2 $C5
     ld   hl, wRoomObjects                         ;; 14:48E3 $21 $11 $D7
-    ld   bc, Data_014_4A24                        ;; 14:48E6 $01 $24 $4A
-    ld   de, Data_014_4A36                        ;; 14:48E9 $11 $36 $4A
-    jp   Func_354B                                ;; 14:48EC $C3 $4B $35
+    ld   bc, RoomTemplateBottomLeftOffsets        ;; 14:48E6 $01 $24 $4A
+    ld   de, RoomTemplateBottomLeftIds            ;; 14:48E9 $11 $36 $4A
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 14:48EC $C3 $4B $35
 
 RoomTemplateBottomRightHandler::
     push bc                                       ;; 14:48EF $C5
     ld   hl, wRoomObjects                         ;; 14:48F0 $21 $11 $D7
-    ld   bc, Data_014_4A47                        ;; 14:48F3 $01 $47 $4A
-    ld   de, Data_014_4A59                        ;; 14:48F6 $11 $59 $4A
-    jp   Func_354B                                ;; 14:48F9 $C3 $4B $35
+    ld   bc, RoomTemplateBottomRightOffsets       ;; 14:48F3 $01 $47 $4A
+    ld   de, RoomTemplateBottomRightIds           ;; 14:48F6 $11 $59 $4A
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 14:48F9 $C3 $4B $35
 
 RoomTemplateTopRightHandler::
     push bc                                       ;; 14:48FC $C5
     ld   hl, wRoomObjects                         ;; 14:48FD $21 $11 $D7
-    ld   bc, Data_014_4A6A                        ;; 14:4900 $01 $6A $4A
-    ld   de, Data_014_4A7C                        ;; 14:4903 $11 $7C $4A
-    jp   Func_354B                                ;; 14:4906 $C3 $4B $35
+    ld   bc, RoomTemplateTopRightOffsets          ;; 14:4900 $01 $6A $4A
+    ld   de, RoomTemplateTopRightIds              ;; 14:4903 $11 $7C $4A
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 14:4906 $C3 $4B $35
 
 RoomTemplateTopLeftHandler::
     push bc                                       ;; 14:4909 $C5
     ld   hl, wRoomObjects                         ;; 14:490A $21 $11 $D7
-    ld   bc, Data_014_4A8D                        ;; 14:490D $01 $8D $4A
-    ld   de, Data_014_4A9F                        ;; 14:4910 $11 $9F $4A
-    jp   Func_354B                                ;; 14:4913 $C3 $4B $35
+    ld   bc, RoomTemplateTopLeftOffsets           ;; 14:490D $01 $8D $4A
+    ld   de, RoomTemplateTopLeftIds               ;; 14:4910 $11 $9F $4A
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 14:4913 $C3 $4B $35
 
 RoomTemplatNotImplementedHandler::
     ret                                           ;; 14:4916 $C9
 
-Data_014_4917::
+RoomTemplateTopRightBottomLeftOffsets::
     db   $00, $01, $02, $03, $04, $05, $06, $07, $08, $09, $10, $19, $20, $29, $30, $39
     db   $40, $49, $50, $59, $60, $69, $70, $71, $72, $73, $74, $75, $76, $77, $78, $79
     db   $FF
 
-Data_014_4938::
+RoomTemplateTopRightBottomLeftIds::
     db   $25, $21, $21, $21, $21, $21, $21, $21, $21, $26, $23, $24, $23, $24, $23, $24
     db   $23, $24, $23, $24, $23, $24, $27, $22, $22, $22, $22, $22, $22, $22, $22, $28
 
-Data_014_4958::
+RoomTemplateRightBottomLeftOffsets::
     db   $00, $09, $10, $19, $20, $29, $30, $39, $40, $49, $50, $59, $60, $69, $70, $71
     db   $72, $73, $74, $75, $76, $77, $78, $79, $FF
 
-Data_014_4971::
+RoomTemplateRightBottomLeftIds::
     db   $23, $24, $23, $24, $23, $24, $23, $24, $23, $24, $23, $24, $23, $24, $27, $22
     db   $22, $22, $22, $22, $22, $22, $22, $28
 
-Data_014_4989::
+RoomTemplateTopLeftBottomOffsets::
     db   $00, $01, $02, $03, $04, $05, $06, $07, $08, $09, $10, $20, $30, $40, $50, $60
     db   $70, $71, $72, $73, $74, $75, $76, $77, $78, $79, $FF
 
-Data_014_49A4::
+RoomTemplateTopLeftBottomIds::
     db   $25, $21, $21, $21, $21, $21, $21, $21, $21, $21, $23, $23, $23, $23, $23, $23
     db   $27, $22, $22, $22, $22, $22, $22, $22, $22, $22
 
-Data_014_49BE::
+RoomTemplateLeftTopRightOffsets::
     db   $00, $01, $02, $03, $04, $05, $06, $07, $08, $09, $10, $19, $20, $29, $30, $39
     db   $40, $49, $50, $59, $60, $69, $70, $79, $FF
 
-Data_014_49D7::
+RoomTemplateLeftTopRightIds::
     db   $25, $21, $21, $21, $21, $21, $21, $21, $21, $26, $23, $24, $23, $24, $23, $24
     db   $23, $24, $23, $24, $23, $24, $23, $24
 
-Data_014_49EF::
+RoomTemplateTopRightBottomOffsets::
     db   $00, $01, $02, $03, $04, $05, $06, $07, $08, $09, $19, $29, $39, $49, $59, $69
     db   $70, $71, $72, $73, $74, $75, $76, $77, $78, $79, $FF
 
-Data_014_4A0A::
+RoomTemplateTopRightBottomIds::
     db   $21, $21, $21, $21, $21, $21, $21, $21, $21, $26, $24, $24, $24, $24, $24, $24
     db   $22, $22, $22, $22, $22, $22, $22, $22, $22, $28
 
-Data_014_4A24::
+RoomTemplateBottomLeftOffsets::
     db   $00, $10, $20, $30, $40, $50, $60, $70, $71, $72, $73, $74, $75, $76, $77, $78
     db   $79, $FF
 
-Data_014_4A36::
+RoomTemplateBottomLeftIds::
     db   $23, $23, $23, $23, $23, $23, $23, $27, $22, $22, $22, $22, $22, $22, $22, $22
     db   $22
 
-Data_014_4A47::
+RoomTemplateBottomRightOffsets::
     db   $09, $19, $29, $39, $49, $59, $69, $70, $71, $72, $73, $74, $75, $76, $77, $78
     db   $79, $FF
 
-Data_014_4A59::
+RoomTemplateBottomRightIds::
     db   $24, $24, $24, $24, $24, $24, $24, $22, $22, $22, $22, $22, $22, $22, $22, $22
     db   $28
 
-Data_014_4A6A::
+RoomTemplateTopRightOffsets::
     db   $00, $01, $02, $03, $04, $05, $06, $07, $08, $09, $19, $29, $39, $49, $59, $69
     db   $79, $FF
 
-Data_014_4A7C::
+RoomTemplateTopRightIds::
     db   $21, $21, $21, $21, $21, $21, $21, $21, $21, $26, $24, $24, $24, $24, $24, $24
     db   $24
 
-Data_014_4A8D::
+RoomTemplateTopLeftOffsets::
     db   $00, $01, $02, $03, $04, $05, $06, $07, $08, $09, $10, $20, $30, $40, $50, $60
     db   $70, $FF
 
-Data_014_4A9F::
-    db   $25, $21, $21, $21, $21, $21, $21, $21, $21, $21, $23, $23, $23, $23
+RoomTemplateTopLeftIds::
+    db   $25, $21, $21, $21, $21, $21, $21, $21, $21, $21, $23, $23, $23, $23, $23, $23
+    db   $23
 
-Data_014_4AAD::
-    db   $23, $23, $23, $18, $20, $28, $30, $38, $40, $48, $50, $58, $60, $68, $70
+; Maps number of hearts to health values (where $08 is a full heart). Used to convert wMaxHearts
+; values to wHealth values.
+; The first value in this table is the health value for 3 hearts, which is the minimum value of
+; wMaxHearts in normal gameplay (Link starts with 3 hearts).
+HeartsToHealthTable::
+    db   $18 ; 3 hearts
+    db   $20 ; 4 hearts
+    db   $28 ; 5 hearts
+    db   $30 ; 6 hearts
+    db   $38 ; 7 hearts
+    db   $40 ; 8 hearts
+    db   $48 ; 9 hearts
+    db   $50 ; 10 hearts
+    db   $58 ; 11 hearts
+    db   $60 ; 12 hearts
+    db   $68 ; 13 hearts
+    db   $70 ; 14 hearts
 
 ; Execute recurrent audio tasks on each frame of the overworld
 PerformOverworldAudioTasks::
@@ -246,21 +262,27 @@ jr_014_4AE7:
     ld   [wNoiseSfxSeaWavesCounter], a            ;; 14:4B09 $EA $14 $C1
 .wavesSfxEnd
 
+    ; Update wFullHearts based on current health
     ld   a, [wMaxHearts]                          ;; 14:4B0C $FA $5B $DB
     ld   e, a                                     ;; 14:4B0F $5F
     ld   d, b                                     ;; 14:4B10 $50
-    ld   hl, Data_014_4AAD                        ;; 14:4B11 $21 $AD $4A
+    ; Start 3 bytes before the conversion table,
+    ; to account for wMaxHearts starting at 3.
+    ld   hl, HeartsToHealthTable - 3                   ;; 14:4B11 $21 $AD $4A
     add  hl, de                                   ;; 14:4B14 $19
     ld   a, [wHealth]                             ;; 14:4B15 $FA $5A $DB
     cp   [hl]                                     ;; 14:4B18 $BE
     ld   a, $00                                   ;; 14:4B19 $3E $00
-    jr   nz, .jr_4B1E                             ;; 14:4B1B $20 $01
+    jr   nz, .updateFullHearts                    ;; 14:4B1B $20 $01
 
     inc  a                                        ;; 14:4B1D $3C
 
-.jr_4B1E
+.updateFullHearts
+    ; Set wFullHearts to 1 if wHealth is full, otherwise to 0
     ld   [wFullHearts], a                         ;; 14:4B1E $EA $A9 $C5
-    ld   a, [wC5AC]                               ;; 14:4B21 $FA $AC $C5
+
+    ; Increment/reset counter used for timing boomerang SFX (?)
+    ld   a, [wBoomerangSFXCounter]                ;; 14:4B21 $FA $AC $C5
     inc  a                                        ;; 14:4B24 $3C
     cp   $1A                                      ;; 14:4B25 $FE $1A
     jr   nz, .jr_4B2A                             ;; 14:4B27 $20 $01
@@ -268,7 +290,7 @@ jr_014_4AE7:
     xor  a                                        ;; 14:4B29 $AF
 
 .jr_4B2A
-    ld   [wC5AC], a                               ;; 14:4B2A $EA $AC $C5
+    ld   [wBoomerangSFXCounter], a                ;; 14:4B2A $EA $AC $C5
     ldh  a, [hFrameCounter]                       ;; 14:4B2D $F0 $E7
     and  $3F                                      ;; 14:4B2F $E6 $3F
     jr   nz, .jr_4B3E                             ;; 14:4B31 $20 $0B

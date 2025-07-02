@@ -616,7 +616,7 @@ FOR I, NAME_LENGTH
 IF CHARLEN(\1) < I + 1
     cp   0
 ELSE
-    cp   CHARSUB(\1, 1 + I) + $01
+    cp   STRCHAR(\1, I) + 1
 ENDC
     jr   nz, \3
 ENDR

@@ -20,9 +20,9 @@ TektiteEntityHandler::
 .jr_78CD
     call ReturnIfNonInteractive_06                ; $78CD: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $78D0: $CD $F7 $64
-    call label_3B39                               ; $78D3: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $78D3: $CD $39 $3B
     call UpdateEntityPosWithSpeed_06              ; $78D6: $CD $41 $65
-    call label_3B23                               ; $78D9: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $78D9: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $78DC: $21 $A0 $C2
     add  hl, bc                                   ; $78DF: $09
     ld   a, [hl]                                  ; $78E0: $7E

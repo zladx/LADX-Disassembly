@@ -89,12 +89,12 @@ jr_015_414D:
 label_015_416F:
 jr_015_416F:
     call CopyEntityPositionToActivePosition       ; $416F: $CD $8A $3D
-    call func_015_7BDB                            ; $4172: $CD $DB $7B
+    call GetEntityToLinkPositionDeltaX_15         ; $4172: $CD $DB $7B
     add  $0C                                      ; $4175: $C6 $0C
     cp   $18                                      ; $4177: $FE $18
     jr   nc, ret_015_41C9                         ; $4179: $30 $4E
 
-    call func_015_7BEB                            ; $417B: $CD $EB $7B
+    call GetEntityToLinkPositionDeltaY_15         ; $417B: $CD $EB $7B
     add  $10                                      ; $417E: $C6 $10
     cp   $1C                                      ; $4180: $FE $1C
     jr   nc, ret_015_41C9                         ; $4182: $30 $45

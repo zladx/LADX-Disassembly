@@ -17,8 +17,8 @@ SandCrabEntityHandler::
     call ReturnIfNonInteractive_15                ; $7336: $CD $0D $7B
     call ApplyRecoilIfNeeded_15                   ; $7339: $CD $3E $7B
     call UpdateEntityPosWithSpeed_15              ; $733C: $CD $88 $7B
-    call label_3B23                               ; $733F: $CD $23 $3B
-    call label_3B39                               ; $7342: $CD $39 $3B
+    call DefaultEntityPhysics_trampoline          ; $733F: $CD $23 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $7342: $CD $39 $3B
     ldh  a, [hFrameCounter]                       ; $7345: $F0 $E7
     rra                                           ; $7347: $1F
     rra                                           ; $7348: $1F

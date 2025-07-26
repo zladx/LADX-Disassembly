@@ -77,7 +77,7 @@ ApplyRecoilIfNeeded_04::
     and  $20                                      ; $6DB5: $E6 $20
     jr   nz, .restoreOriginalVelocity             ; $6DB7: $20 $03
 
-    call label_3B23                               ; $6DB9: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $6DB9: $CD $23 $3B
 
 .restoreOriginalVelocity
     ld   hl, wEntitiesSpeedYTable                 ; $6DBC: $21 $50 $C2
@@ -343,7 +343,7 @@ func_004_7C98::
     ld   a, [hl]                                  ; $7CBF: $7E
     push af                                       ; $7CC0: $F5
     ld   [hl], $01                                ; $7CC1: $36 $01
-    call label_3B23                               ; $7CC3: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7CC3: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $7CC6: $21 $A0 $C2
     add  hl, bc                                   ; $7CC9: $09
     ld   a, [hl]                                  ; $7CCA: $7E
@@ -354,7 +354,7 @@ func_004_7C98::
     ld   hl, wEntitiesSpeedYTable                 ; $7CD2: $21 $50 $C2
     add  hl, bc                                   ; $7CD5: $09
     ld   [hl], $FF                                ; $7CD6: $36 $FF
-    call label_3B23                               ; $7CD8: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7CD8: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $7CDB: $21 $A0 $C2
     add  hl, bc                                   ; $7CDE: $09
     pop  af                                       ; $7CDF: $F1

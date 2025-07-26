@@ -219,7 +219,7 @@ ApplyRecoilIfNeeded_18::
     and  $20                                      ; $7E4A: $E6 $20
     jr   nz, .restoreOriginalSpeed                ; $7E4C: $20 $03
 
-    call label_3B23                               ; $7E4E: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7E4E: $CD $23 $3B
 
 .restoreOriginalSpeed
     ld   hl, wEntitiesSpeedYTable                 ; $7E51: $21 $50 $C2

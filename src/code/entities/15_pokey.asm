@@ -90,7 +90,7 @@ PokeyEntityHandler::
 
 .jr_4C49
     call DecrementEntityIgnoreHitsCountdown       ; $4C49: $CD $56 $0C
-    call label_3B39                               ; $4C4C: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $4C4C: $CD $39 $3B
     ldh  a, [hFrameCounter]                       ; $4C4F: $F0 $E7
     rra                                           ; $4C51: $1F
     rra                                           ; $4C52: $1F
@@ -123,7 +123,7 @@ PokeyEntityHandler::
 
 .jr_4C7F
     call UpdateEntityPosWithSpeed_15              ; $4C7F: $CD $88 $7B
-    jp   label_3B23                               ; $4C82: $C3 $23 $3B
+    jp   DefaultEntityPhysics_trampoline          ; $4C82: $C3 $23 $3B
 
 func_015_4C85::
     ld   d, b                                     ; $4C85: $50
@@ -194,11 +194,11 @@ label_015_4CD9:
     call GetEntityTransitionCountdown             ; $4CE5: $CD $05 $0C
     jr   nz, .jr_4CED                             ; $4CE8: $20 $03
 
-    call label_3B39                               ; $4CEA: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $4CEA: $CD $39 $3B
 
 .jr_4CED
     call UpdateEntityPosWithSpeed_15              ; $4CED: $CD $88 $7B
-    call label_3B23                               ; $4CF0: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $4CF0: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $4CF3: $21 $A0 $C2
     add  hl, bc                                   ; $4CF6: $09
     ld   a, [hl]                                  ; $4CF7: $7E

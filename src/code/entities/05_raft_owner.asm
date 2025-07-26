@@ -196,12 +196,12 @@ jr_005_5411:
 ._02 dw func_005_5490                             ; $5453
 
 func_005_5455::
-    call func_005_7B04                            ; $5455: $CD $04 $7B
+    call GetEntityToLinkPositionDeltaX_05         ; $5455: $CD $04 $7B
     add  $08                                      ; $5458: $C6 $08
     cp   $10                                      ; $545A: $FE $10
     jr   nc, .jr_546A                             ; $545C: $30 $0C
 
-    call func_005_7B14                            ; $545E: $CD $14 $7B
+    call GetEntityToLinkPositionDeltaY_05         ; $545E: $CD $14 $7B
     add  $09                                      ; $5461: $C6 $09
     cp   $12                                      ; $5463: $FE $12
     jr   nc, .jr_546A                             ; $5465: $30 $03

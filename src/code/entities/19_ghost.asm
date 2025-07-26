@@ -80,7 +80,7 @@ GhostEntityHandler::
     ld   e, $04                                   ; $5E66: $1E $04
     jr   z, .jr_5E6F                              ; $5E68: $28 $05
 
-    call entityLinkPositionXDifference            ; $5E6A: $CD $0B $7E
+    call EntityLinkPositionXDifference_19         ; $5E6A: $CD $0B $7E
     sla  e                                        ; $5E6D: $CB $23
 
 .jr_5E6F
@@ -92,7 +92,7 @@ GhostEntityHandler::
     and  $01                                      ; $5E75: $E6 $01
     add  e                                        ; $5E77: $83
     call SetEntitySpriteVariant                   ; $5E78: $CD $0C $3B
-    call entityLinkPositionXDifference            ; $5E7B: $CD $0B $7E
+    call EntityLinkPositionXDifference_19         ; $5E7B: $CD $0B $7E
     add  $18                                      ; $5E7E: $C6 $18
     cp   $30                                      ; $5E80: $FE $30
     jr   nc, .jr_5E99                             ; $5E82: $30 $15
@@ -101,7 +101,7 @@ GhostEntityHandler::
     push af                                       ; $5E86: $F5
     add  $0C                                      ; $5E87: $C6 $0C
     ldh  [hLinkPositionY], a                      ; $5E89: $E0 $99
-    call entityLinkPositionYDifference            ; $5E8B: $CD $1B $7E
+    call EntityLinkPositionYDifference_19         ; $5E8B: $CD $1B $7E
     ld   e, a                                     ; $5E8E: $5F
     pop  af                                       ; $5E8F: $F1
     ldh  [hLinkPositionY], a                      ; $5E90: $E0 $99
@@ -176,7 +176,7 @@ GhostState1Handler::
     ldh  [hLinkPositionX], a                      ; $5EF5: $E0 $98
     ld   a, $08                                   ; $5EF7: $3E $08
     call ApplyVectorTowardsLink_trampoline        ; $5EF9: $CD $AA $3B
-    call entityLinkPositionXDifference            ; $5EFC: $CD $0B $7E
+    call EntityLinkPositionXDifference_19         ; $5EFC: $CD $0B $7E
     push af                                       ; $5EFF: $F5
     ld   a, e                                     ; $5F00: $7B
     sla  a                                        ; $5F01: $CB $27
@@ -188,7 +188,7 @@ GhostState1Handler::
     cp   $06                                      ; $5F0B: $FE $06
     jr   nc, .jr_5F30                             ; $5F0D: $30 $21
 
-    call entityLinkPositionYDifference            ; $5F0F: $CD $1B $7E
+    call EntityLinkPositionYDifference_19         ; $5F0F: $CD $1B $7E
     add  $0C                                      ; $5F12: $C6 $0C
     cp   $18                                      ; $5F14: $FE $18
     jr   nc, .jr_5F30                             ; $5F16: $30 $18

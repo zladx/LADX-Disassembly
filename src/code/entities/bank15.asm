@@ -193,7 +193,7 @@ HookshotBridgeHandler::
     add  hl, bc                                   ; $7449: $09
     ld   [hl], a                                  ; $744A: $77
     call UpdateEntityYPosWithSpeed_15             ; $744B: $CD $8B $7B
-    call label_3B23                               ; $744E: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $744E: $CD $23 $3B
     ldh  a, [hObjectUnderEntity]                  ; $7451: $F0 $AF
     cp   $9D                                      ; $7453: $FE $9D
     jr   z, .jr_746A                              ; $7455: $28 $13
@@ -763,7 +763,7 @@ ApplyRecoilIfNeeded_15::
     and  $20                                      ; $7B73: $E6 $20
     jr   nz, .restoreOriginalSpeed                ; $7B75: $20 $03
 
-    call label_3B23                               ; $7B77: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7B77: $CD $23 $3B
 
 .restoreOriginalSpeed
     ld   hl, wEntitiesSpeedYTable                 ; $7B7A: $21 $50 $C2
@@ -860,7 +860,7 @@ AddEntityZSpeedToPos_15::
     ld   hl, wEntitiesPosZTable                   ; $7BD6: $21 $10 $C3
     jr   AddEntitySpeedToPos_15.updatePosition    ; $7BD9: $18 $D2
 
-func_015_7BDB::
+GetEntityToLinkPositionDeltaX_15::
     ld   e, $00                                   ; $7BDB: $1E $00
     ldh  a, [hLinkPositionX]                      ; $7BDD: $F0 $98
     ld   hl, wEntitiesPosXTable                   ; $7BDF: $21 $00 $C2
@@ -875,7 +875,7 @@ func_015_7BDB::
     ld   d, a                                     ; $7BE9: $57
     ret                                           ; $7BEA: $C9
 
-func_015_7BEB::
+GetEntityToLinkPositionDeltaY_15::
     ld   e, $02                                   ; $7BEB: $1E $02
     ldh  a, [hLinkPositionY]                      ; $7BED: $F0 $99
     ld   hl, wEntitiesPosYTable                   ; $7BEF: $21 $10 $C2
@@ -904,7 +904,7 @@ func_015_7BEB::
     ret                                           ; $7C09: $C9
 
 func_015_7C0A::
-    call func_015_7BDB                            ; $7C0A: $CD $DB $7B
+    call GetEntityToLinkPositionDeltaX_15         ; $7C0A: $CD $DB $7B
     ld   a, e                                     ; $7C0D: $7B
     ldh  [hMultiPurpose0], a                      ; $7C0E: $E0 $D7
     ld   a, d                                     ; $7C10: $7A
@@ -916,7 +916,7 @@ func_015_7C0A::
 
 .jr_7C17
     push af                                       ; $7C17: $F5
-    call func_015_7BEB                            ; $7C18: $CD $EB $7B
+    call GetEntityToLinkPositionDeltaY_15         ; $7C18: $CD $EB $7B
     ld   a, e                                     ; $7C1B: $7B
     ldh  [hMultiPurpose1], a                      ; $7C1C: $E0 $D8
     ld   a, d                                     ; $7C1E: $7A

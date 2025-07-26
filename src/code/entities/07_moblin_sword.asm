@@ -29,7 +29,7 @@ MoblinSwordEntityHandler::
 jr_007_7966:
     call ApplyRecoilIfNeeded_07                   ; $7966: $CD $C3 $7D
     call label_3B65                               ; $7969: $CD $65 $3B
-    call label_3B39                               ; $796C: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $796C: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $796F: $F0 $F0
     JP_TABLE                                      ; $7971
 ._00 dw func_007_7980                             ; $7972
@@ -43,7 +43,7 @@ Data_007_797C::
     db   $00, $00, $FA, $06
 
 func_007_7980::
-    call label_3B23                               ; $7980: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7980: $CD $23 $3B
     ld   hl, wEntitiesInertiaTable                ; $7983: $21 $D0 $C3
     add  hl, bc                                   ; $7986: $09
     ld   [hl], $00                                ; $7987: $36 $00
@@ -89,7 +89,7 @@ func_007_79B4::
 
 .jr_79C2
     call UpdateEntityPosWithSpeed_07              ; $79C2: $CD $0A $7E
-    call label_3B23                               ; $79C5: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $79C5: $CD $23 $3B
     call func_007_7D1A                            ; $79C8: $CD $1A $7D
     call GetEntityTransitionCountdown             ; $79CB: $CD $05 $0C
     jr   nz, ret_007_79D6                         ; $79CE: $20 $06
@@ -140,7 +140,7 @@ func_007_79D7::
     call func_007_7D1A                            ; $7A07: $CD $1A $7D
     call func_007_7D1A                            ; $7A0A: $CD $1A $7D
     call UpdateEntityPosWithSpeed_07              ; $7A0D: $CD $0A $7E
-    call label_3B23                               ; $7A10: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7A10: $CD $23 $3B
     ldh  a, [hFrameCounter]                       ; $7A13: $F0 $E7
     xor  c                                        ; $7A15: $A9
     and  $0F                                      ; $7A16: $E6 $0F
@@ -164,12 +164,12 @@ func_007_7A2D::
     and  a                                        ; $7A30: $A7
     jr   nz, func_007_7A55                        ; $7A31: $20 $22
 
-    call func_007_7E5D                            ; $7A33: $CD $5D $7E
+    call EntityLinkPositionXDifference_07         ; $7A33: $CD $5D $7E
     add  $30                                      ; $7A36: $C6 $30
     cp   $60                                      ; $7A38: $FE $60
     jr   nc, ret_007_7A6C                         ; $7A3A: $30 $30
 
-    call func_007_7E6D                            ; $7A3C: $CD $6D $7E
+    call EntityLinkPositionYDifference_07         ; $7A3C: $CD $6D $7E
     add  $30                                      ; $7A3F: $C6 $30
     cp   $60                                      ; $7A41: $FE $60
     jr   nc, ret_007_7A6C                         ; $7A43: $30 $27

@@ -158,7 +158,7 @@ jr_006_7CB7:
     and  a                                        ; $7CDF: $A7
     jr   nz, .jr_7CE5                             ; $7CE0: $20 $03
 
-    call label_3B39                               ; $7CE2: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $7CE2: $CD $39 $3B
 
 .jr_7CE5
     ldh  a, [hActiveEntityState]                  ; $7CE5: $F0 $F0
@@ -195,7 +195,7 @@ func_006_7D0F::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7D16: $21 $10 $C4
     add  hl, bc                                   ; $7D19: $09
     ld   [hl], $02                                ; $7D1A: $36 $02
-    call label_3B23                               ; $7D1C: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7D1C: $CD $23 $3B
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7D1F: $21 $10 $C4
     add  hl, bc                                   ; $7D22: $09
     ld   [hl], b                                  ; $7D23: $70
@@ -301,7 +301,7 @@ ZolState4Handler::
     ld   [hl], a                                  ; $7DB6: $77
     ld   a, $01                                   ; $7DB7: $3E $01
     ld   [wC117], a                               ; $7DB9: $EA $17 $C1
-    call label_3B23                               ; $7DBC: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7DBC: $CD $23 $3B
     ldh  a, [hJoypadState]                        ; $7DBF: $F0 $CC
     and  a                                        ; $7DC1: $A7
     jr   z, ret_006_7DD3                          ; $7DC2: $28 $0F

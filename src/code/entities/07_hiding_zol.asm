@@ -68,13 +68,13 @@ func_007_72F4::
     call GetEntityTransitionCountdown             ; $72F4: $CD $05 $0C
     jr   nz, ret_007_731F                         ; $72F7: $20 $26
 
-    call func_007_7E5D                            ; $72F9: $CD $5D $7E
+    call EntityLinkPositionXDifference_07         ; $72F9: $CD $5D $7E
     add  $20                                      ; $72FC: $C6 $20
     cp   $40                                      ; $72FE: $FE $40
     jr   nc, ret_007_731F                         ; $7300: $30 $1D
 
 .jr_7302
-    call func_007_7E6D                            ; $7302: $CD $6D $7E
+    call EntityLinkPositionYDifference_07         ; $7302: $CD $6D $7E
     add  $20                                      ; $7305: $C6 $20
     cp   $40                                      ; $7307: $FE $40
     jr   nc, ret_007_731F                         ; $7309: $30 $14
@@ -158,7 +158,7 @@ func_007_735C::
     jp   AddEntitySpeedToPos_07                   ; $7379: $C3 $17 $7E
 
 func_007_737C::
-    call label_3B39                               ; $737C: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $737C: $CD $39 $3B
     call UpdateEntityPosWithSpeed_07              ; $737F: $CD $0A $7E
     call func_007_73F7                            ; $7382: $CD $F7 $73
     call GetEntityTransitionCountdown             ; $7385: $CD $05 $0C
@@ -177,7 +177,7 @@ func_007_737C::
     jp   SetEntitySpriteVariant                   ; $739D: $C3 $0C $3B
 
 func_007_73A0::
-    call label_3B39                               ; $73A0: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $73A0: $CD $39 $3B
     call UpdateEntityPosWithSpeed_07              ; $73A3: $CD $0A $7E
     call func_007_73F7                            ; $73A6: $CD $F7 $73
     ldh  a, [hMultiPurposeG]                      ; $73A9: $F0 $E8
@@ -235,7 +235,7 @@ func_007_73F7::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $73F7: $21 $10 $C4
     add  hl, bc                                   ; $73FA: $09
     ld   [hl], $03                                ; $73FB: $36 $03
-    call label_3B23                               ; $73FD: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $73FD: $CD $23 $3B
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7400: $21 $10 $C4
     add  hl, bc                                   ; $7403: $09
     ld   [hl], b                                  ; $7404: $70

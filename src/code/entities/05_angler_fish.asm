@@ -469,7 +469,7 @@ func_005_593A::
     rra                                           ; $5950: $1F
     and  $01                                      ; $5951: $E6 $01
     call SetEntitySpriteVariant                   ; $5953: $CD $0C $3B
-    call label_3B39                               ; $5956: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $5956: $CD $39 $3B
     pop  af                                       ; $5959: $F1
     ld   e, $FC                                   ; $595A: $1E $FC
     and  $10                                      ; $595C: $E6 $10
@@ -526,7 +526,7 @@ func_005_5984::
     rra                                           ; $59A1: $1F
     and  $01                                      ; $59A2: $E6 $01
     call SetEntitySpriteVariant                   ; $59A4: $CD $0C $3B
-    call label_3B39                               ; $59A7: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $59A7: $CD $39 $3B
     ldh  a, [hFrameCounter]                       ; $59AA: $F0 $E7
     and  $03                                      ; $59AC: $E6 $03
     jr   nz, .jr_59CE                             ; $59AE: $20 $1E

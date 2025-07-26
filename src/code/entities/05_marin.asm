@@ -124,12 +124,12 @@ MarinEntityHandler::
     ld   hl, wEntitiesDirectionTable              ; $4EB1: $21 $80 $C3
     add  hl, bc                                   ; $4EB4: $09
     ld   [hl], $03                                ; $4EB5: $36 $03
-    call func_005_7B04                            ; $4EB7: $CD $04 $7B
+    call GetEntityToLinkPositionDeltaX_05         ; $4EB7: $CD $04 $7B
     add  $14                                      ; $4EBA: $C6 $14
     cp   $28                                      ; $4EBC: $FE $28
     jr   nc, .jr_4ED1                             ; $4EBE: $30 $11
 
-    call func_005_7B14                            ; $4EC0: $CD $14 $7B
+    call GetEntityToLinkPositionDeltaY_05         ; $4EC0: $CD $14 $7B
     add  $14                                      ; $4EC3: $C6 $14
     cp   $28                                      ; $4EC5: $FE $28
     jr   nc, .jr_4ED1                             ; $4EC7: $30 $08

@@ -48,7 +48,7 @@ AnimateRoamingEnemy::
 
 .jr_5858
     call ApplyRecoilIfNeeded_03                   ; $5858: $CD $A9 $7F
-    call func_003_6E28                            ; $585B: $CD $28 $6E
+    call DefaultEnemyDamageCollisionHandler       ; $585B: $CD $28 $6E
     ldh  a, [hActiveEntityState]                  ; $585E: $F0 $F0
     and  a                                        ; $5860: $A7
     jr   z, jr_003_58D7                           ; $5861: $28 $74
@@ -79,7 +79,7 @@ AnimateRoamingEnemy::
     call SpawnMoblinArrow                         ; $5886: $CD $47 $59
 
 .jr_5889
-    call func_003_7893                            ; $5889: $CD $93 $78
+    call DefaultEntityPhysics                     ; $5889: $CD $93 $78
     ret                                           ; $588C: $C9
 
 jr_003_588D:
@@ -155,7 +155,7 @@ jr_003_58D7:
 
 jr_003_58F6:
     call UpdateEntityPosWithSpeed_03              ; $58F6: $CD $25 $7F
-    call func_003_7893                            ; $58F9: $CD $93 $78
+    call DefaultEntityPhysics                     ; $58F9: $CD $93 $78
 
 func_003_58FC::
     ld   hl, wEntitiesDirectionTable              ; $58FC: $21 $80 $C3

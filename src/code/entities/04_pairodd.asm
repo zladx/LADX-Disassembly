@@ -64,7 +64,7 @@ jr_004_5E22:
 ._02 dw PairoddState2Handler                      ; $5E2F
 
 PairoddState0Handler::
-    call label_3B39                               ; $5E31: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $5E31: $CD $39 $3B
     ldh  a, [hFrameCounter]                       ; $5E34: $F0 $E7
     rra                                           ; $5E36: $1F
     rra                                           ; $5E37: $1F
@@ -113,7 +113,7 @@ Data_004_5E73::
 PairoddState1Handler::
     call GetEntityTransitionCountdown             ; $5E76: $CD $05 $0C
     cp   $18                                      ; $5E79: $FE $18
-    jp   nc, label_3B39                           ; $5E7B: $D2 $39 $3B
+    jp   nc, DefaultEnemyDamageCollisionHandler_trampoline ; $5E7B: $D2 $39 $3B
 
     and  a                                        ; $5E7E: $A7
     jr   nz, .jr_5EA4                             ; $5E7F: $20 $23

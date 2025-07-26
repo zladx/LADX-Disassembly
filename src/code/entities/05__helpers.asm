@@ -93,7 +93,7 @@ ApplyRecoilIfNeeded_05::
     and  $20                                      ; $7A9C: $E6 $20
     jr   nz, .restoreOriginalSpeed                ; $7A9E: $20 $03
 
-    call label_3B23                               ; $7AA0: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7AA0: $CD $23 $3B
 
 .restoreOriginalSpeed
     ld   hl, wEntitiesSpeedYTable                 ; $7AA3: $21 $50 $C2
@@ -189,7 +189,7 @@ AddEntityZSpeedToPos_05::
     ld   hl, wEntitiesPosZTable                   ; $7AFF: $21 $10 $C3
     jr   AddEntitySpeedToPos_05.updatePosition    ; $7B02: $18 $D2
 
-func_005_7B04::
+GetEntityToLinkPositionDeltaX_05::
     ld   e, $00                                   ; $7B04: $1E $00
     ldh  a, [hLinkPositionX]                      ; $7B06: $F0 $98
     ld   hl, wEntitiesPosXTable                   ; $7B08: $21 $00 $C2
@@ -204,7 +204,7 @@ func_005_7B04::
     ld   d, a                                     ; $7B12: $57
     ret                                           ; $7B13: $C9
 
-func_005_7B14::
+GetEntityToLinkPositionDeltaY_05::
     ld   e, $02                                   ; $7B14: $1E $02
     ldh  a, [hLinkPositionY]                      ; $7B16: $F0 $99
     ld   hl, wEntitiesPosYTable                   ; $7B18: $21 $10 $C2
@@ -220,7 +220,7 @@ func_005_7B14::
     ret                                           ; $7B23: $C9
 
 func_005_7B24::
-    call func_005_7B04                            ; $7B24: $CD $04 $7B
+    call GetEntityToLinkPositionDeltaX_05         ; $7B24: $CD $04 $7B
     ld   a, e                                     ; $7B27: $7B
     ldh  [hMultiPurpose0], a                      ; $7B28: $E0 $D7
     ld   a, d                                     ; $7B2A: $7A
@@ -232,7 +232,7 @@ func_005_7B24::
 
 .jr_7B31
     push af                                       ; $7B31: $F5
-    call func_005_7B14                            ; $7B32: $CD $14 $7B
+    call GetEntityToLinkPositionDeltaY_05         ; $7B32: $CD $14 $7B
     ld   a, e                                     ; $7B35: $7B
     ldh  [hMultiPurpose1], a                      ; $7B36: $E0 $D8
     ld   a, d                                     ; $7B38: $7A

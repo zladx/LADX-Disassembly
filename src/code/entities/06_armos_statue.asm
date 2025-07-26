@@ -28,7 +28,7 @@ ArmosStatueEntityHandler::
 
 .jr_7472
     call UpdateEntityPosWithSpeed_06              ; $7472: $CD $41 $65
-    call label_3B23                               ; $7475: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7475: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $7478: $F0 $F0
     JP_TABLE                                      ; $747A
 ._00 dw ArmosStatueState0Handler

@@ -518,7 +518,7 @@ BGAttributesPointers_IndoorsA::
 ._FE dw IndoorsAObjectsAttrmap_00
 ._FF dw IndoorsAObjectsAttrmap_00
 
-; Object attributes groups for IndoorA rooms, indexed by hRoomId.
+; Object attributes groups for IndoorB rooms, indexed by hRoomId.
 ; The bank for those pointers is `BANK(IndoorsBObjectsAttrmaps)` (by default $24).
 BGAttributesPointers_IndoorsB::
 ._00 dw IndoorsBObjectsAttrmap_00

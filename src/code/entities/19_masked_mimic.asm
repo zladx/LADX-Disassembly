@@ -56,7 +56,7 @@ MaskedMimicGoriyaEntityHandler::
     ld   [hl], ENTITY_OPT1_SPLASH_IN_WATER        ; $47E6: $36 $08
 
 .jr_47E8
-    call label_3B39                               ; $47E8: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $47E8: $CD $39 $3B
     ld   a, [wCollisionType]                      ; $47EB: $FA $33 $C1
     and  a                                        ; $47EE: $A7
     ret  nz                                       ; $47EF: $C0
@@ -87,7 +87,7 @@ MaskedMimicGoriyaEntityHandler::
     add  hl, bc                                   ; $4813: $09
     ld   [hl], a                                  ; $4814: $77
     call UpdateEntityPosWithSpeed_19              ; $4815: $CD $B8 $7D
-    call label_3B23                               ; $4818: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $4818: $CD $23 $3B
     ldh  a, [hLinkDirection]                      ; $481B: $F0 $9E
     xor  $01                                      ; $481D: $EE $01
     ld   hl, wEntitiesDirectionTable              ; $481F: $21 $80 $C3

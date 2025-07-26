@@ -34,7 +34,7 @@ ThreeOfAKindEntityHandler::
     call ReturnIfNonInteractive_06                ; $493D: $CD $C6 $64
     call DecrementEntityIgnoreHitsCountdown       ; $4940: $CD $56 $0C
     call UpdateEntityPosWithSpeed_06              ; $4943: $CD $41 $65
-    call label_3B23                               ; $4946: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $4946: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $4949: $F0 $F0
     JP_TABLE                                      ; $494B
 ._00 dw ThreeOfAKindState0Handler
@@ -42,7 +42,7 @@ ThreeOfAKindEntityHandler::
 ._02 dw ThreeOfAKindState2Handler
 
 ThreeOfAKindState0Handler::
-    call label_3B39
+    call DefaultEnemyDamageCollisionHandler_trampoline
     call GetEntityTransitionCountdown             ; $4955: $CD $05 $0C
     jr   nz, .jr_4962                             ; $4958: $20 $08
 
@@ -98,7 +98,7 @@ Data_006_499F::
     db   $00, $00, $F4, $0C
 
 ThreeOfAKindState1Handler::
-    call label_3B39                               ; $49A3: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $49A3: $CD $39 $3B
 
 .jr_49A6
     call GetEntityTransitionCountdown             ; $49A6: $CD $05 $0C

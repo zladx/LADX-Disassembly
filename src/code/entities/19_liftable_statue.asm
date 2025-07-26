@@ -1,10 +1,10 @@
-Data_019_4000::
+LiftableStatueSpriteRect::
     db   $F0, $00, $48, $06, $F0, $08, $48, $26, $00, $00, $4A, $06, $00, $08, $4A, $26
 
-Data_019_4010::
+LiftableStatueSpriteRect_BottleGrotto::
     db   $F0, $00, $78, $06, $F0, $08, $78, $26, $00, $00, $7A, $06, $00, $08, $7A, $26
 
-Data_019_4020::
+LiftableStatueRubbleSprite::
     db   $16, $01
 
 LiftableStatueEntityHandler::
@@ -12,9 +12,9 @@ LiftableStatueEntityHandler::
     add  hl, bc                                   ; $4025: $09
     ld   a, [hl]                                  ; $4026: $7E
     and  a                                        ; $4027: $A7
-    jr   z, .jr_404A                              ; $4028: $28 $20
+    jr   z, .notRubblePiece                       ; $4028: $28 $20
 
-    ld   de, Data_019_4020                        ; $402A: $11 $20 $40
+    ld   de, LiftableStatueRubbleSprite           ; $402A: $11 $20 $40
     call RenderActiveEntitySprite                 ; $402D: $CD $77 $3C
     call ReturnIfNonInteractive_19                ; $4030: $CD $3D $7D
     call UpdateEntityPosWithSpeed_19              ; $4033: $CD $B8 $7D
@@ -31,13 +31,13 @@ LiftableStatueEntityHandler::
 
     ret                                           ; $4049: $C9
 
-.jr_404A
-    ld   hl, Data_019_4000                        ; $404A: $21 $00 $40
+.notRubblePiece
+    ld   hl, LiftableStatueSpriteRect             ; $404A: $21 $00 $40
     ldh  a, [hMapId]                              ; $404D: $F0 $F7
     cp   MAP_BOTTLE_GROTTO                        ; $404F: $FE $01
     jr   nz, .jr_4056                             ; $4051: $20 $03
 
-    ld   hl, Data_019_4010                        ; $4053: $21 $10 $40
+    ld   hl, LiftableStatueSpriteRect_BottleGrotto ; $4053: $21 $10 $40
 
 .jr_4056
     ld   c, $04                                   ; $4056: $0E $04
@@ -48,50 +48,50 @@ LiftableStatueEntityHandler::
     call label_3B70                               ; $4064: $CD $70 $3B
     ldh  a, [hActiveEntityState]                  ; $4067: $F0 $F0
     JP_TABLE                                      ; $4069
-._00 dw LiftableStatueState0Handler
-._01 dw LiftableStatueState1And2Handler
-._02 dw LiftableStatueState1And2Handler
+._00 dw LiftableStatueState_Standing
+._01 dw LiftableStatueState_Lifted_Thrown
+._02 dw LiftableStatueState_Lifted_Thrown
 
-LiftableStatueState0Handler::
-    call label_3B23                               ; $4070: $CD $23 $3B
+LiftableStatueState_Standing::
+    call DefaultEntityPhysics_trampoline          ; $4070: $CD $23 $3B
     call PushLinkOutOfEntity_19                   ; $4073: $CD $A2 $7C
-    call entityLinkPositionXDifference            ; $4076: $CD $0B $7E
+    call EntityLinkPositionXDifference_19         ; $4076: $CD $0B $7E
     add  $10                                      ; $4079: $C6 $10
     cp   $20                                      ; $407B: $FE $20
-    jp   nc, label_019_411C                       ; $407D: $D2 $1C $41
+    jp   nc, .notBeingLifted                      ; $407D: $D2 $1C $41
 
-    call entityLinkPositionYDifference            ; $4080: $CD $1B $7E
+    call EntityLinkPositionYDifference_19         ; $4080: $CD $1B $7E
     add  $20                                      ; $4083: $C6 $20
     cp   $30                                      ; $4085: $FE $30
-    jp   nc, label_019_411C                       ; $4087: $D2 $1C $41
+    jp   nc, .notBeingLifted                      ; $4087: $D2 $1C $41
 
     ld   a, [wLinkAttackStepAnimationCountdown]   ; $408A: $FA $9B $C1
     and  a                                        ; $408D: $A7
-    jp   nz, label_019_411C                       ; $408E: $C2 $1C $41
+    jp   nz, .notBeingLifted                      ; $408E: $C2 $1C $41
 
     ld   a, [wInventoryItems.BButtonSlot]         ; $4091: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $4094: $FE $03
-    jr   nz, .jr_40A0                             ; $4096: $20 $08
+    jr   nz, .powerBraceletNotOnB                 ; $4096: $20 $08
 
     ldh  a, [hPressedButtonsMask]                 ; $4098: $F0 $CB
     and  J_B                                      ; $409A: $E6 $20
-    jr   nz, jr_019_40AD                          ; $409C: $20 $0F
+    jr   nz, .usePowerBracelet                    ; $409C: $20 $0F
 
-    jr   label_019_411C                           ; $409E: $18 $7C
+    jr   .notBeingLifted                          ; $409E: $18 $7C
 
-.jr_40A0
+.powerBraceletNotOnB
     ld   a, [wInventoryItems.AButtonSlot]         ; $40A0: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $40A3: $FE $03
-    jr   nz, label_019_411C                       ; $40A5: $20 $75
+    jr   nz, .notBeingLifted                      ; $40A5: $20 $75
 
     ldh  a, [hPressedButtonsMask]                 ; $40A7: $F0 $CB
     and  J_A                                      ; $40A9: $E6 $10
-    jr   z, label_019_411C                        ; $40AB: $28 $6F
+    jr   z, .notBeingLifted                       ; $40AB: $28 $6F
 
-jr_019_40AD:
+.usePowerBracelet
     ld   a, [wC3CF]                               ; $40AD: $FA $CF $C3
     and  a                                        ; $40B0: $A7
-    jr   nz, label_019_411C                       ; $40B1: $20 $69
+    jr   nz, .notBeingLifted                      ; $40B1: $20 $69
 
     ld   a, $01                                   ; $40B3: $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ; $40B5: $E0 $A1
@@ -103,11 +103,11 @@ jr_019_40AD:
     add  hl, de                                   ; $40C2: $19
     ld   a, [hl]                                  ; $40C3: $7E
     ldh  [hLinkAnimationState], a                 ; $40C4: $E0 $9D
-    ld   hl, data_1F55                            ; $40C6: $21 $55 $1F
+    ld   hl, LinkDirectionToLiftDirectionButton   ; $40C6: $21 $55 $1F
     add  hl, de                                   ; $40C9: $19
     ldh  a, [hPressedButtonsMask]                 ; $40CA: $F0 $CB
     and  [hl]                                     ; $40CC: $A6
-    jr   z, label_019_411C                        ; $40CD: $28 $4D
+    jr   z, .notBeingLifted                       ; $40CD: $28 $4D
 
     ld   hl, data_1F59                            ; $40CF: $21 $59 $1F
     add  hl, de                                   ; $40D2: $19
@@ -121,22 +121,20 @@ jr_019_40AD:
     inc  [hl]                                     ; $40E2: $34
     ld   a, [wPowerBraceletLevel]                 ; $40E3: $FA $43 $DB
     cp   $02                                      ; $40E6: $FE $02
-    jr   nz, label_019_411C                       ; $40E8: $20 $32
+    jr   nz, .notBeingLifted                      ; $40E8: $20 $32
 
     ld   e, $08                                   ; $40EA: $1E $08
     ld   a, [wActivePowerUp]                      ; $40EC: $FA $7C $D4
     and  a                                        ; $40EF: $A7
-    jr   z, .jr_40F4                              ; $40F0: $28 $02
-
+    jr   z, .notLiftFaster                        ; $40F0: $28 $02
     ld   e, $03                                   ; $40F2: $1E $03
-
-.jr_40F4
+.notLiftFaster
     ld   hl, wEntitiesInertiaTable                ; $40F4: $21 $D0 $C3
     add  hl, bc                                   ; $40F7: $09
     inc  [hl]                                     ; $40F8: $34
     ld   a, [hl]                                  ; $40F9: $7E
     cp   e                                        ; $40FA: $BB
-    jr   c, ret_019_4122                          ; $40FB: $38 $25
+    jr   c, .ret                                  ; $40FB: $38 $25
 
     call IncrementEntityState                     ; $40FD: $CD $12 $3B
     ld   [hl], $02                                ; $4100: $36 $02
@@ -153,19 +151,19 @@ jr_019_40AD:
     ld   hl, hWaveSfx                             ; $4117: $21 $F3 $FF
     ld   [hl], WAVE_SFX_LIFT_UP                   ; $411A: $36 $02
 
-label_019_411C:
+.notBeingLifted:
     ld   hl, wEntitiesInertiaTable                ; $411C: $21 $D0 $C3
     add  hl, bc                                   ; $411F: $09
     ld   [hl], b                                  ; $4120: $70
     ret                                           ; $4121: $C9
 
-ret_019_4122:
+.ret:
     ret                                           ; $4122: $C9
 
-LiftableStatueState1And2Handler::
+LiftableStatueState_Lifted_Thrown::
     call UpdateEntityPosWithSpeed_19              ; $4123: $CD $B8 $7D
     call AddEntityZSpeedToPos_19                  ; $4126: $CD $F1 $7D
-    call label_3B23                               ; $4129: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $4129: $CD $23 $3B
     ld   hl, wEntitiesSpeedZTable                 ; $412C: $21 $20 $C3
     add  hl, bc                                   ; $412F: $09
     dec  [hl]                                     ; $4130: $35
@@ -183,7 +181,7 @@ LiftableStatueState1And2Handler::
     ret  z                                        ; $4142: $C8
 
 .jr_4143
-    call func_019_4183                            ; $4143: $CD $83 $41
+    call LiftableStatue_SpawnRubble               ; $4143: $CD $83 $41
     ld   a, [wRoomEvent]                          ; $4146: $FA $8E $C1
     and  EVENT_TRIGGER_MASK                       ; $4149: $E6 $1F
     cp   TRIGGER_THROW_AT_DOOR                    ; $414B: $FE $0B
@@ -207,29 +205,29 @@ LiftableStatueState1And2Handler::
 jr_019_4162:
     jp   MarkTriggerAsResolved                    ; $4162: $C3 $60 $0C
 
-Data_019_4165::
+LiftableStatue_RubbleX::
     db   $00, $08, $00, $08, $00, $08
 
-Data_019_416B::
+LiftableStatue_RubbleY::
     db   $F8, $F8, $00, $00, $08, $08
 
-Data_019_4171::
+LiftableStatue_RubbleSpeedX::
     db   $FC, $05, $FA, $06, $FB, $04
 
-Data_019_4177::
+LiftableStatue_RubbleSpeedY::
     db   $FC, $F8, $FE, $FF, $03, $02
 
-Data_019_417D::
+LiftableStatue_RubbleSpeedZ::
     db   $18, $14, $13, $16, $12, $14
 
-func_019_4183::
+LiftableStatue_SpawnRubble::
     ld   a, $00                                   ; $4183: $3E $00
 
-jr_019_4185:
+.spawnLoop:
     ldh  [hMultiPurposeG], a                      ; $4185: $E0 $E8
     ld   a, ENTITY_LIFTABLE_STATUE                ; $4187: $3E $9D
     call SpawnNewEntity_trampoline                ; $4189: $CD $86 $3B
-    jr   c, jr_019_41E2                           ; $418C: $38 $54
+    jr   c, .spawnFailed                          ; $418C: $38 $54
 
     ld   hl, wEntitiesPrivateState1Table          ; $418E: $21 $B0 $C2
     add  hl, de                                   ; $4191: $19
@@ -242,14 +240,14 @@ jr_019_4185:
     push bc                                       ; $4199: $C5
     ldh  a, [hMultiPurposeG]                      ; $419A: $F0 $E8
     ld   c, a                                     ; $419C: $4F
-    ld   hl, Data_019_4165                        ; $419D: $21 $65 $41
+    ld   hl, LiftableStatue_RubbleX               ; $419D: $21 $65 $41
     add  hl, bc                                   ; $41A0: $09
     ldh  a, [hMultiPurpose0]                      ; $41A1: $F0 $D7
     add  [hl]                                     ; $41A3: $86
     ld   hl, wEntitiesPosXTable                   ; $41A4: $21 $00 $C2
     add  hl, de                                   ; $41A7: $19
     ld   [hl], a                                  ; $41A8: $77
-    ld   hl, Data_019_416B                        ; $41A9: $21 $6B $41
+    ld   hl, LiftableStatue_RubbleY               ; $41A9: $21 $6B $41
     add  hl, bc                                   ; $41AC: $09
     ldh  a, [hMultiPurpose1]                      ; $41AD: $F0 $D8
     add  [hl]                                     ; $41AF: $86
@@ -260,19 +258,19 @@ jr_019_4185:
     ld   hl, wEntitiesPosZTable                   ; $41B7: $21 $10 $C3
     add  hl, de                                   ; $41BA: $19
     ld   [hl], a                                  ; $41BB: $77
-    ld   hl, Data_019_4171                        ; $41BC: $21 $71 $41
+    ld   hl, LiftableStatue_RubbleSpeedX          ; $41BC: $21 $71 $41
     add  hl, bc                                   ; $41BF: $09
     ld   a, [hl]                                  ; $41C0: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $41C1: $21 $40 $C2
     add  hl, de                                   ; $41C4: $19
     ld   [hl], a                                  ; $41C5: $77
-    ld   hl, Data_019_4177                        ; $41C6: $21 $77 $41
+    ld   hl, LiftableStatue_RubbleSpeedY          ; $41C6: $21 $77 $41
     add  hl, bc                                   ; $41C9: $09
     ld   a, [hl]                                  ; $41CA: $7E
     ld   hl, wEntitiesSpeedYTable                 ; $41CB: $21 $50 $C2
     add  hl, de                                   ; $41CE: $19
     ld   [hl], a                                  ; $41CF: $77
-    ld   hl, Data_019_417D                        ; $41D0: $21 $7D $41
+    ld   hl, LiftableStatue_RubbleSpeedZ          ; $41D0: $21 $7D $41
     add  hl, bc                                   ; $41D3: $09
     ld   a, [hl]                                  ; $41D4: $7E
     ld   hl, wEntitiesSpeedZTable                 ; $41D5: $21 $20 $C3
@@ -282,9 +280,9 @@ jr_019_4185:
     ldh  a, [hMultiPurposeG]                      ; $41DB: $F0 $E8
     inc  a                                        ; $41DD: $3C
     cp   $06                                      ; $41DE: $FE $06
-    jr   nz, jr_019_4185                          ; $41E0: $20 $A3
+    jr   nz, .spawnLoop                           ; $41E0: $20 $A3
 
-jr_019_41E2:
+.spawnFailed:
     ld   a, NOISE_SFX_BREAK                       ; $41E2: $3E $29
     ldh  [hNoiseSfx], a                           ; $41E4: $E0 $F4
     ldh  a, [hActiveEntityPosX]                   ; $41E6: $F0 $EE

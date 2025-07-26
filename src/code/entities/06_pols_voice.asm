@@ -47,10 +47,10 @@ PolsVoiceEntityHandler::
     add  hl, bc                                   ; $73BF: $09
     ld   [hl], $01                                ; $73C0: $36 $01
     push hl                                       ; $73C2: $E5
-    call label_3B23                               ; $73C3: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $73C3: $CD $23 $3B
     pop  hl                                       ; $73C6: $E1
     ld   [hl], b                                  ; $73C7: $70
-    call label_3B39                               ; $73C8: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $73C8: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $73CB: $F0 $F0
     and  $01                                      ; $73CD: $E6 $01
     JP_TABLE                                      ; $73CF

@@ -22,7 +22,7 @@ WaterTektiteEntityHandler::
     and  $01                                      ; $7547: $E6 $01
     call SetEntitySpriteVariant                   ; $7549: $CD $0C $3B
     call UpdateEntityPosWithSpeed_07              ; $754C: $CD $0A $7E
-    call label_3B23                               ; $754F: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $754F: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $7552: $21 $A0 $C2
     add  hl, bc                                   ; $7555: $09
     ld   a, [hl]                                  ; $7556: $7E
@@ -38,7 +38,7 @@ WaterTektiteEntityHandler::
     ldh  [hActiveEntityState], a                  ; $7568: $E0 $F0
 
 .jr_756A
-    call label_3B39                               ; $756A: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $756A: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $756D: $F0 $F0
     JP_TABLE                                      ; $756F
 ._00 dw func_007_7576                             ; $7570

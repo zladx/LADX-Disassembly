@@ -424,7 +424,7 @@ func_007_6BC8::
     call IncrementEntityState                     ; $6BDC: $CD $12 $3B
 
 label_007_6BDF:
-    call func_007_7E5D                            ; $6BDF: $CD $5D $7E
+    call EntityLinkPositionXDifference_07         ; $6BDF: $CD $5D $7E
     ld   hl, wEntitiesDirectionTable              ; $6BE2: $21 $80 $C3
     add  hl, bc                                   ; $6BE5: $09
     ld   [hl], e                                  ; $6BE6: $73
@@ -441,12 +441,12 @@ func_007_6BE7::
 
 func_007_6BF4::
     call func_007_6EA2                            ; $6BF4: $CD $A2 $6E
-    call func_007_7E5D                            ; $6BF7: $CD $5D $7E
+    call EntityLinkPositionXDifference_07         ; $6BF7: $CD $5D $7E
     add  $20                                      ; $6BFA: $C6 $20
     cp   $40                                      ; $6BFC: $FE $40
     jr   nc, .jr_6C14                             ; $6BFE: $30 $14
 
-    call func_007_7E6D                            ; $6C00: $CD $6D $7E
+    call EntityLinkPositionYDifference_07         ; $6C00: $CD $6D $7E
     add  $1C                                      ; $6C03: $C6 $1C
     cp   $38                                      ; $6C05: $FE $38
     jr   nc, .jr_6C14                             ; $6C07: $30 $0B
@@ -479,7 +479,7 @@ func_007_6BF4::
 
 func_007_6C33::
     call UpdateEntityPosWithSpeed_07              ; $6C33: $CD $0A $7E
-    jp   label_3B23                               ; $6C36: $C3 $23 $3B
+    jp   DefaultEntityPhysics_trampoline          ; $6C36: $C3 $23 $3B
 
 func_007_6C39::
     call GetEntityTransitionCountdown             ; $6C39: $CD $05 $0C
@@ -905,12 +905,12 @@ func_007_6EA2::
     ld   hl, wEntitiesPrivateState1Table          ; $6EA2: $21 $B0 $C2
     add  hl, bc                                   ; $6EA5: $09
     ld   [hl], b                                  ; $6EA6: $70
-    call func_007_7E5D                            ; $6EA7: $CD $5D $7E
+    call EntityLinkPositionXDifference_07         ; $6EA7: $CD $5D $7E
     add  $30                                      ; $6EAA: $C6 $30
     cp   $60                                      ; $6EAC: $FE $60
     jr   nc, .jr_6EC3                             ; $6EAE: $30 $13
 
-    call func_007_7E6D                            ; $6EB0: $CD $6D $7E
+    call EntityLinkPositionYDifference_07         ; $6EB0: $CD $6D $7E
     add  $30                                      ; $6EB3: $C6 $30
     cp   $60                                      ; $6EB5: $FE $60
     jr   nc, .jr_6EC3                             ; $6EB7: $30 $0A

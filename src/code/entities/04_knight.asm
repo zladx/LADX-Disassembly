@@ -32,7 +32,7 @@ jr_004_69D5:
     ld   hl, wEntitiesOptions1Table               ; $69E1: $21 $30 $C4
     add  hl, bc                                   ; $69E4: $09
     ld   [hl], ENTITY_OPT1_NONE                   ; $69E5: $36 $00
-    call label_3B39                               ; $69E7: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $69E7: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $69EA: $F0 $F0
     JP_TABLE                                      ; $69EC
 ._00 dw func_004_69F3                             ; $69ED
@@ -53,7 +53,7 @@ func_004_69F3::
 
 .jr_6A04
     call UpdateEntityPosWithSpeed_04              ; $6A04: $CD $CA $6D
-    call label_3B23                               ; $6A07: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $6A07: $CD $23 $3B
     call func_004_6E35                            ; $6A0A: $CD $35 $6E
     add  $30                                      ; $6A0D: $C6 $30
     cp   $60                                      ; $6A0F: $FE $60
@@ -305,7 +305,7 @@ jr_004_6B51:
     ld   hl, wEntitiesOptions1Table               ; $6B70: $21 $30 $C4
     add  hl, bc                                   ; $6B73: $09
     ld   [hl], ENTITY_OPT1_SWORD_CLINK_OFF        ; $6B74: $36 $40
-    call label_3B39                               ; $6B76: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $6B76: $CD $39 $3B
     call func_004_6BE1                            ; $6B79: $CD $E1 $6B
 
 .jr_6B7C

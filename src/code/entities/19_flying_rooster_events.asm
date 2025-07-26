@@ -558,7 +558,7 @@ label_019_50C4::
     ldh  a, [hFrameCounter]                       ; $5167: $F0 $E7
     and  [hl]                                     ; $5169: $A6
     call z, UpdateEntityPosWithSpeed_19           ; $516A: $CC $B8 $7D
-    call label_3B23                               ; $516D: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $516D: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $5170: $21 $A0 $C2
     add  hl, bc                                   ; $5173: $09
     ld   a, [hl]                                  ; $5174: $7E
@@ -587,12 +587,12 @@ label_019_50C4::
     ld   [hl], a                                  ; $5191: $77
 
 .jr_5192
-    call entityLinkPositionXDifference            ; $5192: $CD $0B $7E
+    call EntityLinkPositionXDifference_19         ; $5192: $CD $0B $7E
     add  $12                                      ; $5195: $C6 $12
     cp   $24                                      ; $5197: $FE $24
     ret  nc                                       ; $5199: $D0
 
-    call entityLinkPositionYDifference            ; $519A: $CD $1B $7E
+    call EntityLinkPositionYDifference_19         ; $519A: $CD $1B $7E
     add  $10                                      ; $519D: $C6 $10
     cp   $20                                      ; $519F: $FE $20
     ret  nc                                       ; $51A1: $D0
@@ -636,12 +636,12 @@ FlyingRoosterState0Handler::
     cp   $02                                      ; $51E6: $FE $02
     ret  c                                        ; $51E8: $D8
 
-    call entityLinkPositionXDifference            ; $51E9: $CD $0B $7E
+    call EntityLinkPositionXDifference_19         ; $51E9: $CD $0B $7E
     add  $08                                      ; $51EC: $C6 $08
     cp   $10                                      ; $51EE: $FE $10
     jp   nc, label_019_52AB                       ; $51F0: $D2 $AB $52
 
-    call entityLinkPositionYDifference            ; $51F3: $CD $1B $7E
+    call EntityLinkPositionYDifference_19         ; $51F3: $CD $1B $7E
     add  $10                                      ; $51F6: $C6 $10
     cp   $20                                      ; $51F8: $FE $20
     jp   nc, label_019_52AB                       ; $51FA: $D2 $AB $52

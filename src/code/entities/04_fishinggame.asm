@@ -832,7 +832,7 @@ jr_004_63DE:
     ld   [hl], b                                  ; $63FB: $70
 
 .jr_63FC
-    call label_3B23                               ; $63FC: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $63FC: $CD $23 $3B
     pop  hl                                       ; $63FF: $E1
     pop  af                                       ; $6400: $F1
     ld   [hl], a                                  ; $6401: $77

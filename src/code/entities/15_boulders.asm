@@ -74,7 +74,7 @@ label_015_43CA:
     call RenderActiveEntitySpritesPair            ; $43CD: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $43D0: $CD $0D $7B
     call DecrementEntityIgnoreHitsCountdown       ; $43D3: $CD $56 $0C
-    call label_3B39                               ; $43D6: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $43D6: $CD $39 $3B
     ldh  a, [hFrameCounter]                       ; $43D9: $F0 $E7
     rra                                           ; $43DB: $1F
 

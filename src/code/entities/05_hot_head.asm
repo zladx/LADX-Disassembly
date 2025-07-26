@@ -275,7 +275,7 @@ func_005_648E::
     ret                                           ; $64AE: $C9
 
 jr_005_64AF:
-    call label_3B39                               ; $64AF: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $64AF: $CD $39 $3B
     call GetEntityDropTimer                       ; $64B2: $CD $FB $0B
     jr   nz, .jr_64CC                             ; $64B5: $20 $15
 
@@ -336,7 +336,7 @@ ENDC
     ret  nc                                       ; $64FE: $D0
 
     call UpdateEntityPosWithSpeed_05              ; $64FF: $CD $B1 $7A
-    call label_3B23                               ; $6502: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $6502: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $6505: $21 $A0 $C2
     add  hl, bc                                   ; $6508: $09
     ld   a, [hl]                                  ; $6509: $7E

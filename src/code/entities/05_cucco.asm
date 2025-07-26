@@ -219,7 +219,7 @@ func_005_4624::
 
 func_005_4663::
     call UpdateEntityPosWithSpeed_05              ; $4663: $CD $B1 $7A
-    call label_3B23                               ; $4666: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $4666: $CD $23 $3B
     ldh  a, [hMultiPurposeG]                      ; $4669: $F0 $E8
     and  a                                        ; $466B: $A7
     jr   z, jr_005_4685                           ; $466C: $28 $17
@@ -282,13 +282,13 @@ func_005_46AF::
 
 jr_005_46D2:
     call UpdateEntityPosWithSpeed_05              ; $46D2: $CD $B1 $7A
-    call label_3B23                               ; $46D5: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $46D5: $CD $23 $3B
     ldh  a, [hFrameCounter]                       ; $46D8: $F0 $E7
     rra                                           ; $46DA: $1F
     rra                                           ; $46DB: $1F
     and  $01                                      ; $46DC: $E6 $01
     call SetEntitySpriteVariant                   ; $46DE: $CD $0C $3B
-    call func_005_7B04                            ; $46E1: $CD $04 $7B
+    call GetEntityToLinkPositionDeltaX_05         ; $46E1: $CD $04 $7B
     ld   hl, wEntitiesDirectionTable              ; $46E4: $21 $80 $C3
     add  hl, bc                                   ; $46E7: $09
     ld   a, e                                     ; $46E8: $7B

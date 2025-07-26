@@ -61,7 +61,7 @@ PapahlEntityHandler::
     cp   $08                                      ; $4A36: $FE $08
     jr   nc, .render                              ; $4A38: $30 $09
 
-    call func_007_7E5D                            ; $4A3A: $CD $5D $7E
+    call EntityLinkPositionXDifference_07         ; $4A3A: $CD $5D $7E
     ld   a, e                                     ; $4A3D: $7B
     ldh  [hActiveEntitySpriteVariant], a          ; $4A3E: $E0 $F1
     ld   de, Papahl1SpriteVariants                ; $4A40: $11 $EF $49
@@ -132,7 +132,7 @@ jr_007_4A69:
 ._04 dw func_007_4B5B                             ; $4AB1
 
 func_007_4AB3::
-    call func_007_7E5D                            ; $4AB3: $CD $5D $7E
+    call EntityLinkPositionXDifference_07         ; $4AB3: $CD $5D $7E
     ld   hl, wEntitiesDirectionTable              ; $4AB6: $21 $80 $C3
     add  hl, bc                                   ; $4AB9: $09
     ld   [hl], e                                  ; $4ABA: $73
@@ -140,7 +140,7 @@ func_007_4AB3::
     cp   $48                                      ; $4ABD: $FE $48
     jr   nc, jr_007_4AE9                          ; $4ABF: $30 $28
 
-    call func_007_7E6D                            ; $4AC1: $CD $6D $7E
+    call EntityLinkPositionYDifference_07         ; $4AC1: $CD $6D $7E
     add  $24                                      ; $4AC4: $C6 $24
     cp   $48                                      ; $4AC6: $FE $48
     jr   nc, jr_007_4AE9                          ; $4AC8: $30 $1F

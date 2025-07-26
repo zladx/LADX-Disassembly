@@ -291,7 +291,7 @@ label_015_7825:
     rra                                           ; $7836: $1F
     and  $01                                      ; $7837: $E6 $01
     call SetEntitySpriteVariant                   ; $7839: $CD $0C $3B
-    call label_3B39                               ; $783C: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $783C: $CD $39 $3B
     call UpdateEntityPosWithSpeed_15              ; $783F: $CD $88 $7B
     call AddEntityZSpeedToPos_15                  ; $7842: $CD $C1 $7B
     ld   hl, wEntitiesSpeedZTable                 ; $7845: $21 $20 $C3

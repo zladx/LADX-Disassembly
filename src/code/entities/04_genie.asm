@@ -278,7 +278,7 @@ jr_004_41A6:
     call UpdateEntityPosWithSpeed_04              ; $41A6: $CD $CA $6D
 
 jr_004_41A9:
-    call label_3B23                               ; $41A9: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $41A9: $CD $23 $3B
 
 jr_004_41AC:
     call DecrementEntityIgnoreHitsCountdown       ; $41AC: $CD $56 $0C
@@ -384,7 +384,7 @@ func_004_4214::
     ld   hl, wEntitiesOptions1Table               ; $4254: $21 $30 $C4
     add  hl, bc                                   ; $4257: $09
     ld   [hl], ENTITY_OPT1_NONE                   ; $4258: $36 $00
-    call label_3B39                               ; $425A: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $425A: $CD $39 $3B
     ld   hl, wEntitiesOptions1Table               ; $425D: $21 $30 $C4
     add  hl, bc                                   ; $4260: $09
     ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IMMUNE_WATER_PIT ; $4261: $36 $D0
@@ -402,7 +402,7 @@ func_004_4214::
 
 .jr_4278
     call UpdateEntityPosWithSpeed_04              ; $4278: $CD $CA $6D
-    call label_3B23                               ; $427B: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $427B: $CD $23 $3B
     jp   label_004_4144                           ; $427E: $C3 $44 $41
 
 Data_004_4281::
@@ -845,7 +845,7 @@ func_004_4517::
     call ApplyRecoilIfNeeded_04                   ; $4535: $CD $80 $6D
     call label_3B70                               ; $4538: $CD $70 $3B
     call UpdateEntityPosWithSpeed_04              ; $453B: $CD $CA $6D
-    call label_3B23                               ; $453E: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $453E: $CD $23 $3B
     ldh  a, [hFrameCounter]                       ; $4541: $F0 $E7
     and  $03                                      ; $4543: $E6 $03
     jr   nz, jr_004_4568                          ; $4545: $20 $21

@@ -249,7 +249,7 @@ ApplyRecoilIfNeeded_07::
     and  $20                                      ; $7DF6: $E6 $20
     jr   nz, .restoreOriginalSpeed                ; $7DF8: $20 $03
 
-    call label_3B23                               ; $7DFA: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7DFA: $CD $23 $3B
 
 .restoreOriginalSpeed
     call GetEntitySpeedYAddress                   ; $7DFD: $CD $05 $40
@@ -342,7 +342,7 @@ AddEntityZSpeedToPos_07::
     ld   hl, wEntitiesPosZTable                   ; $7E58: $21 $10 $C3
     jr   AddEntitySpeedToPos_07.updatePosition    ; $7E5B: $18 $D2
 
-func_007_7E5D::
+EntityLinkPositionXDifference_07::
     ld   e, $00                                   ; $7E5D: $1E $00
     ldh  a, [hLinkPositionX]                      ; $7E5F: $F0 $98
     ld   hl, wEntitiesPosXTable                   ; $7E61: $21 $00 $C2
@@ -357,7 +357,7 @@ func_007_7E5D::
     ld   d, a                                     ; $7E6B: $57
     ret                                           ; $7E6C: $C9
 
-func_007_7E6D::
+EntityLinkPositionYDifference_07::
     ld   e, $02                                   ; $7E6D: $1E $02
     ldh  a, [hLinkPositionY]                      ; $7E6F: $F0 $99
     ld   hl, wEntitiesPosYTable                   ; $7E71: $21 $10 $C2
@@ -373,7 +373,7 @@ func_007_7E6D::
     ret                                           ; $7E7C: $C9
 
 func_007_7E7D::
-    call func_007_7E5D                            ; $7E7D: $CD $5D $7E
+    call EntityLinkPositionXDifference_07         ; $7E7D: $CD $5D $7E
     ld   a, e                                     ; $7E80: $7B
     ldh  [hMultiPurpose0], a                      ; $7E81: $E0 $D7
     ld   a, d                                     ; $7E83: $7A
@@ -385,7 +385,7 @@ func_007_7E7D::
 
 .jr_7E8A
     push af                                       ; $7E8A: $F5
-    call func_007_7E6D                            ; $7E8B: $CD $6D $7E
+    call EntityLinkPositionYDifference_07         ; $7E8B: $CD $6D $7E
     ld   a, e                                     ; $7E8E: $7B
     ldh  [hMultiPurpose1], a                      ; $7E8F: $E0 $D8
     ld   a, d                                     ; $7E91: $7A

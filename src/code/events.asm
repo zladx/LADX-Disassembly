@@ -259,7 +259,7 @@ func_002_5E7B::
     ld   [wC190], a                               ; $5E96: $EA $90 $C1
     ld   a, $04                                   ; $5E99: $3E $04
     ld   [wC111], a                               ; $5E9B: $EA $11 $C1
-    ld   a, WAVE_SFX_BOSS_DEATH_CRY               ; $5E9E: $3E $10
+    ld   a, NOISE_SFX_DOOR_CLOSED                 ; $5E9E: $3E $10
     ldh  [hNoiseSfx], a                           ; $5EA0: $E0 $F4
 
 .return

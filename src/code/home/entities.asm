@@ -352,16 +352,16 @@ HurtBySpikes_trampoline::
     callsb HurtBySpikes                           ; $3B18: $3E $02 $EA $00 $21 $CD $F5 $75
     jp   ReloadSavedBank                          ; $3B20: $C3 $1D $08
 
-label_3B23::
-    callsb func_003_7893                          ; $3B23: $3E $03 $EA $00 $21 $CD $93 $78
+DefaultEntityPhysics_trampoline::
+    callsb DefaultEntityPhysics                   ; $3B23: $3E $03 $EA $00 $21 $CD $93 $78
     jp   ReloadSavedBank                          ; $3B2B: $C3 $1D $08
 
 label_3B2E::
     callsb ApplySwordIntersectionWithObjects      ; $3B2E: $3E $03 $EA $00 $21 $CD $AB $7C
     jp   ReloadSavedBank                          ; $3B36: $C3 $1D $08
 
-label_3B39::
-    callsb func_003_6E28                          ; $3B39: $3E $03 $EA $00 $21 $CD $28 $6E
+DefaultEnemyDamageCollisionHandler_trampoline::
+    callsb DefaultEnemyDamageCollisionHandler     ; $3B39: $3E $03 $EA $00 $21 $CD $28 $6E
     jp   ReloadSavedBank                          ; $3B41: $C3 $1D $08
 
 label_3B44::

@@ -48,7 +48,7 @@ HinoxEntityHandler::
 ._05 dw HinoxState5Handler                             ; $4FFE
 
 HinoxState1Handler::
-    call label_3B39                               ; $5000: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $5000: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $5003: $CD $05 $0C
     jr   z, jr_006_501A                           ; $5006: $28 $12
 
@@ -63,7 +63,7 @@ HinoxState1Handler::
     jr   nz, .jr_5017                             ; $5015: $20 $00
 
 .jr_5017
-    jp   label_3B23                               ; $5017: $C3 $23 $3B
+    jp   DefaultEntityPhysics_trampoline          ; $5017: $C3 $23 $3B
 
 jr_006_501A:
     ld   hl, wEntitiesPrivateState3Table          ; $501A: $21 $D0 $C2
@@ -126,7 +126,7 @@ jr_006_505B:
     ret                                           ; $5073: $C9
 
 HinoxState0Handler::
-    call label_3B39                               ; $5074: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $5074: $CD $39 $3B
     ld   hl, wEntitiesCollisionsTable             ; $5077: $21 $A0 $C2
     add  hl, bc                                   ; $507A: $09
     ld   a, [hl]                                  ; $507B: $7E
@@ -146,7 +146,7 @@ HinoxState0Handler::
 
 jr_006_5093:
     call UpdateEntityPosWithSpeed_06              ; $5093: $CD $41 $65
-    call label_3B23                               ; $5096: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $5096: $CD $23 $3B
 
 func_006_5099::
     ld   hl, wEntitiesInertiaTable                ; $5099: $21 $D0 $C3
@@ -161,7 +161,7 @@ func_006_5099::
     jp   SetEntitySpriteVariant                   ; $50A5: $C3 $0C $3B
 
 HinoxState2Handler::
-    call label_3B39                               ; $50A8: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $50A8: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $50AB: $CD $05 $0C
     jr   nz, jr_006_50BA                          ; $50AE: $20 $0A
 
@@ -184,7 +184,7 @@ jr_006_50BA:
     ret                                           ; $50CA: $C9
 
 HinoxState3Handler::
-    call label_3B39                               ; $50CB: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $50CB: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $50CE: $CD $05 $0C
     jr   nz, .jr_50D7                             ; $50D1: $20 $04
 
@@ -193,7 +193,7 @@ HinoxState3Handler::
 
 .jr_50D7
     call UpdateEntityPosWithSpeed_06              ; $50D7: $CD $41 $65
-    call label_3B23                               ; $50DA: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $50DA: $CD $23 $3B
     call func_006_6594                            ; $50DD: $CD $94 $65
     add  $18                                      ; $50E0: $C6 $18
     cp   $30                                      ; $50E2: $FE $30
@@ -324,7 +324,7 @@ ret_006_51BB:
     ret                                           ; $51BB: $C9
 
 HinoxState5Handler::
-    call label_3B39                               ; $51BC: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $51BC: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $51BF: $CD $05 $0C
     jr   nz, .jr_51C9                             ; $51C2: $20 $05
 

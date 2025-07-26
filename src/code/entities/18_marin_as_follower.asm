@@ -309,7 +309,7 @@ jr_018_5B6A:
     and  a                                        ; $5B75: $A7
     jp   z, label_018_5C6A                        ; $5B76: $CA $6A $5C
 
-    call label_3B23                               ; $5B79: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $5B79: $CD $23 $3B
     ld   a, $02                                   ; $5B7C: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5B7E: $E0 $A1
     ld   [wC167], a                               ; $5B80: $EA $67 $C1
@@ -606,7 +606,7 @@ jr_018_5CEF:
     and  a                                        ; $5D41: $A7
     jr   nz, jr_018_5D7A                          ; $5D42: $20 $36
 
-    call label_3B23                               ; $5D44: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $5D44: $CD $23 $3B
     ld   hl, wEntitiesStatusTable                 ; $5D47: $21 $80 $C2
     add  hl, bc                                   ; $5D4A: $09
     ld   a, [hl]                                  ; $5D4B: $7E
@@ -646,7 +646,7 @@ jr_018_5D6F:
     ldh  [hJingle], a                             ; $5D78: $E0 $F2
 
 jr_018_5D7A:
-    jp   label_3B23                               ; $5D7A: $C3 $23 $3B
+    jp   DefaultEntityPhysics_trampoline          ; $5D7A: $C3 $23 $3B
 
 jr_018_5D7D:
     pop  af                                       ; $5D7D: $F1

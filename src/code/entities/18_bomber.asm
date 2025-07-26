@@ -40,7 +40,7 @@ BomberEntityHandler::
     ld   [hl], a                                  ; $7852: $77
     call ApplyRecoilIfNeeded_18                   ; $7853: $CD $15 $7E
     call UpdateEntityPosWithSpeed_18              ; $7856: $CD $5F $7E
-    call label_3B23                               ; $7859: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $7859: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $785C: $F0 $F0
     JP_TABLE                                      ; $785E
 ._00 dw BomberState0Handler
@@ -176,7 +176,7 @@ label_018_78A6:
     ret                                           ; $7934: $C9
 
 .jr_7935
-    call label_3B39                               ; $7935: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $7935: $CD $39 $3B
 
 label_018_7938:
     ldh  a, [hFrameCounter]                       ; $7938: $F0 $E7

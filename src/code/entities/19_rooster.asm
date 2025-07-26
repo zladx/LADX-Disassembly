@@ -95,12 +95,12 @@ jr_019_5A35:
     and  $01                                      ; $5A47: $E6 $01
     add  e                                        ; $5A49: $83
     call SetEntitySpriteVariant                   ; $5A4A: $CD $0C $3B
-    call entityLinkPositionXDifference            ; $5A4D: $CD $0B $7E
+    call EntityLinkPositionXDifference_19         ; $5A4D: $CD $0B $7E
     add  $12                                      ; $5A50: $C6 $12
     cp   $24                                      ; $5A52: $FE $24
     jr   nc, .jr_5A5F                             ; $5A54: $30 $09
 
-    call entityLinkPositionYDifference            ; $5A56: $CD $1B $7E
+    call EntityLinkPositionYDifference_19         ; $5A56: $CD $1B $7E
     add  $12                                      ; $5A59: $C6 $12
     cp   $24                                      ; $5A5B: $FE $24
     jr   c, jr_019_5A9F                           ; $5A5D: $38 $40
@@ -133,7 +133,7 @@ jr_019_5A35:
 
 jr_019_5A7F:
     call UpdateEntityPosWithSpeed_19              ; $5A7F: $CD $B8 $7D
-    jp   label_3B23                               ; $5A82: $C3 $23 $3B
+    jp   DefaultEntityPhysics_trampoline          ; $5A82: $C3 $23 $3B
 
 jr_019_5A85:
     ld   hl, wEntitiesSpeedXTable                 ; $5A85: $21 $40 $C2

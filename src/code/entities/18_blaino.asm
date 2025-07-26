@@ -48,11 +48,11 @@ jr_018_650A:
     and  a                                        ; $6513: $A7
     jr   nz, .jr_6519                             ; $6514: $20 $03
 
-    call label_3B39                               ; $6516: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $6516: $CD $39 $3B
 
 .jr_6519
     call UpdateEntityPosWithSpeed_18              ; $6519: $CD $5F $7E
-    call label_3B23                               ; $651C: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $651C: $CD $23 $3B
     call AddEntityZSpeedToPos_18                  ; $651F: $CD $98 $7E
     ld   hl, wEntitiesSpeedZTable                 ; $6522: $21 $20 $C3
     add  hl, bc                                   ; $6525: $09

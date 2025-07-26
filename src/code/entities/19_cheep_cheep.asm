@@ -32,7 +32,7 @@ CheepCheepVerticalEntityHandler::
     and  $01                                      ; $6B6C: $E6 $01
     or   e                                        ; $6B6E: $B3
     call SetEntitySpriteVariant                   ; $6B6F: $CD $0C $3B
-    call label_3B39                               ; $6B72: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $6B72: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $6B75: $F0 $F0
     JP_TABLE                                      ; $6B77
 ._00 dw CheepCheepState0Handler
@@ -129,7 +129,7 @@ CheepCheepJumpingEntityHandler::
     and  $01                                      ; $6BF4: $E6 $01
     or   e                                        ; $6BF6: $B3
     call SetEntitySpriteVariant                   ; $6BF7: $CD $0C $3B
-    call label_3B39                               ; $6BFA: $CD $39 $3B
+    call DefaultEnemyDamageCollisionHandler_trampoline ; $6BFA: $CD $39 $3B
 
 .jr_6BFD
     ldh  a, [hActiveEntityState]                  ; $6BFD: $F0 $F0
@@ -201,7 +201,7 @@ CheepCheepJumpingState2Handler::
 
 .jr_6C68
     call AddEntitySpeedToPos_19                   ; $6C68: $CD $C5 $7D
-    jp   label_3B23                               ; $6C6B: $C3 $23 $3B
+    jp   DefaultEntityPhysics_trampoline          ; $6C6B: $C3 $23 $3B
 
 CheepCheepJumpingState3Handler::
     call GetEntityTransitionCountdown             ; $6C6E: $CD $05 $0C
@@ -238,7 +238,7 @@ func_019_6C99::
     ld   hl, wEntitiesOptions1Table               ; $6C99: $21 $30 $C4
     add  hl, bc                                   ; $6C9C: $09
     set  ENTITY_OPT1_B_MOVE_PIT_WATER, [hl]       ; $6C9D: $CB $C6
-    call label_3B23                               ; $6C9F: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $6C9F: $CD $23 $3B
     ld   hl, wEntitiesOptions1Table               ; $6CA2: $21 $30 $C4
     add  hl, bc                                   ; $6CA5: $09
     res  ENTITY_OPT1_B_MOVE_PIT_WATER, [hl]       ; $6CA6: $CB $86

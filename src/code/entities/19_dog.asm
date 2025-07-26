@@ -181,7 +181,7 @@ DogState0Handler::
 
 DogState1Handler::
     call UpdateEntityPosWithSpeed_19              ; $49DB: $CD $B8 $7D
-    call label_3B23                               ; $49DE: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $49DE: $CD $23 $3B
     ldh  a, [hMultiPurposeG]                      ; $49E1: $F0 $E8
     and  a                                        ; $49E3: $A7
     jr   z, func_019_49FD                         ; $49E4: $28 $17
@@ -220,7 +220,7 @@ DogState2Handler::
     ld   hl, wEntitiesSpeedZTable                 ; $4A14: $21 $20 $C3
     add  hl, bc                                   ; $4A17: $09
     ld   [hl], $18                                ; $4A18: $36 $18
-    call entityLinkPositionXDifference            ; $4A1A: $CD $0B $7E
+    call EntityLinkPositionXDifference_19         ; $4A1A: $CD $0B $7E
     ld   hl, wEntitiesDirectionTable              ; $4A1D: $21 $80 $C3
     add  hl, bc                                   ; $4A20: $09
     ld   a, e                                     ; $4A21: $7B
@@ -235,7 +235,7 @@ DogState2Handler::
 
 DogState3Handler::
     call UpdateEntityPosWithSpeed_19              ; $4A2C: $CD $B8 $7D
-    call label_3B23                               ; $4A2F: $CD $23 $3B
+    call DefaultEntityPhysics_trampoline          ; $4A2F: $CD $23 $3B
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4A32: $21 $40 $C3
     add  hl, bc                                   ; $4A35: $09
     ld   [hl], 2 | ENTITY_PHYSICS_SHADOW | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $4A36: $36 $52

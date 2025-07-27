@@ -258,9 +258,9 @@ hTileGlintSequence::
 ; State of a pull switch used to move blocks
 ;
 ; Possible values:
-;  0   not moving
-;  1   pulled?
-;  2   moving back to normal position?
+;  0   not grabbed
+;  1   grabbed and pulled
+;  2   grabbed but not pulled
 hMovingBlockMoverState::
   ds 1 ; FFBA
 
@@ -324,7 +324,7 @@ hJoypadState::
 hIntersectedObjectTop::
   ds 1 ; FFCD
 
-; Topmost corner of the object intersected by Link or Link's sword
+; Leftmost corner of the object intersected by Link or Link's sword
 ; Vary from $00 to $A0 by increments of $10
 hIntersectedObjectLeft::
   ds 1 ; FFCE

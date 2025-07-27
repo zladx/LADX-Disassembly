@@ -7,7 +7,7 @@ import re
 import os
 
 def main():
-    regex = re.compile(r"(; \$[0-9A-F][0-9A-F][0-9A-F][0-9A-F]:(?: \$[0-9A-F]+)+)(.*)", re.IGNORECASE)
+    regex = re.compile(r"(;; [0-9A-F][0-9A-F]:[0-9A-F][0-9A-F][0-9A-F][0-9A-F])(.+)", re.IGNORECASE)
     basepath = os.path.dirname(__file__)
     for path, paths, files in os.walk(os.path.join(basepath, "..", "src")):
         for file in files:
@@ -21,8 +21,9 @@ def main():
                         if not ';' in code:
                             comment = line[m.span(1)[0]:m.span(1)[1]].upper()
                             comment += line[m.span(2)[0]:]
-                            code += " " * (49 - len(code))
-                            line = code + " " + comment
+                            if len(code) < 50:
+                                code += " " * (49 - len(code))
+                                line = code + " " + comment
                     new_content.append(line)
                 open(os.path.join(path, file), "wt").write("\n".join(new_content))
 

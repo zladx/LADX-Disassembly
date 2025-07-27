@@ -4,104 +4,162 @@
 ; Overworld rooms
 ;
 
-ROOM_OW_RIGHT_OF_EGG                     equ $07
-ROOM_OW_MARIN_BRIDGE                     equ $08
-ROOM_OW_EAGLE_TOWER                      equ $0E
+DEF ROOM_OW_TURTLE_ROCK_WARP_HOLE            EQU $01
+DEF ROOM_OW_RIGHT_OF_EGG                     EQU $07
+DEF ROOM_OW_MARIN_BRIDGE                     EQU $08
+DEF ROOM_OW_EAGLES_TOWER                     EQU $0E
 
-ROOM_SECTION_OW_SOUTH_OF_TAL_TAL_HEIGHTS equ $20
+DEF ROOM_SECTION_OW_SOUTH_OF_TAL_TAL_HEIGHTS EQU $20
 
-ROOM_OW_BOTTLE_GROTTO_ENTRANCE           equ $24
-ROOM_OW_ANGLERS_TUNNEL_ENTRANCE          equ $2B
+DEF ROOM_OW_BOTTLE_GROTTO_ENTRANCE           EQU $24
+DEF ROOM_OW_WATERFALL_WARP_HOLE              EQU $2C
+DEF ROOM_OW_ANGLERS_TUNNEL_ENTRANCE          EQU $2B
 
-ROOM_OW_CAMERA_SHOP                      equ $37
+DEF ROOM_OW_CAMERA_SHOP                      EQU $37
 
-ROOM_SECTION_OW_GHOST_TRIGGER            equ $40
+DEF ROOM_SECTION_OW_GHOST_TRIGGER            EQU $40
 
-ROOM_OW_KANALET_CASTLE_CROW              equ $58
-ROOM_OW_KANALET_CASTLE_FIVE_PITS         equ $5A
+DEF ROOM_OW_KANALET_CASTLE_CROW              EQU $58
+DEF ROOM_OW_KANALET_CASTLE_FIVE_PITS         EQU $5A
 
-ROOM_OW_ANGLERS_TUNNEL                   equ $69
+DEF ROOM_OW_GHOST_GRAVE                      EQU $64
+DEF ROOM_OW_KANELET_FRONT_ENTRANCE           EQU $69
+DEF ROOM_OW_KANALET_KIKI_BRIDGE_NORTH        EQU $6B
 
-ROOM_OW_COLOR_DUNGEON_ENTRANCE           equ $77
-ROOM_OW_KANALET_MOAT                     equ $78
-ROOM_OW_KANALET_GATE                     equ $79
-MOUNTAIN_CAVE_ROOM_1                     equ $7A
-MOUNTAIN_CAVE_ROOM_2                     equ $7B
-MOUNTAIN_CAVE_ROOM_3                     equ $7C ; is also Side-view room where the key drops ? double use ?
-MOUNTAIN_CAVE_ROOM_4                     equ $7D
+DEF ROOM_OW_COLOR_DUNGEON_ENTRANCE           EQU $77
+DEF ROOM_OW_KANALET_MOAT_HEARTPIECE          EQU $78
+DEF ROOM_OW_KANALET_GATE                     EQU $79
+DEF ROOM_OW_KANALET_MOAT_EAST_OF_GATE        EQU $7A
+DEF ROOM_OW_KANALET_KIKI_BRIDGE              EQU $7B
 
-ROOM_SECTION_OW_SECOND_HALF              equ $80
-ROOM_OW_FACE_SHRINE_ENTRANCE             equ $8C
+DEF ROOM_SECTION_OW_SECOND_HALF              EQU $80
+DEF ROOM_OW_SEASHELL_MANSION_ENTRANCE        EQU $8A
+DEF ROOM_OW_SEASHELL_MANSION_EAST_SHELL      EQU $8B
+DEF ROOM_OW_FACE_SHRINE_ENTRANCE             EQU $8C
 
-ROOM_OW_GIANT_SKULL                      equ $97
+DEF ROOM_OW_MABE_VILLAGE_SQUARE              EQU $92
+DEF ROOM_OW_UKUKU_PRAIRIE_WARP_HOLE          EQU $95
+DEF ROOM_OW_GIANT_SKULL                      EQU $97
 
-ROOM_OW_SOUTHERN_FACE_SHRINE_ENTRANCE    equ $AC
+DEF ROOM_OW_BOWWOW                           EQU $A1
+DEF ROOM_OW_SOUTHERN_FACE_SHRINE_ENTRANCE    EQU $AC
 
-ROOM_OW_ULRIRA_HOUSE                     equ $B1
-ROOM_OW_KEY_CAVERN_ENTRANCE              equ $B5
+DEF ROOM_OW_ULRIRA_HOUSE                     EQU $B1
+DEF ROOM_OW_KEY_CAVERN_ENTRANCE              EQU $B5
 
-ROOM_SECTION_OW_VILLAGES                 equ $C0
-ROOM_OW_POTHOLE_FIELD_SLIME_KEY          equ $C6
-ROOM_OW_SIREN                            equ $C9
-ROOM_OW_YARNA_LANMOLA                    equ $CE
+DEF ROOM_SECTION_OW_VILLAGES                 EQU $C0
+DEF ROOM_OW_POTHOLE_FIELD_SLIME_KEY          EQU $C6
+DEF ROOM_OW_SIREN                            EQU $C9
+DEF ROOM_OW_YARNA_LANMOLA                    EQU $CE
 
-ROOM_OW_TAIL_CAVE_ENTRANCE               equ $D3
-ROOM_OW_CATFISHS_MAW_ENTRANCE            equ $D9
+DEF ROOM_OW_TAIL_CAVE_ENTRANCE               EQU $D3
+DEF ROOM_OW_CATFISHS_MAW_ENTRANCE            EQU $D9
 
-ROOM_OW_BEACH_WITH_SWORD                 equ $F2
-ROOM_OW_WALRUS                           equ $FD
+DEF ROOM_OW_FISHER_UNDER_BRIDGE              EQU $EA
+DEF ROOM_OW_ANIMAL_VILLAGE_WARP_HOLE         EQU $EC
+
+DEF ROOM_OW_MARIN_CLIFF_PHOTO                EQU $F0
+DEF ROOM_OW_BEACH_WITH_SWORD                 EQU $F2
+DEF ROOM_OW_WALRUS                           EQU $FD
 
 ;
 ; Indoor A rooms
 ;
+DEF ROOM_INDOOR_A_TAIL_CAVE_SPIKED_BEETLES   EQU $03
+DEF ROOM_INDOOR_A_TAIL_CAVE_MOVABLE_BLOCK    EQU $04
+DEF ROOM_INDOOR_A_TAIL_CAVE_THREE_OF_A_KIND  EQU $0A
+DEF ROOM_INDOOR_A_TAIL_CAVE_ROLLING_BONES    EQU $11
+DEF ROOM_INDOOR_A_TAIL_CAVE_ENTRANCE         EQU $17
 
-ROOM_INDOOR_A_MASTER_STALFOS_FINAL       equ $80
-ROOM_INDOOR_A_MASTER_STALFOS_3           equ $84
+DEF ROOM_INDOOR_A_BOTTLE_GROTTO_HINOX        EQU $28
+DEF ROOM_INDOOR_A_BOTTLE_GROTTO_POT_STAIRS   EQU $29
+DEF ROOM_INDOOR_A_BOTTLE_GROTTO_PUSH_BLOCKS  EQU $2F
+DEF ROOM_INDOOR_A_BOTTLE_GROTTO_FIRST_SWITCH EQU $33
+DEF ROOM_INDOOR_A_BOTTLE_GROTTO_ENTRANCE     EQU $36
 
-ROOM_INDOOR_A_MASTER_STALFOS_2           equ $92
-ROOM_INDOOR_A_MASTER_STALFOS_1           equ $95
+DEF ROOM_INDOOR_A_KEY_CAVERN_BOMBITE_CORNER  EQU $40
+DEF ROOM_INDOOR_A_KEY_CAVERN_DODONGO         EQU $45
+DEF ROOM_INDOOR_A_KEY_CAVERN_FLOOR_ARROW     EQU $47
+DEF ROOM_INDOOR_A_KEY_CAVERN_ENTRANCE        EQU $52
+DEF ROOM_INDOOR_A_KEY_CAVERN_SWITCH          EQU $54
 
-ROOM_INDOOR_A_WATER_HOLE                 equ $A3
+DEF ROOM_INDOOR_A_ANGLERS_TUNNEL_CUE_BALL    EQU $64
+DEF ROOM_INDOOR_A_ANGLERS_TUNNEL_KEY_DROP    EQU $69
+DEF ROOM_INDOOR_A_ANGLERS_TUNNEL_HINT_STATUE EQU $6F
+DEF ROOM_INDOOR_A_ANGLERS_TUNNEL_ENTRANCE    EQU $7A
+DEF ROOM_INDOOR_A_ANGLERS_TUNNEL_KEY_FALL    EQU $7C
 
-ROOM_INDOOR_A_POWER_BRACELET_LV2         equ $CE
+DEF ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_4    EQU $80
+DEF ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_3    EQU $84
+DEF ROOM_INDOOR_A_CATFISHS_MAW_HINT_CRYSTAL  EQU $8A
+DEF ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_2    EQU $92
+DEF ROOM_INDOOR_A_CATFISHS_MAW_GOHMA         EQU $93
+DEF ROOM_INDOOR_A_CATFISHS_MAW_MSTALFOS_1    EQU $95
+DEF ROOM_INDOOR_A_CATFISHS_MAW_HINT_STAR     EQU $9A
+DEF ROOM_INDOOR_A_CATFISHS_MAW_ENTRANCE      EQU $A1
+DEF ROOM_INDOOR_A_CATFISHS_MAW_WATER_HOLE    EQU $A3
 
-ROOM_INDOOR_A_WATER_FLOODED_GROTTO       equ $F2
-ROOM_INDOOR_A_GORIYA                     equ $F5
-ROOM_INDOOR_A_QUICKSAND_CAVE             equ $F8
+DEF ROOM_INDOOR_A_FACE_SHRINE_POT_CHEST      EQU $B6
+DEF ROOM_INDOOR_A_FACE_SHRINE_CORRIDOR_HINT  EQU $BB
+DEF ROOM_INDOOR_A_FACE_SHRINE_SMASHER        EQU $C5
+DEF ROOM_INDOOR_A_FACE_SHRINE_PBRACELET_LV2  EQU $CE
+DEF ROOM_INDOOR_A_FACE_SHRINE_ENTRANCE       EQU $D4
+DEF ROOM_INDOOR_A_FACE_SHRINE_CRYSTAL_JUMP   EQU $D7
+
+DEF ROOM_INDOOR_A_WATER_FLOODED_GROTTO       EQU $F2
+DEF ROOM_INDOOR_A_GORIYA                     EQU $F5
+DEF ROOM_INDOOR_A_QUICKSAND_CAVE             EQU $F8
 
 ;
 ; Indoor B rooms
 ;
 
-ROOM_INDOOR_B_SHIELD_LV2                 equ $1A
+DEF ROOM_INDOOR_B_EAGLES_TOWER_NE_CHEST      EQU $04
+DEF ROOM_INDOOR_B_EAGLES_TOWER_ENTRANCE      EQU $0E
+DEF ROOM_INDOOR_B_EAGLES_TOWER_WRECKING_BALL EQU $16
+DEF ROOM_INDOOR_B_EAGLES_TOWER_SHIELD_LV2    EQU $1A
+DEF ROOM_INDOOR_B_EAGLES_TOWER_3_OF_A_KIND   EQU $1C
+DEF ROOM_INDOOR_B_EAGLES_TOWER_GRIM_CREEPER  EQU $28
 
-ROOM_INDOOR_B_97                         equ $97
-ROOM_INDOOR_B_98                         equ $98
+DEF ROOM_INDOOR_B_TURTLE_ROCK_BLAINO         EQU $3F
+DEF ROOM_INDOOR_B_TURTLE_ROCK_ARROW_STATUE   EQU $41
+DEF ROOM_INDOOR_B_TURTLE_ROCK_BOMB_ZOL       EQU $45
+DEF ROOM_INDOOR_B_TURTLE_ROCK_BEAMOS_HINT    EQU $53
+DEF ROOM_INDOOR_B_TURTLE_ROCK_ENTRANCE       EQU $5D
 
-ROOM_INDOOR_B_TRENDY_MINIGAME            equ $A0
-ROOM_INDOOR_B_MARIN_HOUSE                equ $A3
-ROOM_INDOOR_B_MRS_MEOW_MEOW              equ $A7
+DEF ROOM_INDOOR_B_MOUNTAIN_CAVE_ROOM_1       EQU $7A
+DEF ROOM_INDOOR_B_MOUNTAIN_CAVE_ROOM_2       EQU $7B
+DEF ROOM_INDOOR_B_MOUNTAIN_CAVE_ROOM_3       EQU $7C
+DEF ROOM_INDOOR_B_MOUNTAIN_CAVE_ROOM_4       EQU $7D
 
-ROOM_INDOOR_B_FISHING_MINIGAME           equ $B1
-ROOM_INDOOR_B_CAMERA_SHOP                equ $B5
+DEF ROOM_INDOOR_B_UNDER_MERMAID_STATUE       EQU $97
+DEF ROOM_INDOOR_B_MAGNIFYING_GLASS           EQU $98
 
-ROOM_INDOOR_B_KANALET_GATE_SWITCH        equ $C3
+DEF ROOM_INDOOR_B_TRENDY_MINIGAME            EQU $A0
+DEF ROOM_INDOOR_B_MARIN_HOUSE                EQU $A3
+DEF ROOM_INDOOR_B_MRS_MEOW_MEOW              EQU $A7
 
-ROOM_INDOOR_B_KANALET_MAIN_ENTRANCE      equ $D3
-ROOM_INDOOR_B_CHRISTINE_HOUSE            equ $D9
-ROOM_INDOOR_B_SCHULE_HOUSE               equ $DD
+DEF ROOM_INDOOR_B_FISHING_MINIGAME           EQU $B1
+DEF ROOM_INDOOR_B_CAMERA_SHOP                EQU $B5
 
-ROOM_INDOOR_B_EAGLE_TOWER_BOSS           equ $E8
-ROOM_INDOOR_B_SEASHELL_MANSION           equ $E9
+DEF ROOM_INDOOR_B_KANALET_GATE_SWITCH        EQU $C3
 
-ROOM_INDOOR_B_FISHERMAN_UNDER_BRIDGE     equ $F5
-ROOM_INDOOR_B_MANBO                      equ $FD
+DEF ROOM_INDOOR_B_KANALET_MAIN_ENTRANCE      EQU $D3
+DEF ROOM_INDOOR_B_CHRISTINE_HOUSE            EQU $D9
+DEF ROOM_INDOOR_B_SCHULE_HOUSE               EQU $DD
+
+DEF ROOM_INDOOR_B_EAGLES_TOWER_BOSS          EQU $E8
+DEF ROOM_INDOOR_B_SEASHELL_MANSION           EQU $E9
+
+DEF ROOM_INDOOR_B_FISHERMAN_UNDER_BRIDGE     EQU $F5
+DEF ROOM_INDOOR_B_EAGLES_TOWER_BOSS_LADDER   EQU $F8
+DEF ROOM_INDOOR_B_MANBO                      EQU $FD
 
 ;
 ; Color Dungeon rooms
 ;
 
-ROOM_CD_05                               equ $05
+DEF ROOM_CD_05                               EQU $05
 ;
 ; Unlabeled rooms
 ;
@@ -109,128 +167,114 @@ ROOM_CD_05                               equ $05
 ; See docs/rooms.png to help identification
 ;
 
-UNKNOWN_ROOM_00                          equ $00
-UNKNOWN_ROOM_01                          equ $01
-UNKNOWN_ROOM_03                          equ $03
-UNKNOWN_ROOM_04                          equ $04
-UNKNOWN_ROOM_05                          equ $05
-UNKNOWN_ROOM_06                          equ $06
-UNKNOWN_ROOM_0A                          equ $0A
-UNKNOWN_ROOM_0C                          equ $0C ; Tal-Tal Heights, 1N1E of the drainable water above Angler's Tunnel
-UNKNOWN_ROOM_0D                          equ $0D
+DEF ROOM_NULL                                EQU $00 ; Intentionally left null.
+DEF UNKNOWN_ROOM_01                          EQU $01
+DEF UNKNOWN_ROOM_04                          EQU $04
+DEF UNKNOWN_ROOM_05                          EQU $05
+DEF UNKNOWN_ROOM_06                          EQU $06
+DEF UNKNOWN_ROOM_0A                          EQU $0A
+DEF UNKNOWN_ROOM_0C                          EQU $0C ; Tal-Tal Heights, 1N1E of the drainable water above Angler's Tunnel
+DEF UNKNOWN_ROOM_0D                          EQU $0D
 
-UNKNOWN_ROOM_11                          equ $11
-UNKNOWN_ROOM_12                          equ $12
-UNKNOWN_ROOM_16                          equ $16 ; One south of Wind Fish's Egg
-UNKNOWN_ROOM_17                          equ $17 ; One south-east of Wind Fish's Egg
-UNKNOWN_ROOM_1B                          equ $1B ; The drainable water above Angler's Tunnel
-UNKNOWN_ROOM_1C                          equ $1C
-UNKNOWN_ROOM_1E                          equ $1E
+DEF UNKNOWN_ROOM_11                          EQU $11
+DEF UNKNOWN_ROOM_12                          EQU $12
+DEF UNKNOWN_ROOM_16                          EQU $16 ; One south of Wind Fish's Egg
+DEF UNKNOWN_ROOM_17                          EQU $17 ; One south-east of Wind Fish's Egg
+DEF UNKNOWN_ROOM_1B                          EQU $1B ; The drainable water above Angler's Tunnel
+DEF UNKNOWN_ROOM_1C                          EQU $1C
+DEF UNKNOWN_ROOM_1E                          EQU $1E
 
-UNKNOWN_ROOM_28                          equ $28
-UNKNOWN_ROOM_29                          equ $29
-UNKNOWN_ROOM_2C                          equ $2C
-UNKNOWN_ROOM_2F                          equ $2F
+DEF UNKNOWN_ROOM_32                          EQU $32
+DEF UNKNOWN_ROOM_36                          EQU $36 ; 1 room east of Moblin Hideout
+DEF UNKNOWN_ROOM_3A                          EQU $3A ; Overworld room with... no seashell?
+DEF UNKNOWN_ROOM_3B                          EQU $3B
+DEF UNKNOWN_ROOM_3C                          EQU $3C
+DEF UNKNOWN_ROOM_3D                          EQU $3D
+DEF UNKNOWN_ROOM_3E                          EQU $3E ; area for entering river rapids ?
+DEF UNKNOWN_ROOM_3F                          EQU $3F
 
-UNKNOWN_ROOM_32                          equ $32
-UNKNOWN_ROOM_33                          equ $33
-UNKNOWN_ROOM_36                          equ $36 ; 1 room east of Moblin Hideout
-UNKNOWN_ROOM_3A                          equ $3A ; Overworld room with... no seashell?
-UNKNOWN_ROOM_3B                          equ $3B
-UNKNOWN_ROOM_3C                          equ $3C
-UNKNOWN_ROOM_3D                          equ $3D
-UNKNOWN_ROOM_3E                          equ $3E ; area for entering river rapids ?
-UNKNOWN_ROOM_3F                          equ $3F
+DEF UNKNOWN_ROOM_40                          EQU $40
+DEF UNKNOWN_ROOM_41                          EQU $41 ; Tail Cave key chest
+DEF UNKNOWN_ROOM_45                          EQU $45
+DEF UNKNOWN_ROOM_47                          EQU $47
+DEF UNKNOWN_ROOM_4A                          EQU $4A
 
-UNKNOWN_ROOM_40                          equ $40
-UNKNOWN_ROOM_41                          equ $41 ; Tail Cave key chest
-UNKNOWN_ROOM_45                          equ $45
-UNKNOWN_ROOM_47                          equ $47
-UNKNOWN_ROOM_4A                          equ $4A
+DEF UNKNOWN_ROOM_52                          EQU $52
 
-UNKNOWN_ROOM_52                          equ $52
-UNKNOWN_ROOM_53                          equ $53
-UNKNOWN_ROOM_54                          equ $54
-UNKNOWN_ROOM_5D                          equ $5D
+DEF UNKNOWN_ROOM_63                          EQU $63
+DEF UNKNOWN_ROOM_64                          EQU $64 ; maybe map screen where you take the ghost after the house
+DEF UNKNOWN_ROOM_65                          EQU $65
+DEF UNKNOWN_ROOM_66                          EQU $66
+DEF UNKNOWN_ROOM_67                          EQU $67
+DEF UNKNOWN_ROOM_6A                          EQU $6A
+DEF UNKNOWN_ROOM_6B                          EQU $6B
+DEF UNKNOWN_ROOM_6F                          EQU $6F
 
-UNKNOWN_ROOM_63                          equ $63
-UNKNOWN_ROOM_64                          equ $64 ; maybe map screen where you take the ghost after the house
-UNKNOWN_ROOM_65                          equ $65
-UNKNOWN_ROOM_66                          equ $66
-UNKNOWN_ROOM_67                          equ $67
-UNKNOWN_ROOM_6A                          equ $6A
-UNKNOWN_ROOM_6B                          equ $6B
-UNKNOWN_ROOM_6F                          equ $6F
+DEF UNKNOWN_ROOM_71                          EQU $71 ; egg room of wind fish?
+DEF UNKNOWN_ROOM_74                          EQU $74 ; Overworld room one south of ghost's gravestone (w/zombies)
+DEF UNKNOWN_ROOM_75                          EQU $75
+DEF UNKNOWN_ROOM_79                          EQU $79
+DEF UNKNOWN_ROOM_7F                          EQU $7F
 
-UNKNOWN_ROOM_71                          equ $71 ; egg room of wind fish?
-UNKNOWN_ROOM_74                          equ $74 ; Overworld room one south of ghost's gravestone (w/zombies)
-UNKNOWN_ROOM_75                          equ $75
-UNKNOWN_ROOM_79                          equ $79
-UNKNOWN_ROOM_7F                          equ $7F
+DEF UNKNOWN_ROOM_83                          EQU $83
+DEF UNKNOWN_ROOM_8A                          EQU $8A
+DEF UNKNOWN_ROOM_8B                          EQU $8B
+DEF UNKNOWN_ROOM_8D                          EQU $8D
+DEF UNKNOWN_ROOM_8F                          EQU $8F
 
-UNKNOWN_ROOM_80                          equ $80 ; Mysterious Forest enterance from Mabe ?, Master Stalfos final room ?, could also be both
-UNKNOWN_ROOM_83                          equ $83
-UNKNOWN_ROOM_8A                          equ $8A
-UNKNOWN_ROOM_8B                          equ $8B
-UNKNOWN_ROOM_8D                          equ $8D
-UNKNOWN_ROOM_8F                          equ $8F
+DEF UNKNOWN_ROOM_93                          EQU $93
+DEF UNKNOWN_ROOM_96                          EQU $96 ; Master Stalfos "screw you" letter chest ?
+DEF UNKNOWN_ROOM_98                          EQU $98
+DEF UNKNOWN_ROOM_9A                          EQU $9A
+DEF UNKNOWN_ROOM_9C                          EQU $9C ; One south of Face Shrine dungeon
+DEF UNKNOWN_ROOM_9D                          EQU $9D ; Room with staircase leading to Face Shrine dungeon passage
 
-UNKNOWN_ROOM_92                          equ $92
-UNKNOWN_ROOM_93                          equ $93
-UNKNOWN_ROOM_95                          equ $95
-UNKNOWN_ROOM_96                          equ $96 ; Master Stalfos "screw you" letter chest ?
-UNKNOWN_ROOM_98                          equ $98
-UNKNOWN_ROOM_9A                          equ $9A
-UNKNOWN_ROOM_9C                          equ $9C ; One south of Face Shrine dungeon
-UNKNOWN_ROOM_9D                          equ $9D ; Room with staircase leading to Face Shrine dungeon passage
+DEF UNKNOWN_ROOM_A1                          EQU $A1
+DEF UNKNOWN_ROOM_A4                          EQU $A4 ; 1 east of Mabe's big bush field
+DEF UNKNOWN_ROOM_A5                          EQU $A5 ; Overworld room two east of Mabe bush field
+DEF UNKNOWN_ROOM_A8                          EQU $A8 ; Overworld room northeast-ish of Pothole Field, Mr. Write's house
+DEF UNKNOWN_ROOM_A9                          EQU $A9 ; Ulrira's house
+DEF UNKNOWN_ROOM_AA                          EQU $AA
 
-UNKNOWN_ROOM_A1                          equ $A1
-UNKNOWN_ROOM_A4                          equ $A4 ; 1 east of Mabe's big bush field
-UNKNOWN_ROOM_A5                          equ $A5 ; Overworld room two east of Mabe bush field
-UNKNOWN_ROOM_A8                          equ $A8 ; Overworld room northeast-ish of Pothole Field, Mr. Write's house
-UNKNOWN_ROOM_A9                          equ $A9 ; Ulrira's house
-UNKNOWN_ROOM_AA                          equ $AA
+DEF UNKNOWN_ROOM_B2                          EQU $B2 ; Overworld room - Mabe village telephone booth (...no seashell???), Inside the dog house ?
+DEF UNKNOWN_ROOM_B4                          EQU $B4 ; starting room ?
+DEF UNKNOWN_ROOM_B6                          EQU $B6 ; One east of Key Cavern
+DEF UNKNOWN_ROOM_BB                          EQU $BB
+DEF UNKNOWN_ROOM_BE                          EQU $BE
 
-UNKNOWN_ROOM_B2                          equ $B2 ; Overworld room - Mabe village telephone booth (...no seashell???), Inside the dog house ?
-UNKNOWN_ROOM_B4                          equ $B4 ; starting room ?
-UNKNOWN_ROOM_B6                          equ $B6 ; One east of Key Cavern
-UNKNOWN_ROOM_BB                          equ $BB
-UNKNOWN_ROOM_BE                          equ $BE
+DEF UNKNOWN_ROOM_C0                          EQU $C0
+DEF UNKNOWN_ROOM_C1                          EQU $C1
+DEF UNKNOWN_ROOM_C3                          EQU $C3
+DEF UNKNOWN_ROOM_C4                          EQU $C4
+DEF UNKNOWN_ROOM_C5                          EQU $C5
 
-UNKNOWN_ROOM_C0                          equ $C0
-UNKNOWN_ROOM_C1                          equ $C1
-UNKNOWN_ROOM_C3                          equ $C3
-UNKNOWN_ROOM_C4                          equ $C4
-UNKNOWN_ROOM_C5                          equ $C5
+DEF UNKNOWN_ROOM_C7                          EQU $C7 ; Richard's Villa ?
+DEF UNKNOWN_ROOM_CC                          EQU $CC
+DEF UNKNOWN_ROOM_CD                          EQU $CD
+DEF UNKNOWN_ROOM_CF                          EQU $CF
 
-UNKNOWN_ROOM_C7                          equ $C7 ; Richard's Villa ?
-UNKNOWN_ROOM_CC                          equ $CC
-UNKNOWN_ROOM_CD                          equ $CD
-UNKNOWN_ROOM_CF                          equ $CF
+DEF UNKNOWN_ROOM_D2                          EQU $D2 ; 1 west of Tail Cave
+DEF UNKNOWN_ROOM_D4                          EQU $D4
+DEF UNKNOWN_ROOM_D5                          EQU $D5
+DEF UNKNOWN_ROOM_D7                          EQU $D7
+DEF UNKNOWN_ROOM_DA                          EQU $DA ; Overworld room one north of fisherman under bridge
+DEF UNKNOWN_ROOM_DE                          EQU $DE
+DEF UNKNOWN_ROOM_DF                          EQU $DF
 
-UNKNOWN_ROOM_D2                          equ $D2 ; 1 west of Tail Cave
-UNKNOWN_ROOM_D4                          equ $D4
-UNKNOWN_ROOM_D5                          equ $D5
-UNKNOWN_ROOM_D7                          equ $D7
-UNKNOWN_ROOM_DA                          equ $DA ; Overworld room one north of fisherman under bridge
-UNKNOWN_ROOM_DE                          equ $DE
-UNKNOWN_ROOM_DF                          equ $DF
+DEF UNKNOWN_ROOM_E0                          EQU $E0
+DEF UNKNOWN_ROOM_E1                          EQU $E1
+DEF UNKNOWN_ROOM_E2                          EQU $E2
+DEF UNKNOWN_ROOM_E3                          EQU $E3 ; House by the Bay -> indoor or overworld?
+DEF UNKNOWN_ROOM_E4                          EQU $E4
+DEF UNKNOWN_ROOM_EB                          EQU $EB
+DEF UNKNOWN_ROOM_EC                          EQU $EC
+DEF UNKNOWN_ROOM_EE                          EQU $EE ; Yarna Desert
+DEF UNKNOWN_ROOM_EF                          EQU $EF
 
-UNKNOWN_ROOM_E0                          equ $E0
-UNKNOWN_ROOM_E1                          equ $E1
-UNKNOWN_ROOM_E2                          equ $E2
-UNKNOWN_ROOM_E3                          equ $E3 ; House by the Bay -> indoor or overworld?
-UNKNOWN_ROOM_E4                          equ $E4
-UNKNOWN_ROOM_EA                          equ $EA
-UNKNOWN_ROOM_EB                          equ $EB
-UNKNOWN_ROOM_EC                          equ $EC
-UNKNOWN_ROOM_EE                          equ $EE ; Yarna Desert
-UNKNOWN_ROOM_EF                          equ $EF
-
-UNKNOWN_ROOM_F0                          equ $F0
-UNKNOWN_ROOM_F4                          equ $F4
-UNKNOWN_ROOM_F6                          equ $F6 ; ghost jingle is played in this room
-UNKNOWN_ROOM_F8                          equ $F8
-UNKNOWN_ROOM_FA                          equ $FA
-UNKNOWN_ROOM_FE                          equ $FE
-UNKNOWN_ROOM_FF                          equ $FF
+DEF UNKNOWN_ROOM_F0                          EQU $F0
+DEF UNKNOWN_ROOM_F4                          EQU $F4
+DEF UNKNOWN_ROOM_F6                          EQU $F6 ; ghost jingle is played in this room
+DEF UNKNOWN_ROOM_F8                          EQU $F8
+DEF UNKNOWN_ROOM_FA                          EQU $FA
+DEF UNKNOWN_ROOM_FE                          EQU $FE
+DEF UNKNOWN_ROOM_FF                          EQU $FF

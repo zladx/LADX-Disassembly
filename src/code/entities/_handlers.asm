@@ -54,7 +54,7 @@ EntityHandlersTable::
 ._26 far_pointer EntityExplosionSpriteVariants ; small exploding ennemy 2
 ._27 far_pointer SpikeTrapEntityHandler
 ._28 far_pointer MimicEntityHandler ; $28
-._29 far_pointer MiniMoldromEntityHandler
+._29 far_pointer MiniMoldormEntityHandler
 ._2A far_pointer LaserEntityHandler
 ._2B far_pointer LaserBeamEntityHandler
 ._2C far_pointer SpikedBeetleEntityHandler ; $2C
@@ -153,8 +153,8 @@ EntityHandlersTable::
 ._89 far_pointer HinoxEntityHandler
 ._8A far_pointer TileGlintShownEntityHandler
 ._8B far_pointer TileGlintHiddenEntityHandler
-._8C far_pointer Entity8CHandler ; unused moving block?
-._8D far_pointer Entity8DHandler ; unused moving block?
+._8C far_pointer RaisableBlockShiftedRightEntityHandler ; unused
+._8D far_pointer RaisableBlockShiftedDownEntityHandler ; unused
 ._8E far_pointer CueBallEntityHandler
 ._8F far_pointer MaskedMimicGoriyaEntityHandler
 ._90 far_pointer ThreeOfAKindEntityHandler ; $90
@@ -272,18 +272,18 @@ EntityHandlersTable::
 .overflow db $6B, $62, $C9
 
 func_020_4303::
-    ld   a, [wC5A0]                               ; $4303: $FA $A0 $C5
-    ld   [wC5A1], a                               ; $4306: $EA $A1 $C5
-    xor  a                                        ; $4309: $AF
-    ld   [wC5A0], a                               ; $430A: $EA $A0 $C5
-    ld   [wShouldGetLostInMysteriousWoods], a     ; $430D: $EA $0C $C1
-    ldh  [hLinkSlowWalkingSpeed], a               ; $4310: $E0 $B2
-    ld   [wC117], a                               ; $4312: $EA $17 $C1
-    ld   [wC19D], a                               ; $4315: $EA $9D $C1
-    ld   [wC147], a                               ; $4318: $EA $47 $C1
-    ld   [wLiftedEntityType], a                   ; $431B: $EA $A8 $C5
-    ld   [wD45E], a                               ; $431E: $EA $5E $D4
-    ret                                           ; $4321: $C9
+    ld   a, [wC5A0]                               ;; 20:4303 $FA $A0 $C5
+    ld   [wC5A1], a                               ;; 20:4306 $EA $A1 $C5
+    xor  a                                        ;; 20:4309 $AF
+    ld   [wC5A0], a                               ;; 20:430A $EA $A0 $C5
+    ld   [wShouldGetLostInMysteriousWoods], a     ;; 20:430D $EA $0C $C1
+    ldh  [hLinkSlowWalkingSpeed], a               ;; 20:4310 $E0 $B2
+    ld   [wIsGelClingingToLink], a                ;; 20:4312 $EA $17 $C1
+    ld   [wC19D], a                               ;; 20:4315 $EA $9D $C1
+    ld   [wC147], a                               ;; 20:4318 $EA $47 $C1
+    ld   [wLiftedEntityType], a                   ;; 20:431B $EA $A8 $C5
+    ld   [wD45E], a                               ;; 20:431E $EA $5E $D4
+    ret                                           ;; 20:4321 $C9
 
 ; -----------------------------------------------------------------
 ;
@@ -333,26 +333,26 @@ EntityInitHandlersTable::
 ._26 dw   EntityExplosionSpriteVariants
 ._27 dw   EntityInitWithRandomDirection
 ._28 dw   EntityInitWithRandomDirection
-._29 dw   label_3DAB
+._29 dw   EntityInitMiniMoldorm_trampoline
 ._2A dw   EntityInitWithRandomDirection
 ._2B dw   EntityInitWithRandomDirection
 ._2C dw   EntityInitWithRandomDirection
-._2D dw   EntityInitPermanentDroppable
-._2E dw   EntityInitTemporaryDroppable
-._2F dw   EntityInitTemporaryDroppable
+._2D dw   EntityInitDiggableBushOrPotDroppable
+._2E dw   EntityInitTreeOrPotDroppable
+._2F dw   EntityInitTreeOrPotDroppable
 ._30 dw   EntityInitKeyDropPoint
 ._31 dw   EntityInitSword
-._32 dw   EntityInitTemporaryDroppable
-._33 dw   EntityInitTemporaryDroppable
-._34 dw   EntityInitTemporaryDroppable
+._32 dw   EntityInitTreeOrPotDroppable
+._33 dw   EntityInitTreeOrPotDroppable
+._34 dw   EntityInitTreeOrPotDroppable
 ._35 dw   EntityInitNoop
-._36 dw   EntityInitTemporaryDroppable
-._37 dw   EntityInitTemporaryDroppable
-._38 dw   EntityInitTemporaryDroppable
+._36 dw   EntityInitTreeOrPotDroppable
+._37 dw   EntityInitTreeOrPotDroppable
+._38 dw   EntityInitTreeOrPotDroppable
 ._39 dw   EntityInitWithShiftedXPosition
 ._3A dw   EntityInitNoop
-._3B dw   EntityInitPermanentDroppable
-._3C dw   EntityInitPermanentDroppable
+._3B dw   EntityInitDiggableBushOrPotDroppable
+._3C dw   EntityInitDiggableBushOrPotDroppable
 ._3D dw   EntityInitSecretSeashell
 ._3E dw   EntityInitMarin
 ._3F dw   EntityInitTarin
@@ -550,16 +550,16 @@ EntityInitHandlersTable::
 ; Returns:
 ;   de   an address
 GetEntityInitHandler::
-    ldh  a, [hActiveEntityType]                   ; $4518: $F0 $EB
-    ld   e, a                                     ; $451A: $5F
-    ld   d, $00                                   ; $451B: $16 $00
-    ld   hl, EntityInitHandlersTable              ; $451D: $21 $22 $43
-    sla  e                                        ; $4520: $CB $23
-    rl   d                                        ; $4522: $CB $12
-    add  hl, de                                   ; $4524: $19
-    ld   e, [hl]                                  ; $4525: $5E
-    inc  hl                                       ; $4526: $23
-    ld   d, [hl]                                  ; $4527: $56
-    push de                                       ; $4528: $D5
-    pop  hl                                       ; $4529: $E1
-    ret                                           ; $452A: $C9
+    ldh  a, [hActiveEntityType]                   ;; 20:4518 $F0 $EB
+    ld   e, a                                     ;; 20:451A $5F
+    ld   d, $00                                   ;; 20:451B $16 $00
+    ld   hl, EntityInitHandlersTable              ;; 20:451D $21 $22 $43
+    sla  e                                        ;; 20:4520 $CB $23
+    rl   d                                        ;; 20:4522 $CB $12
+    add  hl, de                                   ;; 20:4524 $19
+    ld   e, [hl]                                  ;; 20:4525 $5E
+    inc  hl                                       ;; 20:4526 $23
+    ld   d, [hl]                                  ;; 20:4527 $56
+    push de                                       ;; 20:4528 $D5
+    pop  hl                                       ;; 20:4529 $E1
+    ret                                           ;; 20:452A $C9

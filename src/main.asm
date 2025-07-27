@@ -1,5 +1,8 @@
 ; Root source file for the game.
 
+; RGBDS version check
+include "rgbdscheck.asm"
+
 ; Build options
 include "options.asm"
 
@@ -40,13 +43,14 @@ include "code/entities/05_witch.asm"
 include "code/entities/05_tarin.asm"
 include "code/entities/05_marin.asm"
 include "code/entities/05_raft_owner.asm"
+include "code/entities/05__helpers_1.asm"
 include "code/entities/05_entity_67.asm"
 include "code/entities/05_angler_fish.asm"
 include "code/entities/05_evil_eagle.asm"
 include "code/entities/05_hot_head.asm"
 include "code/entities/05_dodongo_snake.asm"
 include "code/entities/05_slime_eel.asm"
-include "code/entities/05__helpers.asm"
+include "code/entities/05__helpers_2.asm"
 include "code/entities/05_ghoma.asm"
 include "code/entities/05_musical_note.asm"
 include "code/entities/05_animal_d0.asm"
@@ -456,6 +460,11 @@ include "data/object_attributes/indoors_b.asm"
 include "code/background_colors.asm"
 include "data/backgrounds/forest_palettes.asm"
 include "code/overworld_macros.asm"
+include "code/palettes_bulk_update.asm"
+IntroBeachAttrmap::
+incbin "data/backgrounds/intro_beach.attrmap.encoded"
+TitleAttrmap::
+incbin "data/backgrounds/title.attrmap.encoded"
 
 section "bank25",romx[$4000],bank[$25]
 include "data/object_attributes/overworld_b.asm"

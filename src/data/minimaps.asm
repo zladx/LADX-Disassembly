@@ -9,17 +9,12 @@
 ; but hopefully a better visual metaphor than raw values.
 
 
-; Fun rgbds gotcha: NEWCHARMAP also switches to it.
-; This is not indicated in the manual.
 PUSHC
-NEWCHARMAP MinimapCharmap
+NEWCHARMAP MinimapCharmap ; also switches to MinimapCharmap
 CHARMAP "  ", $7D   ; Blank (not shown on map)
 CHARMAP "##", $EF   ; Room (shows up on map)
 CHARMAP "Ch", $ED   ; Room with chest
 CHARMAP "Nm", $EE   ; Nightmare boss marker
-
-; MINIMAP_....._DUNGEON_NAME constants defined in src/constants/inventory.asm
-; due to bug in rgbds 0.4.0
 
 
     ;    0 1 2 3 4 5 6 7  - Minimap arrow positions. Spaces for visibility only.
@@ -33,8 +28,8 @@ Minimap0::
     db "##  ##ChCh      "
     db "  Ch####        "
     ;         03
-; MINIMAP_ARROW_TAIL_CAVE equ 3
-; MINIMAP_STYLE_TAIL_CAVE equ INVENTORY_MINIMAP_SINGLE_FLOOR
+DEF MINIMAP_ARROW_TAIL_CAVE EQU 3
+DEF MINIMAP_STYLE_TAIL_CAVE EQU INVENTORY_MINIMAP_SINGLE_FLOOR
 
 
 Minimap1::
@@ -47,8 +42,8 @@ Minimap1::
     db "  ############  "
     db "    ChChChCh    "
     ;       02
-; MINIMAP_ARROW_BOTTLE_GROTTO equ 2
-; MINIMAP_STYLE_BOTTLE_GROTTO equ INVENTORY_MINIMAP_SINGLE_FLOOR
+DEF MINIMAP_ARROW_BOTTLE_GROTTO EQU 2
+DEF MINIMAP_STYLE_BOTTLE_GROTTO EQU INVENTORY_MINIMAP_SINGLE_FLOOR
 
 
 Minimap2::
@@ -61,8 +56,12 @@ Minimap2::
     db "  Ch        Nm  "
     db "  ##Ch      ####"
     ;     01
-; MINIMAP_ARROW_KEY_CAVERN equ 1
-; MINIMAP_STYLE_KEY_CAVERN equ INVENTORY_MINIMAP_SINGLE_FLOOR
+DEF MINIMAP_ARROW_KEY_CAVERN EQU 1
+IF __SPLIT_KEY_CAVERN_MAP__
+DEF MINIMAP_STYLE_KEY_CAVERN EQU INVENTORY_MINIMAP_V_SPBIT_A
+ELSE
+DEF MINIMAP_STYLE_KEY_CAVERN EQU INVENTORY_MINIMAP_SINGLE_FLOOR
+ENDC
 
 
 Minimap3::
@@ -75,8 +74,8 @@ Minimap3::
     db "    Ch##ChCh    "
     db "      ##Ch      "
     ;         03
-; MINIMAP_ARROW_ANGLERS_TUNNEL equ 3
-; MINIMAP_STYLE_ANGLERS_TUNNEL equ INVENTORY_MINIMAP_SINGLE_FLOOR
+DEF MINIMAP_ARROW_ANGLERS_TUNNEL EQU 3
+DEF MINIMAP_STYLE_ANGLERS_TUNNEL EQU INVENTORY_MINIMAP_SINGLE_FLOOR
 
 
 Minimap4::
@@ -89,8 +88,8 @@ Minimap4::
     db "      Ch####    "
     db "        Ch##Ch##"
     ;                 07
-; MINIMAP_ARROW_CATFISHS_MAW equ 7
-; MINIMAP_STYLE_CATFISHS_MAW equ INVENTORY_MINIMAP_SINGLE_FLOOR
+DEF MINIMAP_ARROW_CATFISHS_MAW EQU 7
+DEF MINIMAP_STYLE_CATFISHS_MAW EQU INVENTORY_MINIMAP_SINGLE_FLOOR
 
 
 Minimap5::
@@ -103,8 +102,8 @@ Minimap5::
     db "  ChCh    ##Ch  "
     db "  ############  "
     ;         03
-; MINIMAP_ARROW_FACE_SHRINE equ 3
-; MINIMAP_STYLE_FACE_SHRINE equ INVENTORY_MINIMAP_SINGLE_FLOOR
+DEF MINIMAP_ARROW_FACE_SHRINE EQU 3
+DEF MINIMAP_STYLE_FACE_SHRINE EQU INVENTORY_MINIMAP_SINGLE_FLOOR
 
 
 Minimap6::
@@ -117,8 +116,8 @@ Minimap6::
     db "Ch##############"
     db "########  ####  "
     ;     01
-; MINIMAP_ARROW_EAGLES_TOWER equ 1
-; MINIMAP_STYLE_EAGLES_TOWER equ INVENTORY_MINIMAP_FOUR_FLOORS_A
+DEF MINIMAP_ARROW_EAGLES_TOWER EQU 1
+DEF MINIMAP_STYLE_EAGLES_TOWER EQU INVENTORY_MINIMAP_FOUR_FLOORS_A
 
 
 Minimap7::
@@ -131,8 +130,8 @@ Minimap7::
     db "##Ch######Ch####"
     db "Ch    ####    Ch"
     ;         03
-; MINIMAP_ARROW_TURTLE_ROCK equ 3
-; MINIMAP_STYLE_TURTLE_ROCK equ INVENTORY_MINIMAP_SINGLE_FLOOR
+DEF MINIMAP_ARROW_TURTLE_ROCK EQU 3
+DEF MINIMAP_STYLE_TURTLE_ROCK EQU INVENTORY_MINIMAP_SINGLE_FLOOR
 
 
 EaglesTowerCollapsedMinimap::
@@ -156,9 +155,8 @@ ColorDungeonMinimap::
     db "    ##Ch##Ch    "
     db "    ####Ch##    "
     ;       02
-; MINIMAP_ARROW_COLOR_DUNGEON equ 2
-; MINIMAP_STYLE_COLOR_DUNGEON equ INVENTORY_MINIMAP_SINGLE_FLOOR
-
+DEF MINIMAP_ARROW_COLOR_DUNGEON EQU 2
+DEF MINIMAP_STYLE_COLOR_DUNGEON EQU INVENTORY_MINIMAP_SINGLE_FLOOR
 
 
 POPC

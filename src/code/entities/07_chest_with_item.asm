@@ -83,199 +83,199 @@ Data_007_7BBB::
 
 ; Also used when an object is spit out after a Like-like ate it
 ChestWithItemEntityHandler::
-    ld   a, $02                                   ; $7BDD: $3E $02
-    ldh  [hLinkInteractiveMotionBlocked], a       ; $7BDF: $E0 $A1
+    ld   a, $02                                   ;; 07:7BDD $3E $02
+    ldh  [hLinkInteractiveMotionBlocked], a       ;; 07:7BDF $E0 $A1
     ; wSwordAnimationState = SWORD_ANIMATION_STATE_NONE
-    xor  a                                        ; $7BE1: $AF
-    ld   [wSwordAnimationState], a                ; $7BE2: $EA $37 $C1
+    xor  a                                        ;; 07:7BE1 $AF
+    ld   [wSwordAnimationState], a                ;; 07:7BE2 $EA $37 $C1
     ; wC16A = 0
-    ld   [wC16A], a                               ; $7BE5: $EA $6A $C1
-    ldh  a, [hActiveEntitySpriteVariant]          ; $7BE8: $F0 $F1
-    cp   CHEST_ZOL                                ; $7BEA: $FE $22
-    jr   nz, notZolChest                          ; $7BEC: $20 $3B
+    ld   [wC16A], a                               ;; 07:7BE5 $EA $6A $C1
+    ldh  a, [hActiveEntitySpriteVariant]          ;; 07:7BE8 $F0 $F1
+    cp   CHEST_ZOL                                ;; 07:7BEA $FE $22
+    jr   nz, notZolChest                          ;; 07:7BEC $20 $3B
 
-    ld   a, ENTITY_ZOL                            ; $7BEE: $3E $1B
-    call SpawnNewEntity_trampoline                ; $7BF0: $CD $86 $3B
-    jp   c, ClearEntityStatus_07                  ; $7BF3: $DA $A4 $7E
+    ld   a, ENTITY_ZOL                            ;; 07:7BEE $3E $1B
+    call SpawnNewEntity_trampoline                ;; 07:7BF0 $CD $86 $3B
+    jp   c, ClearEntityStatus_07                  ;; 07:7BF3 $DA $A4 $7E
 
-    ldh  a, [hMultiPurpose0]                      ; $7BF6: $F0 $D7
-    ld   hl, wEntitiesPosXTable                   ; $7BF8: $21 $00 $C2
-    add  hl, de                                   ; $7BFB: $19
-    ld   [hl], a                                  ; $7BFC: $77
-    ldh  a, [hMultiPurpose1]                      ; $7BFD: $F0 $D8
-    ld   hl, wEntitiesPosYTable                   ; $7BFF: $21 $10 $C2
-    add  hl, de                                   ; $7C02: $19
-    ld   [hl], a                                  ; $7C03: $77
-    ld   hl, wEntitiesSpeedZTable                 ; $7C04: $21 $20 $C3
-    add  hl, de                                   ; $7C07: $19
-    ld   [hl], $18                                ; $7C08: $36 $18
-    ld   hl, wEntitiesPosZTable                   ; $7C0A: $21 $10 $C3
-    add  hl, de                                   ; $7C0D: $19
-    ld   [hl], $06                                ; $7C0E: $36 $06
-    ld   hl, wEntitiesPrivateCountdown1Table      ; $7C10: $21 $F0 $C2
-    add  hl, de                                   ; $7C13: $19
-    ld   [hl], $50                                ; $7C14: $36 $50
-    ld   hl, wEntitiesSpeedXTable                 ; $7C16: $21 $40 $C2
-    add  hl, de                                   ; $7C19: $19
-    ld   [hl], $08                                ; $7C1A: $36 $08
-    ld   hl, wEntitiesStateTable                  ; $7C1C: $21 $90 $C2
-    add  hl, de                                   ; $7C1F: $19
-    ld   [hl], $03                                ; $7C20: $36 $03
-    ld   a, JINGLE_WRONG_ANSWER                   ; $7C22: $3E $1D
-    ldh  [hJingle], a                             ; $7C24: $E0 $F2
-    jp   ClearEntityStatus_07                     ; $7C26: $C3 $A4 $7E
+    ldh  a, [hMultiPurpose0]                      ;; 07:7BF6 $F0 $D7
+    ld   hl, wEntitiesPosXTable                   ;; 07:7BF8 $21 $00 $C2
+    add  hl, de                                   ;; 07:7BFB $19
+    ld   [hl], a                                  ;; 07:7BFC $77
+    ldh  a, [hMultiPurpose1]                      ;; 07:7BFD $F0 $D8
+    ld   hl, wEntitiesPosYTable                   ;; 07:7BFF $21 $10 $C2
+    add  hl, de                                   ;; 07:7C02 $19
+    ld   [hl], a                                  ;; 07:7C03 $77
+    ld   hl, wEntitiesSpeedZTable                 ;; 07:7C04 $21 $20 $C3
+    add  hl, de                                   ;; 07:7C07 $19
+    ld   [hl], $18                                ;; 07:7C08 $36 $18
+    ld   hl, wEntitiesPosZTable                   ;; 07:7C0A $21 $10 $C3
+    add  hl, de                                   ;; 07:7C0D $19
+    ld   [hl], $06                                ;; 07:7C0E $36 $06
+    ld   hl, wEntitiesPrivateCountdown1Table      ;; 07:7C10 $21 $F0 $C2
+    add  hl, de                                   ;; 07:7C13 $19
+    ld   [hl], $50                                ;; 07:7C14 $36 $50
+    ld   hl, wEntitiesSpeedXTable                 ;; 07:7C16 $21 $40 $C2
+    add  hl, de                                   ;; 07:7C19 $19
+    ld   [hl], $08                                ;; 07:7C1A $36 $08
+    ld   hl, wEntitiesStateTable                  ;; 07:7C1C $21 $90 $C2
+    add  hl, de                                   ;; 07:7C1F $19
+    ld   [hl], $03                                ;; 07:7C20 $36 $03
+    ld   a, JINGLE_WRONG_ANSWER                   ;; 07:7C22 $3E $1D
+    ldh  [hJingle], a                             ;; 07:7C24 $E0 $F2
+    jp   ClearEntityStatus_07                     ;; 07:7C26 $C3 $A4 $7E
 
 notZolChest:
-    cp   CHEST_MESSAGE                            ; $7C29: $FE $21
-    jr   z, jr_007_7C5E                           ; $7C2B: $28 $31
+    cp   CHEST_MESSAGE                            ;; 07:7C29 $FE $21
+    jr   z, jr_007_7C5E                           ;; 07:7C2B $28 $31
 
-    cp   CHEST_MEDICINE                           ; $7C2D: $FE $10
-    jr   nz, .jr_7C36                             ; $7C2F: $20 $05
+    cp   CHEST_MEDICINE                           ;; 07:7C2D $FE $10
+    jr   nz, .jr_7C36                             ;; 07:7C2F $20 $05
 
-    ld   a, $01                                   ; $7C31: $3E $01
-    ld   [wHasMedicine], a                        ; $7C33: $EA $0D $DB
+    ld   a, $01                                   ;; 07:7C31 $3E $01
+    ld   [wHasMedicine], a                        ;; 07:7C33 $EA $0D $DB
 
 .jr_7C36
-    ldh  a, [hIsGBC]                              ; $7C36: $F0 $FE
-    and  a                                        ; $7C38: $A7
-    jr   z, jr_007_7C58                           ; $7C39: $28 $1D
+    ldh  a, [hIsGBC]                              ;; 07:7C36 $F0 $FE
+    and  a                                        ;; 07:7C38 $A7
+    jr   z, jr_007_7C58                           ;; 07:7C39 $28 $1D
 
-    ldh  a, [hMapId]                              ; $7C3B: $F0 $F7
+    ldh  a, [hMapId]                              ;; 07:7C3B $F0 $F7
     cp   MAP_FACE_SHRINE
-    jr   nz, .jr_7C49                             ; $7C3F: $20 $08
+    jr   nz, .jr_7C49                             ;; 07:7C3F $20 $08
 
-    ldh  a, [hMapRoom]                            ; $7C41: $F0 $F6
-    cp   ROOM_INDOOR_A_POWER_BRACELET_LV2         ; $7C43: $FE $CE
-    jr   nz, jr_007_7C58                          ; maybe related to incrementing an item level
-    jr   jr_007_7C53                              ; $7C47: $18 $0A
+    ldh  a, [hMapRoom]                            ;; 07:7C41 $F0 $F6
+    cp   ROOM_INDOOR_A_FACE_SHRINE_PBRACELET_LV2  ;; 07:7C43 $FE $CE
+    jr   nz, jr_007_7C58                          ; use alt sprite for lv2 pickup in these rooms
+    jr   UseAltChestSprite                        ;; 07:7C47 $18 $0A
 
 .jr_7C49
     cp   MAP_EAGLES_TOWER
-    jr   nz, jr_007_7C58                          ; $7C4B: $20 $0B
+    jr   nz, jr_007_7C58                          ;; 07:7C4B $20 $0B
 
-    ldh  a, [hMapRoom]                            ; $7C4D: $F0 $F6
-    cp   ROOM_INDOOR_B_SHIELD_LV2                 ; $7C4F: $FE $1A
-    jr   nz, jr_007_7C58                          ; $7C51: $20 $05
+    ldh  a, [hMapRoom]                            ;; 07:7C4D $F0 $F6
+    cp   ROOM_INDOOR_B_EAGLES_TOWER_SHIELD_LV2    ;; 07:7C4F $FE $1A
+    jr   nz, jr_007_7C58                          ;; 07:7C51 $20 $05
 
-jr_007_7C53:
-    ld   de, ChestItemSpriteTableAlt              ; $7C53: $11 $53 $7B
-    jr   jr_007_7C5B                              ; $7C56: $18 $03
+UseAltChestSprite:
+    ld   de, ChestItemSpriteTableAlt              ;; 07:7C53 $11 $53 $7B
+    jr   jr_007_7C5B                              ;; 07:7C56 $18 $03
 
 jr_007_7C58:
-    ld   de, ChestItemSpriteTable                 ; $7C58: $11 $57 $7B
+    ld   de, ChestItemSpriteTable                 ;; 07:7C58 $11 $57 $7B
 
 jr_007_7C5B:
-    call RenderActiveEntitySprite                 ; $7C5B: $CD $77 $3C
+    call RenderActiveEntitySprite                 ;; 07:7C5B $CD $77 $3C
 
 jr_007_7C5E:
-    ld   a, [wDialogState]                        ; $7C5E: $FA $9F $C1
-    and  a                                        ; $7C61: $A7
-    ret  nz                                       ; $7C62: $C0
+    ld   a, [wDialogState]                        ;; 07:7C5E $FA $9F $C1
+    and  a                                        ;; 07:7C61 $A7
+    ret  nz                                       ;; 07:7C62 $C0
 
-    call UpdateEntityPosWithSpeed_07              ; $7C63: $CD $0A $7E
-    ld   hl, wEntitiesInertiaTable                ; $7C66: $21 $D0 $C3
-    add  hl, bc                                   ; $7C69: $09
-    ld   a, [hl]                                  ; $7C6A: $7E
-    inc  a                                        ; $7C6B: $3C
-    ld   [hl], a                                  ; $7C6C: $77
-    cp   $10                                      ; $7C6D: $FE $10
-    jr   nz, .jr_7C76                             ; $7C6F: $20 $05
+    call UpdateEntityPosWithSpeed_07              ;; 07:7C63 $CD $0A $7E
+    ld   hl, wEntitiesInertiaTable                ;; 07:7C66 $21 $D0 $C3
+    add  hl, bc                                   ;; 07:7C69 $09
+    ld   a, [hl]                                  ;; 07:7C6A $7E
+    inc  a                                        ;; 07:7C6B $3C
+    ld   [hl], a                                  ;; 07:7C6C $77
+    cp   $10                                      ;; 07:7C6D $FE $10
+    jr   nz, .jr_7C76                             ;; 07:7C6F $20 $05
 
-    call GetEntitySpeedYAddress                   ; $7C71: $CD $05 $40
-    ld   [hl], $00                                ; $7C74: $36 $00
+    call GetEntitySpeedYAddress                   ;; 07:7C71 $CD $05 $40
+    ld   [hl], $00                                ;; 07:7C74 $36 $00
 
 .jr_7C76
-    cp   $08                                      ; $7C76: $FE $08
-    jr   nz, jr_007_7C93                          ; $7C78: $20 $19
+    cp   $08                                      ;; 07:7C76 $FE $08
+    jr   nz, jr_007_7C93                          ;; 07:7C78 $20 $19
 
-    ldh  a, [hActiveEntitySpriteVariant]          ; $7C7A: $F0 $F1
-    ld   e, a                                     ; $7C7C: $5F
-    ld   d, b                                     ; $7C7D: $50
-    ld   hl, Data_007_7BBB                        ; $7C7E: $21 $BB $7B
-    add  hl, de                                   ; $7C81: $19
-    ld   a, [hl]                                  ; $7C82: $7E
-    and  a                                        ; $7C83: $A7
-    jr   z, jr_007_7C93                           ; $7C84: $28 $0D
+    ldh  a, [hActiveEntitySpriteVariant]          ;; 07:7C7A $F0 $F1
+    ld   e, a                                     ;; 07:7C7C $5F
+    ld   d, b                                     ;; 07:7C7D $50
+    ld   hl, Data_007_7BBB                        ;; 07:7C7E $21 $BB $7B
+    add  hl, de                                   ;; 07:7C81 $19
+    ld   a, [hl]                                  ;; 07:7C82 $7E
+    and  a                                        ;; 07:7C83 $A7
+    jr   z, jr_007_7C93                           ;; 07:7C84 $28 $0D
 
-    cp   $01                                      ; $7C86: $FE $01
-    jr   nz, .jr_7C90                             ; $7C88: $20 $06
+    cp   $01                                      ;; 07:7C86 $FE $01
+    jr   nz, .jr_7C90                             ;; 07:7C88 $20 $06
 
-    ld   a, JINGLE_TREASURE_FOUND                 ; $7C8A: $3E $01
-    ldh  [hJingle], a                             ; $7C8C: $E0 $F2
-    jr   jr_007_7C93                              ; $7C8E: $18 $03
+    ld   a, JINGLE_TREASURE_FOUND                 ;; 07:7C8A $3E $01
+    ldh  [hJingle], a                             ;; 07:7C8C $E0 $F2
+    jr   jr_007_7C93                              ;; 07:7C8E $18 $03
 
 .jr_7C90
-    ld   [wMusicTrackToPlay], a                   ; $7C90: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ;; 07:7C90 $EA $68 $D3
 
 jr_007_7C93:
-    ld   hl, wEntitiesInertiaTable                ; $7C93: $21 $D0 $C3
-    add  hl, bc                                   ; $7C96: $09
-    ld   a, [hl]                                  ; $7C97: $7E
-    cp   $26                                      ; $7C98: $FE $26
-    jr   nz, jr_007_7CEA                          ; $7C9A: $20 $4E
+    ld   hl, wEntitiesInertiaTable                ;; 07:7C93 $21 $D0 $C3
+    add  hl, bc                                   ;; 07:7C96 $09
+    ld   a, [hl]                                  ;; 07:7C97 $7E
+    cp   $26                                      ;; 07:7C98 $FE $26
+    jr   nz, jr_007_7CEA                          ;; 07:7C9A $20 $4E
 
-    ldh  a, [hActiveEntitySpriteVariant]          ; $7C9C: $F0 $F1
-    ld   e, a                                     ; $7C9E: $5F
-    ld   d, b                                     ; $7C9F: $50
-    cp   CHEST_MESSAGE                            ; $7CA0: $FE $21
-    jr   nz, .jr_7CB1                             ; $7CA2: $20 $0D
+    ldh  a, [hActiveEntitySpriteVariant]          ;; 07:7C9C $F0 $F1
+    ld   e, a                                     ;; 07:7C9E $5F
+    ld   d, b                                     ;; 07:7C9F $50
+    cp   CHEST_MESSAGE                            ;; 07:7CA0 $FE $21
+    jr   nz, .jr_7CB1                             ;; 07:7CA2 $20 $0D
 
-    ldh  a, [hMapRoom]                            ; $7CA4: $F0 $F6
+    ldh  a, [hMapRoom]                            ;; 07:7CA4 $F0 $F6
     cp   UNKNOWN_ROOM_96                          ; @TODO Master Stalfos "screw you" letter chest?
-    jr   nz, .jr_7CB1                             ; $7CA8: $20 $07
+    jr   nz, .jr_7CB1                             ;; 07:7CA8 $20 $07
 
-    call_open_dialog Dialog111                    ; $7CAA
-    jr   jr_007_7CE9                              ; $7CAF: $18 $38
+    call_open_dialog Dialog111                    ;; 07:7CAA
+    jr   jr_007_7CE9                              ;; 07:7CAF $18 $38
 
 .jr_7CB1
-    ld   a, e                                     ; $7CB1: $7B
-    cp   CHEST_SHIELD                             ; $7CB2: $FE $01
-    jr   nz, .jr_7CC1                             ; $7CB4: $20 $0B
+    ld   a, e                                     ;; 07:7CB1 $7B
+    cp   CHEST_SHIELD                             ;; 07:7CB2 $FE $01
+    jr   nz, .jr_7CC1                             ;; 07:7CB4 $20 $0B
 
-    ld   a, [wShieldLevel]                        ; $7CB6: $FA $44 $DB
-    cp   $02                                      ; $7CB9: $FE $02
-    jr   nz, .jr_7CC1                             ; $7CBB: $20 $04
+    ld   a, [wShieldLevel]                        ;; 07:7CB6 $FA $44 $DB
+    cp   $02                                      ;; 07:7CB9 $FE $02
+    jr   nz, .jr_7CC1                             ;; 07:7CBB $20 $04
 
-    ld_dialog_low a, Dialog0ED ; "Got the Mirror Shield!" ; $7CBD: $3E $ED
-    jr   jr_007_7CE6                              ; $7CBF: $18 $25
+    ld_dialog_low a, Dialog0ED ; "Got the Mirror Shield!" ;; 07:7CBD $3E $ED
+    jr   jr_007_7CE6                              ;; 07:7CBF $18 $25
 
 .jr_7CC1
-    ld   a, e                                     ; $7CC1: $7B
-    cp   CHEST_SWORD                              ; $7CC2: $FE $0B
-    jr   nz, .jr_7CD1                             ; $7CC4: $20 $0B
+    ld   a, e                                     ;; 07:7CC1 $7B
+    cp   CHEST_SWORD                              ;; 07:7CC2 $FE $0B
+    jr   nz, .jr_7CD1                             ;; 07:7CC4 $20 $0B
 
     ld   a, [wSwordLevel]                ; @TODO ??? Is this used by the Seashell Mansion??
-    cp   $02                                      ; $7CC9: $FE $02
-    jr   nz, .jr_7CD1                             ; $7CCB: $20 $04
+    cp   $02                                      ;; 07:7CC9 $FE $02
+    jr   nz, .jr_7CD1                             ;; 07:7CCB $20 $04
 
-    ld_dialog_low a, Dialog09F ; "Got a new sword!" ; $7CCD: $3E $9F
-    jr   jr_007_7CE6                              ; $7CCF: $18 $15
+    ld_dialog_low a, Dialog09F ; "Got a new sword!" ;; 07:7CCD $3E $9F
+    jr   jr_007_7CE6                              ;; 07:7CCF $18 $15
 
 .jr_7CD1
-    ld   a, e                                     ; $7CD1: $7B
-    cp   CHEST_POWER_BRACELET                     ; $7CD2: $FE $00
-    jr   nz, .jr_7CE1                             ; $7CD4: $20 $0B
+    ld   a, e                                     ;; 07:7CD1 $7B
+    cp   CHEST_POWER_BRACELET                     ;; 07:7CD2 $FE $00
+    jr   nz, .jr_7CE1                             ;; 07:7CD4 $20 $0B
 
-    ld   a, [wPowerBraceletLevel]                 ; $7CD6: $FA $43 $DB
-    cp   $02                                      ; $7CD9: $FE $02
-    jr   nz, .jr_7CE1                             ; $7CDB: $20 $04
+    ld   a, [wPowerBraceletLevel]                 ;; 07:7CD6 $FA $43 $DB
+    cp   $02                                      ;; 07:7CD9 $FE $02
+    jr   nz, .jr_7CE1                             ;; 07:7CDB $20 $04
 
-    ld_dialog_low a, Dialog0EE ; "Got a more powerful Bracelet!" ; $7CDD: $3E $EE
-    jr   jr_007_7CE6                              ; $7CDF: $18 $05
+    ld_dialog_low a, Dialog0EE ; "Got a more powerful Bracelet!" ;; 07:7CDD $3E $EE
+    jr   jr_007_7CE6                              ;; 07:7CDF $18 $05
 
 .jr_7CE1
-    ld   hl, GotItemDialog                        ; $7CE1: $21 $99 $7B
-    add  hl, de                                   ; $7CE4: $19
-    ld   a, [hl]                                  ; $7CE5: $7E
+    ld   hl, GotItemDialog                        ;; 07:7CE1 $21 $99 $7B
+    add  hl, de                                   ;; 07:7CE4 $19
+    ld   a, [hl]                                  ;; 07:7CE5 $7E
 
 jr_007_7CE6:
-    call OpenDialogInTable0                       ; $7CE6: $CD $85 $23
+    call OpenDialogInTable0                       ;; 07:7CE6 $CD $85 $23
 
 jr_007_7CE9:
-    xor  a                                        ; $7CE9: $AF
+    xor  a                                        ;; 07:7CE9 $AF
 
 jr_007_7CEA:
-    cp   $28                                      ; $7CEA: $FE $28
-    ret  nz                                       ; $7CEC: $C0
+    cp   $28                                      ;; 07:7CEA $FE $28
+    ret  nz                                       ;; 07:7CEC $C0
 
-    jp   ClearEntityStatus_07                     ; $7CED: $C3 $A4 $7E
+    jp   ClearEntityStatus_07                     ;; 07:7CED $C3 $A4 $7E

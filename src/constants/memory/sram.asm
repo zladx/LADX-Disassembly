@@ -2,11 +2,11 @@
 ; * Prefix, the values 1,3,5,7,9 are stored here to indicate that the save is valid.
 ; * Main, a copy of wram, from wOverworldRoomStatus till wSaveSlotNames (exclusive)
 ; * 3 pieces of data added with the DX version, for the color dungeon and tunic and photos.
-SAVE_PREFIX_SIZE equ 5
-SAVE_MAIN_SIZE   equ $0380
-SAVE_DX1_SIZE    equ $0005 ; wColorDungeonItemFlags
-SAVE_DX2_SIZE    equ $0020 ; wColorDungeonRoomStatus
-SAVE_DX3_SIZE    equ $0003 ; wTunicType, wPhotos1, wPhotos2
+DEF SAVE_PREFIX_SIZE EQU 5
+DEF SAVE_MAIN_SIZE   EQU $0380
+DEF SAVE_DX1_SIZE    EQU $0005 ; wColorDungeonItemFlags
+DEF SAVE_DX2_SIZE    EQU $0020 ; wColorDungeonRoomStatus
+DEF SAVE_DX3_SIZE    EQU $0003 ; wTunicType, wPhotos1, wPhotos2
 
 assert SAVE_MAIN_SIZE == (wSaveSlotNames - wOverworldRoomStatus)
 

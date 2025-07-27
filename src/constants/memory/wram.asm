@@ -145,12 +145,15 @@ wNoiseSfxSeaWavesCounter::
 wC115:
   ds 1 ; C115
 
-; Unlabeled
+; Used by Mamu and the final nightmare to indicate if required extra graphics have been loaded
 wC116:
   ds 1 ; C116
 
-; Unlabeled
-wC117:
+; Whether there are Gels clinging to Link
+; Possible values:
+; 0 = false
+; 1 = true
+wIsGelClingingToLink:
   ds 1 ; C117
 
 ; Unlabeled
@@ -188,7 +191,7 @@ wC11E:
 ; The condition of the ground Link is standing on:
 ; See GROUND_STATUS_* constants for possible values.
 ;
-; Also see: wLinkGroundVfx
+; Also see: wLinkObjectPhysics
 wLinkGroundStatus::
   ds 1 ; C11F
 
@@ -457,8 +460,8 @@ wScreenShakeHorizontal::
 wScreenShakeVertical::
   ds 1 ; C156
 
-; Unlabeled
-wC157::
+; While not zero, the screen shakes
+wScreenShakeCountdown::
   ds 1 ; C157
 
 ; Unlabeled
@@ -600,16 +603,16 @@ wC176:
 wDialogAskSelectionIndex:
   ds 1 ; C177
 
-; Unlabeled
-wC178:
+; Set to 2 when Link collides with a wall, tree, etc, while running with the Pegasus Boots
+wPegasusBootsCollisionCountdown:
   ds 1 ; C178
 
-; Unlabeled
-wC179:
+; X position of the last Pegasus Boots collision 
+wPegasusBootsCollisionPosX:
   ds 1 ; C179
 
-; Unlabeled
-wC17A:
+; Y position of the last Pegasus Boots collision 
+wPegasusBootsCollisionPosY:
   ds 1 ; C17A
 
 ; See https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening#Mono_Pausing_the_Engine_and_Mono.2FDX_Free-Movement_Mode
@@ -637,10 +640,9 @@ wTransitionGfx::
 wTransitionGfxFrameCount::
   ds 1 ; C180
 
-; Environmental visual effect displayed depending on which ground Link is standing.
-; This may also affect the sound effects, or Link's position.
-; See GROUND_VFX_* constants for possible values.
-wLinkGroundVfx::
+; Physics flags of the object under Link.
+; See OBJ_PHYSICS_* constants for possible values.
+wLinkObjectPhysics::
   ds 1 ; C181
 
 ; Unlabeled
@@ -714,8 +716,8 @@ wLoadedEntitySpritesheets::
 wEntityTilesSpriteslotIndexA::
   ds 1 ; C197
 
-; Unlabeled
-wC198::
+; Used during the falling and revolving door animations.
+wLinkAnimationFrame::
   ds 1 ; C198
 
 ; Unlabeled
@@ -810,8 +812,9 @@ wC1AC::
 wItemUsageContext::
   ds 1 ; C1AD
 
-; Unlabeled
-wC1AE::
+; Number of regular Zols animated so far on this frame.
+; Used by Slime Eye to know the number of Zols on screen.
+wZolCount::
   ds 2 ; C1AE - C1AF
 
 ; Unlabeled
@@ -1048,8 +1051,8 @@ wEntitiesStateTable::
 ; 0 = no collisions,
 ; bit 1 = collision on the right,
 ; bit 2 = collision on the left,
-; bit 3 = collision on the bottom,
-; bit 4 = collision on the top
+; bit 3 = collision on the top,
+; bit 4 = collision on the bottom
 wEntitiesCollisionsTable::
   ds $10 ; C2A0 - C2AF
 
@@ -1062,6 +1065,16 @@ wEntitiesCollisionsTable::
 ;  - Butterfly: stores a delta X to move closer to Link
 ;  - Genie: store the substate
 ;  - LikeLike: swallowed item
+;  - Keese: movement angle (0x0 = right ... 0x4 = down ... 0x8 = left ... 0xC = up)
+;  - Smashable pillar: 0 = pillar, 1 = dust, 2 = debris
+;  - Pincer: hole X position
+;  - Peahat: animation speed 
+;  - Moving blocks (left): Y position when fully closed
+;  - Moving blocks (bottom): X position when fully closed
+;  - Knight: when attacking, iron ball speed parallel to attack direction
+;  - Mini-Moldorm & Moldorm: movement angle (0x0 = right ... 0x4 = down ... 0x8 = left ... 0xC = up)
+;  - Ghini: 0 if trying to move right, 1 if left
+;  - Dodongo Snake: offset to the index of the position history, used for the head
 wEntitiesPrivateState1Table::
   ds $10 ; C2B0 - C2BF
 
@@ -1069,15 +1082,28 @@ wEntitiesPrivateState1Table::
 ;
 ; Examples:
 ;  - Butterfly: stores a delta Y to move closer to Link
+;  - Keese: -1 when flying counter-clockwise, 1 otherwise
+;  - Peahat: -1 when flying counter-clockwise, 1 otherwise
+;  - Pincer: hole Y position
+;  - Moving block mover: initial Y position
+;  - Moving blocks (left): Y position when fully open
+;  - Moving blocks (bottom): X position when fully open
+;  - Knight: when attacking, iron ball speed accumulator parallel to attack direction
+;  - Mini-Moldorm & Moldorm: -1 when moving counter-clockwise, 1 otherwise
+;  - Ghini: 0 if trying to move down, 1 if up
+;  - Dodongo Snake: offset to the index of the position history, used for the body
 wEntitiesPrivateState2Table::
   ds $10 ; C2C0 - C2CF
 
 ; Entity-specific state.
 ;
-; When used by a droppble entity, possible values:
-;   0: ??
-;   1: ??
-;   2: pickable item cannot be picked up by sword
+; Examples:
+;  - Droppable entity: 0 if visible; 1 if can be revealed with Pegasus Boots; 2 if buried, in bush, etc
+;  - Keese: speed update timer
+;  - Peahat: speed update timer
+;  - Pincer: head direction
+;  - Knight: when attacking, iron ball position parallel to attack direction
+;  - Ghinis: 0 if originally hidden, 1 otherwise
 wEntitiesPrivateState3Table::
   ds $10 ; C2D0 - C2DF
 
@@ -1086,10 +1112,18 @@ wEntitiesTransitionCountdownTable::
   ds $10 ; C2E0 - C2EF
 
 ; Entity-specific countdown 1
+;
+; Examples:
+;  - Timer Bombite: flashing timer
+;  - Mini-Moldorm & Moldorm: counts down to next speed update
 wEntitiesPrivateCountdown1Table::
   ds $10 ; C2F0 - C2FF
 
 ; Entity-specific countdown 2
+;
+; Examples:
+;  - Ghini: countdown before starting xy movement
+;  - Dodongo Snake: countdown after eating a bomb
 wEntitiesPrivateCountdown2Table::
   ds $10 ; C300 - C30F
 
@@ -1119,11 +1153,11 @@ wEntitiesSpeedZAccTable::
 wEntitiesPhysicsFlagsTable::
   ds $10 ; C340 - C34F
 
-; Type of hitbox (plus maybe other flags):
-; bit 0: TODO ???,
-; bit 1: TODO ???,
-; bit 2-6: hitbox type (see HitboxPositions),
-; bit 7: force collision (for some entities only)
+; Type of hitbox:
+; bits 0-1: collision box type
+; bits 2-6: hitbox type (see HitboxPositions),
+; bit 7: ignore hits (and force collision, for some entities)
+; See HITFLAGS_ constants for possible values.
 wEntitiesHitboxFlagsTable::
   ds $10 ; C350 - C35F
 
@@ -1220,6 +1254,8 @@ wC3CF::
 ; will be updated every 4 frames.
 ;
 ; Each entity uses this value differently.
+; 
+; In segmented entities (Mini-Moldorm, Dodongo Snake...), the most recent position's index in the position history
 wEntitiesInertiaTable::
   ds $10 ; C3D0 - C3DF
 
@@ -1269,11 +1305,15 @@ wEntitiesOptions1Table::
   ds $10 ; C430 - C43F
 
 ; Entity-specific state.
+;
+; Examples:
+;  - Peahat: movement angle (0x0 = right ... 0x4 = down ... 0x8 = left ... 0xC = up)
+;  - Knight: when attacking, iron ball position perpendicular to attack direction
 wEntitiesPrivateState4Table::
   ds $10 ; C440 - C44F
 
-; Number of frame before a dropped item disappears
-wEntitiesDropTimerTable::
+; Frames before the next state transition of the entity (only decremented every four frames)
+wEntitiesSlowTransitionCountdownTable::
   ds $10 ; C450 - C45F
 
 ; TODO comment
@@ -1284,9 +1324,10 @@ wEntitiesLoadOrderTable::
 ;
 ; Possible values:
 ;  0: on standard solid ground
-;  1: ???
+;  1: on deep water/lava
 ;  2: on shallow water (draws ripples)
 ;  3: on tall grass (draws pushed-away grasses)
+; See ENTITY_GROUND_STATUS* for possible values
 wEntitiesGroundStatusTable::
   ds $10 ; C470 - C47F
 
@@ -1308,11 +1349,12 @@ wEntitiesLiftedTable::
 wEntitiesPowerRecoilingTable::
   ds $10 ; C4A0 - C4AF
 
-; Unlabeled
-wC4B0::
+; When an entity is falling, it moves toward this x position
+wEntitiesFallingTargetXTable::
   ds $10 ; C4B0 - C4BF
 
-wC4C0::
+; When an entity is falling, it moves toward this y position
+wEntitiesFallingTargetYTable::
   ds $10 ; C4C0 - C4CF
 
 ; Entities health group
@@ -1346,8 +1388,8 @@ wOwlEntityIndex::
 wC502::
   ds 1 ; C502
 
-; Unlabeled
-wC503::
+; Type of the object the active entity collided with horizontally
+wEntityHorizontallyCollidedObject::
   ds 1 ; C503
 
 ; Unused? (only written to zero, not read anywhere)
@@ -1374,8 +1416,8 @@ wIndexPickedUpInShop::
 wPickedUpRockIndex::
   ds 1 ; C50C
 
-; Unlabeled
-wC50D::
+; Type of the object the active entity collided with vertically
+wEntityVerticallyCollidedObject::
   ds 1 ; C50D
 
 ; Unlabeled
@@ -1457,8 +1499,9 @@ wBossAgonySFXCountdown::
 wLiftedEntityType::
   ds 1 ; C5A8
 
-; Unlabeled
-wC5A9::
+; 0 = Link has been damaged
+; 1 = Link's hearts are full (full health)
+wFullHearts::
   ds 1 ; C5A9
 
 ; Number of rooms progressed correctly in the Wind Fish's Egg maze
@@ -1499,10 +1542,14 @@ wC5B1::
 wC5C0::
   ds $10 ; C5C0 - C5CF
 
-; Unlabeled
-; check for not used addresses
-wC5D0::
-  ds $8B0 ; C5D0 - CE7F
+; Direction the entity was thrown.
+; See DIRECTION_* constants for possible values.
+; 0xFF = not thrown
+wEntitiesThrownDirectionTable::
+  ds $10 ; C5D0 - C5DF
+  
+wC5E0::
+  ds $8A0 ; C5E0 - CE7F
 
 ; Index of the next slot to use in wRecentRooms
 wRecentRoomsIndex::
@@ -1524,6 +1571,20 @@ wEntitiesClearedRooms::
   ds $FF ; CF00 - CFFF
 
 section "WRAM Bank1", wramx[$D000], bank[1]
+
+UNION
+
+; Histories of either:
+; - up to 8 Mini-Moldorms' last 32 horizontal positions (indexed by load order)
+; - up to 4 Dodongo Snakes' last 64 horizontal positions (indexed by load order)
+wEntitiesPositionXHistoryTable::
+  ds $100 ; D000 - D0FF
+
+; See wEntitiesPositionXHistoryTable
+wEntitiesPositionYHistoryTable::
+  ds $100 ; D100 - D1FF
+
+NEXTU
 
 ; This location has multiple uses.
 ; Time during which the palette is modified by lightning during
@@ -2082,6 +2143,8 @@ ds ($D200 - $D1D2)
 
 ENDU
 
+ENDU
+
 ; Unlabeled
 wD200::
   ds 1 ; D200
@@ -2184,6 +2247,12 @@ wD218::
   ds 1 ; D218
 
 ; Current form of the Final Nightmare (0-5)
+; 0=Intro
+; 1=Giant Gel
+; 2=Agahnim
+; 3=Moldorm
+; 4=Ganon/Lanmola
+; 5=Dethl
 wFinalNightmareForm::
   ds 1 ; D219
 
@@ -3091,9 +3160,12 @@ wHasStolenFromShop::
 wDB47::
   ds 1 ; DB47
 
-; Unlabeled
-; possible values 01, 02, ..
-wDB48::
+; Tarin activity flag possible values:
+; 0 = Zero at game start. Tarin hasn't been cured of Raccoon.
+; 1 = Set to 1 as Tarin turns back into human form from the Magic Powder.
+; 2 = Set to 2 after getting Instrument 2 and being ejected from the dungeon.
+; primarily used by Tarin to determine what he's doing inside his house
+wTarinFlag::
   ds 1 ; DB48
 
 ; $0111 means that the player has every song.
@@ -3125,7 +3197,7 @@ wSwordLevel::
   ds 1 ; DB4E
 
 ; The player's name
-; Name is padded with $00 (spaces) to the max length (default length is 5) 
+; Name is padded with $00 (spaces) to the max length (default length is 5)
 wName::
   ds NAME_LENGTH ; DB4F - DB53
 
@@ -3334,7 +3406,7 @@ wWindFishEggMazeSequenceOffset:
 wBoomerangTradedItem::
   ds 1 ; DB7D
 
-; Switches between 4 different hits for one of the kids throwing the ball
+; Switches between 4 different hints for one of the kids throwing the ball
 wKidSaveHintIndex::
   ds 1 ; DB7E
 
@@ -3533,8 +3605,8 @@ wKillOrder::
 wInvincibilityCounter::
   ds 1 ; DBC7
 
-; Unlabeled
-wDBC8::
+; Initial position of Link when loading a new map
+wMapEntrancePositionZ::
   ds 1
 
 ; TODO comment
@@ -3545,9 +3617,10 @@ wTorchesCount::
 wDBCA::
   ds 1 ; DBCA
 
-; Unlabeled
-; (wGroundVfx is sometimes copied there)
-wDBCB::
+; Physics flags of the object under Link when falling down.
+; Also set by entities that make Link fall down, such as Facade's pits
+; See OBJ_PHYSICS_* constants for possible values.
+wLinkFallingDownObjectPhysics::
   ds 1 ; DBCB
 
 ; A table of five items flags for the current dungeon
@@ -3641,7 +3714,7 @@ wDC0E::
 ; 0 = green,
 ; 1 = red,
 ; 2 = blue
-; 
+;
 ; Other valid values (don't occur naturally, but can be set by the "Tunic Glitch" bug
 ; when wKillOrder overflows into this memory location):
 ; 3 = inverted red,
@@ -3688,17 +3761,16 @@ wObjPal7::
 wObjPal8::
   ds 8 ; DC88 - DC8F
 
-; This seems to be some secondary wDrawCommands buffer used during map scrolling.
-;
-; TODO: find a better name
+; This is a 2nd draw to VRAM command. See wDrawCommand for details.
+; This draws to VRAM1 instead of VRAM0, used to update tile attributes on GBC.
 
 ; Size of all cumulated wDrawCommandsSize
 ; When 0, no wDrawCommand is executed on vblanks
-wDrawCommandsAltSize::
+wDrawCommandsVRAM1Size::
   ds 1 ; DC90
 
 ; Secondary wDrawCommand destination (higher byte)
-wDrawCommandAlt::
+wDrawCommandVRAM1::
 .destinationHigh
   ds 1 ; DC91
 ; Secondary wDrawCommand destination (lower byte)
@@ -3713,25 +3785,20 @@ wDrawCommandAlt::
 .data
   ds $2C ; DC93 - DCBF
 
-; Unlabeled
-wDCC0::
-  ds 15 ; DCC0 - DCCE
+; Stores the 4 animated tiles for belts that are scrolled for the animation.
+wAnimatedScrollingTilesStorage::
+  ds $10 ; DCC0 - DCCE
 
-; Unlabeled
-wDCCF::
-  ds 1 ; DCCF
+.tile1::
+  ds $10 ; DCD0 - DCDF
 
-; Unlabeled
-wDCD0::
-  ds $10 ; DCD0 -DCDF
+.tile2::
+  ds $10 ; DCE0 - DCEF
+.tile3::
+  ds $10 ; DCF0 - DCFF
 
-; Unlabeled
-wDCE0::
-  ds $10 ; DCE0 -DCEF
-
-; Unlabeled
-wDCF0::
-  ds $E1 ; DCF0 -DDD0
+; Unused data?
+  ds $D1 ; DD00 - DDD0
 
 ; Palette flags for copying palettes to hardware.
 ; bit 0: If set, copy background palette to hardware during vblank
@@ -3855,12 +3922,12 @@ wStack::
   ds $DFFF - @ + 1 ; DE04 - DFFF
 
 ; init puts the SP here
-wStackTop equ $DFFF
+DEF wStackTop EQU $DFFF
 
 section "WRAM Bank2", wramx[$D000], bank[2]
 
 ; TODO
 
 ; Something rombank and photographs related
-w2_D16A EQU $D16A
+DEF w2_D16A EQU $D16A
 

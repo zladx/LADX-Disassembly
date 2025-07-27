@@ -1,308 +1,314 @@
 ; Maximum number of loaded entities
-MAX_ENTITIES equ $10
+DEF MAX_ENTITIES EQU $10
 
 ; End marker in a list of entities
-ENTITIES_END equ $FF
+DEF ENTITIES_END EQU $FF
 
 ; Values for wEntitiesStatusTable
-ENTITY_STATUS_DISABLED   equ 0
-ENTITY_STATUS_DYING      equ 1
-ENTITY_STATUS_FALLING    equ 2
-ENTITY_STATUS_DESTROYING equ 3
-ENTITY_STATUS_INIT       equ 4
-ENTITY_STATUS_ACTIVE     equ 5
-ENTITY_STATUS_STUNNED    equ 6
-ENTITY_STATUS_LIFTED     equ 7
-ENTITY_STATUS_THROWN     equ 8
+DEF ENTITY_STATUS_DISABLED   EQU 0
+DEF ENTITY_STATUS_DYING      EQU 1
+DEF ENTITY_STATUS_FALLING    EQU 2
+DEF ENTITY_STATUS_DESTROYING EQU 3
+DEF ENTITY_STATUS_INIT       EQU 4
+DEF ENTITY_STATUS_ACTIVE     EQU 5
+DEF ENTITY_STATUS_STUNNED    EQU 6
+DEF ENTITY_STATUS_LIFTED     EQU 7
+DEF ENTITY_STATUS_THROWN     EQU 8
+
+; Values for wEntitiesGroundStatus
+DEF ENTITY_GROUND_STATUS_NORMAL        EQU 0
+DEF ENTITY_GROUND_STATUS_DEEP_WATER    EQU 1
+DEF ENTITY_GROUND_STATUS_SHALLOW_WATER EQU 2
+DEF ENTITY_GROUND_STATUS_TALL_GRASS    EQU 3
 
 ; Values for wEntitiesOptions1Table
-ENTITY_OPT1_IS_BOSS                equ $80
-ENTITY_OPT1_SWORD_CLINK_OFF        equ $40
-ENTITY_OPT1_ALLOW_OUT_OF_BOUNDS    equ $20
-ENTITY_OPT1_IMMUNE_WATER_PIT       equ $10
-ENTITY_OPT1_SPLASH_IN_WATER        equ $08
-ENTITY_OPT1_IS_MINI_BOSS           equ $04
-ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL equ $02
-ENTITY_OPT1_MOVE_PIT_WATER         equ $01
-ENTITY_OPT1_NONE                   equ $00
+DEF ENTITY_OPT1_IS_BOSS                EQU $80
+DEF ENTITY_OPT1_SWORD_CLINK_OFF        EQU $40
+DEF ENTITY_OPT1_ALLOW_OUT_OF_BOUNDS    EQU $20
+DEF ENTITY_OPT1_NO_GROUND_INTERACTION  EQU $10
+DEF ENTITY_OPT1_SPLASH_IN_WATER        EQU $08
+DEF ENTITY_OPT1_IS_MINI_BOSS           EQU $04
+DEF ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL EQU $02
+DEF ENTITY_OPT1_NO_WALL_COLLISION      EQU $01
+DEF ENTITY_OPT1_NONE                   EQU $00
 ; Bit numbers for wEntitiesOptions1Table
-ENTITY_OPT1_B_IS_BOSS                equ 7
-ENTITY_OPT1_B_SWORD_CLINK_OFF        equ 6
-ENTITY_OPT1_B_ALLOW_OUT_OF_BOUNDS    equ 5
-ENTITY_OPT1_B_IMMUNE_WATER_PIT       equ 4
-ENTITY_OPT1_B_SPLASH_IN_WATER        equ 3
-ENTITY_OPT1_B_IS_MINI_BOSS           equ 2
-ENTITY_OPT1_B_EXCLUDED_FROM_KILL_ALL equ 1
-ENTITY_OPT1_B_MOVE_PIT_WATER         equ 0
+DEF ENTITY_OPT1_B_IS_BOSS                EQU 7
+DEF ENTITY_OPT1_B_SWORD_CLINK_OFF        EQU 6
+DEF ENTITY_OPT1_B_ALLOW_OUT_OF_BOUNDS    EQU 5
+DEF ENTITY_OPT1_B_NO_GROUND_INTERACTION  EQU 4
+DEF ENTITY_OPT1_B_SPLASH_IN_WATER        EQU 3
+DEF ENTITY_OPT1_B_IS_MINI_BOSS           EQU 2
+DEF ENTITY_OPT1_B_EXCLUDED_FROM_KILL_ALL EQU 1
+DEF ENTITY_OPT1_B_NO_WALL_COLLISION      EQU 0
 
 ; Values for wEntitiesPhysicsFlagsTable
-ENTITY_PHYSICS_HARMLESS             equ $80 ; The entity does not damage Link
-ENTITY_PHYSICS_PROJECTILE_NOCLIP    equ $40 ; Projectiles pass through the entity
-ENTITY_PHYSICS_GRABBABLE            equ $20 ; TODO: Implies that the entity can be grabbed with the Power Bracelet, or picked up/collected, depending on entity's private state?
-ENTITY_PHYSICS_SHADOW               equ $10 ; The entity casts a shadow
+DEF ENTITY_PHYSICS_HARMLESS             EQU $80 ; The entity does not damage Link
+DEF ENTITY_PHYSICS_PROJECTILE_NOCLIP    EQU $40 ; Projectiles pass through the entity
+DEF ENTITY_PHYSICS_GRABBABLE            EQU $20 ; TODO: Implies that the entity can be grabbed with the Power Bracelet, or picked up/collected, depending on entity's private state?
+DEF ENTITY_PHYSICS_SHADOW               EQU $10 ; The entity casts a shadow
 ; Mask for all the physics flags
-ENTITY_PHYSICS_MASK                 equ $F0
+DEF ENTITY_PHYSICS_MASK                 EQU $F0
 ; Bit numbers for wEntitiesPhysicsFlagsTable
-ENTITY_PHYSICS_B_HARMLESS           equ 7
-ENTITY_PHYSICS_B_GRABBABLE          equ 5
-ENTITY_PHYSICS_B_PROJECTILE_NOCLIP  equ 6
-ENTITY_PHYSICS_B_SHADOW             equ 4
+DEF ENTITY_PHYSICS_B_HARMLESS           EQU 7
+DEF ENTITY_PHYSICS_B_GRABBABLE          EQU 5
+DEF ENTITY_PHYSICS_B_PROJECTILE_NOCLIP  EQU 6
+DEF ENTITY_PHYSICS_B_SHADOW             EQU 4
 
 ; Values for wEntitiesTypeTable
 ; (See also EntityHandlersTable)
-ENTITY_ARROW                         equ $00
-ENTITY_BOOMERANG                     equ $01
-ENTITY_BOMB                          equ $02
-ENTITY_HOOKSHOT_CHAIN                equ $03
-ENTITY_MAGIC_ROD_FIREBALL            equ $04
-ENTITY_LIFTABLE_ROCK                 equ $05
-ENTITY_PUSHED_BLOCK                  equ $06 ; The entity spawned when pushing an OBJECT_PUSHABLE_BLOCK, before it's moved into its new position
-ENTITY_CHEST_WITH_ITEM               equ $07
-ENTITY_MAGIC_POWDER_SPRINKLE         equ $08
-ENTITY_OCTOROK                       equ $09
-ENTITY_OCTOROK_ROCK                  equ $0A
-ENTITY_MOBLIN                        equ $0B
-ENTITY_MOBLIN_ARROW                  equ $0C
-ENTITY_TEKTITE                       equ $0D
-ENTITY_LEEVER                        equ $0E
-ENTITY_ARMOS_STATUE                  equ $0F
-ENTITY_HIDING_GHINI                  equ $10
-ENTITY_GIANT_GHINI                   equ $11
-ENTITY_GHINI                         equ $12
-ENTITY_BROKEN_HEART_CONTAINER        equ $13 ; Killable; crashes the game if you run into it; works if you use the Magic Powder on it
-ENTITY_MOBLIN_SWORD                  equ $14
-ENTITY_ANTI_FAIRY                    equ $15
-ENTITY_SPARK_COUNTER_CLOCKWISE       equ $16
-ENTITY_SPARK_CLOCKWISE               equ $17
-ENTITY_POLS_VOICE                    equ $18
-ENTITY_KEESE                         equ $19
-ENTITY_STALFOS_AGGRESSIVE            equ $1A
-ENTITY_ZOL                           equ $1B
-ENTITY_GEL                           equ $1C
-;ENTITY_DISABLED                     equ $1D
-ENTITY_STALFOS_EVASIVE               equ $1E
-ENTITY_GIBDO                         equ $1F
-ENTITY_HARDHAT_BEETLE                equ $20
-ENTITY_WIZROBE                       equ $21
-ENTITY_WIZROBE_PROJECTILE            equ $22
-ENTITY_LIKE_LIKE                     equ $23
-ENTITY_IRON_MASK                     equ $24
-ENTITY_SMALL_EXPLOSION_ENEMY         equ $25
-ENTITY_SMALL_EXPLOSION_ENEMY_2       equ $26
-ENTITY_SPIKE_TRAP                    equ $27
-ENTITY_MIMIC                         equ $28
-ENTITY_MINI_MOLDORM                  equ $29
-ENTITY_LASER                         equ $2A
-ENTITY_LASER_BEAM                    equ $2B
-ENTITY_SPIKED_BEETLE                 equ $2C
-ENTITY_DROPPABLE_HEART               equ $2D
-ENTITY_DROPPABLE_RUPEE               equ $2E
-ENTITY_DROPPABLE_FAIRY               equ $2F
-ENTITY_KEY_DROP_POINT                equ $30
-ENTITY_SWORD_SHIELD_PICKUP           equ $31
-ENTITY_IRON_MASKS_MASK               equ $32
-ENTITY_PIECE_OF_POWER                equ $33
-ENTITY_GUARDIAN_ACORN                equ $34
-ENTITY_HEART_PIECE                   equ $35
-ENTITY_HEART_CONTAINER               equ $36
-ENTITY_DROPPABLE_ARROWS              equ $37
-ENTITY_DROPPABLE_BOMBS               equ $38
-ENTITY_INSTRUMENT_OF_THE_SIRENS      equ $39
-ENTITY_SLEEPY_TOADSTOOL              equ $3A
-ENTITY_DROPPABLE_MAGIC_POWDER        equ $3B
-ENTITY_HIDING_SLIME_KEY              equ $3C
-ENTITY_DROPPABLE_SECRET_SEASHELL     equ $3D
-ENTITY_MARIN                         equ $3E
-ENTITY_TARIN                         equ $3F
-ENTITY_WITCH                         equ $40
-ENTITY_OWL_EVENT                     equ $41
-ENTITY_OWL_STATUE                    equ $42
-ENTITY_SEASHELL_MANSION_TREES        equ $43
-ENTITY_YARNA_TALKING_BONES           equ $44
-ENTITY_BOULDERS                      equ $45
-ENTITY_MOVING_BLOCK_LEFT_TOP         equ $46
-ENTITY_MOVING_BLOCK_LEFT_BOTTOM      equ $47
-ENTITY_MOVING_BLOCK_BOTTOM_LEFT      equ $48
-ENTITY_MOVING_BLOCK_BOTTOM_RIGHT     equ $49
-ENTITY_COLOR_DUNGEON_BOOK            equ $4A
-ENTITY_POT                           equ $4B
-;ENTITY_DISABLED                     equ $4C
-ENTITY_SHOP_OWNER                    equ $4D
-ENTITY_4E                            equ $4E ; unknown
-ENTITY_TRENDY_GAME_OWNER             equ $4F
-ENTITY_BOO_BUDDY                     equ $50
-ENTITY_KNIGHT                        equ $51
-ENTITY_TRACTOR_DEVICE                equ $52
-ENTITY_TRACTOR_DEVICE_REVERSE        equ $53
-ENTITY_FISHERMAN_FISHING_GAME        equ $54
-ENTITY_BOUNCING_BOMBITE              equ $55
-ENTITY_TIMER_BOMBITE                 equ $56
-ENTITY_PAIRODD                       equ $57
-ENTITY_PAIRODD_PROJECTILE            equ $58
-ENTITY_MOLDORM                       equ $59
-ENTITY_FACADE                        equ $5A
-ENTITY_SLIME_EYE                     equ $5B
-ENTITY_GENIE                         equ $5C
-ENTITY_SLIME_EEL                     equ $5D
-ENTITY_GHOMA                         equ $5E
-ENTITY_MASTER_STALFOS                equ $5F
-ENTITY_DODONGO_SNAKE                 equ $60
-ENTITY_WARP                          equ $61
-ENTITY_HOT_HEAD                      equ $62
-ENTITY_EVIL_EAGLE                    equ $63
-ENTITY_SOUTH_FACE_SHRINE_DOOR        equ $64 ; unknown ; @TODO unused Eagle's Tower split-screen vfx
-ENTITY_ANGLER_FISH                   equ $65
-ENTITY_CRYSTAL_SWITCH                equ $66
-ENTITY_67                            equ $67 ; unknown
-ENTITY_HOOKSHOT_BRIDGE               equ $68
-ENTITY_MOVING_BLOCK_MOVER            equ $69
-ENTITY_RAFT_RAFT_OWNER               equ $6A
-ENTITY_TEXT_DEBUGGER                 equ $6B
-ENTITY_CUCCO                         equ $6C
-ENTITY_BOW_WOW                       equ $6D
-ENTITY_BUTTERFLY                     equ $6E
-ENTITY_DOG                           equ $6F
-ENTITY_KID_70                        equ $70
-ENTITY_KID_71                        equ $71
-ENTITY_KID_72                        equ $72
-ENTITY_KID_73                        equ $73
-ENTITY_PAPAHLS_WIFE                  equ $74
-ENTITY_GRANDMA_ULRIRA                equ $75
-ENTITY_MR_WRITE                      equ $76
-ENTITY_GRANDPA_ULRIRA                equ $77
-ENTITY_YIP_YIP                       equ $78
-ENTITY_MADAM_MEOWMEOW                equ $79
-ENTITY_CROW                          equ $7A
-ENTITY_CRAZY_TRACY                   equ $7B
-ENTITY_GIANT_GOPONGA_FLOWER          equ $7C
-ENTITY_GOPONGA_FLOWER_PROJECTILE     equ $7D
-ENTITY_GOPONGA_FLOWER                equ $7E
-ENTITY_TURTLE_ROCK_HEAD              equ $7F
-ENTITY_TELEPHONE                     equ $80
-ENTITY_ROLLING_BONES                 equ $81
-ENTITY_ROLLING_BONES_BAR             equ $82
-ENTITY_DREAM_SHRINE_BED              equ $83
-ENTITY_BIG_FAIRY                     equ $84
-ENTITY_MR_WRITES_BIRD                equ $85
-ENTITY_FLOATING_ITEM                 equ $86
-ENTITY_DESERT_LANMOLA                equ $87
-ENTITY_ARMOS_KNIGHT                  equ $88
-ENTITY_HINOX                         equ $89
-ENTITY_TILE_GLINT_SHOWN              equ $8A
-ENTITY_TILE_GLINT_HIDDEN             equ $8B
-ENTITY_8C                            equ $8C ; unknown
-ENTITY_8D                            equ $8D ; unknown
-ENTITY_CUE_BALL                      equ $8E
-ENTITY_MASKED_MIMIC_GORIYA           equ $8F
-ENTITY_THREE_OF_A_KIND               equ $90
-ENTITY_ANTI_KIRBY                    equ $91
-ENTITY_SMASHER                       equ $92
-ENTITY_MAD_BOMBER                    equ $93
-ENTITY_KANALET_BOMBABLE_WALL         equ $94
-ENTITY_RICHARD                       equ $95
-ENTITY_RICHARD_FROG                  equ $96
-ENTITY_DIVABLE_WATER                 equ $97
-ENTITY_HORSE_PIECE                   equ $98
-ENTITY_WATER_TEKTITE                 equ $99
-ENTITY_FLYING_TILES                  equ $9A
-ENTITY_HIDING_ZOL                    equ $9B
-ENTITY_STAR                          equ $9C
-ENTITY_LIFTABLE_STATUE               equ $9D
-ENTITY_FIREBALL_SHOOTER              equ $9E
-ENTITY_GOOMBA                        equ $9F
-ENTITY_PEAHAT                        equ $A0
-ENTITY_SNAKE                         equ $A1
-ENTITY_PIRANHA_PLANT                 equ $A2
-ENTITY_SIDE_VIEW_PLATFORM_HORIZONTAL equ $A3
-ENTITY_SIDE_VIEW_PLATFORM_VERTICAL   equ $A4
-ENTITY_SIDE_VIEW_PLATFORM            equ $A5
-ENTITY_SIDE_VIEW_WEIGHTS             equ $A6
-ENTITY_SMASHABLE_PILLAR              equ $A7
-ENTITY_WRECKING_BALL                 equ $A8
-ENTITY_BLOOPER                       equ $A9
-ENTITY_CHEEP_CHEEP_HORIZONTAL        equ $AA
-ENTITY_CHEEP_CHEEP_VERTICAL          equ $AB
-ENTITY_CHEEP_CHEEP_JUMPING           equ $AC
-ENTITY_KIKI_THE_MONKEY               equ $AD
-ENTITY_WINGED_OCTOROK                equ $AE
-ENTITY_TRADING_ITEM                  equ $AF
-ENTITY_PINCER                        equ $B0
-ENTITY_HOLE_FILLER                   equ $B1
-ENTITY_BEETLE_SPAWNER                equ $B2
-ENTITY_HONEYCOMB                     equ $B3
-ENTITY_TARIN_BEEKEEPER               equ $B4
-ENTITY_BEAR                          equ $B5
-ENTITY_PAPAHL                        equ $B6
-ENTITY_MERMAID                       equ $B7
-ENTITY_FISHERMAN_UNDER_BRIDGE        equ $B8
-ENTITY_BUZZ_BLOB                     equ $B9
-ENTITY_BOMBER                        equ $BA
-ENTITY_BUSH_CRAWLER                  equ $BB
-ENTITY_GRIM_CREEPER                  equ $BC
-ENTITY_VIRE                          equ $BD
-ENTITY_BLAINO                        equ $BE
-ENTITY_ZOMBIE                        equ $BF
-ENTITY_MAZE_SIGNPOST                 equ $C0
-ENTITY_MARIN_AT_THE_SHORE            equ $C1
-ENTITY_MARIN_AT_TAL_TAL_HEIGHTS      equ $C2
-ENTITY_MAMU_AND_FROGS                equ $C3
-ENTITY_WALRUS                        equ $C4
-ENTITY_URCHIN                        equ $C5
-ENTITY_SAND_CRAB                     equ $C6
-ENTITY_MANBO_AND_FISHES              equ $C7
-ENTITY_BUNNY_CALLING_MARIN           equ $C8
-ENTITY_MUSICAL_NOTE                  equ $C9
-ENTITY_MAD_BATTER                    equ $CA
-ENTITY_ZORA                          equ $CB
-ENTITY_FISH                          equ $CC
-ENTITY_BANANAS_SCHULE_SALE           equ $CD
-ENTITY_MERMAID_STATUE                equ $CE
-ENTITY_SEASHELL_MANSION              equ $CF
-ENTITY_ANIMAL_D0                     equ $D0
-ENTITY_ANIMAL_D1                     equ $D1
-ENTITY_ANIMAL_D2                     equ $D2
-ENTITY_BUNNY_D3                      equ $D3
-ENTITY_GHOST                         equ $D4
-ENTITY_ROOSTER                       equ $D5
-ENTITY_SIDE_VIEW_POT                 equ $D6
-ENTITY_THWIMP                        equ $D7
-ENTITY_THWOMP                        equ $D8
-ENTITY_THWOMP_RAMMABLE               equ $D9
-ENTITY_PODOBOO                       equ $DA
-ENTITY_GIANT_BUBBLE                  equ $DB
-ENTITY_FLYING_ROOSTER_EVENTS         equ $DC
-ENTITY_BOOK                          equ $DD
-ENTITY_EGG_SONG_EVENT                equ $DE
-ENTITY_SWORD_BEAM                    equ $DF
-ENTITY_MONKEY                        equ $E0
-ENTITY_WITCH_RAT                     equ $E1
-ENTITY_FLAME_SHOOTER                 equ $E2
-ENTITY_POKEY                         equ $E3
-ENTITY_MOBLIN_KING                   equ $E4
-ENTITY_FLOATING_ITEM_2               equ $E5
-ENTITY_FINAL_NIGHTMARE               equ $E6
-ENTITY_KANALET_CASTLE_GATE_SWITCH    equ $E7
-ENTITY_ENDING_OWL_STAIR_CLIMBING     equ $E8
-ENTITY_COLOR_SHELL_RED               equ $E9
-ENTITY_COLOR_SHELL_GREEN             equ $EA
-ENTITY_COLOR_SHELL_BLUE              equ $EB
-ENTITY_COLOR_GHOUL_RED               equ $EC
-ENTITY_COLOR_GHOUL_GREEN             equ $ED
-ENTITY_COLOR_GHOUL_BLUE              equ $EE
-ENTITY_ROTOSWITCH_RED                equ $EF
-ENTITY_ROTOSWITCH_YELLOW             equ $F0
-ENTITY_ROTOSWITCH_BLUE               equ $F1
-ENTITY_FLYING_HOPPER_BOMBS           equ $F2
-ENTITY_HOPPER                        equ $F3
-ENTITY_AVALAUNCH                     equ $F4
-ENTITY_BOUNCING_BOULDER              equ $F5
-ENTITY_COLOR_GUARDIAN_BLUE           equ $F6
-ENTITY_COLOR_GUARDIAN_RED            equ $F7
-ENTITY_GIANT_BUZZ_BLOB               equ $F8
-ENTITY_HARDHIT_BEETLE                equ $F9
-ENTITY_PHOTOGRAPHER                  equ $FA
-; unused                             equ $FB
-; unused                             equ $FC
-; unused                             equ $FD
-; unused                             equ $FE
-ENTITY_NONE                          equ $FF
+DEF ENTITY_ARROW                         EQU $00
+DEF ENTITY_BOOMERANG                     EQU $01
+DEF ENTITY_BOMB                          EQU $02
+DEF ENTITY_HOOKSHOT_CHAIN                EQU $03
+DEF ENTITY_MAGIC_ROD_FIREBALL            EQU $04
+DEF ENTITY_LIFTABLE_ROCK                 EQU $05
+DEF ENTITY_PUSHED_BLOCK                  EQU $06 ; The entity spawned when pushing an OBJECT_PUSHABLE_BLOCK, before it's moved into its new position
+DEF ENTITY_CHEST_WITH_ITEM               EQU $07
+DEF ENTITY_MAGIC_POWDER_SPRINKLE         EQU $08
+DEF ENTITY_OCTOROK                       EQU $09
+DEF ENTITY_OCTOROK_ROCK                  EQU $0A
+DEF ENTITY_MOBLIN                        EQU $0B
+DEF ENTITY_MOBLIN_ARROW                  EQU $0C
+DEF ENTITY_TEKTITE                       EQU $0D
+DEF ENTITY_LEEVER                        EQU $0E
+DEF ENTITY_ARMOS_STATUE                  EQU $0F
+DEF ENTITY_HIDING_GHINI                  EQU $10
+DEF ENTITY_GIANT_GHINI                   EQU $11
+DEF ENTITY_GHINI                         EQU $12
+DEF ENTITY_BROKEN_HEART_CONTAINER        EQU $13 ; Killable; crashes the game if you run into it; works if you use the Magic Powder on it
+DEF ENTITY_MOBLIN_SWORD                  EQU $14
+DEF ENTITY_ANTI_FAIRY                    EQU $15
+DEF ENTITY_SPARK_COUNTER_CLOCKWISE       EQU $16
+DEF ENTITY_SPARK_CLOCKWISE               EQU $17
+DEF ENTITY_POLS_VOICE                    EQU $18
+DEF ENTITY_KEESE                         EQU $19
+DEF ENTITY_STALFOS_AGGRESSIVE            EQU $1A
+DEF ENTITY_ZOL                           EQU $1B
+DEF ENTITY_GEL                           EQU $1C
+;ENTITY_DISABLED                     EQU $1D
+DEF ENTITY_STALFOS_EVASIVE               EQU $1E
+DEF ENTITY_GIBDO                         EQU $1F
+DEF ENTITY_HARDHAT_BEETLE                EQU $20
+DEF ENTITY_WIZROBE                       EQU $21
+DEF ENTITY_WIZROBE_PROJECTILE            EQU $22
+DEF ENTITY_LIKE_LIKE                     EQU $23
+DEF ENTITY_IRON_MASK                     EQU $24
+DEF ENTITY_SMALL_EXPLOSION_ENEMY         EQU $25
+DEF ENTITY_SMALL_EXPLOSION_ENEMY_2       EQU $26
+DEF ENTITY_SPIKE_TRAP                    EQU $27
+DEF ENTITY_MIMIC                         EQU $28
+DEF ENTITY_MINI_MOLDORM                  EQU $29
+DEF ENTITY_LASER                         EQU $2A
+DEF ENTITY_LASER_BEAM                    EQU $2B
+DEF ENTITY_SPIKED_BEETLE                 EQU $2C
+DEF ENTITY_DROPPABLE_HEART               EQU $2D
+DEF ENTITY_DROPPABLE_RUPEE               EQU $2E
+DEF ENTITY_DROPPABLE_FAIRY               EQU $2F
+DEF ENTITY_KEY_DROP_POINT                EQU $30
+DEF ENTITY_SWORD_SHIELD_PICKUP           EQU $31
+DEF ENTITY_IRON_MASKS_MASK               EQU $32
+DEF ENTITY_PIECE_OF_POWER                EQU $33
+DEF ENTITY_GUARDIAN_ACORN                EQU $34
+DEF ENTITY_HEART_PIECE                   EQU $35
+DEF ENTITY_HEART_CONTAINER               EQU $36
+DEF ENTITY_DROPPABLE_ARROWS              EQU $37
+DEF ENTITY_DROPPABLE_BOMBS               EQU $38
+DEF ENTITY_INSTRUMENT_OF_THE_SIRENS      EQU $39
+DEF ENTITY_SLEEPY_TOADSTOOL              EQU $3A
+DEF ENTITY_DROPPABLE_MAGIC_POWDER        EQU $3B
+DEF ENTITY_HIDING_SLIME_KEY              EQU $3C
+DEF ENTITY_DROPPABLE_SECRET_SEASHELL     EQU $3D
+DEF ENTITY_MARIN                         EQU $3E
+DEF ENTITY_TARIN                         EQU $3F
+DEF ENTITY_WITCH                         EQU $40
+DEF ENTITY_OWL_EVENT                     EQU $41
+DEF ENTITY_OWL_STATUE                    EQU $42
+DEF ENTITY_SEASHELL_MANSION_TREES        EQU $43
+DEF ENTITY_YARNA_TALKING_BONES           EQU $44
+DEF ENTITY_BOULDERS                      EQU $45
+DEF ENTITY_MOVING_BLOCK_LEFT_TOP         EQU $46
+DEF ENTITY_MOVING_BLOCK_LEFT_BOTTOM      EQU $47
+DEF ENTITY_MOVING_BLOCK_BOTTOM_LEFT      EQU $48
+DEF ENTITY_MOVING_BLOCK_BOTTOM_RIGHT     EQU $49
+DEF ENTITY_COLOR_DUNGEON_BOOK            EQU $4A
+DEF ENTITY_POT                           EQU $4B
+;ENTITY_DISABLED                     EQU $4C
+DEF ENTITY_SHOP_OWNER                    EQU $4D
+DEF ENTITY_4E                            EQU $4E ; unknown
+DEF ENTITY_TRENDY_GAME_OWNER             EQU $4F
+DEF ENTITY_BOO_BUDDY                     EQU $50
+DEF ENTITY_KNIGHT                        EQU $51
+DEF ENTITY_TRACTOR_DEVICE                EQU $52
+DEF ENTITY_TRACTOR_DEVICE_REVERSE        EQU $53
+DEF ENTITY_FISHERMAN_FISHING_GAME        EQU $54
+DEF ENTITY_BOUNCING_BOMBITE              EQU $55
+DEF ENTITY_TIMER_BOMBITE                 EQU $56
+DEF ENTITY_PAIRODD                       EQU $57
+DEF ENTITY_PAIRODD_PROJECTILE            EQU $58
+DEF ENTITY_MOLDORM                       EQU $59
+DEF ENTITY_FACADE                        EQU $5A
+DEF ENTITY_SLIME_EYE                     EQU $5B
+DEF ENTITY_GENIE                         EQU $5C
+DEF ENTITY_SLIME_EEL                     EQU $5D
+DEF ENTITY_GHOMA                         EQU $5E
+DEF ENTITY_MASTER_STALFOS                EQU $5F
+DEF ENTITY_DODONGO_SNAKE                 EQU $60
+DEF ENTITY_WARP                          EQU $61
+DEF ENTITY_HOT_HEAD                      EQU $62
+DEF ENTITY_EVIL_EAGLE                    EQU $63
+DEF ENTITY_SOUTH_FACE_SHRINE_DOOR        EQU $64 ; unknown ; @TODO unused Eagle's Tower split-screen vfx
+DEF ENTITY_ANGLER_FISH                   EQU $65
+DEF ENTITY_CRYSTAL_SWITCH                EQU $66
+DEF ENTITY_67                            EQU $67 ; unknown
+DEF ENTITY_HOOKSHOT_BRIDGE               EQU $68
+DEF ENTITY_MOVING_BLOCK_MOVER            EQU $69
+DEF ENTITY_RAFT_RAFT_OWNER               EQU $6A
+DEF ENTITY_TEXT_DEBUGGER                 EQU $6B
+DEF ENTITY_CUCCO                         EQU $6C
+DEF ENTITY_BOW_WOW                       EQU $6D
+DEF ENTITY_BUTTERFLY                     EQU $6E
+DEF ENTITY_DOG                           EQU $6F
+DEF ENTITY_KID_70                        EQU $70
+DEF ENTITY_KID_71                        EQU $71
+DEF ENTITY_KID_72                        EQU $72
+DEF ENTITY_KID_73                        EQU $73
+DEF ENTITY_PAPAHLS_WIFE                  EQU $74
+DEF ENTITY_GRANDMA_ULRIRA                EQU $75
+DEF ENTITY_MR_WRITE                      EQU $76
+DEF ENTITY_GRANDPA_ULRIRA                EQU $77
+DEF ENTITY_YIP_YIP                       EQU $78
+DEF ENTITY_MADAM_MEOWMEOW                EQU $79
+DEF ENTITY_CROW                          EQU $7A
+DEF ENTITY_CRAZY_TRACY                   EQU $7B
+DEF ENTITY_GIANT_GOPONGA_FLOWER          EQU $7C
+DEF ENTITY_GOPONGA_FLOWER_PROJECTILE     EQU $7D
+DEF ENTITY_GOPONGA_FLOWER                EQU $7E
+DEF ENTITY_TURTLE_ROCK_HEAD              EQU $7F
+DEF ENTITY_TELEPHONE                     EQU $80
+DEF ENTITY_ROLLING_BONES                 EQU $81
+DEF ENTITY_ROLLING_BONES_BAR             EQU $82
+DEF ENTITY_DREAM_SHRINE_BED              EQU $83
+DEF ENTITY_BIG_FAIRY                     EQU $84
+DEF ENTITY_MR_WRITES_BIRD                EQU $85
+DEF ENTITY_FLOATING_ITEM                 EQU $86
+DEF ENTITY_DESERT_LANMOLA                EQU $87
+DEF ENTITY_ARMOS_KNIGHT                  EQU $88
+DEF ENTITY_HINOX                         EQU $89
+DEF ENTITY_TILE_GLINT_SHOWN              EQU $8A
+DEF ENTITY_TILE_GLINT_HIDDEN             EQU $8B
+DEF ENTITY_RAISABLE_BLOCK_SHIFTED_RIGHT  EQU $8C ; unused
+DEF ENTITY_RAISABLE_BLOCK_SHIFTED_DOWN   EQU $8D ; unused
+DEF ENTITY_CUE_BALL                      EQU $8E
+DEF ENTITY_MASKED_MIMIC_GORIYA           EQU $8F
+DEF ENTITY_THREE_OF_A_KIND               EQU $90
+DEF ENTITY_ANTI_KIRBY                    EQU $91
+DEF ENTITY_SMASHER                       EQU $92
+DEF ENTITY_MAD_BOMBER                    EQU $93
+DEF ENTITY_KANALET_BOMBABLE_WALL         EQU $94
+DEF ENTITY_RICHARD                       EQU $95
+DEF ENTITY_RICHARD_FROG                  EQU $96
+DEF ENTITY_DIVABLE_WATER                 EQU $97
+DEF ENTITY_HORSE_PIECE                   EQU $98
+DEF ENTITY_WATER_TEKTITE                 EQU $99
+DEF ENTITY_FLYING_TILES                  EQU $9A
+DEF ENTITY_HIDING_ZOL                    EQU $9B
+DEF ENTITY_STAR                          EQU $9C
+DEF ENTITY_LIFTABLE_STATUE               EQU $9D
+DEF ENTITY_FIREBALL_SHOOTER              EQU $9E
+DEF ENTITY_GOOMBA                        EQU $9F
+DEF ENTITY_PEAHAT                        EQU $A0
+DEF ENTITY_SNAKE                         EQU $A1
+DEF ENTITY_PIRANHA_PLANT                 EQU $A2
+DEF ENTITY_SIDE_VIEW_PLATFORM_HORIZONTAL EQU $A3
+DEF ENTITY_SIDE_VIEW_PLATFORM_VERTICAL   EQU $A4
+DEF ENTITY_SIDE_VIEW_PLATFORM            EQU $A5
+DEF ENTITY_SIDE_VIEW_WEIGHTS             EQU $A6
+DEF ENTITY_SMASHABLE_PILLAR              EQU $A7
+DEF ENTITY_WRECKING_BALL                 EQU $A8
+DEF ENTITY_BLOOPER                       EQU $A9
+DEF ENTITY_CHEEP_CHEEP_HORIZONTAL        EQU $AA
+DEF ENTITY_CHEEP_CHEEP_VERTICAL          EQU $AB
+DEF ENTITY_CHEEP_CHEEP_JUMPING           EQU $AC
+DEF ENTITY_KIKI_THE_MONKEY               EQU $AD
+DEF ENTITY_WINGED_OCTOROK                EQU $AE
+DEF ENTITY_TRADING_ITEM                  EQU $AF
+DEF ENTITY_PINCER                        EQU $B0
+DEF ENTITY_HOLE_FILLER                   EQU $B1
+DEF ENTITY_BEETLE_SPAWNER                EQU $B2
+DEF ENTITY_HONEYCOMB                     EQU $B3
+DEF ENTITY_TARIN_BEEKEEPER               EQU $B4
+DEF ENTITY_BEAR                          EQU $B5
+DEF ENTITY_PAPAHL                        EQU $B6
+DEF ENTITY_MERMAID                       EQU $B7
+DEF ENTITY_FISHERMAN_UNDER_BRIDGE        EQU $B8
+DEF ENTITY_BUZZ_BLOB                     EQU $B9
+DEF ENTITY_BOMBER                        EQU $BA
+DEF ENTITY_BUSH_CRAWLER                  EQU $BB
+DEF ENTITY_GRIM_CREEPER                  EQU $BC
+DEF ENTITY_VIRE                          EQU $BD
+DEF ENTITY_BLAINO                        EQU $BE
+DEF ENTITY_ZOMBIE                        EQU $BF
+DEF ENTITY_MAZE_SIGNPOST                 EQU $C0
+DEF ENTITY_MARIN_AT_THE_SHORE            EQU $C1
+DEF ENTITY_MARIN_AT_TAL_TAL_HEIGHTS      EQU $C2
+DEF ENTITY_MAMU_AND_FROGS                EQU $C3
+DEF ENTITY_WALRUS                        EQU $C4
+DEF ENTITY_URCHIN                        EQU $C5
+DEF ENTITY_SAND_CRAB                     EQU $C6
+DEF ENTITY_MANBO_AND_FISHES              EQU $C7
+DEF ENTITY_BUNNY_CALLING_MARIN           EQU $C8
+DEF ENTITY_MUSICAL_NOTE                  EQU $C9
+DEF ENTITY_MAD_BATTER                    EQU $CA
+DEF ENTITY_ZORA                          EQU $CB
+DEF ENTITY_FISH                          EQU $CC
+DEF ENTITY_BANANAS_SCHULE_SALE           EQU $CD
+DEF ENTITY_MERMAID_STATUE                EQU $CE
+DEF ENTITY_SEASHELL_MANSION              EQU $CF
+DEF ENTITY_ANIMAL_D0                     EQU $D0
+DEF ENTITY_ANIMAL_D1                     EQU $D1
+DEF ENTITY_ANIMAL_D2                     EQU $D2
+DEF ENTITY_BUNNY_D3                      EQU $D3
+DEF ENTITY_GHOST                         EQU $D4
+DEF ENTITY_ROOSTER                       EQU $D5
+DEF ENTITY_SIDE_VIEW_POT                 EQU $D6
+DEF ENTITY_THWIMP                        EQU $D7
+DEF ENTITY_THWOMP                        EQU $D8
+DEF ENTITY_THWOMP_RAMMABLE               EQU $D9
+DEF ENTITY_PODOBOO                       EQU $DA
+DEF ENTITY_GIANT_BUBBLE                  EQU $DB
+DEF ENTITY_FLYING_ROOSTER_EVENTS         EQU $DC
+DEF ENTITY_BOOK                          EQU $DD
+DEF ENTITY_EGG_SONG_EVENT                EQU $DE
+DEF ENTITY_SWORD_BEAM                    EQU $DF
+DEF ENTITY_MONKEY                        EQU $E0
+DEF ENTITY_WITCH_RAT                     EQU $E1
+DEF ENTITY_FLAME_SHOOTER                 EQU $E2
+DEF ENTITY_POKEY                         EQU $E3
+DEF ENTITY_MOBLIN_KING                   EQU $E4
+DEF ENTITY_FLOATING_ITEM_2               EQU $E5
+DEF ENTITY_FINAL_NIGHTMARE               EQU $E6
+DEF ENTITY_KANALET_CASTLE_GATE_SWITCH    EQU $E7
+DEF ENTITY_ENDING_OWL_STAIR_CLIMBING     EQU $E8
+DEF ENTITY_COLOR_SHELL_RED               EQU $E9
+DEF ENTITY_COLOR_SHELL_GREEN             EQU $EA
+DEF ENTITY_COLOR_SHELL_BLUE              EQU $EB
+DEF ENTITY_COLOR_GHOUL_RED               EQU $EC
+DEF ENTITY_COLOR_GHOUL_GREEN             EQU $ED
+DEF ENTITY_COLOR_GHOUL_BLUE              EQU $EE
+DEF ENTITY_ROTOSWITCH_RED                EQU $EF
+DEF ENTITY_ROTOSWITCH_YELLOW             EQU $F0
+DEF ENTITY_ROTOSWITCH_BLUE               EQU $F1
+DEF ENTITY_FLYING_HOPPER_BOMBS           EQU $F2
+DEF ENTITY_HOPPER                        EQU $F3
+DEF ENTITY_AVALAUNCH                     EQU $F4
+DEF ENTITY_BOUNCING_BOULDER              EQU $F5
+DEF ENTITY_COLOR_GUARDIAN_BLUE           EQU $F6
+DEF ENTITY_COLOR_GUARDIAN_RED            EQU $F7
+DEF ENTITY_GIANT_BUZZ_BLOB               EQU $F8
+DEF ENTITY_HARDHIT_BEETLE                EQU $F9
+DEF ENTITY_PHOTOGRAPHER                  EQU $FA
+; unused                             EQU $FB
+; unused                             EQU $FC
+; unused                             EQU $FD
+; unused                             EQU $FE
+DEF ENTITY_NONE                          EQU $FF

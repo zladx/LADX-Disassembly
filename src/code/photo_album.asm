@@ -1,9 +1,9 @@
 ; Code for the Photo album and printer
 
 PhotoAlbumEntryPoint::
-    call func_028_4033                            ; $4000: $CD $33 $40
-    ld   a, [wGameplaySubtype]                    ; $4003: $FA $96 $DB
-    JP_TABLE                                      ; $4006: $C7
+    call func_028_4033                            ;; 28:4000 $CD $33 $40
+    ld   a, [wGameplaySubtype]                    ;; 28:4003 $FA $96 $DB
+    JP_TABLE                                      ;; 28:4006 $C7
 ._00 dw PhotoAlbumInit1Handler                   ; $4007 (jumpTable [0]) $A7 $40
 ._01 dw PhotoAlbumInit2Handler                   ; $4009 (jumpTable [1]) $D9 $40
 ._02 dw PhotoAlbumFadeOutHandler                 ; $400B (jumpTable [2]) $8F $40
@@ -32,72 +32,72 @@ Data_028_4031::
     db   $01, $FF
 
 func_028_4033::
-    ld   a, [wGameplaySubtype]                    ; $4033: $FA $96 $DB
-    cp   GAMEPLAY_PHOTO_ALBUM                     ; $4036: $FE $0D
-    jr   c, .return_408E_28                       ; $4038: $38 $54
+    ld   a, [wGameplaySubtype]                    ;; 28:4033 $FA $96 $DB
+    cp   GAMEPLAY_PHOTO_ALBUM                     ;; 28:4036 $FE $0D
+    jr   c, .return_408E_28                       ;; 28:4038 $38 $54
 
-    cp   GAMEPLAY_PHOTO_MARIN_WELL                ; $403A: $FE $11
-    jr   nc, .return_408E_28                      ; $403C: $30 $50
+    cp   GAMEPLAY_PHOTO_MARIN_WELL                ;; 28:403A $FE $11
+    jr   nc, .return_408E_28                      ;; 28:403C $30 $50
 
-    ld   b, $00                                   ; $403E: $06 $00
-    ld   a, [wD1C8]                               ; $4040: $FA $C8 $D1
-    and  %00000001                                ; $4043: $E6 $01
-    jr   nz, .else_4064_28                        ; $4045: $20 $1D
+    ld   b, $00                                   ;; 28:403E $06 $00
+    ld   a, [wD1C8]                               ;; 28:4040 $FA $C8 $D1
+    and  %00000001                                ;; 28:4043 $E6 $01
+    jr   nz, .else_4064_28                        ;; 28:4045 $20 $1D
 
-    ld   a, [wD1CA]                               ; $4047: $FA $CA $D1
-    ld   c, a                                     ; $404A: $4F
-    ld   hl, Data_028_4031                        ; $404B: $21 $31 $40
-    add  hl, bc                                   ; $404E: $09
-    ld   a, [wD1C9]                               ; $404F: $FA $C9 $D1
-    add  [hl]                                     ; $4052: $86
-    ld   [wD1C9], a                               ; $4053: $EA $C9 $D1
-    ld   hl, Data_028_402F                        ; $4056: $21 $2F $40
-    add  hl, bc                                   ; $4059: $09
-    cp   [hl]                                     ; $405A: $BE
-    jr   nz, .else_4064_28                        ; $405B: $20 $07
+    ld   a, [wD1CA]                               ;; 28:4047 $FA $CA $D1
+    ld   c, a                                     ;; 28:404A $4F
+    ld   hl, Data_028_4031                        ;; 28:404B $21 $31 $40
+    add  hl, bc                                   ;; 28:404E $09
+    ld   a, [wD1C9]                               ;; 28:404F $FA $C9 $D1
+    add  [hl]                                     ;; 28:4052 $86
+    ld   [wD1C9], a                               ;; 28:4053 $EA $C9 $D1
+    ld   hl, Data_028_402F                        ;; 28:4056 $21 $2F $40
+    add  hl, bc                                   ;; 28:4059 $09
+    cp   [hl]                                     ;; 28:405A $BE
+    jr   nz, .else_4064_28                        ;; 28:405B $20 $07
 
-    inc  c                                        ; $405D: $0C
-    ld   a, c                                     ; $405E: $79
-    and  %00000001                                ; $405F: $E6 $01
-    ld   [wD1CA], a                               ; $4061: $EA $CA $D1
+    inc  c                                        ;; 28:405D $0C
+    ld   a, c                                     ;; 28:405E $79
+    and  %00000001                                ;; 28:405F $E6 $01
+    ld   [wD1CA], a                               ;; 28:4061 $EA $CA $D1
 .else_4064_28:
-    ld   hl, wD1C8                                ; $4064: $21 $C8 $D1
-    inc  [hl]                                     ; $4067: $34
-    ld   a, [hl]                                  ; $4068: $7E
+    ld   hl, wD1C8                                ;; 28:4064 $21 $C8 $D1
+    inc  [hl]                                     ;; 28:4067 $34
+    ld   a, [hl]                                  ;; 28:4068 $7E
 
     ; for every eight frames, the next block of 40 bytes is used
     ; c = 40 * (a/8)
-    and  %00011000                                ; $4069: $E6 $18
-    ld   c, a                                     ; $406B: $4F
-    sla  a                                        ; $406C: $CB $27
-    sla  a                                        ; $406E: $CB $27
-    add  c                                        ; $4070: $81
-    ld   c, a                                     ; $4071: $4F
+    and  %00011000                                ;; 28:4069 $E6 $18
+    ld   c, a                                     ;; 28:406B $4F
+    sla  a                                        ;; 28:406C $CB $27
+    sla  a                                        ;; 28:406E $CB $27
+    add  c                                        ;; 28:4070 $81
+    ld   c, a                                     ;; 28:4071 $4F
 
-    ld   hl, Data_028_4DD1                        ; $4072: $21 $D1 $4D
-    add  hl, bc                                   ; $4075: $09
-    ld   de, wOAMBuffer                           ; $4076: $11 $00 $C0
-    ld   c, $0A                                   ; $4079: $0E $0A
+    ld   hl, Data_028_4DD1                        ;; 28:4072 $21 $D1 $4D
+    add  hl, bc                                   ;; 28:4075 $09
+    ld   de, wOAMBuffer                           ;; 28:4076 $11 $00 $C0
+    ld   c, $0A                                   ;; 28:4079 $0E $0A
 .loop_407B_28
-    ldi  a, [hl]                                  ; $407B: $2A
-    ld   [de], a                                  ; $407C: $12
-    inc  de                                       ; $407D: $13
-    ld   a, [wD1C9]                               ; $407E: $FA $C9 $D1
-    add  [hl]                                     ; $4081: $86
-    ld   [de], a                                  ; $4082: $12
-    inc  hl                                       ; $4083: $23
-    inc  de                                       ; $4084: $13
-    ldi  a, [hl]                                  ; $4085: $2A
-    ld   [de], a                                  ; $4086: $12
-    inc  de                                       ; $4087: $13
-    ldi  a, [hl]                                  ; $4088: $2A
-    ld   [de], a                                  ; $4089: $12
-    inc  de                                       ; $408A: $13
-    dec  c                                        ; $408B: $0D
-    jr   nz, .loop_407B_28                        ; $408C: $20 $ED
+    ldi  a, [hl]                                  ;; 28:407B $2A
+    ld   [de], a                                  ;; 28:407C $12
+    inc  de                                       ;; 28:407D $13
+    ld   a, [wD1C9]                               ;; 28:407E $FA $C9 $D1
+    add  [hl]                                     ;; 28:4081 $86
+    ld   [de], a                                  ;; 28:4082 $12
+    inc  hl                                       ;; 28:4083 $23
+    inc  de                                       ;; 28:4084 $13
+    ldi  a, [hl]                                  ;; 28:4085 $2A
+    ld   [de], a                                  ;; 28:4086 $12
+    inc  de                                       ;; 28:4087 $13
+    ldi  a, [hl]                                  ;; 28:4088 $2A
+    ld   [de], a                                  ;; 28:4089 $12
+    inc  de                                       ;; 28:408A $13
+    dec  c                                        ;; 28:408B $0D
+    jr   nz, .loop_407B_28                        ;; 28:408C $20 $ED
 
 .return_408E_28:
-    ret                                           ; $408E: $C9
+    ret                                           ;; 28:408E $C9
 
 
 PhotoAlbumFadeOutHandler:
@@ -141,7 +141,7 @@ PhotoAlbumInit1Handler:
     ldh  [hVolumeLeft], a                         ; $40CD: PhotoAlbumInit1Handler $E0 $AA
     call func_028_47CB                            ; $40CF: PhotoAlbumInit1Handler $CD $CB $47
     ld   a, IEF_SERIAL | IEF_VBLANK               ; $40D2: PhotoAlbumInit1Handler $3E $09
-    ld   [rIE], a                                 ; $40D4: PhotoAlbumInit1Handler $E0 $FF
+    ldh  [rIE], a                                 ; $40D4: PhotoAlbumInit1Handler $E0 $FF
     jp   PhotoAlbumIncrementState                 ; $40D6: PhotoAlbumInit1Handler $C3 $DB $44
 
 PhotoAlbumInit2Handler:
@@ -150,7 +150,8 @@ PhotoAlbumInit2Handler:
     call func_028_45CD                            ; $40DD: PhotoAlbumInit2Handler $CD $CD $45
     jp   PhotoAlbumIncrementState                 ; $40E0: PhotoAlbumInit2Handler $C3 $DB $44
 
-Data_028_40E3::
+; VRAM memory addresses for the top left corner of each photo
+PhotoAlbumMapLookupTable::
     db   $E1, $98, $E5, $98, $EC, $98, $F0, $98 ; $40E3 |........|
     db   $61, $99, $65, $99, $6C, $99, $70, $99 ; $40EB |a.e.l.p.|
     db   $E1, $99, $E5, $99, $EC, $99, $F0, $99 ; $40F3 |........|
@@ -204,7 +205,7 @@ ENDC
     ld   hl, PhotoAlbumBackgroundMap              ; $4150: PhotoAlbumInit3Handler $21 $E0 $79
     call CopyBGMapFromBank                        ; $4153: PhotoAlbumInit3Handler $CD $69 $0B
 
-    call func_028_4185                            ; $4156: PhotoAlbumInit3Handler $CD $85 $41
+    call PhotoAlbumImageHandler                   ; $4156: PhotoAlbumInit3Handler $CD $85 $41
     call func_028_41FC                            ; $4159: PhotoAlbumInit3Handler $CD $FC $41
 
     ld   bc, $80                                  ; $415C: PhotoAlbumInit3Handler $01 $80 $00
@@ -213,133 +214,136 @@ ENDC
     call func_028_4176                            ; $4165: PhotoAlbumInit3Handler $CD $76 $41
     ld   a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON ; $4168: PhotoAlbumInit3Handler $3E $C7
     ld   [wLCDControl], a                         ; $416A: PhotoAlbumInit3Handler $EA $FD $D6
-    ld   [rLCDC], a                               ; $416D: PhotoAlbumInit3Handler $E0 $40
+    ldh  [rLCDC], a                               ; $416D: PhotoAlbumInit3Handler $E0 $40
     xor  a                                        ; $416F: PhotoAlbumInit3Handler $AF
     ld   [wTransitionSequenceCounter], a          ; $4170: PhotoAlbumInit3Handler $EA $6B $C1
     jp   PhotoAlbumIncrementState                 ; $4173: PhotoAlbumInit3Handler $C3 $DB $44
 
 func_028_4176::
-    ldh  a, [hIsGBC]                              ; $4176: $F0 $FE
-    and  a                                        ; $4178: $A7
-    ret  z                                        ; $4179: $C8
+    ldh  a, [hIsGBC]                              ;; 28:4176 $F0 $FE
+    and  a                                        ;; 28:4178 $A7
+    ret  z                                        ;; 28:4179 $C8
 
-    ld   a, $02                                   ; $417A: $3E $02
-    ld   [rSVBK], a                               ; $417C: $E0 $70
-    call CopyData                                 ; $417E: $CD $14 $29
-    xor  a                                        ; $4181: $AF
-    ld   [rSVBK], a                               ; $4182: $E0 $70
-    ret                                           ; $4184: $C9
+    ld   a, $02                                   ;; 28:417A $3E $02
+    ldh  [rSVBK], a                               ;; 28:417C $E0 $70
+    call CopyData                                 ;; 28:417E $CD $14 $29
+    xor  a                                        ;; 28:4181 $AF
+    ldh  [rSVBK], a                               ;; 28:4182 $E0 $70
+    ret                                           ;; 28:4184 $C9
 
 
-func_028_4185::
-    ld   a, [ROM_DebugTool3]                      ; $4185: $FA $05 $00
-    and  a                                        ; $4188: $A7
-    jr   z, .else_4195_28                         ; $4189: $28 $0A
+; Loads in the "OK" tiles for the unlocked photos
+PhotoAlbumImageHandler::
+    ; If Debug3 is set, set all photos enabled
+    ld   a, [ROM_DebugTool3]                      ;; 28:4185 $FA $05 $00
+    and  a                                        ;; 28:4188 $A7
+    jr   z, .notDebug                             ;; 28:4189 $28 $0A
 
-    ld   a, $FF                                   ; $418B: $3E $FF
-    ld   [wPhotos1], a                            ; $418D: $EA $0C $DC
-    ld   a, $0F                                   ; $4190: $3E $0F
-    ld   [wPhotos2], a                            ; $4192: $EA $0D $DC
-.else_4195_28:
-    ld   bc, $01                                  ; $4195: $01 $01 $00
+    ld   a, $FF                                   ;; 28:418B $3E $FF
+    ld   [wPhotos1], a                            ;; 28:418D $EA $0C $DC
+    ld   a, $0F                                   ;; 28:4190 $3E $0F
+    ld   [wPhotos2], a                            ;; 28:4192 $EA $0D $DC
+.notDebug:
+    ld   bc, $01                                  ;; 28:4195 $01 $01 $00
 .loop_4198_28
-    ld   hl, Data_028_4265                        ; $4198: $21 $65 $42
-    add  hl, bc                                   ; $419B: $09
-    ld   a, [hl]                                  ; $419C: $7E
-    ld   e, a                                     ; $419D: $5F
-    ld   d, $00                                   ; $419E: $16 $00
-    ld   hl, wPhotos1                             ; $41A0: $21 $0C $DC
-    add  hl, de                                   ; $41A3: $19
-    ld   a, [hl]                                  ; $41A4: $7E
-    ld   hl, Data_028_4259                        ; $41A5: $21 $59 $42
-    add  hl, bc                                   ; $41A8: $09
-    and  [hl]                                     ; $41A9: $A6
-    jr   z, .else_41F5_28                         ; $41AA: $28 $49
+    ; Fetch the appropriate mask, check if that photo is unlocked
+    ld   hl, PhotoAlbumOffsetLookupTable          ;; 28:4198 $21 $65 $42
+    add  hl, bc                                   ;; 28:419B $09
+    ld   a, [hl]                                  ;; 28:419C $7E
+    ld   e, a                                     ;; 28:419D $5F
+    ld   d, $00                                   ;; 28:419E $16 $00
+    ld   hl, wPhotos1                             ;; 28:41A0 $21 $0C $DC
+    add  hl, de                                   ;; 28:41A3 $19
+    ld   a, [hl]                                  ;; 28:41A4 $7E
+    ld   hl, PhotoAlbumMaskLookupTable            ;; 28:41A5 $21 $59 $42
+    add  hl, bc                                   ;; 28:41A8 $09
+    and  [hl]                                     ;; 28:41A9 $A6
+    jr   z, .incrementLoop                        ;; 28:41AA $28 $49
 
-    ld   d, $00                                   ; $41AC: $16 $00
-    ld   hl, Data_028_40E3                        ; $41AE: $21 $E3 $40
-    ld   a, c                                     ; $41B1: $79
-    sla  a                                        ; $41B2: $CB $27
-    ld   e, a                                     ; $41B4: $5F
-    add  hl, de                                   ; $41B5: $19
-    ldi  a, [hl]                                  ; $41B6: $2A
-    ld   e, a                                     ; $41B7: $5F
-    ld   a, [hl]                                  ; $41B8: $7E
-    ld   h, a                                     ; $41B9: $67
-    ld   l, e                                     ; $41BA: $6B
-    push hl                                       ; $41BB: $E5
-    ld   a, $02                                   ; $41BC: $3E $02
-    ldi  [hl], a                                  ; $41BE: $22
-    ld   a, $03                                   ; $41BF: $3E $03
-    ldi  [hl], a                                  ; $41C1: $22
-    ld   a, $04                                   ; $41C2: $3E $04
-    ld   [hl], a                                  ; $41C4: $77
-    ld   a, l                                     ; $41C5: $7D
-    add  $1E                                      ; $41C6: $C6 $1E
-    ld   l, a                                     ; $41C8: $6F
-    ld   a, h                                     ; $41C9: $7C
-    adc  $00                                      ; $41CA: $CE $00
-    ld   h, a                                     ; $41CC: $67
-    ld   a, $0A                                   ; $41CD: $3E $0A
-    ldi  [hl], a                                  ; $41CF: $22
-    ld   a, $0B                                   ; $41D0: $3E $0B
-    ldi  [hl], a                                  ; $41D2: $22
-    ld   a, $0C                                   ; $41D3: $3E $0C
-    ld   [hl], a                                  ; $41D5: $77
-    pop  hl                                       ; $41D6: $E1
-    ldh  a, [hIsGBC]                              ; $41D7: $F0 $FE
-    and  a                                        ; $41D9: $A7
-    jr   z, .else_41F5_28                         ; $41DA: $28 $19
+    ld   d, $00                                   ;; 28:41AC $16 $00
+    ld   hl, PhotoAlbumMapLookupTable             ;; 28:41AE $21 $E3 $40
+    ld   a, c                                     ;; 28:41B1 $79
+    sla  a                                        ;; 28:41B2 $CB $27
+    ld   e, a                                     ;; 28:41B4 $5F
+    add  hl, de                                   ;; 28:41B5 $19
+    ldi  a, [hl]                                  ;; 28:41B6 $2A
+    ld   e, a                                     ;; 28:41B7 $5F
+    ld   a, [hl]                                  ;; 28:41B8 $7E
+    ld   h, a                                     ;; 28:41B9 $67
+    ld   l, e                                     ;; 28:41BA $6B
+    push hl                                       ;; 28:41BB $E5
+    ld   a, $02                                   ;; 28:41BC $3E $02
+    ldi  [hl], a                                  ;; 28:41BE $22
+    ld   a, $03                                   ;; 28:41BF $3E $03
+    ldi  [hl], a                                  ;; 28:41C1 $22
+    ld   a, $04                                   ;; 28:41C2 $3E $04
+    ld   [hl], a                                  ;; 28:41C4 $77
+    ld   a, l                                     ;; 28:41C5 $7D
+    add  $1E                                      ;; 28:41C6 $C6 $1E
+    ld   l, a                                     ;; 28:41C8 $6F
+    ld   a, h                                     ;; 28:41C9 $7C
+    adc  $00                                      ;; 28:41CA $CE $00
+    ld   h, a                                     ;; 28:41CC $67
+    ld   a, $0A                                   ;; 28:41CD $3E $0A
+    ldi  [hl], a                                  ;; 28:41CF $22
+    ld   a, $0B                                   ;; 28:41D0 $3E $0B
+    ldi  [hl], a                                  ;; 28:41D2 $22
+    ld   a, $0C                                   ;; 28:41D3 $3E $0C
+    ld   [hl], a                                  ;; 28:41D5 $77
+    pop  hl                                       ;; 28:41D6 $E1
+    ldh  a, [hIsGBC]                              ;; 28:41D7 $F0 $FE
+    and  a                                        ;; 28:41D9 $A7
+    jr   z, .incrementLoop                        ;; 28:41DA $28 $19
 
-    ld   a, $01                                   ; $41DC: $3E $01
-    ld   [rVBK], a                                ; $41DE: $E0 $4F
-    ld   a, $02                                   ; $41E0: $3E $02
-    ldi  [hl], a                                  ; $41E2: $22
-    ldi  [hl], a                                  ; $41E3: $22
-    ld   [hl], a                                  ; $41E4: $77
-    ld   a, l                                     ; $41E5: $7D
-    add  $1E                                      ; $41E6: $C6 $1E
-    ld   l, a                                     ; $41E8: $6F
-    ld   a, h                                     ; $41E9: $7C
-    adc  $00                                      ; $41EA: $CE $00
-    ld   h, a                                     ; $41EC: $67
-    ld   a, $02                                   ; $41ED: $3E $02
-    ldi  [hl], a                                  ; $41EF: $22
-    ldi  [hl], a                                  ; $41F0: $22
-    ld   [hl], a                                  ; $41F1: $77
-    xor  a                                        ; $41F2: $AF
-    ld   [rVBK], a                                ; $41F3: $E0 $4F
-.else_41F5_28:
-    inc  c                                        ; $41F5: $0C
-    ld   a, c                                     ; $41F6: $79
-    cp   $0C                                      ; $41F7: $FE $0C
-    jr   nz, .loop_4198_28                        ; $41F9: $20 $9D
+    ld   a, $01                                   ;; 28:41DC $3E $01
+    ldh  [rVBK], a                                ;; 28:41DE $E0 $4F
+    ld   a, $02                                   ;; 28:41E0 $3E $02
+    ldi  [hl], a                                  ;; 28:41E2 $22
+    ldi  [hl], a                                  ;; 28:41E3 $22
+    ld   [hl], a                                  ;; 28:41E4 $77
+    ld   a, l                                     ;; 28:41E5 $7D
+    add  $1E                                      ;; 28:41E6 $C6 $1E
+    ld   l, a                                     ;; 28:41E8 $6F
+    ld   a, h                                     ;; 28:41E9 $7C
+    adc  $00                                      ;; 28:41EA $CE $00
+    ld   h, a                                     ;; 28:41EC $67
+    ld   a, $02                                   ;; 28:41ED $3E $02
+    ldi  [hl], a                                  ;; 28:41EF $22
+    ldi  [hl], a                                  ;; 28:41F0 $22
+    ld   [hl], a                                  ;; 28:41F1 $77
+    xor  a                                        ;; 28:41F2 $AF
+    ldh  [rVBK], a                                ;; 28:41F3 $E0 $4F
+.incrementLoop:
+    inc  c                                        ;; 28:41F5 $0C
+    ld   a, c                                     ;; 28:41F6 $79
+    cp   $0C                                      ;; 28:41F7 $FE $0C
+    jr   nz, .loop_4198_28                        ;; 28:41F9 $20 $9D
 
-    ret                                           ; $41FB: $C9
+    ret                                           ;; 28:41FB $C9
 
 
 func_028_41FC::
-    ld   a, [wD1D1]                               ; $41FC: $FA $D1 $D1
-    and  a                                        ; $41FF: $A7
-    ret  z                                        ; $4200: $C8
+    ld   a, [wD1D1]                               ;; 28:41FC $FA $D1 $D1
+    and  a                                        ;; 28:41FF $A7
+    ret  z                                        ;; 28:4200 $C8
 
-    ld   hl, vBGMap0 + $22                        ; $4201: $21 $22 $98
-    ld   d, $7E                                   ; $4204: $16 $7E
+    ld   hl, vBGMap0 + $22                        ;; 28:4201 $21 $22 $98
+    ld   d, $7E                                   ;; 28:4204 $16 $7E
 .loop_4206_28
-    ld   a, d                                     ; $4206: $7A
-    ldi  [hl], a                                  ; $4207: $22
-    ld   a, l                                     ; $4208: $7D
-    and  %00011111                                ; $4209: $E6 $1F
-    cp   $12                                      ; $420B: $FE $12
-    jr   nz, .loop_4206_28                        ; $420D: $20 $F7
+    ld   a, d                                     ;; 28:4206 $7A
+    ldi  [hl], a                                  ;; 28:4207 $22
+    ld   a, l                                     ;; 28:4208 $7D
+    and  %00011111                                ;; 28:4209 $E6 $1F
+    cp   $12                                      ;; 28:420B $FE $12
+    jr   nz, .loop_4206_28                        ;; 28:420D $20 $F7
 
-    ld   a, l                                     ; $420F: $7D
-    cp   $92                                      ; $4210: $FE $92
-    ret  z                                        ; $4212: $C8
+    ld   a, l                                     ;; 28:420F $7D
+    cp   $92                                      ;; 28:4210 $FE $92
+    ret  z                                        ;; 28:4212 $C8
 
-    add  $10                                      ; $4213: $C6 $10
-    ld   l, a                                     ; $4215: $6F
-    jr   .loop_4206_28                            ; $4216: $18 $EE
+    add  $10                                      ;; 28:4213 $C6 $10
+    ld   l, a                                     ;; 28:4215 $6F
+    jr   .loop_4206_28                            ;; 28:4216 $18 $EE
 
 PhotoAlbumInit4Handler:
     ld   a, [wD1D1]                               ; $4218: PhotoAlbumInit4Handler $FA $D1 $D1
@@ -372,198 +376,199 @@ Data_028_4241::
     db   $20, $40, $78, $98
 
 Data_028_424D::
-    db   $50, $50, $50, $50, $70, $70, $70, $70   ; $424D
+    db   $50, $50, $50, $50, $70, $70, $70, $70   ;; 28:424D
     db   $90, $90, $90, $90
 
-Data_028_4259::
+PhotoAlbumMaskLookupTable::
     db   $01, $02, $40, $80
-    db   $04, $08, $01, $02, $10, $20, $04, $08   ; $425D
+    db   $04, $08, $01, $02, $10, $20, $04, $08   ;; 28:425D
 
-Data_028_4265::
-    db   $00, $00, $00, $00, $00, $00, $01, $01   ; $4265
+; Values of $00 indicate that photo's bit is stored in wPhotos1, $01 are stored in wPhotos2
+PhotoAlbumOffsetLookupTable::
+    db   $00, $00, $00, $00, $00, $00, $01, $01   ;; 28:4265
     db   $00, $00, $01, $01
 
 Data_028_4271::
-    db   $00, $01, $06, $07   ; $426D
-    db   $02, $03, $08, $09, $04, $05, $0A, $0B   ; $4275
+    db   $00, $01, $06, $07   ;; 28:426D
+    db   $02, $03, $08, $09, $04, $05, $0A, $0B   ;; 28:4275
 
 func_028_427D::
-    ld   a, [wD1CF]                               ; $427D: $FA $CF $D1
-    and  a                                        ; $4280: $A7
-    ret  nz                                       ; $4281: $C0
+    ld   a, [wD1CF]                               ;; 28:427D $FA $CF $D1
+    and  a                                        ;; 28:4280 $A7
+    ret  nz                                       ;; 28:4281 $C0
     ; return if nothing is pressed
-    ldh  a, [hJoypadState]                        ; $4282: $F0 $CC
-    and  a                                        ; $4284: $A7
-    ret  z                                        ; $4285: $C8
+    ldh  a, [hJoypadState]                        ;; 28:4282 $F0 $CC
+    and  a                                        ;; 28:4284 $A7
+    ret  z                                        ;; 28:4285 $C8
 
-    bit  5, a                                     ; $4286: $CB $6F
-    jr   z, .else_4298_28                         ; $4288: $28 $0E
+    bit  5, a                                     ;; 28:4286 $CB $6F
+    jr   z, .else_4298_28                         ;; 28:4288 $28 $0E
 
-    ld   a, JINGLE_VALIDATE                       ; $428A: $3E $13
-    ldh  [hJingle], a                             ; $428C: $E0 $F2
-    ld   a, $12                                   ; $428E: $3E $12
-    ld   [wGameplaySubtype], a                    ; $4290: $EA $96 $DB
-    xor  a                                        ; $4293: $AF
-    ld   [wTransitionSequenceCounter], a          ; $4294: $EA $6B $C1
-    ret                                           ; $4297: $C9
+    ld   a, JINGLE_VALIDATE                       ;; 28:428A $3E $13
+    ldh  [hJingle], a                             ;; 28:428C $E0 $F2
+    ld   a, $12                                   ;; 28:428E $3E $12
+    ld   [wGameplaySubtype], a                    ;; 28:4290 $EA $96 $DB
+    xor  a                                        ;; 28:4293 $AF
+    ld   [wTransitionSequenceCounter], a          ;; 28:4294 $EA $6B $C1
+    ret                                           ;; 28:4297 $C9
 
 
 .else_4298_28:
-    bit  1, a                                     ; $4298: $CB $4F
-    jr   z, .else_42A9_28                         ; $429A: $28 $0D
+    bit  1, a                                     ;; 28:4298 $CB $4F
+    jr   z, .else_42A9_28                         ;; 28:429A $28 $0D
 
-    ld   a, [wD1CC]                               ; $429C: $FA $CC $D1
-    and  a                                        ; $429F: $A7
-    jr   z, .else_42A5_28                         ; $42A0: $28 $03
+    ld   a, [wD1CC]                               ;; 28:429C $FA $CC $D1
+    and  a                                        ;; 28:429F $A7
+    jr   z, .else_42A5_28                         ;; 28:42A0 $28 $03
 
-    dec  a                                        ; $42A2: $3D
-    jr   .func_028_42E0                           ; $42A3: $18 $3B
+    dec  a                                        ;; 28:42A2 $3D
+    jr   .func_028_42E0                           ;; 28:42A3 $18 $3B
 
 .else_42A5_28:
-    ld   a, $0B                                   ; $42A5: $3E $0B
-    jr   .func_028_42E0                           ; $42A7: $18 $37
+    ld   a, $0B                                   ;; 28:42A5 $3E $0B
+    jr   .func_028_42E0                           ;; 28:42A7 $18 $37
 
 .else_42A9_28:
-    bit  0, a                                     ; $42A9: $CB $47
-    jr   z, .else_42BA_28                         ; $42AB: $28 $0D
+    bit  0, a                                     ;; 28:42A9 $CB $47
+    jr   z, .else_42BA_28                         ;; 28:42AB $28 $0D
 
-    ld   a, [wD1CC]                               ; $42AD: $FA $CC $D1
-    cp   $0B                                      ; $42B0: $FE $0B
-    jr   z, .else_42B7_28                         ; $42B2: $28 $03
+    ld   a, [wD1CC]                               ;; 28:42AD $FA $CC $D1
+    cp   $0B                                      ;; 28:42B0 $FE $0B
+    jr   z, .else_42B7_28                         ;; 28:42B2 $28 $03
 
-    inc  a                                        ; $42B4: $3C
-    jr   .func_028_42E0                           ; $42B5: $18 $29
+    inc  a                                        ;; 28:42B4 $3C
+    jr   .func_028_42E0                           ;; 28:42B5 $18 $29
 
 .else_42B7_28:
-    xor  a                                        ; $42B7: $AF
-    jr   .func_028_42E0                           ; $42B8: $18 $26
+    xor  a                                        ;; 28:42B7 $AF
+    jr   .func_028_42E0                           ;; 28:42B8 $18 $26
 
 .else_42BA_28:
-    bit  2, a                                     ; $42BA: $CB $57
-    jr   z, .else_42CD_28                         ; $42BC: $28 $0F
+    bit  2, a                                     ;; 28:42BA $CB $57
+    jr   z, .else_42CD_28                         ;; 28:42BC $28 $0F
 
-    ld   a, [wD1CC]                               ; $42BE: $FA $CC $D1
-    cp   $04                                      ; $42C1: $FE $04
-    jr   c, .else_42C9_28                         ; $42C3: $38 $04
+    ld   a, [wD1CC]                               ;; 28:42BE $FA $CC $D1
+    cp   $04                                      ;; 28:42C1 $FE $04
+    jr   c, .else_42C9_28                         ;; 28:42C3 $38 $04
 
-    sub  $04                                      ; $42C5: $D6 $04
-    jr   .func_028_42E0                           ; $42C7: $18 $17
+    sub  $04                                      ;; 28:42C5 $D6 $04
+    jr   .func_028_42E0                           ;; 28:42C7 $18 $17
 
 .else_42C9_28:
-    add  $08                                      ; $42C9: $C6 $08
-    jr   .func_028_42E0                           ; $42CB: $18 $13
+    add  $08                                      ;; 28:42C9 $C6 $08
+    jr   .func_028_42E0                           ;; 28:42CB $18 $13
 
 .else_42CD_28:
-    bit  3, a                                     ; $42CD: $CB $5F
-    jr   z, .else_42FB_28                         ; $42CF: $28 $2A
+    bit  3, a                                     ;; 28:42CD $CB $5F
+    jr   z, .else_42FB_28                         ;; 28:42CF $28 $2A
 
-    ld   a, [wD1CC]                               ; $42D1: $FA $CC $D1
-    cp   $08                                      ; $42D4: $FE $08
-    jr   nc, .else_42DC_28                        ; $42D6: $30 $04
+    ld   a, [wD1CC]                               ;; 28:42D1 $FA $CC $D1
+    cp   $08                                      ;; 28:42D4 $FE $08
+    jr   nc, .else_42DC_28                        ;; 28:42D6 $30 $04
 
-    add  $04                                      ; $42D8: $C6 $04
-    jr   .func_028_42E0                           ; $42DA: $18 $04
+    add  $04                                      ;; 28:42D8 $C6 $04
+    jr   .func_028_42E0                           ;; 28:42DA $18 $04
 
 .else_42DC_28:
-    sub  $08                                      ; $42DC: $D6 $08
-    jr   .func_028_42E0                           ; $42DE: $18 $00
+    sub  $08                                      ;; 28:42DC $D6 $08
+    jr   .func_028_42E0                           ;; 28:42DE $18 $00
 
 .func_028_42E0::
-    ld   [wD1CC], a                               ; $42E0: $EA $CC $D1
-    ld   d, $00                                   ; $42E3: $16 $00
-    ld   e, a                                     ; $42E5: $5F
-    ld   hl, Data_028_4241                        ; $42E6: $21 $41 $42
-    add  hl, de                                   ; $42E9: $19
-    ld   a, [hl]                                  ; $42EA: $7E
-    ld   [wD1CD], a                               ; $42EB: $EA $CD $D1
-    ld   hl, Data_028_424D                        ; $42EE: $21 $4D $42
-    add  hl, de                                   ; $42F1: $19
-    ld   a, [hl]                                  ; $42F2: $7E
-    ld   [wD1CE], a                               ; $42F3: $EA $CE $D1
-    ld   a, JINGLE_MOVE_SELECTION                 ; $42F6: $3E $0A
-    ldh  [hJingle], a                             ; $42F8: $E0 $F2
-    ret                                           ; $42FA: $C9
+    ld   [wD1CC], a                               ;; 28:42E0 $EA $CC $D1
+    ld   d, $00                                   ;; 28:42E3 $16 $00
+    ld   e, a                                     ;; 28:42E5 $5F
+    ld   hl, Data_028_4241                        ;; 28:42E6 $21 $41 $42
+    add  hl, de                                   ;; 28:42E9 $19
+    ld   a, [hl]                                  ;; 28:42EA $7E
+    ld   [wD1CD], a                               ;; 28:42EB $EA $CD $D1
+    ld   hl, Data_028_424D                        ;; 28:42EE $21 $4D $42
+    add  hl, de                                   ;; 28:42F1 $19
+    ld   a, [hl]                                  ;; 28:42F2 $7E
+    ld   [wD1CE], a                               ;; 28:42F3 $EA $CE $D1
+    ld   a, JINGLE_MOVE_SELECTION                 ;; 28:42F6 $3E $0A
+    ldh  [hJingle], a                             ;; 28:42F8 $E0 $F2
+    ret                                           ;; 28:42FA $C9
 
 
 .else_42FB_28:
-    ldh  a, [hJoypadState]                        ; $42FB: $F0 $CC
-    bit  J_BIT_A, a                               ; $42FD: $CB $67
-    ret  z                                        ; $42FF: $C8
+    ldh  a, [hJoypadState]                        ;; 28:42FB $F0 $CC
+    bit  J_BIT_A, a                               ;; 28:42FD $CB $67
+    ret  z                                        ;; 28:42FF $C8
 
-    ld   b, $00                                   ; $4300: $06 $00
-    ld   a, [wD1CC]                               ; $4302: $FA $CC $D1
-    ld   c, a                                     ; $4305: $4F
-    ld   d, a                                     ; $4306: $57
-    ld   hl, Data_028_4265                        ; $4307: $21 $65 $42
-    add  hl, bc                                   ; $430A: $09
-    ld   a, [hl]                                  ; $430B: $7E
-    ld   c, a                                     ; $430C: $4F
-    ld   hl, wPhotos1                             ; $430D: $21 $0C $DC
-    add  hl, bc                                   ; $4310: $09
-    ld   a, [hl]                                  ; $4311: $7E
-    ld   c, d                                     ; $4312: $4A
-    ld   hl, Data_028_4259                        ; $4313: $21 $59 $42
-    add  hl, bc                                   ; $4316: $09
-    and  [hl]                                     ; $4317: $A6
-    jr   nz, .else_4322_28                        ; $4318: $20 $08
+    ld   b, $00                                   ;; 28:4300 $06 $00
+    ld   a, [wD1CC]                               ;; 28:4302 $FA $CC $D1
+    ld   c, a                                     ;; 28:4305 $4F
+    ld   d, a                                     ;; 28:4306 $57
+    ld   hl, PhotoAlbumOffsetLookupTable          ;; 28:4307 $21 $65 $42
+    add  hl, bc                                   ;; 28:430A $09
+    ld   a, [hl]                                  ;; 28:430B $7E
+    ld   c, a                                     ;; 28:430C $4F
+    ld   hl, wPhotos1                             ;; 28:430D $21 $0C $DC
+    add  hl, bc                                   ;; 28:4310 $09
+    ld   a, [hl]                                  ;; 28:4311 $7E
+    ld   c, d                                     ;; 28:4312 $4A
+    ld   hl, PhotoAlbumMaskLookupTable            ;; 28:4313 $21 $59 $42
+    add  hl, bc                                   ;; 28:4316 $09
+    and  [hl]                                     ;; 28:4317 $A6
+    jr   nz, .else_4322_28                        ;; 28:4318 $20 $08
 
-    ld   a, JINGLE_WRONG_ANSWER                   ; $431A: $3E $1D
-    ldh  [hJingle], a                             ; $431C: $E0 $F2
-    ld   a, $FF                                   ; $431E: $3E $FF
-    jr   .func_028_432B                           ; $4320: $18 $09
+    ld   a, JINGLE_WRONG_ANSWER                   ;; 28:431A $3E $1D
+    ldh  [hJingle], a                             ;; 28:431C $E0 $F2
+    ld   a, $FF                                   ;; 28:431E $3E $FF
+    jr   .func_028_432B                           ;; 28:4320 $18 $09
 
 .else_4322_28:
-    ld   a, JINGLE_VALIDATE                       ; $4322: $3E $13
-    ldh  [hJingle], a                             ; $4324: $E0 $F2
-    ld   hl, Data_028_4271                        ; $4326: $21 $71 $42
-    add  hl, bc                                   ; $4329: $09
-    ld   a, [hl]                                  ; $432A: $7E
+    ld   a, JINGLE_VALIDATE                       ;; 28:4322 $3E $13
+    ldh  [hJingle], a                             ;; 28:4324 $E0 $F2
+    ld   hl, Data_028_4271                        ;; 28:4326 $21 $71 $42
+    add  hl, bc                                   ;; 28:4329 $09
+    ld   a, [hl]                                  ;; 28:432A $7E
 .func_028_432B::
-    ld   [wD1CB], a                               ; $432B: $EA $CB $D1
-    ld   hl, wD1CF                                ; $432E: $21 $CF $D1
-    inc  [hl]                                     ; $4331: $34
-    xor  a                                        ; $4332: $AF
-    ld   [wD1D0], a                               ; $4333: $EA $D0 $D1
-    ret                                           ; $4336: $C9
+    ld   [wD1CB], a                               ;; 28:432B $EA $CB $D1
+    ld   hl, wD1CF                                ;; 28:432E $21 $CF $D1
+    inc  [hl]                                     ;; 28:4331 $34
+    xor  a                                        ;; 28:4332 $AF
+    ld   [wD1D0], a                               ;; 28:4333 $EA $D0 $D1
+    ret                                           ;; 28:4336 $C9
 
 Data_028_4337::
     db   $0A, $08, $08                          ; $4337 |...|
 
 func_028_433A::
-    ld   a, [wD1CF]                               ; $433A: $FA $CF $D1
-    and  a                                        ; $433D: $A7
-    ret  z                                        ; $433E: $C8
+    ld   a, [wD1CF]                               ;; 28:433A $FA $CF $D1
+    and  a                                        ;; 28:433D $A7
+    ret  z                                        ;; 28:433E $C8
 
-    ld   d, $00                                   ; $433F: $16 $00
-    ld   e, a                                     ; $4341: $5F
-    ld   hl, Data_028_4337                        ; $4342: $21 $37 $43
-    add  hl, de                                   ; $4345: $19
-    ld   a, [wD1D0]                               ; $4346: $FA $D0 $D1
-    cp   [hl]                                     ; $4349: $BE
-    jr   z, .else_4351_28                         ; $434A: $28 $05
+    ld   d, $00                                   ;; 28:433F $16 $00
+    ld   e, a                                     ;; 28:4341 $5F
+    ld   hl, Data_028_4337                        ;; 28:4342 $21 $37 $43
+    add  hl, de                                   ;; 28:4345 $19
+    ld   a, [wD1D0]                               ;; 28:4346 $FA $D0 $D1
+    cp   [hl]                                     ;; 28:4349 $BE
+    jr   z, .else_4351_28                         ;; 28:434A $28 $05
 
-    inc  a                                        ; $434C: $3C
-    ld   [wD1D0], a                               ; $434D: $EA $D0 $D1
-    ret                                           ; $4350: $C9
+    inc  a                                        ;; 28:434C $3C
+    ld   [wD1D0], a                               ;; 28:434D $EA $D0 $D1
+    ret                                           ;; 28:4350 $C9
 
 
 .else_4351_28:
-    xor  a                                        ; $4351: $AF
-    ld   [wD1D0], a                               ; $4352: $EA $D0 $D1
-    ld   hl, wD1CF                                ; $4355: $21 $CF $D1
-    inc  [hl]                                     ; $4358: $34
-    ld   a, [hl]                                  ; $4359: $7E
-    cp   $03                                      ; $435A: $FE $03
-    ret  nz                                       ; $435C: $C0
+    xor  a                                        ;; 28:4351 $AF
+    ld   [wD1D0], a                               ;; 28:4352 $EA $D0 $D1
+    ld   hl, wD1CF                                ;; 28:4355 $21 $CF $D1
+    inc  [hl]                                     ;; 28:4358 $34
+    ld   a, [hl]                                  ;; 28:4359 $7E
+    cp   $03                                      ;; 28:435A $FE $03
+    ret  nz                                       ;; 28:435C $C0
 
-    xor  a                                        ; $435D: $AF
-    ld   [wD1CF], a                               ; $435E: $EA $CF $D1
-    ld   [wTransitionSequenceCounter], a          ; $4361: $EA $6B $C1
-    ld   a, [wD1CB]                               ; $4364: $FA $CB $D1
-    cp   $FF                                      ; $4367: $FE $FF
-    ret  z                                        ; $4369: $C8
+    xor  a                                        ;; 28:435D $AF
+    ld   [wD1CF], a                               ;; 28:435E $EA $CF $D1
+    ld   [wTransitionSequenceCounter], a          ;; 28:4361 $EA $6B $C1
+    ld   a, [wD1CB]                               ;; 28:4364 $FA $CB $D1
+    cp   $FF                                      ;; 28:4367 $FE $FF
+    ret  z                                        ;; 28:4369 $C8
 
-    jp   PhotoAlbumIncrementState                 ; $436A: $C3 $DB $44
+    jp   PhotoAlbumIncrementState                 ;; 28:436A $C3 $DB $44
 
 Data_028_436D::
     db   $00, $00, $40, $04, $00, $08, $42, $04 ; $436D |..@...B.|
@@ -571,37 +576,37 @@ Data_028_436D::
     db   $03, $02, $40, $04, $03, $0A, $42, $04 ; $437D |..@...B.|
 
 func_028_4385::
-    ld   a, [wD1CF]                               ; $4385: $FA $CF $D1
-    sla  a                                        ; $4388: $CB $27
-    sla  a                                        ; $438A: $CB $27
-    sla  a                                        ; $438C: $CB $27
-    ld   e, a                                     ; $438E: $5F
-    ld   d, $00                                   ; $438F: $16 $00
-    ld   hl, Data_028_436D                        ; $4391: $21 $6D $43
-    add  hl, de                                   ; $4394: $19
-    ld   de, wOAMBuffer                           ; $4395: $11 $00 $C0
-    ld   c, $02                                   ; $4398: $0E $02
+    ld   a, [wD1CF]                               ;; 28:4385 $FA $CF $D1
+    sla  a                                        ;; 28:4388 $CB $27
+    sla  a                                        ;; 28:438A $CB $27
+    sla  a                                        ;; 28:438C $CB $27
+    ld   e, a                                     ;; 28:438E $5F
+    ld   d, $00                                   ;; 28:438F $16 $00
+    ld   hl, Data_028_436D                        ;; 28:4391 $21 $6D $43
+    add  hl, de                                   ;; 28:4394 $19
+    ld   de, wOAMBuffer                           ;; 28:4395 $11 $00 $C0
+    ld   c, $02                                   ;; 28:4398 $0E $02
 .loop_439A_28
-    ld   a, [wD1CE]                               ; $439A: $FA $CE $D1
-    add  [hl]                                     ; $439D: $86
-    ld   [de], a                                  ; $439E: $12
-    inc  de                                       ; $439F: $13
-    inc  hl                                       ; $43A0: $23
-    ld   a, [wD1CD]                               ; $43A1: $FA $CD $D1
-    add  [hl]                                     ; $43A4: $86
-    ld   [de], a                                  ; $43A5: $12
-    inc  de                                       ; $43A6: $13
-    inc  hl                                       ; $43A7: $23
-    ldi  a, [hl]                                  ; $43A8: $2A
-    ld   [de], a                                  ; $43A9: $12
-    inc  de                                       ; $43AA: $13
-    ldi  a, [hl]                                  ; $43AB: $2A
-    ld   [de], a                                  ; $43AC: $12
-    inc  de                                       ; $43AD: $13
-    dec  c                                        ; $43AE: $0D
-    jr   nz, .loop_439A_28                        ; $43AF: $20 $E9
+    ld   a, [wD1CE]                               ;; 28:439A $FA $CE $D1
+    add  [hl]                                     ;; 28:439D $86
+    ld   [de], a                                  ;; 28:439E $12
+    inc  de                                       ;; 28:439F $13
+    inc  hl                                       ;; 28:43A0 $23
+    ld   a, [wD1CD]                               ;; 28:43A1 $FA $CD $D1
+    add  [hl]                                     ;; 28:43A4 $86
+    ld   [de], a                                  ;; 28:43A5 $12
+    inc  de                                       ;; 28:43A6 $13
+    inc  hl                                       ;; 28:43A7 $23
+    ldi  a, [hl]                                  ;; 28:43A8 $2A
+    ld   [de], a                                  ;; 28:43A9 $12
+    inc  de                                       ;; 28:43AA $13
+    ldi  a, [hl]                                  ;; 28:43AB $2A
+    ld   [de], a                                  ;; 28:43AC $12
+    inc  de                                       ;; 28:43AD $13
+    dec  c                                        ;; 28:43AE $0D
+    jr   nz, .loop_439A_28                        ;; 28:43AF $20 $E9
 
-    ret                                           ; $43B1: $C9
+    ret                                           ;; 28:43B1 $C9
 
 ; Prepare a concrete photo to be displayed
 PhotoAlbumPreparePictureHandler:
@@ -611,78 +616,78 @@ PhotoAlbumPreparePictureHandler:
     call func_028_442C                            ; $43BB: PhotoAlbumPreparePictureHandler $CD $2C $44
     ld   a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON ; $43BE: PhotoAlbumPreparePictureHandler $3E $C7
     ld   [wLCDControl], a                         ; $43C0: PhotoAlbumPreparePictureHandler $EA $FD $D6
-    ld   [rLCDC], a                               ; $43C3: PhotoAlbumPreparePictureHandler $E0 $40
+    ldh  [rLCDC], a                               ; $43C3: PhotoAlbumPreparePictureHandler $E0 $40
     xor  a                                        ; $43C5: PhotoAlbumPreparePictureHandler $AF
     ld   [wTransitionSequenceCounter], a          ; $43C6: PhotoAlbumPreparePictureHandler $EA $6B $C1
     jp   PhotoAlbumIncrementState                 ; $43C9: PhotoAlbumPreparePictureHandler $C3 $DB $44
 
 func_028_43CC::
-    ld   a, [wD1CB]                               ; $43CC: $FA $CB $D1
-    and  a                                        ; $43CF: $A7
-    jr   nz, .else_43DB_28                        ; $43D0: $20 $09
+    ld   a, [wD1CB]                               ;; 28:43CC $FA $CB $D1
+    and  a                                        ;; 28:43CF $A7
+    jr   nz, .else_43DB_28                        ;; 28:43D0 $20 $09
 
-    ld   a, [wPhotos2]                            ; $43D2: $FA $0D $DC
-    and  %10000000                                ; $43D5: $E6 $80
-    jr   z, .else_43DB_28                         ; $43D7: $28 $02
+    ld   a, [wPhotos2]                            ;; 28:43D2 $FA $0D $DC
+    and  %10000000                                ;; 28:43D5 $E6 $80
+    jr   z, .else_43DB_28                         ;; 28:43D7 $28 $02
 
-    ld   a, $0C                                   ; $43D9: $3E $0C
+    ld   a, $0C                                   ;; 28:43D9 $3E $0C
 .else_43DB_28:
-    ld   b, a                                     ; $43DB: $47
-    sla  a                                        ; $43DC: $CB $27
-    add  b                                        ; $43DE: $80
-    ld   d, $00                                   ; $43DF: $16 $00
-    ld   e, a                                     ; $43E1: $5F
-    ld   hl, Data_028_44E0                        ; $43E2: $21 $E0 $44
-    add  hl, de                                   ; $43E5: $19
-    push de                                       ; $43E6: $D5
-    ldi  a, [hl]                                  ; $43E7: $2A
-    ld   c, a                                     ; $43E8: $4F
-    ld   [wD168], a                               ; $43E9: $EA $68 $D1
-    ldi  a, [hl]                                  ; $43EC: $2A
-    ld   b, a                                     ; $43ED: $47
-    ld   [wD169], a                               ; $43EE: $EA $69 $D1
-    ld   a, [hl]                                  ; $43F1: $7E
-    ld   [w2_D16A], a                             ; $43F2: $EA $6A $D1
-    ld   h, b                                     ; $43F5: $60
-    ld   l, c                                     ; $43F6: $69
-    push hl                                       ; $43F7: $E5
-    ld   bc, $800                                 ; $43F8: $01 $00 $08
-    ld   de, $9000                                ; $43FB: $11 $00 $90
-    call CopyData_trampoline                      ; $43FE: $CD $5D $0B
-    pop  hl                                       ; $4401: $E1
-    ld   bc, $800                                 ; $4402: $01 $00 $08
-    add  hl, bc                                   ; $4405: $09
-    ld   de, $8800                                ; $4406: $11 $00 $88
-    ld   a, [w2_D16A]                             ; $4409: $FA $6A $D1
-    call CopyData_trampoline                      ; $440C: $CD $5D $0B
-    pop  de                                       ; $440F: $D1
-    ret                                           ; $4410: $C9
+    ld   b, a                                     ;; 28:43DB $47
+    sla  a                                        ;; 28:43DC $CB $27
+    add  b                                        ;; 28:43DE $80
+    ld   d, $00                                   ;; 28:43DF $16 $00
+    ld   e, a                                     ;; 28:43E1 $5F
+    ld   hl, Data_028_44E0                        ;; 28:43E2 $21 $E0 $44
+    add  hl, de                                   ;; 28:43E5 $19
+    push de                                       ;; 28:43E6 $D5
+    ldi  a, [hl]                                  ;; 28:43E7 $2A
+    ld   c, a                                     ;; 28:43E8 $4F
+    ld   [wD168], a                               ;; 28:43E9 $EA $68 $D1
+    ldi  a, [hl]                                  ;; 28:43EC $2A
+    ld   b, a                                     ;; 28:43ED $47
+    ld   [wD169], a                               ;; 28:43EE $EA $69 $D1
+    ld   a, [hl]                                  ;; 28:43F1 $7E
+    ld   [w2_D16A], a                             ;; 28:43F2 $EA $6A $D1
+    ld   h, b                                     ;; 28:43F5 $60
+    ld   l, c                                     ;; 28:43F6 $69
+    push hl                                       ;; 28:43F7 $E5
+    ld   bc, $800                                 ;; 28:43F8 $01 $00 $08
+    ld   de, $9000                                ;; 28:43FB $11 $00 $90
+    call CopyData_trampoline                      ;; 28:43FE $CD $5D $0B
+    pop  hl                                       ;; 28:4401 $E1
+    ld   bc, $800                                 ;; 28:4402 $01 $00 $08
+    add  hl, bc                                   ;; 28:4405 $09
+    ld   de, $8800                                ;; 28:4406 $11 $00 $88
+    ld   a, [w2_D16A]                             ;; 28:4409 $FA $6A $D1
+    call CopyData_trampoline                      ;; 28:440C $CD $5D $0B
+    pop  de                                       ;; 28:440F $D1
+    ret                                           ;; 28:4410 $C9
 
 
 func_028_4411::
-    ld   hl, Data_028_4507                        ; $4411: $21 $07 $45
-    add  hl, de                                   ; $4414: $19
-    ldi  a, [hl]                                  ; $4415: $2A
-    ld   c, a                                     ; $4416: $4F
-    ldi  a, [hl]                                  ; $4417: $2A
-    ld   b, a                                     ; $4418: $47
-    ld   a, BANK(@)                               ; $4419: $3E $28
-    ldh  [hMultiPurposeF], a                      ; $441B: $E0 $E6
-    ld   a, [hl]                                  ; $441D: $7E
-    ld   h, b                                     ; $441E: $60
-    ld   l, c                                     ; $441F: $69
-    call CopyBGMapFromBank                        ; $4420: $CD $69 $0B
-    ret                                           ; $4423: $C9
+    ld   hl, Data_028_4507                        ;; 28:4411 $21 $07 $45
+    add  hl, de                                   ;; 28:4414 $19
+    ldi  a, [hl]                                  ;; 28:4415 $2A
+    ld   c, a                                     ;; 28:4416 $4F
+    ldi  a, [hl]                                  ;; 28:4417 $2A
+    ld   b, a                                     ;; 28:4418 $47
+    ld   a, BANK(@)                               ;; 28:4419 $3E $28
+    ldh  [hMultiPurposeF], a                      ;; 28:441B $E0 $E6
+    ld   a, [hl]                                  ;; 28:441D $7E
+    ld   h, b                                     ;; 28:441E $60
+    ld   l, c                                     ;; 28:441F $69
+    call CopyBGMapFromBank                        ;; 28:4420 $CD $69 $0B
+    ret                                           ;; 28:4423 $C9
 
 Data_028_4424::
     db   $7F, $5B, $14, $2E, $4E, $19, $A9, $08 ; $4424 |.[..N...|
 
 func_028_442C::
-    ld   hl, Data_028_4424                        ; $442C: $21 $24 $44
-    ld   bc, $08                                  ; $442F: $01 $08 $00
-    ld   de, wBGPal1                              ; $4432: $11 $10 $DC
-    call func_028_4176                            ; $4435: $CD $76 $41
-    ret                                           ; $4438: $C9
+    ld   hl, Data_028_4424                        ;; 28:442C $21 $24 $44
+    ld   bc, $08                                  ;; 28:442F $01 $08 $00
+    ld   de, wBGPal1                              ;; 28:4432 $11 $10 $DC
+    call func_028_4176                            ;; 28:4435 $CD $76 $41
+    ret                                           ;; 28:4438 $C9
 
 Data_028_4439::
 IF __PATCH_1__
@@ -787,13 +792,13 @@ JumpTable_028_44AA:
     ldh  [hVolumeLeft], a                         ; $44D0: JumpTable_028_44AA $E0 $AA
     ld   a, [wLCDControl]                         ; $44D2: JumpTable_028_44AA $FA $FD $D6
     ld   [wLCDControl], a                         ; $44D5: JumpTable_028_44AA $EA $FD $D6
-    ld   [rLCDC], a                               ; $44D8: JumpTable_028_44AA $E0 $40
+    ldh  [rLCDC], a                               ; $44D8: JumpTable_028_44AA $E0 $40
     ret                                           ; $44DA: JumpTable_028_44AA $C9
 
 PhotoAlbumIncrementState::
-    ld   hl, wGameplaySubtype                     ; $44DB: $21 $96 $DB
-    inc  [hl]                                     ; $44DE: $34
-    ret                                           ; $44DF: $C9
+    ld   hl, wGameplaySubtype                     ;; 28:44DB $21 $96 $DB
+    inc  [hl]                                     ;; 28:44DE $34
+    ret                                           ;; 28:44DF $C9
 
 Data_028_44E0::
     far_pointer PhotoNiceLinkTiles
@@ -936,32 +941,32 @@ PhotoAlbumConfirmPrintingHandler:
 
 
 func_028_45CD::
-    xor  a                                        ; $45CD: $AF
-    ld   [wD16D], a                               ; $45CE: $EA $6D $D1
-    ld   [wD16E], a                               ; $45D1: $EA $6E $D1
-    ld   a, $13                                   ; $45D4: $3E $13
-    ld   [wD17E], a                               ; $45D6: $EA $7E $D1
-    ld   a, $01                                   ; $45D9: $3E $01
-    ld   [wD17F], a                               ; $45DB: $EA $7F $D1
-    ld   a, $E4                                   ; $45DE: $3E $E4
-    ld   [wD180], a                               ; $45E0: $EA $80 $D1
-    ld   a, $80                                   ; $45E3: $3E $80
-    ld   [wD16F], a                               ; $45E5: $EA $6F $D1
-    ret                                           ; $45E8: $C9
+    xor  a                                        ;; 28:45CD $AF
+    ld   [wD16D], a                               ;; 28:45CE $EA $6D $D1
+    ld   [wD16E], a                               ;; 28:45D1 $EA $6E $D1
+    ld   a, $13                                   ;; 28:45D4 $3E $13
+    ld   [wD17E], a                               ;; 28:45D6 $EA $7E $D1
+    ld   a, $01                                   ;; 28:45D9 $3E $01
+    ld   [wD17F], a                               ;; 28:45DB $EA $7F $D1
+    ld   a, $E4                                   ;; 28:45DE $3E $E4
+    ld   [wD180], a                               ;; 28:45E0 $EA $80 $D1
+    ld   a, $80                                   ;; 28:45E3 $3E $80
+    ld   [wD16F], a                               ;; 28:45E5 $EA $6F $D1
+    ret                                           ;; 28:45E8 $C9
 
 
 func_028_45E9::
-    ld   a, $00                                   ; $45E9: $3E $00
-    ld   [wD16B], a                               ; $45EB: $EA $6B $D1
-    ld   a, JINGLE_WRONG_ANSWER                   ; $45EE: $3E $1D
-    ldh  [hJingle], a                             ; $45F0: $E0 $F2
-    ld   a, $10                                   ; $45F2: $3E $10
-    ldh  [hFrameCounter], a                       ; $45F4: $E0 $E7
-    ld   a, $11                                   ; $45F6: $3E $11
-    ld   [wD1C6], a                               ; $45F8: $EA $C6 $D1
-    ld   a, $10                                   ; $45FB: $3E $10
-    ld   [wGameplaySubtype], a                    ; $45FD: $EA $96 $DB
-    ret                                           ; $4600: $C9
+    ld   a, $00                                   ;; 28:45E9 $3E $00
+    ld   [wD16B], a                               ;; 28:45EB $EA $6B $D1
+    ld   a, JINGLE_WRONG_ANSWER                   ;; 28:45EE $3E $1D
+    ldh  [hJingle], a                             ;; 28:45F0 $E0 $F2
+    ld   a, $10                                   ;; 28:45F2 $3E $10
+    ldh  [hFrameCounter], a                       ;; 28:45F4 $E0 $E7
+    ld   a, $11                                   ;; 28:45F6 $3E $11
+    ld   [wD1C6], a                               ;; 28:45F8 $EA $C6 $D1
+    ld   a, $10                                   ;; 28:45FB $3E $10
+    ld   [wGameplaySubtype], a                    ;; 28:45FD $EA $96 $DB
+    ret                                           ;; 28:4600 $C9
 
 
 ; ----------------------------------------------
@@ -971,326 +976,326 @@ func_028_45E9::
 ; ----------------------------------------------
 
 PrinterInterruptSerial::
-    ld   a, [rSC]                                 ; $4601: $F0 $02
-    bit  7, a                                     ; $4603: $CB $7F
-    jr   nz, .return_4615_28                      ; $4605: $20 $0E
+    ldh  a, [rSC]                                 ;; 28:4601 $F0 $02
+    bit  7, a                                     ;; 28:4603 $CB $7F
+    jr   nz, .return_4615_28                      ;; 28:4605 $20 $0E
 
-    push bc                                       ; $4607: $C5
-    push de                                       ; $4608: $D5
-    push hl                                       ; $4609: $E5
-    ld   a, $01                                   ; $460A: $3E $01
-    ld   [wD171], a                               ; $460C: $EA $71 $D1
-    call func_028_4638                            ; $460F: $CD $38 $46
-    pop  hl                                       ; $4612: $E1
-    pop  de                                       ; $4613: $D1
-    pop  bc                                       ; $4614: $C1
+    push bc                                       ;; 28:4607 $C5
+    push de                                       ;; 28:4608 $D5
+    push hl                                       ;; 28:4609 $E5
+    ld   a, $01                                   ;; 28:460A $3E $01
+    ld   [wD171], a                               ;; 28:460C $EA $71 $D1
+    call func_028_4638                            ;; 28:460F $CD $38 $46
+    pop  hl                                       ;; 28:4612 $E1
+    pop  de                                       ;; 28:4613 $D1
+    pop  bc                                       ;; 28:4614 $C1
 .return_4615_28:
-    ret                                           ; $4615: $C9
+    ret                                           ;; 28:4615 $C9
 
 
 PrinterInterruptVBlank::
-    ld   a, [wD16B]                               ; $4616: $FA $6B $D1
-    cp   $01                                      ; $4619: $FE $01
-    ret  nz                                       ; $461B: $C0
+    ld   a, [wD16B]                               ;; 28:4616 $FA $6B $D1
+    cp   $01                                      ;; 28:4619 $FE $01
+    ret  nz                                       ;; 28:461B $C0
 
-    ld   a, [wD16D]                               ; $461C: $FA $6D $D1
-    cp   $FF                                      ; $461F: $FE $FF
-    ret  z                                        ; $4621: $C8
+    ld   a, [wD16D]                               ;; 28:461C $FA $6D $D1
+    cp   $FF                                      ;; 28:461F $FE $FF
+    ret  z                                        ;; 28:4621 $C8
 
-    ld   a, [wD172]                               ; $4622: $FA $72 $D1
-    and  a                                        ; $4625: $A7
-    ret  nz                                       ; $4626: $C0
+    ld   a, [wD172]                               ;; 28:4622 $FA $72 $D1
+    and  a                                        ;; 28:4625 $A7
+    ret  nz                                       ;; 28:4626 $C0
 
-    ld   hl, wD182                                ; $4627: $21 $82 $D1
-    inc  [hl]                                     ; $462A: $34
-    ld   a, [hl]                                  ; $462B: $7E
-    cp   $06                                      ; $462C: $FE $06
-    ret  c                                        ; $462E: $D8
+    ld   hl, wD182                                ;; 28:4627 $21 $82 $D1
+    inc  [hl]                                     ;; 28:462A $34
+    ld   a, [hl]                                  ;; 28:462B $7E
+    cp   $06                                      ;; 28:462C $FE $06
+    ret  c                                        ;; 28:462E $D8
 
-    xor  a                                        ; $462F: $AF
-    ld   [hl], a                                  ; $4630: $77
-    ld   [wD17D], a                               ; $4631: $EA $7D $D1
-    call func_028_4A27                            ; $4634: $CD $27 $4A
-    ret                                           ; $4637: $C9
+    xor  a                                        ;; 28:462F $AF
+    ld   [hl], a                                  ;; 28:4630 $77
+    ld   [wD17D], a                               ;; 28:4631 $EA $7D $D1
+    call func_028_4A27                            ;; 28:4634 $CD $27 $4A
+    ret                                           ;; 28:4637 $C9
 
 
 func_028_4638::
-    ld   a, [wD17C]                               ; $4638: $FA $7C $D1
-    and  a                                        ; $463B: $A7
-    jp   nz, func_028_47C5                        ; $463C: $C2 $C5 $47
+    ld   a, [wD17C]                               ;; 28:4638 $FA $7C $D1
+    and  a                                        ;; 28:463B $A7
+    jp   nz, func_028_47C5                        ;; 28:463C $C2 $C5 $47
 
-    ld   a, [wD16B]                               ; $463F: $FA $6B $D1
-    cp   $07                                      ; $4642: $FE $07
-    jp   z, func_028_477F                         ; $4644: $CA $7F $47
+    ld   a, [wD16B]                               ;; 28:463F $FA $6B $D1
+    cp   $07                                      ;; 28:4642 $FE $07
+    jp   z, func_028_477F                         ;; 28:4644 $CA $7F $47
 
-    ld   a, [wD173]                               ; $4647: $FA $73 $D1
-    and  a                                        ; $464A: $A7
-    jr   nz, .else_4651_28                        ; $464B: $20 $04
+    ld   a, [wD173]                               ;; 28:4647 $FA $73 $D1
+    and  a                                        ;; 28:464A $A7
+    jr   nz, .else_4651_28                        ;; 28:464B $20 $04
 
-    call func_028_4670                            ; $464D: $CD $70 $46
-    ret                                           ; $4650: $C9
+    call func_028_4670                            ;; 28:464D $CD $70 $46
+    ret                                           ;; 28:4650 $C9
 
 
 .else_4651_28:
-    ld   a, [wD174]                               ; $4651: $FA $74 $D1
-    and  a                                        ; $4654: $A7
-    jr   z, .else_466C_28                         ; $4655: $28 $15
+    ld   a, [wD174]                               ;; 28:4651 $FA $74 $D1
+    and  a                                        ;; 28:4654 $A7
+    jr   z, .else_466C_28                         ;; 28:4655 $28 $15
 
-    ld   a, [wD175]                               ; $4657: $FA $75 $D1
-    and  a                                        ; $465A: $A7
-    jr   z, .else_466C_28                         ; $465B: $28 $0F
+    ld   a, [wD175]                               ;; 28:4657 $FA $75 $D1
+    and  a                                        ;; 28:465A $A7
+    jr   z, .else_466C_28                         ;; 28:465B $28 $0F
 
-    ld   a, [wD176]                               ; $465D: $FA $76 $D1
-    cp   $02                                      ; $4660: $FE $02
-    jr   z, .else_4668_28                         ; $4662: $28 $04
+    ld   a, [wD176]                               ;; 28:465D $FA $76 $D1
+    cp   $02                                      ;; 28:4660 $FE $02
+    jr   z, .else_4668_28                         ;; 28:4662 $28 $04
 
-    call func_028_474E                            ; $4664: $CD $4E $47
-    ret                                           ; $4667: $C9
+    call func_028_474E                            ;; 28:4664 $CD $4E $47
+    ret                                           ;; 28:4667 $C9
 
 
 .else_4668_28:
-    call func_028_4765                            ; $4668: $CD $65 $47
-    ret                                           ; $466B: $C9
+    call func_028_4765                            ;; 28:4668 $CD $65 $47
+    ret                                           ;; 28:466B $C9
 
 
 .else_466C_28:
-    call func_028_4695                            ; $466C: $CD $95 $46
-    ret                                           ; $466F: $C9
+    call func_028_4695                            ;; 28:466C $CD $95 $46
+    ret                                           ;; 28:466F $C9
 
 
 func_028_4670::
-    ld   hl, wD17A                                ; $4670: $21 $7A $D1
-    ld   c, [hl]                                  ; $4673: $4E
-    inc  [hl]                                     ; $4674: $34
-    ld   b, $00                                   ; $4675: $06 $00
-    ld   hl, Data_028_4A7C                        ; $4677: $21 $7C $4A
-    add  hl, bc                                   ; $467A: $09
-    ld   a, [hl]                                  ; $467B: $7E
-    ld   [rSB], a                                 ; $467C: $E0 $01
-    ld   a, $01                                   ; $467E: $3E $01
-    ld   [rSC], a                                 ; $4680: $E0 $02
-    ld   a, $81                                   ; $4682: $3E $81
-    ld   [rSC], a                                 ; $4684: $E0 $02
-    ld   a, [wD17A]                               ; $4686: $FA $7A $D1
-    cp   $02                                      ; $4689: $FE $02
-    ret  nz                                       ; $468B: $C0
+    ld   hl, wD17A                                ;; 28:4670 $21 $7A $D1
+    ld   c, [hl]                                  ;; 28:4673 $4E
+    inc  [hl]                                     ;; 28:4674 $34
+    ld   b, $00                                   ;; 28:4675 $06 $00
+    ld   hl, Data_028_4A7C                        ;; 28:4677 $21 $7C $4A
+    add  hl, bc                                   ;; 28:467A $09
+    ld   a, [hl]                                  ;; 28:467B $7E
+    ldh  [rSB], a                                 ;; 28:467C $E0 $01
+    ld   a, $01                                   ;; 28:467E $3E $01
+    ldh  [rSC], a                                 ;; 28:4680 $E0 $02
+    ld   a, $81                                   ;; 28:4682 $3E $81
+    ldh  [rSC], a                                 ;; 28:4684 $E0 $02
+    ld   a, [wD17A]                               ;; 28:4686 $FA $7A $D1
+    cp   $02                                      ;; 28:4689 $FE $02
+    ret  nz                                       ;; 28:468B $C0
 
-    xor  a                                        ; $468C: $AF
-    ld   [wD17A], a                               ; $468D: $EA $7A $D1
-    inc  a                                        ; $4690: $3C
-    ld   [wD173], a                               ; $4691: $EA $73 $D1
-    ret                                           ; $4694: $C9
+    xor  a                                        ;; 28:468C $AF
+    ld   [wD17A], a                               ;; 28:468D $EA $7A $D1
+    inc  a                                        ;; 28:4690 $3C
+    ld   [wD173], a                               ;; 28:4691 $EA $73 $D1
+    ret                                           ;; 28:4694 $C9
 
 
 func_028_4695::
-    ld   a, [wD17A]                               ; $4695: $FA $7A $D1
-    ld   c, a                                     ; $4698: $4F
-    ld   a, [wD17B]                               ; $4699: $FA $7B $D1
-    ld   b, a                                     ; $469C: $47
-    ld   a, [wD183]                               ; $469D: $FA $83 $D1
-    ld   l, a                                     ; $46A0: $6F
-    ld   a, [wD184]                               ; $46A1: $FA $84 $D1
-    ld   h, a                                     ; $46A4: $67
-    add  hl, bc                                   ; $46A5: $09
-    ld   a, [rSB]                                 ; $46A6: $F0 $01
-    ld   [wD18F], a                               ; $46A8: $EA $8F $D1
-    ld   a, [hl]                                  ; $46AB: $7E
-    ld   [rSB], a                                 ; $46AC: $E0 $01
-    ld   l, a                                     ; $46AE: $6F
-    ld   a, [wD178]                               ; $46AF: $FA $78 $D1
-    add  l                                        ; $46B2: $85
-    ld   [wD178], a                               ; $46B3: $EA $78 $D1
-    ld   a, [wD179]                               ; $46B6: $FA $79 $D1
-    adc  $00                                      ; $46B9: $CE $00
-    ld   [wD179], a                               ; $46BB: $EA $79 $D1
-    ld   a, $01                                   ; $46BE: $3E $01
-    ld   [rSC], a                                 ; $46C0: $E0 $02
-    ld   a, $81                                   ; $46C2: $3E $81
-    ld   [rSC], a                                 ; $46C4: $E0 $02
-    ld   hl, wD17A                                ; $46C6: $21 $7A $D1
-    inc  [hl]                                     ; $46C9: $34
-    jr   nz, .else_46CE_28                        ; $46CA: $20 $02
+    ld   a, [wD17A]                               ;; 28:4695 $FA $7A $D1
+    ld   c, a                                     ;; 28:4698 $4F
+    ld   a, [wD17B]                               ;; 28:4699 $FA $7B $D1
+    ld   b, a                                     ;; 28:469C $47
+    ld   a, [wD183]                               ;; 28:469D $FA $83 $D1
+    ld   l, a                                     ;; 28:46A0 $6F
+    ld   a, [wD184]                               ;; 28:46A1 $FA $84 $D1
+    ld   h, a                                     ;; 28:46A4 $67
+    add  hl, bc                                   ;; 28:46A5 $09
+    ldh  a, [rSB]                                 ;; 28:46A6 $F0 $01
+    ld   [wD18F], a                               ;; 28:46A8 $EA $8F $D1
+    ld   a, [hl]                                  ;; 28:46AB $7E
+    ldh  [rSB], a                                 ;; 28:46AC $E0 $01
+    ld   l, a                                     ;; 28:46AE $6F
+    ld   a, [wD178]                               ;; 28:46AF $FA $78 $D1
+    add  l                                        ;; 28:46B2 $85
+    ld   [wD178], a                               ;; 28:46B3 $EA $78 $D1
+    ld   a, [wD179]                               ;; 28:46B6 $FA $79 $D1
+    adc  $00                                      ;; 28:46B9 $CE $00
+    ld   [wD179], a                               ;; 28:46BB $EA $79 $D1
+    ld   a, $01                                   ;; 28:46BE $3E $01
+    ldh  [rSC], a                                 ;; 28:46C0 $E0 $02
+    ld   a, $81                                   ;; 28:46C2 $3E $81
+    ldh  [rSC], a                                 ;; 28:46C4 $E0 $02
+    ld   hl, wD17A                                ;; 28:46C6 $21 $7A $D1
+    inc  [hl]                                     ;; 28:46C9 $34
+    jr   nz, .else_46CE_28                        ;; 28:46CA $20 $02
 
-    inc  hl                                       ; $46CC: $23
-    inc  [hl]                                     ; $46CD: $34
+    inc  hl                                       ;; 28:46CC $23
+    inc  [hl]                                     ;; 28:46CD $34
 .else_46CE_28:
-    ld   hl, wD17A                                ; $46CE: $21 $7A $D1
-    ld   a, [wD189]                               ; $46D1: $FA $89 $D1
-    cp   [hl]                                     ; $46D4: $BE
-    jr   nz, .return_46DE_28                      ; $46D5: $20 $07
+    ld   hl, wD17A                                ;; 28:46CE $21 $7A $D1
+    ld   a, [wD189]                               ;; 28:46D1 $FA $89 $D1
+    cp   [hl]                                     ;; 28:46D4 $BE
+    jr   nz, .return_46DE_28                      ;; 28:46D5 $20 $07
 
-    inc  hl                                       ; $46D7: $23
-    ld   a, [wD18A]                               ; $46D8: $FA $8A $D1
-    cp   [hl]                                     ; $46DB: $BE
-    jr   z, .else_46DF_28                         ; $46DC: $28 $01
+    inc  hl                                       ;; 28:46D7 $23
+    ld   a, [wD18A]                               ;; 28:46D8 $FA $8A $D1
+    cp   [hl]                                     ;; 28:46DB $BE
+    jr   z, .else_46DF_28                         ;; 28:46DC $28 $01
 
 .return_46DE_28:
-    ret                                           ; $46DE: $C9
+    ret                                           ;; 28:46DE $C9
 
 
 .else_46DF_28:
-    ld   hl, wD174                                ; $46DF: $21 $74 $D1
-    ld   a, [hl]                                  ; $46E2: $7E
-    and  a                                        ; $46E3: $A7
-    jr   z, .else_46E9_28                         ; $46E4: $28 $03
+    ld   hl, wD174                                ;; 28:46DF $21 $74 $D1
+    ld   a, [hl]                                  ;; 28:46E2 $7E
+    and  a                                        ;; 28:46E3 $A7
+    jr   z, .else_46E9_28                         ;; 28:46E4 $28 $03
 
-    ld   hl, wD175                                ; $46E6: $21 $75 $D1
+    ld   hl, wD175                                ;; 28:46E6 $21 $75 $D1
 .else_46E9_28:
-    inc  [hl]                                     ; $46E9: $34
-    ld   a, [wD190]                               ; $46EA: $FA $90 $D1
-    and  a                                        ; $46ED: $A7
-    jr   z, .else_4722_28                         ; $46EE: $28 $32
+    inc  [hl]                                     ;; 28:46E9 $34
+    ld   a, [wD190]                               ;; 28:46EA $FA $90 $D1
+    and  a                                        ;; 28:46ED $A7
+    jr   z, .else_4722_28                         ;; 28:46EE $28 $32
 
-    ld   a, [wD16B]                               ; $46F0: $FA $6B $D1
-    cp   $06                                      ; $46F3: $FE $06
-    jr   z, .else_4722_28                         ; $46F5: $28 $2B
+    ld   a, [wD16B]                               ;; 28:46F0 $FA $6B $D1
+    cp   $06                                      ;; 28:46F3 $FE $06
+    jr   z, .else_4722_28                         ;; 28:46F5 $28 $2B
 
-    ld   hl, wD175                                ; $46F7: $21 $75 $D1
-    ld   a, [hl]                                  ; $46FA: $7E
-    and  a                                        ; $46FB: $A7
-    jr   nz, .else_471E_28                        ; $46FC: $20 $20
+    ld   hl, wD175                                ;; 28:46F7 $21 $75 $D1
+    ld   a, [hl]                                  ;; 28:46FA $7E
+    and  a                                        ;; 28:46FB $A7
+    jr   nz, .else_471E_28                        ;; 28:46FC $20 $20
 
-    xor  a                                        ; $46FE: $AF
-    ld   [wD17A], a                               ; $46FF: $EA $7A $D1
-    ld   [wD17B], a                               ; $4702: $EA $7B $D1
-    ld   a, [wD187]                               ; $4705: $FA $87 $D1
-    ld   [wD183], a                               ; $4708: $EA $83 $D1
-    ld   a, [wD188]                               ; $470B: $FA $88 $D1
-    ld   [wD184], a                               ; $470E: $EA $84 $D1
-    ld   a, [wD18D]                               ; $4711: $FA $8D $D1
-    ld   [wD189], a                               ; $4714: $EA $89 $D1
-    ld   a, [wD18E]                               ; $4717: $FA $8E $D1
-    ld   [wD18A], a                               ; $471A: $EA $8A $D1
-    ret                                           ; $471D: $C9
+    xor  a                                        ;; 28:46FE $AF
+    ld   [wD17A], a                               ;; 28:46FF $EA $7A $D1
+    ld   [wD17B], a                               ;; 28:4702 $EA $7B $D1
+    ld   a, [wD187]                               ;; 28:4705 $FA $87 $D1
+    ld   [wD183], a                               ;; 28:4708 $EA $83 $D1
+    ld   a, [wD188]                               ;; 28:470B $FA $88 $D1
+    ld   [wD184], a                               ;; 28:470E $EA $84 $D1
+    ld   a, [wD18D]                               ;; 28:4711 $FA $8D $D1
+    ld   [wD189], a                               ;; 28:4714 $EA $89 $D1
+    ld   a, [wD18E]                               ;; 28:4717 $FA $8E $D1
+    ld   [wD18A], a                               ;; 28:471A $EA $8A $D1
+    ret                                           ;; 28:471D $C9
 
 
 .else_471E_28:
-    call .func_028_4735                           ; $471E: $CD $35 $47
-    ret                                           ; $4721: $C9
+    call .func_028_4735                           ;; 28:471E $CD $35 $47
+    ret                                           ;; 28:4721 $C9
 
 
 .else_4722_28:
-    ld   a, [wD18F]                               ; $4722: $FA $8F $D1
-    ld   [wD16E], a                               ; $4725: $EA $6E $D1
+    ld   a, [wD18F]                               ;; 28:4722 $FA $8F $D1
+    ld   [wD16E], a                               ;; 28:4725 $EA $6E $D1
 .func_028_4728::
-    ld   a, $07                                   ; $4728: $3E $07
-    ld   [wD16B], a                               ; $472A: $EA $6B $D1
-    ld   a, $01                                   ; $472D: $3E $01
-    ld   [wD170], a                               ; $472F: $EA $70 $D1
-    call func_028_47E6.func_028_47F0              ; $4732: $CD $F0 $47
+    ld   a, $07                                   ;; 28:4728 $3E $07
+    ld   [wD16B], a                               ;; 28:472A $EA $6B $D1
+    ld   a, $01                                   ;; 28:472D $3E $01
+    ld   [wD170], a                               ;; 28:472F $EA $70 $D1
+    call func_028_47E6.func_028_47F0              ;; 28:4732 $CD $F0 $47
 .func_028_4735::
-    ld   a, [wD18B]                               ; $4735: $FA $8B $D1
-    ld   [wD189], a                               ; $4738: $EA $89 $D1
-    ld   a, [wD18C]                               ; $473B: $FA $8C $D1
-    ld   [wD18A], a                               ; $473E: $EA $8A $D1
-    ld   a, [wD185]                               ; $4741: $FA $85 $D1
-    ld   [wD183], a                               ; $4744: $EA $83 $D1
-    ld   a, [wD186]                               ; $4747: $FA $86 $D1
-    ld   [wD184], a                               ; $474A: $EA $84 $D1
-    ret                                           ; $474D: $C9
+    ld   a, [wD18B]                               ;; 28:4735 $FA $8B $D1
+    ld   [wD189], a                               ;; 28:4738 $EA $89 $D1
+    ld   a, [wD18C]                               ;; 28:473B $FA $8C $D1
+    ld   [wD18A], a                               ;; 28:473E $EA $8A $D1
+    ld   a, [wD185]                               ;; 28:4741 $FA $85 $D1
+    ld   [wD183], a                               ;; 28:4744 $EA $83 $D1
+    ld   a, [wD186]                               ;; 28:4747 $FA $86 $D1
+    ld   [wD184], a                               ;; 28:474A $EA $84 $D1
+    ret                                           ;; 28:474D $C9
 
 
 func_028_474E::
-    ld   c, a                                     ; $474E: $4F
-    ld   b, $00                                   ; $474F: $06 $00
-    ld   hl, wD178                                ; $4751: $21 $78 $D1
-    add  hl, bc                                   ; $4754: $09
-    ld   a, [hl]                                  ; $4755: $7E
-    ld   [rSB], a                                 ; $4756: $E0 $01
-    ld   a, $01                                   ; $4758: $3E $01
-    ld   [rSC], a                                 ; $475A: $E0 $02
-    ld   a, $81                                   ; $475C: $3E $81
-    ld   [rSC], a                                 ; $475E: $E0 $02
-    ld   hl, wD176                                ; $4760: $21 $76 $D1
-    inc  [hl]                                     ; $4763: $34
-    ret                                           ; $4764: $C9
+    ld   c, a                                     ;; 28:474E $4F
+    ld   b, $00                                   ;; 28:474F $06 $00
+    ld   hl, wD178                                ;; 28:4751 $21 $78 $D1
+    add  hl, bc                                   ;; 28:4754 $09
+    ld   a, [hl]                                  ;; 28:4755 $7E
+    ldh  [rSB], a                                 ;; 28:4756 $E0 $01
+    ld   a, $01                                   ;; 28:4758 $3E $01
+    ldh  [rSC], a                                 ;; 28:475A $E0 $02
+    ld   a, $81                                   ;; 28:475C $3E $81
+    ldh  [rSC], a                                 ;; 28:475E $E0 $02
+    ld   hl, wD176                                ;; 28:4760 $21 $76 $D1
+    inc  [hl]                                     ;; 28:4763 $34
+    ret                                           ;; 28:4764 $C9
 
 
 func_028_4765::
-    ld   a, [rSB]                                 ; $4765: $F0 $01
-    ld   [wD16E], a                               ; $4767: $EA $6E $D1
-    xor  a                                        ; $476A: $AF
-    ld   [rSB], a                                 ; $476B: $E0 $01
-    ld   a, $01                                   ; $476D: $3E $01
-    ld   [rSC], a                                 ; $476F: $E0 $02
-    ld   a, $81                                   ; $4771: $3E $81
-    ld   [rSC], a                                 ; $4773: $E0 $02
-    ld   hl, wD177                                ; $4775: $21 $77 $D1
-    inc  [hl]                                     ; $4778: $34
-    ld   a, [hl]                                  ; $4779: $7E
-    cp   $02                                      ; $477A: $FE $02
-    jr   z, func_028_4695.func_028_4728           ; $477C: $28 $AA
+    ldh  a, [rSB]                                 ;; 28:4765 $F0 $01
+    ld   [wD16E], a                               ;; 28:4767 $EA $6E $D1
+    xor  a                                        ;; 28:476A $AF
+    ldh  [rSB], a                                 ;; 28:476B $E0 $01
+    ld   a, $01                                   ;; 28:476D $3E $01
+    ldh  [rSC], a                                 ;; 28:476F $E0 $02
+    ld   a, $81                                   ;; 28:4771 $3E $81
+    ldh  [rSC], a                                 ;; 28:4773 $E0 $02
+    ld   hl, wD177                                ;; 28:4775 $21 $77 $D1
+    inc  [hl]                                     ;; 28:4778 $34
+    ld   a, [hl]                                  ;; 28:4779 $7E
+    cp   $02                                      ;; 28:477A $FE $02
+    jr   z, func_028_4695.func_028_4728           ;; 28:477C $28 $AA
 
-    ret                                           ; $477E: $C9
+    ret                                           ;; 28:477E $C9
 
 
 func_028_477F::
-    ld   a, [wD191]                               ; $477F: $FA $91 $D1
-    ld   [wD192], a                               ; $4782: $EA $92 $D1
-    ld   a, [wD16D]                               ; $4785: $FA $6D $D1
-    ld   [wD193], a                               ; $4788: $EA $93 $D1
-    ld   a, [rSB]                                 ; $478B: $F0 $01
-    ld   [wD16D], a                               ; $478D: $EA $6D $D1
-    cp   $FF                                      ; $4790: $FE $FF
-    jr   nz, func_028_47A0                        ; $4792: $20 $0C
+    ld   a, [wD191]                               ;; 28:477F $FA $91 $D1
+    ld   [wD192], a                               ;; 28:4782 $EA $92 $D1
+    ld   a, [wD16D]                               ;; 28:4785 $FA $6D $D1
+    ld   [wD193], a                               ;; 28:4788 $EA $93 $D1
+    ldh  a, [rSB]                                 ;; 28:478B $F0 $01
+    ld   [wD16D], a                               ;; 28:478D $EA $6D $D1
+    cp   $FF                                      ;; 28:4790 $FE $FF
+    jr   nz, func_028_47A0                        ;; 28:4792 $20 $0C
 
-    ld   a, $00                                   ; $4794: $3E $00
-    ld   [wD172], a                               ; $4796: $EA $72 $D1
-    ld   [wD16B], a                               ; $4799: $EA $6B $D1
-    ld   a, $02                                   ; $479C: $3E $02
-    jr   func_028_47B8                            ; $479E: $18 $18
+    ld   a, $00                                   ;; 28:4794 $3E $00
+    ld   [wD172], a                               ;; 28:4796 $EA $72 $D1
+    ld   [wD16B], a                               ;; 28:4799 $EA $6B $D1
+    ld   a, $02                                   ;; 28:479C $3E $02
+    jr   func_028_47B8                            ;; 28:479E $18 $18
 
 func_028_47A0::
-    bit  1, a                                     ; $47A0: $CB $4F
-    jr   z, func_028_47A9                         ; $47A2: $28 $05
+    bit  1, a                                     ;; 28:47A0 $CB $4F
+    jr   z, func_028_47A9                         ;; 28:47A2 $28 $05
 
-    ld   a, $01                                   ; $47A4: $3E $01
-    ld   [wD17D], a                               ; $47A6: $EA $7D $D1
+    ld   a, $01                                   ;; 28:47A4 $3E $01
+    ld   [wD17D], a                               ;; 28:47A6 $EA $7D $D1
 func_028_47A9::
-    bit  4, a                                     ; $47A9: $CB $67
-    ld   a, $00                                   ; $47AB: $3E $00
-    ld   [wD16B], a                               ; $47AD: $EA $6B $D1
-    ld   a, $01                                   ; $47B0: $3E $01
-    jr   nz, func_028_47B7                        ; $47B2: $20 $03
+    bit  4, a                                     ;; 28:47A9 $CB $67
+    ld   a, $00                                   ;; 28:47AB $3E $00
+    ld   [wD16B], a                               ;; 28:47AD $EA $6B $D1
+    ld   a, $01                                   ;; 28:47B0 $3E $01
+    jr   nz, func_028_47B7                        ;; 28:47B2 $20 $03
 
-    ld   [wD16B], a                               ; $47B4: $EA $6B $D1
+    ld   [wD16B], a                               ;; 28:47B4 $EA $6B $D1
 func_028_47B7::
-    inc  a                                        ; $47B7: $3C
+    inc  a                                        ;; 28:47B7 $3C
 func_028_47B8::
-    ld   [wD170], a                               ; $47B8: $EA $70 $D1
-    ld   a, [wD190]                               ; $47BB: $FA $90 $D1
-    and  a                                        ; $47BE: $A7
-    jr   nz, func_028_47C5                        ; $47BF: $20 $04
+    ld   [wD170], a                               ;; 28:47B8 $EA $70 $D1
+    ld   a, [wD190]                               ;; 28:47BB $FA $90 $D1
+    and  a                                        ;; 28:47BE $A7
+    jr   nz, func_028_47C5                        ;; 28:47BF $20 $04
 
-    xor  a                                        ; $47C1: $AF
-    ld   [wD172], a                               ; $47C2: $EA $72 $D1
+    xor  a                                        ;; 28:47C1 $AF
+    ld   [wD172], a                               ;; 28:47C2 $EA $72 $D1
 func_028_47C5::
-    ret                                           ; $47C5: $C9
+    ret                                           ;; 28:47C5 $C9
 
 
     db   $AF, $E0, $02, $E0, $01                ; $47C6 |.....|
 
 func_028_47CB::
-    xor  a                                        ; $47CB: $AF
-    ld   [rSB], a                                 ; $47CC: $E0 $01
-    ld   [rSC], a                                 ; $47CE: $E0 $02
-    ld   [wD16B], a                               ; $47D0: $EA $6B $D1
-    ld   [wD16C], a                               ; $47D3: $EA $6C $D1
-    dec  a                                        ; $47D6: $3D
-    ld   [wD16D], a                               ; $47D7: $EA $6D $D1
-    ld   [wD16E], a                               ; $47DA: $EA $6E $D1
-    ld   a, $80                                   ; $47DD: $3E $80
-    ld   [wD16F], a                               ; $47DF: $EA $6F $D1
-    call func_028_47E6                            ; $47E2: $CD $E6 $47
-    ret                                           ; $47E5: $C9
+    xor  a                                        ;; 28:47CB $AF
+    ldh  [rSB], a                                 ;; 28:47CC $E0 $01
+    ldh  [rSC], a                                 ;; 28:47CE $E0 $02
+    ld   [wD16B], a                               ;; 28:47D0 $EA $6B $D1
+    ld   [wD16C], a                               ;; 28:47D3 $EA $6C $D1
+    dec  a                                        ;; 28:47D6 $3D
+    ld   [wD16D], a                               ;; 28:47D7 $EA $6D $D1
+    ld   [wD16E], a                               ;; 28:47DA $EA $6E $D1
+    ld   a, $80                                   ;; 28:47DD $3E $80
+    ld   [wD16F], a                               ;; 28:47DF $EA $6F $D1
+    call func_028_47E6                            ;; 28:47E2 $CD $E6 $47
+    ret                                           ;; 28:47E5 $C9
 
 
 ; What are these values? That's a lot of addresses being set to $00...
 func_028_47E6::
-    xor  a                                        ; $47E6: $AF
-    ld   [wD170], a                               ; $47E7: $EA $70 $D1
-    ld   [wD171], a                               ; $47EA: $EA $71 $D1
-    ld   [wD172], a                               ; $47ED: $EA $72 $D1
+    xor  a                                        ;; 28:47E6 $AF
+    ld   [wD170], a                               ;; 28:47E7 $EA $70 $D1
+    ld   [wD171], a                               ;; 28:47EA $EA $71 $D1
+    ld   [wD172], a                               ;; 28:47ED $EA $72 $D1
 .func_028_47F0::
     xor  a                                      ; $47F0:, func_028_47E6.func_028_47F0 $AF
     ld   [wD173], a                             ; $47F1:, func_028_47E6.func_028_47F0 $EA $73 $D1
@@ -1308,420 +1313,420 @@ func_028_47E6::
 
 
 func_028_4813::
-    ld   a, [wD172]                               ; $4813: $FA $72 $D1
-    and  a                                        ; $4816: $A7
-    jr   z, .else_481D_28                         ; $4817: $28 $04
+    ld   a, [wD172]                               ;; 28:4813 $FA $72 $D1
+    and  a                                        ;; 28:4816 $A7
+    jr   z, .else_481D_28                         ;; 28:4817 $28 $04
 
-    call func_028_482E                            ; $4819: $CD $2E $48
-    ret  nc                                       ; $481C: $D0
+    call func_028_482E                            ;; 28:4819 $CD $2E $48
+    ret  nc                                       ;; 28:481C $D0
 
 .else_481D_28:
-    ld   a, [wD192]                               ; $481D: $FA $92 $D1
-    cp   $01                                      ; $4820: $FE $01
-    jr   nz, .else_4828_28                        ; $4822: $20 $04
+    ld   a, [wD192]                               ;; 28:481D $FA $92 $D1
+    cp   $01                                      ;; 28:4820 $FE $01
+    jr   nz, .else_4828_28                        ;; 28:4822 $20 $04
 
-    call func_028_482E                            ; $4824: $CD $2E $48
-    ret  nc                                       ; $4827: $D0
+    call func_028_482E                            ;; 28:4824 $CD $2E $48
+    ret  nc                                       ;; 28:4827 $D0
 
 .else_4828_28:
-    call func_028_4AA2                            ; $4828: $CD $A2 $4A
-    jp   func_028_4B6B                            ; $482B: $C3 $6B $4B
+    call func_028_4AA2                            ;; 28:4828 $CD $A2 $4A
+    jp   func_028_4B6B                            ;; 28:482B $C3 $6B $4B
 
 func_028_482E::
-    ld   a, [wD170]                               ; $482E: $FA $70 $D1
-    cp   $02                                      ; $4831: $FE $02
-    jr   c, func_028_4878                         ; $4833: $38 $43
+    ld   a, [wD170]                               ;; 28:482E $FA $70 $D1
+    cp   $02                                      ;; 28:4831 $FE $02
+    jr   c, func_028_4878                         ;; 28:4833 $38 $43
 
-    call func_028_487C                            ; $4835: $CD $7C $48
-    jr   nz, func_028_4878                        ; $4838: $20 $3E
+    call func_028_487C                            ;; 28:4835 $CD $7C $48
+    jr   nz, func_028_4878                        ;; 28:4838 $20 $3E
 
-    xor  a                                        ; $483A: $AF
-    ld   [wD182], a                               ; $483B: $EA $82 $D1
-    ld   [wD192], a                               ; $483E: $EA $92 $D1
-    inc  a                                        ; $4841: $3C
-    ld   [wD16B], a                               ; $4842: $EA $6B $D1
-    ld   a, [wD16D]                               ; $4845: $FA $6D $D1
-    cp   $FF                                      ; $4848: $FE $FF
-    jr   z, func_028_486E                         ; $484A: $28 $22
+    xor  a                                        ;; 28:483A $AF
+    ld   [wD182], a                               ;; 28:483B $EA $82 $D1
+    ld   [wD192], a                               ;; 28:483E $EA $92 $D1
+    inc  a                                        ;; 28:4841 $3C
+    ld   [wD16B], a                               ;; 28:4842 $EA $6B $D1
+    ld   a, [wD16D]                               ;; 28:4845 $FA $6D $D1
+    cp   $FF                                      ;; 28:4848 $FE $FF
+    jr   z, func_028_486E                         ;; 28:484A $28 $22
 
-    bit  0, a                                     ; $484C: $CB $47
-    jr   nz, .else_4867_28                        ; $484E: $20 $17
+    bit  0, a                                     ;; 28:484C $CB $47
+    jr   nz, .else_4867_28                        ;; 28:484E $20 $17
 
-    bit  1, a                                     ; $4850: $CB $4F
-    jr   nz, .else_4867_28                        ; $4852: $20 $13
+    bit  1, a                                     ;; 28:4850 $CB $4F
+    jr   nz, .else_4867_28                        ;; 28:4852 $20 $13
 
-    and  %11110000                                ; $4854: $E6 $F0
-    jr   z, func_028_4876                         ; $4856: $28 $1E
+    and  %11110000                                ;; 28:4854 $E6 $F0
+    jr   z, func_028_4876                         ;; 28:4856 $28 $1E
 
-    xor  a                                        ; $4858: $AF
-    ld   [wD16B], a                               ; $4859: $EA $6B $D1
-    ld   [wD192], a                               ; $485C: $EA $92 $D1
-    ld   a, [wD16D]                               ; $485F: $FA $6D $D1
-    call func_028_4BA7                            ; $4862: $CD $A7 $4B
-    jr   func_028_4876                            ; $4865: $18 $0F
+    xor  a                                        ;; 28:4858 $AF
+    ld   [wD16B], a                               ;; 28:4859 $EA $6B $D1
+    ld   [wD192], a                               ;; 28:485C $EA $92 $D1
+    ld   a, [wD16D]                               ;; 28:485F $FA $6D $D1
+    call func_028_4BA7                            ;; 28:4862 $CD $A7 $4B
+    jr   func_028_4876                            ;; 28:4865 $18 $0F
 
 .else_4867_28:
-    scf                                           ; $4867: $37
-    ret                                           ; $4868: $C9
+    scf                                           ;; 28:4867 $37
+    ret                                           ;; 28:4868 $C9
 
 
     db   $AF, $EA, $92, $D1, $3D                ; $4869 |....=|
 
 func_028_486E::
-    inc  a                                        ; $486E: $3C
-    ld   [wD16B], a                               ; $486F: $EA $6B $D1
-    dec  a                                        ; $4872: $3D
-    call func_028_4BA7                            ; $4873: $CD $A7 $4B
+    inc  a                                        ;; 28:486E $3C
+    ld   [wD16B], a                               ;; 28:486F $EA $6B $D1
+    dec  a                                        ;; 28:4872 $3D
+    call func_028_4BA7                            ;; 28:4873 $CD $A7 $4B
 func_028_4876::
-    and  a                                        ; $4876: $A7
-    ret                                           ; $4877: $C9
+    and  a                                        ;; 28:4876 $A7
+    ret                                           ;; 28:4877 $C9
 
 
 func_028_4878::
-    xor  a                                        ; $4878: $AF
-    ld   a, $F0                                   ; $4879: $3E $F0
-    ret                                           ; $487B: $C9
+    xor  a                                        ;; 28:4878 $AF
+    ld   a, $F0                                   ;; 28:4879 $3E $F0
+    ret                                           ;; 28:487B $C9
 
 
 func_028_487C::
-    ld   hl, wD170                                ; $487C: $21 $70 $D1
-    ld   a, [hl]                                  ; $487F: $7E
-    cp   $03                                      ; $4880: $FE $03
-    ret  z                                        ; $4882: $C8
+    ld   hl, wD170                                ;; 28:487C $21 $70 $D1
+    ld   a, [hl]                                  ;; 28:487F $7E
+    cp   $03                                      ;; 28:4880 $FE $03
+    ret  z                                        ;; 28:4882 $C8
 
-    inc  a                                        ; $4883: $3C
-    ld   [hl], a                                  ; $4884: $77
-    ret                                           ; $4885: $C9
+    inc  a                                        ;; 28:4883 $3C
+    ld   [hl], a                                  ;; 28:4884 $77
+    ret                                           ;; 28:4885 $C9
 
 
 func_028_4886::
-    ld   a, [wD16B]                               ; $4886: $FA $6B $D1
-    cp   $01                                      ; $4889: $FE $01
-    jr   z, .else_4898_28                         ; $488B: $28 $0B
+    ld   a, [wD16B]                               ;; 28:4886 $FA $6B $D1
+    cp   $01                                      ;; 28:4889 $FE $01
+    jr   z, .else_4898_28                         ;; 28:488B $28 $0B
 
-    cp   $02                                      ; $488D: $FE $02
-    jr   z, .else_4898_28                         ; $488F: $28 $07
+    cp   $02                                      ;; 28:488D $FE $02
+    jr   z, .else_4898_28                         ;; 28:488F $28 $07
 
-    and  a                                        ; $4891: $A7
-    ld   a, $FF                                   ; $4892: $3E $FF
-    ret  z                                        ; $4894: $C8
+    and  a                                        ;; 28:4891 $A7
+    ld   a, $FF                                   ;; 28:4892 $3E $FF
+    ret  z                                        ;; 28:4894 $C8
 
 .loop_4895_28
-    ld   a, $F0                                   ; $4895: $3E $F0
-    ret                                           ; $4897: $C9
+    ld   a, $F0                                   ;; 28:4895 $3E $F0
+    ret                                           ;; 28:4897 $C9
 
 
 .else_4898_28:
-    ld   a, [wD17D]                               ; $4898: $FA $7D $D1
-    and  a                                        ; $489B: $A7
-    jr   nz, .loop_4895_28                        ; $489C: $20 $F7
+    ld   a, [wD17D]                               ;; 28:4898 $FA $7D $D1
+    and  a                                        ;; 28:489B $A7
+    jr   nz, .loop_4895_28                        ;; 28:489C $20 $F7
 
-    ld   a, [wD172]                               ; $489E: $FA $72 $D1
-    and  a                                        ; $48A1: $A7
-    jr   z, .else_48A8_28                         ; $48A2: $28 $04
+    ld   a, [wD172]                               ;; 28:489E $FA $72 $D1
+    and  a                                        ;; 28:48A1 $A7
+    jr   z, .else_48A8_28                         ;; 28:48A2 $28 $04
 
-    call func_028_482E                            ; $48A4: $CD $2E $48
-    ret  nc                                       ; $48A7: $D0
+    call func_028_482E                            ;; 28:48A4 $CD $2E $48
+    ret  nc                                       ;; 28:48A7 $D0
 
 .else_48A8_28:
-    ld   a, [wD192]                               ; $48A8: $FA $92 $D1
-    cp   $02                                      ; $48AB: $FE $02
-    jr   nz, .else_48B3_28                        ; $48AD: $20 $04
+    ld   a, [wD192]                               ;; 28:48A8 $FA $92 $D1
+    cp   $02                                      ;; 28:48AB $FE $02
+    jr   nz, .else_48B3_28                        ;; 28:48AD $20 $04
 
-    call func_028_482E                            ; $48AF: $CD $2E $48
-    ret  nc                                       ; $48B2: $D0
+    call func_028_482E                            ;; 28:48AF $CD $2E $48
+    ret  nc                                       ;; 28:48B2 $D0
 
 .else_48B3_28:
-    ld   a, [wD16D]                               ; $48B3: $FA $6D $D1
-    cp   $FF                                      ; $48B6: $FE $FF
-    jp   z, func_028_4BA7                         ; $48B8: $CA $A7 $4B
+    ld   a, [wD16D]                               ;; 28:48B3 $FA $6D $D1
+    cp   $FF                                      ;; 28:48B6 $FE $FF
+    jp   z, func_028_4BA7                         ;; 28:48B8 $CA $A7 $4B
 
-    call func_028_4AAF                            ; $48BB: $CD $AF $4A
-    jp   func_028_4B6B                            ; $48BE: $C3 $6B $4B
+    call func_028_4AAF                            ;; 28:48BB $CD $AF $4A
+    jp   func_028_4B6B                            ;; 28:48BE $C3 $6B $4B
 
 func_028_48C1::
-    ld   c, a                                     ; $48C1: $4F
-    ld   a, [wD16B]                               ; $48C2: $FA $6B $D1
-    and  a                                        ; $48C5: $A7
-    ld   a, [wD16D]                               ; $48C6: $FA $6D $D1
-    jp   z, func_028_4BA7                         ; $48C9: $CA $A7 $4B
+    ld   c, a                                     ;; 28:48C1 $4F
+    ld   a, [wD16B]                               ;; 28:48C2 $FA $6B $D1
+    and  a                                        ;; 28:48C5 $A7
+    ld   a, [wD16D]                               ;; 28:48C6 $FA $6D $D1
+    jp   z, func_028_4BA7                         ;; 28:48C9 $CA $A7 $4B
 
-    ld   a, [wD16B]                               ; $48CC: $FA $6B $D1
-    cp   $01                                      ; $48CF: $FE $01
-    jr   z, .else_48DA_28                         ; $48D1: $28 $07
+    ld   a, [wD16B]                               ;; 28:48CC $FA $6B $D1
+    cp   $01                                      ;; 28:48CF $FE $01
+    jr   z, .else_48DA_28                         ;; 28:48D1 $28 $07
 
-    cp   $03                                      ; $48D3: $FE $03
-    jr   z, .else_48DA_28                         ; $48D5: $28 $03
+    cp   $03                                      ;; 28:48D3 $FE $03
+    jr   z, .else_48DA_28                         ;; 28:48D5 $28 $03
 
-    ld   a, $F0                                   ; $48D7: $3E $F0
-    ret                                           ; $48D9: $C9
+    ld   a, $F0                                   ;; 28:48D7 $3E $F0
+    ret                                           ;; 28:48D9 $C9
 
 
 .else_48DA_28:
-    ld   a, [wD172]                               ; $48DA: $FA $72 $D1
-    and  a                                        ; $48DD: $A7
-    jr   nz, .else_4934_28                        ; $48DE: $20 $54
+    ld   a, [wD172]                               ;; 28:48DA $FA $72 $D1
+    and  a                                        ;; 28:48DD $A7
+    jr   nz, .else_4934_28                        ;; 28:48DE $20 $54
 
-    ld   a, c                                     ; $48E0: $79
-    inc  a                                        ; $48E1: $3C
-    ld   [wD194], a                               ; $48E2: $EA $94 $D1
-    ld   a, l                                     ; $48E5: $7D
-    ld   [wD195], a                               ; $48E6: $EA $95 $D1
-    ld   a, h                                     ; $48E9: $7C
-    ld   [wD196], a                               ; $48EA: $EA $96 $D1
-    ld   a, $00                                   ; $48ED: $3E $00
-    ld   [wD197], a                               ; $48EF: $EA $97 $D1
-    ld   a, $D0                                   ; $48F2: $3E $D0
-    ld   [wD198], a                               ; $48F4: $EA $98 $D1
-    ld   a, [wD16D]                               ; $48F7: $FA $6D $D1
-    cp   $FF                                      ; $48FA: $FE $FF
-    jp   z, func_028_4BA7                         ; $48FC: $CA $A7 $4B
+    ld   a, c                                     ;; 28:48E0 $79
+    inc  a                                        ;; 28:48E1 $3C
+    ld   [wD194], a                               ;; 28:48E2 $EA $94 $D1
+    ld   a, l                                     ;; 28:48E5 $7D
+    ld   [wD195], a                               ;; 28:48E6 $EA $95 $D1
+    ld   a, h                                     ;; 28:48E9 $7C
+    ld   [wD196], a                               ;; 28:48EA $EA $96 $D1
+    ld   a, $00                                   ;; 28:48ED $3E $00
+    ld   [wD197], a                               ;; 28:48EF $EA $97 $D1
+    ld   a, $D0                                   ;; 28:48F2 $3E $D0
+    ld   [wD198], a                               ;; 28:48F4 $EA $98 $D1
+    ld   a, [wD16D]                               ;; 28:48F7 $FA $6D $D1
+    cp   $FF                                      ;; 28:48FA $FE $FF
+    jp   z, func_028_4BA7                         ;; 28:48FC $CA $A7 $4B
 
-    ld   a, [wD199]                               ; $48FF: $FA $99 $D1
-    ld   [wD1B5], a                               ; $4902: $EA $B5 $D1
-    and  a                                        ; $4905: $A7
-    jr   z, .else_4928_28                         ; $4906: $28 $20
+    ld   a, [wD199]                               ;; 28:48FF $FA $99 $D1
+    ld   [wD1B5], a                               ;; 28:4902 $EA $B5 $D1
+    and  a                                        ;; 28:4905 $A7
+    jr   z, .else_4928_28                         ;; 28:4906 $28 $20
 
-    ld   a, [wD194]                               ; $4908: $FA $94 $D1
-    dec  a                                        ; $490B: $3D
-    dec  a                                        ; $490C: $3D
-    ld   c, a                                     ; $490D: $4F
-    ld   b, $00                                   ; $490E: $06 $00
-    push hl                                       ; $4910: $E5
-    ld   hl, wD1AC                                ; $4911: $21 $AC $D1
-    add  hl, bc                                   ; $4914: $09
-    ld   a, [hl]                                  ; $4915: $7E
-    ld   [wD1B5], a                               ; $4916: $EA $B5 $D1
-    sla  c                                        ; $4919: $CB $21
-    ld   b, $00                                   ; $491B: $06 $00
-    ld   hl, wD19A                                ; $491D: $21 $9A $D1
-    add  hl, bc                                   ; $4920: $09
-    ldi  a, [hl]                                  ; $4921: $2A
-    ld   b, [hl]                                  ; $4922: $46
-    pop  hl                                       ; $4923: $E1
-    ld   c, a                                     ; $4924: $4F
-    jp   .func_028_492B                           ; $4925: $C3 $2B $49
+    ld   a, [wD194]                               ;; 28:4908 $FA $94 $D1
+    dec  a                                        ;; 28:490B $3D
+    dec  a                                        ;; 28:490C $3D
+    ld   c, a                                     ;; 28:490D $4F
+    ld   b, $00                                   ;; 28:490E $06 $00
+    push hl                                       ;; 28:4910 $E5
+    ld   hl, wD1AC                                ;; 28:4911 $21 $AC $D1
+    add  hl, bc                                   ;; 28:4914 $09
+    ld   a, [hl]                                  ;; 28:4915 $7E
+    ld   [wD1B5], a                               ;; 28:4916 $EA $B5 $D1
+    sla  c                                        ;; 28:4919 $CB $21
+    ld   b, $00                                   ;; 28:491B $06 $00
+    ld   hl, wD19A                                ;; 28:491D $21 $9A $D1
+    add  hl, bc                                   ;; 28:4920 $09
+    ldi  a, [hl]                                  ;; 28:4921 $2A
+    ld   b, [hl]                                  ;; 28:4922 $46
+    pop  hl                                       ;; 28:4923 $E1
+    ld   c, a                                     ;; 28:4924 $4F
+    jp   .func_028_492B                           ;; 28:4925 $C3 $2B $49
 
 .else_4928_28:
-    ld   bc, $280                                 ; $4928: $01 $80 $02
+    ld   bc, $280                                 ;; 28:4928 $01 $80 $02
 .func_028_492B::
-    call func_028_4BD9                            ; $492B: $CD $D9 $4B
-    call func_028_4B0F                            ; $492E: $CD $0F $4B
-    jp   func_028_4B6B                            ; $4931: $C3 $6B $4B
+    call func_028_4BD9                            ;; 28:492B $CD $D9 $4B
+    call func_028_4B0F                            ;; 28:492E $CD $0F $4B
+    jp   func_028_4B6B                            ;; 28:4931 $C3 $6B $4B
 
 .else_4934_28:
-    ld   a, [wD170]                               ; $4934: $FA $70 $D1
-    cp   $02                                      ; $4937: $FE $02
-    ld   a, $F0                                   ; $4939: $3E $F0
-    jp   c, .return_49E1_28                       ; $493B: $DA $E1 $49
+    ld   a, [wD170]                               ;; 28:4934 $FA $70 $D1
+    cp   $02                                      ;; 28:4937 $FE $02
+    ld   a, $F0                                   ;; 28:4939 $3E $F0
+    jp   c, .return_49E1_28                       ;; 28:493B $DA $E1 $49
 
-    call func_028_487C                            ; $493E: $CD $7C $48
-    ld   a, $F0                                   ; $4941: $3E $F0
-    jp   nz, .return_49E1_28                      ; $4943: $C2 $E1 $49
+    call func_028_487C                            ;; 28:493E $CD $7C $48
+    ld   a, $F0                                   ;; 28:4941 $3E $F0
+    jp   nz, .return_49E1_28                      ;; 28:4943 $C2 $E1 $49
 
-    ld   hl, wD194                                ; $4946: $21 $94 $D1
-    ld   a, [wD16D]                               ; $4949: $FA $6D $D1
-    ld   c, a                                     ; $494C: $4F
-    and  %11110000                                ; $494D: $E6 $F0
-    ld   a, c                                     ; $494F: $79
-    jp   nz, .func_028_49CE                       ; $4950: $C2 $CE $49
+    ld   hl, wD194                                ;; 28:4946 $21 $94 $D1
+    ld   a, [wD16D]                               ;; 28:4949 $FA $6D $D1
+    ld   c, a                                     ;; 28:494C $4F
+    and  %11110000                                ;; 28:494D $E6 $F0
+    ld   a, c                                     ;; 28:494F $79
+    jp   nz, .func_028_49CE                       ;; 28:4950 $C2 $CE $49
 
-    bit  1, a                                     ; $4953: $CB $4F
-    jp   nz, .func_028_4970                       ; $4955: $C2 $70 $49
+    bit  1, a                                     ;; 28:4953 $CB $4F
+    jp   nz, .func_028_4970                       ;; 28:4955 $C2 $70 $49
 
-    bit  0, a                                     ; $4958: $CB $47
-    jp   nz, .func_028_4970                       ; $495A: $C2 $70 $49
+    bit  0, a                                     ;; 28:4958 $CB $47
+    jp   nz, .func_028_4970                       ;; 28:495A $C2 $70 $49
 
-    ld   a, [hl]                                  ; $495D: $7E
-    and  a                                        ; $495E: $A7
-    ld   a, [wD16D]                               ; $495F: $FA $6D $D1
-    jr   z, .else_49D8_28                         ; $4962: $28 $74
+    ld   a, [hl]                                  ;; 28:495D $7E
+    and  a                                        ;; 28:495E $A7
+    ld   a, [wD16D]                               ;; 28:495F $FA $6D $D1
+    jr   z, .else_49D8_28                         ;; 28:4962 $28 $74
 
-    ld   a, [hl]                                  ; $4964: $7E
-    cp   $01                                      ; $4965: $FE $01
-    jp   z, .func_028_49E2                        ; $4967: $CA $E2 $49
+    ld   a, [hl]                                  ;; 28:4964 $7E
+    cp   $01                                      ;; 28:4965 $FE $01
+    jp   z, .func_028_49E2                        ;; 28:4967 $CA $E2 $49
 
-    dec  [hl]                                     ; $496A: $35
-    ld   a, [wD16D]                               ; $496B: $FA $6D $D1
-    jr   z, .else_49D8_28                         ; $496E: $28 $68
+    dec  [hl]                                     ;; 28:496A $35
+    ld   a, [wD16D]                               ;; 28:496B $FA $6D $D1
+    jr   z, .else_49D8_28                         ;; 28:496E $28 $68
 
 .func_028_4970::
-    ld   a, [hl]                                  ; $4970: $7E
-    cp   $01                                      ; $4971: $FE $01
-    ld   a, $F0                                   ; $4973: $3E $F0
-    jp   z, .return_49E1_28                       ; $4975: $CA $E1 $49
+    ld   a, [hl]                                  ;; 28:4970 $7E
+    cp   $01                                      ;; 28:4971 $FE $01
+    ld   a, $F0                                   ;; 28:4973 $3E $F0
+    jp   z, .return_49E1_28                       ;; 28:4975 $CA $E1 $49
 
-    ld   bc, $280                                 ; $4978: $01 $80 $02
-    ld   a, [wD199]                               ; $497B: $FA $99 $D1
-    ld   [wD1B5], a                               ; $497E: $EA $B5 $D1
-    and  a                                        ; $4981: $A7
-    jr   z, .else_49A1_28                         ; $4982: $28 $1D
+    ld   bc, $280                                 ;; 28:4978 $01 $80 $02
+    ld   a, [wD199]                               ;; 28:497B $FA $99 $D1
+    ld   [wD1B5], a                               ;; 28:497E $EA $B5 $D1
+    and  a                                        ;; 28:4981 $A7
+    jr   z, .else_49A1_28                         ;; 28:4982 $28 $1D
 
-    ld   a, [wD194]                               ; $4984: $FA $94 $D1
-    dec  a                                        ; $4987: $3D
-    dec  a                                        ; $4988: $3D
-    ld   c, a                                     ; $4989: $4F
-    ld   b, $00                                   ; $498A: $06 $00
-    push hl                                       ; $498C: $E5
-    ld   hl, wD1AC                                ; $498D: $21 $AC $D1
-    add  hl, bc                                   ; $4990: $09
-    ld   a, [hl]                                  ; $4991: $7E
-    ld   [wD1B5], a                               ; $4992: $EA $B5 $D1
-    sla  c                                        ; $4995: $CB $21
-    ld   b, $00                                   ; $4997: $06 $00
-    ld   hl, wD19A                                ; $4999: $21 $9A $D1
-    add  hl, bc                                   ; $499C: $09
-    ldi  a, [hl]                                  ; $499D: $2A
-    ld   b, [hl]                                  ; $499E: $46
-    pop  hl                                       ; $499F: $E1
-    ld   c, a                                     ; $49A0: $4F
+    ld   a, [wD194]                               ;; 28:4984 $FA $94 $D1
+    dec  a                                        ;; 28:4987 $3D
+    dec  a                                        ;; 28:4988 $3D
+    ld   c, a                                     ;; 28:4989 $4F
+    ld   b, $00                                   ;; 28:498A $06 $00
+    push hl                                       ;; 28:498C $E5
+    ld   hl, wD1AC                                ;; 28:498D $21 $AC $D1
+    add  hl, bc                                   ;; 28:4990 $09
+    ld   a, [hl]                                  ;; 28:4991 $7E
+    ld   [wD1B5], a                               ;; 28:4992 $EA $B5 $D1
+    sla  c                                        ;; 28:4995 $CB $21
+    ld   b, $00                                   ;; 28:4997 $06 $00
+    ld   hl, wD19A                                ;; 28:4999 $21 $9A $D1
+    add  hl, bc                                   ;; 28:499C $09
+    ldi  a, [hl]                                  ;; 28:499D $2A
+    ld   b, [hl]                                  ;; 28:499E $46
+    pop  hl                                       ;; 28:499F $E1
+    ld   c, a                                     ;; 28:49A0 $4F
 .else_49A1_28:
-    ld   a, [wD16D]                               ; $49A1: $FA $6D $D1
-    bit  1, a                                     ; $49A4: $CB $4F
-    jp   nz, .func_028_49C3                       ; $49A6: $C2 $C3 $49
+    ld   a, [wD16D]                               ;; 28:49A1 $FA $6D $D1
+    bit  1, a                                     ;; 28:49A4 $CB $4F
+    jp   nz, .func_028_49C3                       ;; 28:49A6 $C2 $C3 $49
 
-    ld   a, [wD197]                               ; $49A9: $FA $97 $D1
-    add  $28                                      ; $49AC: $C6 $28
-    ld   [wD197], a                               ; $49AE: $EA $97 $D1
-    ld   a, [wD198]                               ; $49B1: $FA $98 $D1
-    adc  $00                                      ; $49B4: $CE $00
-    ld   [wD198], a                               ; $49B6: $EA $98 $D1
-    ld   a, $00                                   ; $49B9: $3E $00
-    ld   [wD187], a                               ; $49BB: $EA $87 $D1
-    ld   a, $C2                                   ; $49BE: $3E $C2
-    ld   [wD188], a                               ; $49C0: $EA $88 $D1
+    ld   a, [wD197]                               ;; 28:49A9 $FA $97 $D1
+    add  $28                                      ;; 28:49AC $C6 $28
+    ld   [wD197], a                               ;; 28:49AE $EA $97 $D1
+    ld   a, [wD198]                               ;; 28:49B1 $FA $98 $D1
+    adc  $00                                      ;; 28:49B4 $CE $00
+    ld   [wD198], a                               ;; 28:49B6 $EA $98 $D1
+    ld   a, $00                                   ;; 28:49B9 $3E $00
+    ld   [wD187], a                               ;; 28:49BB $EA $87 $D1
+    ld   a, $C2                                   ;; 28:49BE $3E $C2
+    ld   [wD188], a                               ;; 28:49C0 $EA $88 $D1
 .func_028_49C3::
-    ld   a, [wD187]                               ; $49C3: $FA $87 $D1
-    ld   l, a                                     ; $49C6: $6F
-    ld   a, [wD188]                               ; $49C7: $FA $88 $D1
-    ld   h, a                                     ; $49CA: $67
-    jp   .func_028_492B                           ; $49CB: $C3 $2B $49
+    ld   a, [wD187]                               ;; 28:49C3 $FA $87 $D1
+    ld   l, a                                     ;; 28:49C6 $6F
+    ld   a, [wD188]                               ;; 28:49C7 $FA $88 $D1
+    ld   h, a                                     ;; 28:49CA $67
+    jp   .func_028_492B                           ;; 28:49CB $C3 $2B $49
 
 .func_028_49CE::
-    push af                                       ; $49CE: $F5
-    ld   a, $01                                   ; $49CF: $3E $01
-    ld   [wD17C], a                               ; $49D1: $EA $7C $D1
-    pop  af                                       ; $49D4: $F1
-    call func_028_4BA7                            ; $49D5: $CD $A7 $4B
+    push af                                       ;; 28:49CE $F5
+    ld   a, $01                                   ;; 28:49CF $3E $01
+    ld   [wD17C], a                               ;; 28:49D1 $EA $7C $D1
+    pop  af                                       ;; 28:49D4 $F1
+    call func_028_4BA7                            ;; 28:49D5 $CD $A7 $4B
 .else_49D8_28:
-    push af                                       ; $49D8: $F5
-    xor  a                                        ; $49D9: $AF
-    ld   [wD190], a                               ; $49DA: $EA $90 $D1
-    ld   [wD172], a                               ; $49DD: $EA $72 $D1
-    pop  af                                       ; $49E0: $F1
+    push af                                       ;; 28:49D8 $F5
+    xor  a                                        ;; 28:49D9 $AF
+    ld   [wD190], a                               ;; 28:49DA $EA $90 $D1
+    ld   [wD172], a                               ;; 28:49DD $EA $72 $D1
+    pop  af                                       ;; 28:49E0 $F1
 .return_49E1_28:
-    ret                                           ; $49E1: $C9
+    ret                                           ;; 28:49E1 $C9
 
 
 .func_028_49E2::
-    ld   a, [wD1B6]                               ; $49E2: $FA $B6 $D1
-    and  a                                        ; $49E5: $A7
-    ld   a, [wD16D]                               ; $49E6: $FA $6D $D1
-    jr   z, .else_49D8_28                         ; $49E9: $28 $ED
+    ld   a, [wD1B6]                               ;; 28:49E2 $FA $B6 $D1
+    and  a                                        ;; 28:49E5 $A7
+    ld   a, [wD16D]                               ;; 28:49E6 $FA $6D $D1
+    jr   z, .else_49D8_28                         ;; 28:49E9 $28 $ED
 
-    dec  [hl]                                     ; $49EB: $35
-    call func_028_4B5D                            ; $49EC: $CD $5D $4B
-    jp   func_028_4B6B                            ; $49EF: $C3 $6B $4B
+    dec  [hl]                                     ;; 28:49EB $35
+    call func_028_4B5D                            ;; 28:49EC $CD $5D $4B
+    jp   func_028_4B6B                            ;; 28:49EF $C3 $6B $4B
 
 func_028_49F2::
-    ld   a, [wLinkPositionXHistory + 22]          ; $49F2: $FA $6B $D1
-    cp   $01                                      ; $49F5: $FE $01
-    jr   z, .jr_4a04                              ; $49F7: $28 $0B
+    ld   a, [wLinkPositionXHistory + 22]          ;; 28:49F2 $FA $6B $D1
+    cp   $01                                      ;; 28:49F5 $FE $01
+    jr   z, .jr_4a04                              ;; 28:49F7 $28 $0B
 
-    cp   $03                                      ; $49F9: $FE $03
-    jr   z, .jr_4a04                              ; $49FB: $28 $07
+    cp   $03                                      ;; 28:49F9 $FE $03
+    jr   z, .jr_4a04                              ;; 28:49FB $28 $07
 
-    and  a                                        ; $49FD: $A7
-    ld   a, $ff                                   ; $49FE: $3E $FF
-    ret  z                                        ; $4A00: $C8
+    and  a                                        ;; 28:49FD $A7
+    ld   a, $ff                                   ;; 28:49FE $3E $FF
+    ret  z                                        ;; 28:4A00 $C8
 
-    ld   a, $f0                                   ; $4A01: $3E $F0
-    ret                                           ; $4A03: $C9
+    ld   a, $f0                                   ;; 28:4A01 $3E $F0
+    ret                                           ;; 28:4A03 $C9
 
 
 .jr_4a04::
-    ld   a, [wD172]                               ; $4A04: $FA $72 $D1
-    and  a                                        ; $4A07: $A7
-    jr   z, .jr_4a0e                              ; $4A08: $28 $04
+    ld   a, [wD172]                               ;; 28:4A04 $FA $72 $D1
+    and  a                                        ;; 28:4A07 $A7
+    jr   z, .jr_4a0e                              ;; 28:4A08 $28 $04
 
-    call func_028_482E                            ; $4A0A: $CD $2E $48
-    ret  nc                                       ; $4A0D: $D0
+    call func_028_482E                            ;; 28:4A0A $CD $2E $48
+    ret  nc                                       ;; 28:4A0D $D0
 
 .jr_4a0e::
-    ld   a, [wD192]                               ; $4A0E: $FA $92 $D1
-    cp   $04                                      ; $4A11: $FE $04
-    jr   nz, .jr_4a19                             ; $4A13: $20 $04
+    ld   a, [wD192]                               ;; 28:4A0E $FA $92 $D1
+    cp   $04                                      ;; 28:4A11 $FE $04
+    jr   nz, .jr_4a19                             ;; 28:4A13 $20 $04
 
-    call func_028_482E                            ; $4A15: $CD $2E $48
-    ret  nc                                       ; $4A18: $D0
+    call func_028_482E                            ;; 28:4A15 $CD $2E $48
+    ret  nc                                       ;; 28:4A18 $D0
 
 .jr_4a19::
-    ld   a, [wD16D]                               ; $4A19: $FA $6D $D1
-    cp   $ff                                      ; $4A1C: $FE $FF
-    jp   z, func_028_4BA7                         ; $4A1E: $CA $A7 $4B
+    ld   a, [wD16D]                               ;; 28:4A19 $FA $6D $D1
+    cp   $ff                                      ;; 28:4A1C $FE $FF
+    jp   z, func_028_4BA7                         ;; 28:4A1E $CA $A7 $4B
 
-    call Call_028_4b43                            ; $4A21: $CD $43 $4B
-    jp   func_028_4B6B                            ; $4A24: $C3 $6B $4B
+    call Call_028_4b43                            ;; 28:4A21 $CD $43 $4B
+    jp   func_028_4B6B                            ;; 28:4A24 $C3 $6B $4B
 
 
 func_028_4A27::
-    ld   a, [wD16B]                               ; $4A27: $FA $6B $D1
-    cp   $01                                      ; $4A2A: $FE $01
-    jr   z, .else_4A39_28                         ; $4A2C: $28 $0B
+    ld   a, [wD16B]                               ;; 28:4A27 $FA $6B $D1
+    cp   $01                                      ;; 28:4A2A $FE $01
+    jr   z, .else_4A39_28                         ;; 28:4A2C $28 $0B
 
-    cp   $03                                      ; $4A2E: $FE $03
-    jr   z, .else_4A39_28                         ; $4A30: $28 $07
+    cp   $03                                      ;; 28:4A2E $FE $03
+    jr   z, .else_4A39_28                         ;; 28:4A30 $28 $07
 
-    and  a                                        ; $4A32: $A7
-    ld   a, $FF                                   ; $4A33: $3E $FF
-    ret  z                                        ; $4A35: $C8
+    and  a                                        ;; 28:4A32 $A7
+    ld   a, $FF                                   ;; 28:4A33 $3E $FF
+    ret  z                                        ;; 28:4A35 $C8
 
-    ld   a, $F0                                   ; $4A36: $3E $F0
-    ret                                           ; $4A38: $C9
+    ld   a, $F0                                   ;; 28:4A36 $3E $F0
+    ret                                           ;; 28:4A38 $C9
 
 
 .else_4A39_28:
-    ld   a, [wD172]                               ; $4A39: $FA $72 $D1
-    and  a                                        ; $4A3C: $A7
-    jr   z, .else_4A43_28                         ; $4A3D: $28 $04
+    ld   a, [wD172]                               ;; 28:4A39 $FA $72 $D1
+    and  a                                        ;; 28:4A3C $A7
+    jr   z, .else_4A43_28                         ;; 28:4A3D $28 $04
 
-    call func_028_482E                            ; $4A3F: $CD $2E $48
-    ret  nc                                       ; $4A42: $D0
+    call func_028_482E                            ;; 28:4A3F $CD $2E $48
+    ret  nc                                       ;; 28:4A42 $D0
 
 .else_4A43_28:
-    ld   a, [wD16D]                               ; $4A43: $FA $6D $D1
-    cp   $FF                                      ; $4A46: $FE $FF
-    jp   z, func_028_4BA7                         ; $4A48: $CA $A7 $4B
+    ld   a, [wD16D]                               ;; 28:4A43 $FA $6D $D1
+    cp   $FF                                      ;; 28:4A46 $FE $FF
+    jp   z, func_028_4BA7                         ;; 28:4A48 $CA $A7 $4B
 
-    call func_028_4B50                            ; $4A4B: $CD $50 $4B
-    jp   func_028_4B6B                            ; $4A4E: $C3 $6B $4B
+    call func_028_4B50                            ;; 28:4A4B $CD $50 $4B
+    jp   func_028_4B6B                            ;; 28:4A4E $C3 $6B $4B
 
 func_028_4A51::
-    ld   [wD191], a                               ; $4A51: $EA $91 $D1
-    ld   a, d                                     ; $4A54: $7A
-    ld   [wD190], a                               ; $4A55: $EA $90 $D1
-    ld   a, l                                     ; $4A58: $7D
-    ld   [wD183], a                               ; $4A59: $EA $83 $D1
-    ld   [wD185], a                               ; $4A5C: $EA $85 $D1
-    ld   a, h                                     ; $4A5F: $7C
-    ld   [wD184], a                               ; $4A60: $EA $84 $D1
-    ld   [wD186], a                               ; $4A63: $EA $86 $D1
-    ld   a, c                                     ; $4A66: $79
-    ld   [wD189], a                               ; $4A67: $EA $89 $D1
-    ld   [wD18B], a                               ; $4A6A: $EA $8B $D1
-    ld   a, b                                     ; $4A6D: $78
-    ld   [wD18A], a                               ; $4A6E: $EA $8A $D1
-    ld   [wD18C], a                               ; $4A71: $EA $8C $D1
-    xor  a                                        ; $4A74: $AF
-    ld   [wD170], a                               ; $4A75: $EA $70 $D1
-    call func_028_47E6.func_028_47F0              ; $4A78: $CD $F0 $47
-    ret                                           ; $4A7B: $C9
+    ld   [wD191], a                               ;; 28:4A51 $EA $91 $D1
+    ld   a, d                                     ;; 28:4A54 $7A
+    ld   [wD190], a                               ;; 28:4A55 $EA $90 $D1
+    ld   a, l                                     ;; 28:4A58 $7D
+    ld   [wD183], a                               ;; 28:4A59 $EA $83 $D1
+    ld   [wD185], a                               ;; 28:4A5C $EA $85 $D1
+    ld   a, h                                     ;; 28:4A5F $7C
+    ld   [wD184], a                               ;; 28:4A60 $EA $84 $D1
+    ld   [wD186], a                               ;; 28:4A63 $EA $86 $D1
+    ld   a, c                                     ;; 28:4A66 $79
+    ld   [wD189], a                               ;; 28:4A67 $EA $89 $D1
+    ld   [wD18B], a                               ;; 28:4A6A $EA $8B $D1
+    ld   a, b                                     ;; 28:4A6D $78
+    ld   [wD18A], a                               ;; 28:4A6E $EA $8A $D1
+    ld   [wD18C], a                               ;; 28:4A71 $EA $8C $D1
+    xor  a                                        ;; 28:4A74 $AF
+    ld   [wD170], a                               ;; 28:4A75 $EA $70 $D1
+    call func_028_47E6.func_028_47F0              ;; 28:4A78 $CD $F0 $47
+    ret                                           ;; 28:4A7B $C9
 
 Data_028_4A7C::
     db   $88, $33
 
 Data_028_4A7E::
-    db   $01, $00, $00, $00, $01, $00, $00, $00   ; $4A7E
+    db   $01, $00, $00, $00, $01, $00, $00, $00   ;; 28:4A7E
 
 Data_028_4A86::
     db   $02, $00, $04, $00
@@ -1736,231 +1741,231 @@ Data_028_4A9A::
     db   $0F, $00, $00, $00, $0F, $00, $00, $00
 
 func_028_4AA2::
-    ld   a, $01                                   ; $4AA2: $3E $01
-    ld   d, $00                                   ; $4AA4: $16 $00
-    ld   hl, Data_028_4A7E                        ; $4AA6: $21 $7E $4A
-    ld   bc, $08                                  ; $4AA9: $01 $08 $00
-    jp   func_028_4A51                            ; $4AAC: $C3 $51 $4A
+    ld   a, $01                                   ;; 28:4AA2 $3E $01
+    ld   d, $00                                   ;; 28:4AA4 $16 $00
+    ld   hl, Data_028_4A7E                        ;; 28:4AA6 $21 $7E $4A
+    ld   bc, $08                                  ;; 28:4AA9 $01 $08 $00
+    jp   func_028_4A51                            ;; 28:4AAC $C3 $51 $4A
 
 func_028_4AAF::
-    ld   a, $02                                   ; $4AAF: $3E $02
-    ld   d, $00                                   ; $4AB1: $16 $00
-    ld   hl, wD1B7                                ; $4AB3: $21 $B7 $D1
-    ld   bc, $0C                                  ; $4AB6: $01 $0C $00
-    call func_028_4A51                            ; $4AB9: $CD $51 $4A
-    ld   hl, Data_028_4A86                        ; $4ABC: $21 $86 $4A
-    ld   de, wD1B7                                ; $4ABF: $11 $B7 $D1
-    ld   bc, $04                                  ; $4AC2: $01 $04 $00
-    call func_028_4B06                            ; $4AC5: $CD $06 $4B
-    ld   de, $06                                  ; $4AC8: $11 $06 $00
-    ld   a, [wD17F]                               ; $4ACB: $FA $7F $D1
-    ld   [wD1BB], a                               ; $4ACE: $EA $BB $D1
-    call func_028_4AFF                            ; $4AD1: $CD $FF $4A
-    ld   a, [wD17E]                               ; $4AD4: $FA $7E $D1
-    ld   [wD1BC], a                               ; $4AD7: $EA $BC $D1
-    call func_028_4AFF                            ; $4ADA: $CD $FF $4A
-    ld   a, [wD180]                               ; $4ADD: $FA $80 $D1
-    ld   [wD1BD], a                               ; $4AE0: $EA $BD $D1
-    call func_028_4AFF                            ; $4AE3: $CD $FF $4A
-    ld   a, [wD16F]                               ; $4AE6: $FA $6F $D1
-    ld   [wD1BE], a                               ; $4AE9: $EA $BE $D1
-    call func_028_4AFF                            ; $4AEC: $CD $FF $4A
-    ld   a, e                                     ; $4AEF: $7B
-    ld   [wD1BF], a                               ; $4AF0: $EA $BF $D1
-    ld   a, d                                     ; $4AF3: $7A
-    ld   [wD1C0], a                               ; $4AF4: $EA $C0 $D1
-    xor  a                                        ; $4AF7: $AF
-    ld   [wD1C1], a                               ; $4AF8: $EA $C1 $D1
-    ld   [wD1C2], a                               ; $4AFB: $EA $C2 $D1
-    ret                                           ; $4AFE: $C9
+    ld   a, $02                                   ;; 28:4AAF $3E $02
+    ld   d, $00                                   ;; 28:4AB1 $16 $00
+    ld   hl, wD1B7                                ;; 28:4AB3 $21 $B7 $D1
+    ld   bc, $0C                                  ;; 28:4AB6 $01 $0C $00
+    call func_028_4A51                            ;; 28:4AB9 $CD $51 $4A
+    ld   hl, Data_028_4A86                        ;; 28:4ABC $21 $86 $4A
+    ld   de, wD1B7                                ;; 28:4ABF $11 $B7 $D1
+    ld   bc, $04                                  ;; 28:4AC2 $01 $04 $00
+    call func_028_4B06                            ;; 28:4AC5 $CD $06 $4B
+    ld   de, $06                                  ;; 28:4AC8 $11 $06 $00
+    ld   a, [wD17F]                               ;; 28:4ACB $FA $7F $D1
+    ld   [wD1BB], a                               ;; 28:4ACE $EA $BB $D1
+    call func_028_4AFF                            ;; 28:4AD1 $CD $FF $4A
+    ld   a, [wD17E]                               ;; 28:4AD4 $FA $7E $D1
+    ld   [wD1BC], a                               ;; 28:4AD7 $EA $BC $D1
+    call func_028_4AFF                            ;; 28:4ADA $CD $FF $4A
+    ld   a, [wD180]                               ;; 28:4ADD $FA $80 $D1
+    ld   [wD1BD], a                               ;; 28:4AE0 $EA $BD $D1
+    call func_028_4AFF                            ;; 28:4AE3 $CD $FF $4A
+    ld   a, [wD16F]                               ;; 28:4AE6 $FA $6F $D1
+    ld   [wD1BE], a                               ;; 28:4AE9 $EA $BE $D1
+    call func_028_4AFF                            ;; 28:4AEC $CD $FF $4A
+    ld   a, e                                     ;; 28:4AEF $7B
+    ld   [wD1BF], a                               ;; 28:4AF0 $EA $BF $D1
+    ld   a, d                                     ;; 28:4AF3 $7A
+    ld   [wD1C0], a                               ;; 28:4AF4 $EA $C0 $D1
+    xor  a                                        ;; 28:4AF7 $AF
+    ld   [wD1C1], a                               ;; 28:4AF8 $EA $C1 $D1
+    ld   [wD1C2], a                               ;; 28:4AFB $EA $C2 $D1
+    ret                                           ;; 28:4AFE $C9
 
 
 func_028_4AFF::
-    add  e                                        ; $4AFF: $83
-    ld   e, a                                     ; $4B00: $5F
-    ld   a, d                                     ; $4B01: $7A
-    adc  $00                                      ; $4B02: $CE $00
-    ld   d, a                                     ; $4B04: $57
-    ret                                           ; $4B05: $C9
+    add  e                                        ;; 28:4AFF $83
+    ld   e, a                                     ;; 28:4B00 $5F
+    ld   a, d                                     ;; 28:4B01 $7A
+    adc  $00                                      ;; 28:4B02 $CE $00
+    ld   d, a                                     ;; 28:4B04 $57
+    ret                                           ;; 28:4B05 $C9
 
 
 func_028_4B06::
-    ldi  a, [hl]                                  ; $4B06: $2A
-    ld   [de], a                                  ; $4B07: $12
-    inc  de                                       ; $4B08: $13
-    dec  bc                                       ; $4B09: $0B
-    ld   a, c                                     ; $4B0A: $79
-    or   b                                        ; $4B0B: $B0
-    jr   nz, func_028_4B06                        ; $4B0C: $20 $F8
+    ldi  a, [hl]                                  ;; 28:4B06 $2A
+    ld   [de], a                                  ;; 28:4B07 $12
+    inc  de                                       ;; 28:4B08 $13
+    dec  bc                                       ;; 28:4B09 $0B
+    ld   a, c                                     ;; 28:4B0A $79
+    or   b                                        ;; 28:4B0B $B0
+    jr   nz, func_028_4B06                        ;; 28:4B0C $20 $F8
 
-    ret                                           ; $4B0E: $C9
+    ret                                           ;; 28:4B0E $C9
 
 
 func_028_4B0F::
-    ld   a, l                                     ; $4B0F: $7D
-    ld   [wD187], a                               ; $4B10: $EA $87 $D1
-    ld   a, h                                     ; $4B13: $7C
-    ld   [wD188], a                               ; $4B14: $EA $88 $D1
-    ld   a, c                                     ; $4B17: $79
-    ld   [wD18D], a                               ; $4B18: $EA $8D $D1
-    ld   a, b                                     ; $4B1B: $78
-    ld   [wD18E], a                               ; $4B1C: $EA $8E $D1
-    push bc                                       ; $4B1F: $C5
-    ld   a, $03                                   ; $4B20: $3E $03
-    ld   d, $01                                   ; $4B22: $16 $01
-    ld   hl, wD1B7                                ; $4B24: $21 $B7 $D1
-    ld   bc, $04                                  ; $4B27: $01 $04 $00
-    call func_028_4A51                            ; $4B2A: $CD $51 $4A
-    ld   a, [Data_028_4A8A]                       ; $4B2D: $FA $8A $4A
-    ld   [wD1B7], a                               ; $4B30: $EA $B7 $D1
-    ld   a, [wD1B5]                               ; $4B33: $FA $B5 $D1
-    ld   [wD1B8], a                               ; $4B36: $EA $B8 $D1
-    pop  bc                                       ; $4B39: $C1
-    ld   a, c                                     ; $4B3A: $79
-    ld   [wD1B9], a                               ; $4B3B: $EA $B9 $D1
-    ld   a, b                                     ; $4B3E: $78
-    ld   [wD1BA], a                               ; $4B3F: $EA $BA $D1
-    ret                                           ; $4B42: $C9
+    ld   a, l                                     ;; 28:4B0F $7D
+    ld   [wD187], a                               ;; 28:4B10 $EA $87 $D1
+    ld   a, h                                     ;; 28:4B13 $7C
+    ld   [wD188], a                               ;; 28:4B14 $EA $88 $D1
+    ld   a, c                                     ;; 28:4B17 $79
+    ld   [wD18D], a                               ;; 28:4B18 $EA $8D $D1
+    ld   a, b                                     ;; 28:4B1B $78
+    ld   [wD18E], a                               ;; 28:4B1C $EA $8E $D1
+    push bc                                       ;; 28:4B1F $C5
+    ld   a, $03                                   ;; 28:4B20 $3E $03
+    ld   d, $01                                   ;; 28:4B22 $16 $01
+    ld   hl, wD1B7                                ;; 28:4B24 $21 $B7 $D1
+    ld   bc, $04                                  ;; 28:4B27 $01 $04 $00
+    call func_028_4A51                            ;; 28:4B2A $CD $51 $4A
+    ld   a, [Data_028_4A8A]                       ;; 28:4B2D $FA $8A $4A
+    ld   [wD1B7], a                               ;; 28:4B30 $EA $B7 $D1
+    ld   a, [wD1B5]                               ;; 28:4B33 $FA $B5 $D1
+    ld   [wD1B8], a                               ;; 28:4B36 $EA $B8 $D1
+    pop  bc                                       ;; 28:4B39 $C1
+    ld   a, c                                     ;; 28:4B3A $79
+    ld   [wD1B9], a                               ;; 28:4B3B $EA $B9 $D1
+    ld   a, b                                     ;; 28:4B3E $78
+    ld   [wD1BA], a                               ;; 28:4B3F $EA $BA $D1
+    ret                                           ;; 28:4B42 $C9
 
 Call_028_4b43::
-    ld   a, $04                                   ; $4B43: $3E $04
-    ld   d, $00                                   ; $4B45: $16 $00
-    ld   hl, Data_028_4A92                        ; $4B47: $21 $92 $4A
-    ld   bc, $08                                  ; $4B4A: $01 $08 $00
-    jp   func_028_4A51                            ; $4B4D: $C3 $51 $4A
+    ld   a, $04                                   ;; 28:4B43 $3E $04
+    ld   d, $00                                   ;; 28:4B45 $16 $00
+    ld   hl, Data_028_4A92                        ;; 28:4B47 $21 $92 $4A
+    ld   bc, $08                                  ;; 28:4B4A $01 $08 $00
+    jp   func_028_4A51                            ;; 28:4B4D $C3 $51 $4A
 
 func_028_4B50::
-    ld   a, $05                                   ; $4B50: $3E $05
-    ld   d, $00                                   ; $4B52: $16 $00
-    ld   hl, Data_028_4A9A                        ; $4B54: $21 $9A $4A
-    ld   bc, $08                                  ; $4B57: $01 $08 $00
-    jp   func_028_4A51                            ; $4B5A: $C3 $51 $4A
+    ld   a, $05                                   ;; 28:4B50 $3E $05
+    ld   d, $00                                   ;; 28:4B52 $16 $00
+    ld   hl, Data_028_4A9A                        ;; 28:4B54 $21 $9A $4A
+    ld   bc, $08                                  ;; 28:4B57 $01 $08 $00
+    jp   func_028_4A51                            ;; 28:4B5A $C3 $51 $4A
 
 func_028_4B5D::
-    ld   a, $06                                   ; $4B5D: $3E $06
-    ld   d, $01                                   ; $4B5F: $16 $01
-    ld   hl, Data_028_4A8A                        ; $4B61: $21 $8A $4A
-    ld   bc, $08                                  ; $4B64: $01 $08 $00
-    jp   func_028_4A51                            ; $4B67: $C3 $51 $4A
+    ld   a, $06                                   ;; 28:4B5D $3E $06
+    ld   d, $01                                   ;; 28:4B5F $16 $01
+    ld   hl, Data_028_4A8A                        ;; 28:4B61 $21 $8A $4A
+    ld   bc, $08                                  ;; 28:4B64 $01 $08 $00
+    jp   func_028_4A51                            ;; 28:4B67 $C3 $51 $4A
 
     ret                                         ; $4B6A |.|
 
 func_028_4B6B::
-    ld   a, [wD16B]                               ; $4B6B: $FA $6B $D1
-    cp   $01                                      ; $4B6E: $FE $01
-    jr   z, func_028_4B7E                         ; $4B70: $28 $0C
+    ld   a, [wD16B]                               ;; 28:4B6B $FA $6B $D1
+    cp   $01                                      ;; 28:4B6E $FE $01
+    jr   z, func_028_4B7E                         ;; 28:4B70 $28 $0C
 
-    and  a                                        ; $4B72: $A7
-    jr   nz, func_028_4B7C                        ; $4B73: $20 $07
+    and  a                                        ;; 28:4B72 $A7
+    jr   nz, func_028_4B7C                        ;; 28:4B73 $20 $07
 
-    ld   a, [wD191]                               ; $4B75: $FA $91 $D1
-    cp   $01                                      ; $4B78: $FE $01
-    jr   z, func_028_4B88                         ; $4B7A: $28 $0C
+    ld   a, [wD191]                               ;; 28:4B75 $FA $91 $D1
+    cp   $01                                      ;; 28:4B78 $FE $01
+    jr   z, func_028_4B88                         ;; 28:4B7A $28 $0C
 
 func_028_4B7C::
-    scf                                           ; $4B7C: $37
-    ret                                           ; $4B7D: $C9
+    scf                                           ;; 28:4B7C $37
+    ret                                           ;; 28:4B7D $C9
 
 
 func_028_4B7E::
-    ld   a, [wD191]                               ; $4B7E: $FA $91 $D1
-    cp   $01                                      ; $4B81: $FE $01
-    jr   z, func_028_4B7C                         ; $4B83: $28 $F7
+    ld   a, [wD191]                               ;; 28:4B7E $FA $91 $D1
+    cp   $01                                      ;; 28:4B81 $FE $01
+    jr   z, func_028_4B7C                         ;; 28:4B83 $28 $F7
 
-    ld   [wD16B], a                               ; $4B85: $EA $6B $D1
+    ld   [wD16B], a                               ;; 28:4B85 $EA $6B $D1
 func_028_4B88::
-    xor  a                                        ; $4B88: $AF
-    ld   [wD170], a                               ; $4B89: $EA $70 $D1
-    ld   [wD192], a                               ; $4B8C: $EA $92 $D1
-    ld   a, $01                                   ; $4B8F: $3E $01
-    ld   [wD17A], a                               ; $4B91: $EA $7A $D1
-    ld   [wD172], a                               ; $4B94: $EA $72 $D1
-    ld   a, [Data_028_4A7C]                       ; $4B97: $FA $7C $4A
-    ld   [rSB], a                                 ; $4B9A: $E0 $01
-    ld   a, $01                                   ; $4B9C: $3E $01
-    ld   [rSC], a                                 ; $4B9E: $E0 $02
-    ld   a, $81                                   ; $4BA0: $3E $81
-    ld   [rSC], a                                 ; $4BA2: $E0 $02
-    ld   a, $F0                                   ; $4BA4: $3E $F0
-    ret                                           ; $4BA6: $C9
+    xor  a                                        ;; 28:4B88 $AF
+    ld   [wD170], a                               ;; 28:4B89 $EA $70 $D1
+    ld   [wD192], a                               ;; 28:4B8C $EA $92 $D1
+    ld   a, $01                                   ;; 28:4B8F $3E $01
+    ld   [wD17A], a                               ;; 28:4B91 $EA $7A $D1
+    ld   [wD172], a                               ;; 28:4B94 $EA $72 $D1
+    ld   a, [Data_028_4A7C]                       ;; 28:4B97 $FA $7C $4A
+    ldh  [rSB], a                                 ;; 28:4B9A $E0 $01
+    ld   a, $01                                   ;; 28:4B9C $3E $01
+    ldh  [rSC], a                                 ;; 28:4B9E $E0 $02
+    ld   a, $81                                   ;; 28:4BA0 $3E $81
+    ldh  [rSC], a                                 ;; 28:4BA2 $E0 $02
+    ld   a, $F0                                   ;; 28:4BA4 $3E $F0
+    ret                                           ;; 28:4BA6 $C9
 
 
 func_028_4BA7::
-    push af                                       ; $4BA7: $F5
-    ld   a, [wD16D]                               ; $4BA8: $FA $6D $D1
-    cp   $FF                                      ; $4BAB: $FE $FF
-    jr   z, .else_4BC7_28                         ; $4BAD: $28 $18
+    push af                                       ;; 28:4BA7 $F5
+    ld   a, [wD16D]                               ;; 28:4BA8 $FA $6D $D1
+    cp   $FF                                      ;; 28:4BAB $FE $FF
+    jr   z, .else_4BC7_28                         ;; 28:4BAD $28 $18
 
-    bit  7, a                                     ; $4BAF: $CB $7F
-    jr   z, .else_4BB7_28                         ; $4BB1: $28 $04
+    bit  7, a                                     ;; 28:4BAF $CB $7F
+    jr   z, .else_4BB7_28                         ;; 28:4BB1 $28 $04
 
-    ld   a, $00                                   ; $4BB3: $3E $00
-    jr   .func_028_4BD4                           ; $4BB5: $18 $1D
+    ld   a, $00                                   ;; 28:4BB3 $3E $00
+    jr   .func_028_4BD4                           ;; 28:4BB5 $18 $1D
 
 .else_4BB7_28:
-    bit  6, a                                     ; $4BB7: $CB $77
-    jr   z, .else_4BBF_28                         ; $4BB9: $28 $04
+    bit  6, a                                     ;; 28:4BB7 $CB $77
+    jr   z, .else_4BBF_28                         ;; 28:4BB9 $28 $04
 
-    ld   a, $03                                   ; $4BBB: $3E $03
-    jr   .func_028_4BD4                           ; $4BBD: $18 $15
+    ld   a, $03                                   ;; 28:4BBB $3E $03
+    jr   .func_028_4BD4                           ;; 28:4BBD $18 $15
 
 .else_4BBF_28:
-    bit  5, a                                     ; $4BBF: $CB $6F
-    jr   z, .else_4BC7_28                         ; $4BC1: $28 $04
+    bit  5, a                                     ;; 28:4BBF $CB $6F
+    jr   z, .else_4BC7_28                         ;; 28:4BC1 $28 $04
 
-    ld   a, $02                                   ; $4BC3: $3E $02
-    jr   .func_028_4BD4                           ; $4BC5: $18 $0D
+    ld   a, $02                                   ;; 28:4BC3 $3E $02
+    jr   .func_028_4BD4                           ;; 28:4BC5 $18 $0D
 
 .else_4BC7_28:
-    ld   a, [wD16E]                               ; $4BC7: $FA $6E $D1
-    cp   $81                                      ; $4BCA: $FE $81
-    jr   z, .else_4BD2_28                         ; $4BCC: $28 $04
+    ld   a, [wD16E]                               ;; 28:4BC7 $FA $6E $D1
+    cp   $81                                      ;; 28:4BCA $FE $81
+    jr   z, .else_4BD2_28                         ;; 28:4BCC $28 $04
 
-    ld   a, $01                                   ; $4BCE: $3E $01
-    jr   .func_028_4BD4                           ; $4BD0: $18 $02
+    ld   a, $01                                   ;; 28:4BCE $3E $01
+    jr   .func_028_4BD4                           ;; 28:4BD0 $18 $02
 
 .else_4BD2_28:
-    ld   a, $01                                   ; $4BD2: $3E $01
+    ld   a, $01                                   ;; 28:4BD2 $3E $01
 .func_028_4BD4::
-    ld   [wD1C5], a                               ; $4BD4: $EA $C5 $D1
-    pop  af                                       ; $4BD7: $F1
-    ret                                           ; $4BD8: $C9
+    ld   [wD1C5], a                               ;; 28:4BD4 $EA $C5 $D1
+    pop  af                                       ;; 28:4BD7 $F1
+    ret                                           ;; 28:4BD8 $C9
 
 
 func_028_4BD9::
-    push hl                                       ; $4BD9: $E5
-    push bc                                       ; $4BDA: $C5
-    ld   a, [wD197]                               ; $4BDB: $FA $97 $D1
-    ld   l, a                                     ; $4BDE: $6F
-    ld   a, [wD198]                               ; $4BDF: $FA $98 $D1
-    ld   h, a                                     ; $4BE2: $67
-    ld   de, wEntitiesPosXTable                   ; $4BE3: $11 $00 $C2
-    ld   c, $28                                   ; $4BE6: $0E $28
+    push hl                                       ;; 28:4BD9 $E5
+    push bc                                       ;; 28:4BDA $C5
+    ld   a, [wD197]                               ;; 28:4BDB $FA $97 $D1
+    ld   l, a                                     ;; 28:4BDE $6F
+    ld   a, [wD198]                               ;; 28:4BDF $FA $98 $D1
+    ld   h, a                                     ;; 28:4BE2 $67
+    ld   de, wEntitiesPosXTable                   ;; 28:4BE3 $11 $00 $C2
+    ld   c, $28                                   ;; 28:4BE6 $0E $28
 .loop_4BE8_28
-    ldi  a, [hl]                                  ; $4BE8: $2A
-    push hl                                       ; $4BE9: $E5
-    ld   h, $00                                   ; $4BEA: $26 $00
-    sla  a                                        ; $4BEC: $CB $27
-    rl   h                                        ; $4BEE: $CB $14
-    sla  a                                        ; $4BF0: $CB $27
-    rl   h                                        ; $4BF2: $CB $14
-    sla  a                                        ; $4BF4: $CB $27
-    rl   h                                        ; $4BF6: $CB $14
-    sla  a                                        ; $4BF8: $CB $27
-    rl   h                                        ; $4BFA: $CB $14
-    ld   l, a                                     ; $4BFC: $6F
-    ld   a, [wD169]                               ; $4BFD: $FA $69 $D1
-    adc  h                                        ; $4C00: $8C
-    ld   h, a                                     ; $4C01: $67
-    ld   b, $10                                   ; $4C02: $06 $10
-    call func_BC5                                 ; $4C04: $CD $C5 $0B
-    pop  hl                                       ; $4C07: $E1
-    dec  c                                        ; $4C08: $0D
-    jr   nz, .loop_4BE8_28                        ; $4C09: $20 $DD
+    ldi  a, [hl]                                  ;; 28:4BE8 $2A
+    push hl                                       ;; 28:4BE9 $E5
+    ld   h, $00                                   ;; 28:4BEA $26 $00
+    sla  a                                        ;; 28:4BEC $CB $27
+    rl   h                                        ;; 28:4BEE $CB $14
+    sla  a                                        ;; 28:4BF0 $CB $27
+    rl   h                                        ;; 28:4BF2 $CB $14
+    sla  a                                        ;; 28:4BF4 $CB $27
+    rl   h                                        ;; 28:4BF6 $CB $14
+    sla  a                                        ;; 28:4BF8 $CB $27
+    rl   h                                        ;; 28:4BFA $CB $14
+    ld   l, a                                     ;; 28:4BFC $6F
+    ld   a, [wD169]                               ;; 28:4BFD $FA $69 $D1
+    adc  h                                        ;; 28:4C00 $8C
+    ld   h, a                                     ;; 28:4C01 $67
+    ld   b, $10                                   ;; 28:4C02 $06 $10
+    call func_BC5                                 ;; 28:4C04 $CD $C5 $0B
+    pop  hl                                       ;; 28:4C07 $E1
+    dec  c                                        ;; 28:4C08 $0D
+    jr   nz, .loop_4BE8_28                        ;; 28:4C09 $20 $DD
 
-    pop  bc                                       ; $4C0B: $C1
-    pop  hl                                       ; $4C0C: $E1
-    ret                                           ; $4C0D: $C9
+    pop  bc                                       ;; 28:4C0B $C1
+    pop  hl                                       ;; 28:4C0C $E1
+    ret                                           ;; 28:4C0D $C9
 
 
 PhotoAlbumStartPrint1Handler:

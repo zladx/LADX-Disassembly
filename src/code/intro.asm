@@ -598,58 +598,54 @@ func_001_71C7::
 .return
     ret                                           ;; 01:71DE $C9
 
-Data_001_71DF::
-    db   $9A, $16, $0F, $80, $81, $82, $83, $84   ;; 01:71DF
-    db   $85, $86, $87, $88, $89, $8A, $8B, $8C   ;; 01:71E7
-    db   $8D, $8E, $8F                            ;; 01:71EF
 
-Data_001_71F2::
-    db   $9A, $36, $0F, $90, $91                  ;; 01:71F2
-    db   $92, $93, $94, $95, $96, $97, $98, $99   ;; 01:71F7
-    db   $9A, $9B, $9C, $9D, $9E, $9F             ;; 01:71FF
+; Title screen tilemap, encoded
 
-Data_001_7205::
-    db   $9A, $56                                 ;; 01:7205
-    db   $0F, $A0, $A1, $A2, $A3, $A4, $A5, $A6   ;; 01:7207
-    db   $A7, $A8, $A9, $AA, $AB, $AC, $AD, $AE   ;; 01:720F
-    db   $AF                                      ;; 01:7217
+TitleTileMap1::
+    db   $9A, $16, $0F
+    db   $80, $81, $82, $83, $84, $85, $86, $87, $88, $89, $8A, $8B, $8C, $8D, $8E, $8F
 
-Data_001_7218::
-    db   $9A, $76, $0F, $B0, $B1, $B2, $B3        ;; 01:7218
-    db   $B4, $B5, $B6, $B7, $B8, $B9, $BA, $BB   ;; 01:721F
-    db   $BC, $BD, $BE, $BF                       ;; 01:7227
+TitleTileMap2::
+    db   $9A, $36, $0F
+    db   $90, $91, $92, $93, $94, $95, $96, $97, $98, $99, $9A, $9B, $9C, $9D, $9E, $9F
 
-Data_001_722B::
-    db   $9A, $96, $0F, $C0                       ;; 01:722B
-    db   $C1, $C2, $C3, $C4, $C5, $C6, $C7, $C8   ;; 01:722F
-    db   $C9, $CA, $CB, $CC, $CD, $CE, $CF        ;; 01:7237
+TitleTileMap3::
+    db   $9A, $56, $0F
+    db   $A0, $A1, $A2, $A3, $A4, $A5, $A6, $A7, $A8, $A9, $AA, $AB, $AC, $AD, $AE, $AF
 
-Data_001_723E::
-    db   $9A                                      ;; 01:723E
-    db   $B6, $0F, $D0, $D1, $D2, $D3, $D4, $D5   ;; 01:723F
-    db   $D6, $D7, $D8, $D9, $DA, $DB, $DC, $DD   ;; 01:7247
-    db   $DE, $DF                                 ;; 01:724F
+TitleTileMap4::
+    db   $9A, $76, $0F
+    db   $B0, $B1, $B2, $B3, $B4, $B5, $B6, $B7, $B8, $B9, $BA, $BB, $BC, $BD, $BE, $BF
 
-Data_001_7251::
-    db   $9A, $D6, $0F, $E0, $E1, $E2             ;; 01:7251
-    db   $E3, $E4, $E5, $E6, $E7, $E8, $E9, $EA   ;; 01:7257
-    db   $EB, $EC, $ED, $EE, $EF                  ;; 01:725F
+TitleTileMap5::
+    db   $9A, $96, $0F
+    db   $C0, $C1, $C2, $C3, $C4, $C5, $C6, $C7, $C8, $C9, $CA, $CB, $CC, $CD, $CE, $CF
 
-Data_001_7264::
-    dw Data_001_7218                              ;; 01:7264
-    dw Data_001_7205                              ;; 01:7266
-    dw Data_001_722B                              ;; 01:7268
-    dw Data_001_71F2                              ;; 01:726A
-    dw Data_001_723E                              ;; 01:726C
-    dw Data_001_71DF                              ;; 01:726E
-    dw Data_001_7251                              ;; 01:7270
+TitleTileMap6::
+    db   $9A, $B6, $0F
+    db   $D0, $D1, $D2, $D3, $D4, $D5, $D6, $D7, $D8, $D9, $DA, $DB, $DC, $DD, $DE, $DF
+
+TitleTileMap7::
+    db   $9A, $D6, $0F
+    db   $E0, $E1, $E2, $E3, $E4, $E5, $E6, $E7, $E8, $E9, $EA, $EB, $EC, $ED, $EE, $EF
+
+TitleTileMap::
+    dw TitleTileMap4                              ;; 01:7264
+    dw TitleTileMap3                              ;; 01:7266
+    dw TitleTileMap5                              ;; 01:7268
+    dw TitleTileMap2                              ;; 01:726A
+    dw TitleTileMap6                              ;; 01:726C
+    dw TitleTileMap1                              ;; 01:726E
+    dw TitleTileMap7                              ;; 01:7270
+
+
 
 IntroStage8Handler::
     ld   a, [wIntroSubTimer]                      ;; 01:7272 $FA $02 $D0
     sla  a                                        ;; 01:7275 $CB $27
     ld   e, a                                     ;; 01:7277 $5F
     ld   d, $00                                   ;; 01:7278 $16 $00
-    ld   hl, Data_001_7264                        ;; 01:727A $21 $64 $72
+    ld   hl, TitleTileMap                         ;; 01:727A $21 $64 $72
     add  hl, de                                   ;; 01:727D $19
     ld   a, [hli]                                 ;; 01:727E $2A
     ld   d, [hl]                                  ;; 01:727F $56
@@ -815,11 +811,11 @@ ResetIntroTimers::
     ld   [wD003], a                               ;; 01:73A8 $EA $03 $D0
     ret                                           ;; 01:73AB $C9
 
-Data_001_73AC::
     db   $9B, $B7, $4D, $07, $00                  ;; 01:73AC
+CopyrightAttrmap:: ; paint the copyright portion of the title screen attrmap, after the intro cutscene
 
 func_001_73B1::
-    ld   de, Data_001_73AC                        ;; 01:73B1 $11 $AC $73
+    ld   de, CopyrightAttrmap                     ;; 01:73B1 $11 $AC $73
     ld   hl, wDrawCommandVRAM1                    ;; 01:73B4 $21 $91 $DC
     ld   c, $12                                   ;; 01:73B7 $0E $12
 
@@ -1073,10 +1069,14 @@ RenderIntroEntity::
     call func_001_762B                            ;; 01:7534 $CD $2B $76
     ret                                           ;; 01:7537 $C9
 
-Data_001_7538::
-    db   $00, $00, $1C, $02, $00, $08, $1E, $02   ;; 01:7538
-    db   $10, $F8, $20, $02, $10, $00, $22, $02   ;; 01:7540
-    db   $10, $08, $24, $02, $10, $10, $26, $02   ;; 01:7548
+IntroShipTiles::
+    ;     Y    X   tile attr
+    db   $00, $00, $1C, $02
+    db   $00, $08, $1E, $02
+    db   $10, $F8, $20, $02
+    db   $10, $00, $22, $02
+    db   $10, $08, $24, $02
+    db   $10, $10, $26, $02
 
 Data_001_7550::
     db $F8, $04, $32, $01, $E8, $04, $32, $01, $D8, $04, $32, $01, $C8, $04, $32, $01 ;; 01:7550
@@ -1105,7 +1105,7 @@ RenderIntroShip::
     ld   hl, hActiveEntityVisualPosY              ;; 01:7582 $21 $EC $FF
     add  a, [hl]                                  ;; 01:7585 $86
     ld   [hl], a                                  ;; 01:7586 $77
-    ld   hl, Data_001_7538                        ;; 01:7587 $21 $38 $75
+    ld   hl, IntroShipTiles                       ;; 01:7587 $21 $38 $75
     ld   de, wOAMBuffer                           ;; 01:758A $11 $00 $C0
     push bc                                       ;; 01:758D $C5
     ld   c, $06                                   ;; 01:758E $0E $06
@@ -1160,19 +1160,35 @@ RenderIntroShip::
     pop  bc                                       ;; 01:75C9 $C1
     ret                                           ;; 01:75CA $C9
 
-Data_001_75CB::
-    db   $00, $00, $34, $01, $00, $08, $36, $01   ;; 01:75CB
-    db   $10, $00, $2C, $01, $20, $F8, $2C, $01   ;; 01:75D3
-    db   $28, $00, $2E, $21, $30, $F0, $2E, $01   ;; 01:75DB
-    db   $08, $00, $36, $21, $08, $08, $34, $21   ;; 01:75E3
-    db   $18, $00, $30, $01, $18, $08, $2C, $21   ;; 01:75EB
-    db   $28, $10, $2E, $21, $28, $10, $2E, $21   ;; 01:75F3
-    db   $00, $08, $34, $21, $00, $00, $36, $21   ;; 01:75FB
-    db   $10, $08, $2C, $21, $20, $10, $2C, $21   ;; 01:7603
-    db   $28, $08, $2E, $01, $30, $18, $2E, $21   ;; 01:760B
-    db   $08, $08, $36, $01, $08, $00, $34, $01   ;; 01:7613
-    db   $18, $08, $30, $21, $18, $00, $2C, $01   ;; 01:761B
-    db   $28, $F8, $2E, $01, $28, $F8, $2E, $01   ;; 01:7623
+IntroLightningTiles::
+    ;     Y    X   tile attr
+    db   $00, $00, $34, $01 ; cloud
+    db   $00, $08, $36, $01
+    db   $10, $00, $2C, $01 ; lightning
+    db   $20, $F8, $2C, $01
+    db   $28, $00, $2E, $21
+    db   $30, $F0, $2E, $01
+
+    db   $08, $00, $36, $21 ; cloud
+    db   $08, $08, $34, $21
+    db   $18, $00, $30, $01 ; lightning
+    db   $18, $08, $2C, $21
+    db   $28, $10, $2E, $21
+    db   $28, $10, $2E, $21
+
+    db   $00, $08, $34, $21 ; cloud
+    db   $00, $00, $36, $21
+    db   $10, $08, $2C, $21 ; lightning
+    db   $20, $10, $2C, $21
+    db   $28, $08, $2E, $01
+    db   $30, $18, $2E, $21
+
+    db   $08, $08, $36, $01 ; cloud
+    db   $08, $00, $34, $01
+    db   $18, $08, $30, $21 ; lightning
+    db   $18, $00, $2C, $01
+    db   $28, $F8, $2E, $01
+    db   $28, $F8, $2E, $01
 
 func_001_762B::
     ld   hl, wEntitiesStatusTable                 ;; 01:762B $21 $80 $C2
@@ -1187,7 +1203,7 @@ func_001_762B::
     add  a, e                                     ;; 01:763A $83
     ld   e, a                                     ;; 01:763B $5F
     ld   d, b                                     ;; 01:763C $50
-    ld   hl, Data_001_75CB                        ;; 01:763D $21 $CB $75
+    ld   hl, IntroLightningTiles                  ;; 01:763D $21 $CB $75
     add  hl, de                                   ;; 01:7640 $19
     ld   c, $06                                   ;; 01:7641 $0E $06
     call RenderActiveEntitySpritesRect            ;; 01:7643 $CD $E6 $3C
@@ -1425,7 +1441,7 @@ IntroMarinState4::
     ret                                           ;; 01:77BC $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-Unknown003SpriteVariants::
+IntroSparkleSpriteVariants::
 .variant0 ;; 01:77BD
     db $38, OAMF_PAL0
     db $38, OAMF_PAL0 | OAMF_XFLIP
@@ -1473,7 +1489,7 @@ RenderIntroSparkle::
     ldh  [hActiveEntitySpriteVariant], a          ;; 01:77F3 $E0 $F1
     xor  a                                        ;; 01:77F5 $AF
     ld   [wEntitiesPhysicsFlagsTable], a          ;; 01:77F6 $EA $40 $C3
-    ld   de, Unknown003SpriteVariants             ;; 01:77F9 $11 $BD $77
+    ld   de, IntroSparkleSpriteVariants           ;; 01:77F9 $11 $BD $77
     call RenderActiveEntitySpritesPair            ;; 01:77FC $CD $C0 $3B
     ld   a, [wOAMNextAvailableSlot]               ;; 01:77FF $FA $C0 $C3
     add  a, $08                                   ;; 01:7802 $C6 $08
@@ -1481,8 +1497,9 @@ RenderIntroSparkle::
     ret                                           ;; 01:7807 $C9
 
 IF LANG_JP
-Data_001_7808::
-    db   $00, $10, $2C, $05
+DXOnDarkTilesDMG:: ; DMG
+    ;     Y    X   tile attr
+    db   $00, $10, $2C, $05 ; DX gold, on black palm tree
     db   $10, $10, $2A, $05
     db   $00, $10, $28, $05
     db   $10, $08, $26, $05
@@ -1490,8 +1507,8 @@ Data_001_7808::
     db   $10, $00, $22, $05
     db   $00, $00, $20, $05
 
-Data_001_7828::
-    db   $10, $18, $4F, $16
+DXOnWhiteTilesDMG::
+    db   $10, $18, $4F, $16 ; DX gold, on white cloud
     db   $00, $18, $4D, $16
     db   $10, $10, $4B, $16
     db   $00, $10, $49, $16
@@ -1501,22 +1518,22 @@ Data_001_7828::
     db   $00, $00, $41, $16
 .end
 
-Data_001_7850:
-    db   $10, $10, $2A, $05
+DXOnDarkTilesGBC: ; GBC
+    db   $10, $10, $2A, $05 ; DX gold, on black palm tree
     db   $00, $10, $28, $05
     db   $10, $08, $26, $05
     db   $00, $08, $24, $05
     db   $10, $00, $22, $05
     db   $00, $00, $20, $05
 
-Data_001_7870:
-    db   $10, $15, $5A, $07
+DXOnWhiteAndJP1pxTilesGBC:
+    db   $10, $15, $5A, $07 ; DX white 1px highlight, on black and white
     db   $00, $15, $58, $07
     db   $10, $0D, $56, $07
     db   $00, $0D, $54, $07
     db   $10, $05, $52, $07
     db   $00, $05, $50, $07
-    db   $10, $18, $4E, $16
+    db   $10, $18, $4E, $16 ; DX gold, on white cloud
     db   $00, $18, $4C, $16
     db   $10, $10, $4A, $16
     db   $00, $10, $48, $16
@@ -1526,8 +1543,8 @@ Data_001_7870:
     db   $00, $00, $40, $16
 .end
 
-Data_001_7850_alt:
-    db   $10, $00, $5E, $14
+DXJPShineAnimation:
+    db   $10, $00, $5E, $14 ; DX shine animation
     db   $00, $00, $5C, $14
     db   $10, $00, $62, $14
     db   $00, $60, $60, $14
@@ -1546,8 +1563,9 @@ Data_001_7850_alt:
     db   $10, $18, $7E, $14
     db   $00, $18, $7C, $14
 ELSE
-Data_001_7808::
-    db   $10, $18, $2E, $05                       ;; 01:7808
+
+DXOnDarkTilesDMG:: ; DMG
+    db   $10, $18, $2E, $05                       ;; 01:7808 ; DX on blue sky
     db   $00, $18, $2C, $05                       ;; 01:780C
     db   $10, $10, $2A, $05                       ;; 01:7810
     db   $00, $10, $28, $05                       ;; 01:7814
@@ -1556,10 +1574,10 @@ Data_001_7808::
     db   $10, $00, $22, $05                       ;; 01:7820
     db   $00, $00, $20, $05                       ;; 01:7824
 
-Data_001_7828::
-    db   $00, $28, $52, $16                       ;; 01:7828
+DXOnWhiteTilesDMG::
+    db   $00, $28, $52, $16                       ;; 01:7828 ; TM on white cloud
     db   $00, $20, $50, $16                       ;; 01:782C
-    db   $10, $18, $4E, $16                       ;; 01:7830
+    db   $10, $18, $4E, $16                       ;; 01:7830 ; DX on white cloud
     db   $00, $18, $4C, $16                       ;; 01:7834
     db   $10, $10, $4A, $16                       ;; 01:7838
     db   $00, $10, $48, $16                       ;; 01:783C
@@ -1569,8 +1587,8 @@ Data_001_7828::
     db   $00, $00, $40, $16                       ;; 01:784C
 .end
 
-Data_001_7850::
-    db   $10, $18, $2E, $05                       ;; 01:7850
+DXOnDarkTilesGBC:: ; GBC
+    db   $10, $18, $2E, $05                       ;; 01:7850 ; DX on blue sky
     db   $00, $18, $2C, $05                       ;; 01:7854
     db   $10, $10, $2A, $05                       ;; 01:7858
     db   $00, $10, $28, $05                       ;; 01:785C
@@ -1579,10 +1597,10 @@ Data_001_7850::
     db   $10, $00, $22, $05                       ;; 01:7868
     db   $00, $00, $20, $05                       ;; 01:786C
 
-Data_001_7870::
-    db   $00, $28, $52, $16                       ;; 01:7870
+DXOnWhiteAndJP1pxTilesGBC::
+    db   $00, $28, $52, $16                       ;; 01:7870 ; TM on white cloud
     db   $00, $20, $50, $16                       ;; 01:7874
-    db   $10, $18, $4E, $16                       ;; 01:7878
+    db   $10, $18, $4E, $16                       ;; 01:7878 ; DX on white cloud
     db   $00, $18, $4C, $16                       ;; 01:787C
     db   $10, $10, $4A, $16                       ;; 01:7880
     db   $00, $10, $48, $16                       ;; 01:7884
@@ -1613,65 +1631,65 @@ ELSE
     db   $6C                                      ;; 01:789F
 ENDC
 
-Data_001_78A0::
+DXFadeInPalette::
 IF LANG_JP
          ; Loaded in $18 byte chunks
-    db   $F5, $7A, $00, $00, $00, $00, $00, $00
-    db   $F5, $7A, $FF, $7F, $FF, $7F, $FF, $7F
-    db   $F5, $7A, $FF, $7F, $FF, $7F, $00, $00
+    rgb   #A8B8F0, #000000, #000000, #000000 ; DX on black palm tree, all-black start
+    rgb   #A8B8F0, #F8F8F8, #F8F8F8, #F8F8F8 ; DX on white cloud,     all-white start
+    rgb   #A8B8F0, #F8F8F8, #F8F8F8, #000000 ; DX highlight,          black and white start
 
-    db   $F5, $7A, $84, $04, $42, $00, $00, $00
-    db   $F5, $7A, $BE, $6F, $9C, $6B, $5A, $6B
-    db   $F5, $7A, $FF, $7F, $7B, $6B, $A5, $14
+    rgb   #A8B8F0, #202008, #101000, #000000
+    rgb   #A8B8F0, #F0E8D8, #E0E0D0, #D0D0D0
+    rgb   #A8B8F0, #F8F8F8, #D8D8D0, #282828
 
-    db   $F5, $7A, $E8, $08, $63, $00, $00, $00
-    db   $F5, $7A, $9E, $5F, $39, $5B, $D6, $5A
-    db   $F5, $7A, $FF, $7F, $F7, $5A, $29, $25
+    rgb   #A8B8F0, #403810, #181800, #000000
+    rgb   #A8B8F0, #F0E0B8, #C8C8B0, #B0B0B0
+    rgb   #A8B8F0, #F8F8F8, #B8B8B0, #484848
 
-    db   $F5, $7A, $4C, $09, $A5, $00, $00, $00
-    db   $F5, $7A, $7D, $4F, $D6, $46, $31, $46
-    db   $F5, $7A, $FF, $7F, $73, $46, $CE, $39
+    rgb   #A8B8F0, #605010, #282800, #000000
+    rgb   #A8B8F0, #E8D898, #B0B088, #888888
+    rgb   #A8B8F0, #F8F8F8, #989888, #707070
+                                             ; ...fade...
+    rgb   #A8B8F0, #806818, #303000, #000000
+    rgb   #A8B8F0, #E8C878, #989868, #686868
+    rgb   #A8B8F0, #F8F8F8, #808068, #909090
 
-    db   $F5, $7A, $B0, $0D, $C6, $00, $00, $00
-    db   $F5, $7A, $3D, $3F, $73, $36, $AD, $35
-    db   $F5, $7A, $FF, $7F, $10, $36, $52, $4A
+    rgb   #A8B8F0, #A08018, #404000, #000000
+    rgb   #A8B8F0, #E0C058, #808040, #404040
+    rgb   #A8B8F0, #F8F8F8, #606040, #B8B8B8
 
-    db   $F5, $7A, $14, $0E, $08, $01, $00, $00
-    db   $F5, $7A, $1C, $2F, $10, $22, $08, $21
-    db   $F5, $7A, $FF, $7F, $8C, $21, $F7, $5E
+    rgb   #A8B8F0, #C09820, #484800, #000000
+    rgb   #A8B8F0, #E0B838, #686820, #202020
+    rgb   #A8B8F0, #F8F8F8, #404020, #D8D8D8
 
-    db   $F5, $7A, $78, $12, $29, $01, $00, $00
-    db   $F5, $7A, $FC, $1E, $AD, $11, $84, $10
-    db   $F5, $7A, $FF, $7F, $08, $11, $7B, $6F
-
-    db   $F5, $7A, $DC, $12, $4A, $01, $00, $00
-    db   $F5, $7A, $DC, $12, $4A, $01, $00, $00
-    db   $F5, $7A, $FF, $7F, $A5, $00, $FF, $7F
+    rgb   #A8B8F0, #E0B020, #505000, #000000 ; DX on black palm tree, gold end
+    rgb   #A8B8F0, #E0B020, #505000, #000000 ; DX on white cloud,     gold end
+    rgb   #A8B8F0, #F8F8F8, #282800, #F8F8F8 ; DX highlight,          white end
 ELSE
          ; Loaded in $10 byte chunks
-    db   $F5, $7A, $8D, $7D, $8D, $7D, $8D, $7D   ;; 01:78A0
-    db   $F5, $7A, $FF, $7F, $FF, $7F, $FF, $7F   ;; 01:78A8
+    rgb   #A8B8F0, #6860F8, #6860F8, #6860F8 ; DX on blue sky,    all-blue start
+    rgb   #A8B8F0, #F8F8F8, #F8F8F8, #F8F8F8 ; DX on white cloud, all-white start
 
-    db   $F5, $7A, $6C, $6D, $8D, $71, $CF, $75   ;; 01:78B0
-    db   $F5, $7A, $7B, $6F, $BD, $73, $FF, $77   ;; 01:78B8
+    rgb   #A8B8F0, #6058D8, #6860E0, #7870E8
+    rgb   #A8B8F0, #D8D8D8, #E8E8E0, #F8F8E8
 
-    db   $F5, $7A, $2A, $5D, $8E, $65, $12, $6E   ;; 01:78C0
-    db   $F5, $7A, $F7, $5E, $5B, $67, $DF, $6F   ;; 01:78C8
+    rgb   #A8B8F0, #5048B8, #7060C8, #9080D8
+    rgb   #A8B8F0, #B8B8B8, #D8D0C8, #F8F0D8
 
-    db   $F5, $7A, $E8, $48, $8E, $59, $54, $66   ;; 01:78D0
-    db   $F5, $7A, $52, $4A, $19, $5B, $BF, $67   ;; 01:78D8
+    rgb   #A8B8F0, #403890, #7060B0, #A090C8
+    rgb   #A8B8F0, #909090, #C8C0B0, #F8E8C8 
+                                             ; ...fade...
+    rgb   #A8B8F0, #303070, #786090, #B8A0B0
+    rgb   #A8B8F0, #707070, #B8A890, #F8E8B0
 
-    db   $F5, $7A, $C6, $38, $8F, $49, $97, $5A   ;; 01:78E0
-    db   $F5, $7A, $CE, $39, $B7, $4A, $BF, $5B   ;; 01:78E8
+    rgb   #A8B8F0, #202048, #786078, #C8B0A0
+    rgb   #A8B8F0, #484848, #A89878, #F8E0A0
 
-    db   $F5, $7A, $84, $24, $8F, $3D, $D9, $52   ;; 01:78F0
-    db   $F5, $7A, $29, $25, $75, $3E, $9F, $53   ;; 01:78F8
+    rgb   #A8B8F0, #101028, #806060, #E0C090
+    rgb   #A8B8F0, #282828, #988060, #F8D890
 
-    db   $F5, $7A, $42, $14, $90, $31, $1C, $4B   ;; 01:7900
-    db   $F5, $7A, $A5, $14, $13, $32, $7F, $4B   ;; 01:7908
-
-    db   $F5, $7A, $00, $00, $B1, $21, $5F, $3F   ;; 01:7910
-    db   $F5, $7A, $00, $00, $B1, $21, $5F, $3F   ;; 01:7918
+    rgb   #A8B8F0, #000000, #886840, #F8D078 ; DX on blue sky,    gold end
+    rgb   #A8B8F0, #000000, #886840, #F8D078 ; DX on white cloud, gold end
 ENDC
 
 func_001_7920::
@@ -1774,7 +1792,7 @@ IF LANG_JP
 .jr_001_7a7f
     ld   [wD011], a
 .jr_001_7a82
-    ld   hl, Data_001_7850_alt
+    ld   hl, DXJPShineAnimation
     ld   a, [wD011]
     sla  a
     sla  a
@@ -1796,14 +1814,14 @@ ENDC
     ld   a, [wD013]                               ;; 01:7982 $FA $13 $D0
     cp   $08                                      ;; 01:7985 $FE $08
     jr   z, .jr_001_7990                          ;; 01:7987 $28 $07
-    ; Renders both Data_001_7850 and Data_001_7870
-    ld   hl, Data_001_7850                        ;; 01:7989 $21 $50 $78
-    ld   c, (Data_001_7870.end - Data_001_7850) / 4 ;; 01:798C $0E $12
+    ; Renders both DXOnDarkTilesGBC and DXOnWhiteAndJP1pxTilesGBC
+    ld   hl, DXOnDarkTilesGBC                     ;; 01:7989 $21 $50 $78
+    ld   c, (DXOnWhiteAndJP1pxTilesGBC.end - DXOnDarkTilesGBC) / 4 ;; 01:798C $0E $12
     jr   .render                                  ;; 01:798E $18 $1A
 
 .jr_001_7990
-    ld   hl, Data_001_7870                        ;; 01:7990 $21 $70 $78
-    ld   c, (Data_001_7870.end - Data_001_7870) / 4 ;; 01:7993 $0E $0A
+    ld   hl, DXOnWhiteAndJP1pxTilesGBC            ;; 01:7990 $21 $70 $78
+    ld   c, (DXOnWhiteAndJP1pxTilesGBC.end - DXOnWhiteAndJP1pxTilesGBC) / 4 ;; 01:7993 $0E $0A
     jr   .render                                  ;; 01:7995 $18 $13
 
 .jr_001_7997
@@ -1815,14 +1833,14 @@ ELSE
     cp   $03                                      ;; 01:799A $FE $03
     jr   nc, .jr_001_79A5                         ;; 01:799C $30 $07
 ENDC
-    ld   hl, Data_001_7808                        ;; 01:799E $21 $08 $78
-    ; renders both Data_001_7808 and Data_001_7828
-    ld   c, (Data_001_7828.end - Data_001_7808) / 4 ;; 01:79A1 $0E $12
+    ld   hl, DXOnDarkTilesDMG                     ;; 01:799E $21 $08 $78
+    ; renders both DXOnDarkTilesDMG and DXOnWhiteTilesDMG
+    ld   c, (DXOnWhiteTilesDMG.end - DXOnDarkTilesDMG) / 4 ;; 01:79A1 $0E $12
     jr   .render                                  ;; 01:79A3 $18 $05
 
 .jr_001_79A5
-    ld   hl, Data_001_7828                        ;; 01:79A5 $21 $28 $78
-    ld   c, (Data_001_7828.end - Data_001_7828) / 4 ;; 01:79A8 $0E $0A
+    ld   hl, DXOnWhiteTilesDMG                    ;; 01:79A5 $21 $28 $78
+    ld   c, (DXOnWhiteTilesDMG.end - DXOnWhiteTilesDMG) / 4 ;; 01:79A8 $0E $0A
 
 .render
     call RenderActiveEntitySpritesRect            ;; 01:79AA $CD $E6 $3C
@@ -1861,7 +1879,7 @@ ENDC
     ld   b, $00                                   ;; 01:79CA $06 $00
     ld   c, a                                     ;; 01:79CC $4F
 
-    ld   hl, Data_001_78A0                        ;; 01:79CD $21 $A0 $78
+    ld   hl, DXFadeInPalette                      ;; 01:79CD $21 $A0 $78
     add  hl, bc                                   ;; 01:79D0 $09
     ld   bc, wObjPal6                             ;; 01:79D1 $01 $78 $DC
     ld   e, CHUNKSIZE                             ;; 01:79D4 $1E $10
@@ -1923,7 +1941,7 @@ jr_001_7A19::
     ret                                           ;; 01:7A26 $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-Unknown004SpriteVariants::
+InertLinkSpriteVariants::
 .variant0 ;; 01:7A27
     db $10, OAMF_PAL0
     db $12, OAMF_PAL0
@@ -1937,7 +1955,7 @@ RenderIntroInertLink::
     jr   nc, .jr_001_7A47                         ;; 01:7A33 $30 $12
     xor  a                                        ;; 01:7A35 $AF
     ld   [wEntitiesPhysicsFlagsTable], a          ;; 01:7A36 $EA $40 $C3
-    ld   de, Unknown004SpriteVariants             ;; 01:7A39 $11 $27 $7A
+    ld   de, InertLinkSpriteVariants              ;; 01:7A39 $11 $27 $7A
     call RenderActiveEntitySpritesPair            ;; 01:7A3C $CD $C0 $3B
     ld   a, [wOAMNextAvailableSlot]               ;; 01:7A3F $FA $C0 $C3
     add  a, $08                                   ;; 01:7A42 $C6 $08
@@ -2045,55 +2063,26 @@ InertLinkState3Handler::
 .return
     ret                                           ;; 01:7AE3 $C9
 
-Data_001_7AE4::
-    db   $7C, $7C, $44, $45, $7D, $7D, $7D, $7D   ;; 01:7AE4
-    db   $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D   ;; 01:7AEC
-    db   $4C, $4D, $7C, $7C, $7C, $7C, $7C, $7C   ;; 01:7AF4
-    db   $44, $45, $7D, $2D, $2E, $2D, $2E, $2D   ;; 01:7AFC
-    db   $2E, $7D, $4C, $4D, $7C, $7C, $7C, $7C   ;; 01:7B04
-    db   $7C, $7C, $7C, $7C, $7C, $77, $46, $7E   ;; 01:7B0C
-    db   $7E, $7E, $7E, $7E, $7E, $4B, $79, $7C   ;; 01:7B14
-    db   $7C, $7C, $7C, $7C, $7C, $7C, $7C, $77   ;; 01:7B1C
-    db   $75, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7B24
-    db   $7E, $7E, $7E, $75, $78, $7C, $7C, $7C   ;; 01:7B2C
-    db   $7C, $7C, $77, $7A, $7A, $74, $73, $74   ;; 01:7B34
-    db   $5C, $5D, $5E, $5F, $73, $74, $73, $7A   ;; 01:7B3C
-    db   $7E, $78, $7C, $7C, $7C, $7C, $73, $75   ;; 01:7B44
-    db   $78, $77, $78, $79, $58, $59, $5A, $5B   ;; 01:7B4C
-    db   $79, $79, $77, $75, $7E, $74, $7C, $7C   ;; 01:7B54
-    db   $7C, $7C, $7C, $73, $74, $76, $73, $7A   ;; 01:7B5C
-    db   $54, $55, $56, $57, $7A, $74, $76, $73   ;; 01:7B64
-    db   $74, $7C, $7C, $7C, $77, $78, $7C, $79   ;; 01:7B6C
-    db   $7C, $7C, $7C, $7C, $50, $51, $52, $53   ;; 01:7B74
-    db   $7C, $7C, $7C, $7C, $7C, $7C, $77, $78   ;; 01:7B7C
-    db   $7E, $7E, $75, $7E, $78, $77, $75, $78   ;; 01:7B84
-    db   $79, $2B, $2C, $79, $79, $77, $75, $78   ;; 01:7B8C
-    db   $77, $75, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7B94
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7B9C
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7BA4
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7BAC
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7BB4
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7BBC
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7BC4
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7BCC
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7BD4
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7BDC
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7BE4
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7BEC
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7BF4
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7BFC
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7C04
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7C0C
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7C14
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7C1C
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7C24
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7C2C
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7C34
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7C3C
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7C44
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7C4C
-    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E   ;; 01:7C54
-    db   $7E, $7E, $7E, $7E                       ;; 01:7C5C
+TitleScreenPostBeachTilemap:: ; title screen, only used after the beach intro plays out
+    db   $7C, $7C, $44, $45, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $4C, $4D, $7C, $7C
+    db   $7C, $7C, $7C, $7C, $44, $45, $7D, $2D, $2E, $2D, $2E, $2D, $2E, $7D, $4C, $4D, $7C, $7C, $7C, $7C
+    db   $7C, $7C, $7C, $7C, $7C, $77, $46, $7E, $7E, $7E, $7E, $7E, $7E, $4B, $79, $7C, $7C, $7C, $7C, $7C
+    db   $7C, $7C, $7C, $77, $75, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $75, $78, $7C, $7C, $7C
+    db   $7C, $7C, $77, $7A, $7A, $74, $73, $74, $5C, $5D, $5E, $5F, $73, $74, $73, $7A, $7E, $78, $7C, $7C
+    db   $7C, $7C, $73, $75, $78, $77, $78, $79, $58, $59, $5A, $5B, $79, $79, $77, $75, $7E, $74, $7C, $7C
+    db   $7C, $7C, $7C, $73, $74, $76, $73, $7A, $54, $55, $56, $57, $7A, $74, $76, $73, $74, $7C, $7C, $7C
+    db   $77, $78, $7C, $79, $7C, $7C, $7C, $7C, $50, $51, $52, $53, $7C, $7C, $7C, $7C, $7C, $7C, $77, $78
+    db   $7E, $7E, $75, $7E, $78, $77, $75, $78, $79, $2B, $2C, $79, $79, $77, $75, $78, $77, $75, $7E, $7E
+    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E
+    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E
+    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E
+    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E
+    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E
+    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E
+    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E
+    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E
+    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E
+    db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E
 
 func_7C60::
     ld   a, [wD00A]                               ;; 01:7C60 $FA $0A $D0
@@ -2133,7 +2122,7 @@ func_7C60::
 
 .loop
     push hl                                       ;; 01:7C9D $E5
-    ld   hl, Data_001_7AE4                        ;; 01:7C9E $21 $E4 $7A
+    ld   hl, TitleScreenPostBeachTilemap                        ;; 01:7C9E $21 $E4 $7A
     add  hl, de                                   ;; 01:7CA1 $19
     ld   a, [hl]                                  ;; 01:7CA2 $7E
     pop  hl                                       ;; 01:7CA3 $E1

@@ -34,7 +34,7 @@ ZombieEntityHandler::
     ld   hl, wEntitiesPosYTable                   ;; 18:63B4 $21 $10 $C2
     add  hl, bc                                   ;; 18:63B7 $09
     ld   [hl], a                                  ;; 18:63B8 $77
-    call func_018_6493                            ;; 18:63B9 $CD $93 $64
+    call GetObjectUnderEntity                            ;; 18:63B9 $CD $93 $64
     ldh  a, [hMultiPurpose3]                      ;; 18:63BC $F0 $DA
     cp   $00                                      ;; 18:63BE $FE $00
     jr   z, .jr_63C9                              ;; 18:63C0 $28 $07
@@ -181,7 +181,17 @@ ZombieState3Handler::
     ld   a, e                                     ;; 18:648F $7B
     jp   SetEntitySpriteVariant                   ;; 18:6490 $C3 $0C $3B
 
-func_018_6493::
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   hMultiPurpose3           object physics of object under entity
+;   hMultiPurpose4           entity position X - 1
+;   hMultiPurpose5           entity position Y - 7
+;   hIntersectedObjectLeft   leftmost corner of object under entity
+;   hIntersectedObjectTop    topmost corner of object under entity
+;   hObjectUnderEntity       ID of object under entity
+GetObjectUnderEntity::
     push bc                                       ;; 18:6493 $C5
     ld   hl, wEntitiesPosXTable                   ;; 18:6494 $21 $00 $C2
     add  hl, bc                                   ;; 18:6497 $09

@@ -96,7 +96,7 @@ func_018_5F3D::
 MarinAtTalTalHeightsState0Handler::
     call func_018_5F5E                            ;; 18:5F43 $CD $5E $5F
     call ReturnIfNonInteractive_18                ;; 18:5F46 $CD $E8 $7D
-    call func_018_7EB2                            ;; 18:5F49 $CD $B2 $7E
+    call GetEntityXDistanceToLink_18              ;; 18:5F49 $CD $B2 $7E
     ld   hl, wEntitiesDirectionTable              ;; 18:5F4C $21 $80 $C3
     add  hl, bc                                   ;; 18:5F4F $09
     ld   [hl], e                                  ;; 18:5F50 $73
@@ -136,12 +136,12 @@ MarinAtTalTalHeightsState1Handler::
 MarinAtTalTalHeightsState2Handler::
     call func_018_5F5E                            ;; 18:5F81 $CD $5E $5F
     call ReturnIfNonInteractive_18                ;; 18:5F84 $CD $E8 $7D
-    call func_018_7EB2                            ;; 18:5F87 $CD $B2 $7E
+    call GetEntityXDistanceToLink_18              ;; 18:5F87 $CD $B2 $7E
     add  $08                                      ;; 18:5F8A $C6 $08
     cp   $10                                      ;; 18:5F8C $FE $10
     ret  nc                                       ;; 18:5F8E $D0
 
-    call func_018_7EC2                            ;; 18:5F8F $CD $C2 $7E
+    call GetEntityRealYDistanceToLink_18          ;; 18:5F8F $CD $C2 $7E
     add  $10                                      ;; 18:5F92 $C6 $10
     cp   $20                                      ;; 18:5F94 $FE $20
     ret  nc                                       ;; 18:5F96 $D0
@@ -151,11 +151,11 @@ MarinAtTalTalHeightsState2Handler::
 MarinAtTalTalHeightsState3Handler::
     call func_018_5F3D                            ;; 18:5F9A $CD $3D $5F
     call ReturnIfNonInteractive_18                ;; 18:5F9D $CD $E8 $7D
-    call func_018_7EB2                            ;; 18:5FA0 $CD $B2 $7E
+    call GetEntityXDistanceToLink_18              ;; 18:5FA0 $CD $B2 $7E
     ld   hl, wEntitiesDirectionTable              ;; 18:5FA3 $21 $80 $C3
     add  hl, bc                                   ;; 18:5FA6 $09
     ld   [hl], e                                  ;; 18:5FA7 $73
-    ld   a, [wC1A4]                               ;; 18:5FA8 $FA $A4 $C1
+    ld   a, [wIsUsingHookshot]                    ;; 18:5FA8 $FA $A4 $C1
     and  a                                        ;; 18:5FAB $A7
     jr   z, .jr_5FBF                              ;; 18:5FAC $28 $11
 
@@ -323,7 +323,7 @@ ENDC
     jp   ClearEntityStatusBank18                  ;; 18:60C4 $C3 $08 $7F
 
 .jr_60C7
-    call func_018_7EB2                            ;; 18:60C7 $CD $B2 $7E
+    call GetEntityXDistanceToLink_18              ;; 18:60C7 $CD $B2 $7E
     ld   a, e                                     ;; 18:60CA $7B
     xor  $01                                      ;; 18:60CB $EE $01
     ldh  [hLinkDirection], a                      ;; 18:60CD $E0 $9E

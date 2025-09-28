@@ -1,33 +1,3 @@
-OctorokSpriteVariants::
-; Down
-.variant0
-    db   $30, OAM_GBC_PAL_2 | OAMF_PAL0
-    db   $30, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
-.variant1
-    db   $32, OAM_GBC_PAL_2 | OAMF_PAL0
-    db   $32, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
-; Up
-.variant2
-    db   $30, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP
-    db   $30, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
-.variant3
-    db   $32, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP
-    db   $32, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
-; Left
-.variant4
-    db   $34, OAM_GBC_PAL_2 | OAMF_PAL0
-    db   $36, OAM_GBC_PAL_2 | OAMF_PAL0
-.variant5
-    db   $38, OAM_GBC_PAL_2 | OAMF_PAL0
-    db   $3A, OAM_GBC_PAL_2 | OAMF_PAL0
-; Right
-.variant6
-    db   $36, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
-    db   $34, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
-.variant7
-    db   $3A, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
-    db   $38, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
-
 RoamingEnemySpeedXPerDirection::
     db   $08, $F8, $00, $00
 
@@ -353,7 +323,7 @@ SpawnOctorokRock::
 .return
 IF !__OPTIMIZATIONS_1__
     ; Small optimization: This RET isn't needed since we just
-    ; fall through to EntityInitBrokenHeartContainer, which only
+    ; fall through to EntityInitEntity13, which only
     ; contains RET.
     ret                                           ;; 03:59D6 $C9
 ENDC

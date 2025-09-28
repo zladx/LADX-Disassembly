@@ -400,19 +400,19 @@ PushLinkOutOfEntity_15::
     jr   nc, jr_015_7A9A                          ;; 15:7A71 $30 $27
 
     call CopyLinkFinalPositionToPosition          ;; 15:7A73 $CD $BE $0C
-    ld   a, [wC1A6]                               ;; 15:7A76 $FA $A6 $C1
+    ld   a, [wHookshotEntityIndexPlusOne]         ;; 15:7A76 $FA $A6 $C1
     and  a                                        ;; 15:7A79 $A7
     jr   z, .jr_7A8D                              ;; 15:7A7A $28 $11
 
     ld   e, a                                     ;; 15:7A7C $5F
     ld   d, b                                     ;; 15:7A7D $50
-    ld   hl, wEntitiesPrivateState5Table+15       ;; 15:7A7E $21 $9F $C3
+    ld   hl, wEntitiesTypeTable - 1               ;; 15:7A7E $21 $9F $C3
     add  hl, de                                   ;; 15:7A81 $19
     ld   a, [hl]                                  ;; 15:7A82 $7E
-    cp   $03                                      ;; 15:7A83 $FE $03
+    cp   ENTITY_HOOKSHOT_CHAIN                    ;; 15:7A83 $FE $03
     jr   nz, .jr_7A8D                             ;; 15:7A85 $20 $06
 
-    ld   hl, wEntitiesStatusTable + $0F           ;; 15:7A87 $21 $8F $C2
+    ld   hl, wEntitiesStateTable - 1              ;; 15:7A87 $21 $8F $C2
     add  hl, de                                   ;; 15:7A8A $19
     ld   [hl], $00                                ;; 15:7A8B $36 $00
 

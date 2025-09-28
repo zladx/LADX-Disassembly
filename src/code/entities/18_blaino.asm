@@ -75,11 +75,11 @@ jr_018_650A:
 
 .jr_653E
     call func_018_65CF                            ;; 18:653E $CD $CF $65
-    call func_018_7EB2                            ;; 18:6541 $CD $B2 $7E
+    call GetEntityXDistanceToLink_18              ;; 18:6541 $CD $B2 $7E
     ld   hl, wEntitiesDirectionTable              ;; 18:6544 $21 $80 $C3
     add  hl, bc                                   ;; 18:6547 $09
     ld   [hl], e                                  ;; 18:6548 $73
-    call func_018_7EC2                            ;; 18:6549 $CD $C2 $7E
+    call GetEntityRealYDistanceToLink_18          ;; 18:6549 $CD $C2 $7E
     cp   $00                                      ;; 18:654C $FE $00
     jr   z, .jr_655B                              ;; 18:654E $28 $0B
 
@@ -105,7 +105,7 @@ jr_018_650A:
     ld   hl, wEntitiesSpeedXTable                 ;; 18:656D $21 $40 $C2
     add  hl, bc                                   ;; 18:6570 $09
     ld   [hl], a                                  ;; 18:6571 $77
-    call func_018_7EB2                            ;; 18:6572 $CD $B2 $7E
+    call GetEntityXDistanceToLink_18              ;; 18:6572 $CD $B2 $7E
     add  $28                                      ;; 18:6575 $C6 $28
     cp   $50                                      ;; 18:6577 $FE $50
     jr   c, .jr_6588                              ;; 18:6579 $38 $0D
@@ -326,7 +326,7 @@ jr_018_66E9:
     call GetEntityPrivateCountdown1               ;; 18:6708 $CD $00 $0C
     jr   z, .jr_6724                              ;; 18:670B $28 $17
 
-    call func_018_7EB2                            ;; 18:670D $CD $B2 $7E
+    call GetEntityXDistanceToLink_18              ;; 18:670D $CD $B2 $7E
     add  $30                                      ;; 18:6710 $C6 $30
     cp   $60                                      ;; 18:6712 $FE $60
     jr   c, .jr_6724                              ;; 18:6714 $38 $0E

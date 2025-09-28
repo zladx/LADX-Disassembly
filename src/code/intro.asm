@@ -2122,7 +2122,7 @@ func_7C60::
 
 .loop
     push hl                                       ;; 01:7C9D $E5
-    ld   hl, TitleScreenPostBeachTilemap                        ;; 01:7C9E $21 $E4 $7A
+    ld   hl, TitleScreenPostBeachTilemap          ;; 01:7C9E $21 $E4 $7A
     add  hl, de                                   ;; 01:7CA1 $19
     ld   a, [hl]                                  ;; 01:7CA2 $7E
     pop  hl                                       ;; 01:7CA3 $E1

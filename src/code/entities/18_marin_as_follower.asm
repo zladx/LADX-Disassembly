@@ -378,7 +378,7 @@ func_018_5BD0::
 .jr_5BE7
     ld   a, e                                     ;; 18:5BE7 $7B
     call SetEntitySpriteVariant                   ;; 18:5BE8 $CD $0C $3B
-    call func_018_7EB2                            ;; 18:5BEB $CD $B2 $7E
+    call GetEntityXDistanceToLink_18              ;; 18:5BEB $CD $B2 $7E
     add  $02                                      ;; 18:5BEE $C6 $02
     cp   $04                                      ;; 18:5BF0 $FE $04
     ret  nc                                       ;; 18:5BF2 $D0

@@ -867,19 +867,19 @@ PushLinkOutOfEntity_04::
 
     call CopyLinkFinalPositionToPosition          ;; 04:7BE8 $CD $BE $0C
     call ResetPegasusBoots                        ;; 04:7BEB $CD $B6 $0C
-    ld   a, [wC1A6]                               ;; 04:7BEE $FA $A6 $C1
+    ld   a, [wHookshotEntityIndexPlusOne]         ;; 04:7BEE $FA $A6 $C1
     and  a                                        ;; 04:7BF1 $A7
     jr   z, .ret_7C05                             ;; 04:7BF2 $28 $11
 
     ld   e, a                                     ;; 04:7BF4 $5F
     ld   d, b                                     ;; 04:7BF5 $50
-    ld   hl, wEntitiesPrivateState5Table+15       ;; 04:7BF6 $21 $9F $C3
+    ld   hl, wEntitiesTypeTable - 1               ;; 04:7BF6 $21 $9F $C3
     add  hl, de                                   ;; 04:7BF9 $19
     ld   a, [hl]                                  ;; 04:7BFA $7E
-    cp   $03                                      ;; 04:7BFB $FE $03
+    cp   ENTITY_HOOKSHOT_CHAIN                    ;; 04:7BFB $FE $03
     jr   nz, .ret_7C05                            ;; 04:7BFD $20 $06
 
-    ld   hl, wEntitiesStatusTable+15              ;; 04:7BFF $21 $8F $C2
+    ld   hl, wEntitiesStateTable - 1              ;; 04:7BFF $21 $8F $C2
     add  hl, de                                   ;; 04:7C02 $19
     ld   [hl], $00                                ;; 04:7C03 $36 $00
 

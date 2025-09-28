@@ -271,8 +271,8 @@ WreckingBallState2Handler::
 
 .noCollision
     call ReturnIfNonInteractive_07                ;; 07:6164 $CD $96 $7D
-    ld   a, $0B                                   ;; 07:6167 $3E $0B
-    ld   [wC19E], a                               ;; 07:6169 $EA $9E $C1
+    ld   a, DAMAGE_TYPE_THROW_AT                  ;; 07:6167 $3E $0B
+    ld   [wAttackDamageType], a                   ;; 07:6169 $EA $9E $C1
     call label_3B7B                               ;; 07:616C $CD $7B $3B
     ld   e, $0F                                   ;; 07:616F $1E $0F
     ld   d, b                                     ;; 07:6171 $50

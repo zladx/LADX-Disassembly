@@ -492,60 +492,96 @@ func_019_7B04:
 
     ret                                           ;; 19:7B0F $C9
 
-Data_019_7B10::
-    db   $FD, $FC, $16, $00, $FC, $0C, $16, $00, $0E, $FB, $16, $00, $0C, $0D, $16, $00
-    db   $FB, $FD, $16, $00, $FA, $0B, $16, $00, $0B, $FC, $16, $00, $09, $0C, $16, $00
-    db   $FD, $FE, $16, $00, $FC, $0A, $16, $00, $0B, $FD, $16, $00, $08, $0A, $16, $00
-    db   $FF, $00, $16, $00, $00, $08, $16, $00, $0A, $FF, $16, $00, $08, $09, $16, $00
+SmashedRockSpriteRect::
+.frame0
+    db -3, -4, $16, OAM_GBC_PAL_0 | OAMF_PAL0, -4, 12, $16, OAM_GBC_PAL_0 | OAMF_PAL0
+    db 14, -5, $16, OAM_GBC_PAL_0 | OAMF_PAL0, 12, 13, $16, OAM_GBC_PAL_0 | OAMF_PAL0
+.frame1
+    db -5, -3, $16, OAM_GBC_PAL_0 | OAMF_PAL0, -6, 11, $16, OAM_GBC_PAL_0 | OAMF_PAL0
+    db 11, -4, $16, OAM_GBC_PAL_0 | OAMF_PAL0,  9, 12, $16, OAM_GBC_PAL_0 | OAMF_PAL0
+.frame2
+    db -3, -2, $16, OAM_GBC_PAL_0 | OAMF_PAL0, -4, 10, $16, OAM_GBC_PAL_0 | OAMF_PAL0
+    db 11, -3, $16, OAM_GBC_PAL_0 | OAMF_PAL0,  8, 10, $16, OAM_GBC_PAL_0 | OAMF_PAL0
+.frame3
+    db -1,  0, $16, OAM_GBC_PAL_0 | OAMF_PAL0,  0,  8, $16, OAM_GBC_PAL_0 | OAMF_PAL0
+    db 10, -1, $16, OAM_GBC_PAL_0 | OAMF_PAL0,  8,  9, $16, OAM_GBC_PAL_0 | OAMF_PAL0
 
-Data_019_7B50::
-    db   $02, $FC, $28, $00, $FB, $04, $28, $60, $05, $06, $28, $00, $01, $0A, $28, $20
-    db   $01, $FF, $28, $00, $F9, $04, $28, $60, $08, $06, $28, $00, $02, $07, $28, $20
-    db   $00, $00, $28, $20, $F8, $02, $28, $60, $04, $04, $28, $20, $0A, $07, $28, $20
-    db   $FE, $01, $28, $20, $04, $01, $28, $60, $04, $05, $28, $20, $0C, $07, $28, $20
-    db   $FD, $00, $28, $20, $04, $FE, $28, $60, $08, $08, $28, $20, $0E, $09, $28, $20
-    db   $FC, $FF, $28, $00, $04, $FA, $28, $40, $08, $09, $28, $20, $0F, $0A, $28, $00
-    db   $FB, $FE, $28, $00, $03, $F9, $28, $40, $08, $0C, $28, $00, $11, $0B, $28, $00
-    db   $FA, $FD, $28, $00, $01, $F7, $28, $40, $09, $0D, $28, $00, $0F, $0C, $28, $00
+CutLeavesSpriteRect::
+.frame0
+    db  2, -4, $28, OAM_GBC_PAL_0 | OAMF_PAL0,              -5,  4, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP | OAMF_YFLIP
+    db  5,  6, $28, OAM_GBC_PAL_0 | OAMF_PAL0,               1, 10, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+.frame1
+    db  1, -1, $28, OAM_GBC_PAL_0 | OAMF_PAL0,              -7,  4, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP | OAMF_YFLIP
+    db  8,  6, $28, OAM_GBC_PAL_0 | OAMF_PAL0,               2,  7, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+.frame2
+    db  0,  0, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP, -8,  2, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP | OAMF_YFLIP
+    db  4,  4, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP, 10,  7, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+.frame3
+    db -2,  1, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP,  4,  1, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP | OAMF_YFLIP
+    db  4,  5, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP, 12,  7, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+.frame4
+    db -3,  0, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP,  4, -2, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP | OAMF_YFLIP
+    db  8,  8, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP, 14,  9, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+.frame5
+    db -4, -1, $28, OAM_GBC_PAL_0 | OAMF_PAL0,               4, -6, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_YFLIP
+    db  8,  9, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP, 15, 10, $28, OAM_GBC_PAL_0 | OAMF_PAL0
+.frame6
+    db -5, -2, $28, OAM_GBC_PAL_0 | OAMF_PAL0,               3, -7, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_YFLIP
+    db  8, 12, $28, OAM_GBC_PAL_0 | OAMF_PAL0,              17, 11, $28, OAM_GBC_PAL_0 | OAMF_PAL0
+.frame7
+    db -6, -3, $28, OAM_GBC_PAL_0 | OAMF_PAL0,               1, -9, $28, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_YFLIP
+    db  9, 13, $28, OAM_GBC_PAL_0 | OAMF_PAL0,              15, 12, $28, OAM_GBC_PAL_0 | OAMF_PAL0
 
-Data_019_7BD0::
-    db   $02, $FC, $28, $06, $FB, $04, $28, $66, $05, $06, $28, $06, $01, $0A, $28, $26
-    db   $01, $FF, $28, $06, $F9, $04, $28, $66, $08, $06, $28, $06, $02, $07, $28, $26
-    db   $00, $00, $28, $26, $F8, $02, $28, $66, $04, $04, $28, $26, $0A, $07, $28, $26
-    db   $FE, $01, $28, $26, $04, $01, $28, $66, $04, $05, $28, $26, $0C, $07, $28, $26
-    db   $FD, $00, $28, $26, $04, $FE, $28, $66, $08, $08, $28, $26, $0E, $09, $28, $26
-    db   $FC, $FF, $28, $06, $04, $FA, $28, $46, $08, $09, $28, $26, $0F, $0A, $28, $06
-    db   $FB, $FE, $28, $06, $03, $F9, $28, $46, $08, $0C, $28, $06, $11, $0B, $28, $06
-    db   $FA, $FD, $28, $06, $01, $F7, $28, $46, $09, $0D, $28, $06, $0F, $0C, $28, $06
+; Used for the brown grass in Goponga Swamp.
+CutLeavesSwampSpriteRect::
+.frame0
+    db  2, -4, $28, OAM_GBC_PAL_6 | OAMF_PAL0,              -5,  4, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP | OAMF_YFLIP
+    db  5,  6, $28, OAM_GBC_PAL_6 | OAMF_PAL0,               1, 10, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP
+.frame1
+    db  1, -1, $28, OAM_GBC_PAL_6 | OAMF_PAL0,              -7,  4, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP | OAMF_YFLIP
+    db  8,  6, $28, OAM_GBC_PAL_6 | OAMF_PAL0,               2,  7, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP
+.frame2
+    db  0,  0, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP, -8,  2, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP | OAMF_YFLIP
+    db  4,  4, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP, 10,  7, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP
+.frame3
+    db -2,  1, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP,  4,  1, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP | OAMF_YFLIP
+    db  4,  5, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP, 12,  7, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP
+.frame4
+    db -3,  0, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP,  4, -2, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP | OAMF_YFLIP
+    db  8,  8, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP, 14,  9, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP
+.frame5
+    db -4, -1, $28, OAM_GBC_PAL_6 | OAMF_PAL0,               4, -6, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_YFLIP
+    db  8,  9, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_XFLIP, 15, 10, $28, OAM_GBC_PAL_6 | OAMF_PAL0
+.frame6
+    db -5, -2, $28, OAM_GBC_PAL_6 | OAMF_PAL0,               3, -7, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_YFLIP
+    db  8, 12, $28, OAM_GBC_PAL_6 | OAMF_PAL0,              17, 11, $28, OAM_GBC_PAL_6 | OAMF_PAL0
+.frame7
+    db -6, -3, $28, OAM_GBC_PAL_6 | OAMF_PAL0,               1, -9, $28, OAM_GBC_PAL_6 | OAMF_PAL0 | OAMF_YFLIP
+    db  9, 13, $28, OAM_GBC_PAL_6 | OAMF_PAL0,              15, 12, $28, OAM_GBC_PAL_6 | OAMF_PAL0
 
 ; Code used by the liftable rock.
 func_019_7C50::
     ldh  a, [hActiveEntitySpriteVariant]          ;; 19:7C50 $F0 $F1
-
-.jr_7C52
     cp   $FF                                      ;; 19:7C52 $FE $FF
-    jr   z, jr_019_7C6D                           ;; 19:7C54 $28 $17
+    jr   z, .leaves                               ;; 19:7C54 $28 $17
 
-.jr_7C56
     cp   $01                                      ;; 19:7C56 $FE $01
-    jr   z, jr_019_7C6D                           ;; 19:7C58 $28 $13
+    jr   z, .leaves                               ;; 19:7C58 $28 $13
 
     ldh  a, [hMultiPurpose0]                      ;; 19:7C5A $F0 $D7
     and  $0C                                      ;; 19:7C5C $E6 $0C
-
-.jr_7C5E
     sla  a                                        ;; 19:7C5E $CB $27
     sla  a                                        ;; 19:7C60 $CB $27
     ld   e, a                                     ;; 19:7C62 $5F
     ld   d, b                                     ;; 19:7C63 $50
-    ld   hl, Data_019_7B10                        ;; 19:7C64 $21 $10 $7B
+    ld   hl, SmashedRockSpriteRect                ;; 19:7C64 $21 $10 $7B
     add  hl, de                                   ;; 19:7C67 $19
     ld   c, $04                                   ;; 19:7C68 $0E $04
     jp   RenderActiveEntitySpritesRect            ;; 19:7C6A $C3 $E6 $3C
 
-jr_019_7C6D:
+.leaves
     inc  a                                        ;; 19:7C6D $3C
-    jr   nz, .jr_7C8D                             ;; 19:7C6E $20 $1D
+    jr   nz, .nonSwamp                            ;; 19:7C6E $20 $1D
 
     ldh  [hActiveEntitySpriteVariant], a          ;; 19:7C70 $E0 $F1
     ldh  a, [hFrameCounter]                       ;; 19:7C72 $F0 $E7
@@ -553,25 +589,28 @@ jr_019_7C6D:
     rra                                           ;; 19:7C75 $1F
     ret  c                                        ;; 19:7C76 $D8
 
+    ; If on a Game Boy Color...
     ldh  a, [hIsGBC]                              ;; 19:7C77 $F0 $FE
     and  a                                        ;; 19:7C79 $A7
-    jr   z, .jr_7C8D                              ;; 19:7C7A $28 $11
+    jr   z, .nonSwamp                             ;; 19:7C7A $28 $11
 
+    ; ...and in the southwest-most room of Gopongo Swamp (the only one with tall grass)...
     ld   a, [wIsIndoor]                           ;; 19:7C7C $FA $A5 $DB
     and  a                                        ;; 19:7C7F $A7
-    jr   nz, .jr_7C8D                             ;; 19:7C80 $20 $0B
+    jr   nz, .nonSwamp                            ;; 19:7C80 $20 $0B
 
     ldh  a, [hMapRoom]                            ;; 19:7C82 $F0 $F6
     cp   UNKNOWN_ROOM_32                          ;; 19:7C84 $FE $32
-    jr   nz, .jr_7C8D                             ;; 19:7C86 $20 $05
+    jr   nz, .nonSwamp                            ;; 19:7C86 $20 $05
 
-    ld   hl, Data_019_7BD0                        ;; 19:7C88 $21 $D0 $7B
-    jr   jr_019_7C90                              ;; 19:7C8B $18 $03
+    ; ...use a different palette.
+    ld   hl, CutLeavesSwampSpriteRect             ;; 19:7C88 $21 $D0 $7B
+    jr   .renderLeaves                            ;; 19:7C8B $18 $03
 
-.jr_7C8D
-    ld   hl, Data_019_7B50                        ;; 19:7C8D $21 $50 $7B
+.nonSwamp
+    ld   hl, CutLeavesSpriteRect                  ;; 19:7C8D $21 $50 $7B
 
-jr_019_7C90:
+.renderLeaves
     ldh  a, [hMultiPurpose0]                      ;; 19:7C90 $F0 $D7
     and  $1C                                      ;; 19:7C92 $E6 $1C
     xor  $1C                                      ;; 19:7C94 $EE $1C
@@ -596,19 +635,19 @@ PushLinkOutOfEntity_19::
     jr   nc, jr_019_7CCE                          ;; 19:7CA5 $30 $27
 
     call CopyLinkFinalPositionToPosition          ;; 19:7CA7 $CD $BE $0C
-    ld   a, [wC1A6]                               ;; 19:7CAA $FA $A6 $C1
+    ld   a, [wHookshotEntityIndexPlusOne]         ;; 19:7CAA $FA $A6 $C1
     and  a                                        ;; 19:7CAD $A7
     jr   z, .jr_7CC1                              ;; 19:7CAE $28 $11
 
     ld   e, a                                     ;; 19:7CB0 $5F
     ld   d, b                                     ;; 19:7CB1 $50
-    ld   hl, wEntitiesPrivateState5Table+15       ;; 19:7CB2 $21 $9F $C3
+    ld   hl, wEntitiesTypeTable - 1               ;; 19:7CB2 $21 $9F $C3
     add  hl, de                                   ;; 19:7CB5 $19
     ld   a, [hl]                                  ;; 19:7CB6 $7E
-    cp   $03                                      ;; 19:7CB7 $FE $03
+    cp   ENTITY_HOOKSHOT_CHAIN                    ;; 19:7CB7 $FE $03
     jr   nz, .jr_7CC1                             ;; 19:7CB9 $20 $06
 
-    ld   hl, wEntitiesStatusTable + $0F           ;; 19:7CBB $21 $8F $C2
+    ld   hl, wEntitiesStateTable - 1              ;; 19:7CBB $21 $8F $C2
     add  hl, de                                   ;; 19:7CBE $19
     ld   [hl], $00                                ;; 19:7CBF $36 $00
 

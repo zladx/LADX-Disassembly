@@ -48,8 +48,8 @@ SwordBeamEntityHandler::
 .jr_4562
     call func_019_45B2                            ;; 19:4562 $CD $B2 $45
     call ReturnIfNonInteractive_19                ;; 19:4565 $CD $3D $7D
-    ld   a, $01                                   ;; 19:4568 $3E $01
-    ld   [wC19E], a                               ;; 19:456A $EA $9E $C1
+    ld   a, DAMAGE_TYPE_SWORD_2                   ;; 19:4568 $3E $01
+    ld   [wAttackDamageType], a                   ;; 19:456A $EA $9E $C1
     call label_3B7B                               ;; 19:456D $CD $7B $3B
     call UpdateEntityPosWithSpeed_19              ;; 19:4570 $CD $B8 $7D
     call label_3B2E                               ;; 19:4573 $CD $2E $3B

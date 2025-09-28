@@ -90,7 +90,7 @@ func_005_6D42::
     ld   [hl], $1F                                ;; 05:6D7E $36 $1F
     call GetEntitySlowTransitionCountdown         ;; 05:6D80 $CD $FB $0B
     ld   [hl], $B0                                ;; 05:6D83 $36 $B0
-    call label_3E34                               ;; 05:6D85 $CD $34 $3E
+    call SmashRock_trampoline                     ;; 05:6D85 $CD $34 $3E
     ld   hl, wEntitiesStatusTable                 ;; 05:6D88 $21 $80 $C2
     add  hl, bc                                   ;; 05:6D8B $09
     ld   [hl], $05                                ;; 05:6D8C $36 $05
@@ -99,11 +99,11 @@ func_005_6D42::
     ld   a, [hl]                                  ;; 05:6D92 $7E
     add  $10                                      ;; 05:6D93 $C6 $10
     ld   [hl], a                                  ;; 05:6D95 $77
-    call label_3E34                               ;; 05:6D96 $CD $34 $3E
+    call SmashRock_trampoline                     ;; 05:6D96 $CD $34 $3E
     ld   hl, wEntitiesStatusTable                 ;; 05:6D99 $21 $80 $C2
     add  hl, bc                                   ;; 05:6D9C $09
     ld   [hl], $05                                ;; 05:6D9D $36 $05
-    call label_3E34                               ;; 05:6D9F $CD $34 $3E
+    call SmashRock_trampoline                     ;; 05:6D9F $CD $34 $3E
     call PlayBombExplosionSfx                     ;; 05:6DA2 $CD $4B $0C
     ld   hl, wEntitiesStatusTable                 ;; 05:6DA5 $21 $80 $C2
     add  hl, bc                                   ;; 05:6DA8 $09
@@ -403,7 +403,7 @@ func_005_6E7D::
     ld   hl, wEntitiesDirectionTable              ;; 05:6F78 $21 $80 $C3
     add  hl, de                                   ;; 05:6F7B $19
     ld   [hl], a                                  ;; 05:6F7C $77
-    call label_3E34                               ;; 05:6F7D $CD $34 $3E
+    call SmashRock_trampoline                     ;; 05:6F7D $CD $34 $3E
     ld   hl, wEntitiesStatusTable                 ;; 05:6F80 $21 $80 $C2
     add  hl, bc                                   ;; 05:6F83 $09
     ld   [hl], $05                                ;; 05:6F84 $36 $05
@@ -929,7 +929,7 @@ func_005_7363::
     and  $02                                      ;; 05:7397 $E6 $02
     jp   z, ret_005_7424                          ;; 05:7399 $CA $24 $74
 
-    ld   a, [wC1A6]                               ;; 05:739C $FA $A6 $C1
+    ld   a, [wHookshotEntityIndexPlusOne]         ;; 05:739C $FA $A6 $C1
     and  a                                        ;; 05:739F $A7
     jp   z, ret_005_7424                          ;; 05:73A0 $CA $24 $74
 
@@ -946,7 +946,7 @@ func_005_7363::
     ld   hl, wEntitiesTypeTable                   ;; 05:73B1 $21 $A0 $C3
     add  hl, de                                   ;; 05:73B4 $19
     ld   a, [hl]                                  ;; 05:73B5 $7E
-    cp   $03                                      ;; 05:73B6 $FE $03
+    cp   ENTITY_HOOKSHOT_CHAIN                    ;; 05:73B6 $FE $03
     jr   nz, ret_005_7424                         ;; 05:73B8 $20 $6A
 
     ld   hl, wEntitiesPosXTable                   ;; 05:73BA $21 $00 $C2

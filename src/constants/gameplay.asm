@@ -442,3 +442,21 @@ DEF TUNIC_BLUE   EQU $02
 DEF ITEM_USAGE_NEAR_NPC     EQU $01 ; set when near an NPC, to stop item usage
 DEF ITEM_USAGE_READING_TEXT EQU $02 ; set when reading non-dialog text, to stop item usage
 DEF ITEM_USAGE_ON_RAFT      EQU $80 ; set when on the raft, to freeze the raft when using an item
+
+; values for wAttackDamageType
+DEF DAMAGE_TYPE_SWORD_1      EQU $00
+DEF DAMAGE_TYPE_SWORD_2      EQU $01
+DEF DAMAGE_TYPE_SWORD_3      EQU $02
+DEF DAMAGE_TYPE_03           EQU $03
+DEF DAMAGE_TYPE_04           EQU $04
+DEF DAMAGE_TYPE_ARROW        EQU $05
+DEF DAMAGE_TYPE_HOOKSHOT     EQU $06
+DEF DAMAGE_TYPE_BOMB         EQU $07
+DEF DAMAGE_TYPE_BOOMERANG    EQU $08
+DEF DAMAGE_TYPE_MAGIC_POWDER EQU $09
+DEF DAMAGE_TYPE_MAGIC_ROD    EQU $0A
+DEF DAMAGE_TYPE_THROW_AT     EQU $0B
+DEF DAMAGE_TYPE_BOMB_ARROW   EQU $0C ; used by the harmless arrow shaft, the explosion uses $07
+DEF DAMAGE_TYPE_0D           EQU $0D
+DEF DAMAGE_TYPE_0E           EQU $0E
+DEF DAMAGE_TYPE_0F           EQU $0F

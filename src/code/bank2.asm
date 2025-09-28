@@ -2902,29 +2902,24 @@ func_002_52D6::
 .return
     ret                                           ;; 02:52DF $C9
 
-; convert Link's view direction to ???
-LinkDirectionTohMultiPurpose1::
+; convert Link's view direction to magic rod sprites
+;   The animation starts with the side swing and then shows the forward swing.
+LinkDirectionToMagicRodXOffset::
     ;   right   left    up      down
-    db  $0D,    $F3,    $00,    $FF
-    db  $08,    $F8,    $0C,    $F5
-
-; convert Link's view direction to ???
-LinkDirectionTohMultiPurpose0::
+    db  $0D,    $F3,    $00,    $FF     ; Forward swing
+    db  $08,    $F8,    $0C,    $F5     ; Side swing
+LinkDirectionToMagicRodYOffset::
     ;   right   left    up      down
-    db  $00,    $00,    $F3,    $0E
-    db  $F3,    $F3,    $FC,    $00
-
-; convert Link's view direction to ???
-LinkDirectionTohMultiPurpose2_3::
+    db  $00,    $00,    $F3,    $0E     ; Forward swing
+    db  $F3,    $F3,    $FC,    $00     ; Side swing
+LinkDirectionToMagicRodTiles::
     ;   right       left        up          down
-    db  $06, $08,   $08, $06,   $04, $FF,   $FF, $04
-    db  $04, $FF,   $FF, $04,   $06, $08,   $08, $06
-
-; convert Link's view direction to ???
-LinkDirectionTohMultiPurpose4_5::
+    db  $06, $08,   $08, $06,   $04, $FF,   $FF, $04     ; Forward swing
+    db  $04, $FF,   $FF, $04,   $06, $08,   $08, $06     ; Side swing
+LinkDirectionToMagicRodOAMAttributes::
     ;   right       left        up          down
-    db  $02, $02,   $22, $22,   $22, $02,   $02, $42
-    db  $22, $02,   $02, $22,   $02, $02,   $22, $22
+    db  $02, $02,   $22, $22,   $22, $02,   $02, $42     ; Forward swing
+    db  $22, $02,   $02, $22,   $02, $02,   $22, $22     ; Side swing
 
 label_002_5310::
     ; TODO label and also add row comment for data above
@@ -2939,22 +2934,22 @@ label_002_5310::
 .skipOffset
     ld   e, a                                     ;; 02:531D $5F
     ld   d, $00                                   ;; 02:531E $16 $00
-    ld   hl, LinkDirectionTohMultiPurpose0        ;; 02:5320 $21 $E8 $52
+    ld   hl, LinkDirectionToMagicRodYOffset       ;; 02:5320 $21 $E8 $52
     add  hl, de                                   ;; 02:5323 $19
     ld   a, [hl]                                  ;; 02:5324 $7E
     ldh  [hMultiPurpose0], a                      ;; 02:5325 $E0 $D7
-    ld   hl, LinkDirectionTohMultiPurpose1        ;; 02:5327 $21 $E0 $52
+    ld   hl, LinkDirectionToMagicRodXOffset       ;; 02:5327 $21 $E0 $52
     add  hl, de                                   ;; 02:532A $19
     ld   a, [hl]                                  ;; 02:532B $7E
     ldh  [hMultiPurpose1], a                      ;; 02:532C $E0 $D8
     sla  e                                        ;; 02:532E $CB $23
-    ld   hl, LinkDirectionTohMultiPurpose2_3      ;; 02:5330 $21 $F0 $52
+    ld   hl, LinkDirectionToMagicRodTiles         ;; 02:5330 $21 $F0 $52
     add  hl, de                                   ;; 02:5333 $19
     ld   a, [hl+]                                 ;; 02:5334 $2A
     ldh  [hMultiPurpose2], a                      ;; 02:5335 $E0 $D9
     ld   a, [hl]                                  ;; 02:5337 $7E
     ldh  [hMultiPurpose3], a                      ;; 02:5338 $E0 $DA
-    ld   hl, LinkDirectionTohMultiPurpose4_5      ;; 02:533A $21 $00 $53
+    ld   hl, LinkDirectionToMagicRodOAMAttributes ;; 02:533A $21 $00 $53
     add  hl, de                                   ;; 02:533D $19
     ld   a, [hl+]                                 ;; 02:533E $2A
     ldh  [hMultiPurpose4], a                      ;; 02:533F $E0 $DB

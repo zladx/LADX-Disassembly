@@ -1,5 +1,5 @@
 ; Entities initial health table, indexed by health group.
-; See InitialHealthForGroup
+; See HealthGroupForEntity
 InitialHealthForGroup::
 ._00 db $01
 ._01 db $02

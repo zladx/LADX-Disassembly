@@ -36,7 +36,7 @@ BunnyD3EntityHandler::
     and  $3F                                      ;; 18:51E7 $E6 $3F
     jr   nz, .jr_51F3                             ;; 18:51E9 $20 $08
 
-    call func_018_7EE1                            ;; 18:51EB $CD $E1 $7E
+    call GetEntityDirectionToLink_18              ;; 18:51EB $CD $E1 $7E
     ld   hl, wEntitiesDirectionTable              ;; 18:51EE $21 $80 $C3
     add  hl, bc                                   ;; 18:51F1 $09
     ld   [hl], e                                  ;; 18:51F2 $73

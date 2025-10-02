@@ -4,9 +4,10 @@
 
 include "data/entities/options1.asm"
 
-; Indexed by wEntitiesHealthGroup, 16 bytes per entry, sub indexed by damage type (wC19E)
-; $00-$03) sword, sword level add +1, spin attack adds +1, pegasus boots adds +1, piece of power OR damage tunic adds +1 (tunic makes piece of power useless)
+; Indexed by wEntitiesHealthGroup, 16 bytes per entry, sub indexed by damage type (wAttackDamageType)
+; $00-$02) sword, sword level add +1, spin attack adds +1, pegasus boots adds +1, piece of power OR damage tunic adds +1 (tunic makes piece of power useless)
 ; $01) See above, and sword beam has a fixed value of $01
+; $03) ??
 ; $04) ??
 ; $05) bow
 ; $06) hookshot
@@ -15,7 +16,7 @@ include "data/entities/options1.asm"
 ; $09) magic powder
 ; $0A) magic rod
 ; $0B) hit with thrown object
-; $0C) Seems to be set at the bomb arrow, but can never seem to trigger it (always get $07)
+; $0C) bomb arrow (specifically the arrow itself, which is harmless; the explosion is uses $07)
 ; $0D) ??
 ; $0E) ??
 ; $0F) ??
@@ -75,7 +76,7 @@ Data_003_43EC::
     db   $01, $01, $01, $01, $01, $00, $00, $00, $00, $06, $00, $00, $00, $00, $00, $00   ;; 03:4734
 
 
-; Indexed by entry from above table + damage type (wC19E) * 8
+; Indexed by entry from above table + damage type (wAttackDamageType) * 8
 ; Amount of damage done, unless >= $F0, then special action, and $00 is damage is ignored
 ; $FF = stun, $FE = burn, $FD = turn into fairy ($F0-$FC seem to do nothing)
 Data_003_473C::
@@ -900,27 +901,34 @@ EntityInitGiantBuzzBlob::
     ld   [hl], a                                  ;; 03:4C40 $77
     jp   EntityInitNoop                           ;; 03:4C41 $C3 $56 $4B
 
+; None of these exist, so they end up falling through the fire sprite variants,
+; down to the entity burning handler, and the entity immediately gets destroyed.
+EntityInitEntity25::
+EntityInitEntity26::
+Entity25Handler::
+Entity26Handler::
+
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-EntityExplosionSpriteVariants::
+FireSpriteVariants::
 .variant0 ;; 03:4C44
-    db $34, $02
-    db $34, $22
+    db $34, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $34, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant1 ;; 03:4C48
-    db $34, $14
-    db $34, $34
+    db $34, OAM_GBC_PAL_4 | OAMF_PAL1
+    db $34, OAM_GBC_PAL_4 | OAMF_PAL1 | OAMF_XFLIP
 
-EntityDestructionHandler::
+EntityBurningHandler::
     call GetEntityTransitionCountdown             ;; 03:4C4C $CD $05 $0C
-    jr   z, .destructionEnd                       ;; 03:4C4F $28 $26
+    jr   z, .burningEnd                           ;; 03:4C4F $28 $26
 
-    ; Animate the entity destruction with explosions
+    ; Animate the entity burning with fire
     ldh  a, [hFrameCounter]                       ;; 03:4C51 $F0 $E7
     rra                                           ;; 03:4C53 $1F
     rra                                           ;; 03:4C54 $1F
     rra                                           ;; 03:4C55 $1F
     and  $01                                      ;; 03:4C56 $E6 $01
     ldh  [hActiveEntitySpriteVariant], a          ;; 03:4C58 $E0 $F1
-    ld   de, EntityExplosionSpriteVariants        ;; 03:4C5A $11 $44 $4C
+    ld   de, FireSpriteVariants                   ;; 03:4C5A $11 $44 $4C
     call RenderActiveEntitySpritesPair            ;; 03:4C5D $CD $C0 $3B
     ld   hl, wEntitiesSpriteVariantTable          ;; 03:4C60 $21 $B0 $C3
     add  hl, bc                                   ;; 03:4C63 $09
@@ -937,8 +945,8 @@ ELSE
     ret                                           ;; 03:4C76 $C9
 ENDC
 
-.destructionEnd
-    ; If destroying a Gibdo…
+.burningEnd
+    ; If burning a Gibdo…
     ldh  a, [hActiveEntityType]                   ;; 03:4C77 $F0 $EB
     cp   ENTITY_GIBDO                             ;; 03:4C79 $FE $1F
     jr   nz, .gibdoEnd                            ;; 03:4C7B $20 $0F
@@ -1140,8 +1148,8 @@ EntityThrownHandler::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ;; 03:4DA3 $21 $10 $C4
     add  hl, bc                                   ;; 03:4DA6 $09
     ld   [hl], b                                  ;; 03:4DA7 $70
-    call func_003_66FA                            ;; 03:4DA8 $CD $FA $66
-    call func_003_5438                            ;; 03:4DAB $CD $38 $54
+    call BombEntityHandler.BounceOffWalls         ;; 03:4DA8 $CD $FA $66
+    call EntityCheckThrowAtTriggers               ;; 03:4DAB $CD $38 $54
 
     ldh  a, [hActiveEntityType]                   ;; 03:4DAE $F0 $EB
     cp   ENTITY_GENIE                             ;; 03:4DB0 $FE $5C
@@ -1172,8 +1180,8 @@ ENDC
     jr   z, .genie2                               ;; 03:4DD0 $28 $1D
 .genieEnd
 
-    ld   a, $0B                                   ;; 03:4DD2 $3E $0B
-    ld   [wC19E], a                               ;; 03:4DD4 $EA $9E $C1
+    ld   a, DAMAGE_TYPE_THROW_AT                  ;; 03:4DD2 $3E $0B
+    ld   [wAttackDamageType], a                   ;; 03:4DD4 $EA $9E $C1
     call func_003_75A2                            ;; 03:4DD7 $CD $A2 $75
     ld   hl, wEntitiesSpeedXTable                 ;; 03:4DDA $21 $40 $C2
     add  hl, bc                                   ;; 03:4DDD $09
@@ -1183,7 +1191,7 @@ ENDC
     or   [hl]                                     ;; 03:4DE3 $B6
     jr   nz, .return                              ;; 03:4DE4 $20 $1E
 
-    call func_003_7267                            ;; 03:4DE6 $CD $67 $72
+    call EntityBecomeStunned                      ;; 03:4DE6 $CD $67 $72
 
     ldh  a, [hActiveEntityType]                   ;; 03:4DE9 $F0 $EB
     cp   ENTITY_GENIE                             ;; 03:4DEB $FE $5C
@@ -1220,7 +1228,7 @@ EntityStunnedHandler::
 
     ldh  a, [hJoypadState]                        ;; 03:4E20 $F0 $CC
     and  J_B                                      ;; 03:4E22 $E6 $20
-    jr   nz, func_003_4E35                        ;; 03:4E24 $20 $0F
+    jr   nz, EntityGetLiftedUp                    ;; 03:4E24 $20 $0F
 
     jr   jr_003_4E72                              ;; 03:4E26 $18 $4A
 
@@ -1232,8 +1240,9 @@ EntityStunnedHandler::
     ldh  a, [hJoypadState]                        ;; 03:4E2F $F0 $CC
     and  J_A                                      ;; 03:4E31 $E6 $10
     jr   z, jr_003_4E72                           ;; 03:4E33 $28 $3D
+    ; fallthrough
 
-func_003_4E35::
+EntityGetLiftedUp::
     ld   a, [wC3CF]                               ;; 03:4E35 $FA $CF $C3
     and  a                                        ;; 03:4E38 $A7
     jr   nz, jr_003_4E72                          ;; 03:4E39 $20 $37
@@ -2057,38 +2066,6 @@ label_003_52D7:
 
 include "code/entities/03_liftable_rock.asm"
 
-func_003_53E4::; likely cutting grass
-    ld   hl, hNoiseSfx                            ;; 03:53E4 $21 $F4 $FF
-    ld   [hl], NOISE_SFX_CUT_GRASS                ;; 03:53E7 $36 $05
-    ld   e, $1F                                   ;; 03:53E9 $1E $1F
-    ldh  a, [hActiveEntitySpriteVariant]          ;; 03:53EB $F0 $F1
-    cp   $FF                                      ;; 03:53ED $FE $FF
-    jr   z, .jr_53F9                              ;; 03:53EF $28 $08
-
-    cp   $01                                      ;; 03:53F1 $FE $01
-    jr   z, .jr_53F9                              ;; 03:53F3 $28 $04
-
-    ld   [hl], $09                                ;; 03:53F5 $36 $09
-    ld   e, $0F                                   ;; 03:53F7 $1E $0F
-
-.jr_53F9
-    ld   hl, wEntitiesPrivateCountdown1Table      ;; 03:53F9 $21 $F0 $C2
-    add  hl, bc                                   ;; 03:53FC $09
-    ld   [hl], e                                  ;; 03:53FD $73
-    ld   hl, wEntitiesPhysicsFlagsTable           ;; 03:53FE $21 $40 $C3
-    add  hl, bc                                   ;; 03:5401 $09
-IF __OPTIMIZATIONS_1__
-    inc  [hl]
-    inc  [hl]
-ELSE
-    ld   a, [hl]                                  ;; 03:5402 $7E
-    add  $02                                      ;; 03:5403 $C6 $02
-    ld   [hl], a                                  ;; 03:5405 $77
-ENDC
-
-ret_003_5406:
-    ret                                           ;; 03:5406 $C9
-
 SmashRock::
     ld   a, ENTITY_LIFTABLE_ROCK                  ;; 03:5407 $3E $05
     call SpawnNewEntity                           ;; 03:5409 $CD $CA $64
@@ -2121,7 +2098,7 @@ SmashRock::
     ldh  [hNoiseSfx], a                           ;; 03:5433 $E0 $F4
     jp   UnloadEntityAndReturn                    ;; 03:5435 $C3 $8D $3F
 
-func_003_5438::
+EntityCheckThrowAtTriggers::
     ld   hl, wEntitiesCollisionsTable             ;; 03:5438 $21 $A0 $C2
     add  hl, bc                                   ;; 03:543B $09
     ld   a, [hl]                                  ;; 03:543C $7E
@@ -2134,11 +2111,11 @@ func_003_5438::
     jr   nz, jr_003_5467                          ;; 03:5446 $20 $1F
 
     ld   a, [wEntityHorizontallyCollidedObject]   ;; 03:5448 $FA $03 $C5
-    cp   $A0                                      ;; 03:544B $FE $A0
+    cp   OBJECT_CHEST_CLOSED                      ;; 03:544B $FE $A0
     jr   z, .jr_5455                              ;; 03:544D $28 $06
 
     ld   a, [wEntityVerticallyCollidedObject]     ;; 03:544F $FA $0D $C5
-    cp   $A0                                      ;; 03:5452 $FE $A0
+    cp   OBJECT_CHEST_CLOSED                      ;; 03:5452 $FE $A0
     ret  nz                                       ;; 03:5454 $C0
 
 .jr_5455
@@ -2146,13 +2123,13 @@ func_003_5438::
     ldh  [hIntersectedObjectLeft], a              ;; 03:5457 $E0 $CE
     ld   a, $20                                   ;; 03:5459 $3E $20
     ldh  [hIntersectedObjectTop], a               ;; 03:545B $E0 $CD
-    ld   a, $19                                   ;; 03:545D $3E $19
+    ld   a, CHEST_NIGHTMARE_KEY                   ;; 03:545D $3E $19
     ldh  [hMultiPurpose8], a                      ;; 03:545F $E0 $DF
-    call label_3E4D                               ;; 03:5461 $CD $4D $3E
+    call SpawnChestWithItemAndRestoreBank3        ;; 03:5461 $CD $4D $3E
     jp   MarkTriggerAsResolved                    ;; 03:5464 $C3 $60 $0C
 
 jr_003_5467:
-    cp   $0B                                      ;; 03:5467 $FE $0B
+    cp   TRIGGER_THROW_AT_DOOR                    ;; 03:5467 $FE $0B
     ret  nz                                       ;; 03:5469 $C0
 
     ld   a, [wEntityVerticallyCollidedObject]     ;; 03:546A $FA $0D $C5
@@ -2178,10 +2155,10 @@ Data_003_5480::
 
 ; Explosion GFX display list
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-Unknown022SpriteVariants::
+BombRightBeforeExplodingSprite::
 .variant0
-    db $30, $01
-    db $30, $61
+    db $30, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $30, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP | OAMF_YFLIP
 
 Data_003_5488::
     db   $00, $00, $3C, $01, $00, $08, $3C, $21, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
@@ -2637,7 +2614,7 @@ EntityLiftedHandler::
     ld   hl, wEntitiesFlashCountdownTable         ;; 03:573B $21 $20 $C4
     add  hl, bc                                   ;; 03:573E $09
     ld   [hl], b                                  ;; 03:573F $70
-    call func_003_6711                            ;; 03:5740 $CD $11 $67
+    call RenderBomb                               ;; 03:5740 $CD $11 $67
     jr   jr_003_5748                              ;; 03:5743 $18 $03
 
 .jr_5745
@@ -2761,8 +2738,13 @@ label_003_57E6:
 include "code/entities/03_octorok.asm"
 include "code/entities/03_moblin.asm"
 
-EntityInitBrokenHeartContainer::
+EntityInitEntity13::
     ret                                           ;; 03:59D7 $C9
+
+; Doesn't exist, so it falls through the heart container sprite variants,
+; down to the heart container's entity handler.
+; Touching this entity causes a jump table to be indexed out of bounds, crashing the game.
+Entity13Handler::
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 HeartContainerSpriteVariants::
@@ -4875,200 +4857,9 @@ OctorokRockEntityHandler::
 
 .jr_6A2E
     ld   de, OctorokRockSpriteVariants            ;; 03:6A2E $11 $1E $6A
-    jp   RenderActiveEntitySpritesPairSubcall     ;; 03:6A31 $C3 $D7 $6A
+    jp   ArrowRenderAndMove.skipLoadingSprites    ;; 03:6A31 $C3 $D7 $6A
 
 include "code/entities/03_arrow.asm"
-
-Data_003_6A66::
-    db   $80, $15
-
-Data_003_6A68::
-    db   $04, $FC, $00, $00
-
-Data_003_6A6C::
-    db   $FE, $FE, $FA, $04
-
-func_003_6A70::
-    call GetEntityTransitionCountdown             ;; 03:6A70 $CD $05 $0C
-    jr   z, jr_003_6A96                           ;; 03:6A73 $28 $21
-
-    ld   a, ENTITY_BOMB                           ;; 03:6A75 $3E $02
-    call SpawnNewEntity                           ;; 03:6A77 $CD $CA $64
-    jr   c, .jr_6A93                              ;; 03:6A7A $38 $17
-
-    ldh  a, [hMultiPurpose0]                      ;; 03:6A7C $F0 $D7
-    ld   hl, wEntitiesPosXTable                   ;; 03:6A7E $21 $00 $C2
-    add  hl, de                                   ;; 03:6A81 $19
-    ld   [hl], a                                  ;; 03:6A82 $77
-    ldh  a, [hMultiPurpose1]                      ;; 03:6A83 $F0 $D8
-    ld   hl, wEntitiesPosYTable                   ;; 03:6A85 $21 $10 $C2
-    add  hl, de                                   ;; 03:6A88 $19
-    ld   [hl], a                                  ;; 03:6A89 $77
-    ld   hl, wEntitiesTransitionCountdownTable    ;; 03:6A8A $21 $E0 $C2
-    add  hl, de                                   ;; 03:6A8D $19
-    ld   [hl], $17                                ;; 03:6A8E $36 $17
-    call PlayBombExplosionSfx                     ;; 03:6A90 $CD $4B $0C
-
-.jr_6A93
-    jp   UnloadEntityAndReturn                    ;; 03:6A93 $C3 $8D $3F
-
-jr_003_6A96:
-    ldh  a, [hActiveEntitySpriteVariant]          ;; 03:6A96 $F0 $F1
-    push af                                       ;; 03:6A98 $F5
-    ld   e, a                                     ;; 03:6A99 $5F
-    ld   d, b                                     ;; 03:6A9A $50
-    xor  a                                        ;; 03:6A9B $AF
-    ldh  [hActiveEntitySpriteVariant], a          ;; 03:6A9C $E0 $F1
-    ld   hl, Data_003_6A68                        ;; 03:6A9E $21 $68 $6A
-    add  hl, de                                   ;; 03:6AA1 $19
-    ldh  a, [hActiveEntityPosX]                   ;; 03:6AA2 $F0 $EE
-    add  [hl]                                     ;; 03:6AA4 $86
-    ldh  [hActiveEntityPosX], a                   ;; 03:6AA5 $E0 $EE
-    ld   hl, Data_003_6A6C                        ;; 03:6AA7 $21 $6C $6A
-    add  hl, de                                   ;; 03:6AAA $19
-    ldh  a, [hActiveEntityVisualPosY]             ;; 03:6AAB $F0 $EC
-    add  [hl]                                     ;; 03:6AAD $86
-    ldh  [hActiveEntityVisualPosY], a             ;; 03:6AAE $E0 $EC
-    ld   de, Data_003_6A66                        ;; 03:6AB0 $11 $66 $6A
-    call RenderActiveEntitySprite                 ;; 03:6AB3 $CD $77 $3C
-    call CopyEntityPositionToActivePosition       ;; 03:6AB6 $CD $8A $3D
-    pop  af                                       ;; 03:6AB9 $F1
-    ldh  [hActiveEntitySpriteVariant], a          ;; 03:6ABA $E0 $F1
-    ld   de, EntityMoblinArrowSpriteVariants      ;; 03:6ABC $11 $C6 $6B
-    call RenderActiveEntitySpritesPair            ;; 03:6ABF $CD $C0 $3B
-    ld   a, $0C                                   ;; 03:6AC2 $3E $0C
-    ld   [wC19E], a                               ;; 03:6AC4 $EA $9E $C1
-    call func_003_75A2                            ;; 03:6AC7 $CD $A2 $75
-    jr   jr_003_6ADA                              ;; 03:6ACA $18 $0E
-
-MoblinArrowEntityHandler::
-    call GetEntityTransitionCountdown             ;; 03:6ACC $CD $05 $0C
-    jr   nz, LoadMobilArrowSpriteVariants         ;; 03:6ACF $20 $03
-
-    call CheckLinkCollisionWithProjectile         ;; 03:6AD1 $CD $DE $6B
-
-LoadMobilArrowSpriteVariants::
-    ld   de, EntityMoblinArrowSpriteVariants      ;; 03:6AD4 $11 $C6 $6B
-
-RenderActiveEntitySpritesPairSubcall::
-    call RenderActiveEntitySpritesPair            ;; 03:6AD7 $CD $C0 $3B
-
-jr_003_6ADA:
-    call ReturnIfNonInteractive_03                ;; 03:6ADA $CD $78 $7F
-    call GetEntityTransitionCountdown             ;; 03:6ADD $CD $05 $0C
-    jr   nz, func_003_6B48                        ;; 03:6AE0 $20 $6A
-
-    call UpdateEntityPosWithSpeed_03              ;; 03:6AE2 $CD $25 $7F
-    call ApplySwordIntersectionWithObjects        ;; 03:6AE5 $CD $AB $7C
-    ld   hl, wEntitiesCollisionsTable             ;; 03:6AE8 $21 $A0 $C2
-    add  hl, bc                                   ;; 03:6AEB $09
-    ld   a, [hl]                                  ;; 03:6AEC $7E
-    and  a                                        ;; 03:6AED $A7
-    jr   z, ret_003_6B42                          ;; 03:6AEE $28 $52
-
-    call GetEntityTransitionCountdown             ;; 03:6AF0 $CD $05 $0C
-
-    ldh  a, [hActiveEntityType]                   ;; 03:6AF3 $F0 $EB
-    cp   ENTITY_MAGIC_ROD_FIREBALL                ;; 03:6AF5 $FE $04
-    jr   nz, .fireballEnd                         ;; 03:6AF7 $20 $06
-
-    call GetEntityPrivateCountdown1               ;; 03:6AF9 $CD $00 $0C
-    ld   [hl], $30                                ;; 03:6AFC $36 $30
-    ret                                           ;; 03:6AFE $C9
-.fireballEnd
-
-    ld   [hl], $18                                ;; 03:6AFF $36 $18
-    ld   hl, wEntitiesSpeedZTable                 ;; 03:6B01 $21 $20 $C3
-    add  hl, bc                                   ;; 03:6B04 $09
-    ld   [hl], $10                                ;; 03:6B05 $36 $10
-    ld   hl, wEntitiesCollisionsTable             ;; 03:6B07 $21 $A0 $C2
-    add  hl, bc                                   ;; 03:6B0A $09
-    ld   a, [hl]                                  ;; 03:6B0B $7E
-    inc  a                                        ;; 03:6B0C $3C
-    jr   z, .jr_6B13                              ;; 03:6B0D $28 $04
-
-    ld   a, JINGLE_SWORD_POKING                   ;; 03:6B0F $3E $07
-    ldh  [hJingle], a                             ;; 03:6B11 $E0 $F2
-
-.jr_6B13
-    call func_C50                                 ;; 03:6B13 $CD $50 $0C
-
-    ldh  a, [hActiveEntityType]                   ;; 03:6B16 $F0 $EB
-    cp   ENTITY_ARROW                             ;; 03:6B18 $FE $00
-    jr   nz, jr_003_6B31                          ;; 03:6B1A $20 $15
-
-    call func_003_6B2C                            ;; 03:6B1C $CD $2C $6B
-    ld   hl, wEntitiesSpeedXTable                 ;; 03:6B1F $21 $40 $C2
-
-jr_003_6B22:
-    add  hl, bc                                   ;; 03:6B22 $09
-    ld   a, [hl]                                  ;; 03:6B23 $7E
-    cpl                                           ;; 03:6B24 $2F
-    inc  a                                        ;; 03:6B25 $3C
-    sra  a                                        ;; 03:6B26 $CB $2F
-    sra  a                                        ;; 03:6B28 $CB $2F
-    ld   [hl], a                                  ;; 03:6B2A $77
-    ret                                           ;; 03:6B2B $C9
-
-func_003_6B2C::
-    ld   hl, wEntitiesSpeedYTable                 ;; 03:6B2C $21 $50 $C2
-    jr   jr_003_6B22                              ;; 03:6B2F $18 $F1
-
-jr_003_6B31:
-    call func_003_6B43                            ;; 03:6B31 $CD $43 $6B
-
-func_003_6B34::
-    ld   hl, wEntitiesSpeedXTable                 ;; 03:6B34 $21 $40 $C2
-
-jr_003_6B37:
-    add  hl, bc                                   ;; 03:6B37 $09
-    ld   a, [hl]                                  ;; 03:6B38 $7E
-    cpl                                           ;; 03:6B39 $2F
-    inc  a                                        ;; 03:6B3A $3C
-    sra  a                                        ;; 03:6B3B $CB $2F
-    sra  a                                        ;; 03:6B3D $CB $2F
-    sra  a                                        ;; 03:6B3F $CB $2F
-    ld   [hl], a                                  ;; 03:6B41 $77
-
-ret_003_6B42:
-    ret                                           ;; 03:6B42 $C9
-
-func_003_6B43::
-    ld   hl, wEntitiesSpeedYTable                 ;; 03:6B43 $21 $50 $C2
-    jr   jr_003_6B37                              ;; 03:6B46 $18 $EF
-
-Data_003_6B48::
-    db   $00, $03, $01, $02
-
-func_003_6B48:
-    cp   $01                                      ;; 03:6B4C $FE $01
-IF __OPTIMIZATIONS_3__
-    jp   z, UnloadEntityAndReturn
-ELSE
-    jr   nz, .jr_6B53                             ;; 03:6B4E $20 $03
-    jp   UnloadEntityAndReturn                    ;; 03:6B50 $C3 $8D $3F
-ENDC
-
-.jr_6B53
-    ldh  a, [hActiveEntityType]                   ;; 03:6B53 $F0 $EB
-    cp   ENTITY_OCTOROK_ROCK                      ;; 03:6B55 $FE $0A
-    jr   z, .octorokRockEnd                       ;; 03:6B57 $28 $15
-
-    call GetEntityTransitionCountdown             ;; 03:6B59 $CD $05 $0C
-    srl  a                                        ;; 03:6B5C $CB $3F
-    srl  a                                        ;; 03:6B5E $CB $3F
-    srl  a                                        ;; 03:6B60 $CB $3F
-    and  $03                                      ;; 03:6B62 $E6 $03
-    ld   e, a                                     ;; 03:6B64 $5F
-    ld   d, b                                     ;; 03:6B65 $50
-    ld   hl, Data_003_6B48                        ;; 03:6B66 $21 $48 $6B
-    add  hl, de                                   ;; 03:6B69 $19
-    ld   a, [hl]                                  ;; 03:6B6A $7E
-    call SetEntitySpriteVariant                   ;; 03:6B6B $CD $0C $3B
-.octorokRockEnd
-
-    call UpdateEntityPosWithSpeed_03              ;; 03:6B6E $CD $25 $7F
-    jr   func_003_6B7B                            ;; 03:6B71 $18 $08
 
 Data_003_6B73::
     db   $02, $01, $02, $02
@@ -5142,19 +4933,19 @@ func_003_6B7B::
     ret                                           ;; 03:6BC5 $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-EntityMoblinArrowSpriteVariants::
+EntityArrowSpriteVariants::
 .variant0
-    db $2E, $21
-    db $2C, $21
+    db $2E, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $2C, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $2C, $01
-    db $2E, $01
+    db $2C, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $2E, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant2
-    db $2A, $41
-    db $2A, $61
+    db $2A, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_YFLIP
+    db $2A, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
 .variant3
-    db $2A, $01
-    db $2A, $21
+    db $2A, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $2A, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
 ; For a given direction, get the opposite direction
 ReversedDirectionsTable::
@@ -5507,7 +5298,7 @@ ApplyLinkCollisionWithEnemy::
 
 .jr_6D73
     ld   a, [wInvincibilityCounter]               ;; 03:6D73 $FA $C7 $DB
-    ld   hl, wC1C6                                ;; 03:6D76 $21 $C6 $C1
+    ld   hl, wIsLinkImmuneToCollisionDamage                                ;; 03:6D76 $21 $C6 $C1
     or   [hl]                                     ;; 03:6D79 $B6
     ld   hl, wLinkPlayingOcarinaCountdown         ;; 03:6D7A $21 $66 $C1
     or   [hl]                                     ;; 03:6D7D $B6
@@ -6344,7 +6135,7 @@ ApplySwordDamagesToEnemy::
 .useStandardSwordLevel
 
     dec  a                                        ;; 03:71BC $3D
-    ld   [wC19E], a                               ;; 03:71BD $EA $9E $C1
+    ld   [wAttackDamageType], a                   ;; 03:71BD $EA $9E $C1
 
 label_003_71C0:
     ld   hl, wEntitiesHealthGroup                 ;; 03:71C0 $21 $D0 $C4
@@ -6361,13 +6152,13 @@ label_003_71C0:
     rl   d                                        ;; 03:71D4 $CB $12
     ld   hl, Data_003_43EC                        ;; 03:71D6 $21 $EC $43
     add  hl, de                                   ;; 03:71D9 $19
-    ld   a, [wC19E]                               ;; 03:71DA $FA $9E $C1
+    ld   a, [wAttackDamageType]                   ;; 03:71DA $FA $9E $C1
     ld   e, a                                     ;; 03:71DD $5F
     ld   d, b                                     ;; 03:71DE $50
     add  hl, de                                   ;; 03:71DF $19
     ld   e, [hl]                                  ;; 03:71E0 $5E
     push de                                       ;; 03:71E1 $D5
-    ld   a, [wC19E]                               ;; 03:71E2 $FA $9E $C1
+    ld   a, [wAttackDamageType]                   ;; 03:71E2 $FA $9E $C1
     rla                                           ;; 03:71E5 $17
     rla                                           ;; 03:71E6 $17
     rla                                           ;; 03:71E7 $17
@@ -6442,7 +6233,7 @@ label_003_71C0:
     call StartIgnoringHitsForEntity               ;; 03:7243 $CD $DB $73
     ld   hl, wEntitiesStatusTable                 ;; 03:7246 $21 $80 $C2
     add  hl, bc                                   ;; 03:7249 $09
-    ld   [hl], ENTITY_STATUS_DESTROYING           ;; 03:724A $36 $03
+    ld   [hl], ENTITY_STATUS_BURNING              ;; 03:724A $36 $03
     call GetEntityTransitionCountdown             ;; 03:724C $CD $05 $0C
     ld   [hl], $60                                ;; 03:724F $36 $60
     ld   hl, wEntitiesPhysicsFlagsTable           ;; 03:7251 $21 $40 $C3
@@ -6461,11 +6252,12 @@ label_003_71C0:
     jr   nz, jr_003_7279                          ;; 03:7262 $20 $15
 
     call StartIgnoringHitsForEntity               ;; 03:7264 $CD $DB $73
+    ; fallthrough
 
-func_003_7267::
+EntityBecomeStunned::
     ld   hl, wEntitiesStatusTable                 ;; 03:7267 $21 $80 $C2
     add  hl, bc                                   ;; 03:726A $09
-    ld   [hl], $06                                ;; 03:726B $36 $06
+    ld   [hl], ENTITY_STATUS_STUNNED              ;; 03:726B $36 $06
     ld   hl, wEntitiesPrivateCountdown2Table      ;; 03:726D $21 $00 $C3
     add  hl, bc                                   ;; 03:7270 $09
     ld   [hl], $FF                                ;; 03:7271 $36 $FF
@@ -6844,7 +6636,7 @@ func_003_73EB::
     ; reset sword charge
     xor  a                                        ;; 03:7476 $AF
     ld   [wSwordCharge], a                        ;; 03:7477 $EA $22 $C1
-    call func_C50                                 ;; 03:747A $CD $50 $0C
+    call AlertSwordMoblins                        ;; 03:747A $CD $50 $0C
     ld   hl, wIsUsingSpinAttack                   ;; 03:747D $21 $21 $C1
     ld   a, [wC16A]                               ;; 03:7480 $FA $6A $C1
     or   [hl]                                     ;; 03:7483 $B6
@@ -7362,7 +7154,7 @@ jr_003_7737:
     jr   nz, .jr_7751                             ;; 03:7747 $20 $08
 
     push de                                       ;; 03:7749 $D5
-    call func_003_53E4                            ;; 03:774A $CD $E4 $53
+    call LiftableRockStartSmashingAnimation       ;; 03:774A $CD $E4 $53
     pop  de                                       ;; 03:774D $D1
     jp   checkNextEntity                          ;; 03:774E $C3 $9F $77
 
@@ -7472,28 +7264,28 @@ func_003_77A7::
 func_003_77D6::
     jp   label_003_71C0                           ;; 03:77D6 $C3 $C0 $71
 
-func_003_77D9::
+CheckExplosionInteractionWithEntities::
     ld   e, $0F                                   ;; 03:77D9 $1E $0F
     ld   d, $00                                   ;; 03:77DB $16 $00
 
-jr_003_77DD:
+.loop
     ld   hl, wEntitiesStatusTable                 ;; 03:77DD $21 $80 $C2
     add  hl, de                                   ;; 03:77E0 $19
     ld   a, [hl]                                  ;; 03:77E1 $7E
-    cp   $05                                      ;; 03:77E2 $FE $05
-    jr   c, .jr_7834                              ;; 03:77E4 $38 $4E
+    cp   ENTITY_STATUS_ACTIVE                     ;; 03:77E2 $FE $05
+    jr   c, .noDamage                             ;; 03:77E4 $38 $4E
 
     ld   hl, wEntitiesPhysicsFlagsTable           ;; 03:77E6 $21 $40 $C3
     add  hl, de                                   ;; 03:77E9 $19
     ld   a, [hl]                                  ;; 03:77EA $7E
     and  ENTITY_PHYSICS_PROJECTILE_NOCLIP | ENTITY_PHYSICS_GRABBABLE ;; 03:77EB $E6 $60
-    jr   nz, .jr_7834                             ;; 03:77ED $20 $45
+    jr   nz, .noDamage                            ;; 03:77ED $20 $45
 
     ld   hl, wEntitiesHitboxFlagsTable            ;; 03:77EF $21 $50 $C3
     add  hl, de                                   ;; 03:77F2 $19
     ld   a, [hl]                                  ;; 03:77F3 $7E
-    and  $80                                      ;; 03:77F4 $E6 $80
-    jr   nz, .jr_7834                             ;; 03:77F6 $20 $3C
+    and  HITFLAGS_IGNORE_HITS                     ;; 03:77F4 $E6 $80
+    jr   nz, .noDamage                            ;; 03:77F6 $20 $3C
 
     ld   hl, wEntitiesPosXTable                   ;; 03:77F8 $21 $00 $C2
     add  hl, de                                   ;; 03:77FB $19
@@ -7501,7 +7293,7 @@ jr_003_77DD:
     sub  [hl]                                     ;; 03:77FE $96
     add  $18                                      ;; 03:77FF $C6 $18
     cp   $30                                      ;; 03:7801 $FE $30
-    jr   nc, .jr_7834                             ;; 03:7803 $30 $2F
+    jr   nc, .noDamage                            ;; 03:7803 $30 $2F
 
     ld   hl, wEntitiesPosYTable                   ;; 03:7805 $21 $10 $C2
     add  hl, de                                   ;; 03:7808 $19
@@ -7513,13 +7305,13 @@ jr_003_77DD:
     sub  [hl]                                     ;; 03:7812 $96
     add  $18                                      ;; 03:7813 $C6 $18
     cp   $30                                      ;; 03:7815 $FE $30
-    jr   nc, .jr_7834                             ;; 03:7817 $30 $1B
+    jr   nc, .noDamage                            ;; 03:7817 $30 $1B
 
-    ld   a, $07                                   ;; 03:7819 $3E $07
-    ld   [wC19E], a                               ;; 03:781B $EA $9E $C1
+    ld   a, DAMAGE_TYPE_BOMB                      ;; 03:7819 $3E $07
+    ld   [wAttackDamageType], a                   ;; 03:781B $EA $9E $C1
     call func_003_77A7                            ;; 03:781E $CD $A7 $77
     ld   a, $30                                   ;; 03:7821 $3E $30
-    call func_003_783B                            ;; 03:7823 $CD $3B $78
+    call GetVectorTowardsOtherEntity              ;; 03:7823 $CD $3B $78
     ld   hl, wEntitiesRecoilVelocityY             ;; 03:7826 $21 $00 $C4
     add  hl, de                                   ;; 03:7829 $19
     ldh  a, [hMultiPurpose0]                      ;; 03:782A $F0 $D7
@@ -7529,15 +7321,15 @@ jr_003_77DD:
     ldh  a, [hMultiPurpose1]                      ;; 03:7831 $F0 $D8
     ld   [hl], a                                  ;; 03:7833 $77
 
-.jr_7834
+.noDamage
     dec  e                                        ;; 03:7834 $1D
     ld   a, e                                     ;; 03:7835 $7B
     cp   $FF                                      ;; 03:7836 $FE $FF
-    jr   nz, jr_003_77DD                          ;; 03:7838 $20 $A3
+    jr   nz, .loop                                ;; 03:7838 $20 $A3
 
     ret                                           ;; 03:783A $C9
 
-func_003_783B::
+GetVectorTowardsOtherEntity::
     ldh  [hMultiPurpose0], a                      ;; 03:783B $E0 $D7
     ldh  a, [hLinkPositionX]                      ;; 03:783D $F0 $98
     push af                                       ;; 03:783F $F5
@@ -8362,9 +8154,12 @@ ApplyEntityCollisionWithObject::
     jr   c, .hookshotClearEnd                     ;; 03:7C86 $38 $03
     call UnloadEntity                             ;; 03:7C88 $CD $8D $3F
 
+; Fixes a glitch where Link can become immune to damage from touching entities
+; until he uses the hookshot again or leaves the current screen,
+; just by using the hookshot right in front of a hookshottable object.
 IF __PATCH_0__
     xor  a
-    ld   [wC1C6], a
+    ld   [wIsLinkImmuneToCollisionDamage], a
     jr   .hookshotEnd
 ENDC
 .hookshotClearEnd

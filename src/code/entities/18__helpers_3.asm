@@ -10,19 +10,19 @@ PushLinkOutOfEntity_18::
 .forcePush
     call CopyLinkFinalPositionToPosition          ;; 18:7D3B $CD $BE $0C
     call ResetPegasusBoots                        ;; 18:7D3E $CD $B6 $0C
-    ld   a, [wC1A6]                               ;; 18:7D41 $FA $A6 $C1
+    ld   a, [wHookshotEntityIndexPlusOne]         ;; 18:7D41 $FA $A6 $C1
     and  a                                        ;; 18:7D44 $A7
     jr   z, .jr_7D58                              ;; 18:7D45 $28 $11
 
     ld   e, a                                     ;; 18:7D47 $5F
     ld   d, b                                     ;; 18:7D48 $50
-    ld   hl, wEntitiesPrivateState5Table+15       ;; 18:7D49 $21 $9F $C3
+    ld   hl, wEntitiesTypeTable - 1               ;; 18:7D49 $21 $9F $C3
     add  hl, de                                   ;; 18:7D4C $19
     ld   a, [hl]                                  ;; 18:7D4D $7E
-    cp   $03                                      ;; 18:7D4E $FE $03
+    cp   ENTITY_HOOKSHOT_CHAIN                    ;; 18:7D4E $FE $03
     jr   nz, .jr_7D58                             ;; 18:7D50 $20 $06
 
-    ld   hl, wEntitiesStatusTable + $0F           ;; 18:7D52 $21 $8F $C2
+    ld   hl, wEntitiesStateTable - 1              ;; 18:7D52 $21 $8F $C2
     add  hl, de                                   ;; 18:7D55 $19
     ld   [hl], $00                                ;; 18:7D56 $36 $00
 
@@ -112,7 +112,7 @@ func_018_7DA0::
     jr   z, .jr_7DC1                              ;; 18:7DB3 $28 $0C
 
     push de                                       ;; 18:7DB5 $D5
-    call func_018_7EE1                            ;; 18:7DB6 $CD $E1 $7E
+    call GetEntityDirectionToLink_18              ;; 18:7DB6 $CD $E1 $7E
     ldh  a, [hLinkDirection]                      ;; 18:7DB9 $F0 $9E
     xor  $01                                      ;; 18:7DBB $EE $01
     cp   e                                        ;; 18:7DBD $BB
@@ -329,85 +329,108 @@ AddEntityZSpeedToPos_18::
     ld   hl, wEntitiesPosZTable                   ;; 18:7EAD $21 $10 $C3
     jr   AddEntitySpeedToPos_18.updatePosition    ;; 18:7EB0 $18 $D2
 
-func_018_7EB2::
-    ld   e, $00                                   ;; 18:7EB2 $1E $00
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   d   x distance (Link's position - entity's position)
+;   e   DIRECTION_LEFT if Link is to the left of the entity, DIRECTION_RIGHT otherwise
+GetEntityXDistanceToLink_18::
+    ld   e, DIRECTION_RIGHT                       ;; 18:7EB2 $1E $00
     ldh  a, [hLinkPositionX]                      ;; 18:7EB4 $F0 $98
     ld   hl, wEntitiesPosXTable                   ;; 18:7EB6 $21 $00 $C2
     add  hl, bc                                   ;; 18:7EB9 $09
     sub  [hl]                                     ;; 18:7EBA $96
     bit  7, a                                     ;; 18:7EBB $CB $7F
-    jr   z, .jr_7EC0                              ;; 18:7EBD $28 $01
+    jr   z, .positive                             ;; 18:7EBD $28 $01
 
     inc  e                                        ;; 18:7EBF $1C
 
-.jr_7EC0
+.positive
     ld   d, a                                     ;; 18:7EC0 $57
     ret                                           ;; 18:7EC1 $C9
 
-func_018_7EC2::
-    ld   e, $02                                   ;; 18:7EC2 $1E $02
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   d   y distance (Link's position - entity's position)
+;   e   DIRECTION_UP if Link is above the entity, DIRECTION_DOWN otherwise
+GetEntityRealYDistanceToLink_18::
+    ld   e, DIRECTION_UP                          ;; 18:7EC2 $1E $02
     ldh  a, [hLinkPositionY]                      ;; 18:7EC4 $F0 $99
     ld   hl, wEntitiesPosYTable                   ;; 18:7EC6 $21 $10 $C2
     add  hl, bc                                   ;; 18:7EC9 $09
     sub  [hl]                                     ;; 18:7ECA $96
     bit  7, a                                     ;; 18:7ECB $CB $7F
-    jr   nz, .jr_7ED0                             ;; 18:7ECD $20 $01
+    jr   nz, .negative                            ;; 18:7ECD $20 $01
 
     inc  e                                        ;; 18:7ECF $1C
 
-.jr_7ED0
+.negative
     ld   d, a                                     ;; 18:7ED0 $57
     ret                                           ;; 18:7ED1 $C9
 
-func_018_7ED2::
-    ld   e, $02                                   ;; 18:7ED2 $1E $02
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   d   y distance (Link's position - entity's position)
+;   e   DIRECTION_UP if Link is above the entity, DIRECTION_DOWN otherwise
+GetEntityVisualYDistanceToLink_18::
+    ld   e, DIRECTION_UP                          ;; 18:7ED2 $1E $02
     ldh  a, [hLinkPositionY]                      ;; 18:7ED4 $F0 $99
     ld   hl, hActiveEntityVisualPosY              ;; 18:7ED6 $21 $EC $FF
     sub  [hl]                                     ;; 18:7ED9 $96
     bit  7, a                                     ;; 18:7EDA $CB $7F
-    jr   nz, .jr_7EDF                             ;; 18:7EDC $20 $01
+    jr   nz, .negative                            ;; 18:7EDC $20 $01
 
     inc  e                                        ;; 18:7EDE $1C
 
-.jr_7EDF
+.negative
     ld   d, a                                     ;; 18:7EDF $57
     ret                                           ;; 18:7EE0 $C9
 
-func_018_7EE1::
-    call func_018_7EB2                            ;; 18:7EE1 $CD $B2 $7E
+; Inputs:
+;   bc   entity index
+;
+; Outputs:
+;   e   entity's direction to Link (see DIRECTION_* constants for possible values)
+GetEntityDirectionToLink_18::
+    call GetEntityXDistanceToLink_18              ;; 18:7EE1 $CD $B2 $7E
     ld   a, e                                     ;; 18:7EE4 $7B
     ldh  [hMultiPurpose0], a                      ;; 18:7EE5 $E0 $D7
     ld   a, d                                     ;; 18:7EE7 $7A
     bit  7, a                                     ;; 18:7EE8 $CB $7F
-    jr   z, .jr_7EEE                              ;; 18:7EEA $28 $02
+    jr   z, .positiveX                            ;; 18:7EEA $28 $02
 
     cpl                                           ;; 18:7EEC $2F
     inc  a                                        ;; 18:7EED $3C
 
-.jr_7EEE
+.positiveX
     push af                                       ;; 18:7EEE $F5
-    call func_018_7EC2                            ;; 18:7EEF $CD $C2 $7E
+    call GetEntityRealYDistanceToLink_18          ;; 18:7EEF $CD $C2 $7E
     ld   a, e                                     ;; 18:7EF2 $7B
     ldh  [hMultiPurpose1], a                      ;; 18:7EF3 $E0 $D8
     ld   a, d                                     ;; 18:7EF5 $7A
     bit  7, a                                     ;; 18:7EF6 $CB $7F
-    jr   z, .jr_7EFC                              ;; 18:7EF8 $28 $02
+    jr   z, .positiveY                            ;; 18:7EF8 $28 $02
 
     cpl                                           ;; 18:7EFA $2F
     inc  a                                        ;; 18:7EFB $3C
 
-.jr_7EFC
+.positiveY
     pop  de                                       ;; 18:7EFC $D1
     cp   d                                        ;; 18:7EFD $BA
-    jr   nc, .jr_7F04                             ;; 18:7EFE $30 $04
+    jr   nc, .vertical                            ;; 18:7EFE $30 $04
 
     ldh  a, [hMultiPurpose0]                      ;; 18:7F00 $F0 $D7
-    jr   jr_018_7F06                              ;; 18:7F02 $18 $02
+    jr   .verticalEnd                             ;; 18:7F02 $18 $02
 
-.jr_7F04
+.vertical
     ldh  a, [hMultiPurpose1]                      ;; 18:7F04 $F0 $D8
 
-jr_018_7F06:
+.verticalEnd
     ld   e, a                                     ;; 18:7F06 $5F
     ret                                           ;; 18:7F07 $C9
 

@@ -39,7 +39,7 @@ UseOcarina::
     ld   hl, wIsLinkInTheAir                      ;; 02:41FC $21 $46 $C1
     ld   a, [wLinkPlayingOcarinaCountdown]        ;; 02:41FF $FA $66 $C1
     or   [hl]                                     ;; 02:4202 $B6
-    ld   hl, wC1A4                                ;; 02:4203 $21 $A4 $C1
+    ld   hl, wIsUsingHookshot                     ;; 02:4203 $21 $A4 $C1
     or   [hl]                                     ;; 02:4206 $B6
     ret  nz                                       ;; 02:4207 $C0
 
@@ -3078,7 +3078,7 @@ TryOpenLockedDoor::
     ld   e, a                                     ;; 02:53E1 $5F
     ld   d, $00                                   ;; 02:53E2 $16 $00
 
-    call func_014_5526_trampoline                 ;; 02:53E4 $CD $78 $21
+    call RevealObjectUnderObject_trampoline       ;; 02:53E4 $CD $78 $21
     ldh  a, [hIntersectedObjectLeft]              ;; 02:53E7 $F0 $CE
     add  $08                                      ;; 02:53E9 $C6 $08
     ldh  [hMultiPurpose0], a                      ;; 02:53EB $E0 $D7
@@ -4312,7 +4312,7 @@ label_002_5AA7:
     ld   a, [wIndoorRoom]                         ;; 02:5B87 $FA $AE $DB
     add  [hl]                                     ;; 02:5B8A $86
     ld   e, a                                     ;; 02:5B8B $5F
-    call label_2BC1                               ;; 02:5B8C $CD $C1 $2B
+    call GetRoomStatusAddressForMapPosition_trampoline ;; 02:5B8C $CD $C1 $2B
     ld   c, l                                     ;; 02:5B8F $4D
     ld   b, h                                     ;; 02:5B90 $44
     ld   a, [wC189]                               ;; 02:5B91 $FA $89 $C1
@@ -7275,7 +7275,7 @@ jr_002_728E:
     ldh  a, [hDungeonFloorTile]                   ;; 02:7362 $F0 $E9
     ld   e, a                                     ;; 02:7364 $5F
     ld   d, $00                                   ;; 02:7365 $16 $00
-    call func_014_5526_trampoline                 ;; 02:7367 $CD $78 $21
+    call RevealObjectUnderObject_trampoline       ;; 02:7367 $CD $78 $21
 
     ld   a, ENTITY_LIFTABLE_ROCK                  ;; 02:736A $3E $05
     call SpawnNewEntity_trampoline                ;; 02:736C $CD $86 $3B
@@ -7641,7 +7641,7 @@ func_002_753A::
     ld   [wC13B], a                               ;; 02:7546 $EA $3B $C1
 
 .jr_7549
-    ld   a, [wC1A4]                               ;; 02:7549 $FA $A4 $C1
+    ld   a, [wIsUsingHookshot]                    ;; 02:7549 $FA $A4 $C1
     and  a                                        ;; 02:754C $A7
     jr   z, jr_002_7587                           ;; 02:754D $28 $38
 

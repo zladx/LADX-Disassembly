@@ -812,8 +812,8 @@ PlayBombExplosionSfx::
     ld   hl, hNoiseSfx                            ;; 00:0C4B $21 $F4 $FF
     ld   [hl], NOISE_SFX_EXPLOSION                ;; 00:0C4E $36 $0C
 
-func_C50::
-    ld   hl, wC502                                ;; 00:0C50 $21 $02 $C5
+AlertSwordMoblins::
+    ld   hl, wSwordMoblinAlertingSoundCounter     ;; 00:0C50 $21 $02 $C5
     ld   [hl], $04                                ;; 00:0C53 $36 $04
     ret                                           ;; 00:0C55 $C9
 
@@ -1857,7 +1857,7 @@ ENDC
     ret                                           ;; 00:1318 $C9
 
 UseHookshot::
-    ld   a, [wC1A4]                               ;; 00:1319 $FA $A4 $C1
+    ld   a, [wIsUsingHookshot]                    ;; 00:1319 $FA $A4 $C1
     and  a                                        ;; 00:131C $A7
     ret  nz                                       ;; 00:131D $C0
     jp   FireHookshot                             ;; 00:131E $C3 $54 $42
@@ -1938,17 +1938,17 @@ UseBoomerang::
     ld   [rSelectROMBank], a                      ;; 00:1399 $EA $00 $21
     ret                                           ;; 00:139C $C9
 
-data_139D::
+PlayerProjectileOffsetXPerDirection::
     db   0, 0, 0, 0                               ;; 00:139D
 
-data_13A1::
+PlayerProjectileOffsetYPerDirection::
     db   0, 0, 0, 0                               ;; 00:13A1
 
-data_13A5::
-    db   $20, $E0, 0, 0                           ;; 00:13A5
+PlayerProjectileSpeedXPerDirection::
+    db   32, -32, 0, 0                           ;; 00:13A5
 
-data_13A9::
-    db   0, 0, $E0, $20                           ;; 00:13A9
+PlayerProjectileSpeedYPerDirection::
+    db   0, 0, -32, 32                           ;; 00:13A9
 
 data_13AD::
 .rightWithPieceOfPower      db  $30
@@ -2054,14 +2054,14 @@ SpawnPlayerProjectile::
     ldh  a, [hLinkDirection]                      ;; 00:1439 $F0 $9E
     ld   c, a                                     ;; 00:143B $4F
     ld   b, $00                                   ;; 00:143C $06 $00
-    ld   hl, data_139D                            ;; 00:143E $21 $9D $13
+    ld   hl, PlayerProjectileOffsetXPerDirection  ;; 00:143E $21 $9D $13
     add  hl, bc                                   ;; 00:1441 $09
     ldh  a, [hLinkPositionX]                      ;; 00:1442 $F0 $98
     add  a, [hl]                                  ;; 00:1444 $86
     ld   hl, wEntitiesPosXTable                   ;; 00:1445 $21 $00 $C2
     add  hl, de                                   ;; 00:1448 $19
     ld   [hl], a                                  ;; 00:1449 $77
-    ld   hl, data_13A1                            ;; 00:144A $21 $A1 $13
+    ld   hl, PlayerProjectileOffsetYPerDirection  ;; 00:144A $21 $A1 $13
     add  hl, bc                                   ;; 00:144D $09
     ldh  a, [hLinkPositionY]                      ;; 00:144E $F0 $99
     add  a, [hl]                                  ;; 00:1450 $86
@@ -2073,13 +2073,13 @@ SpawnPlayerProjectile::
     ld   hl, wEntitiesPosZTable                   ;; 00:1459 $21 $10 $C3
     add  hl, de                                   ;; 00:145C $19
     ld   [hl], a                                  ;; 00:145D $77
-    ld   hl, data_13A5                            ;; 00:145E $21 $A5 $13
+    ld   hl, PlayerProjectileSpeedXPerDirection   ;; 00:145E $21 $A5 $13
     add  hl, bc                                   ;; 00:1461 $09
     ld   a, [hl]                                  ;; 00:1462 $7E
     ld   hl, wEntitiesSpeedXTable                 ;; 00:1463 $21 $40 $C2
     add  hl, de                                   ;; 00:1466 $19
     ld   [hl], a                                  ;; 00:1467 $77
-    ld   hl, data_13A9                            ;; 00:1468 $21 $A9 $13
+    ld   hl, PlayerProjectileSpeedYPerDirection   ;; 00:1468 $21 $A9 $13
     add  hl, bc                                   ;; 00:146B $09
     ld   a, [hl]                                  ;; 00:146C $7E
     ld   hl, wEntitiesSpeedYTable                 ;; 00:146D $21 $50 $C2
@@ -2383,7 +2383,7 @@ label_1629::
 label_1637::
     ld   a, c                                     ;; 00:1637 $79
     ldh  [hActiveEntitySpriteVariant], a          ;; 00:1638 $E0 $F1
-    call func_014_5526_trampoline                 ;; 00:163A $CD $78 $21
+    call RevealObjectUnderObject_trampoline       ;; 00:163A $CD $78 $21
     ld   a, [wIsRunningWithPegasusBoots]          ;; 00:163D $FA $4A $C1
     and  a                                        ;; 00:1640 $A7
     jr   nz, label_1653                           ;; 00:1641 $20 $10
@@ -2420,7 +2420,7 @@ label_1653::
     ld   [hl], a                                  ;; 00:1676 $77
     ld   c, e                                     ;; 00:1677 $4B
     ld   b, d                                     ;; 00:1678 $42
-    call label_3942                               ;; 00:1679 $CD $42 $39
+    call LiftableRockStartSmashingAnimation_trampoline ;; 00:1679 $CD $42 $39
 
 .dropRandomItem
     ; In some random cases, don't drop anything.
@@ -2498,7 +2498,7 @@ CheckItemsSwordCollision::
     add  a, [hl]                                  ;; 00:16DC $86
     ldh  [hMultiPurpose1], a                      ;; 00:16DD $E0 $D8
     ld   a, $04                                   ;; 00:16DF $3E $04
-    ld   [wC502], a                               ;; 00:16E1 $EA $02 $C5
+    ld   [wSwordMoblinAlertingSoundCounter], a    ;; 00:16E1 $EA $02 $C5
     call label_D15                                ;; 00:16E4 $CD $15 $0D
     ld   a, $10                                   ;; 00:16E7 $3E $10
     ld   [wC1C4], a                               ;; 00:16E9 $EA $C4 $C1
@@ -3809,7 +3809,7 @@ func_2165::
     ld   e, a                                     ;; 00:2167 $5F
     ldh  a, [hMultiPurpose0]                      ;; 00:2168 $F0 $D7
     ldh  [hObjectUnderEntity], a                  ;; 00:216A $E0 $AF
-    call func_014_5526_trampoline                 ;; 00:216C $CD $78 $21
+    call RevealObjectUnderObject_trampoline       ;; 00:216C $CD $78 $21
     ldh  a, [hLinkDirection]                      ;; 00:216F $F0 $9E
     ld   [wC15D], a                               ;; 00:2171 $EA $5D $C1
     jp   label_2183                               ;; 00:2174 $C3 $83 $21
@@ -3819,8 +3819,8 @@ IF !__OPTIMIZATIONS_1__
     ret                                           ;; 00:2177 $C9
 ENDC
 
-func_014_5526_trampoline::
-    callsb func_014_5526                          ;; 00:2178 $3E $14 $EA $00 $21 $CD $26 $55
+RevealObjectUnderObject_trampoline::
+    callsb RevealObjectUnderObject                ;; 00:2178 $3E $14 $EA $00 $21 $CD $26 $55
     jp   ReloadSavedBank                          ;; 00:2180 $C3 $1D $08
 
 label_2183::
@@ -4766,9 +4766,9 @@ label_2B95::
     ld   bc, TILE_SIZE * $80                      ;; 00:2BBB $01 $00 $08
     jp   CopyData                                 ;; 00:2BBE $C3 $14 $29
 
-label_2BC1::
+GetRoomStatusAddressForMapPosition_trampoline::
     push bc                                       ;; 00:2BC1 $C5
-    callsb func_014_5838                          ;; 00:2BC2 $3E $14 $EA $00 $21 $CD $38 $58
+    callsb GetRoomStatusAddressForMapPosition     ;; 00:2BC2 $3E $14 $EA $00 $21 $CD $38 $58
     call ReloadSavedBank                          ;; 00:2BCA $CD $1D $08
     pop  bc                                       ;; 00:2BCD $C1
     ret                                           ;; 00:2BCE $C9

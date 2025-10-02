@@ -22,8 +22,8 @@ label_3935::
     ld   a, $03                                   ;; 00:393D $3E $03
     jp   SwitchBank                               ;; 00:393F $C3 $0C $08
 
-label_3942::
-    callsb func_003_53E4                          ;; 00:3942 $3E $03 $EA $00 $21 $CD $E4 $53
+LiftableRockStartSmashingAnimation_trampoline::
+    callsb LiftableRockStartSmashingAnimation     ;; 00:3942 $3E $03 $EA $00 $21 $CD $E4 $53
     jp   ReloadSavedBank                          ;; 00:394A $C3 $1D $08
 
 label_394D::
@@ -216,7 +216,7 @@ AnimateEntity::
 ._00 dw AnimateEntities.return                    ;; 00:3A6F
 ._01 dw EntityDeathHandler                        ;; 00:3A71
 ._02 dw EntityFallHandler                         ;; 00:3A73
-._03 dw EntityDestructionHandler                  ;; 00:3A75
+._03 dw EntityBurningHandler                      ;; 00:3A75
 ._04 dw EntityInitHandler                         ;; 00:3A77
 ._05 dw ExecuteActiveEntityHandler                ;; 00:3A79
 ._06 dw EntityStunnedHandler                      ;; 00:3A7B
@@ -965,7 +965,7 @@ GhiniMovement_trampoline::
     callhl GhiniVisibleHandler.move               ;; 00:3E29 $21 $00 $21 $36 $04 $CD $63 $5C
     jp   ReloadSavedBank                          ;; 00:3E31 $C3 $1D $08
 
-label_3E34::
+SmashRock_trampoline::
     callhl SmashRock                              ;; 00:3E34 $21 $00 $21 $36 $03 $CD $07 $54
     jp   ReloadSavedBank                          ;; 00:3E3C $C3 $1D $08
 
@@ -974,7 +974,7 @@ LoadHeartsAndRupeesCount::
     call LoadHeartsCount                          ;; 00:3E47 $CD $14 $64
     jp   ReloadSavedBank                          ;; 00:3E4A $C3 $1D $08
 
-label_3E4D::
+SpawnChestWithItemAndRestoreBank3::
     callsw SpawnChestWithItem                     ;; 00:3E4D $3E $02 $CD $0C $08 $CD $D0 $41
     ld   a, $03                                   ;; 00:3E55 $3E $03
     jp   SwitchBank                               ;; 00:3E57 $C3 $0C $08

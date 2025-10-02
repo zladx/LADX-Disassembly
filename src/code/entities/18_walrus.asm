@@ -138,12 +138,12 @@ WalrusState0Handler::
     jp_open_dialog Dialog1E0                      ;; 18:5585
 
 .jr_558A
-    call func_018_7EB2                            ;; 18:558A $CD $B2 $7E
+    call GetEntityXDistanceToLink_18              ;; 18:558A $CD $B2 $7E
     add  $13                                      ;; 18:558D $C6 $13
     cp   $26                                      ;; 18:558F $FE $26
     ret  nc                                       ;; 18:5591 $D0
 
-    call func_018_7EC2                            ;; 18:5592 $CD $C2 $7E
+    call GetEntityRealYDistanceToLink_18          ;; 18:5592 $CD $C2 $7E
     add  $20                                      ;; 18:5595 $C6 $20
     cp   $40                                      ;; 18:5597 $FE $40
     ret  nc                                       ;; 18:5599 $D0

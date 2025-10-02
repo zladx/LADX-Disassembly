@@ -98,7 +98,7 @@ ZoraState0Handler::
     ld   hl, wEntitiesPosYTable                   ;; 18:4A57 $21 $10 $C2
     add  hl, bc                                   ;; 18:4A5A $09
     ld   [hl], a                                  ;; 18:4A5B $77
-    call func_018_6493                            ;; 18:4A5C $CD $93 $64
+    call GetObjectUnderEntity                            ;; 18:4A5C $CD $93 $64
     ldh  a, [hMultiPurpose3]                      ;; 18:4A5F $F0 $DA
     cp   $07                                      ;; 18:4A61 $FE $07
     ret  nz                                       ;; 18:4A63 $C0

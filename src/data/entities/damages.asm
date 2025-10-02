@@ -1,6 +1,6 @@
 ; The amount of damages an entity deals when collisioning with Link,
 ; indexed by health group.
-; See InitialHealthForGroup
+; See HealthGroupForEntity
 EntityDamagesForGroup::
 ._00 db $04
 ._01 db $04

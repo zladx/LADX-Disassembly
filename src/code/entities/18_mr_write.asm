@@ -56,12 +56,12 @@ jr_018_4BB5:
     rra                                           ;; 18:4BC6 $1F
     and  $01                                      ;; 18:4BC7 $E6 $01
     call SetEntitySpriteVariant                   ;; 18:4BC9 $CD $0C $3B
-    call func_018_7EC2                            ;; 18:4BCC $CD $C2 $7E
+    call GetEntityRealYDistanceToLink_18          ;; 18:4BCC $CD $C2 $7E
     add  $0C                                      ;; 18:4BCF $C6 $0C
     cp   $18                                      ;; 18:4BD1 $FE $18
     jr   nc, .jr_4BE4                             ;; 18:4BD3 $30 $0F
 
-    call func_018_7EB2                            ;; 18:4BD5 $CD $B2 $7E
+    call GetEntityXDistanceToLink_18              ;; 18:4BD5 $CD $B2 $7E
     add  $10                                      ;; 18:4BD8 $C6 $10
     cp   $20                                      ;; 18:4BDA $FE $20
     jr   nc, .jr_4BE4                             ;; 18:4BDC $30 $06

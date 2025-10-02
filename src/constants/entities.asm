@@ -8,7 +8,7 @@ DEF ENTITIES_END EQU $FF
 DEF ENTITY_STATUS_DISABLED   EQU 0
 DEF ENTITY_STATUS_DYING      EQU 1
 DEF ENTITY_STATUS_FALLING    EQU 2
-DEF ENTITY_STATUS_DESTROYING EQU 3
+DEF ENTITY_STATUS_BURNING EQU 3
 DEF ENTITY_STATUS_INIT       EQU 4
 DEF ENTITY_STATUS_ACTIVE     EQU 5
 DEF ENTITY_STATUS_STUNNED    EQU 6
@@ -75,7 +75,7 @@ DEF ENTITY_ARMOS_STATUE                  EQU $0F
 DEF ENTITY_HIDING_GHINI                  EQU $10
 DEF ENTITY_GIANT_GHINI                   EQU $11
 DEF ENTITY_GHINI                         EQU $12
-DEF ENTITY_BROKEN_HEART_CONTAINER        EQU $13 ; Killable; crashes the game if you run into it; works if you use the Magic Powder on it
+DEF ENTITY_13                            EQU $13 ; Killable; looks and acts like a Heart Container but crashes the game if you run into it; works if you use the Magic Powder on it
 DEF ENTITY_MOBLIN_SWORD                  EQU $14
 DEF ENTITY_ANTI_FAIRY                    EQU $15
 DEF ENTITY_SPARK_COUNTER_CLOCKWISE       EQU $16
@@ -93,8 +93,8 @@ DEF ENTITY_WIZROBE                       EQU $21
 DEF ENTITY_WIZROBE_PROJECTILE            EQU $22
 DEF ENTITY_LIKE_LIKE                     EQU $23
 DEF ENTITY_IRON_MASK                     EQU $24
-DEF ENTITY_SMALL_EXPLOSION_ENEMY         EQU $25
-DEF ENTITY_SMALL_EXPLOSION_ENEMY_2       EQU $26
+DEF ENTITY_25                            EQU $25
+DEF ENTITY_26                            EQU $26
 DEF ENTITY_SPIKE_TRAP                    EQU $27
 DEF ENTITY_MIMIC                         EQU $28
 DEF ENTITY_MINI_MOLDORM                  EQU $29
@@ -131,7 +131,7 @@ DEF ENTITY_MOVING_BLOCK_LEFT_BOTTOM      EQU $47
 DEF ENTITY_MOVING_BLOCK_BOTTOM_LEFT      EQU $48
 DEF ENTITY_MOVING_BLOCK_BOTTOM_RIGHT     EQU $49
 DEF ENTITY_COLOR_DUNGEON_BOOK            EQU $4A
-DEF ENTITY_POT                           EQU $4B
+DEF ENTITY_4B                            EQU $4B
 ;ENTITY_DISABLED                     EQU $4C
 DEF ENTITY_SHOP_OWNER                    EQU $4D
 DEF ENTITY_4E                            EQU $4E ; unknown

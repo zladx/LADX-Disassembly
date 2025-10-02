@@ -1,31 +1,32 @@
-; A pot is a specialy-configured liftable rock.
-PotEntityHandler::
+Entity4BHandler::
     ld   d, $03                                   ;; 03:5326 $16 $03
     ; fallthrough
 
+; Rocks, bushes, pots, skulls...
 LiftableRockEntityHandler::
     ld   a, c                                     ;; 03:5328 $79
     ld   [wPickedUpRockIndex], a                  ;; 03:5329 $EA $0C $C5
     call GetEntityPrivateCountdown1               ;; 03:532C $CD $00 $0C
     ldh  [hMultiPurpose0], a                      ;; 03:532F $E0 $D7
-    jp   z, jp_003_53A8                           ;; 03:5331 $CA $A8 $53
+    jp   z, LiftableRockIntactHandler             ;; 03:5331 $CA $A8 $53
 
     cp   $01                                      ;; 03:5334 $FE $01
     jr   nz, jr_003_5395                          ;; 03:5336 $20 $5D
 
+    ; Last frame
     ld   hl, wEntitiesPrivateState5Table          ;; 03:5338 $21 $90 $C3
     add  hl, bc                                   ;; 03:533B $09
     ld   a, [hl]                                  ;; 03:533C $7E
     and  a                                        ;; 03:533D $A7
-    jr   z, .jr_5369                              ;; 03:533E $28 $29
+    jr   z, .spawnFairyEnd                        ;; 03:533E $28 $29
 
     call GetRandomByte                            ;; 03:5340 $CD $0D $28
     and  $03                                      ;; 03:5343 $E6 $03
-    jr   nz, .jr_5369                             ;; 03:5345 $20 $22
+    jr   nz, .spawnFairyEnd                       ;; 03:5345 $20 $22
 
     ld   a, ENTITY_DROPPABLE_FAIRY                ;; 03:5347 $3E $2F
     call SpawnNewEntity                           ;; 03:5349 $CD $CA $64
-    jr   c, .jr_5369                              ;; 03:534C $38 $1B
+    jr   c, .spawnFairyEnd                        ;; 03:534C $38 $1B
 
     ldh  a, [hMultiPurpose0]                      ;; 03:534E $F0 $D7
     ld   hl, wEntitiesPosXTable                   ;; 03:5350 $21 $00 $C2
@@ -43,7 +44,7 @@ LiftableRockEntityHandler::
     add  hl, de                                   ;; 03:5366 $19
     ld   [hl], $80                                ;; 03:5367 $36 $80
 
-.jr_5369
+.spawnFairyEnd
     ldh  a, [hActiveEntitySpriteVariant]          ;; 03:5369 $F0 $F1
     and  a                                        ;; 03:536B $A7
     jr   nz, .marinReactionEnd                    ;; 03:536C $20 $24
@@ -82,61 +83,63 @@ jr_003_5395:
     jp   label_3935                               ;; 03:5395 $C3 $35 $39
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-; maybe for rock or pot entity
-Unknown007SpriteVariants::
+LiftableRockOutdoorSpriteVariants::
+; Rock
 .variant0
     db $F0, OAM_GBC_PAL_7 | OAMF_PAL1
     db $F2, OAM_GBC_PAL_7 | OAMF_PAL1
+; Bush
 .variant1
     db $F4, OAM_GBC_PAL_6 | OAMF_PAL1
     db $F6, OAM_GBC_PAL_6 | OAMF_PAL1
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-; maybe for rock or pot entity
-Unknown008SpriteVariants::
+LiftableRockIndoorSpriteVariants::
+; Pot / Skull 
 .variant0
     db $F0, OAM_GBC_PAL_6 | OAMF_PAL1
     db $F2, OAM_GBC_PAL_6 | OAMF_PAL1
+; Unused?
 .variant1
     db $F4, OAM_GBC_PAL_6 | OAMF_PAL1
     db $F6, OAM_GBC_PAL_6 | OAMF_PAL1
 
-jp_003_53A8::
+LiftableRockIntactHandler::
 IF __OPTIMIZATIONS_3__
-    ld   de, Unknown007SpriteVariants
+    ld   de, LiftableRockOutdoorSpriteVariants
     ld   a, [wIsIndoor]
     and  a
     jr   z, .render
-    ld   de, Unknown008SpriteVariants
+    ld   de, LiftableRockIndoorSpriteVariants
 ELSE
     ld   a, [wIsIndoor]                           ;; 03:53A8 $FA $A5 $DB
     and  a                                        ;; 03:53AB $A7
     jr   z, .isNotIndoor                          ;; 03:53AC $28 $05
-    ld   de, Unknown008SpriteVariants             ;; 03:53AE $11 $A0 $53
+    ld   de, LiftableRockIndoorSpriteVariants     ;; 03:53AE $11 $A0 $53
     jr   .render                                  ;; 03:53B1 $18 $03
 
 .isNotIndoor
-    ld   de, Unknown007SpriteVariants             ;; 03:53B3 $11 $98 $53
+    ld   de, LiftableRockOutdoorSpriteVariants    ;; 03:53B3 $11 $98 $53
 ENDC
 
 .render
     call RenderActiveEntitySpritesPair            ;; 03:53B6 $CD $C0 $3B
     call ReturnIfNonInteractive_03                ;; 03:53B9 $CD $78 $7F
-    ld   a, $0B                                   ;; 03:53BC $3E $0B
-    ld   [wC19E], a                               ;; 03:53BE $EA $9E $C1
+    ld   a, DAMAGE_TYPE_THROW_AT                  ;; 03:53BC $3E $0B
+    ld   [wAttackDamageType], a                   ;; 03:53BE $EA $9E $C1
     call func_003_75A2                            ;; 03:53C1 $CD $A2 $75
     call BouncingEntityPhysics                    ;; 03:53C4 $CD $B3 $60
     ld   hl, wEntitiesStatusTable                 ;; 03:53C7 $21 $80 $C2
     add  hl, bc                                   ;; 03:53CA $09
     ld   a, [hl]                                  ;; 03:53CB $7E
-    cp   $02                                      ;; 03:53CC $FE $02
+    cp   ENTITY_STATUS_FALLING                    ;; 03:53CC $FE $02
     jp   z, ret_003_5406                          ;; 03:53CE $CA $06 $54
 
     ld   hl, wEntitiesPosZTable                   ;; 03:53D1 $21 $10 $C3
     add  hl, bc                                   ;; 03:53D4 $09
     ld   a, [hl]                                  ;; 03:53D5 $7E
     and  a                                        ;; 03:53D6 $A7
-    jr   z, func_003_53E4                         ;; 03:53D7 $28 $0B
+    jr   z, LiftableRockStartSmashingAnimation    ;; 03:53D7 $28 $0B
 
     ld   hl, wEntitiesCollisionsTable             ;; 03:53D9 $21 $A0 $C2
     add  hl, bc                                   ;; 03:53DC $09
@@ -144,4 +147,38 @@ ENDC
     and  a                                        ;; 03:53DE $A7
     jr   z, ret_003_5406                          ;; 03:53DF $28 $25
 
-    call func_003_5438                            ;; 03:53E1 $CD $38 $54
+    call EntityCheckThrowAtTriggers               ;; 03:53E1 $CD $38 $54
+    ; fallthrough
+
+LiftableRockStartSmashingAnimation::
+    ; If a bush, make a cut grass sound. Otherwise, make a pot smashed sound.
+    ld   hl, hNoiseSfx                            ;; 03:53E4 $21 $F4 $FF
+    ld   [hl], NOISE_SFX_CUT_GRASS                ;; 03:53E7 $36 $05
+    ld   e, $1F                                   ;; 03:53E9 $1E $1F
+    ldh  a, [hActiveEntitySpriteVariant]          ;; 03:53EB $F0 $F1
+    cp   $FF                                      ;; 03:53ED $FE $FF
+    jr   z, .grassSound                           ;; 03:53EF $28 $08
+
+    cp   $01                                      ;; 03:53F1 $FE $01
+    jr   z, .grassSound                           ;; 03:53F3 $28 $04
+
+    ld   [hl], NOISE_SFX_POT_SMASHED              ;; 03:53F5 $36 $09
+    ld   e, $0F                                   ;; 03:53F7 $1E $0F
+
+.grassSound
+    ld   hl, wEntitiesPrivateCountdown1Table      ;; 03:53F9 $21 $F0 $C2
+    add  hl, bc                                   ;; 03:53FC $09
+    ld   [hl], e                                  ;; 03:53FD $73
+    ld   hl, wEntitiesPhysicsFlagsTable           ;; 03:53FE $21 $40 $C3
+    add  hl, bc                                   ;; 03:5401 $09
+IF __OPTIMIZATIONS_1__
+    inc  [hl]
+    inc  [hl]
+ELSE
+    ld   a, [hl]                                  ;; 03:5402 $7E
+    add  $02                                      ;; 03:5403 $C6 $02
+    ld   [hl], a                                  ;; 03:5405 $77
+ENDC
+
+ret_003_5406:
+    ret                                           ;; 03:5406 $C9

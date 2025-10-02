@@ -83,7 +83,7 @@ ENDC
 
 .jr_002_676B
     push de                                       ;; 02:676B $D5
-    call label_2BC1                               ;; 02:676C $CD $C1 $2B
+    call GetRoomStatusAddressForMapPosition_trampoline ;; 02:676C $CD $C1 $2B
     ld   c, e                                     ;; 02:676F $4B
     ld   b, d                                     ;; 02:6770 $42
     pop  de                                       ;; 02:6771 $D1
@@ -113,7 +113,7 @@ ENDC
 .jr_002_6793
     push de                                       ;; 02:6793 $D5
     push af                                       ;; 02:6794 $F5
-    call label_2BC1                               ;; 02:6795 $CD $C1 $2B
+    call GetRoomStatusAddressForMapPosition_trampoline ;; 02:6795 $CD $C1 $2B
     pop  af                                       ;; 02:6798 $F1
     ld   e, $20                                   ;; 02:6799 $1E $20
     cp   $ED                                      ;; 02:679B $FE $ED

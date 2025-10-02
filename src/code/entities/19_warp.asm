@@ -129,7 +129,7 @@ WarpState2Handler::
 
     call IncrementEntityState                     ;; 19:42CF $CD $12 $3B
     ld   a, $20                                   ;; 19:42D2 $3E $20
-    ld   [wC1C6], a                               ;; 19:42D4 $EA $C6 $C1
+    ld   [wIsLinkImmuneToCollisionDamage], a                               ;; 19:42D4 $EA $C6 $C1
     call GetEntityTransitionCountdown             ;; 19:42D7 $CD $05 $0C
     ld   [hl], $50                                ;; 19:42DA $36 $50
     ld   a, JINGLE_DUNGEON_WARP                   ;; 19:42DC $3E $1C

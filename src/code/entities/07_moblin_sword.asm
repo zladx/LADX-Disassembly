@@ -160,7 +160,7 @@ Data_007_7A29::
     db   $01, $00, $03, $02
 
 func_007_7A2D::
-    ld   a, [wC502]                               ;; 07:7A2D $FA $02 $C5
+    ld   a, [wSwordMoblinAlertingSoundCounter]    ;; 07:7A2D $FA $02 $C5
     and  a                                        ;; 07:7A30 $A7
     jr   nz, func_007_7A55                        ;; 07:7A31 $20 $22
 

@@ -186,14 +186,14 @@ PerformOverworldAudioTasks::
 .compassSfxEnd
 
     ;
-    ; Decrement wC502 counter
+    ; Decrement wSwordMoblinAlertingSoundCounter counter
     ;
 
-    ld   a, [wC502]                               ;; 14:4ACC $FA $02 $C5
+    ld   a, [wSwordMoblinAlertingSoundCounter]    ;; 14:4ACC $FA $02 $C5
     and  a                                        ;; 14:4ACF $A7
     jr   z, .C502End                              ;; 14:4AD0 $28 $04
     dec  a                                        ;; 14:4AD2 $3D
-    ld   [wC502], a                               ;; 14:4AD3 $EA $02 $C5
+    ld   [wSwordMoblinAlertingSoundCounter], a    ;; 14:4AD3 $EA $02 $C5
 .C502End
 
     ld   a, [wNextWorldMusicTrackCountdown]       ;; 14:4AD6 $FA $AF $C5
@@ -1465,21 +1465,21 @@ func_014_54F8::
 .ret_5525
     ret                                           ;; 14:5525 $C9
 
-func_014_5526::
+RevealObjectUnderObject::
     ld   hl, wRoomObjects                         ;; 14:5526 $21 $11 $D7
     add  hl, de                                   ;; 14:5529 $19
     ldh  a, [hObjectUnderEntity]                  ;; 14:552A $F0 $AF
     cp   OBJECT_POT_WITH_SWITCH                   ;; 14:552C $FE $8E
     jr   nz, jr_014_557D                          ;; 14:552E $20 $4D
 
-    ld   [hl], $AA                                ;; 14:5530 $36 $AA
+    ld   [hl], OBJECT_SWITCH_BUTTON               ;; 14:5530 $36 $AA
     call label_2887                               ;; 14:5532 $CD $87 $28
     ldh  a, [hIsGBC]                              ;; 14:5535 $F0 $FE
     and  a                                        ;; 14:5537 $A7
     jr   z, .jr_554D                              ;; 14:5538 $28 $13
 
     push bc                                       ;; 14:553A $C5
-    ld   c, $AA                                   ;; 14:553B $0E $AA
+    ld   c, OBJECT_SWITCH_BUTTON                  ;; 14:553B $0E $AA
     ld   b, $00                                   ;; 14:553D $06 $00
     sla  c                                        ;; 14:553F $CB $21
     rl   b                                        ;; 14:5541 $CB $10
@@ -1538,14 +1538,14 @@ jr_014_557D:
     cp   OBJECT_FROZEN_BLOCK                      ;; 14:5592 $FE $8A
     jr   nz, jr_014_55E3                          ;; 14:5594 $20 $4D
 
-    ld   [hl], $04                                ;; 14:5596 $36 $04
+    ld   [hl], OBJECT_SIDE_VIEW_EMPTY             ;; 14:5596 $36 $04
     call label_2887                               ;; 14:5598 $CD $87 $28
     ldh  a, [hIsGBC]                              ;; 14:559B $F0 $FE
     and  a                                        ;; 14:559D $A7
     jr   z, .jr_55B3                              ;; 14:559E $28 $13
 
     push bc                                       ;; 14:55A0 $C5
-    ld   c, $04                                   ;; 14:55A1 $0E $04
+    ld   c, OBJECT_SIDE_VIEW_EMPTY                ;; 14:55A1 $0E $04
     ld   b, $00                                   ;; 14:55A3 $06 $00
     sla  c                                        ;; 14:55A5 $CB $21
     rl   b                                        ;; 14:55A7 $CB $10
@@ -1586,14 +1586,14 @@ jr_014_557D:
     jp   label_014_573E                           ;; 14:55E0 $C3 $3E $57
 
 jr_014_55E3:
-    ld   [hl], $0D                                ;; 14:55E3 $36 $0D
+    ld   [hl], OBJECT_FLOOR_OD                    ;; 14:55E3 $36 $0D
     call label_2887                               ;; 14:55E5 $CD $87 $28
     ldh  a, [hIsGBC]                              ;; 14:55E8 $F0 $FE
     and  a                                        ;; 14:55EA $A7
     jr   z, .jr_5600                              ;; 14:55EB $28 $13
 
     push bc                                       ;; 14:55ED $C5
-    ld   c, $0D                                   ;; 14:55EE $0E $0D
+    ld   c, OBJECT_FLOOR_OD                       ;; 14:55EE $0E $0D
     ld   b, $00                                   ;; 14:55F0 $06 $00
     sla  c                                        ;; 14:55F2 $CB $21
     rl   b                                        ;; 14:55F4 $CB $10
@@ -1635,7 +1635,7 @@ jr_014_55E3:
 
 label_014_5630:
     ldh  a, [hObjectUnderEntity]                  ;; 14:5630 $F0 $AF
-    cp   $20                                      ;; 14:5632 $FE $20
+    cp   OBJECT_LIFTABLE_ROCK                     ;; 14:5632 $FE $20
     jr   nz, jr_014_564E                          ;; 14:5634 $20 $18
     ; likely mad batter entrance rooms
     ldh  a, [hMapRoom]                            ;; 14:5636 $F0 $F6
@@ -1678,15 +1678,15 @@ jr_014_564E:
     jr   nz, jr_014_5677                          ;; 14:566B $20 $0A
 
     ldh  a, [hObjectUnderEntity]                  ;; 14:566D $F0 $AF
-    cp   $20                                      ;; 14:566F $FE $20
+    cp   OBJECT_LIFTABLE_ROCK                     ;; 14:566F $FE $20
     jr   z, jr_014_5677                           ;; 14:5671 $28 $04
 
 jr_014_5673:
-    ld   [hl], $03                                ;; 14:5673 $36 $03
+    ld   [hl], OBJECT_DIRT                        ;; 14:5673 $36 $03
     jr   jr_014_5679                              ;; 14:5675 $18 $02
 
 jr_014_5677:
-    ld   [hl], $04                                ;; 14:5677 $36 $04
+    ld   [hl], OBJECT_SHORT_GRASS                 ;; 14:5677 $36 $04
 
 jr_014_5679:
     ld   a, $94                                   ;; 14:5679 $3E $94
@@ -1713,17 +1713,17 @@ jr_014_5679:
     jr   nz, .jr_56A9                             ;; 14:569F $20 $08
 
     ldh  a, [hObjectUnderEntity]                  ;; 14:56A1 $F0 $AF
-    cp   $20                                      ;; 14:56A3 $FE $20
+    cp   OBJECT_LIFTABLE_ROCK                     ;; 14:56A3 $FE $20
     jr   nz, jr_014_56B3                          ;; 14:56A5 $20 $0C
 
     jr   jr_014_56B7                              ;; 14:56A7 $18 $0E
 
 .jr_56A9
-    cp   $75                                      ;; 14:56A9 $FE $75
+    cp   UNKNOWN_ROOM_75                          ;; 14:56A9 $FE $75
     jr   nz, jr_014_56B7                          ;; 14:56AB $20 $0A
 
     ldh  a, [hObjectUnderEntity]                  ;; 14:56AD $F0 $AF
-    cp   $20                                      ;; 14:56AF $FE $20
+    cp   OBJECT_LIFTABLE_ROCK                     ;; 14:56AF $FE $20
     jr   nz, jr_014_56B7                          ;; 14:56B1 $20 $04
 
 jr_014_56B3:
@@ -1777,7 +1777,7 @@ jr_014_56C9:
     jr   nz, .jr_5708                             ;; 14:56FE $20 $08
 
     ldh  a, [hObjectUnderEntity]                  ;; 14:5700 $F0 $AF
-    cp   $20                                      ;; 14:5702 $FE $20
+    cp   OBJECT_LIFTABLE_ROCK                     ;; 14:5702 $FE $20
     jr   nz, jr_014_5729                          ;; 14:5704 $20 $23
 
     jr   jr_014_5712                              ;; 14:5706 $18 $0A
@@ -1980,13 +1980,20 @@ label_014_57E1:
     ld   [hl], $00                                ;; 14:5835 $36 $00
     ret                                           ;; 14:5837 $C9
 
-func_014_5838::
+; Returns room status address for a given indoor room's position within its map.
+:
+; Inputs:
+;   de   room position
+;
+; Outputs:
+;   hl   room status address
+GetRoomStatusAddressForMapPosition::
     ld   hl, MapLayout11                          ;; 14:5838 $21 $E0 $44
     ldh  a, [hMapId]                              ;; 14:583B $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ;; 14:583D $FE $FF
     jr   z, .jr_5866                              ;; 14:583F $28 $25
 
-    cp   $0B                                      ;; 14:5841 $FE $0B
+    cp   MAP_DUNGEON_G1                           ;; 14:5841 $FE $0B
     jr   nc, ret_014_5883                         ;; 14:5843 $30 $3E
 
     ld   hl, MapLayout0                           ;; 14:5845 $21 $20 $42
@@ -2022,10 +2029,10 @@ func_014_5838::
     jr   jr_014_5882                              ;; 14:5877 $18 $09
 
 .jr_5879
-    cp   $1A                                      ;; 14:5879 $FE $1A
+    cp   MAP_INDOORS_B_END                        ;; 14:5879 $FE $1A
     jr   nc, jr_014_5882                          ;; 14:587B $30 $05
 
-    cp   $06                                      ;; 14:587D $FE $06
+    cp   MAP_INDOORS_B_START                      ;; 14:587D $FE $06
     jr   c, jr_014_5882                           ;; 14:587F $38 $01
 
     inc  d                                        ;; 14:5881 $14

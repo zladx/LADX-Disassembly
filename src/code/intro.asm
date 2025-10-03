@@ -811,8 +811,8 @@ ResetIntroTimers::
     ld   [wD003], a                               ;; 01:73A8 $EA $03 $D0
     ret                                           ;; 01:73AB $C9
 
-    db   $9B, $B7, $4D, $07, $00                  ;; 01:73AC
 CopyrightAttrmap:: ; paint the copyright portion of the title screen attrmap, after the intro cutscene
+    db   $9B, $B7, $4D, $07, $00                  ;; 01:73AC
 
 func_001_73B1::
     ld   de, CopyrightAttrmap                     ;; 01:73B1 $11 $AC $73
@@ -1497,7 +1497,7 @@ RenderIntroSparkle::
     ret                                           ;; 01:7807 $C9
 
 IF LANG_JP
-DXOnDarkTilesDMG:: ; DMG
+DXOnDarkTilesDMG::
     ;     Y    X   tile attr
     db   $00, $10, $2C, $05 ; DX gold, on black palm tree
     db   $10, $10, $2A, $05
@@ -1518,7 +1518,7 @@ DXOnWhiteTilesDMG::
     db   $00, $00, $41, $16
 .end
 
-DXOnDarkTilesGBC: ; GBC
+DXOnDarkTilesGBC:
     db   $10, $10, $2A, $05 ; DX gold, on black palm tree
     db   $00, $10, $28, $05
     db   $10, $08, $26, $05
@@ -1587,7 +1587,7 @@ DXOnWhiteTilesDMG::
     db   $00, $00, $40, $16                       ;; 01:784C
 .end
 
-DXOnDarkTilesGBC:: ; GBC
+DXOnDarkTilesGBC::
     db   $10, $18, $2E, $05                       ;; 01:7850 ; DX on blue sky
     db   $00, $18, $2C, $05                       ;; 01:7854
     db   $10, $10, $2A, $05                       ;; 01:7858
@@ -2122,7 +2122,7 @@ func_7C60::
 
 .loop
     push hl                                       ;; 01:7C9D $E5
-    ld   hl, TitleScreenPostBeachTilemap                        ;; 01:7C9E $21 $E4 $7A
+    ld   hl, TitleScreenPostBeachTilemap          ;; 01:7C9E $21 $E4 $7A
     add  hl, de                                   ;; 01:7CA1 $19
     ld   a, [hl]                                  ;; 01:7CA2 $7E
     pop  hl                                       ;; 01:7CA3 $E1

@@ -126,7 +126,7 @@ jr_019_598B:
     and  a                                        ;; 19:5993 $A7
     ret  z                                        ;; 19:5994 $C8
 
-    call label_3E34                               ;; 19:5995 $CD $34 $3E
+    call SmashRock_trampoline                     ;; 19:5995 $CD $34 $3E
     jp   ClearEntityStatus_19                     ;; 19:5998 $C3 $61 $7E
 
 func_019_599B::

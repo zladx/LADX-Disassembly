@@ -32,7 +32,7 @@ EntityHandlersTable::
 ._10 far_pointer HidingGhiniEntityHandler
 ._11 far_pointer GiantGhiniEntityHandler
 ._12 far_pointer GhiniEntityHandler
-._13 far_pointer HeartContainerSpriteVariants
+._13 far_pointer Entity13Handler
 ._14 far_pointer MoblinSwordEntityHandler ; $14
 ._15 far_pointer AntiFairyEntityHandler
 ._16 far_pointer SparkClockwiseEntityHandler
@@ -50,8 +50,8 @@ EntityHandlersTable::
 ._22 far_pointer WizrobeProjectileEntityHandler
 ._23 far_pointer LikeLikeEntityHandler
 ._24 far_pointer IronMaskEntityHandler ; $24
-._25 far_pointer EntityExplosionSpriteVariants ; small exploding ennemy
-._26 far_pointer EntityExplosionSpriteVariants ; small exploding ennemy 2
+._25 far_pointer Entity25Handler
+._26 far_pointer Entity26Handler
 ._27 far_pointer SpikeTrapEntityHandler
 ._28 far_pointer MimicEntityHandler ; $28
 ._29 far_pointer MiniMoldormEntityHandler
@@ -88,7 +88,7 @@ EntityHandlersTable::
 ._48 far_pointer MovingBlockBottomLeftEntityHandler ; $48
 ._49 far_pointer MovingBlockBottomRightEntityHandler
 ._4A far_pointer ColorDungeonBookEntityHandler
-._4B far_pointer PotEntityHandler
+._4B far_pointer Entity4BHandler
 ._4C far_pointer_null
 ._4D far_pointer ShopOwnerEntityHandler
 ._4E far_pointer Disabled4EEntityHandler
@@ -311,7 +311,7 @@ EntityInitHandlersTable::
 ._10 dw   EntityInitGhini
 ._11 dw   EntityInitGhini
 ._12 dw   EntityInitGhini
-._13 dw   EntityInitBrokenHeartContainer
+._13 dw   EntityInitEntity13
 ._14 dw   EntityInitMoblinSword
 ._15 dw   EntityInitWithRandomSpeed
 ._16 dw   EntityInitSparkCounterClockwise
@@ -329,8 +329,8 @@ EntityInitHandlersTable::
 ._22 dw   EntityInitWithRandomDirection
 ._23 dw   IncrementEntityState
 ._24 dw   EntityInitWithRandomDirection
-._25 dw   EntityExplosionSpriteVariants
-._26 dw   EntityExplosionSpriteVariants
+._25 dw   EntityInitEntity25
+._26 dw   EntityInitEntity26
 ._27 dw   EntityInitWithRandomDirection
 ._28 dw   EntityInitWithRandomDirection
 ._29 dw   EntityInitMiniMoldorm_trampoline

@@ -738,7 +738,7 @@ func_004_5586::
     ret  z                                        ;; 04:5595 $C8
 
 label_004_5596:
-    jp   label_3E34                               ;; 04:5596 $C3 $34 $3E
+    jp   SmashRock_trampoline                     ;; 04:5596 $C3 $34 $3E
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Facade4SpriteVariants::

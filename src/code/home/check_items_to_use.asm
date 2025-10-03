@@ -3,7 +3,7 @@ CheckItemsToUse::
     ld   a, [wBlockItemUsage]                     ;; 00:1177 $FA $0A $C5
     ld   hl, wC167                                ;; 00:117A $21 $67 $C1
     or   [hl]                                     ;; 00:117D $B6
-    ld   hl, wC1A4                                ;; 00:117E $21 $A4 $C1
+    ld   hl, wIsUsingHookshot                     ;; 00:117E $21 $A4 $C1
     or   [hl]                                     ;; 00:1181 $B6
     ret  nz                                       ;; 00:1182 $C0
 

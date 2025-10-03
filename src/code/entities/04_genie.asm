@@ -47,7 +47,7 @@ GenieState0Handler::
     ld   hl, wEntitiesHealthTable                 ;; 04:4040 $21 $60 $C3
     add  hl, de                                   ;; 04:4043 $19
     ld   [hl], $08                                ;; 04:4044 $36 $08
-    call label_3E34                               ;; 04:4046 $CD $34 $3E
+    call SmashRock_trampoline                     ;; 04:4046 $CD $34 $3E
     ld   a, NOISE_SFX_BREAK                       ;; 04:4049 $3E $29
     ldh  [hNoiseSfx], a                           ;; 04:404B $E0 $F4
     ret                                           ;; 04:404D $C9

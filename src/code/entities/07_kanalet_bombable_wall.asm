@@ -46,7 +46,7 @@ KanaletBombableWallEntityHandler::
     add  hl, de                                   ;; 07:71E2 $19
     add  $08                                      ;; 07:71E3 $C6 $08
     ld   [hl], a                                  ;; 07:71E5 $77
-    call label_3E34                               ;; 07:71E6 $CD $34 $3E
+    call SmashRock_trampoline                     ;; 07:71E6 $CD $34 $3E
     ldh  a, [hActiveEntityPosX]                   ;; 07:71E9 $F0 $EE
     sub  $08                                      ;; 07:71EB $D6 $08
     ldh  [hIntersectedObjectLeft], a              ;; 07:71ED $E0 $CE

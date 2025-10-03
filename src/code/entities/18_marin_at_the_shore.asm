@@ -52,7 +52,7 @@ MarinAtTheShoreState1Handler::
     and  a                                        ;; 18:61E0 $A7
     ret  nz                                       ;; 18:61E1 $C0
 
-    call func_018_7EC2                            ;; 18:61E2 $CD $C2 $7E
+    call GetEntityRealYDistanceToLink_18          ;; 18:61E2 $CD $C2 $7E
     add  $14                                      ;; 18:61E5 $C6 $14
     cp   $28                                      ;; 18:61E7 $FE $28
     ret  nc                                       ;; 18:61E9 $D0

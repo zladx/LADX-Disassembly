@@ -1076,7 +1076,7 @@ func_20_4B1F::
     xor  a                                        ;; 20:4B1F $AF
     ld   [wHasPlacedBomb], a                      ;; 20:4B20 $EA $4E $C1
     ld   [wActiveProjectileCount], a              ;; 20:4B23 $EA $4D $C1
-    ld   [wC1A4], a                               ;; 20:4B26 $EA $A4 $C1
+    ld   [wIsUsingHookshot], a                    ;; 20:4B26 $EA $A4 $C1
     ld   [wIsCarryingLiftedObject], a             ;; 20:4B29 $EA $5C $C1
     ld   [wZolCount], a                           ;; 20:4B2C $EA $AE $C1
     ld   a, [wIsLinkPushing]                      ;; 20:4B2F $FA $44 $C1
@@ -1400,7 +1400,7 @@ ResetRoomVariables::
     ld   [wMapEntrancePositionZ], a               ;; 20:4CAC $EA $C8 $DB
     ld   [wTorchesCount], a                       ;; 20:4CAF $EA $C9 $DB
     ld   [wC1A2], a                               ;; 20:4CB2 $EA $A2 $C1
-    ld   [wC1C6], a                               ;; 20:4CB5 $EA $C6 $C1
+    ld   [wIsLinkImmuneToCollisionDamage], a                               ;; 20:4CB5 $EA $C6 $C1
     ld   [wRoomSwitchableObject], a               ;; 20:4CB8 $EA $FA $D6
     ld   [wBlockItemUsage], a                     ;; 20:4CBB $EA $0A $C5
     ldh  [hStaircase], a                          ;; 20:4CBE $E0 $AC

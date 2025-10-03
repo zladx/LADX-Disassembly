@@ -698,9 +698,9 @@ wC191::
 ; The 4 bytes indicating which entity spritesheets are loaded in each of the 4 spriteslots.
 ; Values are taken from OverworldEntitySpritesheetsTable and IndoorEntitySpritesheetsTable.
 ;
-; Each byte is bbbttttt, where:
-;  - bbb indicates the bank to use (as an index to NpcTilesBankTable);
-;  - ttttt indicate which 16 tile row to take from that bank.
+; Each byte is bbtttttt, where:
+;  - bb indicates the bank to use (as an index to NpcTilesBankTable);
+;  - tttttt indicate which 16 tile row to take from that bank.
 ; $FF means "keep current".
 wLoadedEntitySpritesheets::
   ds 4 ; C193 - C196
@@ -744,9 +744,8 @@ wC19C::
 wC19D::
   ds 1 ; C19D
 
-; Damage level for the current sword hit?
-; (more or less `sword-level + power-ups - 1`)
-wC19E::
+; Damage type for Link's current attack (see DAMAGE_TYPE_* constants for possible values)
+wAttackDamageType::
   ds 1 ; C19E
 
 ; Upper bit   = set if the dialog is displayed on bottom (instead of top)
@@ -762,16 +761,16 @@ wC1A0::
 wC1A2::
   ds 2 ; C1A2 - w1A3
 
-; Unlabeled
-wC1A4::
+; Whether Link is using the hookshot
+wIsUsingHookshot::
   ds 1 ; C1A4
 
 ; Number of conveyor belts on the current screen
 wConveyorBeltsCount::
   ds 1 ; C1A5
 
-; Unlabeled
-wC1A6::
+; Entity index of the most recent hookshot chain entity, incremented by one
+wHookshotEntityIndexPlusOne::
   ds 1 ; C1A6
 
 ; Unlabeled
@@ -891,7 +890,7 @@ wBombArrowCooldown::
   ds 1 ; C1C0
 
 ; Entity index of last bomb dropped by the player.
-; Used to turn it into a bomb arrow if you drop a bomb within the time window.wLatestDroppedBombEntityIndex::
+; Used to turn it into a bomb arrow if you drop a bomb within the time window.
 wLatestDroppedBombEntityIndex::
   ds 1 ; C1C1
 
@@ -912,7 +911,7 @@ wC1C4::
 ds 1 ; C1C5
 
 ; Unlabeled
-wC1C6::
+wIsLinkImmuneToCollisionDamage::
   ds 1 ; C1C6
 
 ; Whether Link is shoveling.
@@ -1309,6 +1308,7 @@ wEntitiesOptions1Table::
 ; Examples:
 ;  - Peahat: movement angle (0x0 = right ... 0x4 = down ... 0x8 = left ... 0xC = up)
 ;  - Knight: when attacking, iron ball position perpendicular to attack direction
+;  - Bomb: type? (0x0 = non-enemy bomb, 0x1 = enemy bomb, 0x4C = Tarin transformation)
 wEntitiesPrivateState4Table::
   ds $10 ; C440 - C44F
 
@@ -1384,8 +1384,8 @@ wAlternateBackgroundEnabled::
 wOwlEntityIndex::
   ds 1 ; C501
 
-; Unlabeled
-wC502::
+; Set to 4 when a sound plays that alerts sword Moblins of Link's presence.
+wSwordMoblinAlertingSoundCounter::
   ds 1 ; C502
 
 ; Type of the object the active entity collided with horizontally

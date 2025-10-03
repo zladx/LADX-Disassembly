@@ -135,18 +135,18 @@ label_018_78A6:
     ldh  [hJingle], a                             ;; 18:78EF $E0 $F2
 
 .jr_78F1
-    call func_018_7EE1                            ;; 18:78F1 $CD $E1 $7E
+    call GetEntityDirectionToLink_18              ;; 18:78F1 $CD $E1 $7E
     ldh  a, [hLinkDirection]                      ;; 18:78F4 $F0 $9E
     xor  $01                                      ;; 18:78F6 $EE $01
     cp   e                                        ;; 18:78F8 $BB
     jr   nz, .jr_7935                             ;; 18:78F9 $20 $3A
 
-    call func_018_7EB2                            ;; 18:78FB $CD $B2 $7E
+    call GetEntityXDistanceToLink_18              ;; 18:78FB $CD $B2 $7E
     add  $20                                      ;; 18:78FE $C6 $20
     cp   $40                                      ;; 18:7900 $FE $40
     jr   nc, .jr_7935                             ;; 18:7902 $30 $31
 
-    call func_018_7ED2                            ;; 18:7904 $CD $D2 $7E
+    call GetEntityVisualYDistanceToLink_18        ;; 18:7904 $CD $D2 $7E
     add  $20                                      ;; 18:7907 $C6 $20
     cp   $40                                      ;; 18:7909 $FE $40
     jr   nc, .jr_7935                             ;; 18:790B $30 $28

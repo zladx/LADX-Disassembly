@@ -123,12 +123,12 @@ Data_018_6AC8::
 
 VireState1Handler::
     call func_018_6E3B                            ;; 18:6ACB $CD $3B $6E
-    call func_018_7EB2                            ;; 18:6ACE $CD $B2 $7E
+    call GetEntityXDistanceToLink_18              ;; 18:6ACE $CD $B2 $7E
     add  $1C                                      ;; 18:6AD1 $C6 $1C
     cp   $38                                      ;; 18:6AD3 $FE $38
     jr   nc, .jr_6B02                             ;; 18:6AD5 $30 $2B
 
-    call func_018_7ED2                            ;; 18:6AD7 $CD $D2 $7E
+    call GetEntityVisualYDistanceToLink_18        ;; 18:6AD7 $CD $D2 $7E
     add  $20                                      ;; 18:6ADA $C6 $20
     cp   $40                                      ;; 18:6ADC $FE $40
     jr   nc, .jr_6B02                             ;; 18:6ADE $30 $22
@@ -312,12 +312,12 @@ VireState3Handler::
     cp   $FF                                      ;; 18:6BE1 $FE $FF
     jr   z, .jr_6C27                              ;; 18:6BE3 $28 $42
 
-    call func_018_7EB2                            ;; 18:6BE5 $CD $B2 $7E
+    call GetEntityXDistanceToLink_18              ;; 18:6BE5 $CD $B2 $7E
     add  $18                                      ;; 18:6BE8 $C6 $18
     cp   $30                                      ;; 18:6BEA $FE $30
     jr   nc, .jr_6C27                             ;; 18:6BEC $30 $39
 
-    call func_018_7ED2                            ;; 18:6BEE $CD $D2 $7E
+    call GetEntityVisualYDistanceToLink_18        ;; 18:6BEE $CD $D2 $7E
     add  $18                                      ;; 18:6BF1 $C6 $18
     cp   $30                                      ;; 18:6BF3 $FE $30
     jr   nc, .jr_6C27                             ;; 18:6BF5 $30 $30

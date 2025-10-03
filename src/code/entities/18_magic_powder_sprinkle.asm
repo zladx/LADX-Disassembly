@@ -57,7 +57,7 @@ MagicPowderSprinkleEntityHandler::
     and  a                                        ;; 18:79B6 $A7
     jr   nz, jr_018_79CF                          ;; 18:79B7 $20 $16
 
-    call func_014_5526_trampoline                 ;; 18:79B9 $CD $78 $21
+    call RevealObjectUnderObject_trampoline       ;; 18:79B9 $CD $78 $21
     ldh  a, [hActiveEntityPosX]                   ;; 18:79BC $F0 $EE
     ldh  [hMultiPurpose0], a                      ;; 18:79BE $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ;; 18:79C0 $F0 $EC
@@ -157,8 +157,8 @@ label_018_7A4B:
     and  a                                        ;; 18:7A53 $A7
     ret  nz                                       ;; 18:7A54 $C0
 
-    ld   a, $09                                   ;; 18:7A55 $3E $09
-    ld   [wC19E], a                               ;; 18:7A57 $EA $9E $C1
+    ld   a, DAMAGE_TYPE_MAGIC_POWDER              ;; 18:7A55 $3E $09
+    ld   [wAttackDamageType], a                   ;; 18:7A57 $EA $9E $C1
     jp   label_3B7B                               ;; 18:7A5A $C3 $7B $3B
 
 label_018_7A5D:

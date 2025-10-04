@@ -45,6 +45,7 @@ DumpBanks
 *.s7
 *.s8
 *.s9
+*.sn0
 *.sn1
 *.sn2
 *.sn3

@@ -10,26 +10,26 @@ macro rawToRgb
     redef grn equ ((packed_color & %0000001111100000) >>  5) * 8
     redef blu equ ((packed_color & %0111110000000000) >> 10) * 8
     redef friendly_color equ red << 16 | grn << 8 | blu << 0
-    print "    rgb   {friendly_color}"
+    print "    rgb   #{06:friendly_color}"
 
     redef packed_color equ \3 + \4 << 8
     redef red equ ((packed_color & %0000000000011111) >>  0) * 8
     redef grn equ ((packed_color & %0000001111100000) >>  5) * 8
     redef blu equ ((packed_color & %0111110000000000) >> 10) * 8
     redef friendly_color equ red << 16 | grn << 8 | blu << 0
-    print ", {friendly_color}"
+    print ", #{06:friendly_color}"
 
     redef packed_color equ \5 + \6 << 8
     redef red equ ((packed_color & %0000000000011111) >>  0) * 8
     redef grn equ ((packed_color & %0000001111100000) >>  5) * 8
     redef blu equ ((packed_color & %0111110000000000) >> 10) * 8
     redef friendly_color equ red << 16 | grn << 8 | blu << 0
-    print ", {friendly_color}"
+    print ", #{06:friendly_color}"
     
     redef packed_color equ \7 + \8 << 8
     redef red equ ((packed_color & %0000000000011111) >>  0) * 8
     redef grn equ ((packed_color & %0000001111100000) >>  5) * 8
     redef blu equ ((packed_color & %0111110000000000) >> 10) * 8
     redef friendly_color equ red << 16 | grn << 8 | blu << 0
-    println ", {friendly_color}"
+    println ", #{06:friendly_color}"
 endm

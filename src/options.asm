@@ -17,7 +17,7 @@
 ; - Dialogue debugger  (Marin will become a text-debugging object if your name begins with one space)
 ; - Jump to credits    (Marin will trigger the ending if your name begins with two spaces)
 
-;ENABLE_DEBUG_1 EQU 1
+;DEF ENABLE_DEBUG_1 = 1
 
 
 ;
@@ -30,7 +30,7 @@
 ; - Dungeon minimap entrance arrows aren't drawn.
 ; - Ending scene skipping (Left / Right during credits will move between scenes, Up / Down restarts)
 
-;ENABLE_DEBUG_2 EQU 1
+;DEF ENABLE_DEBUG_2 = 1
 
 
 ;
@@ -42,7 +42,7 @@
 ; - Full photo album     (View the photo album to get all 12 images)
 ; - Jump to ending       (Push Start on the map screen)
 
-;ENABLE_DEBUG_3 EQU 1
+;DEF ENABLE_DEBUG_3 = 1
 
 IF(!DEF(VERSION))
 DEF VERSION EQUS "0"

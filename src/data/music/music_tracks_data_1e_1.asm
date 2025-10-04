@@ -63,7 +63,7 @@ ChannelDefinition_1e_4b22::
 
     end_def
 
-Music49::
+Music49:: ; MUSIC_ACTIVE_POWER_UP
     db   $00
     dw   MusicSpeedData_1e_4aca
     dw   Music49Channel1
@@ -71,7 +71,7 @@ Music49::
     dw   Music49Channel3
     dw   Music49Channel4
 
-Music27::
+Music27:: ; MUSIC_OBTAIN_POWERUP
     db   $00
     dw   MusicSpeedData_1e_4aca
     dw   Music27Channel1
@@ -285,7 +285,7 @@ ChannelDefinition_1e_4c2f::
 
     end_def
 
-Music50::
+Music50:: ; MUSIC_MINIBOSS
     db   $02
     dw   MusicSpeedData_1e_4abb
     dw   Music50Channel1
@@ -295,7 +295,6 @@ Music50::
 
 Music50Channel1::
     dw   ChannelDefinition_1e_4c71
-
 MusicLoop_1e_4c45::
     dw   ChannelDefinition_1e_4c87
     dw   ChannelDefinition_1e_4c99

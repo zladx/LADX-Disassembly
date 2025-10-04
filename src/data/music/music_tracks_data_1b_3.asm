@@ -1,4 +1,4 @@
-Music61::
+Music61:: ; MUSIC_COLOR_DUNGEON
 Music62::
 Music63::
 Music64::
@@ -27,7 +27,6 @@ Music61Channel1::
 
 Music61Channel2::
     dw   ChannelDefinition_1b_7137
-
 MusicLoop_1b_7113::
     dw   ChannelDefinition_1b_713c
     dw   ChannelDefinition_1b_713c

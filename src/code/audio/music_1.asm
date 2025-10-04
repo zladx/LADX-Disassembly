@@ -109,41 +109,41 @@ jr_01B_406A:
 ; match up with "constants/sfx.asm" for some reason.
 ; Is this still the case? The constants are now correctly named.
 MusicDataPointerTable_1B::
-    dw   Music01
-    dw   Music02
-    dw   Music03
-    dw   Music04
-    dw   Music05
-    dw   Music06
-    dw   Music07
-    dw   Music08
-    dw   Music09
-    dw   Music0a
-    dw   Music0b
-    dw   Music0c
-    dw   Music0d
-    dw   Music0e
-    dw   Music0f
-    dw   Music10
+    dw   Music01 ; MUSIC_TITLE_SCREEN
+    dw   Music02 ; MUSIC_MINIGAME
+    dw   Music03 ; MUSIC_GAME_OVER
+    dw   Music04 ; MUSIC_MABE_VILLAGE
+    dw   Music05 ; MUSIC_OVERWORLD
+    dw   Music06 ; MUSIC_TAL_TAL_RANGE
+    dw   Music07 ; MUSIC_SHOP
+    dw   Music08 ; MUSIC_RAFT_RIDE_RAPIDS
+    dw   Music09 ; MUSIC_MYSTERIOUS_FOREST
+    dw   Music0a ; MUSIC_INSIDE_BUILDING
+    dw   Music0b ; MUSIC_ANIMAL_VILLAGE
+    dw   Music0c ; MUSIC_FAIRY_FOUNTAIN
+    dw   Music0d ; MUSIC_TITLE_SCREEN_NO_INTRO
+    dw   Music0e ; MUSIC_BOWWOW_KIDNAPPED
+    dw   Music0f ; MUSIC_OBTAIN_SWORD
+    dw   Music10 ; MUSIC_OBTAIN_ITEM
 
-    dw   Music31
-    dw   Music32
-    dw   Music33
-    dw   Music34
-    dw   Music35
-    dw   Music36
-    dw   Music37
-    dw   Music38
-    dw   Music39
-    dw   Music3a
-    dw   Music3b
-    dw   Music3c
-    dw   Music3d
-    dw   Music3e
-    dw   Music3f
-    dw   Music40
+    dw   Music31 ; MUSIC_OVERWORLD_INTRO
+    dw   Music32 ; MUSIC_MR_WRITE_HOUSE
+    dw   Music33 ; MUSIC_ULRIRA
+    dw   Music34 ; MUSIC_TARIN_BEES
+    dw   Music35 ; MUSIC_MAMU_FROG_SONG
+    dw   Music36 ; MUSIC_MONKEYS_BUILDING_BRIDGE
+    dw   Music37 ; MUSIC_CHRISTINE_HOUSE
+    dw   Music38 ; MUSIC_TOTAKA_UNUSED
+    dw   Music39 ; MUSIC_TURTLE_ROCK_ENTRANCE_BOSS
+    dw   Music3a ; MUSIC_FISHERMAN_UNDER_BRIDGE
+    dw   Music3b ; MUSIC_OBTAIN_ITEM_UNUSED
+    dw   Music3c ; MUSIC_FILE_SELECT_TOTAKA
+    dw   Music3d ; MUSIC_ENDING
+    dw   Music3e ; MUSIC_MOBLIN_HIDEOUT
+    dw   Music3f ; MUSIC_ISLAND_DISAPPEAR
+    dw   Music40 ; MUSIC_RICHARD_HOUSE
 
-    dw   Music61
+    dw   Music61 ; MUSIC_COLOR_DUNGEON
     dw   Music62
     dw   Music63
     dw   Music64

@@ -19,6 +19,7 @@ DEF MUSIC_TITLE_SCREEN_NO_INTRO             EQU $0D ; If title cutscene is skipp
 DEF MUSIC_BOWWOW_KIDNAPPED                  EQU $0E
 DEF MUSIC_OBTAIN_SWORD                      EQU $0F
 DEF MUSIC_OBTAIN_ITEM                       EQU $10
+
 DEF MUSIC_FILE_SELECT                       EQU $11
 DEF MUSIC_EGG_MAZE                          EQU $12
 DEF MUSIC_KANALET_CASTLE                    EQU $13
@@ -35,6 +36,7 @@ DEF MUSIC_OVERWORLD_SWORDLESS               EQU $1D
 DEF MUSIC_DREAM_SHRINE_SLEEP                EQU $1E
 DEF MUSIC_SOUTHERN_SHRINE                   EQU $1F
 DEF MUSIC_INSTRUMENT_FULL_MOON_CELLO        EQU $20 ; After obtaining
+
 DEF MUSIC_2D_UNDERGROUND                    EQU $21
 DEF MUSIC_OWL                               EQU $22
 DEF MUSIC_FINAL_BOSS                        EQU $23
@@ -51,6 +53,7 @@ DEF MUSIC_INSTRUMENT_ORGAN_OF_EVENING_CALM  EQU $2D ; /
 DEF MUSIC_INSTRUMENT_THUNDER_DRUM           EQU $2E ;/
 DEF MUSIC_MARIN_SING                        EQU $2F
 DEF MUSIC_MANBOS_MAMBO                      EQU $30
+
 DEF MUSIC_OVERWORLD_INTRO                   EQU $31 ; After obtaining sword
 DEF MUSIC_MR_WRITE_HOUSE                    EQU $32
 DEF MUSIC_ULRIRA                            EQU $33 ; Ulrira's House, Phone Booths
@@ -67,6 +70,7 @@ DEF MUSIC_ENDING                            EQU $3D
 DEF MUSIC_MOBLIN_HIDEOUT                    EQU $3E
 DEF MUSIC_ISLAND_DISAPPEAR                  EQU $3F
 DEF MUSIC_RICHARD_HOUSE                     EQU $40
+
 DEF MUSIC_EGG_BALLAD_DEFAULT                EQU $41 ; Play at egg without instrument #3
 DEF MUSIC_EGG_BALLAD_BELL                   EQU $42 ; Play at egg with instrument #3
 DEF MUSIC_EGG_BALLAD_HARP                   EQU $43 ; Play at egg with instruments #3-4
@@ -83,6 +87,7 @@ DEF MUSIC_MARIN_ON_BEACH                    EQU $4D
 DEF MUSIC_MARIN_BEACH_TALK                  EQU $4E
 DEF MUSIC_MARIN_UNUSED                      EQU $4F
 DEF MUSIC_MINIBOSS                          EQU $50
+
 DEF MUSIC_KANALET_CASTLE_COPY               EQU $51
 DEF MUSIC_TAIL_CAVE_COPY                    EQU $52
 DEF MUSIC_DREAM_SHRINE_DREAM                EQU $53
@@ -99,6 +104,7 @@ DEF MUSIC_FINAL_BOSS_INTRO                  EQU $5D
 DEF MUSIC_BOSS_DEFEAT                       EQU $5E
 DEF MUSIC_FINAL_BOSS_DEFEAT                 EQU $5F
 DEF MUSIC_FILE_SELECT_ZELDA                 EQU $60 ; Enter file name ZELDA
+
 DEF MUSIC_COLOR_DUNGEON                     EQU $61
 DEF MUSIC_SILENCE                           EQU $FF ; Silences the music. Seems to only work cleanly for certain tracks. Needs looking into
 

@@ -1,4 +1,4 @@
-Music41::
+Music41:: ; MUSIC_EGG_BALLAD_DEFAULT
     db   $00
     dw   MusicSpeedData_1e_4ad9
     dw   Music41Channel1
@@ -32,7 +32,7 @@ ChannelDefinition_1e_7026::
     unknownop_94
     end_def
 
-Music42::
+Music42:: ; MUSIC_EGG_BALLAD_BELL
     db   $00
     dw   MusicSpeedData_1e_4ad9
     dw   Music42Channel1
@@ -228,7 +228,7 @@ ChannelDefinition_1e_70c0::
     disable_unknown1
     end_def
 
-Music43::
+Music43:: ; MUSIC_EGG_BALLAD_HARP
     db   $00
     dw   MusicSpeedData_1e_4ad9
     dw   Music43Channel1
@@ -334,7 +334,7 @@ ChannelDefinition_1e_7133::
     disable_unknown1
     end_def
 
-Music44::
+Music44:: ; MUSIC_EGG_BALLAD_MARIMBA
     db   $00
     dw   MusicSpeedData_1e_4ad9
     dw   Music44Channel1
@@ -400,7 +400,7 @@ ChannelDefinition_1e_718a::
     note A_6
     end_def
 
-Music45::
+Music45:: ; MUSIC_EGG_BALLAD_TRIANGLE
     db   $00
     dw   MusicSpeedData_1e_4ad9
     dw   Music45Channel1
@@ -446,7 +446,7 @@ ChannelDefinition_1e_71b5::
 
     end_def
 
-Music46::
+Music46:: ; MUSIC_EGG_BALLAD_ORGAN
     db   $00
     dw   MusicSpeedData_1e_4ad9
     dw   Music46Channel1
@@ -543,7 +543,7 @@ ChannelDefinition_1e_7237::
     set_envelope_duty $61, $82, 2, 0
     end_def
 
-Music47::
+Music47:: ; MUSIC_EGG_BALLAD_ALL
     db   $00
     dw   MusicSpeedData_1e_4ad9
     dw   Music47Channel1
@@ -624,7 +624,7 @@ ChannelDefinition_1e_7295::
         note NOISE_8
         end_def
 
-Music20::
+Music20:: ; MUSIC_INSTRUMENT_FULL_MOON_CELLO
     db   $00
     dw   MusicSpeedData_1e_4ae8
     dw   Music20Channel1
@@ -684,7 +684,7 @@ ChannelDefinition_1e_72c8::
 waveform_1e_72e1::
     db   $01, $35, $66, $53, $10, $02, $46, $8a, $01, $35, $66, $53, $10, $02, $46, $8a
 
-Music28::
+Music28:: ; MUSIC_INSTRUMENT_CONCH_HORN
     db   $00
     dw   MusicSpeedData_1e_4af7
     dw   Music28Channel1
@@ -746,7 +746,7 @@ ChannelDefinition_1e_7324::
 
     end_def
 
-Music29::
+Music29:: ; MUSIC_INSTRUMENT_SEA_LILYS_BELL
     db   $00
     dw   MusicSpeedData_1e_4ad9
     dw   Music29Channel1
@@ -822,7 +822,7 @@ ChannelDefinition_1e_7380::
 
     end_def
 
-Music2a::
+Music2a:: ; MUSIC_INSTRUMENT_SURF_HARP
     db   $18
     dw   MusicSpeedData_1e_4a9d
     dw   Music2aChannel1
@@ -927,7 +927,7 @@ ChannelDefinition_1e_73d1::
 
     end_def
 
-Music2b::
+Music2b:: ; MUSIC_INSTRUMENT_WIND_MARIMBA
     db   $00
     dw   MusicSpeedData_1e_4abb
     dw   Music2bChannel1
@@ -1027,7 +1027,7 @@ ChannelDefinition_1e_748c::
     note C#6
     end_def
 
-Music2c::
+Music2c:: ; MUSIC_INSTRUMENT_CORAL_TRIANGLE
     db   $00
     dw   MusicSpeedData_1e_4aca
     dw   Music2cChannel1
@@ -1140,7 +1140,7 @@ ChannelDefinition_1e_7540::
 
     end_def
 
-Music2d::
+Music2d:: ; MUSIC_INSTRUMENT_ORGAN_OF_EVENING_CALM
     db   $00
     dw   MusicSpeedData_1e_4ae8
     dw   Music2dChannel1
@@ -1195,7 +1195,7 @@ ChannelDefinition_1e_757d::
     note F#4
     end_def
 
-Music2e::
+Music2e:: ; MUSIC_INSTRUMENT_THUNDER_DRUM
     db   $00
     dw   MusicSpeedData_1e_4ad9
     dw   Music2eChannel1
@@ -1286,7 +1286,7 @@ ChannelDefinition_1e_75fa::
 
     end_def
 
-Music2f::
+Music2f:: ; MUSIC_MARIN_SING
     db   $00
     dw   MusicSpeedData_1e_4ad9
     dw   Music2fChannel1
@@ -1296,7 +1296,6 @@ Music2f::
 
 Music2fChannel1::
     dw   ChannelDefinition_1e_7627
-
 MusicLoop_1e_760d::
     dw   ChannelDefinition_1e_7634
     dw   ChannelDefinition_1e_764a
@@ -1424,7 +1423,7 @@ ChannelDefinition_1e_768a::
     rest
     end_def
 
-Music4a::
+Music4a:: ; MUSIC_LEARN_BALLAD
     db   $00
     dw   MusicSpeedData_1e_4ad9
     dw   Music4aChannel1
@@ -1434,7 +1433,6 @@ Music4a::
 
 Music4aChannel1::
     dw   ChannelDefinition_1e_76be
-
 MusicLoop_1e_76a0::
     dw   ChannelDefinition_1e_7114
     dw   ChannelDefinition_1e_7114
@@ -1568,7 +1566,7 @@ ChannelDefinition_1e_76eb::
     rest
     end_def
 
-Music30::
+Music30:: ; MUSIC_MANBOS_MAMBO
     db   $00
     dw   MusicSpeedData_1e_4b06
     dw   Music30Channel1
@@ -1964,7 +1962,7 @@ ChannelDefinition_1e_78cd::
 
     end_def
 
-Music48::
+Music48:: ; MUSIC_GHOST_HOUSE
     db   $00
     dw   MusicSpeedData_1e_4ad9
     dw   Music48Channel1
@@ -1982,7 +1980,6 @@ Music48Channel2::
 
 Music48Channel3::
     dw   ChannelDefinition_1e_79b7
-
 MusicLoop_1e_78ec::
     dw   ChannelDefinition_1e_79be
     dw   $ffff, MusicLoop_1e_78ec
@@ -2250,7 +2247,7 @@ ChannelDefinition_1e_79be::
     rest
     end_def
 
-Music55::
+Music55:: ; MUSIC_ROOSTER_REVIVAL
     db   $00
     dw   MusicSpeedData_1e_4aca
     dw   Music55Channel1
@@ -2275,7 +2272,6 @@ Music55Channel2::
 
 Music55Channel3::
     dw   ChannelDefinition_1e_79b7
-
 MusicLoop_1e_7a2c::
     dw   ChannelDefinition_1e_7a51
     dw   $ffff, MusicLoop_1e_7a2c
@@ -2320,7 +2316,7 @@ ChannelDefinition_1e_7a51::
 
     end_def
 
-Music56::
+Music56:: ; MUSIC_L2_SWORD
     db   $00
     dw   MusicSpeedData_1e_4af7
     dw   Music56Channel1
@@ -2331,7 +2327,6 @@ Music56::
 Music56Channel1::
     dw   ChannelDefinition_1e_7a7b
     dw   ChannelDefinition_1e_7a87
-
 MusicLoop_1e_7a69::
     dw   ChannelDefinition_1e_7b16
     dw   ChannelDefinition_1e_7b1f
@@ -2340,7 +2335,6 @@ MusicLoop_1e_7a69::
 Music56Channel2::
     dw   ChannelDefinition_1e_7a82
     dw   ChannelDefinition_1e_7a87
-
 MusicLoop_1e_7a75::
     dw   ChannelDefinition_1e_7b1b
     dw   $ffff, MusicLoop_1e_7a75
@@ -2519,7 +2513,7 @@ ChannelDefinition_1e_7b1f::
 
     end_def
 
-Music57::
+Music57:: ; MUSIC_HENHOUSE
     db   $0e
     dw   MusicSpeedData_1e_4abb
     dw   Music57Channel1
@@ -2635,7 +2629,7 @@ ChannelDefinition_1e_7b90::
 
     end_def
 
-Music25::
+Music25:: ; MUSIC_HEART_CONTAINER
     db   $00
     dw   MusicSpeedData_1e_4ae8
     dw   Music25Channel1
@@ -2726,7 +2720,7 @@ ChannelDefinition_1e_7c1a::
     set_speed MusicSpeedData_1e_4ad9
     end_def
 
-Music59::
+Music59:: ; MUSIC_WIND_FISH
     db   $00
     dw   MusicSpeedData_1e_4aca
     dw   Music59Channel1
@@ -2736,7 +2730,6 @@ Music59::
 
 Music59Channel1::
     dw   ChannelDefinition_1e_7c47
-
 MusicLoop_1e_7c35::
     dw   ChannelDefinition_1e_7c4e
     dw   $ffff, MusicLoop_1e_7c35
@@ -2914,7 +2907,7 @@ ChannelDefinition_1e_7cf9::
 
     end_def
 
-Music5e::
+Music5e:: ; MUSIC_BOSS_DEFEAT
     db   $00
     dw   MusicSpeedData_1e_4aca
     dw   Music5eChannel1
@@ -2924,14 +2917,12 @@ Music5e::
 
 Music5eChannel1::
     dw   ChannelDefinition_1e_7d28
-
 MusicLoop_1e_7d0c::
     dw   ChannelDefinition_1e_7d36
     dw   $ffff, MusicLoop_1e_7d0c
 
 Music5eChannel2::
     dw   ChannelDefinition_1e_7d33
-
 MusicLoop_1e_7d14::
     dw   ChannelDefinition_1e_7d3c
     dw   ChannelDefinition_1e_7d36
@@ -2978,7 +2969,7 @@ ChannelDefinition_1e_7d46::
     set_envelope_duty $40, $00, 1, 0
     end_def
 
-Music5f::
+Music5f:: ; MUSIC_FINAL_BOSS_DEFEAT
     db   $00
     dw   MusicSpeedData_1e_4aac
     dw   Music5fChannel1
@@ -2988,21 +2979,18 @@ Music5f::
 
 Music5fChannel1::
     dw   ChannelDefinition_1e_7d6e
-
 MusicLoop_1e_7d58::
     dw   ChannelDefinition_1e_7d84
     dw   $ffff, MusicLoop_1e_7d58
 
 Music5fChannel2::
     dw   ChannelDefinition_1e_7d7a
-
 MusicLoop_1e_7d60::
     dw   ChannelDefinition_1e_7d84
     dw   $ffff, MusicLoop_1e_7d60
 
 Music5fChannel3::
     dw   ChannelDefinition_1e_7df8
-
 MusicLoop_1e_7d68::
     dw   ChannelDefinition_1e_7d84
     dw   $ffff, MusicLoop_1e_7d68
@@ -3156,7 +3144,7 @@ ChannelDefinition_1e_7df8::
     rest
     end_def
 
-Music60::
+Music60:: ; MUSIC_FILE_SELECT_ZELDA
     db   $00
     dw   MusicSpeedData_1e_4ad9
     dw   Music60Channel1
@@ -3166,28 +3154,24 @@ Music60::
 
 Music60Channel1::
     dw   ChannelDefinition_1e_7e2f
-
 MusicLoop_1e_7e11::
     dw   ChannelDefinition_1e_7e70
     dw   $ffff, MusicLoop_1e_7e11
 
 Music60Channel2::
     dw   ChannelDefinition_1e_7e3a
-
 MusicLoop_1e_7e19::
     dw   ChannelDefinition_1e_7e96
     dw   $ffff, MusicLoop_1e_7e19
 
 Music60Channel3::
     dw   ChannelDefinition_1e_7e55
-
 MusicLoop_1e_7e21::
     dw   ChannelDefinition_1e_7efe
     dw   $ffff, MusicLoop_1e_7e21
 
 Music60Channel4::
     dw   ChannelDefinition_1e_7e60
-
 MusicLoop_1e_7e29::
     dw   ChannelDefinition_1e_7f76
     dw   $ffff, MusicLoop_1e_7e29

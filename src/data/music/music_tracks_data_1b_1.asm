@@ -31,7 +31,7 @@ Music36Channel1::
 Music38Channel1::
 Music38Channel2::
 Music3aChannel1::
-    dw   ChannelDefinition_1b_4b20
+    dw   ChannelDefinition_1b_4b20 ; rest 20*14
     dw   $ffff, Music04Channel3
 
 ChannelDefinition_1b_4b20::
@@ -44,7 +44,7 @@ ChannelDefinition_1b_4b20::
 ; UNREFERENCED DATA
     db   $00, $22, $44, $55, $66, $66, $88, $88, $aa, $aa, $cc, $cc, $04, $84, $04, $84
 
-Music10::
+Music10:: ; MUSIC_OBTAIN_ITEM
     db   $00
     dw   MusicSpeedData_1b_4ab9
     dw   Music10Channel1
@@ -130,7 +130,7 @@ ChannelDefinition_1b_4b81::
     rest
     end_def
 
-Music40::
+Music40:: ; MUSIC_RICHARD_HOUSE
     db   $04
     dw   MusicSpeedData_1b_4af5
     dw   Music40Channel1
@@ -153,7 +153,7 @@ Music40Channel1::
 
 Music40Channel2::
     dw   ChannelDefinition_1b_4bd5
-    dw   ChannelDefinition_1b_4c3f
+    dw   ChannelDefinition_1b_4c3f ; Totaka's song
     dw   $ffff, Music40Channel2
 
 Music40Channel3::
@@ -280,7 +280,7 @@ ChannelDefinition_1b_4c0a::
 
     end_def
 
-ChannelDefinition_1b_4c3f::
+ChannelDefinition_1b_4c3f:: ; Totaka's song
     set_envelope_duty $61, $00, 2, 0
     notelen 4
     rest
@@ -340,7 +340,7 @@ ChannelDefinition_1b_4c74::
 
     end_def
 
-Music3c::
+Music3c:: ; MUSIC_FILE_SELECT_TOTAKA
     db   $00
     dw   MusicSpeedData_1b_4ae6
     dw   Music3cChannel1
@@ -350,28 +350,24 @@ Music3c::
 
 Music3cChannel1::
     dw   ChannelDefinition_1b_4ca5
-
 MusicLoop_1b_4c87::
     dw   ChannelDefinition_1b_4cde
     dw   $ffff, MusicLoop_1b_4c87
 
 Music3cChannel2::
     dw   ChannelDefinition_1b_4cb2
-
 MusicLoop_1b_4c8f::
     dw   ChannelDefinition_1b_4cef
     dw   $ffff, MusicLoop_1b_4c8f
 
 Music3cChannel3::
     dw   ChannelDefinition_1b_4cbf
-
 MusicLoop_1b_4c97::
     dw   ChannelDefinition_1b_4d3f
     dw   $ffff, MusicLoop_1b_4c97
 
 Music3cChannel4::
     dw   ChannelDefinition_1b_4ccc
-
 MusicLoop_1b_4c9f::
     dw   ChannelDefinition_1b_4d88
     dw   $ffff, MusicLoop_1b_4c9f
@@ -626,7 +622,7 @@ ChannelDefinition_1b_4d88::
     note NOISE_5
     end_def
 
-Music37::
+Music37:: ; MUSIC_CHRISTINE_HOUSE
     db   $00
     dw   MusicSpeedData_1b_4ab9
     dw   Music37Channel1

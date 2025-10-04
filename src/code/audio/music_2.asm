@@ -115,73 +115,73 @@ jr_01E_4072:
 ; match up with "constants/sfx.asm" for some reason.
 ; Is this still the case? The constants are now correctly named.
 MusicDataPointerTable_1E::
-    dw   Music11
-    dw   Music12
-    dw   Music13
-    dw   Music14
-    dw   Music15
-    dw   Music16
-    dw   Music17
-    dw   Music18
-    dw   Music19
-    dw   Music1a
-    dw   Music1b
-    dw   Music1c
-    dw   Music1d
-    dw   Music1e
-    dw   Music1f
-    dw   Music20
+    dw   Music11 ; MUSIC_FILE_SELECT
+    dw   Music12 ; MUSIC_EGG_MAZE
+    dw   Music13 ; MUSIC_KANALET_CASTLE
+    dw   Music14 ; MUSIC_TAIL_CAVE
+    dw   Music15 ; MUSIC_BOTTLE_GROTTO
+    dw   Music16 ; MUSIC_KEY_CAVERN
+    dw   Music17 ; MUSIC_ANGLERS_TUNNEL
+    dw   Music18 ; MUSIC_AFTER_BOSS
+    dw   Music19 ; MUSIC_BOSS
+    dw   Music1a ; MUSIC_TITLE_CUTSCENE
+    dw   Music1b ; MUSIC_OBTAIN_INSTRUMENT
+    dw   Music1c ; MUSIC_INTRO_WAKE_UP
+    dw   Music1d ; MUSIC_OVERWORLD_SWORDLESS
+    dw   Music1e ; MUSIC_DREAM_SHRINE_SLEEP
+    dw   Music1f ; MUSIC_SOUTHERN_SHRINE
+    dw   Music20 ; MUSIC_INSTRUMENT_FULL_MOON_CELLO
 
-    dw   Music21
-    dw   Music22
-    dw   Music23
-    dw   Music24
-    dw   Music25
-    dw   Music26
-    dw   Music27
-    dw   Music28
-    dw   Music29
-    dw   Music2a
-    dw   Music2b
-    dw   Music2c
-    dw   Music2d
-    dw   Music2e
-    dw   Music2f
-    dw   Music30
+    dw   Music21 ; MUSIC_2D_UNDERGROUND
+    dw   Music22 ; MUSIC_OWL
+    dw   Music23 ; MUSIC_FINAL_BOSS
+    dw   Music24 ; MUSIC_DREAM_SHRINE_BED
+    dw   Music25 ; MUSIC_HEART_CONTAINER
+    dw   Music26 ; MUSIC_CAVE
+    dw   Music27 ; MUSIC_OBTAIN_POWERUP
+    dw   Music28 ; MUSIC_INSTRUMENT_CONCH_HORN
+    dw   Music29 ; MUSIC_INSTRUMENT_SEA_LILYS_BELL
+    dw   Music2a ; MUSIC_INSTRUMENT_SURF_HARP
+    dw   Music2b ; MUSIC_INSTRUMENT_WIND_MARIMBA
+    dw   Music2c ; MUSIC_INSTRUMENT_CORAL_TRIANGLE
+    dw   Music2d ; MUSIC_INSTRUMENT_ORGAN_OF_EVENING_CALM
+    dw   Music2e ; MUSIC_INSTRUMENT_THUNDER_DRUM
+    dw   Music2f ; MUSIC_MARIN_SING
+    dw   Music30 ; MUSIC_MANBOS_MAMBO
 
-    dw   Music41
-    dw   Music42
-    dw   Music43
-    dw   Music44
-    dw   Music45
-    dw   Music46
-    dw   Music47
-    dw   Music48
-    dw   Music49
-    dw   Music4a
-    dw   Music4b
-    dw   Music4c
-    dw   Music4d
-    dw   Music4e
-    dw   Music4f
-    dw   Music50
+    dw   Music41 ; MUSIC_EGG_BALLAD_DEFAULT
+    dw   Music42 ; MUSIC_EGG_BALLAD_BELL
+    dw   Music43 ; MUSIC_EGG_BALLAD_HARP
+    dw   Music44 ; MUSIC_EGG_BALLAD_MARIMBA
+    dw   Music45 ; MUSIC_EGG_BALLAD_TRIANGLE
+    dw   Music46 ; MUSIC_EGG_BALLAD_ORGAN
+    dw   Music47 ; MUSIC_EGG_BALLAD_ALL
+    dw   Music48 ; MUSIC_GHOST_HOUSE
+    dw   Music49 ; MUSIC_ACTIVE_POWER_UP
+    dw   Music4a ; MUSIC_LEARN_BALLAD
+    dw   Music4b ; MUSIC_CATFISHS_MAW
+    dw   Music4c ; MUSIC_OPEN_ANGLERS_TUNNEL
+    dw   Music4d ; MUSIC_MARIN_ON_BEACH
+    dw   Music4e ; MUSIC_MARIN_BEACH_TALK
+    dw   Music4f ; MUSIC_MARIN_UNUSED
+    dw   Music50 ; MUSIC_MINIBOSS
 
-    dw   Music51
-    dw   Music52
-    dw   Music53
-    dw   Music54
-    dw   Music55
-    dw   Music56
-    dw   Music57
-    dw   Music58
-    dw   Music59
-    dw   Music5a
-    dw   Music5b
-    dw   Music5c
-    dw   Music5d
-    dw   Music5e
-    dw   Music5f
-    dw   Music60
+    dw   Music51 ; MUSIC_KANALET_CASTLE_COPY
+    dw   Music52 ; MUSIC_TAIL_CAVE_COPY
+    dw   Music53 ; MUSIC_DREAM_SHRINE_DREAM
+    dw   Music54 ; MUSIC_EAGLE_BOSS_TRANSITION
+    dw   Music55 ; MUSIC_ROOSTER_REVIVAL
+    dw   Music56 ; MUSIC_L2_SWORD
+    dw   Music57 ; MUSIC_HENHOUSE
+    dw   Music58 ; MUSIC_FACE_SHRINE
+    dw   Music59 ; MUSIC_WIND_FISH
+    dw   Music5a ; MUSIC_TURTLE_ROCK
+    dw   Music5b ; MUSIC_EAGLES_TOWER
+    dw   Music5c ; MUSIC_EAGLE_BOSS_LOOP
+    dw   Music5d ; MUSIC_FINAL_BOSS_INTRO
+    dw   Music5e ; MUSIC_BOSS_DEFEAT
+    dw   Music5f ; MUSIC_FINAL_BOSS_DEFEAT
+    dw   Music60 ; MUSIC_FILE_SELECT_ZELDA
 
 func_01E_40FF::
     inc  e                                        ;; 1E:40FF $1C

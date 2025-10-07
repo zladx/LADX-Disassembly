@@ -52,10 +52,10 @@ Music5cChannel3::
 Music5dChannel1::
 Music5dChannel3::
 Music5eChannel3::
-    dw   ChannelDefinition_1e_4b22
+    dw   ChannelDefinition_1e_rest_1C0_1
     dw   $ffff, Music14Channel1
 
-ChannelDefinition_1e_4b22::
+ChannelDefinition_1e_rest_1C0_1::
     begin_loop $20
         notelen 14
         rest

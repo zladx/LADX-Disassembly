@@ -1048,7 +1048,7 @@ Music2cChannel2::
     dw   ChannelDefinition_1e_74fe
     dw   ChannelDefinition_1e_74d3
     dw   ChannelDefinition_1e_7505
-    dw   ChannelDefinition_1e_7540
+    dw   ChannelDefinition_1e_rest_1C0_2
     dw   $0000
 
 Music2cChannel3::
@@ -1132,7 +1132,7 @@ ChannelDefinition_1e_751c::
 
     disable_software_envelope
 
-ChannelDefinition_1e_7540::
+ChannelDefinition_1e_rest_1C0_2::
     begin_loop $20
         notelen 14
         rest
@@ -1215,7 +1215,7 @@ Music2eChannel2::
 Music2eChannel4::
     dw   ChannelDefinition_1e_75e2
     dw   ChannelDefinition_1e_75e2
-    dw   ChannelDefinition_1e_75fa
+    dw   ChannelDefinition_1e_rest_1C0_3
     dw   $0000
 
 ChannelDefinition_1e_75b5::
@@ -1278,7 +1278,7 @@ ChannelDefinition_1e_75e2::
     note NOISE_FF
     end_def
 
-ChannelDefinition_1e_75fa::
+ChannelDefinition_1e_rest_1C0_3::
     begin_loop $20
         notelen 14
         rest
@@ -1939,10 +1939,10 @@ ChannelDefinition_1e_788c::
     end_def
 
 MusicLoop_1e_78bb::
-    dw   ChannelDefinition_1e_78c1
+    dw   ChannelDefinition_1e_rest_1C0_4
     dw   $ffff, MusicLoop_1e_78bb
 
-ChannelDefinition_1e_78c1::
+ChannelDefinition_1e_rest_1C0_4::
     begin_loop $20
         notelen 14
         rest
@@ -1951,10 +1951,10 @@ ChannelDefinition_1e_78c1::
     end_def
 
 MusicLoop_1e_78c7::
-    dw   ChannelDefinition_1e_78cd
+    dw   ChannelDefinition_1e_rest_1C0_5
     dw   $ffff, MusicLoop_1e_78c7
 
-ChannelDefinition_1e_78cd::
+ChannelDefinition_1e_rest_1C0_5::
     begin_loop $20
         notelen 14
         rest

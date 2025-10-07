@@ -31,10 +31,10 @@ Music36Channel1::
 Music38Channel1::
 Music38Channel2::
 Music3aChannel1::
-    dw   ChannelDefinition_1b_4b20 ; rest 20*14
+    dw   ChannelDefinition_1b_rest_1C0
     dw   $ffff, Music04Channel3
 
-ChannelDefinition_1b_4b20::
+ChannelDefinition_1b_rest_1C0::
     begin_loop $20
         notelen 14
         rest
@@ -148,7 +148,7 @@ Music40Channel1::
     dw   ChannelDefinition_1b_4c0a
     dw   ChannelDefinition_1b_4c0a
     dw   ChannelDefinition_1b_4c0a
-    dw   ChannelDefinition_1b_4c74
+    dw   ChannelDefinition_1b_rest_2C
     dw   $ffff, Music40Channel1
 
 Music40Channel2::
@@ -165,7 +165,7 @@ Music40Channel3::
     dw   ChannelDefinition_1b_4c05
     dw   ChannelDefinition_1b_4c05
     dw   ChannelDefinition_1b_4c05
-    dw   ChannelDefinition_1b_4c74
+    dw   ChannelDefinition_1b_rest_2C
     dw   $ffff, Music40Channel3
 
 ChannelDefinition_1b_4bd0::
@@ -332,7 +332,7 @@ ChannelDefinition_1b_4c3f:: ; Totaka's song
     rest
     end_def
 
-ChannelDefinition_1b_4c74::
+ChannelDefinition_1b_rest_2C::
     begin_loop $0b
         notelen 4
         rest

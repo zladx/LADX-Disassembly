@@ -15,12 +15,12 @@ Music1aChannel1::
     dw   ChannelDefinition_1e_6e22
     dw   ChannelDefinition_1e_50a8
     dw   ChannelDefinition_1e_6e09
-    dw   ChannelDefinition_1e_6d2a
+    dw   ChannelDefinition_1e_rest_1
     dw   ChannelDefinition_1e_5147
     dw   ChannelDefinition_1e_5147
-    dw   ChannelDefinition_1e_6d15
+    dw   ChannelDefinition_1e_rest_5
     dw   ChannelDefinition_1e_6eb0
-    dw   ChannelDefinition_1e_6d10
+    dw   ChannelDefinition_1e_rest_A_1
     dw   ChannelDefinition_1e_6e09
     dw   ChannelDefinition_1e_5151
     dw   ChannelDefinition_1e_51e3
@@ -37,11 +37,11 @@ Music1aChannel2::
     dw   ChannelDefinition_1e_5147
     dw   ChannelDefinition_1e_6e09
     dw   ChannelDefinition_1e_5147
-    dw   ChannelDefinition_1e_6d15
+    dw   ChannelDefinition_1e_rest_5
     dw   ChannelDefinition_1e_6eb0
     dw   ChannelDefinition_1e_6dbe
     dw   ChannelDefinition_1e_5151
-    dw   ChannelDefinition_1e_6d2d
+    dw   ChannelDefinition_1e_rest_0
     dw   ChannelDefinition_1e_6e18
     dw   ChannelDefinition_1e_51e3
     dw   $0000
@@ -55,7 +55,7 @@ Music1aChannel3::
     dw   ChannelDefinition_1e_6e54
     dw   ChannelDefinition_1e_5138
     dw   ChannelDefinition_1e_6e72
-    dw   ChannelDefinition_1e_6d27
+    dw   ChannelDefinition_1e_rest_6
     dw   ChannelDefinition_1e_5147
     dw   ChannelDefinition_1e_6e77
     dw   ChannelDefinition_1e_5147
@@ -498,7 +498,7 @@ Music11:: ; MUSIC_FILE_SELECT
     dw   Music11Channel4
 
 Music11Channel1::
-    dw   ChannelDefinition_1e_6d15
+    dw   ChannelDefinition_1e_rest_5
 MusicLoop_1e_5216::
     dw   ChannelDefinition_1e_6de1
     dw   ChannelDefinition_1e_5253
@@ -671,9 +671,9 @@ Music23Channel2::
     dw   ChannelDefinition_1e_6de1
     dw   ChannelDefinition_1e_53ce
     dw   ChannelDefinition_1e_6ea0
-    dw   ChannelDefinition_1e_6d15
+    dw   ChannelDefinition_1e_rest_5
     dw   ChannelDefinition_1e_6eac
-    dw   ChannelDefinition_1e_6d27
+    dw   ChannelDefinition_1e_rest_6
 
 MusicLoop_1e_52d6::
     dw   ChannelDefinition_1e_6deb
@@ -694,15 +694,15 @@ Music23Channel1::
     dw   ChannelDefinition_1e_6dd2
     dw   ChannelDefinition_1e_5411
     dw   ChannelDefinition_1e_6ea0
-    dw   ChannelDefinition_1e_6d15
+    dw   ChannelDefinition_1e_rest_5
     dw   ChannelDefinition_1e_6eac
-    dw   ChannelDefinition_1e_6d27
+    dw   ChannelDefinition_1e_rest_6
 
 MusicLoop_1e_52fe::
     dw   ChannelDefinition_1e_6e40
     dw   ChannelDefinition_1e_542a
     dw   ChannelDefinition_1e_543b
-    dw   ChannelDefinition_1e_6d2a
+    dw   ChannelDefinition_1e_rest_1
     dw   ChannelDefinition_1e_543b
     dw   ChannelDefinition_1e_6e40
     dw   ChannelDefinition_1e_5450
@@ -713,7 +713,7 @@ MusicLoop_1e_52fe::
     dw   ChannelDefinition_1e_6e40
     dw   ChannelDefinition_1e_542a
     dw   ChannelDefinition_1e_543b
-    dw   ChannelDefinition_1e_6d2a
+    dw   ChannelDefinition_1e_rest_1
     dw   ChannelDefinition_1e_543b
     dw   ChannelDefinition_1e_6e40
     dw   ChannelDefinition_1e_5450
@@ -725,7 +725,7 @@ MusicLoop_1e_52fe::
     dw   ChannelDefinition_1e_6e40
     dw   ChannelDefinition_1e_5472
     dw   ChannelDefinition_1e_543b
-    dw   ChannelDefinition_1e_6d2a
+    dw   ChannelDefinition_1e_rest_1
     dw   ChannelDefinition_1e_543b
     dw   ChannelDefinition_1e_6df0
     dw   ChannelDefinition_1e_6e7c
@@ -740,7 +740,7 @@ MusicLoop_1e_52fe::
     dw   ChannelDefinition_1e_6e40
     dw   ChannelDefinition_1e_542a
     dw   ChannelDefinition_1e_543b
-    dw   ChannelDefinition_1e_6d2a
+    dw   ChannelDefinition_1e_rest_1
     dw   ChannelDefinition_1e_543b
     dw   ChannelDefinition_1e_6e40
     dw   ChannelDefinition_1e_5450
@@ -751,7 +751,7 @@ MusicLoop_1e_52fe::
     dw   ChannelDefinition_1e_6e40
     dw   ChannelDefinition_1e_542a
     dw   ChannelDefinition_1e_543b
-    dw   ChannelDefinition_1e_6d2a
+    dw   ChannelDefinition_1e_rest_1
     dw   ChannelDefinition_1e_543b
     dw   ChannelDefinition_1e_6e40
     dw   ChannelDefinition_1e_5450
@@ -763,7 +763,7 @@ MusicLoop_1e_52fe::
     dw   ChannelDefinition_1e_6e40
     dw   ChannelDefinition_1e_5472
     dw   ChannelDefinition_1e_543b
-    dw   ChannelDefinition_1e_6d2a
+    dw   ChannelDefinition_1e_rest_1
     dw   ChannelDefinition_1e_543b
     dw   ChannelDefinition_1e_6df0
     dw   ChannelDefinition_1e_6e7c
@@ -781,9 +781,9 @@ Music23Channel3::
     dw   ChannelDefinition_1e_6e54
     dw   ChannelDefinition_1e_541d
     dw   ChannelDefinition_1e_6ea0
-    dw   ChannelDefinition_1e_6d15
+    dw   ChannelDefinition_1e_rest_5
     dw   ChannelDefinition_1e_6eac
-    dw   ChannelDefinition_1e_6d27
+    dw   ChannelDefinition_1e_rest_6
 
 MusicLoop_1e_53a6::
     dw   ChannelDefinition_1e_6e59
@@ -1507,8 +1507,8 @@ Music12:: ; MUSIC_EGG_MAZE
 Music12Channel1::
     dw   ChannelDefinition_1e_6de1
     dw   ChannelDefinition_1e_56a7
-    dw   ChannelDefinition_1e_6d20
-    dw   ChannelDefinition_1e_6d20
+    dw   ChannelDefinition_1e_rest_A_2
+    dw   ChannelDefinition_1e_rest_A_2
     dw   $ffff, MusicLoop_1e_5745
 
 Music12Channel2::
@@ -1730,8 +1730,8 @@ MusicLoop_1e_5745::
     dw   ChannelDefinition_1e_5808
     dw   ChannelDefinition_1e_6de1
     dw   ChannelDefinition_1e_56a7
-    dw   ChannelDefinition_1e_6d20
-    dw   ChannelDefinition_1e_6d20
+    dw   ChannelDefinition_1e_rest_A_2
+    dw   ChannelDefinition_1e_rest_A_2
     dw   $ffff, Music12Channel1
 
 MusicLoop_1e_575f::
@@ -1740,7 +1740,7 @@ MusicLoop_1e_575f::
     dw   ChannelDefinition_1e_6e40
     dw   ChannelDefinition_1e_583e
     dw   ChannelDefinition_1e_6eb4
-    dw   ChannelDefinition_1e_6d15
+    dw   ChannelDefinition_1e_rest_5
     dw   ChannelDefinition_1e_6d9b
     dw   ChannelDefinition_1e_56bc
     dw   ChannelDefinition_1e_6e45
@@ -1766,7 +1766,7 @@ MusicLoop_1e_5791::
     dw   ChannelDefinition_1e_6e54
     dw   ChannelDefinition_1e_589b
     dw   ChannelDefinition_1e_6eb4
-    dw   ChannelDefinition_1e_6d15
+    dw   ChannelDefinition_1e_rest_5
     dw   ChannelDefinition_1e_6e59
     dw   ChannelDefinition_1e_56f9
     dw   ChannelDefinition_1e_56f9
@@ -2085,7 +2085,7 @@ Music5a:: ; MUSIC_TURTLE_ROCK
     dw   $0000
 
 Music5aChannel1::
-    dw   ChannelDefinition_1e_6d27
+    dw   ChannelDefinition_1e_rest_6
 MusicLoop_1e_58d6::
     dw   ChannelDefinition_1e_6d78
     dw   ChannelDefinition_1e_5918
@@ -2117,7 +2117,7 @@ Music5aChannel2::
 
 Music5aChannel3::
     dw   ChannelDefinition_1e_6e54
-    dw   ChannelDefinition_1e_596e
+    dw   ChannelDefinition_1e_rest_3C
     dw   ChannelDefinition_1e_5939
     dw   ChannelDefinition_1e_5961
     dw   $ffff, Music5aChannel3
@@ -2220,7 +2220,7 @@ ChannelDefinition_1e_5961::
     note B_1
     end_def
 
-ChannelDefinition_1e_596e::
+ChannelDefinition_1e_rest_3C::
     begin_loop $0c
         notelen 5
         rest
@@ -2254,7 +2254,7 @@ Music14Channel2::
     dw   ChannelDefinition_1e_6de6
     dw   ChannelDefinition_1e_6e85
     dw   ChannelDefinition_1e_5a47
-    dw   ChannelDefinition_1e_6d20
+    dw   ChannelDefinition_1e_rest_A_2
     dw   ChannelDefinition_1e_6e7c
     dw   ChannelDefinition_1e_6e13
     dw   ChannelDefinition_1e_6e7c
@@ -2272,7 +2272,7 @@ Music14Channel2::
     dw   ChannelDefinition_1e_6de6
     dw   ChannelDefinition_1e_6e85
     dw   ChannelDefinition_1e_5a47
-    dw   ChannelDefinition_1e_6d20
+    dw   ChannelDefinition_1e_rest_A_2
     dw   ChannelDefinition_1e_6e7c
     dw   ChannelDefinition_1e_6d9b
     dw   ChannelDefinition_1e_5a77
@@ -2592,22 +2592,22 @@ Music15Channel2::
     dw   ChannelDefinition_1e_5c49
     dw   ChannelDefinition_1e_6d8c
     dw   ChannelDefinition_1e_5c49
-    dw   ChannelDefinition_1e_6d20
-    dw   ChannelDefinition_1e_6d20
+    dw   ChannelDefinition_1e_rest_A_2
+    dw   ChannelDefinition_1e_rest_A_2
     dw   ChannelDefinition_1e_6d9b
     dw   ChannelDefinition_1e_5c4e
     dw   ChannelDefinition_1e_6e94
     dw   ChannelDefinition_1e_5c4e
-    dw   ChannelDefinition_1e_6d20
-    dw   ChannelDefinition_1e_6d20
+    dw   ChannelDefinition_1e_rest_A_2
+    dw   ChannelDefinition_1e_rest_A_2
     dw   $ffff, Music15Channel2
 
 Music15Channel3::
-    dw   ChannelDefinition_1e_5d67
-    dw   ChannelDefinition_1e_6d15
-    dw   ChannelDefinition_1e_6d20
-    dw   ChannelDefinition_1e_6d20
-    dw   ChannelDefinition_1e_6d20
+    dw   ChannelDefinition_1e_rest_2D
+    dw   ChannelDefinition_1e_rest_5
+    dw   ChannelDefinition_1e_rest_A_2
+    dw   ChannelDefinition_1e_rest_A_2
+    dw   ChannelDefinition_1e_rest_A_2
     dw   ChannelDefinition_1e_6e63
     dw   ChannelDefinition_1e_5c5e
     dw   ChannelDefinition_1e_6e72
@@ -2618,12 +2618,12 @@ Music15Channel3::
     dw   ChannelDefinition_1e_5c8d
     dw   ChannelDefinition_1e_6e6d
     dw   ChannelDefinition_1e_5ca1
-    dw   ChannelDefinition_1e_6d18
+    dw   ChannelDefinition_1e_rest_4
     dw   ChannelDefinition_1e_6e6d
     dw   ChannelDefinition_1e_5c96
     dw   ChannelDefinition_1e_6e77
     dw   ChannelDefinition_1e_5ca1
-    dw   ChannelDefinition_1e_6d18
+    dw   ChannelDefinition_1e_rest_4
     dw   $ffff, Music15Channel3
 
 ChannelDefinition_1e_5bdf::
@@ -2874,10 +2874,10 @@ Music16Channel1::
     dw   ChannelDefinition_1e_6e09
     dw   ChannelDefinition_1e_5d6d
     dw   ChannelDefinition_1e_5d6d
-    dw   ChannelDefinition_1e_6d18
-    dw   ChannelDefinition_1e_6d24
-    dw   ChannelDefinition_1e_6d24
-    dw   ChannelDefinition_1e_6d2d
+    dw   ChannelDefinition_1e_rest_4
+    dw   ChannelDefinition_1e_rest_2
+    dw   ChannelDefinition_1e_rest_2
+    dw   ChannelDefinition_1e_rest_0
     dw   ChannelDefinition_1e_6e09
     dw   ChannelDefinition_1e_5d6d
     dw   ChannelDefinition_1e_6e13
@@ -2894,8 +2894,8 @@ Music16Channel1::
     dw   ChannelDefinition_1e_5d6d
     dw   ChannelDefinition_1e_6dcd
     dw   ChannelDefinition_1e_5d6d
-    dw   ChannelDefinition_1e_6d24
-    dw   ChannelDefinition_1e_6d24
+    dw   ChannelDefinition_1e_rest_2
+    dw   ChannelDefinition_1e_rest_2
     dw   ChannelDefinition_1e_6e0e
     dw   ChannelDefinition_1e_5d98
     dw   $ffff, Music16Channel1
@@ -2911,22 +2911,22 @@ Music16Channel2::
     dw   ChannelDefinition_1e_5d6d
     dw   ChannelDefinition_1e_6e09
     dw   ChannelDefinition_1e_5d6d
-    dw   ChannelDefinition_1e_6d2d
-    dw   ChannelDefinition_1e_6d2d
+    dw   ChannelDefinition_1e_rest_0
+    dw   ChannelDefinition_1e_rest_0
     dw   ChannelDefinition_1e_6e09
     dw   ChannelDefinition_1e_5d6d
     dw   ChannelDefinition_1e_6e0e
     dw   ChannelDefinition_1e_5d6d
     dw   ChannelDefinition_1e_6e13
     dw   ChannelDefinition_1e_5d6d
-    dw   ChannelDefinition_1e_6d2d
-    dw   ChannelDefinition_1e_6d2d
+    dw   ChannelDefinition_1e_rest_0
+    dw   ChannelDefinition_1e_rest_0
     dw   $ffff, Music16Channel2
 
 Music16Channel3::
     dw   ChannelDefinition_1e_6e5e
     dw   ChannelDefinition_1e_5d36
-    dw   ChannelDefinition_1e_5d67
+    dw   ChannelDefinition_1e_rest_2D
     dw   $ffff, Music16Channel3
 
 ChannelDefinition_1e_5d36::
@@ -2984,7 +2984,7 @@ ChannelDefinition_1e_5d4d::
     note F_6
     end_def
 
-ChannelDefinition_1e_5d67::
+ChannelDefinition_1e_rest_2D::
     begin_loop $09
         notelen 5
         rest
@@ -3270,7 +3270,7 @@ Music13Channel2::
     dw   $ffff, Music13Channel2
 
 Music13Channel1::
-    dw   ChannelDefinition_1e_6d10
+    dw   ChannelDefinition_1e_rest_A_1
 MusicLoop_1e_5e8b::
     dw   ChannelDefinition_1e_6d7d
     dw   ChannelDefinition_1e_5e9b
@@ -3383,7 +3383,7 @@ Music18:: ; MUSIC_AFTER_BOSS
     dw   $0000
 
 Music18Channel1::
-    dw   ChannelDefinition_1e_6d10
+    dw   ChannelDefinition_1e_rest_A_1
 MusicLoop_1e_5efb::
     dw   ChannelDefinition_1e_6d7d
     dw   ChannelDefinition_1e_5f19
@@ -3458,7 +3458,7 @@ Music19Channel1::
     dw   ChannelDefinition_1e_5fbc
     dw   ChannelDefinition_1e_6dc8
     dw   ChannelDefinition_1e_5f9d
-    dw   ChannelDefinition_1e_6d20
+    dw   ChannelDefinition_1e_rest_A_2
     dw   $ffff, Music19Channel1
 
 Music19Channel2::
@@ -3471,19 +3471,19 @@ Music19Channel2::
     dw   ChannelDefinition_1e_6e8e
     dw   ChannelDefinition_1e_6dc8
     dw   ChannelDefinition_1e_5fc7
-    dw   ChannelDefinition_1e_6d20
+    dw   ChannelDefinition_1e_rest_A_2
     dw   ChannelDefinition_1e_6e7c
     dw   $ffff, Music19Channel2
 
 Music19Channel3::
-    dw   ChannelDefinition_1e_6d15
+    dw   ChannelDefinition_1e_rest_5
     dw   ChannelDefinition_1e_6e5e
     dw   ChannelDefinition_1e_6015
     dw   ChannelDefinition_1e_6e59
     dw   ChannelDefinition_1e_6022
     dw   ChannelDefinition_1e_6e5e
     dw   ChannelDefinition_1e_6015
-    dw   ChannelDefinition_1e_6d20
+    dw   ChannelDefinition_1e_rest_A_2
     dw   $ffff, Music19Channel3
 
 Music19Channel4::
@@ -3731,8 +3731,8 @@ Music1b:: ; MUSIC_OBTAIN_INSTRUMENT
 
 Music1bChannel1::
     dw   ChannelDefinition_1e_6e09
-    dw   ChannelDefinition_1e_6d24
-    dw   ChannelDefinition_1e_6d27
+    dw   ChannelDefinition_1e_rest_2
+    dw   ChannelDefinition_1e_rest_6
     dw   ChannelDefinition_1e_6087
     dw   $0000
 
@@ -3743,7 +3743,7 @@ Music1bChannel2::
 
 Music1bChannel3::
     dw   ChannelDefinition_1e_6e77
-    dw   ChannelDefinition_1e_6d27
+    dw   ChannelDefinition_1e_rest_6
     dw   ChannelDefinition_1e_6087
     dw   $0000
 
@@ -3819,7 +3819,7 @@ Music1c:: ; MUSIC_INTRO_WAKE_UP
 Music1cChannel1::
     dw   ChannelDefinition_1e_6e09
     dw   ChannelDefinition_1e_6003
-    dw   ChannelDefinition_1e_6d10
+    dw   ChannelDefinition_1e_rest_A_1
 MusicLoop_1e_60d3::
     dw   ChannelDefinition_1e_60e3
     dw   $ffff, MusicLoop_1e_60d3
@@ -4281,18 +4281,18 @@ Music1e:: ; MUSIC_DREAM_SHRINE_SLEEP
 
 Music1eChannel1::
     dw   ChannelDefinition_1e_6d7d
-    dw   ChannelDefinition_1e_6d10
+    dw   ChannelDefinition_1e_rest_A_1
     dw   ChannelDefinition_1e_62f2
     dw   ChannelDefinition_1e_6e09
     dw   ChannelDefinition_1e_62f2
     dw   ChannelDefinition_1e_6304
-    dw   ChannelDefinition_1e_6d2d
+    dw   ChannelDefinition_1e_rest_0
     dw   ChannelDefinition_1e_6ea8
     dw   ChannelDefinition_1e_6d7d
     dw   ChannelDefinition_1e_5147
     dw   ChannelDefinition_1e_5147
     dw   ChannelDefinition_1e_5147
-    dw   ChannelDefinition_1e_6d20
+    dw   ChannelDefinition_1e_rest_A_2
     dw   $0000
 
 Music1eChannel2::
@@ -4311,7 +4311,7 @@ Music1eChannel2::
     dw   ChannelDefinition_1e_5147
     dw   ChannelDefinition_1e_6e0e
     dw   ChannelDefinition_1e_5147
-    dw   ChannelDefinition_1e_6d20
+    dw   ChannelDefinition_1e_rest_A_2
     dw   $0000
 
 ChannelDefinition_1e_62f2::
@@ -4390,7 +4390,7 @@ Music4bChannel3::
     dw   ChannelDefinition_1e_6e6d
     dw   ChannelDefinition_1e_6433
     dw   ChannelDefinition_1e_6e6d
-    dw   ChannelDefinition_1e_6454
+    dw   ChannelDefinition_1e_rest_60
     dw   ChannelDefinition_1e_6e6d
     dw   ChannelDefinition_1e_645a
     dw   $ffff, Music4bChannel3
@@ -4630,7 +4630,7 @@ ChannelDefinition_1e_6433::
 
     end_def
 
-ChannelDefinition_1e_6454::
+ChannelDefinition_1e_rest_60::
     begin_loop $0c
         notelen 8
         rest
@@ -4705,8 +4705,8 @@ MusicLoop_1e_6488::
     dw   $ffff, MusicLoop_1e_6488
 
 Music1fChannel2::
-    dw   ChannelDefinition_1e_6d20
-    dw   ChannelDefinition_1e_6d20
+    dw   ChannelDefinition_1e_rest_A_2
+    dw   ChannelDefinition_1e_rest_A_2
 MusicLoop_1e_64b8::
     dw   ChannelDefinition_1e_6e2c
     dw   ChannelDefinition_1e_654b
@@ -4938,7 +4938,7 @@ Music58:: ; MUSIC_FACE_SHRINE
     dw   $0000
 
 Music58Channel1::
-    dw   ChannelDefinition_1e_6d24
+    dw   ChannelDefinition_1e_rest_2
 
 MusicLoop_1e_6588::
     dw   ChannelDefinition_1e_6d7d
@@ -5021,7 +5021,7 @@ Music21:: ; MUSIC_2D_UNDERGROUND
 Music21Channel2::
     dw   ChannelDefinition_1e_6df5
     dw   ChannelDefinition_1e_6625
-    dw   ChannelDefinition_1e_6d20
+    dw   ChannelDefinition_1e_rest_A_2
     dw   $ffff, Music21Channel2
 
 ChannelDefinition_1e_6625::
@@ -5053,8 +5053,8 @@ Music22:: ; MUSIC_OWL
 
 Music22Channel1::
     dw   ChannelDefinition_1e_6e09
-    dw   ChannelDefinition_1e_6d24
-    dw   ChannelDefinition_1e_6d10
+    dw   ChannelDefinition_1e_rest_2
+    dw   ChannelDefinition_1e_rest_A_1
 MusicLoop_1e_6647::
     dw   ChannelDefinition_1e_6653
     dw   $ffff, MusicLoop_1e_6647
@@ -5090,7 +5090,7 @@ Music24:: ; MUSIC_DREAM_SHRINE_BED
 
 Music24Channel1::
     dw   ChannelDefinition_1e_6e09
-    dw   ChannelDefinition_1e_6d10
+    dw   ChannelDefinition_1e_rest_A_1
     dw   ChannelDefinition_1e_6685
     dw   ChannelDefinition_1e_669b
 MusicLoop_1e_6675::
@@ -5173,7 +5173,7 @@ Music53:: ; MUSIC_DREAM_SHRINE_DREAM
 
 Music53Channel1::
     dw   ChannelDefinition_1e_6d7d
-    dw   ChannelDefinition_1e_6d10
+    dw   ChannelDefinition_1e_rest_A_1
     dw   ChannelDefinition_1e_66f6
     dw   ChannelDefinition_1e_6ea4
     dw   ChannelDefinition_1e_6e09
@@ -5184,7 +5184,7 @@ Music53Channel1::
 Music53Channel2::
     dw   ChannelDefinition_1e_6da0
     dw   ChannelDefinition_1e_66f6
-    dw   ChannelDefinition_1e_6d10
+    dw   ChannelDefinition_1e_rest_A_1
     dw   ChannelDefinition_1e_6ea4
     dw   ChannelDefinition_1e_6dbe
     dw   ChannelDefinition_1e_6719
@@ -5192,8 +5192,8 @@ Music53Channel2::
     dw   $ffff, Music53Channel2
 
 Music53Channel3::
-    dw   ChannelDefinition_1e_6d10
-    dw   ChannelDefinition_1e_6d18
+    dw   ChannelDefinition_1e_rest_A_1
+    dw   ChannelDefinition_1e_rest_4
     dw   ChannelDefinition_1e_6ea4
     dw   ChannelDefinition_1e_6e68
     dw   ChannelDefinition_1e_6700
@@ -5367,7 +5367,7 @@ Music5b:: ; MUSIC_EAGLES_TOWER
     dw   $0000
 
 Music5bChannel1::
-    dw   ChannelDefinition_1e_6d10
+    dw   ChannelDefinition_1e_rest_A_1
 MusicLoop_1e_67a9::
     dw   ChannelDefinition_1e_6d78
     dw   ChannelDefinition_1e_68db
@@ -5384,14 +5384,14 @@ MusicLoop_1e_67a9::
     dw   ChannelDefinition_1e_6d78
     dw   ChannelDefinition_1e_68db
     dw   ChannelDefinition_1e_68c4
-    dw   ChannelDefinition_1e_6d20
-    dw   ChannelDefinition_1e_6d20
-    dw   ChannelDefinition_1e_6d20
-    dw   ChannelDefinition_1e_6d20
+    dw   ChannelDefinition_1e_rest_A_2
+    dw   ChannelDefinition_1e_rest_A_2
+    dw   ChannelDefinition_1e_rest_A_2
+    dw   ChannelDefinition_1e_rest_A_2
     dw   $ffff, MusicLoop_1e_67a9
 
 Music5bChannel3::
-    dw   ChannelDefinition_1e_6973
+    dw   ChannelDefinition_1e_rest_78
     dw   ChannelDefinition_1e_6e68
     dw   ChannelDefinition_1e_6856
     dw   ChannelDefinition_1e_6e6d
@@ -5771,7 +5771,7 @@ ChannelDefinition_1e_6965::
     rest
     end_def
 
-ChannelDefinition_1e_6973::
+ChannelDefinition_1e_rest_78::
     begin_loop $18
         notelen 5
         rest
@@ -5891,7 +5891,7 @@ Music4d:: ; MUSIC_MARIN_ON_BEACH
 
 Music4dChannel1::
     dw   ChannelDefinition_1e_6d7d
-    dw   ChannelDefinition_1e_6d10
+    dw   ChannelDefinition_1e_rest_A_1
     dw   ChannelDefinition_1e_6a08
     dw   $ffff, MusicLoop_1e_69f8
 
@@ -5903,7 +5903,7 @@ MusicLoop_1e_69f8::
     dw   $ffff, MusicLoop_1e_6d30
 
 Music4dChannel3::
-    dw   ChannelDefinition_1e_6d18
+    dw   ChannelDefinition_1e_rest_4
     dw   ChannelDefinition_1e_6e77
     dw   ChannelDefinition_1e_6a1c
     dw   $ffff, MusicLoop_1e_6d30
@@ -5955,55 +5955,55 @@ MusicLoop_1e_6a32::
     dw   ChannelDefinition_1e_6eb0
     dw   ChannelDefinition_1e_6d96
     dw   ChannelDefinition_1e_6aa8
-    dw   ChannelDefinition_1e_6d10
+    dw   ChannelDefinition_1e_rest_A_1
     dw   ChannelDefinition_1e_6d7d
     dw   ChannelDefinition_1e_6a08
-    dw   ChannelDefinition_1e_6d24
-    dw   ChannelDefinition_1e_6d2d
+    dw   ChannelDefinition_1e_rest_2
+    dw   ChannelDefinition_1e_rest_0
     dw   ChannelDefinition_1e_6a96
     dw   ChannelDefinition_1e_6b78
     dw   ChannelDefinition_1e_6da0
     dw   ChannelDefinition_1e_6b28
     dw   ChannelDefinition_1e_6e09
     dw   ChannelDefinition_1e_6b40
-    dw   ChannelDefinition_1e_6d27
+    dw   ChannelDefinition_1e_rest_6
     dw   $ffff, MusicLoop_1e_6a32
 
 Music4eChannel1::
     dw   ChannelDefinition_1e_6d7d
-    dw   ChannelDefinition_1e_6d10
+    dw   ChannelDefinition_1e_rest_A_1
     dw   ChannelDefinition_1e_6a9b
-    dw   ChannelDefinition_1e_6d2d
+    dw   ChannelDefinition_1e_rest_0
 MusicLoop_1e_6a5c::
     dw   ChannelDefinition_1e_6eb0
-    dw   ChannelDefinition_1e_6b22
+    dw   ChannelDefinition_1e_rest_44
     dw   ChannelDefinition_1e_6d87
     dw   ChannelDefinition_1e_6a08
-    dw   ChannelDefinition_1e_6d20
-    dw   ChannelDefinition_1e_6d20
-    dw   ChannelDefinition_1e_6d20
-    dw   ChannelDefinition_1e_6d20
-    dw   ChannelDefinition_1e_6d10
+    dw   ChannelDefinition_1e_rest_A_2
+    dw   ChannelDefinition_1e_rest_A_2
+    dw   ChannelDefinition_1e_rest_A_2
+    dw   ChannelDefinition_1e_rest_A_2
+    dw   ChannelDefinition_1e_rest_A_1
     dw   ChannelDefinition_1e_6d7d
     dw   ChannelDefinition_1e_6b28
-    dw   ChannelDefinition_1e_6d27
-    dw   ChannelDefinition_1e_6d2d
-    dw   ChannelDefinition_1e_6d10
+    dw   ChannelDefinition_1e_rest_6
+    dw   ChannelDefinition_1e_rest_0
+    dw   ChannelDefinition_1e_rest_A_1
     dw   $ffff, MusicLoop_1e_6a5c
 
 Music4eChannel3::
-    dw   ChannelDefinition_1e_6d18
-    dw   ChannelDefinition_1e_6d24
+    dw   ChannelDefinition_1e_rest_4
+    dw   ChannelDefinition_1e_rest_2
 MusicLoop_1e_6a80::
     dw   ChannelDefinition_1e_6e6d
     dw   ChannelDefinition_1e_6eb0
-    dw   ChannelDefinition_1e_6d10
-    dw   ChannelDefinition_1e_5d67
+    dw   ChannelDefinition_1e_rest_A_1
+    dw   ChannelDefinition_1e_rest_2D
     dw   ChannelDefinition_1e_6b46
-    dw   ChannelDefinition_1e_6d15
-    dw   ChannelDefinition_1e_6d2d
-    dw   ChannelDefinition_1e_6d18
-    dw   ChannelDefinition_1e_6d24
+    dw   ChannelDefinition_1e_rest_5
+    dw   ChannelDefinition_1e_rest_0
+    dw   ChannelDefinition_1e_rest_4
+    dw   ChannelDefinition_1e_rest_2
     dw   $ffff, MusicLoop_1e_6a80
 
 ChannelDefinition_1e_6a96::
@@ -6115,7 +6115,7 @@ ChannelDefinition_1e_6aa8::
     rest
     end_def
 
-ChannelDefinition_1e_6b22::
+ChannelDefinition_1e_rest_44::
     begin_loop $11
         notelen 4
         rest
@@ -6322,7 +6322,7 @@ Music4f:: ; MUSIC_MARIN_UNUSED
 Music4fChannel1::
     dw   ChannelDefinition_1e_6d9b
     dw   ChannelDefinition_1e_6c40
-    dw   ChannelDefinition_1e_6d2a
+    dw   ChannelDefinition_1e_rest_1
     dw   $ffff, MusicLoop_1e_6c22
 
 Music4fChannel2::
@@ -6337,7 +6337,7 @@ MusicLoop_1e_6c22::
 
 Music4fChannel3::
     dw   ChannelDefinition_1e_6e6d
-    dw   ChannelDefinition_1e_6d10
+    dw   ChannelDefinition_1e_rest_A_1
     dw   $ffff, MusicLoop_1e_6c20
 
 ChannelDefinition_1e_6c2e::
@@ -6452,15 +6452,15 @@ Music54Channel2::
     dw   $ffff, Music19Channel2
 
 Music54Channel3::
-    dw   ChannelDefinition_1e_6d20
-    dw   ChannelDefinition_1e_6d20
-    dw   ChannelDefinition_1e_6d20
-    dw   ChannelDefinition_1e_6d15
+    dw   ChannelDefinition_1e_rest_A_2
+    dw   ChannelDefinition_1e_rest_A_2
+    dw   ChannelDefinition_1e_rest_A_2
+    dw   ChannelDefinition_1e_rest_5
     dw   ChannelDefinition_1e_6ea0
     dw   $ffff, Music19Channel3
 
 Music54Channel4::
-    dw   ChannelDefinition_1e_6d0a
+    dw   ChannelDefinition_1e_rest_23
     dw   ChannelDefinition_1e_6ea0
     dw   $ffff, Music19Channel4
 
@@ -6503,7 +6503,7 @@ ChannelDefinition_1e_6d03::
     rest
     end_def
 
-ChannelDefinition_1e_6d0a::
+ChannelDefinition_1e_rest_23::
     begin_loop $07
         notelen 5
         rest
@@ -6511,53 +6511,53 @@ ChannelDefinition_1e_6d0a::
 
     end_def
 
-ChannelDefinition_1e_6d10::
+ChannelDefinition_1e_rest_A_1::
     notelen 1
     rest
     notelen 9
     rest
     end_def
 
-ChannelDefinition_1e_6d15::
+ChannelDefinition_1e_rest_5::
     notelen 5
     rest
     end_def
 
-ChannelDefinition_1e_6d18::
+ChannelDefinition_1e_rest_4::
     notelen 4
     rest
     end_def
 ; UNREFERENCED DATA
     db   $a5, $01, $a8, $01, $00
 
-ChannelDefinition_1e_6d20::
+ChannelDefinition_1e_rest_A_2::
     notelen 5
     rest
     rest
     end_def
 
-ChannelDefinition_1e_6d24::
+ChannelDefinition_1e_rest_2::
     notelen 2
     rest
     end_def
 
-ChannelDefinition_1e_6d27::
+ChannelDefinition_1e_rest_6::
     notelen 6
     rest
     end_def
 
-ChannelDefinition_1e_6d2a::
+ChannelDefinition_1e_rest_1::
     notelen 1
     rest
     end_def
 
-ChannelDefinition_1e_6d2d::
+ChannelDefinition_1e_rest_0::
     notelen 0
     rest
     end_def
 
 MusicLoop_1e_6d30::
-    dw   ChannelDefinition_1e_6d15
+    dw   ChannelDefinition_1e_rest_5
     dw   $ffff, MusicLoop_1e_6d30
 ; UNREFERENCED DATA
     db   $99, $00

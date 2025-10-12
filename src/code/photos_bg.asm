@@ -115,7 +115,7 @@ LoadPhotoBgMap::
 
     ret                                           ;; 3D:40A3 $C9
 
-; Background map and BG attributes
+; Background map and BG attributes for photos or animated scenes when you get the photo.
 
 PhotoDizzyLinkBgMap::
 include "data/photos_bg/dizzy_link.asm"

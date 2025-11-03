@@ -250,9 +250,9 @@ InterruptVBlank::
 .photoAlbumEnd
 
     ;
-    ; If the next frame is still being rendered, drop this frame.
+    ; If the next frame is still being computed, drop this frame.
     ;
-    ldh  a, [hIsRenderingFrame]                   ;; 00:048D $F0 $FD
+    ldh  a, [hIsComputingFrame]                   ;; 00:048D $F0 $FD
     and  a                                        ;; 00:048F $A7
     jp   nz, .vblankDone                          ;; 00:0490 $C2 $69 $05
 
@@ -440,7 +440,7 @@ InterruptVBlank::
 PhotoAlbumVBlankHandler::
     ld   a, [wCurrentBank]                        ;; 00:0577 $FA $AF $DB
     push af                                       ;; 00:057A $F5
-    ldh  a, [hIsRenderingFrame]                   ;; 00:057B $F0 $FD
+    ldh  a, [hIsComputingFrame]                   ;; 00:057B $F0 $FD
     and  a                                        ;; 00:057D $A7
     jr   nz, .clearBGTilesFlag                    ;; 00:057E $20 $2B
 

@@ -12,9 +12,9 @@
 ;  - render window,
 ;  - wait for next frame.
 RenderLoop::
-    ; Mark rendering of a new frame as being started
+    ; Mark computing of a new frame as being started
     ld   a, TRUE                                  ;; 00:01DA $3E $01
-    ldh  [hIsRenderingFrame], a                   ;; 00:01DC $E0 $FD
+    ldh  [hIsComputingFrame], a                   ;; 00:01DC $E0 $FD
 
     ;
     ; Set scroll Y
@@ -358,7 +358,7 @@ ENDC
 
     ; Mark the frame as being ready
     xor  a                                        ;; 00:036F $AF
-    ldh  [hIsRenderingFrame], a                   ;; 00:0370 $E0 $FD
+    ldh  [hIsComputingFrame], a                   ;; 00:0370 $E0 $FD
 
     ; Stop the CPU until the next interrupt
     halt                                          ;; 00:0372 $76

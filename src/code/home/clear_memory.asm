@@ -20,8 +20,8 @@ ClearWRAMAndLowerHRAM::
 ; Clear all values from HRAM and WRAM
 ; (only `hIsGBC` is kept)
 ClearHRAMAndWRAM::
-    ; Set all bytes of HRAM (from hGameValuesSection to hIsRenderingFrame) to zero
-    ld   bc, hIsRenderingFrame - hGameValuesSection ;; 00:29D0 $01 $6D $00
+    ; Set all bytes of HRAM (from hGameValuesSection to hIsComputingFrame) to zero
+    ld   bc, hIsComputingFrame - hGameValuesSection ;; 00:29D0 $01 $6D $00
 
 ClearHRAMBytesAndWRAM::
     ; Set BC bytes of HRAM (starting from $FF90) to zero

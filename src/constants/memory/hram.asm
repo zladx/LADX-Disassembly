@@ -539,10 +539,10 @@ hLinkFinalRoomPosition::
 ; Unused
 ds 1 ; FFFC
 
-; Is the engine currently rendering a frame.
-; 0 = rendering is done, a frame is ready to be copied to VRAM,
-; 1 = the engine is rendering a new frame
-hIsRenderingFrame::
+; Is the engine currently computing a frame.
+; 0 = computation is done, a frame is ready to be copied to VRAM,
+; 1 = the engine is computing a new frame
+hIsComputingFrame::
  ds 1 ; FFFD
 
 ; Marker for the Hardware that the program is running on

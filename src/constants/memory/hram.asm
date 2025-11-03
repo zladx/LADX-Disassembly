@@ -337,10 +337,10 @@ hIntersectedObjectBGAddressHigh::
 hIntersectedObjectBGAddressLow::
   ds $1 ; FFD0
 
-; boolean value if changes needs to be rendered
-; 1 = frame rendering is needed,
-; 0 = frame rendering was done
-hNeedsRenderingFrame::
+; Whether the VBlank interrupt was serviced since the last frame was computed
+; 0 = the VBlank interrupt didn't execute since last frame
+; 1 = the VBlank interrupt just finished
+hVBlankOccurred::
   ds 1 ; FFD1
 
 ; Copy of the rIE register

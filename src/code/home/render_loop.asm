@@ -366,14 +366,12 @@ ENDC
 
     ; An interrupt occured; but maybe it wasn't the V-Blank interrupt.
     ; Busy-loop until the V-Blank interrupt actually ran and finished.
-.pollNeedsRenderingFrame
-    ldh  a, [hNeedsRenderingFrame]                ;; 00:0374 $F0 $D1
+.pollUntilVBlank
+    ldh  a, [hVBlankOccurred]                     ;; 00:0374 $F0 $D1
     and  a                                        ;; 00:0376 $A7
-    jr   z, .pollNeedsRenderingFrame              ;; 00:0377 $28 $FB
-
-    ; Clear hNeedsRenderingFrame
+    jr   z, .pollUntilVBlank                      ;; 00:0377 $28 $FB
     xor  a                                        ;; 00:0379 $AF
-    ldh  [hNeedsRenderingFrame], a                ;; 00:037A $E0 $D1
+    ldh  [hVBlankOccurred], a                     ;; 00:037A $E0 $D1
 
     ; Start rendering the next frame
     jp   RenderLoop                               ;; 00:037C $C3 $DA $01

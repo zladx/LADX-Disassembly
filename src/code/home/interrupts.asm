@@ -432,7 +432,7 @@ InterruptVBlank::
     pop  bc                                       ;; 00:0570 $C1
 
     ld   a, TRUE                                  ;; 00:0571 $3E $01
-    ldh  [hNeedsRenderingFrame], a                ;; 00:0573 $E0 $D1
+    ldh  [hVBlankOccurred], a                     ;; 00:0573 $E0 $D1
 
     pop  af                                       ;; 00:0575 $F1
     reti                                          ;; 00:0576 $D9

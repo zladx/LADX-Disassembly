@@ -1,8 +1,8 @@
 MusicTotakaUnused::
     db   $00
     dw   MusicSpeedData_1b_4ae6
-    dw   MusicTotakaUnused_Channel1 ; rest $1C0
-    dw   MusicTotakaUnused_Channel2 ; rest $1C0
+    dw   MusicTotakaUnused_Channel1_rest_1C0
+    dw   MusicTotakaUnused_Channel2_rest_1C0
     dw   MusicTotakaUnused_Channel3
     dw   $0000
 
@@ -768,7 +768,7 @@ MusicMabeVillage::
     dw   MusicSpeedData_1b_4af5
     dw   MusicMabeVillage_Channel1
     dw   MusicMabeVillage_Channel2
-    dw   MusicMabeVillage_Channel3 ; rest $1C0
+    dw   MusicMabeVillage_Channel3_rest_1C0
     dw   $0000
 
 MusicMabeVillage_Channel1:: ; accompaniment
@@ -2997,7 +2997,7 @@ MusicInsideBuilding::
     dw   MusicSpeedData_1b_4ae6
     dw   MusicInsideBuilding_Channel1
     dw   MusicInsideBuilding_Channel2
-    dw   MusicInsideBuilding_Channel3
+    dw   MusicInsideBuilding_Channel3_rest_1C0
     dw   $0000
 
 MusicInsideBuilding_Channel1::
@@ -3744,7 +3744,7 @@ MusicMrWriteHouse::
     dw   MusicSpeedData_1b_4ae6
     dw   MusicMrWriteHouse_Channel1
     dw   MusicMrWriteHouse_Channel2
-    dw   MusicMrWriteHouse_Channel3
+    dw   MusicMrWriteHouse_Channel3_rest_1C0
     dw   $0000
 
 MusicMrWriteHouse_Channel1::
@@ -3825,7 +3825,7 @@ MusicUlrira::
     dw   MusicSpeedData_1b_4ab9
     dw   MusicUlrira_Channel1
     dw   MusicUlrira_Channel2
-    dw   MusicUlrira_Channel3
+    dw   MusicUlrira_Channel3_rest_1C0
     dw   $0000
 
 MusicUlrira_Channel1::
@@ -3937,7 +3937,7 @@ ChannelDefinition_1b_6090::
 MusicTarinBees::
     db   $00
     dw   MusicSpeedData_1b_4ad7
-    dw   MusicTarinBees_Channel1
+    dw   MusicTarinBees_Channel1_rest_1C0
     dw   MusicTarinBees_Channel2
     dw   MusicTarinBees_Channel3
     dw   $0000
@@ -4352,7 +4352,7 @@ ChannelDefinition_1b_6211::
 MusicMonkeysBuildingBridge::
     db   $00
     dw   MusicSpeedData_1b_4ad7
-    dw   MusicMonkeysBuildingBridge_Channel1
+    dw   MusicMonkeysBuildingBridge_Channel1_rest_1C0
     dw   MusicMonkeysBuildingBridge_Channel2
     dw   MusicMonkeysBuildingBridge_Channel3
     dw   $0000
@@ -4855,7 +4855,7 @@ ChannelDefinition_1b_642e::
 MusicFishermanUnderBridge::
     db   $00
     dw   MusicSpeedData_1b_4af5
-    dw   MusicFishermanUnderBridge_Channel1
+    dw   MusicFishermanUnderBridge_Channel1_rest_1C0
     dw   MusicFishermanUnderBridge_Channel2
     dw   MusicFishermanUnderBridge_Channel3
     dw   MusicFishermanUnderBridge_Channel4

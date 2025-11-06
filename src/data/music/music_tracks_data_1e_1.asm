@@ -25,35 +25,35 @@ MusicSpeedData_1e_4b06::
 HardcodedData_1e_4b15::
     db   $10, $32, $22, $47, $60, $20, $00
 
-MusicTailCave_Channel1::
-MusicAnglersTunnel_Channel3::
-MusicIntroWakeUp_Channel3::
-MusicDreamShrineSleep_Channel3::
-MusicSouthernShrine_Channel3::
-MusicSouthernShrine_Channel4::
-MusicInstrumentFullMoonCello_Channel1::
-Music2dUnderground_Channel1::
-Music2dUnderground_Channel3::
-MusicOwl_Channel3::
-MusicDreamShrineBed_Channel3::
-MusicCave_Channel3::
-MusicInstrumentConchHorn_Channel1::
-MusicInstrumentSeaLilysBell_Channel1::
-MusicInstrumentSurfHarp_Channel1::
-MusicInstrumentCoralTriangle_Channel1::
-MusicInstrumentOrganOfEveningCalm_Channel1::
-MusicInstrumentThunderDrum_Channel1::
-MusicInstrumentThunderDrum_Channel3::
-MusicEggBalladDefault_Channel2::
-MusicL2Sword_Channel3::
-MusicFaceShrine_Channel3::
-MusicWindFish_Channel3::
-MusicEagleBossLoop_Channel3::
-MusicFinalBossIntro_Channel1::
-MusicFinalBossIntro_Channel3::
-MusicBossDefeat_Channel3::
+MusicTailCave_Channel1_rest_1C0::
+MusicAnglersTunnel_Channel3_rest_1C0::
+MusicIntroWakeUp_Channel3_rest_1C0::
+MusicDreamShrineSleep_Channel3_rest_1C0::
+MusicSouthernShrine_Channel3_rest_1C0::
+MusicSouthernShrine_Channel4_rest_1C0::
+MusicInstrumentFullMoonCello_Channel1_rest_1C0::
+Music2dUnderground_Channel1_rest_1C0::
+Music2dUnderground_Channel3_rest_1C0::
+MusicOwl_Channel3_rest_1C0::
+MusicDreamShrineBed_Channel3_rest_1C0::
+MusicCave_Channel3_rest_1C0::
+MusicInstrumentConchHorn_Channel1_rest_1C0::
+MusicInstrumentSeaLilysBell_Channel1_rest_1C0::
+MusicInstrumentSurfHarp_Channel1_rest_1C0::
+MusicInstrumentCoralTriangle_Channel1_rest_1C0::
+MusicInstrumentOrganOfEveningCalm_Channel1_rest_1C0::
+MusicInstrumentThunderDrum_Channel1_rest_1C0::
+MusicInstrumentThunderDrum_Channel3_rest_1C0::
+MusicEggBalladDefault_Channel2_rest_1C0::
+MusicL2Sword_Channel3_rest_1C0::
+MusicFaceShrine_Channel3_rest_1C0::
+MusicWindFish_Channel3_rest_1C0::
+MusicEagleBossLoop_Channel3_rest_1C0::
+MusicFinalBossIntro_Channel1_rest_1C0::
+MusicFinalBossIntro_Channel3_rest_1C0::
+MusicBossDefeat_Channel3_rest_1C0::
     dw   ChannelDefinition_1e_rest_1C0_1
-    dw   $ffff, MusicTailCave_Channel1
+    dw   $ffff, MusicTailCave_Channel1_rest_1C0
 
 ChannelDefinition_1e_rest_1C0_1::
     begin_loop $20

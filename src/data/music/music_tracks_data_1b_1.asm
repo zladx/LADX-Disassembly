@@ -22,17 +22,17 @@ MusicSpeedData_1b_4b04::
 HardcodedData_1b_4b13::
     db   $10, $32, $22, $47, $81, $20, $00
 
-MusicMabeVillage_Channel3::
-MusicInsideBuilding_Channel3::
-MusicMrWriteHouse_Channel3::
-MusicUlrira_Channel3::
-MusicTarinBees_Channel1::
-MusicMonkeysBuildingBridge_Channel1::
-MusicTotakaUnused_Channel1::
-MusicTotakaUnused_Channel2::
-MusicFishermanUnderBridge_Channel1::
+MusicMabeVillage_Channel3_rest_1C0::
+MusicInsideBuilding_Channel3_rest_1C0::
+MusicMrWriteHouse_Channel3_rest_1C0::
+MusicUlrira_Channel3_rest_1C0::
+MusicTarinBees_Channel1_rest_1C0::
+MusicMonkeysBuildingBridge_Channel1_rest_1C0::
+MusicTotakaUnused_Channel1_rest_1C0::
+MusicTotakaUnused_Channel2_rest_1C0::
+MusicFishermanUnderBridge_Channel1_rest_1C0::
     dw   ChannelDefinition_1b_rest_1C0
-    dw   $ffff, MusicMabeVillage_Channel3
+    dw   $ffff, MusicMabeVillage_Channel3_rest_1C0
 
 ChannelDefinition_1b_rest_1C0::
     begin_loop $20

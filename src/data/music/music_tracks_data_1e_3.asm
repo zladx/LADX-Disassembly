@@ -2,7 +2,7 @@ MusicEggBalladDefault::
     db   $00
     dw   MusicSpeedData_1e_4ad9
     dw   MusicEggBalladDefault_Channel1
-    dw   MusicEggBalladDefault_Channel2
+    dw   MusicEggBalladDefault_Channel2_rest_1C0
     dw   MusicEggBalladDefault_Channel3
     dw   $0000
 
@@ -627,7 +627,7 @@ ChannelDefinition_1e_7295::
 MusicInstrumentFullMoonCello::
     db   $00
     dw   MusicSpeedData_1e_4ae8
-    dw   MusicInstrumentFullMoonCello_Channel1
+    dw   MusicInstrumentFullMoonCello_Channel1_rest_1C0
     dw   MusicInstrumentFullMoonCello_Channel2
     dw   MusicInstrumentFullMoonCello_Channel3
     dw   $0000
@@ -687,7 +687,7 @@ waveform_1e_72e1::
 MusicInstrumentConchHorn::
     db   $00
     dw   MusicSpeedData_1e_4af7
-    dw   MusicInstrumentConchHorn_Channel1
+    dw   MusicInstrumentConchHorn_Channel1_rest_1C0
     dw   MusicInstrumentConchHorn_Channel2
     dw   MusicInstrumentConchHorn_Channel3
     dw   $0000
@@ -749,7 +749,7 @@ ChannelDefinition_1e_7324::
 MusicInstrumentSeaLilysBell::
     db   $00
     dw   MusicSpeedData_1e_4ad9
-    dw   MusicInstrumentSeaLilysBell_Channel1
+    dw   MusicInstrumentSeaLilysBell_Channel1_rest_1C0
     dw   MusicInstrumentSeaLilysBell_Channel2
     dw   MusicInstrumentSeaLilysBell_Channel3
     dw   $0000
@@ -825,7 +825,7 @@ ChannelDefinition_1e_7380::
 MusicInstrumentSurfHarp::
     db   $18
     dw   MusicSpeedData_1e_4a9d
-    dw   MusicInstrumentSurfHarp_Channel1
+    dw   MusicInstrumentSurfHarp_Channel1_rest_1C0
     dw   MusicInstrumentSurfHarp_Channel2
     dw   MusicInstrumentSurfHarp_Channel3
     dw   $0000
@@ -1030,7 +1030,7 @@ ChannelDefinition_1e_748c::
 MusicInstrumentCoralTriangle::
     db   $00
     dw   MusicSpeedData_1e_4aca
-    dw   MusicInstrumentCoralTriangle_Channel1
+    dw   MusicInstrumentCoralTriangle_Channel1_rest_1C0
     dw   MusicInstrumentCoralTriangle_Channel2
     dw   MusicInstrumentCoralTriangle_Channel3
     dw   $0000
@@ -1143,7 +1143,7 @@ ChannelDefinition_1e_rest_1C0_2::
 MusicInstrumentOrganOfEveningCalm::
     db   $00
     dw   MusicSpeedData_1e_4ae8
-    dw   MusicInstrumentOrganOfEveningCalm_Channel1
+    dw   MusicInstrumentOrganOfEveningCalm_Channel1_rest_1C0
     dw   MusicInstrumentOrganOfEveningCalm_Channel2
     dw   MusicInstrumentOrganOfEveningCalm_Channel3
     dw   $0000
@@ -1198,9 +1198,9 @@ ChannelDefinition_1e_757d::
 MusicInstrumentThunderDrum::
     db   $00
     dw   MusicSpeedData_1e_4ad9
-    dw   MusicInstrumentThunderDrum_Channel1
+    dw   MusicInstrumentThunderDrum_Channel1_rest_1C0
     dw   MusicInstrumentThunderDrum_Channel2
-    dw   MusicInstrumentThunderDrum_Channel3
+    dw   MusicInstrumentThunderDrum_Channel3_rest_1C0
     dw   MusicInstrumentThunderDrum_Channel4
 
 MusicInstrumentThunderDrum_Channel2::
@@ -2321,7 +2321,7 @@ MusicL2Sword::
     dw   MusicSpeedData_1e_4af7
     dw   MusicL2Sword_Channel1
     dw   MusicL2Sword_Channel2
-    dw   MusicL2Sword_Channel3
+    dw   MusicL2Sword_Channel3_rest_1C0
     dw   $0000
 
 MusicL2Sword_Channel1::
@@ -2725,7 +2725,7 @@ MusicWindFish::
     dw   MusicSpeedData_1e_4aca
     dw   MusicWindFish_Channel1
     dw   MusicWindFish_Channel2
-    dw   MusicWindFish_Channel3
+    dw   MusicWindFish_Channel3_rest_1C0
     dw   MusicWindFish_Channel4
 
 MusicWindFish_Channel1::
@@ -2912,7 +2912,7 @@ MusicBossDefeat::
     dw   MusicSpeedData_1e_4aca
     dw   MusicBossDefeat_Channel1
     dw   MusicBossDefeat_Channel2
-    dw   MusicBossDefeat_Channel3
+    dw   MusicBossDefeat_Channel3_rest_1C0
     dw   $0000
 
 MusicBossDefeat_Channel1::

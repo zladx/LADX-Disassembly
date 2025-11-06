@@ -649,9 +649,9 @@ ChannelDefinition_1e_5293::
 MusicFinalBossIntro::
     db   $00
     dw   MusicSpeedData_1e_4ae8
-    dw   MusicFinalBossIntro_Channel1
+    dw   MusicFinalBossIntro_Channel1_rest_1C0
     dw   MusicFinalBossIntro_Channel2
-    dw   MusicFinalBossIntro_Channel3
+    dw   MusicFinalBossIntro_Channel3_rest_1C0
     dw   $0000
 
 MusicFinalBossIntro_Channel2::
@@ -2232,7 +2232,7 @@ MusicTailCave::
 MusicTailCaveCopy::
     db   $00
     dw   MusicSpeedData_1e_4abb
-    dw   MusicTailCave_Channel1
+    dw   MusicTailCave_Channel1_rest_1C0
     dw   MusicTailCave_Channel2
     dw   MusicTailCave_Channel3
     dw   $0000
@@ -3076,7 +3076,7 @@ MusicAnglersTunnel::
     dw   MusicSpeedData_1e_4abb
     dw   MusicAnglersTunnel_Channel1
     dw   MusicAnglersTunnel_Channel2
-    dw   MusicAnglersTunnel_Channel3
+    dw   MusicAnglersTunnel_Channel3_rest_1C0
     dw   $0000
 
 MusicAnglersTunnel_Channel1::
@@ -3813,7 +3813,7 @@ MusicIntroWakeUp::
     dw   MusicSpeedData_1e_4aca
     dw   MusicIntroWakeUp_Channel1
     dw   MusicIntroWakeUp_Channel2
-    dw   MusicIntroWakeUp_Channel3
+    dw   MusicIntroWakeUp_Channel3_rest_1C0
     dw   $0000
 
 MusicIntroWakeUp_Channel1::
@@ -4276,7 +4276,7 @@ MusicDreamShrineSleep::
     dw   MusicSpeedData_1e_4abb
     dw   MusicDreamShrineSleep_Channel1
     dw   MusicDreamShrineSleep_Channel2
-    dw   MusicDreamShrineSleep_Channel3
+    dw   MusicDreamShrineSleep_Channel3_rest_1C0
     dw   $0000
 
 MusicDreamShrineSleep_Channel1::
@@ -4672,15 +4672,14 @@ MusicSouthernShrine::
     dw   MusicSpeedData_1e_4abb
     dw   MusicSouthernShrine_Channel1
     dw   MusicSouthernShrine_Channel2
-    dw   MusicSouthernShrine_Channel3
-    dw   MusicSouthernShrine_Channel4
+    dw   MusicSouthernShrine_Channel3_rest_1C0
+    dw   MusicSouthernShrine_Channel4_rest_1C0
 
 MusicSouthernShrine_Channel1::
     dw   ChannelDefinition_1e_6e7f
     dw   ChannelDefinition_1e_6e0e
     dw   ChannelDefinition_1e_64c0
     dw   ChannelDefinition_1e_64c0
-
 MusicLoop_1e_6488::
     dw   ChannelDefinition_1e_6e13
     dw   ChannelDefinition_1e_64c0
@@ -4934,7 +4933,7 @@ MusicFaceShrine::
     dw   MusicSpeedData_1e_4ae8
     dw   MusicFaceShrine_Channel1
     dw   MusicFaceShrine_Channel2
-    dw   MusicFaceShrine_Channel3
+    dw   MusicFaceShrine_Channel3_rest_1C0
     dw   $0000
 
 MusicFaceShrine_Channel1::
@@ -5013,9 +5012,9 @@ MusicFaceShrine_Channel2::
 Music2dUnderground::
     db   $00
     dw   MusicSpeedData_1e_4ae8
-    dw   Music2dUnderground_Channel1
+    dw   Music2dUnderground_Channel1_rest_1C0
     dw   Music2dUnderground_Channel2
-    dw   Music2dUnderground_Channel3
+    dw   Music2dUnderground_Channel3_rest_1C0
     dw   $0000
 
 Music2dUnderground_Channel2::
@@ -5048,7 +5047,7 @@ MusicOwl::
     dw   MusicSpeedData_1e_4abb
     dw   MusicOwl_Channel1
     dw   MusicOwl_Channel2
-    dw   MusicOwl_Channel3
+    dw   MusicOwl_Channel3_rest_1C0
     dw   $0000
 
 MusicOwl_Channel1::
@@ -5085,7 +5084,7 @@ MusicDreamShrineBed::
     dw   MusicSpeedData_1e_4aca
     dw   MusicDreamShrineBed_Channel1
     dw   MusicDreamShrineBed_Channel2
-    dw   MusicDreamShrineBed_Channel3
+    dw   MusicDreamShrineBed_Channel3_rest_1C0
     dw   $0000
 
 MusicDreamShrineBed_Channel1::
@@ -5340,7 +5339,7 @@ MusicCave::
     dw   MusicSpeedData_1e_4aca
     dw   MusicCave_Channel1
     dw   MusicCave_Channel2
-    dw   MusicCave_Channel3
+    dw   MusicCave_Channel3_rest_1C0
     dw   $0000
 
 MusicCave_Channel1::
@@ -6378,7 +6377,7 @@ MusicEagleBossLoop::
     dw   MusicSpeedData_1e_4abb
     dw   MusicEagleBossLoop_Channel1
     dw   MusicEagleBossLoop_Channel2
-    dw   MusicEagleBossLoop_Channel3
+    dw   MusicEagleBossLoop_Channel3_rest_1C0
     dw   $0000
 
 MusicEagleBossLoop_Channel1::

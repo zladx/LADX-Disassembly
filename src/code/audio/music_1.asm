@@ -109,41 +109,41 @@ jr_01B_406A:
 ; match up with "constants/sfx.asm" for some reason.
 ; Is this still the case? The constants are now correctly named.
 MusicDataPointerTable_1B::
-    dw   Music01
-    dw   Music02
-    dw   Music03
-    dw   Music04
-    dw   Music05
-    dw   Music06
-    dw   Music07
-    dw   Music08
-    dw   Music09
-    dw   Music0a
-    dw   Music0b
-    dw   Music0c
-    dw   Music0d
-    dw   Music0e
-    dw   Music0f
-    dw   Music10
+    dw   MusicTitleScreen
+    dw   MusicMinigame
+    dw   MusicGameOver
+    dw   MusicMabeVillage
+    dw   MusicOverworld
+    dw   MusicTalTalRange
+    dw   MusicShop
+    dw   MusicRaftRideRapids
+    dw   MusicMysteriousForest
+    dw   MusicInsideBuilding
+    dw   MusicAnimalVillage
+    dw   MusicFairyFountain
+    dw   MusicTitleScreenNoIntro
+    dw   MusicBowwowKidnapped
+    dw   MusicObtainSword
+    dw   MusicObtainItem
 
-    dw   Music31
-    dw   Music32
-    dw   Music33
-    dw   Music34
-    dw   Music35
-    dw   Music36
-    dw   Music37
-    dw   Music38
-    dw   Music39
-    dw   Music3a
-    dw   Music3b
-    dw   Music3c
-    dw   Music3d
-    dw   Music3e
-    dw   Music3f
-    dw   Music40
+    dw   MusicOverworldIntro
+    dw   MusicMrWriteHouse
+    dw   MusicUlrira
+    dw   MusicTarinBees
+    dw   MusicMamuFrogSong
+    dw   MusicMonkeysBuildingBridge
+    dw   MusicChristineHouse
+    dw   MusicTotakaUnused
+    dw   MusicTurtleRockEntranceBoss
+    dw   MusicFishermanUnderBridge
+    dw   MusicObtainItemUnused
+    dw   MusicFileSelectTotaka
+    dw   MusicEnding
+    dw   MusicMoblinHideout
+    dw   MusicIslandDisappear
+    dw   MusicRichardHouse
 
-    dw   Music61
+    dw   MusicColorDungeon
     dw   Music62
     dw   Music63
     dw   Music64

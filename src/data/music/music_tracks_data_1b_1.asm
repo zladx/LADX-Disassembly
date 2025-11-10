@@ -22,19 +22,19 @@ MusicSpeedData_1b_4b04::
 HardcodedData_1b_4b13::
     db   $10, $32, $22, $47, $81, $20, $00
 
-Music04Channel3::
-Music0aChannel3::
-Music32Channel3::
-Music33Channel3::
-Music34Channel1::
-Music36Channel1::
-Music38Channel1::
-Music38Channel2::
-Music3aChannel1::
-    dw   ChannelDefinition_1b_4b20
-    dw   $ffff, Music04Channel3
+MusicMabeVillage_Channel3_rest_1C0::
+MusicInsideBuilding_Channel3_rest_1C0::
+MusicMrWriteHouse_Channel3_rest_1C0::
+MusicUlrira_Channel3_rest_1C0::
+MusicTarinBees_Channel1_rest_1C0::
+MusicMonkeysBuildingBridge_Channel1_rest_1C0::
+MusicTotakaUnused_Channel1_rest_1C0::
+MusicTotakaUnused_Channel2_rest_1C0::
+MusicFishermanUnderBridge_Channel1_rest_1C0::
+    dw   ChannelDefinition_1b_rest_1C0
+    dw   $ffff, MusicMabeVillage_Channel3_rest_1C0
 
-ChannelDefinition_1b_4b20::
+ChannelDefinition_1b_rest_1C0::
     begin_loop $20
         notelen 14
         rest
@@ -44,27 +44,27 @@ ChannelDefinition_1b_4b20::
 ; UNREFERENCED DATA
     db   $00, $22, $44, $55, $66, $66, $88, $88, $aa, $aa, $cc, $cc, $04, $84, $04, $84
 
-Music10::
+MusicObtainItem::
     db   $00
     dw   MusicSpeedData_1b_4ab9
-    dw   Music10Channel1
-    dw   Music10Channel2
-    dw   Music10Channel3
-    dw   Music10Channel4
+    dw   MusicObtainItem_Channel1
+    dw   MusicObtainItem_Channel2
+    dw   MusicObtainItem_Channel3
+    dw   MusicObtainItem_Channel4
 
-Music10Channel1::
+MusicObtainItem_Channel1::
     dw   ChannelDefinition_1b_4b51
     dw   $0000
 
-Music10Channel2::
+MusicObtainItem_Channel2::
     dw   ChannelDefinition_1b_4b61
     dw   $0000
 
-Music10Channel3::
+MusicObtainItem_Channel3::
     dw   ChannelDefinition_1b_4b6f
     dw   $0000
 
-Music10Channel4::
+MusicObtainItem_Channel4::
     dw   ChannelDefinition_1b_4b81
     dw   $0000
 
@@ -130,15 +130,15 @@ ChannelDefinition_1b_4b81::
     rest
     end_def
 
-Music40::
+MusicRichardHouse::
     db   $04
     dw   MusicSpeedData_1b_4af5
-    dw   Music40Channel1
-    dw   Music40Channel2
-    dw   Music40Channel3
+    dw   MusicRichardHouse_Channel1
+    dw   MusicRichardHouse_Channel2
+    dw   MusicRichardHouse_Channel3
     dw   $0000
 
-Music40Channel1::
+MusicRichardHouse_Channel1::
     dw   ChannelDefinition_1b_4bd0
     dw   ChannelDefinition_1b_4c0a
     dw   ChannelDefinition_1b_4c0a
@@ -148,15 +148,15 @@ Music40Channel1::
     dw   ChannelDefinition_1b_4c0a
     dw   ChannelDefinition_1b_4c0a
     dw   ChannelDefinition_1b_4c0a
-    dw   ChannelDefinition_1b_4c74
-    dw   $ffff, Music40Channel1
+    dw   ChannelDefinition_1b_rest_2C
+    dw   $ffff, MusicRichardHouse_Channel1
 
-Music40Channel2::
+MusicRichardHouse_Channel2::
     dw   ChannelDefinition_1b_4bd5
-    dw   ChannelDefinition_1b_4c3f
-    dw   $ffff, Music40Channel2
+    dw   ChannelDefinition_1b_4c3f ; Totaka's song
+    dw   $ffff, MusicRichardHouse_Channel2
 
-Music40Channel3::
+MusicRichardHouse_Channel3::
     dw   ChannelDefinition_1b_4c05
     dw   ChannelDefinition_1b_4c05
     dw   ChannelDefinition_1b_4c05
@@ -165,8 +165,8 @@ Music40Channel3::
     dw   ChannelDefinition_1b_4c05
     dw   ChannelDefinition_1b_4c05
     dw   ChannelDefinition_1b_4c05
-    dw   ChannelDefinition_1b_4c74
-    dw   $ffff, Music40Channel3
+    dw   ChannelDefinition_1b_rest_2C
+    dw   $ffff, MusicRichardHouse_Channel3
 
 ChannelDefinition_1b_4bd0::
     set_envelope_duty $31, $00, 1, 0
@@ -280,7 +280,7 @@ ChannelDefinition_1b_4c0a::
 
     end_def
 
-ChannelDefinition_1b_4c3f::
+ChannelDefinition_1b_4c3f:: ; Totaka's song
     set_envelope_duty $61, $00, 2, 0
     notelen 4
     rest
@@ -332,7 +332,7 @@ ChannelDefinition_1b_4c3f::
     rest
     end_def
 
-ChannelDefinition_1b_4c74::
+ChannelDefinition_1b_rest_2C::
     begin_loop $0b
         notelen 4
         rest
@@ -340,38 +340,34 @@ ChannelDefinition_1b_4c74::
 
     end_def
 
-Music3c::
+MusicFileSelectTotaka::
     db   $00
     dw   MusicSpeedData_1b_4ae6
-    dw   Music3cChannel1
-    dw   Music3cChannel2
-    dw   Music3cChannel3
-    dw   Music3cChannel4
+    dw   MusicFileSelectTotaka_Channel1
+    dw   MusicFileSelectTotaka_Channel2
+    dw   MusicFileSelectTotaka_Channel3
+    dw   MusicFileSelectTotaka_Channel4
 
-Music3cChannel1::
+MusicFileSelectTotaka_Channel1::
     dw   ChannelDefinition_1b_4ca5
-
 MusicLoop_1b_4c87::
     dw   ChannelDefinition_1b_4cde
     dw   $ffff, MusicLoop_1b_4c87
 
-Music3cChannel2::
+MusicFileSelectTotaka_Channel2::
     dw   ChannelDefinition_1b_4cb2
-
 MusicLoop_1b_4c8f::
     dw   ChannelDefinition_1b_4cef
     dw   $ffff, MusicLoop_1b_4c8f
 
-Music3cChannel3::
+MusicFileSelectTotaka_Channel3::
     dw   ChannelDefinition_1b_4cbf
-
 MusicLoop_1b_4c97::
     dw   ChannelDefinition_1b_4d3f
     dw   $ffff, MusicLoop_1b_4c97
 
-Music3cChannel4::
+MusicFileSelectTotaka_Channel4::
     dw   ChannelDefinition_1b_4ccc
-
 MusicLoop_1b_4c9f::
     dw   ChannelDefinition_1b_4d88
     dw   $ffff, MusicLoop_1b_4c9f
@@ -626,25 +622,25 @@ ChannelDefinition_1b_4d88::
     note NOISE_5
     end_def
 
-Music37::
+MusicChristineHouse::
     db   $00
     dw   MusicSpeedData_1b_4ab9
-    dw   Music37Channel1
-    dw   Music37Channel2
-    dw   Music37Channel3
+    dw   MusicChristineHouse_Channel1
+    dw   MusicChristineHouse_Channel2
+    dw   MusicChristineHouse_Channel3
     dw   $0000
 
-Music37Channel1::
+MusicChristineHouse_Channel1::
     dw   ChannelDefinition_1b_4dc9
-    dw   $ffff, Music37Channel1
+    dw   $ffff, MusicChristineHouse_Channel1
 
-Music37Channel2::
+MusicChristineHouse_Channel2::
     dw   ChannelDefinition_1b_4ddf
-    dw   $ffff, Music37Channel2
+    dw   $ffff, MusicChristineHouse_Channel2
 
-Music37Channel3::
+MusicChristineHouse_Channel3::
     dw   ChannelDefinition_1b_4e15
-    dw   $ffff, Music37Channel3
+    dw   $ffff, MusicChristineHouse_Channel3
 
 ChannelDefinition_1b_4dc9::
     set_envelope_duty $43, $00, 2, 0

@@ -19,10 +19,42 @@ OverworldMusicTracks::
     db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
     db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
 
-; Music tracks for inside houses, indexed by map index
+; Music tracks for inside houses, indexed by map index (hMapId)
 HouseMusicTracks::
-    db   MUSIC_TAIL_CAVE, MUSIC_BOTTLE_GROTTO, MUSIC_KEY_CAVERN, MUSIC_ANGLERS_TUNNEL, MUSIC_CATFISHS_MAW, MUSIC_FACE_SHRINE, MUSIC_EAGLES_TOWER, MUSIC_TURTLE_ROCK, MUSIC_EGG_MAZE, MUSIC_COLOR_DUNGEON, MUSIC_CAVE, MUSIC_CAVE, MUSIC_CAVE, MUSIC_CAVE, MUSIC_SHOP, MUSIC_MINIGAME
-    db   MUSIC_INSIDE_BUILDING, MUSIC_CAVE, MUSIC_INSIDE_BUILDING, MUSIC_DREAM_SHRINE_DREAM, MUSIC_KANALET_CASTLE, MUSIC_MOBLIN_HIDEOUT, MUSIC_SOUTHERN_SHRINE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_INSIDE_BUILDING, MUSIC_GHOST_HOUSE, MUSIC_CAVE
+    db   MUSIC_TAIL_CAVE          
+    db   MUSIC_BOTTLE_GROTTO      
+    db   MUSIC_KEY_CAVERN         
+    db   MUSIC_ANGLERS_TUNNEL     
+    db   MUSIC_CATFISHS_MAW       
+    db   MUSIC_FACE_SHRINE        
+    ; start indoors b             
+    db   MUSIC_EAGLES_TOWER       
+    db   MUSIC_TURTLE_ROCK        
+    db   MUSIC_EGG_MAZE           
+    db   MUSIC_COLOR_DUNGEON      ; MAP_09_UNUSED
+    db   MUSIC_CAVE               ; MAP_CAVE_B, cave tileset A
+    db   MUSIC_CAVE               ; MAP_DUNGEON_G1      
+    db   MUSIC_CAVE               ; MAP_EAGLES_TOWER_ALT
+    db   MUSIC_CAVE               ; MAP_DUNGEON_G3      
+    db   MUSIC_SHOP               
+    db   MUSIC_MINIGAME           
+    db   MUSIC_INSIDE_BUILDING    ; MAP_HOUSE
+    db   MUSIC_CAVE               ; MAP_CAVE_C, cave tileset B
+    db   MUSIC_INSIDE_BUILDING    ; MAP_DOGHOUSE
+    db   MUSIC_DREAM_SHRINE_DREAM 
+    db   MUSIC_KANALET_CASTLE     
+    db   MUSIC_MOBLIN_HIDEOUT     
+    db   MUSIC_SOUTHERN_SHRINE    
+    db   MUSIC_NONE               
+    db   MUSIC_NONE               
+    db   MUSIC_NONE               
+    ; end indoors b               
+    db   MUSIC_NONE               
+    db   MUSIC_NONE               
+    db   MUSIC_NONE               
+    db   MUSIC_INSIDE_BUILDING    ; MAP_LIBRARY
+    db   MUSIC_GHOST_HOUSE        
+    db   MUSIC_CAVE               ; MAP_CAVE_WATER, cave tileset C
 
 ; Whether a music track has precedence over the Power-Up music, indexed by track id
 MusicOverridesPowerUpTrack::

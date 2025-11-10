@@ -1,4 +1,4 @@
-Music61::
+MusicColorDungeon::
 Music62::
 Music63::
 Music64::
@@ -16,30 +16,29 @@ Music6f::
 Music70::
     db   $00
     dw   MusicSpeedData_1b_4ac8
-    dw   Music61Channel1
-    dw   Music61Channel2
-    dw   Music61Channel3
+    dw   MusicColorDungeon_Channel1
+    dw   MusicColorDungeon_Channel2
+    dw   MusicColorDungeon_Channel3
     dw   $0000
 
-Music61Channel1::
+MusicColorDungeon_Channel1::
     dw   ChannelDefinition_1b_712f
     dw   $ffff, MusicLoop_1b_7113
 
-Music61Channel2::
+MusicColorDungeon_Channel2::
     dw   ChannelDefinition_1b_7137
-
 MusicLoop_1b_7113::
     dw   ChannelDefinition_1b_713c
     dw   ChannelDefinition_1b_713c
     dw   ChannelDefinition_1b_71b2
     dw   $ffff, MusicLoop_1b_7113
 
-Music61Channel3::
+MusicColorDungeon_Channel3::
     dw   ChannelDefinition_1b_7228
     dw   ChannelDefinition_1b_722d
     dw   ChannelDefinition_1b_722d
     dw   ChannelDefinition_1b_726a
-    dw   $ffff, Music61Channel3
+    dw   $ffff, MusicColorDungeon_Channel3
 ; UNREFERENCED DATA
     db   $22, $73, $ff, $ff, $29, $71
 

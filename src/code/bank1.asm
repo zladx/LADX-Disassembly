@@ -135,7 +135,7 @@ ENDC
     ; POI: "えすばはら" = "Esubahara" - possibly Takamitsu Kuzuhara?
     ; (credited as "Programmer")
 FOR INDEX, 5
-    ld   a, STRCHAR("{DEBUG_SAVE_FILE_NAME}", INDEX) + 1
+    ld   a, CHARVAL(STRCHAR(#DEBUG_SAVE_FILE_NAME, INDEX)) + 1
     ld   [SaveGame1.main + wName - wOverworldRoomStatus + INDEX], a
 ENDR
 

@@ -475,7 +475,7 @@ ENDC
     call ReloadSavedBank                          ;; 00:2586 $CD $1D $08
     ld   a, e                                     ;; 00:2589 $7B
     ldh  [hMultiPurpose0], a                      ;; 00:258A $E0 $D7
-    cp   "<ask>" ; $fe                            ;; 00:258C $FE $FE
+    cp   '<ask>' ; $fe                            ;; 00:258C $FE $FE
     jr   nz, .notChoice                           ;; 00:258E $20 $14
     pop  hl                                       ;; 00:2590 $E1
     xor  a                                        ;; 00:2591 $AF
@@ -494,7 +494,7 @@ ENDC
     ret                                           ;; 00:25A3 $C9
 
 .notChoice
-    cp   "@" ; $ff                                ;; 00:25A4 $FE $FF
+    cp   '@' ; $ff                                ;; 00:25A4 $FE $FF
     jr   nz, .notEnd                              ;; 00:25A6 $20 $15
     pop  hl                                       ;; 00:25A8 $E1
     xor  a                                        ;; 00:25A9 $AF
@@ -510,15 +510,15 @@ ENDC
 
 .ThiefString::
 FOR INDEX, 5
-    IF CHARLEN("{THIEF_NAME}") < INDEX + 1
-        db 0
+    IF CHARLEN(#THIEF_NAME) < INDEX + 1
+        db 0                                      ;; 00:25B8
     ELSE
-        db STRCHAR("{THIEF_NAME}", INDEX) + 1     ;; 00:25B8
+        db CHARVAL(STRCHAR(#THIEF_NAME, INDEX)) + 1
     ENDC
 ENDR
 
 .notEnd
-    cp   " "                                      ;; 00:25BD $FE $20
+    cp   ' '                                      ;; 00:25BD $FE $20
     jr   z, .noSFX                                ;; 00:25BF $28 $1F
     push af                                       ;; 00:25C1 $F5
     ld   a, [wDialogSFX]                          ;; 00:25C2 $FA $AB $C5
@@ -542,7 +542,7 @@ ENDR
 
 .noSFX
     ld   d, $00                                   ;; 00:25E0 $16 $00
-    cp   "#" ; character of player name           ;; 00:25E2 $FE $23
+    cp   '#' ; character of player name           ;; 00:25E2 $FE $23
     jr   nz, .notName                             ;; 00:25E4 $20 $22
     ld   a, [wNameIndex]                          ;; 00:25E6 $FA $08 $C1
     ld   e, a                                     ;; 00:25E9 $5F
@@ -568,10 +568,10 @@ ENDR
     ; DialogCharmap/ASCII space ($20)
     PUSHC
     SETCHARMAP NameEntryCharmap
-    cp   " " - 1                                  ;; 00:2602 $FE $FF
+    cp   ' ' - 1                                  ;; 00:2602 $FE $FF
     POPC
     jr   nz, .handleNameChar                      ;; 00:2604 $20 $02
-    ld   a, " "                                   ;; 00:2606 $3E $20
+    ld   a, ' '                                   ;; 00:2606 $3E $20
 .handleNameChar
 
 .notName
@@ -705,9 +705,9 @@ DialogBreakHandler::
     and  $1F                                      ;; 00:2698 $E6 $1F
     jr   nz, .buildDrawCommand                    ;; 00:269A $20 $45
     ld   a, [wDialogNextChar]                     ;; 00:269C $FA $C3 $C3
-    cp   "@"                                      ;; 00:269F $FE $FF
+    cp   '@'                                      ;; 00:269F $FE $FF
     jp   z, DialogDrawNextCharacterHandler.end    ;; 00:26A1 $CA $AD $25
-    cp   "<ask>"                                  ;; 00:26A4 $FE $FE
+    cp   '<ask>'                                  ;; 00:26A4 $FE $FE
     jp   z, DialogDrawNextCharacterHandler.choice ;; 00:26A6 $CA $95 $25
     ld   a, [wDialogIsWaitingForButtonPress]      ;; 00:26A9 $FA $CC $C1
     and  a                                        ;; 00:26AC $A7

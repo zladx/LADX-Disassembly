@@ -13,6 +13,8 @@ rwildcard = $(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(
 RGBDS   :=
 
 2BPP    := $(RGBDS)rgbgfx
+2BFLAGS := \
+  --colors dmg=e4
 
 ASM     := $(RGBDS)rgbasm
 ASFLAGS := \
@@ -57,7 +59,7 @@ oam_%.2bpp: oam_%.png
 # (This typically uses `rgbgfx`, which is much faster than the
 # Python-based `gfx.py`.)
 %.2bpp: %.png
-	$(2BPP) -o $@ $<
+	$(2BPP) $(2BFLAGS) -o $@ $<
 
 # Compile all dependencies (ASM, 2BPP) into an single object file.
 # (This means all the source code is always fully recompiled: for now,

@@ -10,7 +10,7 @@ Misc notes that have not been translated into disassembly comments yet
 Note: the graph is still wrong:
 - FR should not have PATCH_9
 
-
+```
                                                     -- LANG_FR -- [FR 1.0] -- [FR 1.1]
                                                    /                       /
                                        -- PATCH_1 -- LANG_DE -- [DE 1.0] -- [DE 1.1]
@@ -22,7 +22,7 @@ BASE -- PATCH_9 -- PATCH_0 -- PATCH_2 - -- PATCH_4 ----------------------
       \           -- LANG_JP -- [JP 1.0] ---------------------- [JP 1.1] --- [JP 1.2]
        \
         -- LANG_EN -- [US 1.0]
-
+```
 
 |       -       | JP 1.0 | JP 1.1 | JP 1.2 | US 1.0 | US 1.1 | US 1.2 | FR 1.0 | FR 1.1 | DE 1.0 | DE 1.1 |
 |:-------------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
@@ -46,7 +46,7 @@ and even for the patches listed below the lists are likely not complete.
 * If **Yes**, will **not** check for Evil Eagle's room when loading a minimap
   * `src/code/minimap.asm -> LoadMinimap`
   * Effects of this are unknown
-* [Color Dungeon book shadow is removed](https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening/Version_Differences#Book.27s_Shadow_in_the_Library)
+* [Color Dungeon book shadow is removed](https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening_(Game_Boy)/Version_Differences#Book.27s_Shadow_in_the_Library)
   * `src/code/bank3.asm -> Data_003_42F1`
 * Many, many other undocumented changes everywhere
   * A handful of checks against your current tunic type when changing music tracks
@@ -94,7 +94,7 @@ _(To-do)_
   * This seems like a complete waste of a few bytes and CPU cycles???
 * Changes some graphics for the introduction sequence
   * `src/code/intro.asm -> Data_001_72DE`
-  * [Obligatory TCRF link](https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening/Version_Differences#Introduction_Background)
+  * [Obligatory TCRF link](https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening_(Game_Boy)/Version_Differences#Introduction_Background)
 * Various other undocumented changes
 
 

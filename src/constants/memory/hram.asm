@@ -337,10 +337,10 @@ hIntersectedObjectBGAddressHigh::
 hIntersectedObjectBGAddressLow::
   ds $1 ; FFD0
 
-; boolean value if changes needs to be rendered
-; 1 = frame rendering is needed,
-; 0 = frame rendering was done
-hNeedsRenderingFrame::
+; Whether the VBlank interrupt was serviced since the last frame was computed
+; 0 = the VBlank interrupt didn't execute since last frame
+; 1 = the VBlank interrupt just finished
+hVBlankOccurred::
   ds 1 ; FFD1
 
 ; Copy of the rIE register
@@ -539,10 +539,10 @@ hLinkFinalRoomPosition::
 ; Unused
 ds 1 ; FFFC
 
-; Is the engine currently rendering a frame.
-; 0 = rendering is done, a frame is ready to be copied to VRAM,
-; 1 = the engine is rendering a new frame
-hIsRenderingFrame::
+; Is the engine currently computing a frame.
+; 0 = computation is done, a frame is ready to be copied to VRAM,
+; 1 = the engine is computing a new frame
+hIsComputingFrame::
  ds 1 ; FFFD
 
 ; Marker for the Hardware that the program is running on

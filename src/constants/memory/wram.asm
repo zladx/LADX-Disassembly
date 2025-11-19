@@ -967,7 +967,7 @@ wC1CF::
 
 ; Unlabeled
 wC1D0::
-  ds 16 ; C1D0 -C1DF
+  ds 16 ; C1D0 - C1DF
 
 ; Unlabeled
 wC1E0::
@@ -1512,8 +1512,9 @@ wEggMazeProgress::
 wDialogSFX::
     ds 1 ; C5AB
 
-; Unlabeled
-wC5AC::
+; Seems to be a counter for timing NOISE_SFX_BOOMERANG
+; Values: $00-$1A
+wBoomerangSFXCounter::
   ds 1 ; C5AC
 
 ; Unlabeled

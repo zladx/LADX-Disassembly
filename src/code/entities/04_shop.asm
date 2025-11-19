@@ -164,7 +164,7 @@ func_004_77F8::
     cp   $74                                      ;; 04:7824 $FE $74
     jr   nz, .ret_7838                            ;; 04:7826 $20 $10
 
-    call_open_dialog Dialog038                    ;; 04:7828
+    call_open_dialog Dialog038 ; Shopkeeper's dialog ;; 04:7828
     ld   hl, wEntitiesStateTable                  ;; 04:782D $21 $90 $C2
     add  hl, bc                                   ;; 04:7830 $09
     ld   [hl], $04                                ;; 04:7831 $36 $04

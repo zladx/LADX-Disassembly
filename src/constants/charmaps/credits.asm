@@ -3,6 +3,5 @@
 ; In English, the Credits charmap is just the Dialog charmap.
 ;
 PUSHC
-NEWCHARMAP CreditsCharmap
-SETCHARMAP DialogCharmap
+NEWCHARMAP CreditsCharmap, DialogCharmap
 POPC

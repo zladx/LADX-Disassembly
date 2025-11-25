@@ -616,7 +616,7 @@ FOR I, NAME_LENGTH
 IF CHARLEN(\1) < I + 1
     cp   0
 ELSE
-    cp   STRCHAR(\1, I) + 1
+    cp   CHARVAL(STRCHAR(\1, I)) + 1
 ENDC
     jr   nz, \3
 ENDR
@@ -669,12 +669,12 @@ ENDC
     ld   d, $00                                   ;; 01:4ADA $16 $00
 
 IF (DEF(EASTER_EGG_FILENAME_2))
-    CHECKNAME "{EASTER_EGG_FILENAME_1}", EASTER_EGG_SONG_1, .checkOtherName
+    CHECKNAME #EASTER_EGG_FILENAME_1, EASTER_EGG_SONG_1, .checkOtherName
     jr .foundName
 .checkOtherName
-    CHECKNAME "{EASTER_EGG_FILENAME_2}", EASTER_EGG_SONG_2, .easterEggEnd
+    CHECKNAME #EASTER_EGG_FILENAME_2, EASTER_EGG_SONG_2, .easterEggEnd
 ELSE
-    CHECKNAME "{EASTER_EGG_FILENAME_1}", EASTER_EGG_SONG_1, .easterEggEnd
+    CHECKNAME #EASTER_EGG_FILENAME_1, EASTER_EGG_SONG_1, .easterEggEnd
 ENDC
 
 .foundName

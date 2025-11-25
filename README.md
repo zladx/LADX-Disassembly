@@ -29,7 +29,7 @@ Additionally, a wiki includes a [high-level overview of the game engine](https:/
 
 ## Usage
 
-1. Install Python 3 and [rgbds](https://github.com/gbdev/rgbds#1-installing-rgbds) (version >= 0.9.3 required);
+1. Install Python 3 and [rgbds](https://github.com/gbdev/rgbds#1-installing-rgbds) (version >= 1.0.0 required);
 2. `make all`.
 
 This will build both the games and their debug symbols. Once built, use [BGB](https://github.com/zladx/LADX-Disassembly/wiki/Tooling-for-reverse-engineering#bgb) to load the debug symbols into the debugger.

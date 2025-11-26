@@ -6199,7 +6199,7 @@ LoadRoomObject::
 ._F7 dw LoadObject_OpenDoorRight                  ;; 00:32F6
 ._F8 dw LoadObject_BossDoor                       ;; 00:32F8
 ._F9 dw LoadObject_StairsDoor                     ;; 00:32FA
-._FA dw LoadObject_FlipWall                       ;; 00:32FC
+._FA dw LoadObject_RevolvingDoor                       ;; 00:32FC
 ._FB dw LoadObject_OneWayArrow                    ;; 00:32FE
 ._FC dw LoadObject_DungeonEntrance                ;; 00:3300
 ._FD dw LoadObject_IndoorEntrance                 ;; 00:3302
@@ -6702,19 +6702,27 @@ FillRoomWithConsecutiveObjects::
     ret                                           ;; 00:34FF $C9
 
 ; On GBC, special case for some overworld objects
-label_3500::
-    cp   $04                                      ;; 00:3500 $FE $04
+; Part of the macro objects system
+; Identical to SetupDestroyableObjectIfNeeded, but with different return banks 
+; Input:
+;   a    object id
+SetupDestroyableObjectIfNeeded2::
+    ; Short grass cannot be cut
+    cp   OBJECT_SHORT_GRASS                       ;; 00:3500 $FE $04
     ret  z                                        ;; 00:3502 $C8
-    cp   $09                                      ;; 00:3503 $FE $09
-    jr   nz, label_350E                           ;; 00:3505 $20 $07
+
+    ; On the Stone Pig Head room, setup the rocky ground (under the head) to be destroyable
+    cp   OBJECT_ROCKY_GROUND                      ;; 00:3503 $FE $09
+    jr   nz, .rockyGroundEnd                      ;; 00:3505 $20 $07
     ldh  a, [hMapRoom]                            ;; 00:3507 $F0 $F6
     cp   ROOM_OW_GIANT_SKULL                      ;; 00:3509 $FE $97
     ret  nz                                       ;; 00:350B $C0
-    jr   label_3527                               ;; 00:350C $18 $19
+    jr   .setupReturnBank1A                       ;; 00:350C $18 $19
+.rockyGroundEnd
 
-label_350E::
-    cp   $E1                                      ;; 00:350E $FE $E1
-    jr   nz, label_351D                           ;; 00:3510 $20 $0B
+    cp   OBJECT_ROCKY_CAVE_DOOR                   ;; 00:350E $FE $E1
+    jr   nz, .setupReturnBank                     ;; 00:3510 $20 $0B
+
     ldh  a, [hMapRoom]                            ;; 00:3512 $F0 $F6
     cp   ROOM_OW_EAGLES_TOWER                     ;; 00:3514 $FE $0E
     ret  z                                        ;; 00:3516 $C8
@@ -6723,17 +6731,18 @@ label_350E::
     cp   UNKNOWN_ROOM_1B                          ;; 00:351A $FE $1B
     ret  z                                        ;; 00:351C $C8
 
-label_351D::
+.setupReturnBank
     ldh  a, [hMapRoom]                            ;; 00:351D $F0 $F6
     cp   ROOM_SECTION_OW_SECOND_HALF              ;; 00:351F $FE $80
-    jr   nc, label_3527                           ;; 00:3521 $30 $04
+    jr   nc, .setupReturnBank1A                   ;; 00:3521 $30 $04
+    ; We are on bottom half of map
     ld   a, $09                                   ;; 00:3523 $3E $09
-    jr   label_3529                               ;; 00:3525 $18 $02
+    jr   .setupDestroyableObject                  ;; 00:3525 $18 $02
 
-label_3527::
+.setupReturnBank1A
     ld   a, $1A                                   ;; 00:3527 $3E $1A
 
-label_3529::
+.setupDestroyableObject
     call BackupObjectInRAM2                       ;; 00:3529 $CD $2F $0B
     ret                                           ;; 00:352C $C9
 
@@ -6753,7 +6762,7 @@ CopyObjectToActiveRoomMap::
     ; Copy the object to the active room
     ld   [hl], a                                  ;; 00:3535 $77
     ; On GBC, do some special-case handling
-    call label_3500                               ;; 00:3536 $CD $00 $35
+    call SetupDestroyableObjectIfNeeded2          ;; 00:3536 $CD $00 $35
     ; Cleanup
     inc  bc                                       ;; 00:3539 $03
     ret                                           ;; 00:353A $C9
@@ -6774,24 +6783,39 @@ SetBankForRoom::
     ld   [rSelectROMBank], a                      ;; 00:3547 $EA $00 $21
     ret                                           ;; 00:354A $C9
 
-; Load object or objects?
-Func_354B::
+; Copy the objects provided by a macro into the room.
+; This subroutine is identical to CopyOutdoorsMacroObjectsToRoom, except that it calls
+; a different SetupDestroyableObjectIfNeeded, and seems to only be used for room templates.
+; Inputs:
+;   hl   start location of objects (inside wRoomObjects)
+;   bc   object offsets list, relative to the object start location ($FF-terminated)
+;   de   object ids list (must be the length of bc - 1)
+CopyIndoorsMacroObjectsToRoom::
+.loop
     push hl                                       ;; 00:354B $E5
     push de                                       ;; 00:354C $D5
+
+    ; Read the next object offset from [bc]
     ld   a, [bc]                                  ;; 00:354D $0A
     ld   e, a                                     ;; 00:354E $5F
     ld   d, $00                                   ;; 00:354F $16 $00
+
+    ; Update the target position inside wRoomObjects
     add  hl, de                                   ;; 00:3551 $19
+
+    ; Read the next object id from [de]
     pop  de                                       ;; 00:3552 $D1
     ld   a, [de]                                  ;; 00:3553 $1A
-    cp   $E1                                      ;; 00:3554 $FE $E1
-    jr   z, .label_3560                           ;; 00:3556 $28 $08
-    cp   $E2                                      ;; 00:3558 $FE $E2
-    jr   z, .label_3560                           ;; 00:355A $28 $04
-    cp   $E3                                      ;; 00:355C $FE $E3
-    jr   nz, .label_357C                          ;; 00:355E $20 $1C
 
-.label_3560
+    ; Setup warp data if the macro contains a door
+    cp   OBJECT_ROCKY_CAVE_DOOR                   ;; 00:3554 $FE $E1
+    jr   z, .setupWarpData                        ;; 00:3556 $28 $08
+    cp   $E2                                      ;; 00:3558 $FE $E2
+    jr   z, .setupWarpData                        ;; 00:355A $28 $04
+    cp   OBJECT_CAVE_DOOR                         ;; 00:355C $FE $E3
+    jr   nz, .warpDataEnd                         ;; 00:355E $20 $1C
+
+.setupWarpData
     push af                                       ;; 00:3560 $F5
     push hl                                       ;; 00:3561 $E5
     push de                                       ;; 00:3562 $D5
@@ -6811,26 +6835,36 @@ Func_354B::
     pop  de                                       ;; 00:3579 $D1
     pop  hl                                       ;; 00:357A $E1
     pop  af                                       ;; 00:357B $F1
+.warpDataEnd
 
-.label_357C
+    ; Copy the object id to the room objects
     ld   [hl], a                                  ;; 00:357C $77
-    call label_3500                               ;; 00:357D $CD $00 $35
+
+    call SetupDestroyableObjectIfNeeded2          ;; 00:357D $CD $00 $35
+
+    ; Move to the next position and object
     inc  de                                       ;; 00:3580 $13
     inc  bc                                       ;; 00:3581 $03
+
+    ; Restore the initial start location
     pop  hl                                       ;; 00:3582 $E1
+
+    ; Loop while the object is not $FF (list-end sentinel)
     ld   a, [bc]                                  ;; 00:3583 $0A
     and  a                                        ;; 00:3584 $A7
     cp   $FF                                      ;; 00:3585 $FE $FF
-    jr   nz, Func_354B                            ;; 00:3587 $20 $C2
+    jr   nz, CopyIndoorsMacroObjectsToRoom.loop   ;; 00:3587 $20 $C2
     pop  bc                                       ;; 00:3589 $C1
     ret                                           ;; 00:358A $C9
 
 ; Copy the objects provided by a macro into the room.
+; This subroutine is identical to CopyIndoorsMacroObjectsToRoom, except that it calls
+; a different SetupDestroyableObjectIfNeeded.
 ; Inputs:
 ;   hl   start location of objects (inside wRoomObjects)
 ;   bc   object offsets list, relative to the object start location ($FF-terminated)
 ;   de   object ids list (must be the length of bc - 1)
-CopyMacroObjectsToRoom::
+CopyOutdoorsMacroObjectsToRoom::
 .loop
     push hl                                       ;; 00:358B $E5
     push de                                       ;; 00:358C $D5
@@ -6892,13 +6926,15 @@ CopyMacroObjectsToRoom::
     ld   a, [bc]                                  ;; 00:35C3 $0A
     and  a                                        ;; 00:35C4 $A7
     cp   $FF                                      ;; 00:35C5 $FE $FF
-    jr   nz, CopyMacroObjectsToRoom.loop          ;; 00:35C7 $20 $C2
+    jr   nz, CopyOutdoorsMacroObjectsToRoom.loop  ;; 00:35C7 $20 $C2
 
     ; Done
     pop  bc                                       ;; 00:35C9 $C1
     ret                                           ;; 00:35CA $C9
 
+; On GBC, special case for some overworld objects
 ; Part of the macro objects system
+; Identical to SetupDestroyableObjectIfNeeded2, but with a different return bank 
 ; Input:
 ;   a    object id
 SetupDestroyableObjectIfNeeded::
@@ -6931,7 +6967,10 @@ SetupDestroyableObjectIfNeeded::
     call BackupObjectInRAM2                       ;; 00:35EA $CD $2F $0B
     ret                                           ;; 00:35ED $C9
 
-label_35EE::
+; bc = object type
+; returns: hl with address in wRoomObjects for the object
+ObjectPositionToRoomObjectAddress::
+    ; Decrement bc to get object position
     dec  bc                                       ;; 00:35EE $0B
     ld   a, [bc]                                  ;; 00:35EF $0A
     ld   e, a                                     ;; 00:35F0 $5F
@@ -6940,72 +6979,73 @@ label_35EE::
     add  hl, de                                   ;; 00:35F6 $19
     ret                                           ;; 00:35F7 $C9
 
-data_35F8::
+KeyDoorTopObjectIds:
     db $2D, $2E                                   ;; 00:35F8
 
 LoadObject_KeyDoorTop::
     ld   e, 0                                     ;; 00:35FA $1E $00
-    call func_373F                                ;; 00:35FC $CD $3F $37
+    call MakeListOfDoorPositions                  ;; 00:35FC $CD $3F $37
     ldh  a, [hRoomStatus]                         ;; 00:35FF $F0 $F8
     and  ROOM_STATUS_DOOR_OPEN_UP                 ;; 00:3601 $E6 $04
     jp   nz, LoadObject_OpenDoorTop               ;; 00:3603 $C2 $B2 $36
-    push bc                                       ;; 00:3606 $C5
-    call label_35EE                               ;; 00:3607 $CD $EE $35
-    ld   bc, data_37E1                            ;; 00:360A $01 $E1 $37
-    ld   de, data_35F8                            ;; 00:360D $11 $F8 $35
-    jp   Func_354B                                ;; 00:3610 $C3 $4B $35
 
-data_3613::
+    push bc                                       ;; 00:3606 $C5
+    call ObjectPositionToRoomObjectAddress        ;; 00:3607 $CD $EE $35
+    ld   bc, HorizontalObjectOffsets              ;; 00:360A $01 $E1 $37
+    ld   de, KeyDoorTopObjectIds                  ;; 00:360D $11 $F8 $35
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 00:3610 $C3 $4B $35
+
+KeyDoorBottomObjectIds::
     db   $2F, $30                                 ;; 00:3613
 
 LoadObject_KeyDoorBottom::
     ld   e, $01                                   ;; 00:3615 $1E $01
-    call func_373F                                ;; 00:3617 $CD $3F $37
+    call MakeListOfDoorPositions                  ;; 00:3617 $CD $3F $37
     ldh  a, [hRoomStatus]                         ;; 00:361A $F0 $F8
     and  ROOM_STATUS_DOOR_OPEN_DOWN               ;; 00:361C $E6 $08
     jp   nz, LoadObject_OpenDoorBottom            ;; 00:361E $C2 $EA $36
 
     push bc                                       ;; 00:3621 $C5
-    call label_35EE                               ;; 00:3622 $CD $EE $35
-    ld   bc, data_37E1                            ;; 00:3625 $01 $E1 $37
-    ld   de, data_3613                            ;; 00:3628 $11 $13 $36
-    jp   Func_354B                                ;; 00:362B $C3 $4B $35
+    call ObjectPositionToRoomObjectAddress        ;; 00:3622 $CD $EE $35
+    ld   bc, HorizontalObjectOffsets              ;; 00:3625 $01 $E1 $37
+    ld   de, KeyDoorBottomObjectIds               ;; 00:3628 $11 $13 $36
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 00:362B $C3 $4B $35
 
-data_362E::
+KeyDoorLeftObjectIds::
     db   $31, $32                                 ;; 00:362E
 
 LoadObject_KeyDoorLeft::
     ld   e, $02                                   ;; 00:3630 $1E $02
-    call func_373F                                ;; 00:3632 $CD $3F $37
+    call MakeListOfDoorPositions                  ;; 00:3632 $CD $3F $37
     ldh  a, [hRoomStatus]                         ;; 00:3635 $F0 $F8
     and  ROOM_STATUS_DOOR_OPEN_LEFT               ;; 00:3637 $E6 $02
     jp   nz, LoadObject_OpenDoorLeft              ;; 00:3639 $C2 $FE $36
 
     push bc                                       ;; 00:363C $C5
-    call label_35EE                               ;; 00:363D $CD $EE $35
-    ld   bc, data_37E4                            ;; 00:3640 $01 $E4 $37
-    ld   de, data_362E                            ;; 00:3643 $11 $2E $36
-    jp   Func_354B                                ;; 00:3646 $C3 $4B $35
+    call ObjectPositionToRoomObjectAddress        ;; 00:363D $CD $EE $35
+    ld   bc, VerticalObjectOffsets                ;; 00:3640 $01 $E4 $37
+    ld   de, KeyDoorLeftObjectIds                 ;; 00:3643 $11 $2E $36
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 00:3646 $C3 $4B $35
 
-data_3649::
+KeyDoorRightObjectIds::
     db   $33, $34                                 ;; 00:3649
 
 LoadObject_KeyDoorRight::
     ld   e, $03                                   ;; 00:364B $1E $03
-    call func_373F                                ;; 00:364D $CD $3F $37
+    call MakeListOfDoorPositions                  ;; 00:364D $CD $3F $37
     ldh  a, [hRoomStatus]                         ;; 00:3650 $F0 $F8
     and  ROOM_STATUS_DOOR_OPEN_RIGHT              ;; 00:3652 $E6 $01
     jp   nz, LoadObject_OpenDoorRight             ;; 00:3654 $C2 $12 $37
 
     push bc                                       ;; 00:3657 $C5
-    call label_35EE                               ;; 00:3658 $CD $EE $35
-    ld   bc, data_37E4                            ;; 00:365B $01 $E4 $37
-    ld   de, data_3649                            ;; 00:365E $11 $49 $36
-    jp   Func_354B                                ;; 00:3661 $C3 $4B $35
+    call ObjectPositionToRoomObjectAddress        ;; 00:3658 $CD $EE $35
+    ld   bc, VerticalObjectOffsets                ;; 00:365B $01 $E4 $37
+    ld   de, KeyDoorRightObjectIds                ;; 00:365E $11 $49 $36
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 00:3661 $C3 $4B $35
 
 LoadObject_ClosedDoorTop::
     ld   e, $04                                   ;; 00:3664 $1E $04
-    call func_373F                                ;; 00:3666 $CD $3F $37
+    call MakeListOfDoorPositions                  ;; 00:3666 $CD $3F $37
     ld   a, [wC18A]                               ;; 00:3669 $FA $8A $C1
     or   $01                                      ;; 00:366C $F6 $01
     ld   [wC18A], a                               ;; 00:366E $EA $8A $C1
@@ -7014,7 +7054,7 @@ LoadObject_ClosedDoorTop::
 
 LoadObject_ClosedDoorBottom::
     ld   e, $05                                   ;; 00:3677 $1E $05
-    call func_373F                                ;; 00:3679 $CD $3F $37
+    call MakeListOfDoorPositions                  ;; 00:3679 $CD $3F $37
     ld   a, [wC18A]                               ;; 00:367C $FA $8A $C1
     or   $02                                      ;; 00:367F $F6 $02
     ld   [wC18A], a                               ;; 00:3681 $EA $8A $C1
@@ -7023,7 +7063,7 @@ LoadObject_ClosedDoorBottom::
 
 LoadObject_ClosedDoorLeft::
     ld   e, $06                                   ;; 00:368A $1E $06
-    call func_373F                                ;; 00:368C $CD $3F $37
+    call MakeListOfDoorPositions                  ;; 00:368C $CD $3F $37
     ld   a, [wC18A]                               ;; 00:368F $FA $8A $C1
     or   $04                                      ;; 00:3692 $F6 $04
     ld   [wC18A], a                               ;; 00:3694 $EA $8A $C1
@@ -7032,27 +7072,27 @@ LoadObject_ClosedDoorLeft::
 
 LoadObject_ClosedDoorRight::
     ld   e, $07                                   ;; 00:369D $1E $07
-    call func_373F                                ;; 00:369F $CD $3F $37
+    call MakeListOfDoorPositions                  ;; 00:369F $CD $3F $37
     ld   a, [wC18A]                               ;; 00:36A2 $FA $8A $C1
     or   $08                                      ;; 00:36A5 $F6 $08
     ld   [wC18A], a                               ;; 00:36A7 $EA $8A $C1
     ld   [wC18B], a                               ;; 00:36AA $EA $8B $C1
     jp   LoadObject_OpenDoorRight                 ;; 00:36AD $C3 $12 $37
 
-data_36B0::
+OpenDoorTopObjectIds::
     db   $43, $44                                 ;; 00:36B0
 
 LoadObject_OpenDoorTop::
     ld   a, ROOM_STATUS_DOOR_OPEN_UP              ;; 00:36B2 $3E $04
     call UpdateIndoorRoomStatus                   ;; 00:36B4 $CD $C4 $36
     push bc                                       ;; 00:36B7 $C5
-    call label_35EE                               ;; 00:36B8 $CD $EE $35
-    ld   bc, data_37E1                            ;; 00:36BB $01 $E1 $37
-    ld   de, data_36B0                            ;; 00:36BE $11 $B0 $36
-    jp   Func_354B                                ;; 00:36C1 $C3 $4B $35
+    call ObjectPositionToRoomObjectAddress        ;; 00:36B8 $CD $EE $35
+    ld   bc, HorizontalObjectOffsets              ;; 00:36BB $01 $E1 $37
+    ld   de, OpenDoorTopObjectIds                 ;; 00:36BE $11 $B0 $36
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 00:36C1 $C3 $4B $35
 
 ; Set hRoomStatus depending on the map and room
-; a = new rom status
+; a = new room status
 ; f = not used, but overridden
 UpdateIndoorRoomStatus::
     push af                                       ;; 00:36C4 $F5
@@ -7090,125 +7130,131 @@ UpdateIndoorRoomStatus::
     ldh  [hRoomStatus], a                         ;; 00:36E5 $E0 $F8
     ret                                           ;; 00:36E7 $C9
 
-data_36E8::
-    db $8C, 8                                     ;; 00:36E8
+OpenDoorBottomObjectIds::
+    db $8C, $08                                   ;; 00:36E8
 
 LoadObject_OpenDoorBottom::
-    ld   a, 8                                     ;; 00:36EA $3E $08
+    ld   a, ROOM_STATUS_DOOR_OPEN_DOWN            ;; 00:36EA $3E $08
     call UpdateIndoorRoomStatus                   ;; 00:36EC $CD $C4 $36
     push bc                                       ;; 00:36EF $C5
-    call label_35EE                               ;; 00:36F0 $CD $EE $35
-    ld   bc, data_37E1                            ;; 00:36F3 $01 $E1 $37
-    ld   de, data_36E8                            ;; 00:36F6 $11 $E8 $36
-    jp   Func_354B                                ;; 00:36F9 $C3 $4B $35
+    call ObjectPositionToRoomObjectAddress        ;; 00:36F0 $CD $EE $35
+    ld   bc, HorizontalObjectOffsets              ;; 00:36F3 $01 $E1 $37
+    ld   de, OpenDoorBottomObjectIds              ;; 00:36F6 $11 $E8 $36
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 00:36F9 $C3 $4B $35
 
-data_36FC::
-    db 9, $A                                      ;; 00:36FC
+OpenDoorLeftObjectIds::
+    db $09, $0A                                   ;; 00:36FC
 
 LoadObject_OpenDoorLeft::
-    ld   a, $02                                   ;; 00:36FE $3E $02
+    ld   a, ROOM_STATUS_DOOR_OPEN_LEFT            ;; 00:36FE $3E $02
     call UpdateIndoorRoomStatus                   ;; 00:3700 $CD $C4 $36
     push bc                                       ;; 00:3703 $C5
-    call label_35EE                               ;; 00:3704 $CD $EE $35
-    ld   bc, data_37E4                            ;; 00:3707 $01 $E4 $37
-    ld   de, data_36FC                            ;; 00:370A $11 $FC $36
-    jp   Func_354B                                ;; 00:370D $C3 $4B $35
+    call ObjectPositionToRoomObjectAddress        ;; 00:3704 $CD $EE $35
+    ld   bc, VerticalObjectOffsets                ;; 00:3707 $01 $E4 $37
+    ld   de, OpenDoorLeftObjectIds                ;; 00:370A $11 $FC $36
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 00:370D $C3 $4B $35
 
-data_3710::
-    db $B, $C                                     ;; 00:3710
+OpenDoorRightObjectIds::
+    db $0B, $0C                                   ;; 00:3710
 
 LoadObject_OpenDoorRight::
-    ld   a, $01                                   ;; 00:3712 $3E $01
+    ld   a, ROOM_STATUS_DOOR_OPEN_RIGHT           ;; 00:3712 $3E $01
     call UpdateIndoorRoomStatus                   ;; 00:3714 $CD $C4 $36
     push bc                                       ;; 00:3717 $C5
-    call label_35EE                               ;; 00:3718 $CD $EE $35
-    ld   bc, data_37E4                            ;; 00:371B $01 $E4 $37
-    ld   de, data_3710                            ;; 00:371E $11 $10 $37
-    jp   Func_354B                                ;; 00:3721 $C3 $4B $35
+    call ObjectPositionToRoomObjectAddress        ;; 00:3718 $CD $EE $35
+    ld   bc, VerticalObjectOffsets                ;; 00:371B $01 $E4 $37
+    ld   de, OpenDoorRightObjectIds               ;; 00:371E $11 $10 $37
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 00:3721 $C3 $4B $35
 
-data_3724::
+BossDoorObjectIds::
     db $A4, $A5                                   ;; 00:3724
 
 LoadObject_BossDoor::
     ld   e, $08                                   ;; 00:3726 $1E $08
-    call func_373F                                ;; 00:3728 $CD $3F $37
+    call MakeListOfDoorPositions                  ;; 00:3728 $CD $3F $37
     ; if boss door is not open load door object
     ldh  a, [hRoomStatus]                         ;; 00:372B $F0 $F8
     and  ROOM_STATUS_DOOR_OPEN_UP                 ;; 00:372D $E6 $04
     jp   nz, LoadObject_OpenDoorTop               ;; 00:372F $C2 $B2 $36
     push bc                                       ;; 00:3732 $C5
-    call label_35EE                               ;; 00:3733 $CD $EE $35
-    ld   bc, data_37E1                            ;; 00:3736 $01 $E1 $37
-    ld   de, data_3724                            ;; 00:3739 $11 $24 $37
-    jp   Func_354B                                ;; 00:373C $C3 $4B $35
+    call ObjectPositionToRoomObjectAddress        ;; 00:3733 $CD $EE $35
+    ld   bc, HorizontalObjectOffsets              ;; 00:3736 $01 $E1 $37
+    ld   de, BossDoorObjectIds                    ;; 00:3739 $11 $24 $37
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 00:373C $C3 $4B $35
 
-func_373F::
+; Make lists of the positions of current doors in the room
+MakeListOfDoorPositions::
     ld   d, $00                                   ;; 00:373F $16 $00
     ld   hl, wC1F0                                ;; 00:3741 $21 $F0 $C1
     add  hl, de                                   ;; 00:3744 $19
+    ; Decrement bc to be at object position
     dec  bc                                       ;; 00:3745 $0B
     ld   a, [bc]                                  ;; 00:3746 $0A
+    ; Put position in scratch space
     ld   [hl], a                                  ;; 00:3747 $77
     push af                                       ;; 00:3748 $F5
+    ; Put Y position in scratch space
     and  $F0                                      ;; 00:3749 $E6 $F0
     ld   hl, wC1E0                                ;; 00:374B $21 $E0 $C1
     add  hl, de                                   ;; 00:374E $19
     ld   [hl], a                                  ;; 00:374F $77
+    ; Put X position in scratch space
     pop  af                                       ;; 00:3750 $F1
     swap a                                        ;; 00:3751 $CB $37
     and  $F0                                      ;; 00:3753 $E6 $F0
     ld   hl, wC1D0                                ;; 00:3755 $21 $D0 $C1
     add  hl, de                                   ;; 00:3758 $19
     ld   [hl], a                                  ;; 00:3759 $77
+    ; Increment bc to be back at object type
     inc  bc                                       ;; 00:375A $03
     ret                                           ;; 00:375B $C9
 
-data_375C::
+StairsDoorObjectIds::
     db   $AF, $B0                                 ;; 00:375C
 
 LoadObject_StairsDoor::
-    push bc                                       ; $375E: $C5 ;; 00:375E $C5
-    call label_35EE                               ; $375F: $CD $EE $35 ;; 00:375F $CD $EE $35
-    ld   bc, data_37E4                            ; $3762: $01 $E4 $37 ;; 00:3762 $01 $E4 $37
-    ld   de, data_375C                            ; $3765: $11 $5C $37 ;; 00:3765 $11 $5C $37
-    jp   Func_354B                                ; $3768: $C3 $4B $35 ;; 00:3768 $C3 $4B $35
+    push bc                                       ;; 00:375E $C5
+    call ObjectPositionToRoomObjectAddress        ;; 00:375F $CD $EE $35
+    ld   bc, VerticalObjectOffsets                ;; 00:3762 $01 $E4 $37
+    ld   de, StairsDoorObjectIds                  ;; 00:3765 $11 $5C $37
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 00:3768 $C3 $4B $35
 
-data_376B::
+RevolvingDoorObjectIds::
     db   $B1, $B2                                 ;; 00:376B
 
-LoadObject_FlipWall::
-    push bc                                       ; $376D: $C5 ;; 00:376D $C5
-    call label_35EE                               ; $376E: $CD $EE $35 ;; 00:376E $CD $EE $35
-    ld   bc, data_37E1                            ; $3771: $01 $E1 $37 ;; 00:3771 $01 $E1 $37
-    ld   de, data_376B                            ; $3774: $11 $6B $37 ;; 00:3774 $11 $6B $37
-    jp   Func_354B                                ; $3777: $C3 $4B $35 ;; 00:3777 $C3 $4B $35
+LoadObject_RevolvingDoor::
+    push bc                                       ;; 00:376D $C5
+    call ObjectPositionToRoomObjectAddress        ;; 00:376E $CD $EE $35
+    ld   bc, HorizontalObjectOffsets              ;; 00:3771 $01 $E1 $37
+    ld   de, RevolvingDoorObjectIds                    ;; 00:3774 $11 $6B $37
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 00:3777 $C3 $4B $35
 
-data_377A::
+OneWayArrowObjectIds::
     db   $45, $46                                 ;; 00:377A
 
 LoadObject_OneWayArrow::
-    push bc                                       ; $377C: $C5 ;; 00:377C $C5
-    call label_35EE                               ; $377D: $CD $EE $35 ;; 00:377D $CD $EE $35
-    ld   bc, data_37E1                            ; $3780: $01 $E1 $37 ;; 00:3780 $01 $E1 $37
-    ld   de, data_377A                            ; $3783: $11 $7A $37 ;; 00:3783 $11 $7A $37
-    jp   Func_354B                                ; $3786: $C3 $4B $35 ;; 00:3786 $C3 $4B $35
+    push bc                                       ;; 00:377C $C5
+    call ObjectPositionToRoomObjectAddress        ;; 00:377D $CD $EE $35
+    ld   bc, HorizontalObjectOffsets              ;; 00:3780 $01 $E1 $37
+    ld   de, OneWayArrowObjectIds                 ;; 00:3783 $11 $7A $37
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 00:3786 $C3 $4B $35
 
-data_3789::
-    db   0, 1, 2, 3, $10, $11, $12, $13, $20, $21, $22, $23, $FF ;; 00:3789
+DungeonEntranceObjectOffsets::
+    db   $00, $01, $02, $03, $10, $11, $12, $13, $20, $21, $22, $23, $FF ;; 00:3789
 
-data_3796::
+DungeonEntranceObjectIds::
     db   $B3, $B4, $B4, $B5, $B6, $B7, $B8, $B9, $BA, $BB, $BC, $BD ;; 00:3796
 
 LoadObject_DungeonEntrance::
-    ld   a, $08                                   ; $37A2: $3E $08 ;; 00:37A2 $3E $08
-    call UpdateIndoorRoomStatus                   ; $37A4: $CD $C4 $36 ;; 00:37A4 $CD $C4 $36
-    push bc                                       ; $37A7: $C5 ;; 00:37A7 $C5
-    call label_35EE                               ; $37A8: $CD $EE $35 ;; 00:37A8 $CD $EE $35
-    ld   bc, data_3789                            ; $37AB: $01 $89 $37 ;; 00:37AB $01 $89 $37
-    ld   de, data_3796                            ; $37AE: $11 $96 $37 ;; 00:37AE $11 $96 $37
-    jp   Func_354B                                ; $37B1: $C3 $4B $35 ;; 00:37B1 $C3 $4B $35
+    ld   a, $08                                   ;; 00:37A2 $3E $08
+    call UpdateIndoorRoomStatus                   ;; 00:37A4 $CD $C4 $36
+    push bc                                       ;; 00:37A7 $C5
+    call ObjectPositionToRoomObjectAddress        ;; 00:37A8 $CD $EE $35
+    ld   bc, DungeonEntranceObjectOffsets         ;; 00:37AB $01 $89 $37
+    ld   de, DungeonEntranceObjectIds             ;; 00:37AE $11 $96 $37
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 00:37B1 $C3 $4B $35
 
-data_37B4::
+EntranceObjectIds::
     db   $C1, $C2                                 ;; 00:37B4
 
 LoadObject_IndoorEntrance::
@@ -7253,18 +7299,18 @@ LoadObject_IndoorEntrance::
     ld   a, $01                                   ;; 00:37CF $3E $01
     call UpdateIndoorRoomStatus                   ;; 00:37D1 $CD $C4 $36
     push bc                                       ;; 00:37D4 $C5
-    call label_35EE                               ;; 00:37D5 $CD $EE $35
-    ld   bc, data_37E1                            ;; 00:37D8 $01 $E1 $37
-    ld   de, data_37B4                            ;; 00:37DB $11 $B4 $37
+    call ObjectPositionToRoomObjectAddress        ;; 00:37D5 $CD $EE $35
+    ld   bc, HorizontalObjectOffsets              ;; 00:37D8 $01 $E1 $37
+    ld   de, EntranceObjectIds                    ;; 00:37DB $11 $B4 $37
     ; tail-call jump
-    jp   Func_354B                                ;; 00:37DE $C3 $4B $35
+    jp   CopyIndoorsMacroObjectsToRoom            ;; 00:37DE $C3 $4B $35
 
-data_37E1::
+HorizontalObjectOffsets::
     db   $00                                      ;; 00:37E1
     db   $01                                      ;; 00:37E2
     db   $FF                                      ;; 00:37E3
 
-data_37E4::
+VerticalObjectOffsets::
     db   $00                                      ;; 00:37E4
     db   $10                                      ;; 00:37E5
     db   $FF                                      ;; 00:37E6

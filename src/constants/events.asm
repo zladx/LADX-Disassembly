@@ -6,7 +6,7 @@ DEF EVENT_EFFECT_MASK  EQU $E0
 DEF TRIGGER_NONE                 EQU $00
 DEF TRIGGER_KILL_ALL_ENEMIES     EQU $01
 DEF TRIGGER_PUSH_SINGLE_BLOCK    EQU $02 ; Push a single block (tile 0xA7).
-DEF TRIGGER_STEP_ON_BUTTON       EQU $03 ; can only used once per dungeon
+DEF TRIGGER_STEP_ON_BUTTON       EQU $03 ; can only be used once per dungeon
 ;TRIGGER_UNKNOWN             EQU $04 ; found at the end of the Color Dungeon with the fairy
 DEF TRIGGER_LIGHT_TORCHES        EQU $05 ; light two torches
 DEF TRIGGER_KILL_IN_ORDER        EQU $06 ; Kill enemies in order of their sprite/object ID (after killing three enemies, the ID is triggered. This is the Pols Voice/Keese/Stalfos puzzle from Bottle Grotto).
@@ -21,11 +21,26 @@ DEF TRIGGER_FILL_LAVA_GAPS       EQU $0E ; Fill in the gaps with that rolling th
 DEF TRIGGER_SHOOT_STATUE_EYE     EQU $0F ; Shoot an arrow at the eye of a statue (tile 0xC0). You can have as many statues as you want; shooting any of them will work.
 DEF TRIGGER_ANSWER_TUNICS        EQU $10 ; Answer the questions of the skeletons about their tunics colors. Only works on a room id $12.
 
-DEF EFFECT_NONE              EQU $00
-DEF EFFECT_OPEN_LOCKED_DOORS EQU $20
-DEF EFFECT_KILL_ALL_ENEMIES  EQU $40
-DEF EFFECT_REVEAL_CHEST      EQU $60
-DEF EFFECT_DROP_KEY          EQU $80
-DEF EFFECT_REVEAL_STAIRWAY   EQU $A0
-DEF EFFECT_CLEAR_MIDBOSS     EQU $C0
-DEF EFFECT_DROP_FAIRY        EQU $E0
+DEF EFFECT_NONE               EQU $00
+DEF EFFECT_OPEN_SHUTTER_DOORS EQU $20
+DEF EFFECT_KILL_ALL_ENEMIES   EQU $40
+DEF EFFECT_REVEAL_CHEST       EQU $60
+DEF EFFECT_DROP_KEY           EQU $80
+DEF EFFECT_REVEAL_STAIRCASE   EQU $A0
+DEF EFFECT_CLEAR_MIDBOSS      EQU $C0
+DEF EFFECT_DROP_FAIRY         EQU $E0
+
+DEF DOOR_TYPE_KEY_TOP        EQU $00
+DEF DOOR_TYPE_KEY_BOTTOM     EQU $01
+DEF DOOR_TYPE_KEY_LEFT       EQU $02
+DEF DOOR_TYPE_KEY_RIGHT      EQU $03
+DEF DOOR_TYPE_SHUTTER_TOP    EQU $04
+DEF DOOR_TYPE_SHUTTER_BOTTOM EQU $05
+DEF DOOR_TYPE_SHUTTER_LEFT   EQU $06
+DEF DOOR_TYPE_SHUTTER_RIGHT  EQU $07
+DEF DOOR_TYPE_BOSS_TOP       EQU $08
+
+DEF DOOR_TYPE_SHUTTER_TOP_BIT    EQU %0000_0001 ; (1 << DOOR_TYPE_SHUTTER_TOP) >> 4
+DEF DOOR_TYPE_SHUTTER_BOTTOM_BIT EQU %0000_0010 ; (1 << DOOR_TYPE_SHUTTER_BOTTOM) >> 4
+DEF DOOR_TYPE_SHUTTER_LEFT_BIT   EQU %0000_0100 ; (1 << DOOR_TYPE_SHUTTER_LEFT) >> 4
+DEF DOOR_TYPE_SHUTTER_RIGHT_BIT  EQU %0000_1000 ; (1 << DOOR_TYPE_SHUTTER_RIGHT) >> 4

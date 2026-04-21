@@ -607,11 +607,11 @@ wDialogAskSelectionIndex:
 wPegasusBootsCollisionCountdown:
   ds 1 ; C178
 
-; X position of the last Pegasus Boots collision 
+; X position of the last Pegasus Boots collision
 wPegasusBootsCollisionPosX:
   ds 1 ; C179
 
-; Y position of the last Pegasus Boots collision 
+; Y position of the last Pegasus Boots collision
 wPegasusBootsCollisionPosY:
   ds 1 ; C17A
 
@@ -653,28 +653,38 @@ wC182::
 wC183::
   ds 5 ; C183 - C187
 
-; Unlabeled
-wC188::
+; Are the shutter doors of the current room currently opening or closing?
+; 0 = neither,
+; 1 = opening,
+; 2 = closing
+wDoorsOpeningOrClosing::
   ds 1 ; C188
 
 ; Unlabeled
-wC189::
+; Type of door to close?
+wDoorEvent::
   ds 1 ; C189
 
-; Unlabeled
-wC18A::
+; A bitmask designating which shutter doors the current room contains.
+; A 1 bit means the door is present.
+; bit 0 = top door,
+; bit 1 = bottom door,
+; bit 2 = left door,
+; bit 3 = right door
+; bits 4-7 = unused
+wShutterDoorsMask::
   ds 1 ; C18A
 
 ; Unlabeled
-wC18B::
+wShutterDoorsMask2::
   ds 1 ; C18B
 
-; Unlabeled
-wC18C::
+; If non-zero, the shutter doors of the current room should open.
+wEnqueueDoorsOpening::
   ds 1 ; C18C
 
-; Unlabeled
-wC18D::
+; If non-zero, the shutter doors of the current room should close.
+wEnqueueDoorsClosing::
   ds 1 ; C18D
 
 ; Event for the current room.
@@ -687,8 +697,8 @@ wRoomEvent::
 wRoomEventEffectExecuted::
   ds 1 ; C18F
 
-; Unlabeled
-wC190::
+; Have the doors of the current room been opened or closed already?
+wShutterDoorEventExecuted::
   ds 1 ; C190
 
 ; Unlabeled
@@ -966,21 +976,44 @@ wC1CE::
 wC1CF::
   ds 1 ; C1CF
 
-; Unlabeled
-wC1D0::
-  ds 16 ; C1D0 - C1DF
+; Array of X positions of doors in the current room.
+; Format: (X << 8).
+; Index designates the door type; see wDoorPositions.
+wDoorXPositions::
+  ds 9 ; C1D0 - C1D8
 
-; Unlabeled
-wC1E0::
-  ds 16 ; C1E0 - C1EF
+; Unused
+wC1D9::
+  ds 7 ; C1D9 - C1DF
 
-; Unlabeled
-wC1F0::
-  ds 4 ; C1F0 - C1F3
+; Array of Y positions of doors in the current room.
+; Format: (Y << 8).
+; Index designates the door type; see wDoorPositions.
+wDoorYPositions::
+  ds 9 ; C1E0 - C1E8
 
-; Unlabeled
-wC1F4::
-  ds 12 ; C1F4 - C1FF
+; Unused
+wC1E9::
+  ds 7 ; C1E9 - C1EF
+
+; Array of positions of doors in the current room.
+; Format: (Y << 8) | X.
+; Indexed by the door type:
+; 0 = DOOR_TYPE_KEY_TOP,
+; 1 = DOOR_TYPE_KEY_BOTTOM,
+; 2 = DOOR_TYPE_KEY_LEFT,
+; 3 = DOOR_TYPE_KEY_RIGHT,
+; 4 = DOOR_TYPE_SHUTTER_TOP,
+; 5 = DOOR_TYPE_SHUTTER_BOTTOM,
+; 6 = DOOR_TYPE_SHUTTER_LEFT,
+; 7 = DOOR_TYPE_SHUTTER_RIGHT,
+; 8 = DOOR_TYPE_BOSS_TOP
+wDoorPositions::
+  ds 9 ; C1F0 - C1F8
+
+; Unused
+wC1F9::
+  ds 7 ; C1F9 - C1FF
 
 ; ---------------------------------------------------------
 ;
@@ -1068,7 +1101,7 @@ wEntitiesCollisionsTable::
 ;  - Keese: movement angle (0x0 = right ... 0x4 = down ... 0x8 = left ... 0xC = up)
 ;  - Smashable pillar: 0 = pillar, 1 = dust, 2 = debris
 ;  - Pincer: hole X position
-;  - Peahat: animation speed 
+;  - Peahat: animation speed
 ;  - Moving blocks (left): Y position when fully closed
 ;  - Moving blocks (bottom): X position when fully closed
 ;  - Knight: when attacking, iron ball speed parallel to attack direction
@@ -1254,7 +1287,7 @@ wC3CF::
 ; will be updated every 4 frames.
 ;
 ; Each entity uses this value differently.
-; 
+;
 ; In segmented entities (Mini-Moldorm, Dodongo Snake...), the most recent position's index in the position history
 wEntitiesInertiaTable::
   ds $10 ; C3D0 - C3DF
@@ -1549,7 +1582,7 @@ wC5C0::
 ; 0xFF = not thrown
 wEntitiesThrownDirectionTable::
   ds $10 ; C5D0 - C5DF
-  
+
 wC5E0::
   ds $8A0 ; C5E0 - CE7F
 
@@ -3669,7 +3702,8 @@ wDBAB::
 wDBAC::
   ds 2 ; DBAC - DBAD
 
-; TODO comment
+; The coordinates of the current room (hRoomId)
+; on the current map layout (hMapId)
 wIndoorRoom::
   ds 1 ; DBAE
 

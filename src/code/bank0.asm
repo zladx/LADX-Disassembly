@@ -1527,8 +1527,7 @@ WorldInteractiveHandler::
     ld   hl, wC11E                                ;; 00:0FB7 $21 $1E $C1
     res  7, [hl]                                  ;; 00:0FBA $CB $BE
 
-    ; Execute room events
-    call label_002_593B                           ;; 00:0FBC $CD $3B $59
+    call ExecuteRoomEvents                        ;; 00:0FBC $CD $3B $59
 
     callsw ApplyRoomTransition                    ;; 00:0FBF $3E $02 $CD $0C $08 $CD $E8 $78
 
@@ -6179,20 +6178,20 @@ LoadRoomObject::
     ret                                           ;; 00:32D8 $C9
 
 .loadIndoorObject
-    ; a = object type - OBJECT_KEY_DOOR_TOP
+    ; a = object type - OBJECT_DOOR_TYPE_KEY_TOP
     ld   a, [bc]                                  ;; 00:32D9 $0A
-    sub  a, OBJECT_KEY_DOOR_TOP                   ;; 00:32DA $D6 $EC
-    ; If a >= OBJECT_KEY_DOOR_TOP, dispatch to the door object handlers
+    sub  a, OBJECT_DOOR_TYPE_KEY_TOP              ;; 00:32DA $D6 $EC
+    ; If a >= OBJECT_DOOR_TYPE_KEY_TOP, dispatch to the door object handlers
     jp  c, .loadNonDoorIndoorObject               ;; 00:32DC $DA $CB $33
     JP_TABLE                                      ;; 00:32DF $C7
 ._EC dw LoadObject_KeyDoorTop                     ;; 00:32E0
 ._ED dw LoadObject_KeyDoorBottom                  ;; 00:32E2
 ._EE dw LoadObject_KeyDoorLeft                    ;; 00:32E4
 ._EF dw LoadObject_KeyDoorRight                   ;; 00:32E6
-._F0 dw LoadObject_ClosedDoorTop                  ;; 00:32E8
-._F1 dw LoadObject_ClosedDoorBottom               ;; 00:32EA
-._F2 dw LoadObject_ClosedDoorLeft                 ;; 00:32EC
-._F3 dw LoadObject_ClosedDoorRight                ;; 00:32EE
+._F0 dw LoadObject_ShutterDoorTop                  ;; 00:32E8
+._F1 dw LoadObject_ShutterDoorBottom               ;; 00:32EA
+._F2 dw LoadObject_ShutterDoorLeft                 ;; 00:32EC
+._F3 dw LoadObject_ShutterDoorRight                ;; 00:32EE
 ._F4 dw LoadObject_OpenDoorTop                    ;; 00:32F0
 ._F5 dw LoadObject_OpenDoorBottom                 ;; 00:32F2
 ._F6 dw LoadObject_OpenDoorLeft                   ;; 00:32F4
@@ -6368,7 +6367,7 @@ LoadRoomObject::
 
 .loadNonDoorIndoorObject
     ; Re-increment a to be the object type
-    add  a, OBJECT_KEY_DOOR_TOP                   ;; 00:33CB $C6 $EC
+    add  a, OBJECT_DOOR_TYPE_KEY_TOP              ;; 00:33CB $C6 $EC
     ldh  [hMultiPurpose9], a                      ;; 00:33CD $E0 $E0
 
     ; If object type is a conveyor belt…
@@ -6703,7 +6702,7 @@ FillRoomWithConsecutiveObjects::
 
 ; On GBC, special case for some overworld objects
 ; Part of the macro objects system
-; Identical to SetupDestroyableObjectIfNeeded, but with different return banks 
+; Identical to SetupDestroyableObjectIfNeeded, but with different return banks
 ; Input:
 ;   a    object id
 SetupDestroyableObjectIfNeeded2::
@@ -6934,7 +6933,7 @@ CopyOutdoorsMacroObjectsToRoom::
 
 ; On GBC, special case for some overworld objects
 ; Part of the macro objects system
-; Identical to SetupDestroyableObjectIfNeeded2, but with a different return bank 
+; Identical to SetupDestroyableObjectIfNeeded2, but with a different return bank
 ; Input:
 ;   a    object id
 SetupDestroyableObjectIfNeeded::
@@ -6983,7 +6982,7 @@ KeyDoorTopObjectIds:
     db $2D, $2E                                   ;; 00:35F8
 
 LoadObject_KeyDoorTop::
-    ld   e, 0                                     ;; 00:35FA $1E $00
+    ld   e, DOOR_TYPE_KEY_TOP                     ;; 00:35FA $1E $00
     call MakeListOfDoorPositions                  ;; 00:35FC $CD $3F $37
     ldh  a, [hRoomStatus]                         ;; 00:35FF $F0 $F8
     and  ROOM_STATUS_DOOR_OPEN_UP                 ;; 00:3601 $E6 $04
@@ -6999,7 +6998,7 @@ KeyDoorBottomObjectIds::
     db   $2F, $30                                 ;; 00:3613
 
 LoadObject_KeyDoorBottom::
-    ld   e, $01                                   ;; 00:3615 $1E $01
+    ld   e, DOOR_TYPE_KEY_BOTTOM                  ;; 00:3615 $1E $01
     call MakeListOfDoorPositions                  ;; 00:3617 $CD $3F $37
     ldh  a, [hRoomStatus]                         ;; 00:361A $F0 $F8
     and  ROOM_STATUS_DOOR_OPEN_DOWN               ;; 00:361C $E6 $08
@@ -7012,10 +7011,11 @@ LoadObject_KeyDoorBottom::
     jp   CopyIndoorsMacroObjectsToRoom            ;; 00:362B $C3 $4B $35
 
 KeyDoorLeftObjectIds::
-    db   $31, $32                                 ;; 00:362E
+    db   $31                                      ;; 00:362E
+    db   $32
 
 LoadObject_KeyDoorLeft::
-    ld   e, $02                                   ;; 00:3630 $1E $02
+    ld   e, DOOR_TYPE_KEY_LEFT                    ;; 00:3630 $1E $02
     call MakeListOfDoorPositions                  ;; 00:3632 $CD $3F $37
     ldh  a, [hRoomStatus]                         ;; 00:3635 $F0 $F8
     and  ROOM_STATUS_DOOR_OPEN_LEFT               ;; 00:3637 $E6 $02
@@ -7028,10 +7028,11 @@ LoadObject_KeyDoorLeft::
     jp   CopyIndoorsMacroObjectsToRoom            ;; 00:3646 $C3 $4B $35
 
 KeyDoorRightObjectIds::
-    db   $33, $34                                 ;; 00:3649
+    db   $33                                      ;; 00:3649
+    db   $34
 
 LoadObject_KeyDoorRight::
-    ld   e, $03                                   ;; 00:364B $1E $03
+    ld   e, DOOR_TYPE_KEY_RIGHT                   ;; 00:364B $1E $03
     call MakeListOfDoorPositions                  ;; 00:364D $CD $3F $37
     ldh  a, [hRoomStatus]                         ;; 00:3650 $F0 $F8
     and  ROOM_STATUS_DOOR_OPEN_RIGHT              ;; 00:3652 $E6 $01
@@ -7043,40 +7044,40 @@ LoadObject_KeyDoorRight::
     ld   de, KeyDoorRightObjectIds                ;; 00:365E $11 $49 $36
     jp   CopyIndoorsMacroObjectsToRoom            ;; 00:3661 $C3 $4B $35
 
-LoadObject_ClosedDoorTop::
-    ld   e, $04                                   ;; 00:3664 $1E $04
+LoadObject_ShutterDoorTop::
+    ld   e, DOOR_TYPE_SHUTTER_TOP                 ;; 00:3664 $1E $04
     call MakeListOfDoorPositions                  ;; 00:3666 $CD $3F $37
-    ld   a, [wC18A]                               ;; 00:3669 $FA $8A $C1
-    or   $01                                      ;; 00:366C $F6 $01
-    ld   [wC18A], a                               ;; 00:366E $EA $8A $C1
-    ld   [wC18B], a                               ;; 00:3671 $EA $8B $C1
+    ld   a, [wShutterDoorsMask]                   ;; 00:3669 $FA $8A $C1
+    or   DOOR_TYPE_SHUTTER_TOP_BIT                ;; 00:366C $F6 $01
+    ld   [wShutterDoorsMask], a                   ;; 00:366E $EA $8A $C1
+    ld   [wShutterDoorsMask2], a                  ;; 00:3671 $EA $8B $C1
     jp   LoadObject_OpenDoorTop                   ;; 00:3674 $C3 $B2 $36
 
-LoadObject_ClosedDoorBottom::
-    ld   e, $05                                   ;; 00:3677 $1E $05
+LoadObject_ShutterDoorBottom::
+    ld   e, DOOR_TYPE_SHUTTER_BOTTOM              ;; 00:3677 $1E $05
     call MakeListOfDoorPositions                  ;; 00:3679 $CD $3F $37
-    ld   a, [wC18A]                               ;; 00:367C $FA $8A $C1
-    or   $02                                      ;; 00:367F $F6 $02
-    ld   [wC18A], a                               ;; 00:3681 $EA $8A $C1
-    ld   [wC18B], a                               ;; 00:3684 $EA $8B $C1
+    ld   a, [wShutterDoorsMask]                   ;; 00:367C $FA $8A $C1
+    or   DOOR_TYPE_SHUTTER_BOTTOM_BIT             ;; 00:367F $F6 $02
+    ld   [wShutterDoorsMask], a                   ;; 00:3681 $EA $8A $C1
+    ld   [wShutterDoorsMask2], a                  ;; 00:3684 $EA $8B $C1
     jp   LoadObject_OpenDoorBottom                ;; 00:3687 $C3 $EA $36
 
-LoadObject_ClosedDoorLeft::
-    ld   e, $06                                   ;; 00:368A $1E $06
+LoadObject_ShutterDoorLeft::
+    ld   e, DOOR_TYPE_SHUTTER_LEFT                ;; 00:368A $1E $06
     call MakeListOfDoorPositions                  ;; 00:368C $CD $3F $37
-    ld   a, [wC18A]                               ;; 00:368F $FA $8A $C1
-    or   $04                                      ;; 00:3692 $F6 $04
-    ld   [wC18A], a                               ;; 00:3694 $EA $8A $C1
-    ld   [wC18B], a                               ;; 00:3697 $EA $8B $C1
+    ld   a, [wShutterDoorsMask]                   ;; 00:368F $FA $8A $C1
+    or   DOOR_TYPE_SHUTTER_LEFT_BIT               ;; 00:3692 $F6 $04
+    ld   [wShutterDoorsMask], a                   ;; 00:3694 $EA $8A $C1
+    ld   [wShutterDoorsMask2], a                  ;; 00:3697 $EA $8B $C1
     jp   LoadObject_OpenDoorLeft                  ;; 00:369A $C3 $FE $36
 
-LoadObject_ClosedDoorRight::
-    ld   e, $07                                   ;; 00:369D $1E $07
+LoadObject_ShutterDoorRight::
+    ld   e, DOOR_TYPE_SHUTTER_RIGHT               ;; 00:369D $1E $07
     call MakeListOfDoorPositions                  ;; 00:369F $CD $3F $37
-    ld   a, [wC18A]                               ;; 00:36A2 $FA $8A $C1
-    or   $08                                      ;; 00:36A5 $F6 $08
-    ld   [wC18A], a                               ;; 00:36A7 $EA $8A $C1
-    ld   [wC18B], a                               ;; 00:36AA $EA $8B $C1
+    ld   a, [wShutterDoorsMask]                   ;; 00:36A2 $FA $8A $C1
+    or   DOOR_TYPE_SHUTTER_RIGHT_BIT              ;; 00:36A5 $F6 $08
+    ld   [wShutterDoorsMask], a                   ;; 00:36A7 $EA $8A $C1
+    ld   [wShutterDoorsMask2], a                  ;; 00:36AA $EA $8B $C1
     jp   LoadObject_OpenDoorRight                 ;; 00:36AD $C3 $12 $37
 
 OpenDoorTopObjectIds::
@@ -7131,7 +7132,7 @@ UpdateIndoorRoomStatus::
     ret                                           ;; 00:36E7 $C9
 
 OpenDoorBottomObjectIds::
-    db $8C, $08                                   ;; 00:36E8
+    db   $8C, $08                                   ;; 00:36E8
 
 LoadObject_OpenDoorBottom::
     ld   a, ROOM_STATUS_DOOR_OPEN_DOWN            ;; 00:36EA $3E $08
@@ -7143,7 +7144,8 @@ LoadObject_OpenDoorBottom::
     jp   CopyIndoorsMacroObjectsToRoom            ;; 00:36F9 $C3 $4B $35
 
 OpenDoorLeftObjectIds::
-    db $09, $0A                                   ;; 00:36FC
+    db   $09                                      ;; 00:36FC
+    db   $0A
 
 LoadObject_OpenDoorLeft::
     ld   a, ROOM_STATUS_DOOR_OPEN_LEFT            ;; 00:36FE $3E $02
@@ -7155,7 +7157,8 @@ LoadObject_OpenDoorLeft::
     jp   CopyIndoorsMacroObjectsToRoom            ;; 00:370D $C3 $4B $35
 
 OpenDoorRightObjectIds::
-    db $0B, $0C                                   ;; 00:3710
+    db   $0B                                      ;; 00:3710
+    db   $0C
 
 LoadObject_OpenDoorRight::
     ld   a, ROOM_STATUS_DOOR_OPEN_RIGHT           ;; 00:3712 $3E $01
@@ -7167,10 +7170,10 @@ LoadObject_OpenDoorRight::
     jp   CopyIndoorsMacroObjectsToRoom            ;; 00:3721 $C3 $4B $35
 
 BossDoorObjectIds::
-    db $A4, $A5                                   ;; 00:3724
+    db   $A4, $A5                                 ;; 00:3724
 
 LoadObject_BossDoor::
-    ld   e, $08                                   ;; 00:3726 $1E $08
+    ld   e, DOOR_TYPE_BOSS_TOP                    ;; 00:3726 $1E $08
     call MakeListOfDoorPositions                  ;; 00:3728 $CD $3F $37
     ; if boss door is not open load door object
     ldh  a, [hRoomStatus]                         ;; 00:372B $F0 $F8
@@ -7183,9 +7186,16 @@ LoadObject_BossDoor::
     jp   CopyIndoorsMacroObjectsToRoom            ;; 00:373C $C3 $4B $35
 
 ; Make lists of the positions of current doors in the room
+; Inputs:
+;  e:   door type (see DOOR_TYPE_*)
+;  bc:  object position
+; Outputs:
+;  wDoorXPositions:  X positions of doors, indexed by DOOR_TYPE_*
+;  wDoorYPositions:  Y positions of doors, indexed by DOOR_TYPE_*
+;  wDoorPositions:  YX positions of doors, indexed by DOOR_TYPE_*
 MakeListOfDoorPositions::
     ld   d, $00                                   ;; 00:373F $16 $00
-    ld   hl, wC1F0                                ;; 00:3741 $21 $F0 $C1
+    ld   hl, wDoorPositions                       ;; 00:3741 $21 $F0 $C1
     add  hl, de                                   ;; 00:3744 $19
     ; Decrement bc to be at object position
     dec  bc                                       ;; 00:3745 $0B
@@ -7195,14 +7205,14 @@ MakeListOfDoorPositions::
     push af                                       ;; 00:3748 $F5
     ; Put Y position in scratch space
     and  $F0                                      ;; 00:3749 $E6 $F0
-    ld   hl, wC1E0                                ;; 00:374B $21 $E0 $C1
+    ld   hl, wDoorYPositions                      ;; 00:374B $21 $E0 $C1
     add  hl, de                                   ;; 00:374E $19
     ld   [hl], a                                  ;; 00:374F $77
     ; Put X position in scratch space
     pop  af                                       ;; 00:3750 $F1
     swap a                                        ;; 00:3751 $CB $37
     and  $F0                                      ;; 00:3753 $E6 $F0
-    ld   hl, wC1D0                                ;; 00:3755 $21 $D0 $C1
+    ld   hl, wDoorXPositions                      ;; 00:3755 $21 $D0 $C1
     add  hl, de                                   ;; 00:3758 $19
     ld   [hl], a                                  ;; 00:3759 $77
     ; Increment bc to be back at object type
@@ -7240,13 +7250,18 @@ LoadObject_OneWayArrow::
     jp   CopyIndoorsMacroObjectsToRoom            ;; 00:3786 $C3 $4B $35
 
 DungeonEntranceObjectOffsets::
-    db   $00, $01, $02, $03, $10, $11, $12, $13, $20, $21, $22, $23, $FF ;; 00:3789
+    db   $00, $01, $02, $03
+    db   $10, $11, $12, $13
+    db   $20, $21, $22, $23
+    db   $FF
 
 DungeonEntranceObjectIds::
-    db   $B3, $B4, $B4, $B5, $B6, $B7, $B8, $B9, $BA, $BB, $BC, $BD ;; 00:3796
+    db   $B3, $B4, $B4, $B5
+    db   $B6, $B7, $B8, $B9
+    db   $BA, $BB, $BC, $BD
 
 LoadObject_DungeonEntrance::
-    ld   a, $08                                   ;; 00:37A2 $3E $08
+    ld   a, ROOM_STATUS_DOOR_OPEN_DOWN            ;; 00:37A2 $3E $08
     call UpdateIndoorRoomStatus                   ;; 00:37A4 $CD $C4 $36
     push bc                                       ;; 00:37A7 $C5
     call ObjectPositionToRoomObjectAddress        ;; 00:37A8 $CD $EE $35
@@ -7270,7 +7285,7 @@ LoadObject_IndoorEntrance::
     ; 2. even when fixing the room id, the closed door has garbled tiles.
     ;
     ; In the final version, this code is never triggered, because the
-    ; $D3 room (Kanalet's Castle main entrance) doesn't have a
+    ; $D3 room (Kanalet's Castle main entrance) doesn't have an
     ; IndoorEntrance object at all.
     ;
 
@@ -7291,11 +7306,15 @@ LoadObject_IndoorEntrance::
     and  a                                        ;; 00:37C9 $A7
     jr   z, .end                                  ;; 00:37CA $28 $03
 
-    ; … load a closed entrance instead of a open one.
-    jp   LoadObject_ClosedDoorBottom              ;; 00:37CC $C3 $77 $36
-
+    ; … load a shutter door instead of an entrance object.
+    jp   LoadObject_ShutterDoorBottom             ;; 00:37CC $C3 $77 $36
 .end
 
+    ; POI: Why does this use $01 instead of $08?
+    ; $01 is ROOM_STATUS_DOOR_OPEN_RIGHT, while
+    ; $08 is ROOM_STATUS_DOOR_OPEN_DOWN.
+    ; Entrance objects are always on the bottom of the room.
+    ; Does this number mean something else here?
     ld   a, $01                                   ;; 00:37CF $3E $01
     call UpdateIndoorRoomStatus                   ;; 00:37D1 $CD $C4 $36
     push bc                                       ;; 00:37D4 $C5
@@ -7306,8 +7325,7 @@ LoadObject_IndoorEntrance::
     jp   CopyIndoorsMacroObjectsToRoom            ;; 00:37DE $C3 $4B $35
 
 HorizontalObjectOffsets::
-    db   $00                                      ;; 00:37E1
-    db   $01                                      ;; 00:37E2
+    db   $00, $01                                 ;; 00:37E1
     db   $FF                                      ;; 00:37E3
 
 VerticalObjectOffsets::

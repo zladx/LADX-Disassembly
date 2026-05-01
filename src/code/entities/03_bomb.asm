@@ -4,7 +4,7 @@ BombSprite::
 ExplosionSpriteRect::
 .variant0
     db -8, -8, $32, OAM_GBC_PAL_1 | OAMF_PAL0, -8,  0, $32, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
-    db -8,  8, $32, OAM_GBC_PAL_1 | OAMF_PAL0, -8, 16, $32, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP 
+    db -8,  8, $32, OAM_GBC_PAL_1 | OAMF_PAL0, -8, 16, $32, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
     db  8, -8, $32, OAM_GBC_PAL_1 | OAMF_PAL0,  8,  0, $32, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
     db  8,  8, $32, OAM_GBC_PAL_1 | OAMF_PAL0,  8, 16, $32, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant1

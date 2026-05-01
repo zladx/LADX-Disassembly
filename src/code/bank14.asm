@@ -28,63 +28,63 @@ RoomTemplateTopRightBottomLeftHandler::
     push bc                                       ;; 14:48A1 $C5
     ld   hl, wRoomObjects                         ;; 14:48A2 $21 $11 $D7
     ld   bc, RoomTemplateTopRightBottomLeftOffsets ;; 14:48A5 $01 $17 $49
-    ld   de, RoomTemplateTopRightBottomLeftIds    ;; 14:48A8 $11 $38 $49
+    ld   de, RoomTemplateTopRightBottomLeftObjectIds    ;; 14:48A8 $11 $38 $49
     jp   CopyIndoorsMacroObjectsToRoom            ;; 14:48AB $C3 $4B $35
 
 RoomTemplateRightBottomLeftHandler::
     push bc                                       ;; 14:48AE $C5
     ld   hl, wRoomObjects                         ;; 14:48AF $21 $11 $D7
     ld   bc, RoomTemplateRightBottomLeftOffsets   ;; 14:48B2 $01 $58 $49
-    ld   de, RoomTemplateRightBottomLeftIds       ;; 14:48B5 $11 $71 $49
+    ld   de, RoomTemplateRightBottomLeftObjectIds ;; 14:48B5 $11 $71 $49
     jp   CopyIndoorsMacroObjectsToRoom            ;; 14:48B8 $C3 $4B $35
 
 RoomTemplateTopLeftBottomHandler::
     push bc                                       ;; 14:48BB $C5
     ld   hl, wRoomObjects                         ;; 14:48BC $21 $11 $D7
     ld   bc, RoomTemplateTopLeftBottomOffsets     ;; 14:48BF $01 $89 $49
-    ld   de, RoomTemplateTopLeftBottomIds         ;; 14:48C2 $11 $A4 $49
+    ld   de, RoomTemplateTopLeftBottomObjectIds   ;; 14:48C2 $11 $A4 $49
     jp   CopyIndoorsMacroObjectsToRoom            ;; 14:48C5 $C3 $4B $35
 
 RoomTemplateLeftTopRightHandler::
     push bc                                       ;; 14:48C8 $C5
     ld   hl, wRoomObjects                         ;; 14:48C9 $21 $11 $D7
     ld   bc, RoomTemplateLeftTopRightOffsets      ;; 14:48CC $01 $BE $49
-    ld   de, RoomTemplateLeftTopRightIds          ;; 14:48CF $11 $D7 $49
+    ld   de, RoomTemplateLeftTopRightObjectIds    ;; 14:48CF $11 $D7 $49
     jp   CopyIndoorsMacroObjectsToRoom            ;; 14:48D2 $C3 $4B $35
 
 RoomTemplateTopRightBottomHandler::
     push bc                                       ;; 14:48D5 $C5
     ld   hl, wRoomObjects                         ;; 14:48D6 $21 $11 $D7
     ld   bc, RoomTemplateTopRightBottomOffsets    ;; 14:48D9 $01 $EF $49
-    ld   de, RoomTemplateTopRightBottomIds        ;; 14:48DC $11 $0A $4A
+    ld   de, RoomTemplateTopRightBottomObjectIds  ;; 14:48DC $11 $0A $4A
     jp   CopyIndoorsMacroObjectsToRoom            ;; 14:48DF $C3 $4B $35
 
 RoomTemplateBottomLeftHandler::
     push bc                                       ;; 14:48E2 $C5
     ld   hl, wRoomObjects                         ;; 14:48E3 $21 $11 $D7
     ld   bc, RoomTemplateBottomLeftOffsets        ;; 14:48E6 $01 $24 $4A
-    ld   de, RoomTemplateBottomLeftIds            ;; 14:48E9 $11 $36 $4A
+    ld   de, RoomTemplateBottomLeftObjectIds      ;; 14:48E9 $11 $36 $4A
     jp   CopyIndoorsMacroObjectsToRoom            ;; 14:48EC $C3 $4B $35
 
 RoomTemplateBottomRightHandler::
     push bc                                       ;; 14:48EF $C5
     ld   hl, wRoomObjects                         ;; 14:48F0 $21 $11 $D7
     ld   bc, RoomTemplateBottomRightOffsets       ;; 14:48F3 $01 $47 $4A
-    ld   de, RoomTemplateBottomRightIds           ;; 14:48F6 $11 $59 $4A
+    ld   de, RoomTemplateBottomRightObjectIds     ;; 14:48F6 $11 $59 $4A
     jp   CopyIndoorsMacroObjectsToRoom            ;; 14:48F9 $C3 $4B $35
 
 RoomTemplateTopRightHandler::
     push bc                                       ;; 14:48FC $C5
     ld   hl, wRoomObjects                         ;; 14:48FD $21 $11 $D7
     ld   bc, RoomTemplateTopRightOffsets          ;; 14:4900 $01 $6A $4A
-    ld   de, RoomTemplateTopRightIds              ;; 14:4903 $11 $7C $4A
+    ld   de, RoomTemplateTopRightObjectIds        ;; 14:4903 $11 $7C $4A
     jp   CopyIndoorsMacroObjectsToRoom            ;; 14:4906 $C3 $4B $35
 
 RoomTemplateTopLeftHandler::
     push bc                                       ;; 14:4909 $C5
     ld   hl, wRoomObjects                         ;; 14:490A $21 $11 $D7
     ld   bc, RoomTemplateTopLeftOffsets           ;; 14:490D $01 $8D $4A
-    ld   de, RoomTemplateTopLeftIds               ;; 14:4910 $11 $9F $4A
+    ld   de, RoomTemplateTopLeftObjectIds         ;; 14:4910 $11 $9F $4A
     jp   CopyIndoorsMacroObjectsToRoom            ;; 14:4913 $C3 $4B $35
 
 RoomTemplatNotImplementedHandler::
@@ -95,7 +95,7 @@ RoomTemplateTopRightBottomLeftOffsets::
     db   $40, $49, $50, $59, $60, $69, $70, $71, $72, $73, $74, $75, $76, $77, $78, $79
     db   $FF
 
-RoomTemplateTopRightBottomLeftIds::
+RoomTemplateTopRightBottomLeftObjectIds::
     db   $25, $21, $21, $21, $21, $21, $21, $21, $21, $26, $23, $24, $23, $24, $23, $24
     db   $23, $24, $23, $24, $23, $24, $27, $22, $22, $22, $22, $22, $22, $22, $22, $28
 
@@ -103,7 +103,7 @@ RoomTemplateRightBottomLeftOffsets::
     db   $00, $09, $10, $19, $20, $29, $30, $39, $40, $49, $50, $59, $60, $69, $70, $71
     db   $72, $73, $74, $75, $76, $77, $78, $79, $FF
 
-RoomTemplateRightBottomLeftIds::
+RoomTemplateRightBottomLeftObjectIds::
     db   $23, $24, $23, $24, $23, $24, $23, $24, $23, $24, $23, $24, $23, $24, $27, $22
     db   $22, $22, $22, $22, $22, $22, $22, $28
 
@@ -111,7 +111,7 @@ RoomTemplateTopLeftBottomOffsets::
     db   $00, $01, $02, $03, $04, $05, $06, $07, $08, $09, $10, $20, $30, $40, $50, $60
     db   $70, $71, $72, $73, $74, $75, $76, $77, $78, $79, $FF
 
-RoomTemplateTopLeftBottomIds::
+RoomTemplateTopLeftBottomObjectIds::
     db   $25, $21, $21, $21, $21, $21, $21, $21, $21, $21, $23, $23, $23, $23, $23, $23
     db   $27, $22, $22, $22, $22, $22, $22, $22, $22, $22
 
@@ -119,7 +119,7 @@ RoomTemplateLeftTopRightOffsets::
     db   $00, $01, $02, $03, $04, $05, $06, $07, $08, $09, $10, $19, $20, $29, $30, $39
     db   $40, $49, $50, $59, $60, $69, $70, $79, $FF
 
-RoomTemplateLeftTopRightIds::
+RoomTemplateLeftTopRightObjectIds::
     db   $25, $21, $21, $21, $21, $21, $21, $21, $21, $26, $23, $24, $23, $24, $23, $24
     db   $23, $24, $23, $24, $23, $24, $23, $24
 
@@ -127,7 +127,7 @@ RoomTemplateTopRightBottomOffsets::
     db   $00, $01, $02, $03, $04, $05, $06, $07, $08, $09, $19, $29, $39, $49, $59, $69
     db   $70, $71, $72, $73, $74, $75, $76, $77, $78, $79, $FF
 
-RoomTemplateTopRightBottomIds::
+RoomTemplateTopRightBottomObjectIds::
     db   $21, $21, $21, $21, $21, $21, $21, $21, $21, $26, $24, $24, $24, $24, $24, $24
     db   $22, $22, $22, $22, $22, $22, $22, $22, $22, $28
 
@@ -135,7 +135,7 @@ RoomTemplateBottomLeftOffsets::
     db   $00, $10, $20, $30, $40, $50, $60, $70, $71, $72, $73, $74, $75, $76, $77, $78
     db   $79, $FF
 
-RoomTemplateBottomLeftIds::
+RoomTemplateBottomLeftObjectIds::
     db   $23, $23, $23, $23, $23, $23, $23, $27, $22, $22, $22, $22, $22, $22, $22, $22
     db   $22
 
@@ -143,7 +143,7 @@ RoomTemplateBottomRightOffsets::
     db   $09, $19, $29, $39, $49, $59, $69, $70, $71, $72, $73, $74, $75, $76, $77, $78
     db   $79, $FF
 
-RoomTemplateBottomRightIds::
+RoomTemplateBottomRightObjectIds::
     db   $24, $24, $24, $24, $24, $24, $24, $22, $22, $22, $22, $22, $22, $22, $22, $22
     db   $28
 
@@ -151,7 +151,7 @@ RoomTemplateTopRightOffsets::
     db   $00, $01, $02, $03, $04, $05, $06, $07, $08, $09, $19, $29, $39, $49, $59, $69
     db   $79, $FF
 
-RoomTemplateTopRightIds::
+RoomTemplateTopRightObjectIds::
     db   $21, $21, $21, $21, $21, $21, $21, $21, $21, $26, $24, $24, $24, $24, $24, $24
     db   $24
 
@@ -159,7 +159,7 @@ RoomTemplateTopLeftOffsets::
     db   $00, $01, $02, $03, $04, $05, $06, $07, $08, $09, $10, $20, $30, $40, $50, $60
     db   $70, $FF
 
-RoomTemplateTopLeftIds::
+RoomTemplateTopLeftObjectIds::
     db   $25, $21, $21, $21, $21, $21, $21, $21, $21, $21, $23, $23, $23, $23, $23, $23
     db   $23
 
@@ -168,18 +168,18 @@ RoomTemplateTopLeftIds::
 ; The first value in this table is the health value for 3 hearts, which is the minimum value of
 ; wMaxHearts in normal gameplay (Link starts with 3 hearts).
 HeartsToHealthTable::
-    db   $18 ; 3 hearts
-    db   $20 ; 4 hearts
-    db   $28 ; 5 hearts
-    db   $30 ; 6 hearts
-    db   $38 ; 7 hearts
-    db   $40 ; 8 hearts
-    db   $48 ; 9 hearts
-    db   $50 ; 10 hearts
-    db   $58 ; 11 hearts
-    db   $60 ; 12 hearts
-    db   $68 ; 13 hearts
-    db   $70 ; 14 hearts
+    db   3  FULL_HEARTS
+    db   4  FULL_HEARTS
+    db   5  FULL_HEARTS
+    db   6  FULL_HEARTS
+    db   7  FULL_HEARTS
+    db   8  FULL_HEARTS
+    db   9  FULL_HEARTS
+    db   10 FULL_HEARTS
+    db   11 FULL_HEARTS
+    db   12 FULL_HEARTS
+    db   13 FULL_HEARTS
+    db   14 FULL_HEARTS
 
 ; Execute recurrent audio tasks on each frame of the overworld
 PerformOverworldAudioTasks::
@@ -268,7 +268,7 @@ jr_014_4AE7:
     ld   d, b                                     ;; 14:4B10 $50
     ; Start 3 bytes before the conversion table,
     ; to account for wMaxHearts starting at 3.
-    ld   hl, HeartsToHealthTable - 3              ;; 14:4B11 $21 $AD $4A
+    ld   hl, HeartsToHealthTable - MIN_HEARTS     ;; 14:4B11 $21 $AD $4A
     add  hl, de                                   ;; 14:4B14 $19
     ld   a, [wHealth]                             ;; 14:4B15 $FA $5A $DB
     cp   [hl]                                     ;; 14:4B18 $BE
@@ -2003,7 +2003,10 @@ label_014_57E1:
     ret                                           ;; 14:5837 $C9
 
 ; Returns room status address for a given indoor room's position within its map.
-:
+; This subroutine is similar to GetRoomStatusAddress, but it takes the room ID
+; as input, only works indoors, and it also takes into account the collapse of
+; Eagle's Tower.
+;
 ; Inputs:
 ;   de   room position
 ;
@@ -2013,11 +2016,12 @@ GetRoomStatusAddressForMapPosition::
     ld   hl, MapLayout11                          ;; 14:5838 $21 $E0 $44
     ldh  a, [hMapId]                              ;; 14:583B $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ;; 14:583D $FE $FF
-    jr   z, .jr_5866                              ;; 14:583F $28 $25
+    jr   z, .getRoomId                            ;; 14:583F $28 $25
 
     cp   MAP_DUNGEON_G1                           ;; 14:5841 $FE $0B
-    jr   nc, ret_014_5883                         ;; 14:5843 $30 $3E
+    jr   nc, .return                              ;; 14:5843 $30 $3E
 
+    ; Adjust the map layout address based on the current map
     ld   hl, MapLayout0                           ;; 14:5845 $21 $20 $42
     swap a                                        ;; 14:5848 $CB $37
     ld   c, a                                     ;; 14:584A $4F
@@ -2027,42 +2031,47 @@ GetRoomStatusAddressForMapPosition::
     sla  c                                        ;; 14:5851 $CB $21
     rl   b                                        ;; 14:5853 $CB $10
     add  hl, bc                                   ;; 14:5855 $09
+
+    ; If we're in Eagle's Tower...
     ldh  a, [hMapId]                              ;; 14:5856 $F0 $F7
     cp   MAP_EAGLES_TOWER                         ;; 14:5858 $FE $06
-    jr   nz, .jr_5866                             ;; 14:585A $20 $0A
+    jr   nz, .getRoomId                           ;; 14:585A $20 $0A
 
+    ; ...and the tower has collapsed, load MapLayout12
+    ; (which is the layout for MAP_EAGLES_TOWER_ALT)
     ld   a, [wHasInstrument7]                     ;; 14:585C $FA $6B $DB
     and  $04                                      ;; 14:585F $E6 $04
-    jr   z, .jr_5866                              ;; 14:5861 $28 $03
-
+    jr   z, .getRoomId                            ;; 14:5861 $28 $03
     ld   hl, MapLayout12                          ;; 14:5863 $21 $20 $45
 
-.jr_5866
+.getRoomId
     add  hl, de                                   ;; 14:5866 $19
     ld   a, [hl]                                  ;; 14:5867 $7E
     ld   e, a                                     ;; 14:5868 $5F
     ld   d, $00                                   ;; 14:5869 $16 $00
     ld   hl, wIndoorARoomStatus                   ;; 14:586B $21 $00 $D9
+
+    ; If we're in the color dungeon…
     ldh  a, [hMapId]                              ;; 14:586E $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ;; 14:5870 $FE $FF
-    jr   nz, .jr_5879                             ;; 14:5872 $20 $05
+    jr   nz, .regularDungeon                      ;; 14:5872 $20 $05
 
     ld   hl, wColorDungeonRoomStatus              ;; 14:5874 $21 $E0 $DD
-    jr   jr_014_5882                              ;; 14:5877 $18 $09
+    jr   .computeAddress                          ;; 14:5877 $18 $09
 
-.jr_5879
+.regularDungeon
+    ; If the map uses rooms in the indoors_b rooms group…
     cp   MAP_INDOORS_B_END                        ;; 14:5879 $FE $1A
-    jr   nc, jr_014_5882                          ;; 14:587B $30 $05
-
+    jr   nc, .computeAddress                      ;; 14:587B $30 $05
     cp   MAP_INDOORS_B_START                      ;; 14:587D $FE $06
-    jr   c, jr_014_5882                           ;; 14:587F $38 $01
-
+    jr   c, .computeAddress                       ;; 14:587F $38 $01
+    ; d += 1
     inc  d                                        ;; 14:5881 $14
 
-jr_014_5882:
+.computeAddress
     add  hl, de                                   ;; 14:5882 $19
 
-ret_014_5883:
+.return
     ret                                           ;; 14:5883 $C9
 
 ; Retrieve the status of chests in the given room
@@ -2097,7 +2106,7 @@ func_014_5897::
     jr   jr_014_58C7                              ;; 14:58A0 $18 $25
 
 .jr_58A2
-    cp   $0B                                      ;; 14:58A2 $FE $0B
+    cp   MAP_DUNGEON_G1                           ;; 14:58A2 $FE $0B
     jr   nc, jr_014_58D1                          ;; 14:58A4 $30 $2B
 
     ld   hl, MapLayout0                           ;; 14:58A6 $21 $20 $42
@@ -2139,10 +2148,10 @@ jr_014_58D1:
     jr   jr_014_58ED                              ;; 14:58DF $18 $0C
 
 .jr_58E1
-    cp   $1A                                      ;; 14:58E1 $FE $1A
+    cp   MAP_INDOORS_B_END                        ;; 14:58E1 $FE $1A
     jr   nc, .jr_58EA                             ;; 14:58E3 $30 $05
 
-    cp   $06                                      ;; 14:58E5 $FE $06
+    cp   MAP_INDOORS_B_START                      ;; 14:58E5 $FE $06
     jr   c, .jr_58EA                              ;; 14:58E7 $38 $01
 
     inc  b                                        ;; 14:58E9 $04
@@ -2155,9 +2164,9 @@ jr_014_58ED:
     ld   a, [hl]                                  ;; 14:58EE $7E
     ld   [wRoomEvent], a                          ;; 14:58EF $EA $8E $C1
     xor  a                                        ;; 14:58F2 $AF
-    ld   [wC18A], a                               ;; 14:58F3 $EA $8A $C1
-    ld   [wC18B], a                               ;; 14:58F6 $EA $8B $C1
-    ld   [wC190], a                               ;; 14:58F9 $EA $90 $C1
+    ld   [wShutterDoorsMask], a                   ;; 14:58F3 $EA $8A $C1
+    ld   [wShutterDoorsMask2], a                  ;; 14:58F6 $EA $8B $C1
+    ld   [wShutterDoorEventExecuted], a           ;; 14:58F9 $EA $90 $C1
     ld   [wRoomEventEffectExecuted], a            ;; 14:58FC $EA $8F $C1
     ret                                           ;; 14:58FF $C9
 
@@ -2175,10 +2184,10 @@ func_014_5900::
     jr   jr_014_5920                              ;; 14:5912 $18 $0C
 
 .jr_5914
-    cp   $1A                                      ;; 14:5914 $FE $1A
+    cp   MAP_INDOORS_B_END                        ;; 14:5914 $FE $1A
     jr   nc, .jr_591D                             ;; 14:5916 $30 $05
 
-    cp   $06                                      ;; 14:5918 $FE $06
+    cp   MAP_INDOORS_B_START                      ;; 14:5918 $FE $06
     jr   c, .jr_591D                              ;; 14:591A $38 $01
 
     inc  d                                        ;; 14:591C $14

@@ -2225,7 +2225,7 @@ HardhitBeetleEntityHandler::
     ld   de, Data_036_4CB4                        ;; 36:4CDE $11 $B4 $4C
     call func_036_6C90                            ;; 36:4CE1 $CD $90 $6C
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 36:4CE4 $CD $39 $3B
-    ld   a, [wC190]                               ;; 36:4CE7 $FA $90 $C1
+    ld   a, [wShutterDoorEventExecuted]           ;; 36:4CE7 $FA $90 $C1
     and  a                                        ;; 36:4CEA $A7
     ret  z                                        ;; 36:4CEB $C8
 
@@ -3495,7 +3495,7 @@ AvalaunchState1Handler::
     ret                                           ;; 36:5536 $C9
 
 func_036_5537::
-    ld   a, [wC190]                               ;; 36:5537 $FA $90 $C1
+    ld   a, [wShutterDoorEventExecuted]           ;; 36:5537 $FA $90 $C1
     and  a                                        ;; 36:553A $A7
     ret  z                                        ;; 36:553B $C8
 
@@ -4649,7 +4649,7 @@ AvalaunchEntityHandler::
 
     call BossIntro                                ;; 36:5C0A $CD $E8 $3E
     call ReturnIfNonInteractive_36                ;; 36:5C0D $CD $40 $6A
-    ld   a, [wC190]                               ;; 36:5C10 $FA $90 $C1
+    ld   a, [wShutterDoorEventExecuted]           ;; 36:5C10 $FA $90 $C1
     and  a                                        ;; 36:5C13 $A7
     ret  z                                        ;; 36:5C14 $C8
 
@@ -5748,7 +5748,7 @@ ColorGhoulBlueEntityHandler::
     call DefaultEnemyDamageCollisionHandler_trampoline ;; 36:63DA $CD $39 $3B
 
 .jr_63DD
-    ld   a, [wC190]                               ;; 36:63DD $FA $90 $C1
+    ld   a, [wShutterDoorEventExecuted]           ;; 36:63DD $FA $90 $C1
     and  a                                        ;; 36:63E0 $A7
     ret  z                                        ;; 36:63E1 $C8
 

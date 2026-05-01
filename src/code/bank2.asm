@@ -3036,8 +3036,8 @@ label_002_538B:
     ld   [hl], d                                  ;; 02:53AC $72
     jp   label_140F                               ;; 02:53AD $C3 $0F $14
 
-; Try to open a locked door with a small key
-TryOpenLockedDoor::
+; Try to open a key door with a small key
+TryOpenKeyDoor::
     push bc                                       ;; 02:53B0 $C5
     push de                                       ;; 02:53B1 $D5
     ldh  a, [hMultiPurposeG]                      ;; 02:53B2 $F0 $E8
@@ -3051,7 +3051,7 @@ TryOpenLockedDoor::
     jr   z, .return                               ;; 02:53BC $28 $5F
 
     ;
-    ; Open locked door with a small key
+    ; Open key door with a small key
     ;
 
     ; Decrease the player small key count
@@ -3975,12 +3975,15 @@ func_002_5928::
     ld   a, TRANSCIENT_VFX_WATER_SPLASH           ;; 02:5932 $3E $01
     jp   AddTranscientVfx                         ;; 02:5934 $C3 $C7 $0C
 
-Data_002_5937::
-    db   $FE, $FD, $FB, $F7
+ShutterDoorsMaskTable::
+    db   ~DOOR_TYPE_SHUTTER_TOP_BIT
+    db   ~DOOR_TYPE_SHUTTER_BOTTOM_BIT
+    db   ~DOOR_TYPE_SHUTTER_LEFT_BIT
+    db   ~DOOR_TYPE_SHUTTER_RIGHT_BIT
 
-; Execute active room events, and do some other stuff
-label_002_593B:
-    ; If not dialog, no subscreen, no map transition, return
+; Execute active room events, and enqueue doors opening/closing if needed
+ExecuteRoomEvents:
+    ; If we're in the middle of a dialog or a subscreen or map transition, return
     ld   hl, wDialogState                         ;; 02:593B $21 $9F $C1
     ld   a, [wRoomTransitionState]                ;; 02:593E $FA $24 $C1
     or   [hl]                                     ;; 02:5941 $B6
@@ -3994,135 +3997,307 @@ label_002_593B:
     jr   z, .return                               ;; 02:594C $28 $19
 
     call ExecuteRoomTriggersAndEffects            ;; 02:594E $CD $4F $5D
-    ld   a, [wC188]                               ;; 02:5951 $FA $88 $C1
+    ld   a, [wDoorsOpeningOrClosing]              ;; 02:5951 $FA $88 $C1
     and  a                                        ;; 02:5954 $A7
-    jr   z, .jr_002_5968                          ;; 02:5955 $28 $11
+    jr   z, .checkIfDoorsShouldOpen               ;; 02:5955 $28 $11
 
+    ; If a door is currently opening or closing, freeze Link
     cp   $02                                      ;; 02:5957 $FE $02
     ld   a, $01                                   ;; 02:5959 $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ;; 02:595B $E0 $A1
-    jr   z, .jr_002_5964                          ;; 02:595D $28 $05
+    jr   z, .doorClosing                          ;; 02:595D $28 $05
 
-    call func_002_5A7B                            ;; 02:595F $CD $7B $5A
+    ; If it's opening
+    call DoorOpening                              ;; 02:595F $CD $7B $5A
     jr   .return                                  ;; 02:5962 $18 $03
 
-.jr_002_5964
-    call func_002_5C04                            ;; 02:5964 $CD $04 $5C
+.doorClosing
+    call DoorClosing                              ;; 02:5964 $CD $04 $5C
 
 .return
     ret                                           ;; 02:5967 $C9
 
-.jr_002_5968
-    ld   a, [wC18C]                               ;; 02:5968 $FA $8C $C1
+.checkIfDoorsShouldOpen
+    ld   a, [wEnqueueDoorsOpening]                ;; 02:5968 $FA $8C $C1
     and  a                                        ;; 02:596B $A7
-    jr   z, .jr_002_599D                          ;; 02:596C $28 $2F
+    jr   z, .checkIfDoorsShouldClose              ;; 02:596C $28 $2F
 
+    ; Prepare opening doors
     ld   e, $03                                   ;; 02:596E $1E $03
-    ld   a, [wC18A]                               ;; 02:5970 $FA $8A $C1
+    ld   a, [wShutterDoorsMask]                   ;; 02:5970 $FA $8A $C1
     ld   c, a                                     ;; 02:5973 $4F
 
-.jr_002_5974
+.loop2
     inc  e                                        ;; 02:5974 $1C
     ld   a, e                                     ;; 02:5975 $7B
     cp   $08                                      ;; 02:5976 $FE $08
-    jr   z, .jr_002_5998                          ;; 02:5978 $28 $1E
+    jr   z, .doorsOpened                          ;; 02:5978 $28 $1E
 
     srl  c                                        ;; 02:597A $CB $39
-    jr   nc, .jr_002_5974                         ;; 02:597C $30 $F6
+    jr   nc, .loop2                               ;; 02:597C $30 $F6
 
     ld   d, $00                                   ;; 02:597E $16 $00
-    ld   hl, (Data_002_5937 - 4)                  ;; 02:5980 $21 $33 $59
+    ld   hl, (ShutterDoorsMaskTable - 4)          ;; 02:5980 $21 $33 $59
     add  hl, de                                   ;; 02:5983 $19
-    ld   a, [wC18A]                               ;; 02:5984 $FA $8A $C1
+    ld   a, [wShutterDoorsMask]                   ;; 02:5984 $FA $8A $C1
     and  [hl]                                     ;; 02:5987 $A6
-    ld   [wC18A], a                               ;; 02:5988 $EA $8A $C1
+    ld   [wShutterDoorsMask], a                   ;; 02:5988 $EA $8A $C1
     ld   a, e                                     ;; 02:598B $7B
-    ld   [wC189], a                               ;; 02:598C $EA $89 $C1
+    ld   [wDoorEvent], a                          ;; 02:598C $EA $89 $C1
     xor  a                                        ;; 02:598F $AF
     ld   [wDBAC], a                               ;; 02:5990 $EA $AC $DB
     inc  a                                        ;; 02:5993 $3C
-    ld   [wC188], a                               ;; 02:5994 $EA $88 $C1
+    ld   [wDoorsOpeningOrClosing], a              ;; 02:5994 $EA $88 $C1
     ret                                           ;; 02:5997 $C9
 
-.jr_002_5998
+.doorsOpened
     xor  a                                        ;; 02:5998 $AF
-    ld   [wC18C], a                               ;; 02:5999 $EA $8C $C1
+    ld   [wEnqueueDoorsOpening], a                ;; 02:5999 $EA $8C $C1
     ret                                           ;; 02:599C $C9
 
-.jr_002_599D
-    ld   a, [wC18D]                               ;; 02:599D $FA $8D $C1
+.checkIfDoorsShouldClose
+    ld   a, [wEnqueueDoorsClosing]                ;; 02:599D $FA $8D $C1
     and  a                                        ;; 02:59A0 $A7
-    jr   nz, .jr_002_59A4                         ;; 02:59A1 $20 $01
+    jr   nz, .prepareClosingDoors                 ;; 02:59A1 $20 $01
 
     ret                                           ;; 02:59A3 $C9
 
-.jr_002_59A4
+.prepareClosingDoors
     ld   e, $03                                   ;; 02:59A4 $1E $03
-    ld   a, [wC18B]                               ;; 02:59A6 $FA $8B $C1
+    ld   a, [wShutterDoorsMask2]                  ;; 02:59A6 $FA $8B $C1
     ld   c, a                                     ;; 02:59A9 $4F
 
 .loop
     inc  e                                        ;; 02:59AA $1C
     ld   a, e                                     ;; 02:59AB $7B
     cp   $08                                      ;; 02:59AC $FE $08
-    jr   z, .jr_002_59CF                          ;; 02:59AE $28 $1F
+    jr   z, .doorsClosed                          ;; 02:59AE $28 $1F
 
     srl  c                                        ;; 02:59B0 $CB $39
     jr   nc, .loop                                ;; 02:59B2 $30 $F6
 
     ld   d, $00                                   ;; 02:59B4 $16 $00
-    ld   hl, (Data_002_5937 - 4)                  ;; 02:59B6 $21 $33 $59
+    ld   hl, (ShutterDoorsMaskTable - 4)          ;; 02:59B6 $21 $33 $59
     add  hl, de                                   ;; 02:59B9 $19
-    ld   a, [wC18B]                               ;; 02:59BA $FA $8B $C1
+    ld   a, [wShutterDoorsMask2]                  ;; 02:59BA $FA $8B $C1
     and  [hl]                                     ;; 02:59BD $A6
-    ld   [wC18B], a                               ;; 02:59BE $EA $8B $C1
+    ld   [wShutterDoorsMask2], a                  ;; 02:59BE $EA $8B $C1
     ld   a, e                                     ;; 02:59C1 $7B
-    ld   [wC189], a                               ;; 02:59C2 $EA $89 $C1
+    ld   [wDoorEvent], a                          ;; 02:59C2 $EA $89 $C1
     ld   a, $02                                   ;; 02:59C5 $3E $02
-    ld   [wC188], a                               ;; 02:59C7 $EA $88 $C1
+    ld   [wDoorsOpeningOrClosing], a              ;; 02:59C7 $EA $88 $C1
     xor  a                                        ;; 02:59CA $AF
     ld   [wDBAC], a                               ;; 02:59CB $EA $AC $DB
     ret                                           ;; 02:59CE $C9
 
-.jr_002_59CF
+.doorsClosed
     xor  a                                        ;; 02:59CF $AF
-    ld   [wC18D], a                               ;; 02:59D0 $EA $8D $C1
+    ld   [wEnqueueDoorsClosing], a                ;; 02:59D0 $EA $8D $C1
     ret                                           ;; 02:59D3 $C9
 
-Data_002_59D4::
-    db   $50
+OpeningDoorTileIds::
+; Half-open door
 
-Data_002_59D5::
-    db   $51, $13, $12, $11, $10, $42, $43, $45, $13, $55, $11, $12, $46, $10, $56, $58
-    db   $59, $13, $12, $11, $10, $4A, $4B, $4D, $13, $5D, $11, $12, $4E, $10, $5E, $02
-    db   $03, $13, $12, $11, $10, $13, $12, $11, $10, $13, $12, $12, $13, $10, $11, $12
-    db   $13, $10, $11, $11, $10, $13, $12, $11, $10, $13, $12, $12, $13, $10, $11, $12
-    db   $13, $10, $11, $11, $10, $13, $12
+    ; DOOR_TYPE_KEY_TOP
+    db   $50, $51
+    db   $13, $12
 
-Data_002_5A1C::
-    db   $08, $08, $00, $00, $08, $08, $00, $00, $08, $08, $08, $00, $00, $08, $08, $00
-    db   $00, $08
+    ; DOOR_TYPE_KEY_BOTTOM
+    db   $11, $10
+    db   $42, $43
 
-Data_002_5A2E::
-    db   $00, $00, $08, $08, $00, $00, $08, $08, $00, $08, $08, $10, $10, $08, $08, $10
-    db   $10, $08
+    ; DOOR_TYPE_KEY_LEFT
+    db   $45, $13
+    db   $55, $11
 
-Data_002_5A40::
-    db   $00, $00, $00, $00, $00, $00, $00, $00, $01, $01, $10, $10, $01, $01, $10, $10
+    ; DOOR_TYPE_KEY_RIGHT
+    db   $12, $46
+    db   $10, $56
 
-Data_002_5A50::
-    db   $43, $8C, $09, $0B, $43, $8C, $09, $0B, $44, $08, $0A, $0C, $44, $08, $0A, $0C
+    ; DOOR_TYPE_SHUTTER_TOP
+    db   $58, $59
+    db   $13, $12
 
-Data_002_5A60::
-    db   $04, $08, $02, $01, $04, $08, $02, $01, $04
+    ; DOOR_TYPE_SHUTTER_BOTTOM
+    db   $11, $10
+    db   $4A, $4B
 
-Data_002_5A69::
-    db   $F8, $08, $FF, $01, $F8, $08, $FF, $01, $F8
+    ; DOOR_TYPE_SHUTTER_LEFT
+    db   $4D, $13
+    db   $5D, $11
 
-Data_002_5A72::
-    db   $08, $04, $01, $02, $08, $04, $01, $02, $08
+    ; DOOR_TYPE_SHUTTER_RIGHT
+    db   $12, $4E
+    db   $10, $5E
 
-func_002_5A7B::
+    ; DOOR_TYPE_BOSS_TOP
+    db   $02, $03
+    db   $13, $12
+
+; Fully open door
+
+    ; DOOR_TYPE_KEY_TOP
+    db   $11, $10
+    db   $13, $12
+
+    ; DOOR_TYPE_KEY_BOTTOM
+    db   $11, $10
+    db   $13, $12
+
+    ; DOOR_TYPE_KEY_LEFT
+    db   $12, $13
+    db   $10, $11
+
+    ; DOOR_TYPE_KEY_RIGHT
+    db   $12, $13
+    db   $10, $11
+
+    ; DOOR_TYPE_SHUTTER_TOP
+    db   $11, $10
+    db   $13, $12
+
+    ; DOOR_TYPE_SHUTTER_BOTTOM
+    db   $11, $10
+    db   $13, $12
+
+    ; DOOR_TYPE_SHUTTER_LEFT
+    db   $12, $13
+    db   $10, $11
+
+    ; DOOR_TYPE_SHUTTER_RIGHT
+    db   $12, $13
+    db   $10, $11
+
+    ; DOOR_TYPE_BOSS_TOP
+    db   $11, $10
+    db   $13, $12
+
+DoorXOffsets::
+    db   $08 ; DOOR_TYPE_KEY_TOP
+    db   $08 ; DOOR_TYPE_KEY_BOTTOM
+    db   $00 ; DOOR_TYPE_KEY_LEFT
+    db   $00 ; DOOR_TYPE_KEY_RIGHT
+    db   $08 ; DOOR_TYPE_SHUTTER_TOP
+    db   $08 ; DOOR_TYPE_SHUTTER_BOTTOM
+    db   $00 ; DOOR_TYPE_SHUTTER_LEFT
+    db   $00 ; DOOR_TYPE_SHUTTER_RIGHT
+    db   $08 ; DOOR_TYPE_BOSS_TOP
+
+    db   $08
+    db   $08
+    db   $00
+    db   $00
+    db   $08
+    db   $08
+    db   $00
+    db   $00
+    db   $08
+
+; TODO why do all these change by 8 but X doesn't?
+DoorYOffsets::
+    db   $00
+    db   $00
+    db   $08
+    db   $08
+    db   $00
+    db   $00
+    db   $08
+    db   $08
+    db   $00
+
+    db   $08
+    db   $08
+    db   $10
+    db   $10
+    db   $08
+    db   $08
+    db   $10
+    db   $10
+    db   $08
+
+; Offsets for open door objects, which consist of two objects each.
+; Each offset is indexed by door type. DOOR_TYPE_BOSS_TOP uses index 0.
+OpeningDoorTileOffsets::
+; First object
+    db   $00 ; DOOR_TYPE_KEY_TOP or DOOR_TYPE_BOSS_TOP
+    db   $00 ; DOOR_TYPE_KEY_BOTTOM
+    db   $00 ; DOOR_TYPE_KEY_LEFT
+    db   $00 ; DOOR_TYPE_KEY_RIGHT
+    db   $00 ; DOOR_TYPE_SHUTTER_TOP
+    db   $00 ; DOOR_TYPE_SHUTTER_BOTTOM
+    db   $00 ; DOOR_TYPE_SHUTTER_LEFT
+    db   $00 ; DOOR_TYPE_SHUTTER_RIGHT
+; Second object
+    db   $01 ; DOOR_TYPE_KEY_TOP or DOOR_TYPE_BOSS_TOP
+    db   $01 ; DOOR_TYPE_KEY_BOTTOM
+    db   $10 ; DOOR_TYPE_KEY_LEFT
+    db   $10 ; DOOR_TYPE_KEY_RIGHT
+    db   $01 ; DOOR_TYPE_SHUTTER_TOP
+    db   $01 ; DOOR_TYPE_SHUTTER_BOTTOM
+    db   $10 ; DOOR_TYPE_SHUTTER_LEFT
+    db   $10 ; DOOR_TYPE_SHUTTER_RIGHT
+
+; Object IDs for open doors, which consist of two objects each.
+; Each object ID is indexed by door type. DOOR_TYPE_BOSS_TOP uses index 0.
+OpenDoorObjectIdsTable::
+; First object
+    db   $43 ; DOOR_TYPE_KEY_TOP or DOOR_TYPE_BOSS_TOP
+    db   $8C ; DOOR_TYPE_KEY_BOTTOM
+    db   $09 ; DOOR_TYPE_KEY_LEFT
+    db   $0B ; DOOR_TYPE_KEY_RIGHT
+    db   $43 ; DOOR_TYPE_SHUTTER_TOP
+    db   $8C ; DOOR_TYPE_SHUTTER_BOTTOM
+    db   $09 ; DOOR_TYPE_SHUTTER_LEFT
+    db   $0B ; DOOR_TYPE_SHUTTER_RIGHT
+; Second object
+    db   $44 ; DOOR_TYPE_KEY_TOP or DOOR_TYPE_BOSS_TOP
+    db   $08 ; DOOR_TYPE_KEY_BOTTOM
+    db   $0A ; DOOR_TYPE_KEY_LEFT
+    db   $0C ; DOOR_TYPE_KEY_RIGHT
+    db   $44 ; DOOR_TYPE_SHUTTER_TOP
+    db   $08 ; DOOR_TYPE_SHUTTER_BOTTOM
+    db   $0A ; DOOR_TYPE_SHUTTER_LEFT
+    db   $0C ; DOOR_TYPE_SHUTTER_RIGHT
+
+; Map a door to the corresponding status flag for it being open
+DoorToOpenStatusFlagTable::
+    db   ROOM_STATUS_DOOR_OPEN_UP    ; DOOR_TYPE_KEY_TOP
+    db   ROOM_STATUS_DOOR_OPEN_DOWN  ; DOOR_TYPE_KEY_BOTTOM
+    db   ROOM_STATUS_DOOR_OPEN_LEFT  ; DOOR_TYPE_KEY_LEFT
+    db   ROOM_STATUS_DOOR_OPEN_RIGHT ; DOOR_TYPE_KEY_RIGHT
+    db   ROOM_STATUS_DOOR_OPEN_UP    ; DOOR_TYPE_SHUTTER_TOP
+    db   ROOM_STATUS_DOOR_OPEN_DOWN  ; DOOR_TYPE_SHUTTER_BOTTOM
+    db   ROOM_STATUS_DOOR_OPEN_LEFT  ; DOOR_TYPE_SHUTTER_LEFT
+    db   ROOM_STATUS_DOOR_OPEN_RIGHT ; DOOR_TYPE_SHUTTER_RIGHT
+    db   ROOM_STATUS_DOOR_OPEN_UP    ; DOOR_TYPE_BOSS_TOP
+
+; Map a door to the adjacent room the door leads to
+; in a map layout
+DoorToAdjacentRoomTable::
+    db  -8 ; DOOR_TYPE_KEY_TOP
+    db   8 ; DOOR_TYPE_KEY_BOTTOM
+    db  -1 ; DOOR_TYPE_KEY_LEFT
+    db   1 ; DOOR_TYPE_KEY_RIGHT
+    db  -8 ; DOOR_TYPE_SHUTTER_TOP
+    db   8 ; DOOR_TYPE_SHUTTER_BOTTOM
+    db  -1 ; DOOR_TYPE_SHUTTER_LEFT
+    db   1 ; DOOR_TYPE_SHUTTER_RIGHT
+    db  -8 ; DOOR_TYPE_BOSS_TOP
+
+; Maps a door to its opposite door status flag, ie. the door's
+; corresponding status flag for the door in the adjacent room being open
+DoorToAdjacentOpenStatusFlagTable::
+    db   ROOM_STATUS_DOOR_OPEN_DOWN  ; DOOR_TYPE_KEY_TOP
+    db   ROOM_STATUS_DOOR_OPEN_UP    ; DOOR_TYPE_KEY_BOTTOM
+    db   ROOM_STATUS_DOOR_OPEN_RIGHT ; DOOR_TYPE_KEY_LEFT
+    db   ROOM_STATUS_DOOR_OPEN_LEFT  ; DOOR_TYPE_KEY_RIGHT
+    db   ROOM_STATUS_DOOR_OPEN_DOWN  ; DOOR_TYPE_SHUTTER_TOP
+    db   ROOM_STATUS_DOOR_OPEN_UP    ; DOOR_TYPE_SHUTTER_BOTTOM
+    db   ROOM_STATUS_DOOR_OPEN_RIGHT ; DOOR_TYPE_SHUTTER_LEFT
+    db   ROOM_STATUS_DOOR_OPEN_LEFT  ; DOOR_TYPE_SHUTTER_RIGHT
+    db   ROOM_STATUS_DOOR_OPEN_DOWN  ; DOOR_TYPE_BOSS_TOP
+
+DoorOpening::
     ld   e, $00                                   ;; 02:5A7B $1E $00
     ld   d, e                                     ;; 02:5A7D $53
     ld   c, e                                     ;; 02:5A7E $4B
@@ -4130,7 +4305,7 @@ func_002_5A7B::
     xor  a                                        ;; 02:5A80 $AF
     ldh  [hMultiPurposeC], a                      ;; 02:5A81 $E0 $E3
     ldh  [hMultiPurposeE], a                      ;; 02:5A83 $E0 $E5
-    ld   a, [wC189]                               ;; 02:5A85 $FA $89 $C1
+    ld   a, [wDoorEvent]                          ;; 02:5A85 $FA $89 $C1
     ld   c, a                                     ;; 02:5A88 $4F
     and  a                                        ;; 02:5A89 $A7
     jr   z, jr_002_5A95                           ;; 02:5A8A $28 $09
@@ -4138,6 +4313,7 @@ func_002_5A7B::
     xor  a                                        ;; 02:5A8C $AF
 
 .loop_5A8D
+    ; e = wDoorEvent * 4
     add  $04                                      ;; 02:5A8D $C6 $04
     ld   e, a                                     ;; 02:5A8F $5F
     ld   d, $00                                   ;; 02:5A90 $16 $00
@@ -4145,27 +4321,27 @@ func_002_5A7B::
     jr   nz, .loop_5A8D                           ;; 02:5A93 $20 $F8
 
 jr_002_5A95:
-    ld   hl, Data_002_5A1C                        ;; 02:5A95 $21 $1C $5A
-    ld   a, [wC189]                               ;; 02:5A98 $FA $89 $C1
+    ld   hl, DoorXOffsets                         ;; 02:5A95 $21 $1C $5A
+    ld   a, [wDoorEvent]                          ;; 02:5A98 $FA $89 $C1
     ld   c, a                                     ;; 02:5A9B $4F
     ld   b, $00                                   ;; 02:5A9C $06 $00
     add  hl, bc                                   ;; 02:5A9E $09
     ld   a, [hl]                                  ;; 02:5A9F $7E
-    ld   hl, wC1D0                                ;; 02:5AA0 $21 $D0 $C1
+    ld   hl, wDoorXPositions                      ;; 02:5AA0 $21 $D0 $C1
     add  hl, bc                                   ;; 02:5AA3 $09
     add  [hl]                                     ;; 02:5AA4 $86
     ldh  [hIntersectedObjectLeft], a              ;; 02:5AA5 $E0 $CE
 
 label_002_5AA7:
-    ld   hl, Data_002_5A2E                        ;; 02:5AA7 $21 $2E $5A
+    ld   hl, DoorYOffsets                         ;; 02:5AA7 $21 $2E $5A
     ldh  a, [hMultiPurposeC]                      ;; 02:5AAA $F0 $E3
     ld   c, a                                     ;; 02:5AAC $4F
     add  hl, bc                                   ;; 02:5AAD $09
-    ld   a, [wC189]                               ;; 02:5AAE $FA $89 $C1
+    ld   a, [wDoorEvent]                          ;; 02:5AAE $FA $89 $C1
     ld   c, a                                     ;; 02:5AB1 $4F
     add  hl, bc                                   ;; 02:5AB2 $09
     ld   a, [hl]                                  ;; 02:5AB3 $7E
-    ld   hl, wC1E0                                ;; 02:5AB4 $21 $E0 $C1
+    ld   hl, wDoorYPositions                      ;; 02:5AB4 $21 $E0 $C1
     add  hl, bc                                   ;; 02:5AB7 $09
     add  [hl]                                     ;; 02:5AB8 $86
     ldh  [hIntersectedObjectTop], a               ;; 02:5AB9 $E0 $CD
@@ -4205,13 +4381,13 @@ label_002_5AA7:
     ld   a, $01                                   ;; 02:5AEA $3E $01
     ld   [hl+], a                                 ;; 02:5AEC $22
     push hl                                       ;; 02:5AED $E5
-    ld   hl, Data_002_59D4                        ;; 02:5AEE $21 $D4 $59
+    ld   hl, OpeningDoorTileIds                   ;; 02:5AEE $21 $D4 $59
     add  hl, de                                   ;; 02:5AF1 $19
     ld   a, [hl]                                  ;; 02:5AF2 $7E
     pop  hl                                       ;; 02:5AF3 $E1
     ld   [hl+], a                                 ;; 02:5AF4 $22
     push hl                                       ;; 02:5AF5 $E5
-    ld   hl, Data_002_59D5                        ;; 02:5AF6 $21 $D5 $59
+    ld   hl, (OpeningDoorTileIds + 1)             ;; 02:5AF6 $21 $D5 $59
     add  hl, de                                   ;; 02:5AF9 $19
     ld   a, [hl]                                  ;; 02:5AFA $7E
     pop  hl                                       ;; 02:5AFB $E1
@@ -4255,30 +4431,35 @@ label_002_5AA7:
 
 .jr_5B31
     xor  a                                        ;; 02:5B31 $AF
-    ld   [wC188], a                               ;; 02:5B32 $EA $88 $C1
+    ld   [wDoorsOpeningOrClosing], a              ;; 02:5B32 $EA $88 $C1
     ld   [wC1A8], a                               ;; 02:5B35 $EA $A8 $C1
     xor  a                                        ;; 02:5B38 $AF
     ldh  [hMultiPurposeE], a                      ;; 02:5B39 $E0 $E5
-    ld   a, [wC189]                               ;; 02:5B3B $FA $89 $C1
+    ld   a, [wDoorEvent]                          ;; 02:5B3B $FA $89 $C1
     ld   c, a                                     ;; 02:5B3E $4F
     ld   b, $00                                   ;; 02:5B3F $06 $00
-    ld   hl, wC1F0                                ;; 02:5B41 $21 $F0 $C1
+    ld   hl, wDoorPositions                       ;; 02:5B41 $21 $F0 $C1
     add  hl, bc                                   ;; 02:5B44 $09
     ld   a, [hl]                                  ;; 02:5B45 $7E
     ldh  [hMultiPurpose0], a                      ;; 02:5B46 $E0 $D7
+
+    ; Turn DOOR_TYPE_BOSS_TOP (8) into DOOR_TYPE_KEY_TOP (0) as they
+    ; are the same objects when opened
     ld   a, c                                     ;; 02:5B48 $79
     and  $07                                      ;; 02:5B49 $E6 $07
     ld   c, a                                     ;; 02:5B4B $4F
 
-.loop_5B4C
-    ld   hl, Data_002_5A40                        ;; 02:5B4C $21 $40 $5A
+; Replace the door objects in wRoomObjects
+; with the open door objects
+.replaceRoomObject
+    ld   hl, OpeningDoorTileOffsets               ;; 02:5B4C $21 $40 $5A
     add  hl, bc                                   ;; 02:5B4F $09
     ld   a, [hl]                                  ;; 02:5B50 $7E
     ld   hl, hMultiPurpose0                       ;; 02:5B51 $21 $D7 $FF
     add  [hl]                                     ;; 02:5B54 $86
     ld   e, a                                     ;; 02:5B55 $5F
     ld   d, $00                                   ;; 02:5B56 $16 $00
-    ld   hl, Data_002_5A50                        ;; 02:5B58 $21 $50 $5A
+    ld   hl, OpenDoorObjectIdsTable               ;; 02:5B58 $21 $50 $5A
     add  hl, bc                                   ;; 02:5B5B $09
     ld   a, [hl]                                  ;; 02:5B5C $7E
     ld   hl, wRoomObjects                         ;; 02:5B5D $21 $11 $D7
@@ -4292,22 +4473,24 @@ label_002_5AA7:
     add  $08                                      ;; 02:5B68 $C6 $08
     ldh  [hMultiPurposeE], a                      ;; 02:5B6A $E0 $E5
     ld   c, a                                     ;; 02:5B6C $4F
-    jr   .loop_5B4C                               ;; 02:5B6D $18 $DD
+    jr   .replaceRoomObject                       ;; 02:5B6D $18 $DD
 
 .jr_5B6F
     call GetRoomStatusAddress                     ;; 02:5B6F $CD $9F $5B
     ld   c, l                                     ;; 02:5B72 $4D
     ld   b, h                                     ;; 02:5B73 $44
-    ld   a, [wC189]                               ;; 02:5B74 $FA $89 $C1
+    ld   a, [wDoorEvent]                          ;; 02:5B74 $FA $89 $C1
     ld   e, a                                     ;; 02:5B77 $5F
     ld   d, $00                                   ;; 02:5B78 $16 $00
-    ld   hl, Data_002_5A60                        ;; 02:5B7A $21 $60 $5A
+    ld   hl, DoorToOpenStatusFlagTable            ;; 02:5B7A $21 $60 $5A
     add  hl, de                                   ;; 02:5B7D $19
     ld   a, [bc]                                  ;; 02:5B7E $0A
     or   [hl]                                     ;; 02:5B7F $B6
     ld   [bc], a                                  ;; 02:5B80 $02
     ldh  [hRoomStatus], a                         ;; 02:5B81 $E0 $F8
-    ld   hl, Data_002_5A69                        ;; 02:5B83 $21 $69 $5A
+
+    ;
+    ld   hl, DoorToAdjacentRoomTable              ;; 02:5B83 $21 $69 $5A
     add  hl, de                                   ;; 02:5B86 $19
     ld   a, [wIndoorRoom]                         ;; 02:5B87 $FA $AE $DB
     add  [hl]                                     ;; 02:5B8A $86
@@ -4315,10 +4498,10 @@ label_002_5AA7:
     call GetRoomStatusAddressForMapPosition_trampoline ;; 02:5B8C $CD $C1 $2B
     ld   c, l                                     ;; 02:5B8F $4D
     ld   b, h                                     ;; 02:5B90 $44
-    ld   a, [wC189]                               ;; 02:5B91 $FA $89 $C1
+    ld   a, [wDoorEvent]                          ;; 02:5B91 $FA $89 $C1
     ld   e, a                                     ;; 02:5B94 $5F
     ld   d, $00                                   ;; 02:5B95 $16 $00
-    ld   hl, Data_002_5A72                        ;; 02:5B97 $21 $72 $5A
+    ld   hl, DoorToAdjacentOpenStatusFlagTable    ;; 02:5B97 $21 $72 $5A
     add  hl, de                                   ;; 02:5B9A $19
     ld   a, [bc]                                  ;; 02:5B9B $0A
     or   [hl]                                     ;; 02:5B9C $B6
@@ -4326,19 +4509,21 @@ label_002_5AA7:
     ret                                           ;; 02:5B9E $C9
 
 ; Retrieve the address of the status flags for the current room.
+; See also GetDungeonRoomStatusAddress, which does the same thing for
+; arbitrary (dungeon) rooms and handles some special cases.
 ; Returns the address in hl.
 GetRoomStatusAddress::
     ld   hl, wOverworldRoomStatus                 ;; 02:5B9F $21 $00 $D8
     ldh  a, [hMapRoom]                            ;; 02:5BA2 $F0 $F6
     ld   e, a                                     ;; 02:5BA4 $5F
 
-    ; If is indoor…
+    ; If we're indoors…
     ld   a, [wIsIndoor]                           ;; 02:5BA5 $FA $A5 $DB
     ld   d, a                                     ;; 02:5BA8 $57
     and  a                                        ;; 02:5BA9 $A7
     jr   z, .computeAddress                       ;; 02:5BAA $28 $16
 
-    ; If is color dungeon…
+    ; If we're in the color dungeon…
     ldh  a, [hMapId]                              ;; 02:5BAC $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ;; 02:5BAE $FE $FF
     jr   nz, .regularDungeon                      ;; 02:5BB0 $20 $07
@@ -4360,26 +4545,67 @@ GetRoomStatusAddress::
     add  hl, de                                   ;; 02:5BC2 $19
     ret                                           ;; 02:5BC3 $C9
 
-Data_002_5BC4::
-    db   $58
+ClosingDoorTileIds::
+; Half-closed door
 
-Data_002_5BC5::
-    db   $59, $13, $12, $11, $10, $4A, $4B, $4D, $13, $5D, $11, $12, $4E, $10, $5E, $40
-    db   $41, $58, $59, $4A, $4B, $52, $53, $44, $4D, $54, $5D
+    ; DOOR_TYPE_SHUTTER_TOP
+    db   $58, $59
+    db   $13, $12
 
-Data_002_5BE0::
-    db   $4E, $47, $5E, $57, $08, $08, $00, $00
+    ; DOOR_TYPE_SHUTTER_BOTTOM
+    db   $11, $10
+    db   $4A, $4B
 
-Data_002_5BE8::
+    ; DOOR_TYPE_SHUTTER_LEFT
+    db   $4D, $13
+    db   $5D, $11
+
+    ; DOOR_TYPE_SHUTTER_RIGHT
+    db   $12, $4E
+    db   $10, $5E
+
+; Fully closed door
+
+    ; DOOR_TYPE_SHUTTER_TOP
+    db   $40, $41
+    db   $58, $59
+
+    ; DOOR_TYPE_SHUTTER_BOTTOM
+    db   $4A, $4B
+    db   $52, $53
+
+    ; DOOR_TYPE_SHUTTER_LEFT
+    db   $44, $4D
+    db   $54, $5D
+
+    ; DOOR_TYPE_SHUTTER_RIGHT
+    db   $4E, $47
+    db   $5E, $57
+
+Data_002_5BE4::
+    db   $08, $08, $00, $00
+
+;Data_002_5BE8::
     db   $08, $08, $00, $00, $00, $00, $08, $08, $08, $08, $10, $10
 
-Data_002_5BF4::
+ClosingDoorTileOffsets::
     db   $00, $00, $00, $00, $01, $01, $10, $10
 
-Data_002_5BFC::
-    db   $35, $37, $39, $3B, $36, $38, $3A, $3C
+; Object IDs for closed shutter doors, which consist of two objects each.
+; Each object ID is indexed by door type, minus 4.
+ClosedShutterDoorObjectIdsTable::
+; First object
+    db   $35 ; DOOR_TYPE_SHUTTER_TOP
+    db   $37 ; DOOR_TYPE_SHUTTER_BOTTOM
+    db   $39 ; DOOR_TYPE_SHUTTER_LEFT
+    db   $3B ; DOOR_TYPE_SHUTTER_RIGHT
+; Second object
+    db   $36 ; DOOR_TYPE_SHUTTER_TOP
+    db   $38 ; DOOR_TYPE_SHUTTER_BOTTOM
+    db   $3A ; DOOR_TYPE_SHUTTER_LEFT
+    db   $3C ; DOOR_TYPE_SHUTTER_RIGHT
 
-func_002_5C04::
+DoorClosing::
     ld   e, $00                                   ;; 02:5C04 $1E $00
     ld   d, e                                     ;; 02:5C06 $53
     ld   c, e                                     ;; 02:5C07 $4B
@@ -4388,7 +4614,7 @@ func_002_5C04::
     ldh  [hMultiPurposeC], a                      ;; 02:5C0A $E0 $E3
     ldh  [hMultiPurposeD], a                      ;; 02:5C0C $E0 $E4
     ldh  [hMultiPurposeE], a                      ;; 02:5C0E $E0 $E5
-    ld   a, [wC189]                               ;; 02:5C10 $FA $89 $C1
+    ld   a, [wDoorEvent]                          ;; 02:5C10 $FA $89 $C1
     sub  $04                                      ;; 02:5C13 $D6 $04
     jr   z, jr_002_5C21                           ;; 02:5C15 $28 $0A
 
@@ -4403,27 +4629,27 @@ func_002_5C04::
     jr   nz, .loop_5C19                           ;; 02:5C1F $20 $F8
 
 jr_002_5C21:
-    ld   hl, Data_002_5BE0                        ;; 02:5C21 $21 $E0 $5B
-    ld   a, [wC189]                               ;; 02:5C24 $FA $89 $C1
+    ld   hl, (Data_002_5BE4 - 4)                  ;; 02:5C21 $21 $E0 $5B
+    ld   a, [wDoorEvent]                          ;; 02:5C24 $FA $89 $C1
     ld   c, a                                     ;; 02:5C27 $4F
     ld   b, $00                                   ;; 02:5C28 $06 $00
     add  hl, bc                                   ;; 02:5C2A $09
     ld   a, [hl]                                  ;; 02:5C2B $7E
-    ld   hl, wC1D0                                ;; 02:5C2C $21 $D0 $C1
+    ld   hl, wDoorXPositions                      ;; 02:5C2C $21 $D0 $C1
     add  hl, bc                                   ;; 02:5C2F $09
     add  [hl]                                     ;; 02:5C30 $86
     ldh  [hIntersectedObjectLeft], a              ;; 02:5C31 $E0 $CE
 
 label_002_5C33:
-    ld   hl, Data_002_5BE8                        ;; 02:5C33 $21 $E8 $5B
+    ld   hl, (Data_002_5BE4 + 4)                  ;; 02:5C33 $21 $E8 $5B
     ldh  a, [hMultiPurposeC]                      ;; 02:5C36 $F0 $E3
     ld   c, a                                     ;; 02:5C38 $4F
     add  hl, bc                                   ;; 02:5C39 $09
-    ld   a, [wC189]                               ;; 02:5C3A $FA $89 $C1
+    ld   a, [wDoorEvent]                          ;; 02:5C3A $FA $89 $C1
     ld   c, a                                     ;; 02:5C3D $4F
     add  hl, bc                                   ;; 02:5C3E $09
     ld   a, [hl]                                  ;; 02:5C3F $7E
-    ld   hl, wC1E0                                ;; 02:5C40 $21 $E0 $C1
+    ld   hl, wDoorYPositions                      ;; 02:5C40 $21 $E0 $C1
     add  hl, bc                                   ;; 02:5C43 $09
     add  [hl]                                     ;; 02:5C44 $86
     ldh  [hIntersectedObjectTop], a               ;; 02:5C45 $E0 $CD
@@ -4485,13 +4711,13 @@ label_002_5C33:
     ld   a, $01                                   ;; 02:5C9E $3E $01
     ld   [hl+], a                                 ;; 02:5CA0 $22
     push hl                                       ;; 02:5CA1 $E5
-    ld   hl, Data_002_5BC4                        ;; 02:5CA2 $21 $C4 $5B
+    ld   hl, ClosingDoorTileIds                   ;; 02:5CA2 $21 $C4 $5B
     add  hl, de                                   ;; 02:5CA5 $19
     ld   a, [hl]                                  ;; 02:5CA6 $7E
     pop  hl                                       ;; 02:5CA7 $E1
     ld   [hl+], a                                 ;; 02:5CA8 $22
     push hl                                       ;; 02:5CA9 $E5
-    ld   hl, Data_002_5BC5                        ;; 02:5CAA $21 $C5 $5B
+    ld   hl, (ClosingDoorTileIds + 1)             ;; 02:5CAA $21 $C5 $5B
     add  hl, de                                   ;; 02:5CAD $19
     ld   a, [hl]                                  ;; 02:5CAE $7E
     pop  hl                                       ;; 02:5CAF $E1
@@ -4535,28 +4761,30 @@ label_002_5C33:
 
 .jr_5CE5
     xor  a                                        ;; 02:5CE5 $AF
-    ld   [wC188], a                               ;; 02:5CE6 $EA $88 $C1
+    ld   [wDoorsOpeningOrClosing], a              ;; 02:5CE6 $EA $88 $C1
     ld   [wC1A8], a                               ;; 02:5CE9 $EA $A8 $C1
     xor  a                                        ;; 02:5CEC $AF
     ldh  [hMultiPurposeE], a                      ;; 02:5CED $E0 $E5
-    ld   a, [wC189]                               ;; 02:5CEF $FA $89 $C1
+    ld   a, [wDoorEvent]                          ;; 02:5CEF $FA $89 $C1
     sub  $04                                      ;; 02:5CF2 $D6 $04
     ld   c, a                                     ;; 02:5CF4 $4F
     ld   b, $00                                   ;; 02:5CF5 $06 $00
-    ld   hl, wC1F4                                ;; 02:5CF7 $21 $F4 $C1
+    ld   hl, wDoorPositions + DOOR_TYPE_SHUTTER_TOP                 ;; 02:5CF7 $21 $F4 $C1
     add  hl, bc                                   ;; 02:5CFA $09
     ld   a, [hl]                                  ;; 02:5CFB $7E
     ldh  [hMultiPurpose0], a                      ;; 02:5CFC $E0 $D7
 
-.loop_5CFE
-    ld   hl, Data_002_5BF4                        ;; 02:5CFE $21 $F4 $5B
+; Replace the open door objects in wRoomObjects
+; with the closed shutter door objects
+.replaceRoomObject
+    ld   hl, ClosingDoorTileOffsets               ;; 02:5CFE $21 $F4 $5B
     add  hl, bc                                   ;; 02:5D01 $09
     ld   a, [hl]                                  ;; 02:5D02 $7E
     ld   hl, hMultiPurpose0                       ;; 02:5D03 $21 $D7 $FF
     add  [hl]                                     ;; 02:5D06 $86
     ld   e, a                                     ;; 02:5D07 $5F
     ld   d, $00                                   ;; 02:5D08 $16 $00
-    ld   hl, Data_002_5BFC                        ;; 02:5D0A $21 $FC $5B
+    ld   hl, ClosedShutterDoorObjectIdsTable      ;; 02:5D0A $21 $FC $5B
     add  hl, bc                                   ;; 02:5D0D $09
     ld   a, [hl]                                  ;; 02:5D0E $7E
     ld   hl, wRoomObjects                         ;; 02:5D0F $21 $11 $D7
@@ -4570,7 +4798,7 @@ label_002_5C33:
     add  $04                                      ;; 02:5D1A $C6 $04
     ldh  [hMultiPurposeE], a                      ;; 02:5D1C $E0 $E5
     ld   c, a                                     ;; 02:5D1E $4F
-    jr   .loop_5CFE                               ;; 02:5D1F $18 $DD
+    jr   .replaceRoomObject                       ;; 02:5D1F $18 $DD
 
 .jr_5D21
     ld   hl, wOverworldRoomStatus                 ;; 02:5D21 $21 $00 $D8
@@ -4591,10 +4819,10 @@ label_002_5C33:
     ld   d, $00                                   ;; 02:5D39 $16 $00
     add  hl, de                                   ;; 02:5D3B $19
     push hl                                       ;; 02:5D3C $E5
-    ld   a, [wC189]                               ;; 02:5D3D $FA $89 $C1
+    ld   a, [wDoorEvent]                          ;; 02:5D3D $FA $89 $C1
     ld   e, a                                     ;; 02:5D40 $5F
     ld   d, $00                                   ;; 02:5D41 $16 $00
-    ld   hl, Data_002_5A60                        ;; 02:5D43 $21 $60 $5A
+    ld   hl, DoorToOpenStatusFlagTable            ;; 02:5D43 $21 $60 $5A
     add  hl, de                                   ;; 02:5D46 $19
     ld   a, [hl]                                  ;; 02:5D47 $7E
     cpl                                           ;; 02:5D48 $2F
@@ -5075,9 +5303,9 @@ UpdateHealth:
     ld   [wAddHealthBuffer], a                    ;; 02:6355 $EA $93 $DB
     ; cap $wMaxHearts at $0E
     ld   a, [wMaxHearts]                          ;; 02:6358 $FA $5B $DB
-    cp   $0F                                      ;; 02:635B $FE $0F
+    cp   MAX_HEARTS + 1                           ;; 02:635B $FE $0F
     jr   c, .skipSetMaxHeartsCap                  ;; 02:635D $38 $02
-    ld   a, $0E                                   ;; 02:635F $3E $0E
+    ld   a, MAX_HEARTS                            ;; 02:635F $3E $0E
 
 .skipSetMaxHeartsCap:
     ; e = $wMaxHearts * 8
@@ -5235,7 +5463,7 @@ LoadHeartsCount::
 
 jr_002_6442:
     ldh  a, [hMultiPurpose0]                      ;; 02:6442 $F0 $D7
-    sub  $08                                      ;; 02:6444 $D6 $08
+    sub  ONE_HEART                                ;; 02:6444 $D6 $08
     ldh  [hMultiPurpose0], a                      ;; 02:6446 $E0 $D7
     jr   c, jr_002_6459                           ;; 02:6448 $38 $0F
 
@@ -5254,7 +5482,7 @@ jr_002_6442:
     jr   jr_002_6442                              ;; 02:6457 $18 $E9
 
 jr_002_6459:
-    add  $08                                      ;; 02:6459 $C6 $08
+    add  ONE_HEART                                ;; 02:6459 $C6 $08
     jr   z, jr_002_6462                           ;; 02:645B $28 $05
 
     ld   a, $CE                                   ;; 02:645D $3E $CE
@@ -6274,7 +6502,7 @@ CheckPositionForMapTransition::
     ld   [wPegasusBootsChargeMeter], a            ;; 02:6DEE $EA $4B $C1
     ld   [wIsUsingSpinAttack], a                  ;; 02:6DF1 $EA $21 $C1
     ld   [wIsRunningWithPegasusBoots], a          ;; 02:6DF4 $EA $4A $C1
-    ld   [wC188], a                               ;; 02:6DF7 $EA $88 $C1
+    ld   [wDoorsOpeningOrClosing], a              ;; 02:6DF7 $EA $88 $C1
 IF __PATCH_0__
     ld   [wBGPaletteTransitionEffect], a
     ld   [wDDD7], a
@@ -6844,7 +7072,7 @@ label_002_70DF:
     bit  1, a                                     ;; 02:70EE $CB $4F
     jr   nz, .jr_7103                             ;; 02:70F0 $20 $11
 
-    ld   hl, wC1D0                                ;; 02:70F2 $21 $D0 $C1
+    ld   hl, wDoorXPositions                      ;; 02:70F2 $21 $D0 $C1
     add  hl, de                                   ;; 02:70F5 $19
     ld   e, [hl]                                  ;; 02:70F6 $5E
     ldh  a, [hLinkPositionX]                      ;; 02:70F7 $F0 $98
@@ -6856,7 +7084,7 @@ label_002_70DF:
     jr   jr_002_7112                              ;; 02:7101 $18 $0F
 
 .jr_7103
-    ld   hl, wC1E0                                ;; 02:7103 $21 $E0 $C1
+    ld   hl, wDoorYPositions                      ;; 02:7103 $21 $E0 $C1
     add  hl, de                                   ;; 02:7106 $19
     ld   e, [hl]                                  ;; 02:7107 $5E
     ldh  a, [hLinkPositionY]                      ;; 02:7108 $F0 $99
@@ -6866,49 +7094,50 @@ label_002_70DF:
     jp   nc, ApplyCollisionWithSolid              ;; 02:710F $D2 $77 $72
 
 jr_002_7112:
-    ld   a, [wC188]                               ;; 02:7112 $FA $88 $C1
+    ld   a, [wDoorsOpeningOrClosing]              ;; 02:7112 $FA $88 $C1
     and  a                                        ;; 02:7115 $A7
     jp   nz, ApplyCollisionWithSolid              ;; 02:7116 $C2 $77 $72
 
     ldh  a, [hMultiPurposeD]                      ;; 02:7119 $F0 $E4
     cp   $94                                      ;; 02:711B $FE $94
-    jr   nc, .jr_712C                             ;; 02:711D $30 $0D
+    jr   nc, .checkShutterDoor                    ;; 02:711D $30 $0D
 
+    ; Check locked door
     ld   a, [wSmallKeysCount]                     ;; 02:711F $FA $D0 $DB
     and  a                                        ;; 02:7122 $A7
     jp   z, ApplyCollisionWithSolid               ;; 02:7123 $CA $77 $72
 
     dec  a                                        ;; 02:7126 $3D
     ld   [wSmallKeysCount], a                     ;; 02:7127 $EA $D0 $DB
-    jr   jr_002_7147                              ;; 02:712A $18 $1B
+    jr   OpenDoor                                 ;; 02:712A $18 $1B
 
-.jr_712C
+.checkShutterDoor
     cp   $98                                      ;; 02:712C $FE $98
-    jr   z, .jr_7139                              ;; 02:712E $28 $09
+    jr   z, .checkBossDoor                        ;; 02:712E $28 $09
 
     ld   a, [wRoomEvent]                          ;; 02:7130 $FA $8E $C1
     and  a                                        ;; 02:7133 $A7
-    jr   z, jr_002_7147                           ;; 02:7134 $28 $11
+    jr   z, OpenDoor                              ;; 02:7134 $28 $11
 
     jp   ApplyCollisionWithSolid                  ;; 02:7136 $C3 $77 $72
 
-.jr_7139
+.checkBossDoor
     ld   a, [wHasDungeonBossKey]                  ;; 02:7139 $FA $CF $DB
     and  a                                        ;; 02:713C $A7
-    jr   nz, jr_002_7147                          ;; 02:713D $20 $08
+    jr   nz, OpenDoor                             ;; 02:713D $20 $08
 
     ld_dialog_low a, Dialog007 ; "Boss door locked" ;; 02:713F $3E $07
     call OpenDialogInTable0AndClearIncrement      ;; 02:7141 $CD $FE $74
     jp   ApplyCollisionWithSolid                  ;; 02:7144 $C3 $77 $72
 
-jr_002_7147:
+OpenDoor:
     ldh  a, [hMultiPurposeD]                      ;; 02:7147 $F0 $E4
     sub  $90                                      ;; 02:7149 $D6 $90
-    ld   [wC189], a                               ;; 02:714B $EA $89 $C1
+    ld   [wDoorEvent], a                          ;; 02:714B $EA $89 $C1
     xor  a                                        ;; 02:714E $AF
     ld   [wDBAC], a                               ;; 02:714F $EA $AC $DB
     inc  a                                        ;; 02:7152 $3C
-    ld   [wC188], a                               ;; 02:7153 $EA $88 $C1
+    ld   [wDoorsOpeningOrClosing], a              ;; 02:7153 $EA $88 $C1
     call SynchronizeDungeonsItemFlags_trampoline  ;; 02:7156 $CD $02 $28
     call EnqueueDoorUnlockedSfx                   ;; 02:7159 $CD $20 $54
     jp   ApplyCollisionWithSolid                  ;; 02:715C $C3 $77 $72
@@ -7444,7 +7673,7 @@ interactiveBlock:
     ldh  [hMultiPurposeG], a                      ;; 02:743A $E0 $E8
     xor  a                                        ;; 02:743C $AF
     ld   [wC191], a                               ;; 02:743D $EA $91 $C1
-    call TryOpenLockedDoor                        ;; 02:7440 $CD $B0 $53
+    call TryOpenKeyDoor                           ;; 02:7440 $CD $B0 $53
 
     ; If on overworld…
     ld   a, [wIsIndoor]                           ;; 02:7443 $FA $A5 $DB

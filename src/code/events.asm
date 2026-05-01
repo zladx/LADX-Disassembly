@@ -19,14 +19,14 @@ ExecuteRoomTriggersAndEffects::
     srl  a                                        ;; 02:5D64 $CB $3F
     srl  a                                        ;; 02:5D66 $CB $3F
     JP_TABLE                                      ;; 02:5D68 $C7
-._00 dw Events.return
-._20 dw OpenLockedDoorsEffectHandler
-._40 dw KillAllEnemiesEffectHandler
-._60 dw RevealChestEffectHandler
-._80 dw DropKeyEffectHandler
-._A0 dw RevealStairwayEffectHandler
-._C0 dw ClearMidbossEffectHandler
-._E0 dw DropFairyEffectHandler
+._00 dw Events.return                 ; EFFECT_NONE
+._20 dw OpenShutterDoorsEffectHandler ; EFFECT_OPEN_SHUTTER_DOORS
+._40 dw KillAllEnemiesEffectHandler   ; EFFECT_KILL_ALL_ENEMIES
+._60 dw RevealChestEffectHandler      ; EFFECT_REVEAL_CHEST
+._80 dw DropKeyEffectHandler          ; EFFECT_DROP_KEY
+._A0 dw RevealStaircaseEffectHandler  ; EFFECT_REVEAL_STAIRCASE
+._C0 dw ClearMidbossEffectHandler     ; EFFECT_CLEAR_MIDBOSS
+._E0 dw DropFairyEffectHandler        ; EFFECT_DROP_FAIRY
 
 KillAllEnemiesEffectHandler::
     call EventEffectGuard                         ;; 02:5D79
@@ -126,7 +126,7 @@ DropFairyEffectHandler::
     ld   a, TRANSCIENT_VFX_POOF                   ;; 02:5DE4 $3E $02
     jp   MakeEffectObjectAppear                   ;; 02:5DE6 $C3 $F6 $5D
 
-RevealStairwayEffectHandler::
+RevealStaircaseEffectHandler::
     call EventEffectGuard                         ;; 02:5DE9 $CD $AF $5D
 
     ld   a, $88                                   ;; 02:5DEC $3E $88
@@ -164,9 +164,7 @@ DropKeyEffectHandler::
 .jr_5E15
     jp   label_002_5425                           ;; 02:5E15 $C3 $25 $54
 
-; Open locked doors, and make the teleport point appear.
-; @FIXME Actually checks if the miniboss has been defeated.
-; Has nothing to do with actually clearing the miniboss.
+; Handle the effects of a midboss having been defeated
 ClearMidbossEffectHandler::
     ldh  a, [hMapId]                              ;; 02:5E18 $F0 $F7
     ld   e, a                                     ;; 02:5E1A $5F
@@ -176,25 +174,30 @@ ClearMidbossEffectHandler::
     ld   a, [hl]                                  ;; 02:5E21 $7E
     and  $01                                      ;; 02:5E22 $E6 $01
     ret  nz                                       ;; 02:5E24 $C0
+    ; If the miniboss has not been marked as
+    ; defeated already, fall through to
+    ; OpenShutterDoorsEffectHandler and handle it there.
 
-; Open all the locked doors of the room
-OpenLockedDoorsEffectHandler::
-    ld   a, [wC190]                               ;; 02:5E25 $FA $90 $C1
+; Open shutter doors (and make the teleport point appear if we're in a miniboss room)
+OpenShutterDoorsEffectHandler::
+    ld   a, [wShutterDoorEventExecuted]           ;; 02:5E25 $FA $90 $C1
     and  a                                        ;; 02:5E28 $A7
     jr   nz, .jr_5E2E                             ;; 02:5E29 $20 $03
 
-    call func_002_5E7B                            ;; 02:5E2B $CD $7B $5E
+    call CloseDoors                               ;; 02:5E2B $CD $7B $5E
 
 .jr_5E2E
     ld   a, [wRoomEventEffectExecuted]            ;; 02:5E2E $FA $8F $C1
     and  a                                        ;; 02:5E31 $A7
     ret  z                                        ;; 02:5E32 $C8
 
+    ; Are we in a miniboss room?
     ld   a, [wRoomEvent]                          ;; 02:5E33 $FA $8E $C1
     cp   TRIGGER_KILL_ALL_ENEMIES | EFFECT_CLEAR_MIDBOSS ;; 02:5E36 $FE $C1
-    jr   nz, jr_002_5E6A                          ;; 02:5E38 $20 $30
+    jr   nz, .openDoors                           ;; 02:5E38 $20 $30
 
-    ldh  a, [hMapId]                              ; @TODO This sets the miniboss killed flag.
+    ; Set "miniboss cleared" flag for current dungeon
+    ldh  a, [hMapId]                              ;; 02:5E3A $F0 $F7
     ld   e, a                                     ;; 02:5E3C $5F
     ld   d, $00                                   ;; 02:5E3D $16 $00
     ld   hl, wHasInstrument1                      ;; 02:5E3F $21 $65 $DB
@@ -202,61 +205,70 @@ OpenLockedDoorsEffectHandler::
     ld   a, [hl]                                  ;; 02:5E43 $7E
     or   $01                                      ;; 02:5E44 $F6 $01
     ld   [hl], a                                  ;; 02:5E46 $77
+
+    ; Set the current room status as cleared
     ld   d, $00                                   ;; 02:5E47 $16 $00
     ldh  a, [hMapRoom]                            ;; 02:5E49 $F0 $F6
     ld   e, a                                     ;; 02:5E4B $5F
     ld   hl, wIndoorARoomStatus                   ;; 02:5E4C $21 $00 $D9
     ldh  a, [hMapId]                              ;; 02:5E4F $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ;; 02:5E51 $FE $FF
-    jr   nz, .jr_5E5A                             ;; 02:5E53 $20 $05
+    jr   nz, .checkIndoorsRoomsGroup              ;; 02:5E53 $20 $05
 
     ld   hl, wColorDungeonRoomStatus              ;; 02:5E55 $21 $E0 $DD
-    jr   jr_002_5E63                              ;; 02:5E58 $18 $09
+    jr   .spawnWarpPoint                          ;; 02:5E58 $18 $09
 
-.jr_5E5A
-    cp   $1A                                      ;; 02:5E5A $FE $1A
-    jr   nc, jr_002_5E63                          ;; 02:5E5C $30 $05
+.checkIndoorsRoomsGroup
+    ; If we're in a dungeon in the indoors_b rooms group...
+    cp   MAP_INDOORS_B_END                        ;; 02:5E5A $FE $1A
+    jr   nc, .spawnWarpPoint                      ;; 02:5E5C $30 $05
 
-    cp   $06                                      ;; 02:5E5E $FE $06
-    jr   c, jr_002_5E63                           ;; 02:5E60 $38 $01
+    cp   MAP_INDOORS_B_START                      ;; 02:5E5E $FE $06
+    jr   c, .spawnWarpPoint                       ;; 02:5E60 $38 $01
 
+    ; ...set de to wIndoorBRoomStatus
     inc  d                                        ;; 02:5E62 $14
 
-jr_002_5E63:
+.spawnWarpPoint:
     add  hl, de                                   ;; 02:5E63 $19
-    set  5, [hl]                                  ;; 02:5E64 $CB $EE
+    set  5, [hl] ; ROOM_STATUS_EVENT_2            ;; 02:5E64 $CB $EE
     ld   a, JINGLE_DUNGEON_WARP_APPEAR            ;; 02:5E66 $3E $1B
     ldh  [hJingle], a                             ;; 02:5E68 $E0 $F2
 
-jr_002_5E6A:
-    ld   a, [wC190]                               ;; 02:5E6A $FA $90 $C1
+.openDoors:
+    ld   a, [wShutterDoorEventExecuted]           ;; 02:5E6A $FA $90 $C1
     and  a                                        ;; 02:5E6D $A7
     ret  z                                        ;; 02:5E6E $C8
 
     xor  a                                        ;; 02:5E6F $AF
     ld   [wRoomEvent], a                          ;; 02:5E70 $EA $8E $C1
-    ld   a, $01                                   ;; 02:5E73 $3E $01
-    ld   [wC18C], a                               ;; 02:5E75 $EA $8C $C1
+    ld   a, TRUE                                  ;; 02:5E73 $3E $01
+    ld   [wEnqueueDoorsOpening], a                ;; 02:5E75 $EA $8C $C1
     jp   EnqueueDoorUnlockedSfx                   ;; 02:5E78 $C3 $20 $54
 
-func_002_5E7B::
+CloseDoors::
+    ; If Link has moved far enough into the room
+    ; to trigger the doors closing, either horizontally...
     ldh  a, [hLinkPositionX]                      ;; 02:5E7B $F0 $98
     sub  $11                                      ;; 02:5E7D $D6 $11
     cp   $7E                                      ;; 02:5E7F $FE $7E
     jr   nc, .return                              ;; 02:5E81 $30 $1F
 
+    ; ...or vertically...
     ldh  a, [hLinkPositionY]                      ;; 02:5E83 $F0 $99
     sub  $16                                      ;; 02:5E85 $D6 $16
     cp   $5E                                      ;; 02:5E87 $FE $5E
     jr   nc, .return                              ;; 02:5E89 $30 $17
 
+    ; ...and the room event effect has not been executed yet...
     ld   a, [wRoomEventEffectExecuted]            ;; 02:5E8B $FA $8F $C1
     and  a                                        ;; 02:5E8E $A7
     jr   nz, .return                              ;; 02:5E8F $20 $11
 
-    ld   a, $01                                   ;; 02:5E91 $3E $01
-    ld   [wC18D], a                               ;; 02:5E93 $EA $8D $C1
-    ld   [wC190], a                               ;; 02:5E96 $EA $90 $C1
+    ; ...close the doors.
+    ld   a, TRUE                                  ;; 02:5E91 $3E $01
+    ld   [wEnqueueDoorsClosing], a                ;; 02:5E93 $EA $8D $C1
+    ld   [wShutterDoorEventExecuted], a           ;; 02:5E96 $EA $90 $C1
     ld   a, $04                                   ;; 02:5E99 $3E $04
     ld   [wC111], a                               ;; 02:5E9B $EA $11 $C1
     ld   a, NOISE_SFX_DOOR_CLOSED                 ;; 02:5E9E $3E $10
@@ -265,11 +277,15 @@ func_002_5E7B::
 .return
     ret                                           ;; 02:5EA2 $C9
 
-Data_002_5EA3::
-    db $60, $70, $61, $71
-
-Data_002_5EA7::
-    db $60, $70, $60, $70
+ChestTileIds::
+.dmg:
+    db   $60, $70
+    db   $61, $71
+.cgb:
+    ; On CGB, the left and right side of the chest are the
+    ; same tiles, just horizontally flipped
+    db   $60, $70
+    db   $60, $70
 
 RevealChestEffectHandler::
     call EventEffectGuard                         ;; 02:5EAB $CD $AF $5D
@@ -342,12 +358,12 @@ jr_002_5EED:
     add  hl, de                                   ;; 02:5F16 $19
     add  $0A                                      ;; 02:5F17 $C6 $0A
     ld   [wDrawCommandsSize], a                   ;; 02:5F19 $EA $00 $D6
-    ld   de, Data_002_5EA3                        ;; 02:5F1C $11 $A3 $5E
+    ld   de, ChestTileIds.dmg                     ;; 02:5F1C $11 $A3 $5E
     ldh  a, [hIsGBC]                              ;; 02:5F1F $F0 $FE
     and  a                                        ;; 02:5F21 $A7
     jr   z, label_002_5F27                        ;; 02:5F22 $28 $03
 
-    ld   de, Data_002_5EA7                        ;; 02:5F24 $11 $A7 $5E
+    ld   de, ChestTileIds.cgb                     ;; 02:5F24 $11 $A7 $5E
 
 label_002_5F27:
     ldh  a, [hIntersectedObjectBGAddressHigh]     ;; 02:5F27 $F0 $CF
@@ -380,6 +396,8 @@ label_002_5F27:
     and  a                                        ;; 02:5F49 $A7
     jr   z, .ret_5F53                             ;; 02:5F4A $28 $07
 
+    ; On CGB, set palette 2 for this object's tiles
+    ; (chest or staircase)
     push bc                                       ;; 02:5F4C $C5
     ld   a, $02                                   ;; 02:5F4D $3E $02
     call func_91D                                 ;; 02:5F4F $CD $1D $09
@@ -388,8 +406,16 @@ label_002_5F27:
 .ret_5F53
     ret                                           ;; 02:5F53 $C9
 
-Data_002_5F54::
-    db $6A, $7A, $6B, $7B, $00, $00, $00, $00
+StaircaseTileIds::
+    db   $6A, $7A
+    db   $6B, $7B
+
+    ; POI: The next four bytes are unused. This is probably a leftover
+    ; because these tile IDs are used by the same function that
+    ; handles the chest tiles, and the chest has one DMG variant
+    ; and one CGB variant.
+    db   $00, $00
+    db   $00, $00
 
 func_002_5F5C::
     ld   a, STAIRCASE_INACTIVE                    ;; 02:5F5C $3E $01
@@ -423,13 +449,13 @@ func_002_5F5C::
     add  hl, de                                   ;; 02:5F93 $19
     add  $0A                                      ;; 02:5F94 $C6 $0A
     ld   [wDrawCommandsSize], a                   ;; 02:5F96 $EA $00 $D6
-    ld   de, Data_002_5F54                        ;; 02:5F99 $11 $54 $5F
+    ld   de, StaircaseTileIds                     ;; 02:5F99 $11 $54 $5F
     jp   label_002_5F27                           ;; 02:5F9C $C3 $27 $5F
 
-; Check if some triggers has been resolved.
+; Check if some triggers have been resolved.
 ;
-; Some trigger are marked as resolved directly by their respective
-; entities. There function checks for all the other triggers.
+; Some triggers are marked as resolved directly by their respective
+; entities. There are function checks for all the other triggers.
 CheckTriggersResolution::
     ; hMultiPurpose0 = event trigger
     and  EVENT_TRIGGER_MASK                       ;; 02:5F9F $E6 $1F
@@ -627,7 +653,7 @@ jr_002_6064:
     jr   nz, .jr_6098                             ;; 02:6082 $20 $14
 
     call EventEffectGuard                         ;; 02:6084 $CD $AF $5D
-    call OpenLockedDoorsEffectHandler             ;; 02:6087 $CD $25 $5E
+    call OpenShutterDoorsEffectHandler            ;; 02:6087 $CD $25 $5E
     ld   hl, wColorDungeonRoomStatus              ;; 02:608A $21 $E0 $DD
     ldh  a, [hMapRoom]                            ;; 02:608D $F0 $F6
     ld   e, a                                     ;; 02:608F $5F

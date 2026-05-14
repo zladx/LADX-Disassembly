@@ -200,3 +200,15 @@ DEF G#6     EQU $8a
 DEF A_6     EQU $8c
 DEF A#6     EQU $8e
 DEF B_6     EQU $90
+
+; Note length tables (indexed by "notelen" macro).
+; General pattern:  n//2, n, 2n, 4n, 8n, 16n, 3n, 6n, 12n, (n+1)//2, ?, ?, ?, ?, 24n
+DEF NOTELENS_2  EQUS "1,  2,  4,  8, 16,  32,  6, 12,  24, 1,  1,   1,  1, 1,  48"
+DEF NOTELENS_3  EQUS "1,  3,  6, 12, 24,  48,  9, 18,  36, 2,  4,   8,  1, 1,  72"
+DEF NOTELENS_4  EQUS "2,  4,  8, 16, 32,  64, 12, 24,  48, 2,  5,   3,  1, 1,  96"
+DEF NOTELENS_5  EQUS "3,  5, 10, 20, 40,  80, 15, 30,  60, 2,  8,  16,  2, 1, 120"
+DEF NOTELENS_6  EQUS "3,  6, 12, 24, 48,  96, 18, 36,  72, 3,  8,  16,  2, 4, 144"
+DEF NOTELENS_7  EQUS "3,  7, 14, 28, 56, 112, 21, 42,  84, 4,  9,  18,  2, 1, 168"
+DEF NOTELENS_8  EQUS "4,  8, 16, 32, 64, 128, 24, 48,  96, 4,  2,   1,  1, 0, 192"
+DEF NOTELENS_9  EQUS "4,  9, 18, 36, 72, 144, 27, 54, 108, 5, 12,  24, 24, 6, 216"
+DEF NOTELENS_10 EQUS "5, 10, 20, 40, 80, 160, 30, 60, 120, 5,  1,   1,  1, 1, 240"

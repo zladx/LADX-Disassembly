@@ -1,26 +1,30 @@
 ; The `notelen` macro indexes into MusicSpeedData_* tables, which give a note
 ; length in frames.
 
+; Not used
+NoteLengthTable_1e_2::
+    db   NOTELENS_2
+
 ; Boss, FinalBoss, EagleBossTransition, InstrumentSurfHarp
-MusicSpeedData_1e_4a9d::
-    db   $01, $03, $06, $0c, $18, $30, $09, $12, $24, $02, $04, $08, $01, $01, $48
+NoteLengthTable_1e_3::
+    db   NOTELENS_3
 
 ; FinalBoss, ObtainInstrument, OverworldSwordless, DreamShrineDream,
 ; FinalBossDefeat
-MusicSpeedData_1e_4aac::
-    db   $02, $04, $08, $10, $20, $40, $0c, $18, $30, $02, $05, $03, $01, $01, $60
+NoteLengthTable_1e_4::
+    db   NOTELENS_4
 
 ; Miniboss, EagleBossLoop, EagleBossTransition, TailCave, BottleGrotto,
 ; AnglersTunnel, DreamShrineSleep, SouthernShrine, Owl, InstrumentWindMarimba,
 ; Henhouse
-MusicSpeedData_1e_4abb::
-    db   $03, $05, $0a, $14, $28, $50, $0f, $1e, $3c, $02, $08, $10, $02, $01, $78
+NoteLengthTable_1e_5::
+    db   NOTELENS_5
 
 ; TurtleRock, IntroWakeUp, DreamShrineBed, DreamShrineDream, Cave,
 ; MarinUnused, TitleCutscene, DreamShrineSleep, InstrumentCoralTriangle,
 ; RoosterRevival, WindFish, BossDefeat
-MusicSpeedData_1e_4aca::
-    db   $03, $06, $0c, $18, $30, $60, $12, $24, $48, $03, $08, $10, $02, $04, $90
+NoteLengthTable_1e_6::
+    db   NOTELENS_6
 
 ; FileSelect, KeyCavern, AfterBoss, CatfishsMaw, EaglesTower,
 ; OpenAnglersTunnel, MarinBeachTalk, TitleCutscene, FinalBoss,
@@ -28,22 +32,22 @@ MusicSpeedData_1e_4aca::
 ; EggBalladTriangle, EggBalladOrgan, EggBalladAll, InstrumentSeaLilysBell,
 ; InstrumentThunderDrum, MarinSing, LearnBallad, GhostHouse, FileSelectZelda,
 ; HeartContainer
-MusicSpeedData_1e_4ad9::
-    db   $03, $07, $0e, $1c, $38, $70, $15, $2a, $54, $04, $09, $12, $02, $01, $a8
+NoteLengthTable_1e_7::
+    db   NOTELENS_7
 
 ; TitleCutscene, FinalBossIntro, KanaletCastle, FaceShrine, 2dUnderground,
 ; MarinOnBeach, MarinBeachTalk, InstrumentFullMoonCello,
 ; InstrumentOrganOfEveningCalm, HeartContainer
-MusicSpeedData_1e_4ae8::
-    db   $04, $08, $10, $20, $40, $80, $18, $30, $60, $04, $02, $01, $01, $00, $c0
+NoteLengthTable_1e_8::
+    db   NOTELENS_8
 
 ; EggMaze, InstrumentConchHorn, L2Sword
-MusicSpeedData_1e_4af7::
-    db   $04, $09, $12, $24, $48, $90, $1b, $36, $6c, $05, $0c, $18, $18, $06, $d8
+NoteLengthTable_1e_9::
+    db   NOTELENS_9
 
 ; ManbosMambo
-MusicSpeedData_1e_4b06::
-    db   $05, $0a, $14, $28, $50, $a0, $1e, $3c, $78, $05, $01, $01, $01, $01, $f0
+NoteLengthTable_1e_10::
+    db   NOTELENS_10
 
 HardcodedData_1e_4b15::
     db   $10, $32, $22, $47, $60, $20, $00
@@ -88,7 +92,7 @@ ChannelDefinition_1e_rest_1C0_1::
 
 MusicActivePowerUp::
     db   $00
-    dw   MusicSpeedData_1e_4aca
+    dw   NoteLengthTable_1e_6
     dw   MusicActivePowerUp_Channel1
     dw   MusicActivePowerUp_Channel2
     dw   MusicActivePowerUp_Channel3
@@ -96,7 +100,7 @@ MusicActivePowerUp::
 
 MusicObtainPowerup::
     db   $00
-    dw   MusicSpeedData_1e_4aca
+    dw   NoteLengthTable_1e_6
     dw   MusicObtainPowerup_Channel1
     dw   MusicObtainPowerup_Channel2
     dw   MusicObtainPowerup_Channel3
@@ -310,7 +314,7 @@ ChannelDefinition_1e_4c2f::
 
 MusicMiniboss::
     db   $02
-    dw   MusicSpeedData_1e_4abb
+    dw   NoteLengthTable_1e_5
     dw   MusicMiniboss_Channel1
     dw   MusicMiniboss_Channel2
     dw   MusicMiniboss_Channel3

@@ -1,6 +1,6 @@
 MusicTotakaUnused::
     db   $00
-    dw   MusicSpeedData_1b_4ae6
+    dw   NoteLengthTable_1b_8
     dw   MusicTotakaUnused_Channel1_rest_1C0
     dw   MusicTotakaUnused_Channel2_rest_1C0
     dw   MusicTotakaUnused_Channel3
@@ -48,7 +48,7 @@ ChannelDefinition_1b_500f::
 
 MusicTitleScreen::
     db   $00
-    dw   MusicSpeedData_1b_4ac8
+    dw   NoteLengthTable_1b_6
     dw   MusicTitleScreen_Channel1
     dw   MusicTitleScreen_Channel2
     dw   MusicTitleScreen_Channel3
@@ -473,7 +473,7 @@ ChannelDefinition_1b_517e::
 
 MusicMinigame::
     db   $00
-    dw   MusicSpeedData_1b_4aaa
+    dw   NoteLengthTable_1b_4
     dw   MusicMinigame_Channel1
     dw   MusicMinigame_Channel2
     dw   MusicMinigame_Channel3
@@ -622,7 +622,7 @@ ChannelDefinition_1b_5288::
 
 MusicGameOver::
     db   $00
-    dw   MusicSpeedData_1b_4ae6
+    dw   NoteLengthTable_1b_8
     dw   MusicGameOver_Channel1
     dw   MusicGameOver_Channel2
     dw   MusicGameOver_Channel3
@@ -765,7 +765,7 @@ ChannelDefinition_1b_5327::
 
 MusicMabeVillage::
     db   $00
-    dw   MusicSpeedData_1b_4af5
+    dw   NoteLengthTable_1b_9
     dw   MusicMabeVillage_Channel1
     dw   MusicMabeVillage_Channel2
     dw   MusicMabeVillage_Channel3_rest_1C0
@@ -868,7 +868,7 @@ ChannelDefinition_1b_5343:: ; Accompaniment
     note C_3
 
     ; 16 long beats. Because we've swapped MusicSpeedData, 1 beat is 10 frames instead of 9 frames.
-    set_speed MusicSpeedData_1b_4b04
+    set_speed NoteLengthTable_1b_10
     notelen 4; 8 long beats
     note B_2
     notelen 7; 6 long beats
@@ -876,10 +876,10 @@ ChannelDefinition_1b_5343:: ; Accompaniment
     set_envelope_duty $52, $00, 2, 0
     notelen 2; 2 long beats
     note D_3
-    set_speed MusicSpeedData_1b_4af5
+    set_speed NoteLengthTable_1b_9
     end_def
 
-; Case study! This song uses MusicSpeedData_1b_4af5, stored in
+; Case study! This song uses NoteLengthTable_1b_9, stored in
 ; music_tracks_data_1b_1.asm.
 ;
 ; `notelen *` is an index into that table. It gets note durations in frames.
@@ -890,7 +890,7 @@ ChannelDefinition_1b_5343:: ; Accompaniment
 ; musical "beats" by dividing by their greatest common factor. In this case,
 ; that's 9 frames per 1 beat.
 ;
-;     MusicSpeedData_1b_4af5::
+;     NoteLengthTable_1b_9::
 ;     ; notelen:      1    2    3    4              7
 ;         db   $04, $09, $12, $24, $48, $90, $1b, $36, $6c, $05, $0c, $18, $18, $06, $d8
 ;     ; Decimal:      9   18   36   72             54
@@ -988,19 +988,19 @@ ChannelDefinition_1b_53a5:: ; Melody
     next_loop
 
     ; 16 long beats. Because we've swapped MusicSpeedData, 1 beat is 10 frames instead of 9.
-    set_speed MusicSpeedData_1b_4b04
+    set_speed NoteLengthTable_1b_10
     begin_loop $04
         notelen 2; 2 long beats
         note D_5
         note D_6
     next_loop
-    set_speed MusicSpeedData_1b_4af5
+    set_speed NoteLengthTable_1b_9
 
     end_def
 
 MusicOverworld::
     db   $00
-    dw   MusicSpeedData_1b_4ac8
+    dw   NoteLengthTable_1b_6
     dw   MusicOverworld_Channel1
     dw   MusicOverworld_Channel2
     dw   MusicOverworld_Channel3
@@ -1810,7 +1810,7 @@ ChannelDefinition_1b_56f7::
 
 MusicTalTalRange::
     db   $00
-    dw   MusicSpeedData_1b_4ac8
+    dw   NoteLengthTable_1b_6
     dw   MusicTalTalRange_Channel1
     dw   MusicTalTalRange_Channel2
     dw   MusicTalTalRange_Channel3
@@ -2442,7 +2442,7 @@ ChannelDefinition_1b_59d9::
 
 MusicShop::
     db   $00
-    dw   MusicSpeedData_1b_4b04
+    dw   NoteLengthTable_1b_10
     dw   MusicShop_Channel1
     dw   MusicShop_Channel2
     dw   MusicShop_Channel3
@@ -2584,7 +2584,7 @@ ChannelDefinition_1b_5a7a::
 
 MusicRaftRideRapids::
     db   $00
-    dw   MusicSpeedData_1b_4ad7
+    dw   NoteLengthTable_1b_7
     dw   MusicRaftRideRapids_Channel1
     dw   MusicRaftRideRapids_Channel2
     dw   MusicRaftRideRapids_Channel3
@@ -2802,7 +2802,7 @@ ChannelDefinition_1b_5b68::
 
 MusicMysteriousForest::
     db   $00
-    dw   MusicSpeedData_1b_4b04
+    dw   NoteLengthTable_1b_10
     dw   MusicMysteriousForest_Channel1
     dw   MusicMysteriousForest_Channel2
     dw   MusicMysteriousForest_Channel3
@@ -3037,7 +3037,7 @@ ChannelDefinition_1b_5c61::
 
 MusicInsideBuilding::
     db   $04
-    dw   MusicSpeedData_1b_4ae6
+    dw   NoteLengthTable_1b_8
     dw   MusicInsideBuilding_Channel1
     dw   MusicInsideBuilding_Channel2
     dw   MusicInsideBuilding_Channel3_rest_1C0
@@ -3182,7 +3182,7 @@ ChannelDefinition_1b_5c8e::
 
 MusicAnimalVillage::
     db   $00
-    dw   MusicSpeedData_1b_4b04
+    dw   NoteLengthTable_1b_10
     dw   MusicAnimalVillage_Channel1
     dw   MusicAnimalVillage_Channel2
     dw   MusicAnimalVillage_Channel3
@@ -3343,7 +3343,7 @@ ChannelDefinition_1b_5da5::
 
 MusicFairyFountain::
     db   $00
-    dw   MusicSpeedData_1b_4ac8
+    dw   NoteLengthTable_1b_6
     dw   MusicFairyFountain_Channel1
     dw   MusicFairyFountain_Channel2
     dw   MusicFairyFountain_Channel3
@@ -3403,7 +3403,7 @@ ChannelDefinition_1b_5df6::
 
 MusicTitleScreenNoIntro::
     db   $00
-    dw   MusicSpeedData_1b_4ac8
+    dw   NoteLengthTable_1b_6
     dw   MusicTitleScreenNoIntro_Channel1
     dw   MusicTitleScreenNoIntro_Channel2
     dw   MusicTitleScreenNoIntro_Channel3
@@ -3424,7 +3424,7 @@ MusicTitleScreenNoIntro_Channel3::
 
 MusicBowwowKidnapped::
     db   $00
-    dw   MusicSpeedData_1b_4ab9
+    dw   NoteLengthTable_1b_5
     dw   MusicBowwowKidnapped_Channel1
     dw   MusicBowwowKidnapped_Channel2
     dw   MusicBowwowKidnapped_Channel3
@@ -3524,7 +3524,7 @@ ChannelDefinition_1b_5ea0::
 
 MusicObtainSword::
     db   $00
-    dw   MusicSpeedData_1b_4ab9
+    dw   NoteLengthTable_1b_5
     dw   MusicObtainSword_Channel1
     dw   MusicObtainSword_Channel2
     dw   MusicObtainSword_Channel3
@@ -3615,7 +3615,7 @@ ChannelDefinition_1b_5edb::
 
 MusicOverworldIntro::
     db   $00
-    dw   MusicSpeedData_1b_4ac8
+    dw   NoteLengthTable_1b_6
     dw   MusicOverworldIntro_Channel1
     dw   MusicOverworldIntro_Channel2
     dw   MusicOverworldIntro_Channel3
@@ -3784,7 +3784,7 @@ ChannelDefinition_1b_5f85::
 
 MusicMrWriteHouse::
     db   $00
-    dw   MusicSpeedData_1b_4ae6
+    dw   NoteLengthTable_1b_8
     dw   MusicMrWriteHouse_Channel1
     dw   MusicMrWriteHouse_Channel2
     dw   MusicMrWriteHouse_Channel3_rest_1C0
@@ -3865,7 +3865,7 @@ ChannelDefinition_1b_5ffe::
 
 MusicUlrira::
     db   $00
-    dw   MusicSpeedData_1b_4ab9
+    dw   NoteLengthTable_1b_5
     dw   MusicUlrira_Channel1
     dw   MusicUlrira_Channel2
     dw   MusicUlrira_Channel3_rest_1C0
@@ -3979,7 +3979,7 @@ ChannelDefinition_1b_6090::
 
 MusicTarinBees::
     db   $00
-    dw   MusicSpeedData_1b_4ad7
+    dw   NoteLengthTable_1b_7
     dw   MusicTarinBees_Channel1_rest_1C0
     dw   MusicTarinBees_Channel2
     dw   MusicTarinBees_Channel3
@@ -4030,7 +4030,7 @@ ChannelDefinition_1b_60c1::
 
 ChannelDefinition_1b_60d9::
     set_envelope_duty $55, $00, 0, 0
-    set_speed MusicSpeedData_1b_4ab9
+    set_speed NoteLengthTable_1b_5
 
     begin_loop $02
         notelen 1
@@ -4081,7 +4081,7 @@ ChannelDefinition_1b_60fa::
     end_def
 
 ChannelDefinition_1b_610f::
-    set_speed MusicSpeedData_1b_4ac8
+    set_speed NoteLengthTable_1b_6
     notelen 0
     note D_6
     note C_6
@@ -4109,7 +4109,7 @@ ChannelDefinition_1b_611d::
     end_def
 
 ChannelDefinition_1b_6129::
-    set_speed MusicSpeedData_1b_4ab9
+    set_speed NoteLengthTable_1b_5
     enable_software_envelope
 
     begin_loop $02
@@ -4160,14 +4160,14 @@ ChannelDefinition_1b_614c::
     end_def
 
 ChannelDefinition_1b_6159::
-    set_speed MusicSpeedData_1b_4ac8
+    set_speed NoteLengthTable_1b_6
     notelen 1
     rest
     end_def
 
 MusicMamuFrogSong::
     db   $00
-    dw   MusicSpeedData_1b_4ad7
+    dw   NoteLengthTable_1b_7
     dw   MusicMamuFrogSong_Channel1
     dw   MusicMamuFrogSong_Channel2
     dw   MusicMamuFrogSong_Channel3
@@ -4394,7 +4394,7 @@ ChannelDefinition_1b_6211::
 
 MusicMonkeysBuildingBridge::
     db   $00
-    dw   MusicSpeedData_1b_4ad7
+    dw   NoteLengthTable_1b_7
     dw   MusicMonkeysBuildingBridge_Channel1_rest_1C0
     dw   MusicMonkeysBuildingBridge_Channel2
     dw   MusicMonkeysBuildingBridge_Channel3
@@ -4602,7 +4602,7 @@ ChannelDefinition_1b_6300::
 
 MusicTurtleRockEntranceBoss::
     db   $00
-    dw   MusicSpeedData_1b_4ab9
+    dw   NoteLengthTable_1b_5
     dw   MusicTurtleRockEntranceBoss_Channel1
     dw   MusicTurtleRockEntranceBoss_Channel2
     dw   MusicTurtleRockEntranceBoss_Channel3
@@ -4897,7 +4897,7 @@ ChannelDefinition_1b_642e::
 
 MusicFishermanUnderBridge::
     db   $00
-    dw   MusicSpeedData_1b_4af5
+    dw   NoteLengthTable_1b_9
     dw   MusicFishermanUnderBridge_Channel1_rest_1C0
     dw   MusicFishermanUnderBridge_Channel2
     dw   MusicFishermanUnderBridge_Channel3
@@ -5052,7 +5052,7 @@ ChannelDefinition_1b_64d0::
 
 MusicObtainItemUnused::
     db   $00
-    dw   MusicSpeedData_1b_4ab9
+    dw   NoteLengthTable_1b_5
     dw   MusicObtainItemUnused_Channel1
     dw   MusicObtainItemUnused_Channel2
     dw   MusicObtainItemUnused_Channel3
@@ -5104,7 +5104,7 @@ ChannelDefinition_1b_650a::
 
 MusicEnding::
     db   $00
-    dw   MusicSpeedData_1b_4ae6
+    dw   NoteLengthTable_1b_8
     dw   MusicEnding_Channel1
     dw   MusicEnding_Channel2
     dw   MusicEnding_Channel3
@@ -6738,7 +6738,7 @@ ChannelDefinition_1b_6c10::
 
 MusicMoblinHideout::
     db   $00
-    dw   MusicSpeedData_1b_4ab9
+    dw   NoteLengthTable_1b_5
     dw   MusicMoblinHideout_Channel1
     dw   MusicMoblinHideout_Channel2
     dw   MusicMoblinHideout_Channel3
@@ -6798,7 +6798,7 @@ ChannelDefinition_1b_6c5f::
 
 MusicIslandDisappear::
     db   $00
-    dw   MusicSpeedData_1b_4ad7
+    dw   NoteLengthTable_1b_7
     dw   MusicIslandDisappear_Channel1
     dw   MusicIslandDisappear_Channel2
     dw   MusicIslandDisappear_Channel3
@@ -7647,13 +7647,13 @@ MusicLoop_1b_7095::
     dw   $ffff, MusicLoop_1b_7095
 
 ChannelDefinition_1b_709b::
-    set_speed MusicSpeedData_1b_4ac8
+    set_speed NoteLengthTable_1b_6
     end_def
 
 ChannelDefinition_1b_709f::
-    set_speed MusicSpeedData_1b_4ad7
+    set_speed NoteLengthTable_1b_7
     end_def
 
 ChannelDefinition_1b_70a3::
-    set_speed MusicSpeedData_1b_4af5
+    set_speed NoteLengthTable_1b_9
     end_def

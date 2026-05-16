@@ -39,8 +39,10 @@ MusicColorDungeon_Channel3::
     dw   ChannelDefinition_1b_722d
     dw   ChannelDefinition_1b_726a
     dw   $ffff, MusicColorDungeon_Channel3
-; UNREFERENCED DATA
-    db   $22, $73, $ff, $ff, $29, $71
+
+MusicColorDungeon_Channel4Unused::
+    dw   ChannelDefinitionUnused_1b_7322
+    dw   $ffff, MusicColorDungeon_Channel4Unused
 
 ChannelDefinition_1b_712f::
     set_envelope_duty $37, $00, 2, 0
@@ -497,10 +499,34 @@ ChannelDefinition_1b_726a::
     rest
     disable_software_envelope
     end_def
-; UNREFERENCED DATA
-    db   $9b, $07, $a3, $15, $15, $1f, $a2, $06, $a3, $15, $15, $a2, $15, $a3, $10, $9c
-    db   $a2, $15, $15, $15, $15, $a3, $01, $a2, $15, $15, $15, $15, $a3, $01, $a2, $15
-    db   $15, $15, $15, $a3, $06, $06, $00
+
+MusicColorDungeon_Channel4Unused::
+    begin_loop 7
+        notelen 3
+        note NOISE_5 NOISE_5 NOISE_7
+        notelen 2
+        note NOISE_2
+        notelen 3
+        note NOISE_5 NOISE_5
+        notelen 2
+        note NOISE_5
+        notelen 3
+        note NOISE_4
+    next_loop
+
+    notelen 2
+    note NOISE_5 NOISE_5 NOISE_5 NOISE_5
+    notelen 3
+    rest
+    notelen 2
+    note NOISE_5 NOISE_5 NOISE_5 NOISE_5
+    notelen 3
+    rest
+    notelen 2
+    note NOISE_5 NOISE_5 NOISE_5 NOISE_5
+    notelen 3
+    note NOISE_2 NOISE_2
+    end_def
 
 waveform_1b_7349::
     db   $66, $66, $66, $66, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00

@@ -1,35 +1,43 @@
-; The `notelen` macro indexes into MusicSpeedData_* tables, which give a note
+; The `notelen` macro indexes into NoteLengthTable_* tables, which give a note
 ; length in frames.
 
+; Not used
+NoteLengthTable_1b_2:: 
+    db   NOTELENS_2
+
+; Not used in bank 1B
+NoteLengthTable_1b_3::
+    db   NOTELENS_3
+
 ; Minigame
-MusicSpeedData_1b_4aaa::
-    db   $02, $04, $08, $10, $20, $40, $0c, $18, $30, $02, $05, $03, $01, $01, $60
+NoteLengthTable_1b_4::
+    db   NOTELENS_4
 
 ; ObtainItem, ChristineHouse, BowwowKidnapped, ObtainSword, Ulrira, TarinBees,
 ; TurtleRockEntranceBoss, ObtainItemUnused, MoblinHideout
-MusicSpeedData_1b_4ab9::
-    db   $03, $05, $0a, $14, $28, $50, $0f, $1e, $3c, $02, $08, $10, $02, $01, $78
+NoteLengthTable_1b_5::
+    db   NOTELENS_5
 
 ; OverworldIntro, TarinBees, Ending
-MusicSpeedData_1b_4ac8::
-    db   $03, $06, $0c, $18, $30, $60, $12, $24, $48, $03, $08, $10, $02, $04, $90
+NoteLengthTable_1b_6::
+    db   NOTELENS_6
 
 ; IslandDisappear, Ending
-MusicSpeedData_1b_4ad7::
-    db   $03, $07, $0e, $1c, $38, $70, $15, $2a, $54, $04, $09, $12, $02, $01, $a8
+NoteLengthTable_1b_7::
+    db   NOTELENS_7
 
 ; FileSelectTotaka, TotakaUnused, GameOver, InsideBuilding, MrWriteHouse,
 ; Ending
-MusicSpeedData_1b_4ae6::
-    db   $04, $08, $10, $20, $40, $80, $18, $30, $60, $04, $02, $01, $01, $00, $c0
+NoteLengthTable_1b_8::
+    db   NOTELENS_8
 
 ; RichardHouse, MabeVillage, FishermanUnderBridge, Ending
-MusicSpeedData_1b_4af5::
-    db   $04, $09, $12, $24, $48, $90, $1b, $36, $6c, $05, $0c, $18, $18, $06, $d8
+NoteLengthTable_1b_9::
+    db   NOTELENS_9
 
 ; MabeVillage, Shop, MysteriousForest, AnimalVillage
-MusicSpeedData_1b_4b04::
-    db   $05, $0a, $14, $28, $50, $a0, $1e, $3c, $78, $05, $01, $01, $01, $01, $f0
+NoteLengthTable_1b_10::
+    db   NOTELENS_10
 
 HardcodedData_1b_4b13::
     db   $10, $32, $22, $47, $81, $20, $00
@@ -58,7 +66,7 @@ ChannelDefinition_1b_rest_1C0::
 
 MusicObtainItem::
     db   $00
-    dw   MusicSpeedData_1b_4ab9
+    dw   NoteLengthTable_1b_5
     dw   MusicObtainItem_Channel1
     dw   MusicObtainItem_Channel2
     dw   MusicObtainItem_Channel3
@@ -144,7 +152,7 @@ ChannelDefinition_1b_4b81::
 
 MusicRichardHouse::
     db   $04
-    dw   MusicSpeedData_1b_4af5
+    dw   NoteLengthTable_1b_9
     dw   MusicRichardHouse_Channel1
     dw   MusicRichardHouse_Channel2
     dw   MusicRichardHouse_Channel3
@@ -358,7 +366,7 @@ ChannelDefinition_1b_rest_2C::
 
 MusicFileSelectTotaka::
     db   $00
-    dw   MusicSpeedData_1b_4ae6
+    dw   NoteLengthTable_1b_8
     dw   MusicFileSelectTotaka_Channel1
     dw   MusicFileSelectTotaka_Channel2
     dw   MusicFileSelectTotaka_Channel3
@@ -640,7 +648,7 @@ ChannelDefinition_1b_4d88::
 
 MusicChristineHouse::
     db   $00
-    dw   MusicSpeedData_1b_4ab9
+    dw   NoteLengthTable_1b_5
     dw   MusicChristineHouse_Channel1
     dw   MusicChristineHouse_Channel2
     dw   MusicChristineHouse_Channel3

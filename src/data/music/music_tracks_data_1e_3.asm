@@ -1,6 +1,6 @@
 MusicEggBalladDefault::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   NoteLengthTable_1e_7
     dw   MusicEggBalladDefault_Channel1
     dw   MusicEggBalladDefault_Channel2_rest_1C0
     dw   MusicEggBalladDefault_Channel3
@@ -34,7 +34,7 @@ ChannelDefinition_1e_7026::
 
 MusicEggBalladBell::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   NoteLengthTable_1e_7
     dw   MusicEggBalladBell_Channel1
     dw   MusicEggBalladBell_Channel2
     dw   MusicEggBalladBell_Channel3
@@ -230,7 +230,7 @@ ChannelDefinition_1e_70c0::
 
 MusicEggBalladHarp::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   NoteLengthTable_1e_7
     dw   MusicEggBalladHarp_Channel1
     dw   MusicEggBalladHarp_Channel2
     dw   MusicEggBalladHarp_Channel3
@@ -336,7 +336,7 @@ ChannelDefinition_1e_7133::
 
 MusicEggBalladMarimba::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   NoteLengthTable_1e_7
     dw   MusicEggBalladMarimba_Channel1
     dw   MusicEggBalladMarimba_Channel2
     dw   MusicEggBalladMarimba_Channel3
@@ -402,7 +402,7 @@ ChannelDefinition_1e_718a::
 
 MusicEggBalladTriangle::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   NoteLengthTable_1e_7
     dw   MusicEggBalladTriangle_Channel1
     dw   MusicEggBalladTriangle_Channel2
     dw   MusicEggBalladTriangle_Channel3
@@ -448,7 +448,7 @@ ChannelDefinition_1e_71b5::
 
 MusicEggBalladOrgan::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   NoteLengthTable_1e_7
     dw   MusicEggBalladOrgan_Channel1
     dw   MusicEggBalladOrgan_Channel2
     dw   MusicEggBalladOrgan_Channel3
@@ -545,7 +545,7 @@ ChannelDefinition_1e_7237::
 
 MusicEggBalladAll::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   NoteLengthTable_1e_7
     dw   MusicEggBalladAll_Channel1
     dw   MusicEggBalladAll_Channel2
     dw   MusicEggBalladAll_Channel3
@@ -626,7 +626,7 @@ ChannelDefinition_1e_7295::
 
 MusicInstrumentFullMoonCello::
     db   $00
-    dw   MusicSpeedData_1e_4ae8
+    dw   NoteLengthTable_1e_8
     dw   MusicInstrumentFullMoonCello_Channel1_rest_1C0
     dw   MusicInstrumentFullMoonCello_Channel2
     dw   MusicInstrumentFullMoonCello_Channel3
@@ -686,7 +686,7 @@ waveform_1e_72e1::
 
 MusicInstrumentConchHorn::
     db   $00
-    dw   MusicSpeedData_1e_4af7
+    dw   NoteLengthTable_1e_9
     dw   MusicInstrumentConchHorn_Channel1_rest_1C0
     dw   MusicInstrumentConchHorn_Channel2
     dw   MusicInstrumentConchHorn_Channel3
@@ -748,7 +748,7 @@ ChannelDefinition_1e_7324::
 
 MusicInstrumentSeaLilysBell::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   NoteLengthTable_1e_7
     dw   MusicInstrumentSeaLilysBell_Channel1_rest_1C0
     dw   MusicInstrumentSeaLilysBell_Channel2
     dw   MusicInstrumentSeaLilysBell_Channel3
@@ -824,7 +824,7 @@ ChannelDefinition_1e_7380::
 
 MusicInstrumentSurfHarp::
     db   $18
-    dw   MusicSpeedData_1e_4a9d
+    dw   NoteLengthTable_1e_3
     dw   MusicInstrumentSurfHarp_Channel1_rest_1C0
     dw   MusicInstrumentSurfHarp_Channel2
     dw   MusicInstrumentSurfHarp_Channel3
@@ -929,7 +929,7 @@ ChannelDefinition_1e_73d1::
 
 MusicInstrumentWindMarimba::
     db   $00
-    dw   MusicSpeedData_1e_4abb
+    dw   NoteLengthTable_1e_5
     dw   MusicInstrumentWindMarimba_Channel1
     dw   MusicInstrumentWindMarimba_Channel2
     dw   MusicInstrumentWindMarimba_Channel3
@@ -1029,7 +1029,7 @@ ChannelDefinition_1e_748c::
 
 MusicInstrumentCoralTriangle::
     db   $00
-    dw   MusicSpeedData_1e_4aca
+    dw   NoteLengthTable_1e_6
     dw   MusicInstrumentCoralTriangle_Channel1_rest_1C0
     dw   MusicInstrumentCoralTriangle_Channel2
     dw   MusicInstrumentCoralTriangle_Channel3
@@ -1142,7 +1142,7 @@ ChannelDefinition_1e_rest_1C0_2::
 
 MusicInstrumentOrganOfEveningCalm::
     db   $00
-    dw   MusicSpeedData_1e_4ae8
+    dw   NoteLengthTable_1e_8
     dw   MusicInstrumentOrganOfEveningCalm_Channel1_rest_1C0
     dw   MusicInstrumentOrganOfEveningCalm_Channel2
     dw   MusicInstrumentOrganOfEveningCalm_Channel3
@@ -1197,7 +1197,7 @@ ChannelDefinition_1e_757d::
 
 MusicInstrumentThunderDrum::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   NoteLengthTable_1e_7
     dw   MusicInstrumentThunderDrum_Channel1_rest_1C0
     dw   MusicInstrumentThunderDrum_Channel2
     dw   MusicInstrumentThunderDrum_Channel3_rest_1C0
@@ -1288,7 +1288,7 @@ ChannelDefinition_1e_rest_1C0_3::
 
 MusicMarinSing::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   NoteLengthTable_1e_7
     dw   MusicMarinSing_Channel1
     dw   MusicMarinSing_Channel2
     dw   MusicMarinSing_Channel3
@@ -1425,7 +1425,7 @@ ChannelDefinition_1e_768a::
 
 MusicLearnBallad::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   NoteLengthTable_1e_7
     dw   MusicLearnBallad_Channel1
     dw   MusicLearnBallad_Channel2
     dw   MusicLearnBallad_Channel3
@@ -1568,7 +1568,7 @@ ChannelDefinition_1e_76eb::
 
 MusicManbosMambo::
     db   $00
-    dw   MusicSpeedData_1e_4b06
+    dw   NoteLengthTable_1e_10
     dw   MusicManbosMambo_Channel1
     dw   MusicManbosMambo_Channel2
     dw   MusicManbosMambo_Channel3
@@ -1964,7 +1964,7 @@ ChannelDefinition_1e_rest_1C0_5::
 
 MusicGhostHouse::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   NoteLengthTable_1e_7
     dw   MusicGhostHouse_Channel1
     dw   MusicGhostHouse_Channel2
     dw   MusicGhostHouse_Channel3
@@ -2249,7 +2249,7 @@ ChannelDefinition_1e_79be::
 
 MusicRoosterRevival::
     db   $00
-    dw   MusicSpeedData_1e_4aca
+    dw   NoteLengthTable_1e_6
     dw   MusicRoosterRevival_Channel1
     dw   MusicRoosterRevival_Channel2
     dw   MusicRoosterRevival_Channel3
@@ -2318,7 +2318,7 @@ ChannelDefinition_1e_7a51::
 
 MusicL2Sword::
     db   $00
-    dw   MusicSpeedData_1e_4af7
+    dw   NoteLengthTable_1e_9
     dw   MusicL2Sword_Channel1
     dw   MusicL2Sword_Channel2
     dw   MusicL2Sword_Channel3_rest_1C0
@@ -2515,7 +2515,7 @@ ChannelDefinition_1e_7b1f::
 
 MusicHenhouse::
     db   $0e
-    dw   MusicSpeedData_1e_4abb
+    dw   NoteLengthTable_1e_5
     dw   MusicHenhouse_Channel1
     dw   MusicHenhouse_Channel2
     dw   MusicHenhouse_Channel3
@@ -2631,7 +2631,7 @@ ChannelDefinition_1e_7b90::
 
 MusicHeartContainer::
     db   $00
-    dw   MusicSpeedData_1e_4ae8
+    dw   NoteLengthTable_1e_8
     dw   MusicHeartContainer_Channel1
     dw   MusicHeartContainer_Channel2
     dw   MusicHeartContainer_Channel3
@@ -2667,7 +2667,7 @@ ChannelDefinition_1e_7bc9::
     notelen 4
     note F#5
     rest
-    set_speed MusicSpeedData_1e_4ad9
+    set_speed NoteLengthTable_1e_7
     end_def
 
 ChannelDefinition_1e_7be0::
@@ -2683,7 +2683,7 @@ ChannelDefinition_1e_7be0::
     notelen 4
     note A#4
     rest
-    set_speed MusicSpeedData_1e_4ad9
+    set_speed NoteLengthTable_1e_7
     end_def
 
 waveform_1e_7bf6::
@@ -2703,7 +2703,7 @@ ChannelDefinition_1e_7c06::
     notelen 4
     note C#4
     rest
-    set_speed MusicSpeedData_1e_4ad9
+    set_speed NoteLengthTable_1e_7
     end_def
 
 ChannelDefinition_1e_7c1a::
@@ -2717,12 +2717,12 @@ ChannelDefinition_1e_7c1a::
         note NOISE_5
     next_loop
 
-    set_speed MusicSpeedData_1e_4ad9
+    set_speed NoteLengthTable_1e_7
     end_def
 
 MusicWindFish::
     db   $00
-    dw   MusicSpeedData_1e_4aca
+    dw   NoteLengthTable_1e_6
     dw   MusicWindFish_Channel1
     dw   MusicWindFish_Channel2
     dw   MusicWindFish_Channel3_rest_1C0
@@ -2909,7 +2909,7 @@ ChannelDefinition_1e_7cf9::
 
 MusicBossDefeat::
     db   $00
-    dw   MusicSpeedData_1e_4aca
+    dw   NoteLengthTable_1e_6
     dw   MusicBossDefeat_Channel1
     dw   MusicBossDefeat_Channel2
     dw   MusicBossDefeat_Channel3_rest_1C0
@@ -2971,7 +2971,7 @@ ChannelDefinition_1e_7d46::
 
 MusicFinalBossDefeat::
     db   $00
-    dw   MusicSpeedData_1e_4aac
+    dw   NoteLengthTable_1e_4
     dw   MusicFinalBossDefeat_Channel1
     dw   MusicFinalBossDefeat_Channel2
     dw   MusicFinalBossDefeat_Channel3
@@ -3146,7 +3146,7 @@ ChannelDefinition_1e_7df8::
 
 MusicFileSelectZelda::
     db   $00
-    dw   MusicSpeedData_1e_4ad9
+    dw   NoteLengthTable_1e_7
     dw   MusicFileSelectZelda_Channel1
     dw   MusicFileSelectZelda_Channel2
     dw   MusicFileSelectZelda_Channel3

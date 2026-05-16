@@ -15,7 +15,7 @@ Music6e::
 Music6f::
 Music70::
     db   $00
-    dw   MusicSpeedData_1b_4ac8
+    dw   NoteLengthTable_1b_6
     dw   MusicColorDungeon_Channel1
     dw   MusicColorDungeon_Channel2
     dw   MusicColorDungeon_Channel3

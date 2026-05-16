@@ -503,11 +503,11 @@ ChannelDefinition_1b_726a::
 MusicColorDungeon_Channel4Unused::
     begin_loop 7
         notelen 3
-        note NOISE_5 NOISE_5 NOISE_7
+        note NOISE_5, NOISE_5, NOISE_7
         notelen 2
         note NOISE_2
         notelen 3
-        note NOISE_5 NOISE_5
+        note NOISE_5, NOISE_5
         notelen 2
         note NOISE_5
         notelen 3
@@ -515,17 +515,17 @@ MusicColorDungeon_Channel4Unused::
     next_loop
 
     notelen 2
-    note NOISE_5 NOISE_5 NOISE_5 NOISE_5
+    note NOISE_5, NOISE_5, NOISE_5, NOISE_5
     notelen 3
     rest
     notelen 2
-    note NOISE_5 NOISE_5 NOISE_5 NOISE_5
+    note NOISE_5, NOISE_5, NOISE_5, NOISE_5
     notelen 3
     rest
     notelen 2
-    note NOISE_5 NOISE_5 NOISE_5 NOISE_5
+    note NOISE_5, NOISE_5, NOISE_5, NOISE_5
     notelen 3
-    note NOISE_2 NOISE_2
+    note NOISE_2, NOISE_2
     end_def
 
 waveform_1b_7349::

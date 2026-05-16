@@ -500,7 +500,7 @@ ChannelDefinition_1b_726a::
     disable_software_envelope
     end_def
 
-MusicColorDungeon_Channel4Unused::
+ChannelDefinitionUnused_1b_7322::
     begin_loop 7
         notelen 3
         note NOISE_5, NOISE_5, NOISE_7

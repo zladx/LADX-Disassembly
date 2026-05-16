@@ -867,7 +867,7 @@ ChannelDefinition_1b_5343:: ; Accompaniment
     note D_3
     note C_3
 
-    ; 16 long beats. Because we've swapped MusicSpeedData, 1 beat is 10 frames instead of 9 frames.
+    ; 16 long beats. Because we've swapped NoteLengthTable, 1 beat is 10 frames instead of 9 frames.
     set_speed NoteLengthTable_1b_10
     notelen 4; 8 long beats
     note B_2
@@ -987,7 +987,7 @@ ChannelDefinition_1b_53a5:: ; Melody
         note D_5
     next_loop
 
-    ; 16 long beats. Because we've swapped MusicSpeedData, 1 beat is 10 frames instead of 9.
+    ; 16 long beats. Because we've swapped NoteLengthTable, 1 beat is 10 frames instead of 9.
     set_speed NoteLengthTable_1b_10
     begin_loop $04
         notelen 2; 2 long beats

@@ -1,4 +1,4 @@
-; The `notelen` macro indexes into MusicSpeedData_* tables, which give a note
+; The `notelen` macro indexes into NoteLengthTable_* tables, which give a note
 ; length in frames.
 
 ; Not used

@@ -682,7 +682,7 @@ ChannelDefinition_1e_72c8::
     end_def
 
 waveform_1e_72e1::
-    db   $01, $35, $66, $53, $10, $02, $46, $8a, $01, $35, $66, $53, $10, $02, $46, $8a
+    db   WV_CELLO
 
 MusicInstrumentConchHorn::
     db   $00
@@ -710,7 +710,7 @@ ChannelDefinition_1e_7306::
     end_def
 
 waveform_1e_730f::
-    db   $06, $9b, $cd, $de, $ee, $ff, $ff, $fe, $06, $9b, $cd, $de, $ee, $ff, $ff, $fe
+    db   WV_CONCH
 
 ChannelDefinition_1e_731f::
     set_waveform waveform_1e_730f, $01
@@ -848,7 +848,7 @@ ChannelDefinition_1e_73b3::
     end_def
 
 waveform_1e_73bc::
-    db   $46, $79, $98, $64, $43, $10, $01, $34, $46, $79, $98, $64, $43, $10, $01, $34
+    db   WV_HARP
 
 ChannelDefinition_1e_73cc::
     set_waveform waveform_1e_73bc, $20
@@ -998,7 +998,7 @@ ChannelDefinition_1e_7458::
     end_def
 
 waveform_1e_747c::
-    db   $66, $00, $66, $00, $66, $00, $66, $00, $66, $00, $66, $00, $66, $00, $66, $00
+    db   SQUARE_FREQ_8_DUTY_2_VOL_6
 
 ChannelDefinition_1e_748c::
     set_waveform waveform_1e_747c, $23
@@ -1094,7 +1094,7 @@ ChannelDefinition_1e_7505::
     end_def
 
 waveform_1e_750c::
-    db   $00, $0c, $00, $0c, $00, $0c, $00, $0c, $06, $06, $06, $06, $06, $06, $06, $06
+    db   WV_CORAL_BELL
 
 ChannelDefinition_1e_751c::
     set_waveform waveform_1e_750c, $20
@@ -1166,7 +1166,7 @@ ChannelDefinition_1e_755f::
     end_def
 
 waveform_1e_7568::
-    db   $88, $88, $88, $84, $00, $00, $00, $00, $88, $88, $88, $84, $00, $00, $00, $00
+    db   SOFT_SQUARE_VOL_8
 
 ChannelDefinition_1e_7578::
     set_waveform waveform_1e_7568, $00
@@ -1482,7 +1482,7 @@ ChannelDefinition_1e_76c7::
     end_def
 
 waveform_1e_76db::
-    db   $01, $37, $9a, $bb, $bb, $bb, $a6, $21, $01, $37, $9a, $bb, $bb, $bb, $a6, $21
+    db   WV_LINK
 
 ChannelDefinition_1e_76eb::
     set_waveform waveform_1e_76db, $40
@@ -2166,7 +2166,7 @@ ChannelDefinition_1e_7960::
     end_def
 
 waveform_1e_79a7::
-    db   $11, $11, $11, $10, $00, $00, $00, $00, $11, $11, $11, $10, $00, $00, $00, $00
+    db   SOFT_SQUARE_VOL_1
 
 ChannelDefinition_1e_79b7::
     set_waveform waveform_1e_79a7, $20
@@ -2687,7 +2687,7 @@ ChannelDefinition_1e_7be0::
     end_def
 
 waveform_1e_7bf6::
-    db   $aa, $aa, $aa, $a8, $00, $00, $00, $00, $aa, $aa, $aa, $a8, $00, $00, $00, $00
+    db   SOFT_SQUARE_VOL_10
 
 ChannelDefinition_1e_7c06::
     set_waveform waveform_1e_7bf6, $20
@@ -3197,7 +3197,7 @@ ChannelDefinition_1e_7e3a::
     end_def
 
 waveform_1e_7e45::
-    db   $8a, $df, $da, $86, $31, $01, $36, $86, $8a, $df, $da, $86, $31, $01, $36, $86
+    db   WV_FILESELECT
 
 ChannelDefinition_1e_7e55::
     set_waveform waveform_1e_7e45, $20
@@ -3347,7 +3347,7 @@ ChannelDefinition_1e_7e96::
     end_def
 
 waveform_1e_7eee::
-    db   $00, $11, $22, $33, $44, $55, $67, $89, $00, $00, $00, $05, $00, $00, $00, $05
+    db   WV_ZELDA
 
 ChannelDefinition_1e_7efe::
     set_waveform waveform_1e_7eee, $20

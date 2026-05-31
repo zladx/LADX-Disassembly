@@ -270,10 +270,10 @@ ChannelDefinition_1e_4b97::
     end_def
 
 waveform_1e_4bf9::
-    db   $66, $66, $66, $66, $00, $00, $00, $00, $66, $66, $66, $66, $00, $00, $00, $00
+    db   SQUARE_FREQ_2_DUTY_2_VOL_6
 
 waveform_1e_4c09::
-    db   $00, $22, $44, $55, $66, $66, $88, $88, $aa, $aa, $cc, $cc, $04, $84, $04, $84
+    db   WV_MINIBOSS
 
 ChannelDefinition_1e_4c19::
     notelen 5

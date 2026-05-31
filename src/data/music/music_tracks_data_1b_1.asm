@@ -62,7 +62,7 @@ ChannelDefinition_1b_rest_1C0::
 
     end_def
 ; UNREFERENCED DATA
-    db   $00, $22, $44, $55, $66, $66, $88, $88, $aa, $aa, $cc, $cc, $04, $84, $04, $84
+    db   WV_MINIBOSS
 
 MusicObtainItem::
     db   $00
@@ -530,7 +530,7 @@ ChannelDefinition_1b_4cef::
     end_def
 
 waveform_1b_4d2f::
-    db   $8a, $df, $da, $86, $31, $01, $36, $86, $8a, $df, $da, $86, $31, $01, $36, $86
+    db   WV_FILESELECT
 
 ChannelDefinition_1b_4d3f::
     set_waveform waveform_1b_4d2f, $20
@@ -725,7 +725,7 @@ ChannelDefinition_1b_4ddf::
     end_def
 
 waveform_1b_4e05::
-    db   $44, $44, $44, $42, $00, $00, $00, $00, $44, $44, $44, $42, $00, $00, $00, $00
+    db   SOFT_SQUARE_VOL_4
 
 ChannelDefinition_1b_4e15::
     set_waveform waveform_1b_4e05, $20

@@ -6562,16 +6562,16 @@ MusicLoop_1e_6d30::
     db   $99, $00
 
 waveform_1e_6d38::
-    db   $ff, $ff, $ff, $ff, $00, $00, $00, $00, $ff, $ff, $ff, $ff, $00, $00, $00, $00
+    db   SQUARE_FREQ_2_DUTY_2_VOL_15
 
 waveform_1e_6d48::
-    db   $ff, $ff, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db   SQUARE_FREQ_1_DUTY_8_VOL_15
 
 waveform_1e_6d58::
-    db   $99, $99, $99, $99, $00, $00, $00, $00, $99, $99, $99, $99, $00, $00, $00, $00
+    db   SQUARE_FREQ_2_DUTY_2_VOL_9
 
 waveform_1e_6d68::
-    db   $44, $44, $44, $44, $00, $00, $00, $00, $44, $44, $44, $44, $00, $00, $00, $00
+    db   SQUARE_FREQ_2_DUTY_2_VOL_4
 
 ChannelDefinition_1e_6d78::
     set_envelope_duty $10, $00, 2, 0

@@ -212,3 +212,122 @@ DEF NOTELENS_7  EQUS "3,  7, 14, 28, 56, 112, 21, 42,  84, 4,  9,  18,  2, 1, 16
 DEF NOTELENS_8  EQUS "4,  8, 16, 32, 64, 128, 24, 48,  96, 4,  2,   1,  1, 0, 192"
 DEF NOTELENS_9  EQUS "4,  9, 18, 36, 72, 144, 27, 54, 108, 5, 12,  24, 24, 6, 216"
 DEF NOTELENS_10 EQUS "5, 10, 20, 40, 80, 160, 30, 60, 120, 5,  1,   1,  1, 1, 240"
+
+; Channel 3 Music Waveforms (29)
+
+; SQUARE WAVES (16)
+; To match Channels 1 and 2, apparently.
+; Sorted here by 3 parameters:
+; - FREQ_f is the frequency multiplier. 
+;     f = number of repeating copies of "basic" waveform.
+;     Channel 3 responds an octave lower than Channels 1 and 2, 
+;     so to play in unison it is often fed "doubled" waveforms (f = 2).
+; - DUTY_d is the (reciprocal) duty.
+;     Only applies to square waves.
+;       d   duty cycle %
+;       2    1/2 = 50%
+;       4    1/4 = 25%
+;       8    1/8 = 12.5%
+; - VOL_p is the volume.
+;     p = MAX - MIN, between 1 and 15.
+;     This is twice the peak amplitude, a.k.a. the peak-to-peak amplitude.
+
+; Minigame
+DEF SQUARE_FREQ_1_DUTY_2_VOL_6  EQUS "$66, $66, $66, $66, $66, $66, $66, $66, $00, $00, $00, $00, $00, $00, $00, $00"
+
+; TitleScreen, TitleScreenNoIntro, Overworld, OverworldIntro, AnimalVillage, 
+; RaftRideRapids, TurtleRockEntranceBoss, Shop, Minigame, ObtainItem, Ending
+DEF SQUARE_FREQ_1_DUTY_2_VOL_8  EQUS "$88, $88, $88, $88, $88, $88, $88, $88, $00, $00, $00, $00, $00, $00, $00, $00"
+
+; TitleScreen
+DEF SQUARE_FREQ_1_DUTY_2_VOL_10 EQUS "$aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $00, $00, $00, $00, $00, $00, $00, $00"
+
+; GameOver, Ending
+DEF SQUARE_FREQ_2_DUTY_2_VOL_1  EQUS "$11, $11, $11, $11, $00, $00, $00, $00, $11, $11, $11, $11, $00, $00, $00, $00"
+
+; Ending
+DEF SQUARE_FREQ_2_DUTY_2_VOL_3  EQUS "$33, $33, $33, $33, $00, $00, $00, $00, $33, $33, $33, $33, $00, $00, $00, $00"
+
+; TitleCutscene, FairyFountain, BottleGrotto, EaglesTower, 
+; MarinOnBeach, MarinSing, ObtainInstrument
+DEF SQUARE_FREQ_2_DUTY_2_VOL_4  EQUS "$44, $44, $44, $44, $00, $00, $00, $00, $44, $44, $44, $44, $00, $00, $00, $00"
+
+; ActivePowerUp, Henhouse
+DEF SQUARE_FREQ_2_DUTY_2_VOL_6  EQUS "$66, $66, $66, $66, $00, $00, $00, $00, $66, $66, $66, $66, $00, $00, $00, $00"
+
+; ObtainSword, RichardHouse, TalTalRange, TarinBees, 
+; MonkeysBuildingBridge, IslandDisappear, Ending
+DEF SQUARE_FREQ_2_DUTY_2_VOL_8  EQUS "$88, $88, $88, $88, $00, $00, $00, $00, $88, $88, $88, $88, $00, $00, $00, $00"
+
+; TitleCutscene, FileSelect, OverworldSwordless, BottleGrotto, CatfishsMaw, 
+; EaglesTower, EggMaze, DreamShrineDream, MarinBeachTalk, MarinUnused
+DEF SQUARE_FREQ_2_DUTY_2_VOL_9  EQUS "$99, $99, $99, $99, $00, $00, $00, $00, $99, $99, $99, $99, $00, $00, $00, $00"
+
+; TitleCutscene, FinalBoss, EggMaze, TurtleRock, KanaletCastle, OpenAnglersTunnel
+DEF SQUARE_FREQ_2_DUTY_2_VOL_15 EQUS "$ff, $ff, $ff, $ff, $00, $00, $00, $00, $ff, $ff, $ff, $ff, $00, $00, $00, $00"
+
+; WindMarimba
+DEF SQUARE_FREQ_8_DUTY_2_VOL_6  EQUS "$66, $00, $66, $00, $66, $00, $66, $00, $66, $00, $66, $00, $66, $00, $66, $00"
+
+; ColorDungeon (note phase shift)
+DEF SQUARE_FREQ_16_DUTY_2_VOL_5 EQUS "$05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05"
+DEF SQUARE_FREQ_16_DUTY_2_VOL_9 EQUS "$09, $09, $09, $09, $09, $09, $09, $09, $09, $09, $09, $09, $09, $09, $09, $09"
+DEF SQUARE_FREQ_1_DUTY_4_VOL_6  EQUS "$66, $66, $66, $66, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00"
+
+; MysteriousForest, TalTalRange, BowwowKidnapped, 
+; FishermanUnderBridge, MamuFrogSong, ObtainItemUnused
+DEF SQUARE_FREQ_1_DUTY_8_VOL_8  EQUS "$88, $88, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00"
+
+; TailCave, KeyCavern, OpenAnglersTunnel, EggMaze, Boss, FinalBoss
+DEF SQUARE_FREQ_1_DUTY_8_VOL_15 EQUS "$ff, $ff, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00"
+
+
+; "SOFT" SQUARE WAVES (4)
+; Last nibble on falling edge is downshifted once.
+
+; GhostHouse, RoosterRevival, FinalBossDefeat
+DEF SOFT_SQUARE_VOL_1  EQUS "$11, $11, $11, $10, $00, $00, $00, $00, $11, $11, $11, $10, $00, $00, $00, $00"
+
+; ChristineHouse
+DEF SOFT_SQUARE_VOL_4  EQUS "$44, $44, $44, $42, $00, $00, $00, $00, $44, $44, $44, $42, $00, $00, $00, $00"
+
+; OrganOfEveningCalm
+DEF SOFT_SQUARE_VOL_8  EQUS "$88, $88, $88, $84, $00, $00, $00, $00, $88, $88, $88, $84, $00, $00, $00, $00"
+
+; HeartContainer
+DEF SOFT_SQUARE_VOL_10 EQUS "$aa, $aa, $aa, $a8, $00, $00, $00, $00, $aa, $aa, $aa, $a8, $00, $00, $00, $00"
+
+
+; INSTRUMENT WAVEFORMS (4)
+; Most Instruments of the Sirens use custom waveforms, 
+; including in tracks that feature them (EggBallad*, IslandDisappear).
+
+; FullMoonCello, EggBallad*
+DEF WV_CELLO      EQUS "$01, $35, $66, $53, $10, $02, $46, $8a, $01, $35, $66, $53, $10, $02, $46, $8a"
+
+; ConchHorn, EggBallad*, IslandDisappear, ManbosMambo
+DEF WV_CONCH      EQUS "$06, $9b, $cd, $de, $ee, $ff, $ff, $fe, $06, $9b, $cd, $de, $ee, $ff, $ff, $fe"
+
+; CoralTriangle, SeaLilysBell
+DEF WV_CORAL_BELL EQUS "$00, $0c, $00, $0c, $00, $0c, $00, $0c, $06, $06, $06, $06, $06, $06, $06, $06"
+
+; SurfHarp
+DEF WV_HARP       EQUS "$46, $79, $98, $64, $43, $10, $01, $34, $46, $79, $98, $64, $43, $10, $01, $34"
+
+
+; MISCELLANEOUS WAVEFORMS (5)
+
+; TotakaUnused, IslandDisappear (opening call)
+DEF WV_TOTAKA     EQUS "$7f, $ff, $57, $73, $55, $34, $42, $21, $7f, $ff, $57, $73, $55, $34, $42, $21"
+
+; Miniboss (bassline)
+DEF WV_MINIBOSS   EQUS "$00, $22, $44, $55, $66, $66, $88, $88, $aa, $aa, $cc, $cc, $04, $84, $04, $84"
+
+; LearnBallad (tenor line -- Link's part!)
+DEF WV_LINK       EQUS "$01, $37, $9a, $bb, $bb, $bb, $a6, $21, $01, $37, $9a, $bb, $bb, $bb, $a6, $21"
+
+; FileSelectZelda (accompaniment loop)
+DEF WV_ZELDA      EQUS "$00, $11, $22, $33, $44, $55, $67, $89, $00, $00, $00, $05, $00, $00, $00, $05"
+
+; FileSelect* (just two notes (Ab, A) of the opening chords)
+DEF WV_FILESELECT EQUS "$8a, $df, $da, $86, $31, $01, $36, $86, $8a, $df, $da, $86, $31, $01, $36, $86"

@@ -7303,34 +7303,34 @@ ChannelDefinition_1b_rest_1b::
     end_def
 
 waveform_1b_6ea1::
-    db   $66, $66, $66, $66, $66, $66, $66, $66, $00, $00, $00, $00, $00, $00, $00, $00
+    db   SQUARE_FREQ_1_DUTY_2_VOL_6
 
 waveform_1b_6eb1::
-    db   $88, $88, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db   SQUARE_FREQ_1_DUTY_8_VOL_8
 
 waveform_1b_6ec1::
-    db   $88, $88, $88, $88, $88, $88, $88, $88, $00, $00, $00, $00, $00, $00, $00, $00
+    db   SQUARE_FREQ_1_DUTY_2_VOL_8
 
 waveform_1b_6ed1::
-    db   $88, $88, $88, $88, $00, $00, $00, $00, $88, $88, $88, $88, $00, $00, $00, $00
+    db   SQUARE_FREQ_2_DUTY_2_VOL_8
 
 waveform_1b_6ee1::
-    db   $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $00, $00, $00, $00, $00, $00, $00, $00
+    db   SQUARE_FREQ_1_DUTY_2_VOL_10
 
 waveform_1b_6ef1::
-    db   $06, $9b, $cd, $de, $ee, $ff, $ff, $fe, $06, $9b, $cd, $de, $ee, $ff, $ff, $fe
+    db   WV_CONCH
 
 waveform_1b_6f01::
-    db   $7f, $ff, $57, $73, $55, $34, $42, $21, $7f, $ff, $57, $73, $55, $34, $42, $21
+    db   WV_TOTAKA
 
 waveform_1b_6f11::
-    db   $33, $33, $33, $33, $00, $00, $00, $00, $33, $33, $33, $33, $00, $00, $00, $00
+    db   SQUARE_FREQ_2_DUTY_2_VOL_3
 
 waveform_1b_6f21::
-    db   $11, $11, $11, $11, $00, $00, $00, $00, $11, $11, $11, $11, $00, $00, $00, $00
+    db   SQUARE_FREQ_2_DUTY_2_VOL_1
 
 waveform_1b_6f31::
-    db   $44, $44, $44, $44, $00, $00, $00, $00, $44, $44, $44, $44, $00, $00, $00, $00
+    db   SQUARE_FREQ_2_DUTY_2_VOL_4
 
 ChannelDefinition_1b_6f41::
     set_waveform waveform_1b_6ec1, $20

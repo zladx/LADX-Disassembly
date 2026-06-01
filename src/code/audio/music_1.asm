@@ -46,7 +46,7 @@ DontPlayAudio_1B:
     ret                                           ;; 1B:4030 $C9
 
 ; Input:
-;  hl   Points to data after "wMusicTrackToPlay"
+;   hl   Points to data after "wMusicTrackToPlay"
 BeginMusicTrack_1B::
     ; [wActiveMusicIndex] = [wMusicTrackToPlay]
     ld   [hl], a                                  ;; 1B:4031 $77
@@ -568,7 +568,7 @@ LoadMusicData_1B::
     ret                                           ;; 1B:43C0 $C9
 
 ; Input:
-;  de:  Pointer to waveform data
+;   de:  Pointer to waveform data
 soundOpcode9DChannel3Handler_1B::
     push hl                                       ;; 1B:43C1 $E5
     ld   a, e                                     ;; 1B:43C2 $7B
@@ -663,10 +663,12 @@ ReadSoundPointerByte::
     ld   b, a                                     ;; 1B:4425 $47
     ret                                           ;; 1B:4426 $C9
 
-jr_01B_4427:
+PopHLAndUpdateNext:
     pop  hl                                       ;; 1B:4427 $E1
     jr   UpdateNextMusicChannelAfterHlDecrement   ;; 1B:4428 $18 $31
 
+; Effects processor.
+; Starts with a software fadeout for channel 3 (set via opcode 9D's 2nd argument).
 label_01B_442A:
     ld   a, [wActiveChannelIndex]                 ;; 1B:442A $FA $50 $D3
     cp   $03                                      ;; 1B:442D $FE $03
@@ -680,28 +682,28 @@ label_01B_442A:
     cp   $06                                      ;; 1B:4439 $FE $06
     jr   nz, .channel3Done                        ;; 1B:443B $20 $04
 
-    ld   a, $40                                   ;; 1B:443D $3E $40
+    ld   a, $40     ; 50% volume                  ;; 1B:443D $3E $40
     ldh  [rNR32], a                               ;; 1B:443F $E0 $1C
-.channel3Done
 
+.channel3Done
     push hl                                       ;; 1B:4441 $E5
     ld   a, l                                     ;; 1B:4442 $7D
     add  $09                                      ;; 1B:4443 $C6 $09
     ld   l, a                                     ;; 1B:4445 $6F
     ld   a, [hl] ; D3xB                           ;; 1B:4446 $7E
     and  a                                        ;; 1B:4447 $A7
-    jr   nz, jr_01B_4427                          ;; 1B:4448 $20 $DD
+    jr   nz, PopHLAndUpdateNext                   ;; 1B:4448 $20 $DD
 
     ld   a, l                                     ;; 1B:444A $7D
     add  $04                                      ;; 1B:444B $C6 $04
     ld   l, a                                     ;; 1B:444D $6F
     bit  7, [hl] ; D3xF                           ;; 1B:444E $CB $7E
-    jr   nz, jr_01B_4427                          ;; 1B:4450 $20 $D5
+    jr   nz, PopHLAndUpdateNext                   ;; 1B:4450 $20 $D5
 
     pop  hl                                       ;; 1B:4452 $E1
-    call func_01B_46FE                            ;; 1B:4453 $CD $FE $46
+    call HandleEffects                            ;; 1B:4453 $CD $FE $46
     push hl                                       ;; 1B:4456 $E5
-    call func_01B_4787                            ;; 1B:4457 $CD $87 $47
+    call HandleSoftwareEnvelopes                  ;; 1B:4457 $CD $87 $47
     pop  hl                                       ;; 1B:445A $E1
 
 UpdateNextMusicChannelAfterHlDecrement:
@@ -946,34 +948,41 @@ ParseSoundOpcode:
     inc  l                                        ;; 1B:4591 $2C
     ld   a, [hl] ; D3x7                           ;; 1B:4592 $7E
     and  $F0                                      ;; 1B:4593 $E6 $F0
-    jr   nz, .jr_01B_459A                         ;; 1B:4595 $20 $03
+    jr   nz, CalculateSoftwareEnvelopeOnset       ;; 1B:4595 $20 $03
 
     ld   a, d                                     ;; 1B:4597 $7A
-    jr   .jr_01B_45BF                             ;; 1B:4598 $18 $25
+    jr   SaveNoteLength                           ;; 1B:4598 $18 $25
 
-.jr_01B_459A
+; calculates approximately d * 1/2 or d * 1/4 or d * 3/4
+; Input:
+;  d:  value from NoteLengthTable
+;  a:  [wD3x7] & $f0 -- only ever 100_00000, 010_00000, or 001_00000
+; Output:
+;  c:  d>>1, d>>2, or (d>>1)+(d>>2); or 2 if it'd be 0 otherwise
+CalculateSoftwareEnvelopeOnset:
     ld   e, a                                     ;; 1B:459A $5F
     ld   a, d                                     ;; 1B:459B $7A
     push af                                       ;; 1B:459C $F5
     srl  a                                        ;; 1B:459D $CB $3F
     sla  e                                        ;; 1B:459F $CB $23
-    jr   c, .jr_01B_45AB                          ;; 1B:45A1 $38 $08
+    jr   c, .adjust                               ;; 1B:45A1 $38 $08
 
     ld   d, a                                     ;; 1B:45A3 $57
     srl  a                                        ;; 1B:45A4 $CB $3F
     sla  e                                        ;; 1B:45A6 $CB $23
-    jr   c, .jr_01B_45AB                          ;; 1B:45A8 $38 $01
+    jr   c, .adjust                               ;; 1B:45A8 $38 $01
 
     add  d                                        ;; 1B:45AA $82
 
-.jr_01B_45AB
+; c = a if a != 0 else 2
+.adjust
     ld   c, a                                     ;; 1B:45AB $4F
     and  a                                        ;; 1B:45AC $A7
-    jr   nz, .jr_01B_45B1                         ;; 1B:45AD $20 $02
+    jr   nz, .save                                ;; 1B:45AD $20 $02
 
     ld   c, $02                                   ;; 1B:45AF $0E $02
 
-.jr_01B_45B1
+.save
     ld   de, wActiveChannelIndex                  ;; 1B:45B1 $11 $50 $D3
     ld   a, [de]                                  ;; 1B:45B4 $1A
     dec  a                                        ;; 1B:45B5 $3D
@@ -984,7 +993,7 @@ ParseSoundOpcode:
     ld   [hl], c                                  ;; 1B:45BD $71
     pop  af                                       ;; 1B:45BE $F1
 
-.jr_01B_45BF
+SaveNoteLength:
     pop  hl                                       ;; 1B:45BF $E1
     dec  l                                        ;; 1B:45C0 $2D
     ld   [hl+], a ; [D3x3]                        ;; 1B:45C1 $22
@@ -1116,7 +1125,7 @@ HandleNote::
     cp   $4B                                      ;; 1B:465A $FE $4B
     jr   nz, .jr_01B_4656                         ;; 1B:465C $20 $F8
 
-    ld   c, rNR41 & $ff                           ;; 1B:465E $0E $20
+    ld   c, LOW(rNR41)                            ;; 1B:465E $0E $20
     ld   hl, wMusicChannel4.definitionPointerLow  ;; 1B:4660 $21 $44 $D3
     ld   b, $00                                   ;; 1B:4663 $06 $00
     jr   .jr_01B_46A8                             ;; 1B:4665 $18 $41
@@ -1143,7 +1152,7 @@ HandleNote::
     jr   z, .channel2                             ;; 1B:4686 $28 $19
 
     ; Channel 3
-    ld   c, rNR30 & $ff                           ;; 1B:4688 $0E $1A
+    ld   c, LOW(rNR30)                            ;; 1B:4688 $0E $1A
     ld   a, [wMusicChannel3.loopCounter]          ;; 1B:468A $FA $3F $D3
     bit  7, a                                     ;; 1B:468D $CB $7F
     jr   nz, .jr_01B_4696                         ;; 1B:468F $20 $05
@@ -1165,11 +1174,11 @@ HandleNote::
     jr   .jr_01B_46AF                             ;; 1B:469F $18 $0E
 
 .channel2:
-    ld   c, rNR21 & $ff                           ;; 1B:46A1 $0E $16
+    ld   c, LOW(rNR21)                            ;; 1B:46A1 $0E $16
     jr   .jr_01B_46A8                             ;; 1B:46A3 $18 $03
 
 .channel1:
-    ld   c, rNR10 & $ff                           ;; 1B:46A5 $0E $10
+    ld   c, LOW(rNR10)                            ;; 1B:46A5 $0E $10
     inc  c ; rNR11                                ;; 1B:46A7 $0C
 
 .jr_01B_46A8
@@ -1257,122 +1266,126 @@ UpdateNextMusicChannel_1B::
     inc  [hl]                                     ;; 1B:46FA $34
     ret                                           ;; 1B:46FB $C9
 
-label_01B_46FC:
+PopHLAndQuit:
     pop  hl                                       ;; 1B:46FC $E1
     ret                                           ;; 1B:46FD $C9
 
-func_01B_46FE::
+; Called solely by label_01B_442A, with hl = D3x2
+HandleEffects::
     push hl                                       ;; 1B:46FE $E5
     ld   a, l                                     ;; 1B:46FF $7D
     add  $06                                      ;; 1B:4700 $C6 $06
     ld   l, a                                     ;; 1B:4702 $6F
     ld   a, [hl]                                  ;; 1B:4703 $7E
     and  $0F                                      ;; 1B:4704 $E6 $0F
-    jr   z, jr_01B_4720                           ;; 1B:4706 $28 $18
+    jr   z, HandleRemainingEffects                ;; 1B:4706 $28 $18
 
     ld   [wD351], a                               ;; 1B:4708 $EA $51 $D3
     ld   a, [wActiveChannelIndex]                 ;; 1B:470B $FA $50 $D3
-    ld   c, $13                                   ;; 1B:470E $0E $13
+    ld   c, LOW(rNR13)                             ;; 1B:470E $0E $13
     cp   $01                                      ;; 1B:4710 $FE $01
-    jr   z, jr_01B_4762                           ;; 1B:4712 $28 $4E
+    jr   z, ModulatePitch                         ;; 1B:4712 $28 $4E
 
-    ld   c, $18                                   ;; 1B:4714 $0E $18
+    ld   c, LOW(rNR23)                             ;; 1B:4714 $0E $18
     cp   $02                                      ;; 1B:4716 $FE $02
-    jr   z, jr_01B_4762                           ;; 1B:4718 $28 $48
+    jr   z, ModulatePitch                         ;; 1B:4718 $28 $48
 
-    ld   c, $1D                                   ;; 1B:471A $0E $1D
+    ld   c, LOW(rNR33)                             ;; 1B:471A $0E $1D
     cp   $03                                      ;; 1B:471C $FE $03
-    jr   z, jr_01B_4762                           ;; 1B:471E $28 $42
+    jr   z, ModulatePitch                         ;; 1B:471E $28 $42
 
-label_01B_4720:
-jr_01B_4720:
+HandleRemainingEffects:
     ld   a, [wActiveChannelIndex]                 ;; 1B:4720 $FA $50 $D3
     cp   $04                                      ;; 1B:4723 $FE $04
-    jp   z, label_01B_46FC                        ;; 1B:4725 $CA $FC $46
+    jp   z, PopHLAndQuit                          ;; 1B:4725 $CA $FC $46
 
     ld   de, wD3B6                                ;; 1B:4728 $11 $B6 $D3
     call IndexChannelArray                        ;; 1B:472B $CD $95 $48
     ld   a, [de]                                  ;; 1B:472E $1A
     and  a                                        ;; 1B:472F $A7
-    jp   z, label_01B_4749                        ;; 1B:4730 $CA $49 $47
+    jp   z, EffectOpcode99Or94                    ;; 1B:4730 $CA $49 $47
 
     ld   a, [wActiveChannelIndex]                 ;; 1B:4733 $FA $50 $D3
-    ld   c, $13                                   ;; 1B:4736 $0E $13
+    ld   c, LOW(rNR13)                            ;; 1B:4736 $0E $13
     cp   $01                                      ;; 1B:4738 $FE $01
-    jp   z, label_01B_485E                        ;; 1B:473A $CA $5E $48
+    jp   z, EffectOpcode97                        ;; 1B:473A $CA $5E $48
 
-    ld   c, $18                                   ;; 1B:473D $0E $18
+    ld   c, LOW(rNR23)                            ;; 1B:473D $0E $18
     cp   $02                                      ;; 1B:473F $FE $02
-    jp   z, label_01B_485E                        ;; 1B:4741 $CA $5E $48
+    jp   z, EffectOpcode97                        ;; 1B:4741 $CA $5E $48
 
-    ld   c, $1D                                   ;; 1B:4744 $0E $1D
-    jp   label_01B_485E                           ;; 1B:4746 $C3 $5E $48
+    ld   c, LOW(rNR33)                            ;; 1B:4744 $0E $1D
+    jp   EffectOpcode97                           ;; 1B:4746 $C3 $5E $48
 
-label_01B_4749:
+EffectOpcode99Or94:
     ld   a, [wActiveChannelIndex]                 ;; 1B:4749 $FA $50 $D3
     cp   $03                                      ;; 1B:474C $FE $03
-    jp   nz, label_01B_46FC                       ;; 1B:474E $C2 $FC $46
+    jp   nz, PopHLAndQuit                         ;; 1B:474E $C2 $FC $46
 
     ld   a, [wD39E]                               ;; 1B:4751 $FA $9E $D3
     and  a                                        ;; 1B:4754 $A7
-    jp   nz, label_01B_4810                       ;; 1B:4755 $C2 $10 $48
+    jp   nz, EffectOpcode99                       ;; 1B:4755 $C2 $10 $48
 
     ld   a, [wActiveMusicTableIndex]              ;; 1B:4758 $FA $D9 $D3
     and  a                                        ;; 1B:475B $A7
-    jp   nz, label_01B_4998                       ;; 1B:475C $C2 $98 $49
+    jp   nz, EffectOpcode94                       ;; 1B:475C $C2 $98 $49
 
-    jp   label_01B_46FC                           ;; 1B:475F $C3 $FC $46
+    jp   PopHLAndQuit                             ;; 1B:475F $C3 $FC $46
 
-jr_01B_4762:
-    inc  l                                        ;; 1B:4762 $2C
-    ld   a, [hl+]                                 ;; 1B:4763 $2A
+; Input:
+;   c:   $13, $18, or $1D (LOW byte of NR13, NR23, or NR33)
+;   hl:  D3x8
+ModulatePitch:
+    inc  l                  ; now hl = D3x9       ;; 1B:4762 $2C
+    ld   a, [hl+]           ; now hl = D3xA       ;; 1B:4763 $2A
     ld   e, a                                     ;; 1B:4764 $5F
     ld   a, [hl]                                  ;; 1B:4765 $7E
     and  $0F                                      ;; 1B:4766 $E6 $0F
-    ld   d, a                                     ;; 1B:4768 $57
+    ld   d, a               ; now de = base freq  ;; 1B:4768 $57
     push de                                       ;; 1B:4769 $D5
     ld   a, l                                     ;; 1B:476A $7D
     add  $04                                      ;; 1B:476B $C6 $04
-    ld   l, a                                     ;; 1B:476D $6F
+    ld   l, a               ; now hl = D3xE       ;; 1B:476D $6F
     ld   b, [hl]                                  ;; 1B:476E $46
     ld   a, [wD351]                               ;; 1B:476F $FA $51 $D3
     cp   $01                                      ;; 1B:4772 $FE $01
-    jp   z, label_01B_48AB                        ;; 1B:4774 $CA $AB $48
+    jp   z, EffectVibrato                         ;; 1B:4774 $CA $AB $48
 
     cp   $05                                      ;; 1B:4777 $FE $05
-    jp   z, label_01B_4918                        ;; 1B:4779 $CA $18 $49
+    jp   z, EffectUnusedVibrato                   ;; 1B:4779 $CA $18 $49
 
-    ld   hl, $FFFF                                ;; 1B:477C $21 $FF $FF
+    ; "vibrato 3" is actually a detune
+    ld   hl, $FFFF          ; i.e. -1             ;; 1B:477C $21 $FF $FF
     pop  de                                       ;; 1B:477F $D1
     add  hl, de                                   ;; 1B:4780 $19
-    call func_01B_4884                            ;; 1B:4781 $CD $84 $48
-    jp   label_01B_4720                           ;; 1B:4784 $C3 $20 $47
+    call WriteAndSaveFrequency                    ;; 1B:4781 $CD $84 $48
+    jp   HandleRemainingEffects                   ;; 1B:4784 $C3 $20 $47
 
-func_01B_4787::
+HandleSoftwareEnvelopes::
     ld   a, [wMusicChannel1.playingRest]          ;; 1B:4787 $FA $1B $D3
     and  a                                        ;; 1B:478A $A7
-    jr   nz, .jr_47AE                             ;; 1B:478B $20 $21
+    jr   nz, .channel2                             ;; 1B:478B $20 $21
 
     ld   a, [wMusicChannel1.softwareEnvelope]     ;; 1B:478D $FA $17 $D3
     and  a                                        ;; 1B:4790 $A7
-    jr   z, .jr_47AE                              ;; 1B:4791 $28 $1B
+    jr   z, .channel2                              ;; 1B:4791 $28 $1B
 
     and  $0F                                      ;; 1B:4793 $E6 $0F
     ld   b, a                                     ;; 1B:4795 $47
     ld   hl, wD307                                ;; 1B:4796 $21 $07 $D3
     ld   a, [wMusicChannel1.lengthCounterUp]      ;; 1B:4799 $FA $1E $D3
     cp   [hl]                                     ;; 1B:479C $BE
-    jr   nz, .jr_47AE                             ;; 1B:479D $20 $0F
+    jr   nz, .channel2                             ;; 1B:479D $20 $0F
 
     ld   c, $12                                   ;; 1B:479F $0E $12
     ld   de, wMusicChannel1.noteBaseFrequencyHigh ;; 1B:47A1 $11 $1A $D3
     ld   a, [wMusicChannel1.loopCounter]          ;; 1B:47A4 $FA $1F $D3
     bit  7, a                                     ;; 1B:47A7 $CB $7F
-    jr   nz, .jr_47AE                             ;; 1B:47A9 $20 $03
+    jr   nz, .channel2                             ;; 1B:47A9 $20 $03
 
-    call func_01B_47D2                            ;; 1B:47AB $CD $D2 $47
+    call EffectSoftwareEnvelope                   ;; 1B:47AB $CD $D2 $47
 
-.jr_47AE
+.channel2
     ld   a, [wMusicChannel2.playingRest]          ;; 1B:47AE $FA $2B $D3
     and  a                                        ;; 1B:47B1 $A7
     ret  nz                                       ;; 1B:47B2 $C0
@@ -1394,10 +1407,10 @@ func_01B_4787::
 
     ld   c, $17                                   ;; 1B:47C9 $0E $17
     ld   de, wMusicChannel2.noteBaseFrequencyHigh ;; 1B:47CB $11 $2A $D3
-    call func_01B_47D2                            ;; 1B:47CE $CD $D2 $47
+    call EffectSoftwareEnvelope                   ;; 1B:47CE $CD $D2 $47
     ret                                           ;; 1B:47D1 $C9
 
-func_01B_47D2::
+EffectSoftwareEnvelope::
     push bc                                       ;; 1B:47D2 $C5
     dec  b                                        ;; 1B:47D3 $05
     ld   c, b                                     ;; 1B:47D4 $48
@@ -1448,41 +1461,55 @@ soundOpcode9A:
     ld   [wD39E], a                               ;; 1B:480B $EA $9E $D3
     jr   soundOpcode99.setD39EAndParseNext        ;; 1B:480E $18 $F1
 
-label_01B_4810:
+; "bounce" envelope for channel 3
+; 100% |------
+;  75% |
+;  50% |      ----
+;  25% |          ----      ------        
+;   0% |              ------      ------
+;       0 1 2 3 4 5 6 7 8 9 A B C D E F 
+EffectOpcode99:
     cp   $02                                      ;; 1B:4810 $FE $02
-    jp   z, label_01B_46FC                        ;; 1B:4812 $CA $FC $46
+    jp   z, PopHLAndQuit                          ;; 1B:4812 $CA $FC $46
 
     ld   bc, wD39F                                ;; 1B:4815 $01 $9F $D3
-    call func_01B_4842                            ;; 1B:4818 $CD $42 $48
+    call TickChannel3OpcodeCounter                ;; 1B:4818 $CD $42 $48
     ld   c, $1C                                   ;; 1B:481B $0E $1C
     ld   b, $40                                   ;; 1B:481D $06 $40
     cp   $03                                      ;; 1B:481F $FE $03
-    jr   z, jr_01B_483D                           ;; 1B:4821 $28 $1A
+    jr   z, WriteChannel3Volume                   ;; 1B:4821 $28 $1A
 
     ld   b, $60                                   ;; 1B:4823 $06 $60
     cp   $05                                      ;; 1B:4825 $FE $05
-    jr   z, jr_01B_483D                           ;; 1B:4827 $28 $14
+    jr   z, WriteChannel3Volume                   ;; 1B:4827 $28 $14
 
     cp   $0A                                      ;; 1B:4829 $FE $0A
-    jr   z, jr_01B_483D                           ;; 1B:482B $28 $10
+    jr   z, WriteChannel3Volume                   ;; 1B:482B $28 $10
 
     ld   b, $00                                   ;; 1B:482D $06 $00
     cp   $07                                      ;; 1B:482F $FE $07
-    jr   z, jr_01B_483D                           ;; 1B:4831 $28 $0A
+    jr   z, WriteChannel3Volume                   ;; 1B:4831 $28 $0A
 
     cp   $0D                                      ;; 1B:4833 $FE $0D
-    jp   nz, label_01B_46FC                       ;; 1B:4835 $C2 $FC $46
+    jp   nz, PopHLAndQuit                         ;; 1B:4835 $C2 $FC $46
 
     ld   a, $02                                   ;; 1B:4838 $3E $02
     ld   [wD39E], a                               ;; 1B:483A $EA $9E $D3
 
-label_01B_483D:
-jr_01B_483D:
+; Input: 
+;   c:  $1C (always) (LOW of NR32)
+;   b:  volume level ($00 mute, $20 full, $40 half, $60 quarter)
+WriteChannel3Volume:
     ld   a, b                                     ;; 1B:483D $78
     ldh  [c], a                                   ;; 1B:483E $E2
-    jp   label_01B_46FC                           ;; 1B:483F $C3 $FC $46
+    jp   PopHLAndQuit                             ;; 1B:483F $C3 $FC $46
 
-func_01B_4842::
+; only used by opcodes 99 and 94
+; Input:
+;   bc:  wD39F or wD3DA
+; Output:
+;   a:   ++[bc]
+TickChannel3OpcodeCounter::
     ld   a, [bc]                                  ;; 1B:4842 $0A
     inc  a                                        ;; 1B:4843 $3C
     ld   [bc], a                                  ;; 1B:4844 $02
@@ -1504,29 +1531,34 @@ soundOpcode98:
     xor  a                                        ;; 1B:485B $AF
     jr   soundOpcode97.setDeAndParseNext          ;; 1B:485C $18 $F0
 
-label_01B_485E:
+; rapid pitch sweep down ("pitched percussion")
+EffectOpcode97:
     inc  e                                        ;; 1B:485E $1C
     ld   a, [de]                                  ;; 1B:485F $1A
     and  a                                        ;; 1B:4860 $A7
-    jr   nz, jr_01B_4874                          ;; 1B:4861 $20 $11
+    jr   nz, CallGetCurrentFrequency              ;; 1B:4861 $20 $11
 
     inc  a                                        ;; 1B:4863 $3C
     ld   [de], a                                  ;; 1B:4864 $12
     pop  hl                                       ;; 1B:4865 $E1
     push hl                                       ;; 1B:4866 $E5
-    call func_01B_4879                            ;; 1B:4867 $CD $79 $48
+    call GetBaseFrequency                         ;; 1B:4867 $CD $79 $48
 
-jr_01B_486A:
-    ld   hl, hLinkPhysicsModifier                 ;; 1B:486A $21 $9C $FF
+.subtract100:
+    ld   hl, $ff9c ; -100 as a signed 16-bit int  ;; 1B:486A $21 $9C $FF
     add  hl, de                                   ;; 1B:486D $19
-    call func_01B_4884                            ;; 1B:486E $CD $84 $48
-    jp   label_01B_46FC                           ;; 1B:4871 $C3 $FC $46
+    call WriteAndSaveFrequency                    ;; 1B:486E $CD $84 $48
+    jp   PopHLAndQuit                             ;; 1B:4871 $C3 $FC $46
 
-jr_01B_4874:
-    call func_01B_489E                            ;; 1B:4874 $CD $9E $48
-    jr   jr_01B_486A                              ;; 1B:4877 $18 $F1
+CallGetCurrentFrequency:
+    call GetCurrentFrequency                      ;; 1B:4874 $CD $9E $48
+    jr   .subtract100                             ;; 1B:4877 $18 $F1
 
-func_01B_4879::
+; Input:
+;   hl:  D3x2
+; Output:
+;   de:  [hl+7] & $fff
+GetBaseFrequency::
     ld   a, $07                                   ;; 1B:4879 $3E $07
     add  l                                        ;; 1B:487B $85
     ld   l, a                                     ;; 1B:487C $6F
@@ -1537,7 +1569,10 @@ func_01B_4879::
     ld   d, a                                     ;; 1B:4882 $57
     ret                                           ;; 1B:4883 $C9
 
-func_01B_4884::
+; Input:
+;   c:   $13, $18, or $1D (LOW byte of NR13, NR23, or NR33)
+;   hl:  frequency to be written (after masking with $fff)
+WriteAndSaveFrequency::
     ld   de, wD3A4                                ;; 1B:4884 $11 $A4 $D3
     call IndexChannelArray                        ;; 1B:4887 $CD $95 $48
     ld   a, l                                     ;; 1B:488A $7D
@@ -1563,7 +1598,8 @@ IndexChannelArray::
     ld   e, a                                     ;; 1B:489C $5F
     ret                                           ;; 1B:489D $C9
 
-func_01B_489E::
+; only used by opcode 97
+GetCurrentFrequency::
     ld   de, wD3A4                                ;; 1B:489E $11 $A4 $D3
     call IndexChannelArray                        ;; 1B:48A1 $CD $95 $48
     ld   a, [de]                                  ;; 1B:48A4 $1A
@@ -1574,7 +1610,7 @@ func_01B_489E::
     ld   e, l                                     ;; 1B:48A9 $5D
     ret                                           ;; 1B:48AA $C9
 
-label_01B_48AB:
+EffectVibrato:
     pop  de                                       ;; 1B:48AB $D1
     ld   de, wD3B0                                ;; 1B:48AC $11 $B0 $D3
     call IndexChannelArray                        ;; 1B:48AF $CD $95 $48
@@ -1582,24 +1618,24 @@ label_01B_48AB:
     inc  a                                        ;; 1B:48B3 $3C
     ld   [de], a                                  ;; 1B:48B4 $12
     inc  e                                        ;; 1B:48B5 $1C
-    cp   $19                                      ;; 1B:48B6 $FE $19
-    jr   z, jr_01B_48EB                           ;; 1B:48B8 $28 $31
+    cp   $19 ; frame 25                           ;; 1B:48B6 $FE $19
+    jr   z, InitVibrato                           ;; 1B:48B8 $28 $31
 
-    cp   $2D                                      ;; 1B:48BA $FE $2D
-    jr   z, jr_01B_48E4                           ;; 1B:48BC $28 $26
+    cp   $2D ; frame 40                           ;; 1B:48BA $FE $2D
+    jr   z, ReinitVibrato                         ;; 1B:48BC $28 $26
 
     ld   a, [de]                                  ;; 1B:48BE $1A
     and  a                                        ;; 1B:48BF $A7
-    jp   z, label_01B_4720                        ;; 1B:48C0 $CA $20 $47
+    jp   z, HandleRemainingEffects                ;; 1B:48C0 $CA $20 $47
 
-jr_01B_48C3:
+ApplyVibrato:
     dec  e                                        ;; 1B:48C3 $1D
     ld   a, [de]                                  ;; 1B:48C4 $1A
     sub  $19                                      ;; 1B:48C5 $D6 $19
     sla  a                                        ;; 1B:48C7 $CB $27
     ld   l, a                                     ;; 1B:48C9 $6F
     ld   h, $00                                   ;; 1B:48CA $26 $00
-    ld   de, Data_01B_48F0                        ;; 1B:48CC $11 $F0 $48
+    ld   de, VibratoTable                         ;; 1B:48CC $11 $F0 $48
     add  hl, de                                   ;; 1B:48CF $19
     ld   a, [hl+]                                 ;; 1B:48D0 $2A
     ld   d, a                                     ;; 1B:48D1 $57
@@ -1608,34 +1644,40 @@ jr_01B_48C3:
     pop  hl                                       ;; 1B:48D4 $E1
     push hl                                       ;; 1B:48D5 $E5
     push de                                       ;; 1B:48D6 $D5
-    call func_01B_4879                            ;; 1B:48D7 $CD $79 $48
+    call GetBaseFrequency                         ;; 1B:48D7 $CD $79 $48
     ld   h, d                                     ;; 1B:48DA $62
     ld   l, e                                     ;; 1B:48DB $6B
     pop  de                                       ;; 1B:48DC $D1
     add  hl, de                                   ;; 1B:48DD $19
-    call func_01B_4884                            ;; 1B:48DE $CD $84 $48
-    jp   label_01B_4720                           ;; 1B:48E1 $C3 $20 $47
+    call WriteAndSaveFrequency                    ;; 1B:48DE $CD $84 $48
+    jp   HandleRemainingEffects                   ;; 1B:48E1 $C3 $20 $47
 
-jr_01B_48E4:
+ReinitVibrato:
     dec  e                                        ;; 1B:48E4 $1D
     ld   a, $19                                   ;; 1B:48E5 $3E $19
     ld   [de], a                                  ;; 1B:48E7 $12
     inc  e                                        ;; 1B:48E8 $1C
-    jr   jr_01B_48C3                              ;; 1B:48E9 $18 $D8
+    jr   ApplyVibrato                             ;; 1B:48E9 $18 $D8
 
-jr_01B_48EB:
+InitVibrato:
     ld   a, $01                                   ;; 1B:48EB $3E $01
     ld   [de], a                                  ;; 1B:48ED $12
-    jr   jr_01B_48C3                              ;; 1B:48EE $18 $D3
+    jr   ApplyVibrato                             ;; 1B:48EE $18 $D3
 
-Data_01B_48F0::
+VibratoTable::
     db   $00, $00, $00, $00, $00, $01, $00, $01   ;; 1B:48F0
     db   $00, $02, $00, $02, $00, $00, $00, $00   ;; 1B:48F8
     db   $FF, $FF, $FF, $FF, $FF, $FE, $FF, $FE   ;; 1B:4900
     db   $00, $00, $00, $01, $00, $02, $00, $01   ;; 1B:4908
     db   $00, $00, $FF, $FF, $FF, $FE, $FF, $FF   ;; 1B:4910
 
-label_01B_4918:
+; +2 |        ----                --          :
+; +1 |    ----                  --  --        :
+; =0 |----        ----        --      --      :
+; -1 |                ----              --  --:
+; -2 |                    ----            --  :
+
+EffectUnusedVibrato:
     pop  de                                       ;; 1B:4918 $D1
     ld   de, wD3D0                                ;; 1B:4919 $11 $D0 $D3
     call IndexChannelArray                        ;; 1B:491C $CD $95 $48
@@ -1644,15 +1686,15 @@ label_01B_4918:
     ld   [de], a                                  ;; 1B:4921 $12
     inc  e                                        ;; 1B:4922 $1C
     cp   $21                                      ;; 1B:4923 $FE $21
-    jr   z, jr_01B_4946                           ;; 1B:4925 $28 $1F
+    jr   z, ReinitUnusedVibrato                   ;; 1B:4925 $28 $1F
 
-jr_01B_4927:
+ApplyUnusedVibrato:
     dec  e                                        ;; 1B:4927 $1D
     ld   a, [de]                                  ;; 1B:4928 $1A
     sla  a                                        ;; 1B:4929 $CB $27
     ld   l, a                                     ;; 1B:492B $6F
     ld   h, $00                                   ;; 1B:492C $26 $00
-    ld   de, Data_01B_494D                        ;; 1B:492E $11 $4D $49
+    ld   de, UnusedVibratoTable                   ;; 1B:492E $11 $4D $49
     add  hl, de                                   ;; 1B:4931 $19
     ld   a, [hl+]                                 ;; 1B:4932 $2A
     ld   d, a                                     ;; 1B:4933 $57
@@ -1661,22 +1703,22 @@ jr_01B_4927:
     pop  hl                                       ;; 1B:4936 $E1
     push hl                                       ;; 1B:4937 $E5
     push de                                       ;; 1B:4938 $D5
-    call func_01B_4879                            ;; 1B:4939 $CD $79 $48
+    call GetBaseFrequency                         ;; 1B:4939 $CD $79 $48
     ld   h, d                                     ;; 1B:493C $62
     ld   l, e                                     ;; 1B:493D $6B
     pop  de                                       ;; 1B:493E $D1
     add  hl, de                                   ;; 1B:493F $19
-    call func_01B_4884                            ;; 1B:4940 $CD $84 $48
-    jp   label_01B_4720                           ;; 1B:4943 $C3 $20 $47
+    call WriteAndSaveFrequency                    ;; 1B:4940 $CD $84 $48
+    jp   HandleRemainingEffects                   ;; 1B:4943 $C3 $20 $47
 
-jr_01B_4946:
+ReinitUnusedVibrato:
     dec  e                                        ;; 1B:4946 $1D
     ld   a, $01                                   ;; 1B:4947 $3E $01
     ld   [de], a                                  ;; 1B:4949 $12
     inc  e                                        ;; 1B:494A $1C
-    jr   jr_01B_4927                              ;; 1B:494B $18 $DA
+    jr   ApplyUnusedVibrato                       ;; 1B:494B $18 $DA
 
-Data_01B_494D::
+UnusedVibratoTable::
     db   $00, $08, $00, $00, $FF, $F8, $00, $00   ;; 1B:494D
     db   $00, $0A, $00, $02, $FF, $FA, $00, $02   ;; 1B:4955
     db   $00, $0C, $00, $04, $FF, $FC, $00, $04   ;; 1B:495D
@@ -1686,34 +1728,60 @@ Data_01B_494D::
     db   $00, $04, $FF, $FC, $FF, $F4, $FF, $FC   ;; 1B:497D
     db   $00, $06, $FF, $FE, $FF, $F6, $FF, $FE   ;; 1B:4985
 
+; +12|                --                                              :+12
+; +10|        --              --                                      :+10
+; +8 |--                              --                              :+8
+; +6 |                                        --              --      :+6
+; +4 |                  --  --                        --              :+4
+; +2 |          --  --          --  --                                :+2
+; =0 |  --  --                          --  --                        :=0
+; -2 |                                          --  --          --  --:-2
+; -4 |                    --                            --  --        :-4
+; -6 |            --              --                                  :-6
+; -8 |    --                              --                          :-8
+; -10|                                            --              --  :-10
+; -12|                                                    --          :-12
+; The code is buggy. It reads words [1:33] (out of bounds) instead of [0:32].
+; This causes the frequency on every 32nd frame to be offset by 0x3E01 
+; (the literal bytecode of the very next instruction: "ld a, $01").
+; Result is n + 1537 for n = 0..510 and n - 511 for n = 511..2047.
+; This bug is quite audible, which is probably why this effect is never used.
+
 soundOpcode94:
     ld   a, $01                                   ;; 1B:498D $3E $01
     ld   [wActiveMusicTableIndex], a              ;; 1B:498F $EA $D9 $D3
     call IncChannelDefinitionPointer              ;; 1B:4992 $CD $0B $44
     jp   ParseSoundOpcode                         ;; 1B:4995 $C3 $31 $45
 
-label_01B_4998:
+; "attack" envelope for channel 3
+; 100% |            ------
+;  75% |                  
+;  50% |          --      
+;  25% |      ----        
+;   0% |------            
+;       0 1 2 3 4 5 6 7 8 
+EffectOpcode94:
     cp   $02                                      ;; 1B:4998 $FE $02
-    jp   z, label_01B_46FC                        ;; 1B:499A $CA $FC $46
+    jp   z, PopHLAndQuit                          ;; 1B:499A $CA $FC $46
 
     ld   bc, wD3DA                                ;; 1B:499D $01 $DA $D3
-    call func_01B_4842                            ;; 1B:49A0 $CD $42 $48
-    ld   c, $1C                                   ;; 1B:49A3 $0E $1C
+    call TickChannel3OpcodeCounter                ;; 1B:49A0 $CD $42 $48
+    ld   c, LOW(rNR32)                             ;; 1B:49A3 $0E $1C
     ld   b, $60                                   ;; 1B:49A5 $06 $60
     cp   $03                                      ;; 1B:49A7 $FE $03
-    jp   z, label_01B_483D                        ;; 1B:49A9 $CA $3D $48
+    jp   z, WriteChannel3Volume                   ;; 1B:49A9 $CA $3D $48
 
     ld   b, $40                                   ;; 1B:49AC $06 $40
     cp   $05                                      ;; 1B:49AE $FE $05
-    jp   z, label_01B_483D                        ;; 1B:49B0 $CA $3D $48
+    jp   z, WriteChannel3Volume                   ;; 1B:49B0 $CA $3D $48
 
     ld   b, $20                                   ;; 1B:49B3 $06 $20
     cp   $06                                      ;; 1B:49B5 $FE $06
-    jp   nz, label_01B_46FC                       ;; 1B:49B7 $C2 $FC $46
+    jp   nz, PopHLAndQuit                         ;; 1B:49B7 $C2 $FC $46
 
     ld   a, $02                                   ;; 1B:49BA $3E $02
     ld   [wActiveMusicTableIndex], a              ;; 1B:49BC $EA $D9 $D3
-    jp   label_01B_483D                           ;; 1B:49BF $C3 $3D $48
+    jp   WriteChannel3Volume                      ;; 1B:49BF $C3 $3D $48
 
 
 SquareAndWaveFrequencyTable::

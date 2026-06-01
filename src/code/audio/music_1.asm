@@ -1544,7 +1544,7 @@ EffectOpcode97:
     push hl                                       ;; 1B:4866 $E5
     call GetBaseFrequency                         ;; 1B:4867 $CD $79 $48
 
-.subtract100:
+Subtract100:
     ld   hl, $ff9c ; -100 as a signed 16-bit int  ;; 1B:486A $21 $9C $FF
     add  hl, de                                   ;; 1B:486D $19
     call WriteAndSaveFrequency                    ;; 1B:486E $CD $84 $48
@@ -1552,7 +1552,7 @@ EffectOpcode97:
 
 CallGetCurrentFrequency:
     call GetCurrentFrequency                      ;; 1B:4874 $CD $9E $48
-    jr   .subtract100                             ;; 1B:4877 $18 $F1
+    jr   Subtract100                              ;; 1B:4877 $18 $F1
 
 ; Input:
 ;   hl:  D3x2

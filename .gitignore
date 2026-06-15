@@ -14,6 +14,9 @@ DumpBanks
 
 # precompiled python
 *.pyc
+__pycache__/
+*.egg-info/
+.pytest_cache/
 
 # swap files
 *.swp

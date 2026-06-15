@@ -2,13 +2,13 @@
 
 ## 目标
 
-以当前 `LADX-Disassembly` 反汇编工程为第一落地点，快速构造一个适合 AI Agent 和强化学习训练使用的 2D Zelda 模拟器环境 wrapper。第一版目标游戏是《塞尔达传说：梦见岛 DX》（LADX），但状态抽象、动作抽象和模拟器后端接口必须为未来扩展到 SNES 上的 Zelda 3 / ALTTP 保留兼容空间。
+以当前 `LADX-Disassembly` 反汇编工程为第一落地点，快速构造一个适合 AI Agent 和强化学习训练使用的 2D Zelda 模拟器环境 wrapper。第一版目标游戏是《塞尔达传说：梦见岛 DX》（LADX），但状态抽象、动作抽象和模拟器后端接口必须为未来扩展到 SNES 上的 Zelda 3 / ALTTP 保留兼容空间。这里的 ALTTP 指 *The Legend of Zelda: A Link to the Past*，也就是 Zelda 3。
 
 核心产物应是一个 Python 包，提供最常用的强化学习环境 API：`gymnasium.Env`。Gymnasium 当前 `step()` 返回 `(observation, reward, terminated, truncated, info)`，`reset()` 返回 `(observation, info)`，`info` 用于携带调试、指标和隐藏状态；这正好适合作为奖励函数所需的结构化游戏状态出口。参考：<https://gymnasium.farama.org/api/env/>
 
 第一版底层模拟器建议优先使用 PyBoy。PyBoy 支持 Python 内嵌运行 Game Boy / Game Boy Color ROM，提供按键输入、逐帧 `tick()`、屏幕数组、读写内存、`.sym` 符号文件、save/load state 等能力，适合把当前反汇编工程生成的 ROM 和符号表接入 RL 环境。参考：<https://docs.pyboy.dk/>
 
-未来扩展到 Zelda 3 时，不应推翻上层 API。应新增一个 SNES backend，例如 BizHawk/Lua bridge、Snes9x bridge 或 Libretro/RetroArch bridge，只要它实现同一套 `EmulatorBackend`、`StateExtractor` 和 `MemoryMap` 接口即可。
+未来扩展到 Zelda 3 / ALTTP 时，不应推翻上层 API。应新增一个 SNES backend，例如 BizHawk/Lua bridge、Snes9x bridge 或 Libretro/RetroArch bridge，只要它实现同一套 `EmulatorBackend`、`StateExtractor` 和 `MemoryMap` 接口即可。
 
 ## 当前代码库可复用信息
 
@@ -68,17 +68,15 @@ class ZeldaEnv(gymnasium.Env):
 
 后续可扩展为 `MultiBinary(n)`，允许 Agent 直接控制底层平台的完整按键集合。对 LADX，底层是 8 个 Game Boy 按键；对 ALTTP，底层会增加 `X`、`Y`、`L`、`R`。环境层只暴露逻辑动作，backend 负责把逻辑动作翻译成平台按键。
 
-观测空间建议提供两种模式：
+观测空间第一版必须只向 agent 暴露像素输入：
 
 - `pixels`: `Box(0, 255, shape=(144, 160, 3 or 4), dtype=np.uint8)`
-- `features`: 从 `info["state"]` 派生的固定长度数值向量
-- `dict`: `spaces.Dict({"screen": ..., "features": ...})`
 
-第一版建议默认 `pixels`，并始终在 `info` 中返回完整结构化状态，避免一开始就把所有状态塞进 observation_space。
+语义状态不得进入 `observation`，只通过 `info["state"]` 返回，用于调试、分析、奖励函数和课程设计。这样训练时 agent 只看画面，奖励函数仍能读取可解释的地图、sprite、玩家、道具和进度状态。后续可以增加 debug-only wrapper 从 `info["state"]` 派生 feature observation，但不作为默认训练接口。
 
-### 2. 状态字典 `info["state"]`
+### 2. 可解释状态字典 `info["state"]`
 
-每次 `reset()` 和 `step()` 都应返回可 JSON 序列化的 `info`：
+每次 `reset()` 和 `step()` 都应返回可 JSON 序列化的 `info`。这个字典是语义状态出口，不是 agent observation：
 
 ```python
 info = {
@@ -104,12 +102,12 @@ info = {
 顶层字段需要跨 LADX 和 ALTTP 稳定：
 
 - `meta`: 游戏、平台、backend、frame、ROM 版本、state schema 版本。
-- `world`: 当前 map/room/area、室内外、滚屏、视角、楼层。
+- `world`: 当前 map/room/area、室内外、滚屏、视角、楼层、地图分布摘要。
 - `player`: Link 的位置、速度、方向、动作状态、生命、魔法/能力资源。
 - `inventory`: 装备、道具、消耗品、当前按键装备。
 - `progress`: 长期剧情/地牢/收集进度。
 - `entities`: 活跃实体/sprite/object slot 列表。
-- `room`: 当前房间运行时对象、静态地图对象、初始实体。
+- `room`: 当前房间运行时对象、静态地图对象、初始实体、tile/object grid。
 - `effects`: 短期 buff/debuff、无敌、击退、蓄力、特殊模式。
 - `flags`: 其他游戏特定 flag。
 - `raw`: 原始内存快照或关键原始字段，便于调试。
@@ -492,12 +490,14 @@ docs/
 - 定义 `EmulatorBackend` 协议。
 - 封装初始化、按键、逐帧 tick、屏幕读取、内存读取、save/load state。
 - 支持 `frame_skip`。
-- 支持 `initial_state_path`，让训练从跳过标题/建档后的状态开始。
+- 支持用户提供的 `initial_state_path`，让训练从跳过标题/建档后的状态开始。
+- 支持生成初始 save state 的 setup script，用固定输入流程或内存初始化创建可复用起点。
 - 动作层使用逻辑动作，再映射到 PyBoy 的 Game Boy 按键。
 
 验收：
 
 - 单元测试能加载一个 state，执行 action，读取屏幕和内存。
+- setup script 能生成一个可被 `reset()` 复用的初始 state。
 - repeated reset 能回到相同核心状态。
 - `test_backend_contract.py` 可复用给未来 SNES backend。
 
@@ -531,7 +531,7 @@ docs/
 #### Phase 5: Gymnasium 环境
 
 - 实现通用 `ZeldaEnv` 和 LADX 注册入口。
-- 定义 `action_space`、`observation_space`、`metadata`。
+- 定义 `action_space`、pixel-only `observation_space`、`metadata`。
 - 实现 `reset()`、`step()`、`render()`、`close()`。
 - 注册环境 ID，例如 `Zelda-LADX-v0`。
 
@@ -539,7 +539,8 @@ docs/
 
 - `gymnasium.utils.env_checker.check_env(env)` 通过。
 - `env.reset()`、随机 action `env.step()` 可运行 1000 步。
-- 每步返回 `info["state"]`。
+- 每步返回可解释且可 JSON 序列化的 `info["state"]`。
+- `observation` 只包含 pixels，不包含语义 feature。
 - 构造函数能显式接收 `game="ladx"` 和 `backend="pyboy"`。
 
 #### Phase 6: 奖励与 wrappers
@@ -550,8 +551,8 @@ docs/
   - `FrameStack`
   - `ResizeObservation`
   - `GrayScaleObservation`
-  - `FeatureObservationWrapper`
   - `InfoStateRecorder`
+  - `DebugFeatureObservationWrapper`，只用于诊断，不作为默认训练接口
 
 验收：
 
@@ -576,7 +577,7 @@ docs/
 ## 主要风险与待确认问题
 
 - ROM 文件版权：仓库可构建 ROM，但训练环境应只引用本地用户提供/构建的 ROM，不应分发 ROM。
-- 标题画面和建档流程：RL 训练通常应从预制 save state 开始，需要用户提供或由脚本生成初始 state。
+- 标题画面和建档流程：RL 训练通常应从预制 save state 开始，需要同时支持用户提供 state 和脚本生成 state。
 - `.sym` 局部 label：RGBDS 符号文件对局部 label 的表示需要实际构建后确认。
 - Buff 字段：`Piece of Power`、`Guardian Acorn` 等短期效果需要继续追踪对应 RAM 标签或逻辑代码。
 - `wTunicType`、`wPhotos1`、`wPhotos2` 在当前摘读片段中由 SRAM 注释提及，但仍需在 WRAM 定义中确认具体地址。
@@ -591,9 +592,10 @@ docs/
 
 - `gymnasium.Env` API。
 - PyBoy headless 后端。
-- `pixels` observation。
+- pixel-only observation。
 - `info["state"]` 包含通用字段 `meta`、`world`、`player`、`inventory`、`progress`、`entities`。
-- 支持从 save state reset。
+- 支持从用户提供的 save state reset。
+- 支持用 setup script 生成初始 save state。
 - 默认 reward 很薄，主要让用户自定义奖励。
 - 包结构、backend contract、state schema 预留 ALTTP/SNES 扩展点。
 

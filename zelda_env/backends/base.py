@@ -1,0 +1,36 @@
+"""Backend contract for emulator integrations."""
+
+from __future__ import annotations
+
+from typing import Protocol, runtime_checkable
+
+
+@runtime_checkable
+class EmulatorBackend(Protocol):
+    """Minimal emulator interface required by the environment and extractors."""
+
+    platform: str
+    buttons: tuple[str, ...]
+
+    def reset(self) -> None: ...
+
+    def close(self) -> None: ...
+
+    def press(self, buttons: set[str] | frozenset[str]) -> None: ...
+
+    def release_all(self) -> None: ...
+
+    def advance(self, frames: int) -> None: ...
+
+    def read_u8(self, address: int) -> int: ...
+
+    def read_u16(self, address: int, *, endian: str = "little") -> int: ...
+
+    def read_bytes(self, address: int, length: int) -> bytes: ...
+
+    def save_state(self) -> bytes: ...
+
+    def load_state(self, data: bytes) -> None: ...
+
+    def screen_rgb(self): ...
+

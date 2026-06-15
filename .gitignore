@@ -36,6 +36,7 @@ __pycache__/
 *~
 
 # save files
+*.ram
 *.sav
 *.ss*
 *.s0

@@ -11,7 +11,7 @@ trajectory analysis.
 - `player`: Link position, velocity, direction, action state, health, magic/resources.
 - `inventory`: equipped items, owned items, consumables, capacities.
 - `progress`: long-term quest, dungeon, collection, and save-file progress.
-- `entities`: active sprite/entity slots normalized into per-slot dictionaries.
+- `entities`: all sprite/entity slots normalized into per-slot dictionaries.
 - `room`: runtime room object cache, static room objects, initial static entities.
 - `effects`: short-term buffs, debuffs, timers, invincibility, charge states.
 - `flags`: game-specific flags that are useful but not yet promoted to stable fields.
@@ -30,10 +30,21 @@ trajectory analysis.
 - `world.is_indoor`: `wIsIndoor`
 - `inventory.items`: `wInventoryItems`
 - `entities[*].type`: `wEntitiesTypeTable[slot]`
+- `entities[*].type_name`: parsed from `src/constants/entities.asm`
 - `entities[*].status`: `wEntitiesStatusTable[slot]`
 - `entities[*].x`: `wEntitiesPosXTable[slot]`
 - `entities[*].y`: `wEntitiesPosYTable[slot]`
+- `effects.active_projectile_count`: `wActiveProjectileCount`
+- `effects.latest_shot_arrow_entity_slot`: `wLatestShotArrowEntityIndex`
 - `room.objects_runtime`: `wRoomObjects`
+- `raw.entity_tables`: raw snapshots of the per-slot LADX entity tables that
+  are currently mapped by the extractor.
+
+LADX projectiles such as arrows, moblin arrows, bombs, hookshot chain segments,
+magic-rod fireballs, and enemy projectiles are represented as regular entity
+slots in `wEntities*Table`. Reward code should therefore inspect
+`entities[*]` plus the projectile counters in `effects`, instead of expecting a
+separate projectile list.
 
 ## ALTTP Compatibility Target
 
@@ -51,4 +62,3 @@ support should map its documented RAM addresses into the same public schema:
 
 ALTTP-specific fields should start in `flags` or `raw` before being promoted to
 stable reward-facing paths.
-

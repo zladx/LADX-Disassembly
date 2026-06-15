@@ -69,9 +69,21 @@ The viewer opens:
 
 - the main PyBoy game window for manual control
 - a tile/object mapping window for the current room
+- a sprite/entity mapping window that overlays Link plus active entity slot/type IDs and lists entity names
 - a semantic state text window
 
 Closing the PyBoy window or either debug window closes all windows.
+
+In the sprite/entity map, Link is labeled `LINK` and drawn in green. Other
+sprites use stable per-entity-type colors, so repeated enemy/projectile types
+keep the same color across refreshes.
+
+The main emulator advances at normal Game Boy speed by default. The side debug
+windows refresh less frequently so they do not cap gameplay to the debug UI rate:
+
+```bash
+python3 examples/manual_debug_viewer.py --speed 1.0 --debug-update-ms 100
+```
 
 ## Save State Generation
 
@@ -93,4 +105,3 @@ python3 -m zelda_env.setup_state --help
 ```
 
 The full PyBoy smoke test requires `azle.gbc` and `azle.sym`.
-

@@ -7,7 +7,12 @@ from typing import Any
 
 from zelda_env.backends.base import EmulatorBackend
 from zelda_env.games.ladx import memory_map
-from zelda_env.games.ladx.constants import ENTITY_STATUS_NAMES, INVENTORY_SLOT_COUNT, MAX_ENTITIES
+from zelda_env.games.ladx.constants import (
+    ENTITY_STATUS_NAMES,
+    INVENTORY_SLOT_COUNT,
+    MAX_ENTITIES,
+    load_entity_type_names,
+)
 from zelda_env.games.ladx.symbols import SymbolTable, default_ladx_symbol_table
 
 
@@ -16,6 +21,7 @@ class LadxStateExtractor:
 
     def __init__(self, symbols: SymbolTable | None = None, *, repo_root: str | Path = ".") -> None:
         self.symbols = symbols or default_ladx_symbol_table(repo_root)
+        self.entity_type_names = load_entity_type_names(repo_root)
 
     def extract(self, backend: EmulatorBackend) -> dict[str, Any]:
         state: dict[str, Any] = {
@@ -43,7 +49,7 @@ class LadxStateExtractor:
         self._read_fields(backend, state["effects"], memory_map.EFFECT_FIELDS)
         self._read_inventory_items(backend, state["inventory"])
         self._read_progress_items(backend, state["progress"])
-        self._read_entities(backend, state["entities"])
+        self._read_entities(backend, state["entities"], state["raw"])
         self._read_room(backend, state["room"])
         return state
 
@@ -81,11 +87,21 @@ class LadxStateExtractor:
         if high is not None and low is not None:
             progress["rupees"] = backend.read_u8(high) * 100 + backend.read_u8(low)
 
-    def _read_entities(self, backend: EmulatorBackend, entities: list[dict[str, Any]]) -> None:
+    def _read_entities(
+        self,
+        backend: EmulatorBackend,
+        entities: list[dict[str, Any]],
+        raw: dict[str, Any],
+    ) -> None:
         table_addresses = {
             field: self.symbols.get(symbol)
             for field, symbol in memory_map.ENTITY_TABLES.items()
         }
+        raw["entity_tables"] = {}
+        for field, base in table_addresses.items():
+            if base is not None:
+                raw["entity_tables"][field] = list(backend.read_bytes(base, MAX_ENTITIES))
+
         for slot in range(MAX_ENTITIES):
             entity: dict[str, Any] = {"slot": slot, "private": {}}
             for field, base in table_addresses.items():
@@ -94,9 +110,10 @@ class LadxStateExtractor:
                 value = backend.read_u8(base + slot)
                 _set_path(entity, field, value)
             status = entity.get("status", 0)
+            entity_type = entity.get("type")
             entity["enabled"] = status != 0
             entity["status_name"] = ENTITY_STATUS_NAMES.get(status)
-            entity["type_name"] = None
+            entity["type_name"] = self.entity_type_names.get(entity_type) if isinstance(entity_type, int) else None
             entities.append(entity)
 
     def _read_room(self, backend: EmulatorBackend, room: dict[str, Any]) -> None:
@@ -122,4 +139,3 @@ def _set_path(target: dict[str, Any], dotted_path: str, value: Any) -> None:
 
 def _to_signed(value: int) -> int:
     return value - 0x100 if value & 0x80 else value
-

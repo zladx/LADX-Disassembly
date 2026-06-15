@@ -71,5 +71,9 @@ def test_ladx_state_extractor_returns_generic_json_safe_schema():
     assert state["entities"][0]["enabled"] is True
     assert state["entities"][0]["status_name"] == "ENTITY_STATUS_ACTIVE"
     assert state["entities"][0]["type"] == 9
+    assert state["entities"][0]["type_name"] == "ENTITY_OCTOROK"
     assert state["entities"][0]["x"] == 80
     assert state["entities"][0]["y"] == 64
+    assert len(state["entities"]) == 0x10
+    assert state["raw"]["entity_tables"]["status"][0] == 5
+    assert state["raw"]["entity_tables"]["type"][0] == 9

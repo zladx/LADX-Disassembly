@@ -1,6 +1,6 @@
 ; File generated automatically by `tools/generate_map_data.py`
 
-dw IndoorsB01  ; $2C200
+dw IndoorsB00  ; $2C200
 dw IndoorsB01  ; $2C200
 dw IndoorsB02  ; $2C22A
 dw IndoorsB03  ; $2C258
@@ -51,10 +51,10 @@ dw IndoorsB2F  ; $2CBFB
 dw IndoorsB30  ; $2CBFE
 dw IndoorsB31  ; $2CC3F
 dw IndoorsB32  ; $2CC5E
-dw IndoorsB34  ; $2CC8A
+dw IndoorsB33  ; $2CC8A
 dw IndoorsB34  ; $2CC8A
 dw IndoorsB35  ; $2CCA4
-dw IndoorsB37  ; $2CCE2
+dw IndoorsB36  ; $2CCE2
 dw IndoorsB37  ; $2CCE2
 dw IndoorsB38  ; $2CD40
 dw IndoorsB39  ; $2CD57
@@ -108,20 +108,20 @@ dw IndoorsB68  ; $2D7D0
 dw IndoorsB69  ; $2D80E
 dw IndoorsB6A  ; $2D85A
 dw IndoorsB6B  ; $2D8A8
+dw IndoorsB6C  ; $2D8F0
+dw IndoorsB6D  ; $2D8F0
+dw IndoorsB6E  ; $2D8F0
 dw IndoorsB6F  ; $2D8F0
-dw IndoorsB6F  ; $2D8F0
-dw IndoorsB6F  ; $2D8F0
-dw IndoorsB6F  ; $2D8F0
-dw IndoorsB76  ; $2D93D
+dw IndoorsB70  ; $2D93D
 dw IndoorsB71  ; $2D972
 dw IndoorsB72  ; $2D991
 dw IndoorsB73  ; $2D9C6
 dw IndoorsB74  ; $2DA1F
 dw IndoorsB75  ; $2DA4A
 dw IndoorsB76  ; $2D93D
-dw IndoorsB7A  ; $2DA9C
-dw IndoorsB7A  ; $2DA9C
-dw IndoorsB7A  ; $2DA9C
+dw IndoorsB77  ; $2DA9C
+dw IndoorsB78  ; $2DA9C
+dw IndoorsB79  ; $2DA9C
 dw IndoorsB7A  ; $2DA9C
 dw IndoorsB7B  ; $2DAFF
 dw IndoorsB7C  ; $2DB59
@@ -158,7 +158,7 @@ dw IndoorsB9A  ; $2E466
 dw IndoorsB9B  ; $2E49A
 dw IndoorsB9C  ; $2E4C7
 dw IndoorsB9D  ; $2E4F4
-dw IndoorsB9F  ; $2E521
+dw IndoorsB9E  ; $2E521
 dw IndoorsB9F  ; $2E521
 dw IndoorsBA0  ; $2E544
 dw IndoorsBA1  ; $2E580

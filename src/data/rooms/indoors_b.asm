@@ -1,5 +1,6 @@
 ; File generated automatically by `tools/generate_map_data.py`
 
+IndoorsB00::
 IndoorsB01::
   db   ANIMATED_TILES_DUNGEON_1 ; animation id
   db   ROOM_TEMPLATE_TOP_LEFT | $0D ; room template | floor tile
@@ -1327,6 +1328,7 @@ IndoorsB32::
   db   $28, $A1                ; object
   db   ROOM_END
 
+IndoorsB33::
 IndoorsB34::
   db   ANIMATED_TILES_LAVA ; animation id
   db   ROOM_TEMPLATE_TOP_RIGHT_BOTTOM_LEFT | $0D ; room template | floor tile
@@ -1371,6 +1373,7 @@ IndoorsB35::
   db   $08, $2A                ; object
   db   ROOM_END
 
+IndoorsB36::
 IndoorsB37::
   db   ANIMATED_TILES_DUNGEON_1 ; animation id
   db   ROOM_TEMPLATE_TOP_RIGHT_BOTTOM_LEFT | $0D ; room template | floor tile
@@ -2850,6 +2853,9 @@ IndoorsB6B::
   db   $E1, $07, $5F, $18, $70 ; object
   db   ROOM_END
 
+IndoorsB6C::
+IndoorsB6D::
+IndoorsB6E::
 IndoorsB6F::
   db   ANIMATED_TILES_DUNGEON_1 ; animation id
   db   ROOM_TEMPLATE_TOP_RIGHT_BOTTOM_LEFT | $0F ; room template | floor tile
@@ -2888,6 +2894,7 @@ IndoorsB6F::
   db   $56, $AB                ; object
   db   ROOM_END
 
+IndoorsB70::
 IndoorsB76::
   db   ANIMATED_TILES_DUNGEON_1 ; animation id
   db   ROOM_TEMPLATE_TOP_RIGHT_BOTTOM_LEFT | $0F ; room template | floor tile
@@ -3066,6 +3073,9 @@ IndoorsB75::
   db   $E1, $08, $71, $48, $40 ; object
   db   ROOM_END
 
+IndoorsB77::
+IndoorsB78::
+IndoorsB79::
 IndoorsB7A::
   db   ANIMATED_TILES_DUNGEON_1 ; animation id
   db   $90 | $05 ; room template | floor tile
@@ -4327,6 +4337,7 @@ IndoorsB9D::
   db   $E0, $00, $E8, $38, $62 ; object
   db   ROOM_END
 
+IndoorsB9E::
 IndoorsB9F::
   db   ANIMATED_TILES_WATER_DUNGEON ; animation id
   db   ROOM_TEMPLATE_TOP_RIGHT_BOTTOM_LEFT | $0D ; room template | floor tile

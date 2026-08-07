@@ -3603,6 +3603,7 @@ IndoorsA7D::
   db   $E1, $03, $6A, $78, $30 ; object
   db   ROOM_END
 
+IndoorsA7E::
 IndoorsA7F::
   db   ANIMATED_TILES_WATER_DUNGEON ; animation id
   db   ROOM_TEMPLATE_TOP_RIGHT_BOTTOM_LEFT | $0D ; room template | floor tile
@@ -6460,6 +6461,7 @@ IndoorsAEC::
   db   $E0, $00, $4A, $88, $30 ; object
   db   ROOM_END
 
+IndoorsAED::
 IndoorsAEE::
   db   ANIMATED_TILES_WATER_DUNGEON ; animation id
   db   $90 | $0D ; room template | floor tile

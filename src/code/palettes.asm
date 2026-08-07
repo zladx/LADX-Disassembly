@@ -206,7 +206,7 @@ func_021_40DB::
     cp   MAP_COLOR_DUNGEON                        ;; 21:4122 $FE $FF
     jr   nz, .jr_412C                             ;; 21:4124 $20 $06
 
-    ld   hl, Data_021_67D0                        ;; 21:4126 $21 $D0 $67
+    ld   hl, ColorDungeonPalette                  ;; 21:4126 $21 $D0 $67
     jp   label_021_41B4                           ;; 21:4129 $C3 $B4 $41
 
 .jr_412C

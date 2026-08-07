@@ -258,7 +258,9 @@ BGAttributesPointers_Overworld::
 ._FE dw OverworldObjectsAttrmap_0B
 ._FF dw OverworldObjectsAttrmap_0B
 
-; Object attributes groups for IndoorA rooms, indexed by hRoomId.
+; Object attributes groups for IndoorA rooms, indexed by hMapId.
+; NOTE: Not indexed by hRoomId as you would expected from the size of this table.
+; This is used for any indoorA room, but also for map id 6 and 7 (D7 and D8)
 ; The bank for those pointers is `BANK(IndoorsAObjectsAttrmaps)` (by default $23).
 BGAttributesPointers_IndoorsA::
 ._00 dw IndoorsAObjectsAttrmap_00
@@ -518,7 +520,9 @@ BGAttributesPointers_IndoorsA::
 ._FE dw IndoorsAObjectsAttrmap_00
 ._FF dw IndoorsAObjectsAttrmap_00
 
-; Object attributes groups for IndoorB rooms, indexed by hRoomId.
+; Object attributes groups for IndoorB rooms, indexed by hMapId.
+; NOTE: Not indexed by hRoomId as you would expected from the size of this table.
+; This is used for any indoorB room, except for map id 6 and 7 (D7 and D8), which use the IndoorsA table. (yes, this is a mess)
 ; The bank for those pointers is `BANK(IndoorsBObjectsAttrmaps)` (by default $24).
 BGAttributesPointers_IndoorsB::
 ._00 dw IndoorsBObjectsAttrmap_00

@@ -158,7 +158,7 @@ MACRO dialog_string_wrapping
 
 		REPT strlen(#paragraph) ; Not the real iteration count, but we need an upper bound since there is no `WHILE`.
 			; Pad from the last line's end.
-			ds (DIALOG_LINE_LEN - (@ - :-)) % DIALOG_LINE_LEN,  charval(#" ")
+			ds (DIALOG_LINE_LEN - (@ - :-)) % DIALOG_LINE_LEN, ' '
 			: ; Mark the beginning of this line for the next one.
 
 			redef line equs ""
@@ -169,7 +169,7 @@ MACRO dialog_string_wrapping
 			ENDC
 
 			; Otherwise, build up the line from charmap units.
-			FOR i, DIALOG_LINE_LEN+1
+			FOR i, DIALOG_LINE_LEN
 				redef unit equs strchar(#paragraph, i)
 				assert charsize(#unit) == 1, "'{unit}' maps to more than one byte!!"
 
@@ -183,8 +183,12 @@ MACRO dialog_string_wrapping
 
 				redef line equs #line ++ #unit ; Append the unit.
 			ENDR
-
+			IF strchar(#paragraph, DIALOG_LINE_LEN) === " " ; Check if the *next* char is a space!
+				def line_len = strlen(#line)
+				def cut_at = line_len + 1 ; The space isn't going to be included in the line, so that's okay.
+			ENDC
 			assert def(line_len), "Line too long! (No breakable char found in \"{line}\")"
+
 			db strslice(#line, 0, line_len) ; Emit the wrapped line...
 			redef paragraph equs strslice(#paragraph, cut_at)
 			purge line_len, cut_at ; So they aren't left over for the next iteration.

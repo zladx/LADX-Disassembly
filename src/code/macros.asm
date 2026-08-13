@@ -145,3 +145,61 @@ macro jp_open_dialog
       | (OpenDialogInTable1 * (HIGH((\1_IdxOffset - DialogPointerTable) / 2) == 1)) \
       | (OpenDialogInTable2 * (HIGH((\1_IdxOffset - DialogPointerTable) / 2) == 2))
 endm
+
+
+def DIALOG_LINE_LEN equ 16
+
+MACRO dialog_string_wrapping
+	: ; Since each line pads for the previous one, pretend there is an empty line so the first line doesn't emit any padding.
+
+	REPT _NARG
+		def paragraph equs \1
+		shift ; Process the next argument on the next iteration.
+
+		REPT strlen(#paragraph) ; Not the real iteration count, but we need an upper bound since there is no `WHILE`.
+			; Pad from the last line's end.
+			ds (DIALOG_LINE_LEN - (@ - :-)) % DIALOG_LINE_LEN,  charval(#" ")
+			: ; Mark the beginning of this line for the next one.
+
+			redef line equs ""
+            redef unit equs ""
+			IF charlen(#paragraph) <= DIALOG_LINE_LEN ; If we are guaranteed to finish the line...
+				db #paragraph ; ...then emit whatever's left...
+				BREAK ; ...and stop!
+			ENDC
+
+			; Otherwise, build up the line from charmap units.
+			FOR i, DIALOG_LINE_LEN+1
+				redef unit equs strchar(#paragraph, i)
+				assert charsize(#unit) == 1, "'{unit}' maps to more than one byte!!"
+
+				IF #unit === " "
+					def line_len = strlen(#line) ; It is possible to break *before* this char.
+					def cut_at = line_len + 1 ; ...but then the next line begins *after* it!
+				ELIF #unit === "-"
+					def line_len = strlen(#line) + 1 ; It is possible to break *after* hyphens.
+					def cut_at = line_len ; ...and they thus don't get ignored.
+				ENDC
+
+				redef line equs #line ++ #unit ; Append the unit.
+			ENDR
+
+			assert def(line_len), "Line too long! (No breakable char found in \"{line}\")"
+			db strslice(#line, 0, line_len) ; Emit the wrapped line...
+			redef paragraph equs strslice(#paragraph, cut_at)
+			purge line_len, cut_at ; So they aren't left over for the next iteration.
+		ENDR
+
+		purge paragraph, line, unit ; Delete temporaries.
+	ENDR
+ENDM
+
+MACRO dialog_text
+    dialog_string_wrapping \#
+	db "@"
+ENDM
+
+MACRO dialog_ask
+    dialog_string_wrapping \#
+	db "<ask>"
+ENDM

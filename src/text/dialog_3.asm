@@ -251,11 +251,7 @@ Dialog128:: ; Mamasha, probably
     db "return!@"
 
 Dialog129:: ; Narrator
-    db "You traded your "
-    db "<yoshi> for <ribbon>!  Maybe "
-    db "you can trade   "
-    db "the ribbon for  "
-    db "something else!@"
+    dialog_text "You traded your <yoshi> for <ribbon>!  Maybe you can trade the ribbon for something else!"
 
 Dialog12A:: ; Mamasha
     db "Because they all"

@@ -380,6 +380,7 @@ jr_017_466B:
     xor  a                                        ;; 17:466E $AF
     ld   [wCreditsSubscene], a                    ;; 17:466F $EA $0E $D0
     call ResetCreditsSceneVariables               ;; 17:4672 $CD $A5 $4D
+.VCHookEndStaffCredits:
     jp   IncrementCreditsGameplaySubtype          ;; 17:4675 $C3 $5B $4C
 
 func_017_4678::
@@ -4880,6 +4881,7 @@ CreditsLinkFaceCloseUp6Handler::
     and  a                                        ;; 17:6E68 $A7
     jr   nz, .ret_6E6E                            ;; 17:6E69 $20 $03
 
+.VCHookBeginStaffCredits:
     jp   TransitionToNextEndingScene              ;; 17:6E6B $C3 $DE $64
 
 .ret_6E6E

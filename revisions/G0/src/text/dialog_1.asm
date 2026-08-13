@@ -194,12 +194,21 @@ Dialog016::
     db "    Ja   Nein<ask>"
 
 Dialog017::
+IF DEF(VIRTUAL_CONSOLE)
+    db "Hallo, ich heiße"
+    db "Trantrudi! Ich  "
+    db "verkaufe Dir ein"
+    db "Geheimnis, das  "
+    db "Dich sicher an- "
+    db "machen wird...@"
+ELSE
     db "Hallo, ich heiße"
     db "Geierwally! Ich "
     db "verkaufe Dir ein"
     db "Geheimnis, das  "
     db "Dich sicher an- "
     db "machen wird...@"
+ENDC
 
 Dialog018::
     db "Zahlst Du mir 28"
@@ -751,8 +760,13 @@ Dialog07F::
     db "@"
 
 Dialog080::
+IF DEF(VIRTUAL_CONSOLE)
+    db "   Trantrudis   "
+    db "   Reformhaus@"
+ELSE
     db "  Geierwallies  "
     db "   Reformhaus@"
+ENDC
 
 Dialog081::
     db "   Haus  der    "

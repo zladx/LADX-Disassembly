@@ -8,3 +8,6 @@
 *.bat  text eol=crlf
 *.sh   text eol=lf
 *.md5  text eol=lf
+
+# Enforce encoding and syntax highlighting for VC patch templates
+*.patch.template text eol=crlf linguist-language=INI

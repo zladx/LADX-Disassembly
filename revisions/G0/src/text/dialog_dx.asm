@@ -57,6 +57,17 @@ Dialog243::
     db "@"
 
 Dialog244::
+IF DEF(VIRTUAL_CONSOLE)
+    db "TUUUUT! TUUUUT! "
+    db "Ja? Hier Ulrira!"
+    db "Du solltest den "
+    db "kleinen Komet   "
+    db "jetzt nach Hause"
+    db "bringen! Madame "
+    db "MiouMiou wartet "
+    db "schon auf ihn..."
+    db "KLICK! TUTUTU..@"
+ELSE
     db "TUUUUT! TUUUUT! "
     db "Ja? Hier Ulrira!"
     db "Du solltest den "
@@ -66,6 +77,7 @@ Dialog244::
     db "MiouMiou wartet "
     db "schon auf ihn..."
     db "KLICK! TUTUTU..@"
+ENDC
 
 Dialog245::
     db "TUUUUT! TUUUUT! "
@@ -423,12 +435,21 @@ Dialog26F::
     db "Rot: Gefahr!@"
 
 Dialog270::
+IF DEF(VIRTUAL_CONSOLE)
+    db "Hey, ein tolles "
+    db "Motiv! Ich nenne"
+    db "es \"##### und   "
+    db "Komet!\"         "
+    db "Rücke näher zu  "
+    db "Komet!  @"
+ELSE
     db "Hey, ein tolles "
     db "Motiv! Ich nenne"
     db "es \"##### und   "
     db "Struppi!\"       "
     db "Rücke näher zu  "
     db "Struppi!@"
+ENDC
 
 Dialog271::
     db "Grrrr!@"
@@ -505,6 +526,12 @@ Dialog27E::
     db "Tragkraft...@"
 
 Dialog27F::
+IF DEF(VIRTUAL_CONSOLE)
+    db "Hey! Hast Du    "
+    db "Trantrudi       "
+    db "schon besucht?@"
+ELSE
     db "Hey! Hast Du    "
     db "Geierwally      "
     db "schon besucht?@"
+ENDC

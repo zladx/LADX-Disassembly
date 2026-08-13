@@ -740,8 +740,12 @@ PhotoAlbumPictureInteractiveHandler:
 .else_447D_28:
     ldh  a, [hJoypadState]                        ; $447D: PhotoAlbumPictureInteractiveHandler $F0 $CC
     bit  J_BIT_A, a                               ; $447F: PhotoAlbumPictureInteractiveHandler $CB $67
+.VCPatchPrintPhoto:
+IF DEF(VIRTUAL_CONSOLE)
+    jr   .else_4492_28                            ; $4481: PhotoAlbumPictureInteractiveHandler $18 $0F
+ELSE
     jr   z, .else_4492_28                         ; $4481: PhotoAlbumPictureInteractiveHandler $28 $0F
-
+ENDC
     ld   a, JINGLE_VALIDATE                       ; $4483: PhotoAlbumPictureInteractiveHandler $3E $13
     ldh  [hJingle], a                             ; $4485: PhotoAlbumPictureInteractiveHandler $E0 $F2
     xor  a                                        ; $4487: PhotoAlbumPictureInteractiveHandler $AF

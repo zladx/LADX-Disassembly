@@ -717,21 +717,41 @@ Dialog159:: ; Grandma Yahoo
     db "the island!@"
 
 Dialog15A:: ; Grandma Yahoo
+IF DEF(VIRTUAL_CONSOLE)
+    db "HELLO!   I'm    "
+    db "fine, and you?!@"
+ELSE
     db "YAHOO!   I'm    "
     db "fine, and you?!@"
+ENDC
 
 Dialog15B:: ; Grandma Yahoo
+IF DEF(VIRTUAL_CONSOLE)
+    db "YIPPEE! I worked"
+    db "too hard and now"
+    db "my broom is worn"
+    db "to the handle!@"
+ELSE
     db "YAHOO!  I worked"
     db "too hard and now"
     db "my broom is worn"
     db "to the handle!@"
+ENDC
 
 Dialog15C:: ; Grandma Yahoo
+IF DEF(VIRTUAL_CONSOLE)
+    db "YIPPEE! YIPPEE! "
+    db "A new broom?!   "
+    db "For me?  It is, "
+    db "isn't it?!      "
+    db "    Yes  No<ask>"
+ELSE
     db "YAHOO!  YAHOO!  "
     db "A new broom?!   "
     db "For me?  It is, "
     db "isn't it?!      "
     db "    Yes  No<ask>"
+ENDC
 
 Dialog15D:: ; Grandma Yahoo
     db "Okay!  In return"
@@ -749,8 +769,13 @@ Dialog15E:: ; Narrator
     db "hook become?@"
 
 Dialog15F:: ; Grandma Yahoo
+IF DEF(VIRTUAL_CONSOLE)
+    db "YIPPEE! A new   "
+    db "broom!  Superb!@"
+ELSE
     db "YAHOO!  A new   "
     db "broom!  Superb!@"
+ENDC
 
 Dialog160:: ; Kiki
     db "Kiiiki!  What?! "

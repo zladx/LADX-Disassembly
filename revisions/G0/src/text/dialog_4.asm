@@ -286,11 +286,19 @@ Dialog1A7::
     db "Telefonhäuschen@"
 
 Dialog1A8::
+IF DEF(VIRTUAL_CONSOLE)
+    db " * GEFAHR!!!! * "
+    db "    BETRETEN    "
+    db "    VERBOTEN    "
+    db " (außer  Komet) "
+    db "@"
+ELSE
     db " * GEFAHR!!!! * "
     db "    BETRETEN    "
     db "    VERBOTEN    "
     db "(außer  Struppi)"
     db "@"
+ENDC
 
 Dialog1A9::
     db "<down> HIER ENTLANG@"
@@ -321,9 +329,15 @@ Dialog1AF::
     db "@"
 
 Dialog1B0::
+IF DEF(VIRTUAL_CONSOLE)
+    db "<right> Trantrudi     "
+    db "<down> Manbos Brunnen"
+    db "@"
+ELSE
     db "<right> Geierwally    "
     db "<down> Manbos Brunnen"
     db "@"
+ENDC
 
 Dialog1B1::
     db "<right> Zoodorf       "
@@ -1187,6 +1201,35 @@ Dialog21E::
 
 Dialog21F::
 Dialog220::
+IF DEF(VIRTUAL_CONSOLE)
+    db "Hey, Du da! Es  "
+    db "ist etwas ganz  "
+    db "Schlimmes ge-   "
+    db "schehen... Ja,  "
+    db "ganz schlimm!   "
+    db "Die Moblins sind"
+    db "ins Dorf gekom- "
+    db "men. Ja, ganz   "
+    db "viele... Eine   "
+    db "ganze Gruppe von"
+    db "Miblons, ähh... "
+    db "Moblins! Dann..."
+    db "sie sind zu dem "
+    db "Haus... Ja, das "
+    db "Haus von Komet  "
+    db "und der Frau... "
+    db "Sie haben etwas "
+    db "ganz Böses ge-  "
+    db "tan. Oh ja, das "
+    db "war vielleicht  "
+    db "böse...         "
+    db "... ... ... ... "
+    db "... ... ... ... "
+    db "Hm! Finde besser"
+    db "selbst heraus,  "
+    db "was geschehen   "
+    db "ist...@"
+ELSE
     db "Hey, Du da! Es  "
     db "ist etwas ganz  "
     db "Schlimmes ge-   "
@@ -1214,6 +1257,7 @@ Dialog220::
     db "selbst heraus,  "
     db "was geschehen   "
     db "ist...@"
+ENDC
 
 Dialog221::
     db "Letzte Nacht hat"

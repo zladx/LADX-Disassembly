@@ -827,6 +827,16 @@ Dialog1FC::
     db "50 pas <up>@"
 
 Dialog1FD::
+IF DEF(VIRTUAL_CONSOLE)
+    db "DRING DRING!    "
+    db "DRING! Hello!   "
+    db "Madison         "
+    db "à l'appaouïelle."
+    db "No darling...   "
+    db "CLIC!           "
+    db "Tu as dû faire  "
+    db "un faux numéro!@"
+ELSE
     db "DRING DRING!    "
     db "DRING! Hello!   "
     db "Madonna         "
@@ -835,6 +845,7 @@ Dialog1FD::
     db "CLIC!           "
     db "Tu as dû faire  "
     db "un faux numéro!@"
+ENDC
 
 Dialog1FE::
     db "C'est un gros!  "

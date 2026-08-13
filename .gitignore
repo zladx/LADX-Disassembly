@@ -1,6 +1,7 @@
 # build
 *.o
 *.gbc
+*.patch
 *.1bpp
 *.2bpp
 

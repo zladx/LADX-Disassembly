@@ -1,6 +1,6 @@
 .POSIX:
 .SUFFIXES:
-.PRECIOUS: %.2bpp oam_%.2bpp
+.PRECIOUS: %.2bpp oam_%.2bpp src/vc/%.gbc
 .PHONY: default build build-all test test-all all clean tidy
 
 # Recursive `wildcard` function.
@@ -74,12 +74,25 @@ oam_%.2bpp: oam_%.png
 src/main.%.o: src/main.asm $(asm_files) $(gfx_files:.png=.2bpp) $(bin_files)
 	$(ASM) $(ASFLAGS) $($*_ASFLAGS) -I src/ -o $@ $<
 
-# Link object files into a GBC executable rom
+# Link object files into a GBC executable ROM
 # The arguments used are both the global options (e.g. `LDFLAGS`) and the
 # locale-specific options (e.g. `azlg-r1_LDFLAGS`).
 %.gbc: src/main.%.o
 	$(LD) $(LDFLAGS) $($*_LDFLAGS) -n $*.sym -o $@ $^
 	$(FX) $(FXFLAGS) $($*_FXFLAGS) $@
+
+# Compile prepatched object files for creating VC patches
+src/vc/main.%.o: src/main.asm $(asm_files) $(gfx_files:.png=.2bpp) $(bin_files)
+	$(ASM) $(ASFLAGS) $($*_ASFLAGS) -DVIRTUAL_CONSOLE -I src/ -o $@ $<
+
+# Link prepatched ROMs for creating VC patches
+src/vc/%.gbc: src/vc/main.%.o
+	$(LD) $(LDFLAGS) $($*_LDFLAGS) -n src/vc/$*.sym -o $@ $^
+	$(FX) $(FXFLAGS) $($*_FXFLAGS) $@
+
+# Fill in template into a VC patch file
+%.patch: src/vc/%.patch.template src/vc/%.gbc
+	tools/vc.py --template $< --out $@ --sym src/vc/$*.sym --rom src/vc/$*.gbc
 
 # Make may attempt to re-generate the Makefile; prevent this.
 Makefile: ;
@@ -108,6 +121,9 @@ src/main.azlj-r2.o: $(azlj_asm) $(azlj_gfx:.png=.2bpp) $(azlj_bin)
 azlj-r2_ASFLAGS = -DLANG=JP -DVERSION=2 -I revisions/J0/src/
 azlj-r2_FXFLAGS = --rom-version 2 --title "ZELDA" --game-id "AZLJ"
 
+patches += azlj-r2.patch
+src/vc/main.azlj-r2.o: $(azlj_asm) $(azlj_gfx:.png=.2bpp) $(azlj_bin)
+
 #
 # German
 #
@@ -127,6 +143,9 @@ src/main.azlg-r1.o: $(azlg_asm) $(azlg_gfx:.png=.2bpp) $(azlg_bin) azlj-r2.gbc
 azlg-r1_ASFLAGS = -DLANG=DE -DVERSION=1 -I revisions/G0/src/
 azlg-r1_LDFLAGS = -O azlj-r2.gbc
 azlg-r1_FXFLAGS = --rom-version 1 --non-japanese --title "ZELDA" --game-id "AZLD"
+
+patches += azlg-r1.patch
+src/vc/main.azlg-r1.o: $(azlg_asm) $(azlg_gfx:.png=.2bpp) $(azlg_bin) azlj-r2.gbc
 
 #
 # French
@@ -148,6 +167,9 @@ azlf-r1_ASFLAGS = -DLANG=FR -DVERSION=1 -I revisions/F0/src/
 azlf-r1_LDFLAGS = -O azlg-r1.gbc
 azlf-r1_FXFLAGS = --rom-version 1 --non-japanese --title "ZELDA" --game-id "AZLF"
 
+patches += azlf-r1.patch
+src/vc/main.azlf-r1.o: $(azlf_asm) $(azlf_gfx:.png=.2bpp) $(azlf_bin) azlg-r1.gbc
+
 #
 # English
 #
@@ -168,6 +190,9 @@ azle-r2_ASFLAGS = -DLANG=EN -DVERSION=2
 azle-r2_LDFLAGS = -O azlf-r1.gbc
 azle-r2_FXFLAGS = --rom-version 2 --non-japanese --title "ZELDA" --game-id "AZLE"
 
+patches += azle-r2.patch
+src/vc/main.azle-r2.o: azlf-r1.gbc
+
 #
 # Main targets
 #
@@ -176,7 +201,7 @@ azle-r2_FXFLAGS = --rom-version 2 --non-japanese --title "ZELDA" --game-id "AZLE
 build: azle.gbc
 
 # Build all revisions.
-build-all: $(games)
+build-all: $(games) $(patches)
 
 # Test the default revision.
 test: build
@@ -184,7 +209,7 @@ test: build
 
 # Test all revisions.
 test-all: build-all
-	@tools/compare.sh ladx.md5 $(games)
+	@tools/compare.sh ladx.md5 $(games) $(patches)
 
 all: build-all test-all
 
@@ -193,6 +218,11 @@ tidy:
 	rm -f $(games:%.gbc=src/main.%.o)
 	rm -f $(games:.gbc=.map)
 	rm -f $(games:.gbc=.sym)
+	rm -f $(patches)
+	rm -f $(patches:%.patch=src/vc/main.%.o)
+	rm -f $(patches:%.patch=src/vc/%.gbc)
+	rm -f $(patches:%.patch=src/vc/%.map)
+	rm -f $(patches:%.patch=src/vc/%.sym)
 
 clean: tidy
 	rm -f $(gfx_files:.png=.2bpp)

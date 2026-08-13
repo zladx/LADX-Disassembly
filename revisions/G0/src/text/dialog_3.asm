@@ -362,6 +362,26 @@ Dialog12E::
     db "für ein Foto?@"
 
 Dialog12F::
+IF DEF(VIRTUAL_CONSOLE)
+    db "Danke! Daaaanke!"
+    db "Es war ja so süß"
+    db "von Dir, Dich um"
+    db "den kleinen     "
+    db "Komet zu        "
+    db "kümmern. Du bist"
+    db "ein ganz lieber "
+    db "Kerl. Wie kann  "
+    db "ich Dir jemals  "
+    db "danken..? Aaaah,"
+    db "ich weiß... ... "
+    db "SCHMMMMMMMMMATZ!"
+    db "... ... ... ... "
+    db "... ... ... ... "
+    db "Du hast einen   "
+    db "Kuß von Madame  "
+    db "MiouMiou erhal- "
+    db "ten. Zufrieden?@"
+ELSE
     db "Danke! Daaaanke!"
     db "Es war ja so süß"
     db "von Dir, Dich um"
@@ -380,15 +400,37 @@ Dialog12F::
     db "Kuß von Madame  "
     db "MiouMiou erhal- "
     db "ten. Zufrieden?@"
+ENDC
 
 Dialog130::
+IF DEF(VIRTUAL_CONSOLE)
+    db "Bonjour..! Mein "
+    db "kleiner Komet   "
+    db "sieht mit seiner"
+    db "neuen Frisur so "
+    db "süüüüß aus!@"
+ELSE
     db "Bonjour..! Mein "
     db "kleiner Struppi "
     db "sieht mit seiner"
     db "neuen Frisur so "
     db "süüüüß aus!@"
+ENDC
 
 Dialog131::
+IF DEF(VIRTUAL_CONSOLE)
+    db "KREEEEIIIIIISCH!"
+    db "Es ist entsetz- "
+    db "lich! Sie haben "
+    db "meinen Komet    "
+    db "entführt. Sie..."
+    db "die.. Mo.. Mob.."
+    db "MOBLIIIIIIINS..."
+    db "Warum hilft denn"
+    db "keiner meinem   "
+    db "kleinen Komet?  "
+    db "@"
+ELSE
     db "KREEEEIIIIIISCH!"
     db "Es ist entsetz- "
     db "lich! Sie haben "
@@ -400,8 +442,22 @@ Dialog131::
     db "keiner meinem   "
     db "kleinen Struppi?"
     db "@"
+ENDC
 
 Dialog132::
+IF DEF(VIRTUAL_CONSOLE)
+    db "DANKE! DAAAANKE!"
+    db "Du hast mir den "
+    db "Kleinen Komet   "
+    db "zurückgebracht. "
+    db "Aber könntest Du"
+    db "mit ihm kurz    "
+    db "Gassi gehen? Ich"
+    db "bin gerade etwas"
+    db "unpäßlich...    "
+    db "Du machst es?   "
+    db "Vielen Dank!@"
+ELSE
     db "DANKE! DAAAANKE!"
     db "Du hast mir den "
     db "Kleinen Struppi "
@@ -413,6 +469,7 @@ Dialog132::
     db "unpäßlich...    "
     db "Du machst es?   "
     db "Vielen Dank!@"
+ENDC
 
 Dialog133::
     db "Hallo, mein Name"
@@ -579,6 +636,19 @@ Dialog142::
     db "@"
 
 Dialog143::
+IF DEF(VIRTUAL_CONSOLE)
+    db "TUUUUT! TUUUUT! "
+    db "Ja? Hier Ulrira!"
+    db "Die unzerstör-  "
+    db "baren Blumen im "
+    db "Schleimsumpf    "
+    db "sind Komets     "
+    db "Lieblingsspeise!"
+    db "Warum führst Du "
+    db "ihn nicht einmal"
+    db "dort herum?     "
+    db "KLICK! TUTUTU..@"
+ELSE
     db "TUUUUT! TUUUUT! "
     db "Ja? Hier Ulrira!"
     db "Die unzerstör-  "
@@ -590,6 +660,7 @@ Dialog143::
     db "ihn nicht einmal"
     db "dort herum?     "
     db "KLICK! TUTUTU..@"
+ENDC
 
 Dialog144::
     db "TUUUUT! TUUUUT! "
@@ -939,10 +1010,17 @@ Dialog16B::
     db "peinlich...@"
 
 Dialog16C::
+IF DEF(VIRTUAL_CONSOLE)
+    db "Du hast Komet   "
+    db "gerettet! Ein   "
+    db "furchterregender"
+    db "Köter!@"
+ELSE
     db "Du hast Struppi "
     db "gerettet! Ein   "
     db "furchterregender"
     db "Köter!@"
+ENDC
 
 Dialog16D::
     db "Wow! Der Gockel "

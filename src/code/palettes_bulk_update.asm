@@ -236,7 +236,12 @@ MadBatterReplaceScenePalettes::
     ld   c, MadBatterBGPalettes.inverted1 - MadBatterBGPalettes.start ;; 24:7B7D $0E $80
 
     ld   a, d                                     ;; 24:7B7F $7A
+.VCPatchFlashingEffect:
+IF DEF(VIRTUAL_CONSOLE)
+    bit  4, a                                     ;; 24:7B80 $CB $67
+ELSE
     bit  1, a                                     ;; 24:7B80 $CB $4F
+ENDC
     jr   nz, .jr_024_7B85                         ;; 24:7B82 $20 $01
     add  hl, bc                                   ;; 24:7B84 $09
 .jr_024_7B85

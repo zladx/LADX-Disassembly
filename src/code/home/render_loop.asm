@@ -96,6 +96,7 @@ ENDC
     ; Load the requested tileset or BG map
     di                                            ;; 00:022F $F3
     call LoadRequestedGfx                         ;; 00:0230 $CD $19 $04
+.VCHookSoundDelay:
     ei                                            ;; 00:0233 $FB
     ; Play more audio
     call PlayAudioStep                            ;; 00:0234 $CD $A4 $08

@@ -1,0 +1,121 @@
+;Dmgazlf1.f80: ZeldaYumeDX
+
+[PRINT]
+Mode = 1
+Address = {LABEL PhotoAlbumPictureInteractiveHandler.VCPatchPrintPhoto}
+Fixcode = {PATCH PhotoAlbumPictureInteractiveHandler.VCPatchPrintPhoto 1}
+
+[SoundDelayA]
+Mode = 2
+Type = 0
+Address = {LABEL RenderLoop.playAudioStep}
+Fixcode = 2
+
+[SoundDelayB]
+Mode = 2
+Type = 0
+Address = {LABEL RenderLoop.skipAudio}
+Fixcode = 2
+
+[SoundDelayC]
+Mode = 2
+Type = 1
+Address = {LABEL RenderLoop.VCHookSoundDelay}
+
+[STAFF_Begin]
+Mode = 5
+Type = 0
+Address = {LABEL CreditsLinkFaceCloseUp6Handler.VCHookBeginStaffCredits}
+
+[STAFF_End]
+Mode = 5
+Type = 1
+Address = {LABEL jr_017_466B.VCHookEndStaffCredits}
+
+[Madonna]
+Mode = 1
+Address = {LABEL Dialog1FD+35}
+Fixcode = {PATCH Dialog1FD+35 4}
+
+;[LIGHT_Begin]
+;Mode = 3
+;Type = 0
+;DarkEnable = 1
+;Dark = 4
+;Address = x610EF
+
+;[LIGHT_End]
+;Mode = 3
+;Type = 1
+;Address = x63F2D
+
+;4F: origin 57: 1/2  5F: 1/4  67: 1/8 
+[LIGHT_FREQ]
+Mode = 1
+Address = {MIXEDCASELABEL MadBatterReplaceScenePalettes.VCPatchFlashingEffect+1}
+Fixcode = {PATCH MadBatterReplaceScenePalettes.VCPatchFlashingEffect+1 1}
+
+
+;[LIGHT_COLOR_BLACK_75_0]
+;Mode = 1
+;Address = x93AA3
+;Fixcode = a16: 6B 19 6B 19 B5 32 00 00  00 00 6B 19 B5 32 FF 47
+
+;[LIGHT_COLOR_BLACK_75_1]
+;Mode = 1
+;Address = x93AB3
+;Fixcode = a16: 00 00 6B 19 B5 32 FF 47  00 00 6B 19 B5 32 FF 47
+
+;[LIGHT_COLOR_BLACK_75_2]
+;Mode = 1
+;Address = x93AC3
+;Fixcode = a16: 00 00 6B 19 B5 32 FF 47  6B 19 B5 32 00 00 FF 47
+
+;[LIGHT_COLOR_BLACK_75_3]
+;Mode = 1
+;Address = x93AD3
+;Fixcode = a16: 00 00 6B 19 B5 32 FF 47  6B 19 6B 19 B5 32 FF 47
+
+;[LIGHT_COLOR_WHITE_75]
+;Mode = 1
+;Address = x93B37
+;Fixcode = a16: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+;[LIGHT_COLOR_BLACK_74_0]
+;Mode = 1
+;Address = x93A63
+;Fixcode = a16: 00 00 6B 19 B5 32 FF 47 00 00 6B 19 B5 32 FF 47
+
+
+;[LIGHT_COLOR_BLACK_74_1]
+;Mode = 1
+;Address = x93A73
+;Fixcode = a16: 00 00 6B 19 B5 32 FF 47 00 00 6B 19 B5 32 FF 47
+
+
+;[LIGHT_COLOR_BLACK_74_2]
+;Mode = 1
+;Address = x93A83
+;Fixcode = a16: B5 32 00 00 B5 32 FF 47 FF 7F FF 7F FF 7F FF 7F
+
+;[LIGHT_COLOR_BLACK_74_3]
+;Mode = 1
+;Address = x93A93
+;Fixcode = a16: B5 32 6B 19 B5 32 FF 47 00 00 6B 19 B5 32 FF 47
+
+;[LIGHT_COLOR_WHITE_74_0]
+;Mode = 1
+;Address = x93AE3
+;Fixcode = a16: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+[Dead Menu Begin]
+Mode = 2
+Type = 3
+Address = {LABEL GameOverInteractiveHandler}
+Fixcode = 1343
+
+[Dead Menu End]
+Mode = 2
+Type = 4
+Address = {LABEL GameOverInteractiveHandler.VCHookEndDisabledMenuHandler}
+Fixcode = 1343

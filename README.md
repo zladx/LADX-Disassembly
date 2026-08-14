@@ -1,4 +1,4 @@
-# Links Awakening DX Disassembly
+# Link's Awakening DX Disassembly
 
 Disassembly of one of my favorite games. Taking it easy for now.
 

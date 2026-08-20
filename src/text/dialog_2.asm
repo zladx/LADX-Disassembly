@@ -121,7 +121,41 @@ Dialog0CF:: ; Owl
     dialog_text "Hoot! Young lad, I mean... #####, the hero!  You have defeated the Nightmares! You have proven your wisdom, courage and power!", "... ... ... ... As part of the Wind Fish's spirit, I am the guardian of his dream world... But one day, the Nightmares entered the dream and began wreaking havoc. Then you, #####, came to rescue the island...", "I have always trusted in your courage to turn back the Night- mares.  Thank you, #####... My work is done... The Wind Fish will wake soon. Good bye...Hoot!"
 
 Dialog0D0:: ; Wind Fish
-    dialog_text "... ... ... ...", " ... ... ... ...  I AM THE WIND", "      FISH...", " LONG HAS BEEN", "  MY SLUMBER...", " IN MY DREAMS...  AN EGG APPEARED      AND WAS SURROUNDED BY AN   ISLAND, WITH PEOPLE, ANIMALS, AN ENTIRE WORLD! ... ... ... ...", "  BUT, VERILY, IT BE THE NATURE   OF DREAMS TO END! WHEN I DOST AWAKEN, KOHOLINT  WILL BE GONE... ONLY THE MEMORY", " OF THIS DREAM LAND WILL EXIST", "  IN THE WAKING", "      WORLD...", " SOMEDAY, THOU MAY RECALL THIS", " ISLAND...  THAT  MEMORY MUST BE", " THE REAL DREAM", "     WORLD... ... ... ... ...", " COME, #####... LET US AWAKEN...    TOGETHER!!"
+    db "... ... ... ... "
+    db " ... ... ... ..."
+    db " I AM THE WIND  "
+    db "      FISH...   "
+    db " LONG HAS BEEN  "
+    db "  MY SLUMBER... "
+    db " IN MY DREAMS..."
+    db " AN EGG APPEARED"
+    db "     AND WAS    "
+    db "SURROUNDED BY AN"
+    db "  ISLAND, WITH  "
+    db "PEOPLE, ANIMALS,"
+    db "AN ENTIRE WORLD!"
+    db "... ... ... ... "
+    db "  BUT, VERILY,  "
+    db "IT BE THE NATURE"
+    db "  OF DREAMS TO  "
+    db "END! WHEN I DOST"
+    db "AWAKEN, KOHOLINT"
+    db " WILL BE GONE..."
+    db "ONLY THE MEMORY "
+    db " OF THIS DREAM  "
+    db "LAND WILL EXIST "
+    db "  IN THE WAKING "
+    db "      WORLD...  "
+    db " SOMEDAY, THOU  "
+    db "MAY RECALL THIS "
+    db " ISLAND...  THAT"
+    db " MEMORY MUST BE "
+    db " THE REAL DREAM "
+    db "     WORLD...   "
+    db "... ... ... ... "
+    db " COME, #####... "
+    db "LET US AWAKEN..."
+    db "   TOGETHER!!@"
 
 Dialog0D1:: ; Wind Fish
 Dialog0D2:: ; Wind Fish
@@ -149,7 +183,8 @@ Dialog0DB:: ; Mamu
     dialog_text "Ribbit!  Ribbit! Hey, man, I'm Mamu, on vocals! Brother, you look like you don't know", "squat about music!  Ribbit!"
 
 Dialog0DC:: ; Mamu
-    dialog_ask "Ribbit!  Ribbit! I'm Mamu, on vocals!  But I don't need to tell you that, do I?  Everybody knows me!  Want to hang out and listen to us jam?  For 300 Rupees, we'll let you listen to a previously unreleased cut! What do you do?", "    Pay  Leave"
+    dialog_string_wrapping "Ribbit!  Ribbit! I'm Mamu, on vocals!  But I don't need to tell you that, do I?  Everybody knows me!  Want to hang out and listen to us jam?  For 300 Rupees, we'll let you listen to a previously unreleased cut! What do you do?"
+    dialog_ask_line "Pay", "Leave"
 
 Dialog0DD:: ; Mamu
     dialog_text "Thank you... Thank you very much... Croak!"
@@ -164,16 +199,20 @@ Dialog0E0:: ; Mamu
     dialog_text "If you play this song, you'll make everything around you feel more alive!"
 
 Dialog0E1:: ; Li'l Devil
-    dialog_ask "Hey, Kid!  You woke me up from a fine nap!! ...Thanks a lot! But now, I'll get my revenge! Are you ready?!", "    Yes  N-No"
+    dialog_string_wrapping "Hey, Kid!  You woke me up from a fine nap!! ...Thanks a lot! But now, I'll get my revenge! Are you ready?!"
+    dialog_ask_line "Yes", "N-No"
 
 Dialog0E2:: ; Li'l Devil
-    dialog_ask "I'll let you carry more Magic Powder!  He He! Are you ready?!", "    Yes  N-No"
+    dialog_string_wrapping "I'll let you carry more Magic Powder!  He He! Are you ready?!"
+    dialog_ask_line "Yes", "N-No"
 
 Dialog0E3:: ; Li'l Devil
-    dialog_ask "Okay, I'll let you carry more Bombs! He He He! Are you ready?!", "    Yes  N-No"
+    dialog_string_wrapping "Okay, I'll let you carry more Bombs! He He He! Are you ready?!"
+    dialog_ask_line "Yes", "N-No"
 
 Dialog0E4:: ; Li'l Devil
-    dialog_ask "Fine, I'll let you have more arrows! Heh Heh! Are you ready?!", "    Yes  N-No"
+    dialog_string_wrapping "Fine, I'll let you have more arrows! Heh Heh! Are you ready?!"
+    dialog_ask_line "Yes", "N-No"
 
 Dialog0E5:: ; Li'l Devil
     dialog_text "Heh Heh Heh!", "You deserve it! Now look at all that junk you have to carry! Hah!  Take care! See you again!"
@@ -205,7 +244,8 @@ Dialog0EF:: ; Narrator
     dialog_text "You found a Secret Seashell! If you collect a lot of these, something good is bound to happen!"
 
 Dialog0F0:: ; Raft Guy
-    dialog_ask "Want to go on a raft ride for a hundred Rupees?", "    Yes  No Way"
+    dialog_string_wrapping "Want to go on a raft ride for a hundred Rupees?"
+    dialog_ask_line "Yes", "No Way"
 
 Dialog0F1:: ; Raft Guy
     dialog_text "Okay, the raft is ready for you outside!  Enjoy!"
@@ -226,10 +266,12 @@ Dialog0F6:: ; Nightmare (final boss)
     dialog_text "This island is going to dis- appear...  Our world is going to disappear... Our world... Our... world... "
 
 Dialog0F7:: ; Marin
-    dialog_ask "Wow!  #####, can I try this?! What do you say?", "    Okay No Way"
+    dialog_string_wrapping "Wow!  #####, can I try this?! What do you say?"
+    dialog_ask_line "Okay", "No Way"
 
 Dialog0F8:: ; Marin
-    dialog_ask "C'mon!  I want to do it! Can I? It looks so fun!", "    Yes  Okay"
+    dialog_string_wrapping "C'mon!  I want to do it! Can I? It looks so fun!"
+    dialog_ask_line "Yes", "Okay"
 
 Dialog0F9:: ; Trendy Gamester
     dialog_text "You're good! You're a pro, aren't you?", "... ... ... ... Well, beat it! Pros aren't allowed in here!"

@@ -41,10 +41,12 @@ Dialog25B:: ; Narrator
     dialog_text "You've got the Red Clothes! Your body is full of energy! "
 
 Dialog25C:: ; Fairy Queen (Color Dungeon)
-    dialog_ask "Red for offense, blue for defense. Which do you choose?", "    RED  BLUE"
+    dialog_string_wrapping "Red for offense, blue for defense. Which do you choose?"
+    dialog_ask_line "RED", "BLUE"
 
 Dialog25D:: ; Fairy Queen (Color Dungeon), Link
-    dialog_ask "Are you sure?", "    YES  NO"
+    dialog_string_wrapping "Are you sure?"
+    dialog_ask_line "YES", "NO"
 
 Dialog25E:: ; Dion (Color Dungeon)
     dialog_text "The fairy queen is waiting for you."
@@ -53,7 +55,8 @@ Dialog25F:: ; Gar (Color Dungeon)
     dialog_text "Do you have the powder? If not, you must go back."
 
 Dialog260:: ; Color Guard (Color Dungeon)
-    dialog_ask "Our colors are never the same! If I am red, he is blue! If he is red, I am blue! What color is my cloth?", "    Red  Blue"
+    dialog_string_wrapping "Our colors are never the same! If I am red, he is blue! If he is red, I am blue! What color is my cloth?"
+    dialog_ask_line "Red", "Blue"
 
 Dialog261:: ; idk
     dialog_text "BOO! I am no weakling! Your pitiful sword is no match for me!"
@@ -71,13 +74,15 @@ Dialog265:: ; idk
     dialog_text "Don't tell anyone."
 
 Dialog266:: ; Narrator
-    dialog_ask "Do you want to read this book?", "    YES  NO"
+    dialog_string_wrapping "Do you want to read this book?"
+    dialog_ask_line "YES", "NO"
 
 Dialog267:: ; Book, Narrator
     dialog_text "New world of color under the 5 gravestones.", " ", "   3<up>  4<right>  5<up>", "   2<left>  1<down>", "Try with all your might. Open a new path! Whoever is worthy receives the power of color. I wonder what the world of color is?"
 
 Dialog268:: ; Fairy Queen (Color Dungeon)
-    dialog_ask "Welcome, #####. I admire you for coming this far. I will give you the power of color. If you want offense, choose red. If you want defense choose blue. Which power do you want?", "    RED  BLUE"
+    dialog_string_wrapping "Welcome, #####. I admire you for coming this far. I will give you the power of color. If you want offense, choose red. If you want defense choose blue. Which power do you want?"
+    dialog_ask_line "RED", "BLUE"
 
 Dialog269:: ; idk
     dialog_text "You fool! Your sword won't work! Try something else!"
@@ -210,10 +215,12 @@ Dialog293:: ; Owl Statue
     dialog_text "If the statue looks strange, shoot it with the bow."
 
 Dialog294:: ; Photographer, Link
-    dialog_ask "Let's take a picture!", "    YES  NO"
+    dialog_string_wrapping "Let's take a picture!"
+    dialog_ask_line "YES", "NO"
 
 Dialog295:: ; Photographer, Link
-    dialog_ask "No picture?! Are you pullin' my leg?", "    Yes  No way"
+    dialog_string_wrapping "No picture?! Are you pullin' my leg?"
+    dialog_ask_line "Yes", "No way"
 
 Dialog296:: ; Photographer
     dialog_text "What a bummer!"
@@ -288,7 +295,8 @@ Dialog2AD:: ; Photographer, probably
     dialog_text "See me later, when you're alone!"
 
 Dialog2AE:: ; Photographer, probably
-    dialog_ask "Are you sure?", "    YES  NO"
+    dialog_string_wrapping "Are you sure?"
+    dialog_ask_line "YES", "NO"
 
 Dialog2AF:: ; Photographer, probably
     dialog_text "Ah how I love pictures. Hey, #####! What are you doing here? "

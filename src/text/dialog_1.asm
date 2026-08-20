@@ -65,16 +65,19 @@ Dialog015:: ; Marin
     dialog_text "Please!  I want you to learn it! This song is my favorite!"
 
 Dialog016:: ; Marin
-    dialog_ask "So, how do you like it?  It's really touching, isn't it?  Does it stick in your mind?", "    Yes  No"
+    dialog_string_wrapping "So, how do you like it?  It's really touching, isn't it?  Does it stick in your mind?"
+    dialog_ask_line "Yes", "No"
 
 Dialog017:: ; Crazy Tracy
     dialog_text "Hi there, big guy!  I'm Crazy Tracy!  I've got a little secret for sale that'll pump you up!"
 
 Dialog018:: ; Crazy Tracy
-    dialog_ask "Will you give me 28 Rupees for my secret?", "    Give Don't"
+    dialog_string_wrapping "Will you give me 28 Rupees for my secret?"
+    dialog_ask_line "Give", "Don't"
 
 Dialog019:: ; Crazy Tracy
-    dialog_ask "How about it?", "42 Rupees for my little secret...", "    Give Don't"
+    dialog_string_wrapping "How about it?", "42 Rupees for my little secret..."
+    dialog_ask_line "Give", "Don't"
 
 Dialog01A:: ; Crazy Tracy
 IF VERSION >= 2
@@ -133,10 +136,12 @@ Dialog02A:: ; Narrator
 
 Dialog02B:: ; Shopkeeper, Link
 Dialog02C:: ; Shopkeeper, Link
-    dialog_ask "Bow & Arrow Set Only 980 Rupees!", "    Buy  No Way"
+    dialog_string_wrapping "Bow & Arrow Set Only 980 Rupees!"
+    dialog_ask_line "Buy", "No Way"
 
 Dialog02D:: ; Shopkeeper, Link
-    dialog_ask "   10 Arrows", "   10 Rupees", "    Buy  Don't"
+    dialog_string_wrapping "   10 Arrows", "   10 Rupees"
+    dialog_ask_line "Buy", "Don't"
 
 Dialog02E:: ; Shopkeeper
     dialog_text "Hey!  Welcome! See something you like?!  Just bring it here!"
@@ -145,16 +150,22 @@ Dialog02F:: ; Shopkeeper
     dialog_text "Hey! You! Stop! You gotta pay! Put it back!"
 
 Dialog030:: ; Shopkeeper, Link
-    dialog_ask "  Deluxe Shovel", "   200 Rupees! Seems expensive!", "    Buy  No Way!"
+    dialog_string_wrapping "  Deluxe Shovel", "   200 Rupees! Seems expensive!"
+    dialog_ask_line "Buy", "No Way!"
 
 Dialog031:: ; Shopkeeper, Link
-    dialog_ask "   Three Hearts", "    10 Rupees!", "    Buy  Don't"
+    db "   Three Hearts "
+    db "    10 Rupees!  "
+:   dialog_ask_line "Buy", "Don't"
 
 Dialog032:: ; Shopkeeper, Link
-    dialog_ask "     Shield", "    20 Rupees!", "    Buy  Don't"
+    dialog_string_wrapping "     Shield", "    20 Rupees!"
+    dialog_ask_line "Buy", "Don't"
 
 Dialog033:: ; Shopkeeper, Link
-    dialog_ask "    Ten Bombs", "    10 Rupees", "    Buy  Don't"
+    db "    Ten Bombs   "
+    db "    10 Rupees   "
+:   dialog_ask_line "Buy", "Don't"
 
 Dialog034:: ; Shopkeeper
     dialog_text "Sorry, kid!  You don't have the Rupees!  Come back when you have the cash!"
@@ -174,7 +185,8 @@ Dialog039:: ; Narrator
 
 Dialog03A:: ; Trendy Gamester
 Dialog03B:: ; Trendy Gamester
-    dialog_ask "  TRENDY GAME!", " One Play 10 Rs.", "    Play No"
+    dialog_string_wrapping "  TRENDY GAME!", " One Play 10 Rs."
+    dialog_ask_line "Play", "No"
 
 Dialog03C:: ; Trendy Gamester
     dialog_text "The A and B Buttons move the crane...The rest is just timing! Go over to the buttons to play! Good Luck!"
@@ -183,7 +195,8 @@ Dialog03D:: ; Narrator
     dialog_text "It's a Shield! There is space for your name!"
 
 Dialog03E:: ; Trendy Gamester, Link
-    dialog_ask "Challenge Again?", "    Play No"
+    dialog_string_wrapping "Challenge Again?"
+    dialog_ask_line "Play", "No"
 
 Dialog03F:: ; Trendy Gamester
     dialog_text "Good Luck!"
@@ -204,7 +217,8 @@ Dialog044:: ; Narrator
     dialog_text "You got a Yoshi Doll!  Recently, he seems to be showing up in many games!"
 
 Dialog045:: ; Fisherman
-    dialog_ask "How about some fishing, little buddy? I'll only charge you 10 Rupees...", "    Fish Not Now"
+    dialog_string_wrapping "How about some fishing, little buddy? I'll only charge you 10 Rupees..."
+    dialog_ask_line "Fish", "Not Now"
 
 Dialog046:: ; Fisherman
     dialog_text "You have to have more passion! Live a little!"
@@ -213,22 +227,27 @@ Dialog047:: ; Fisherman
     dialog_text "Okay, here's how you do it.  Use <left> and <right> on the <dpad> to aim a cast. Once you hook a fish, press the Button rapidly to reel him in!"
 
 Dialog048:: ; Fisherman, Link
-    dialog_ask "Why not try one more time, little buddy?", "    Cast Not Now"
+    dialog_string_wrapping "Why not try one more time, little buddy?"
+    dialog_ask_line "Cast", "Not Now"
 
 Dialog049:: ; Fisherman, Link
-    dialog_ask "Wow! That one got away!  Want to try again?", "    Cast Not Now"
+    dialog_string_wrapping "Wow! That one got away!  Want to try again?"
+    dialog_ask_line "Cast", "Not Now"
 
 Dialog04A:: ; Fisherman, Link
-    dialog_ask "Wow! Nice Fish! It's a lunker!! I'll give you a 20 Rupee prize! Try again?", "    Cast Not Now"
+    dialog_string_wrapping "Wow! Nice Fish! It's a lunker!! I'll give you a 20 Rupee prize! Try again?"
+    dialog_ask_line "Cast", "Not Now"
 
 Dialog04B:: ; Fisherman, Link
-    dialog_ask "This pond's all fished out.  Why not try your luck in the sea?" ,"    Okay No"
+    dialog_string_wrapping "This pond's all fished out.  Why not try your luck in the sea?"
+    dialog_ask_line "Okay", "No"
 
 Dialog04C:: ; Fisherman, Link
     dialog_text "Did I say that? Forget it, okay? Run along now..."
 
 Dialog04D:: ; Fisherman, Link
-    dialog_ask "It's a runt! I'll only give you a 5 Rupees prize for that. You should try again!", "    Okay No"
+    dialog_string_wrapping "It's a runt! I'll only give you a 5 Rupees prize for that. You should try again!"
+    dialog_ask_line "Okay", "No"
 
 Dialog04E:: ; Fisherman
     dialog_text "You're short of Rupees?  Don't worry about it. You just come back when you have more money, little buddy."

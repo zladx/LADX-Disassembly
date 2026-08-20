@@ -2,7 +2,8 @@ Dialog180::
     dialog_text "Ouaf Ouaf!", "Je suis un chien très branché! J'aimerais avoir des accessoires à la mode!"
 
 Dialog181::
-    dialog_ask "Ouaf Ouaf!", "Je suis un chien très branché!", "Ce <ribbon> ,", "c'est d'un chic! Il me le faut absolument...", "Tu l'échanges contre", "ma pâtée?", "    Oui  Non"
+    dialog_string_wrapping "Ouaf Ouaf!", "Je suis un chien très branché!", "Ce <ribbon> ,", "c'est d'un chic! Il me le faut absolument...", "Tu l'échanges contre", "ma pâtée?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog182::
     dialog_text "Tu as échangé", "le <ribbon> contre", "la pâtée <dogfood>!"
@@ -14,7 +15,8 @@ Dialog184::
     dialog_text "Je n'arrive pas à y croire...", "Tu es nul!"
 
 Dialog185::
-    dialog_ask "Je suis Manbo, descendant du Poisson-Lune.", "As-tu l'Ocarina?", "    Oui  Non"
+    dialog_string_wrapping "Je suis Manbo, descendant du Poisson-Lune.", "As-tu l'Ocarina?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog186::
     dialog_text "Ah bon?!", "Glou Glou..."
@@ -187,7 +189,8 @@ Dialog1BE::
 
 Dialog1BF::
 Dialog1C0::
-    dialog_ask "##### ! Ton", "truc me plaît. J'te donne du Miel pour c'Bâton. Alors?", "    Oui  Non"
+    dialog_string_wrapping "##### ! Ton", "truc me plaît. J'te donne du Miel pour c'Bâton. Alors?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog1C1::
     dialog_text "Tu as échangé", "le <stick> contre", "le Miel <honeycomb> .", "Pour quoi faire, tu verras bien!"
@@ -206,7 +209,8 @@ Dialog1C6::
     dialog_text "Bienvenue chez AlligoBanane! lci j'entrepose. Mon hobby, c'est collectionner des boîtes", "de conserve.", "Mon frère cadet est un artiste. Moi...", "Je suis plus terre à terre. J'adore manger!"
 
 Dialog1C7::
-    dialog_ask "Mais qu'est-ce que tu as là?", "Je t'en prie, donne-moi", "cette <dogfood> ...", "Je t'en SUPPLIE! Alors, que décides-tu?", "    Oui  Non"
+    dialog_string_wrapping "Mais qu'est-ce que tu as là?", "Je t'en prie, donne-moi", "cette <dogfood> ...", "Je t'en SUPPLIE! Alors, que décides-tu?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog1C8::
     dialog_text "Merci! Vite!", "A table!"
@@ -230,7 +234,8 @@ Dialog1CE::
     dialog_text "Il me manque", "des ingrédients. C'est embêtant. Si j'avais", "du Miel, ce serait parfait!"
 
 Dialog1CF::
-    dialog_ask "C'est du <honeycomb>", "que tu as là! J'en ai besoin! Tu ne veux pas d'Ananas", "à la place?", "    Oui  Non"
+    dialog_string_wrapping "C'est du <honeycomb>", "que tu as là! J'en ai besoin! Tu ne veux pas d'Ananas", "à la place?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog1D0::
     dialog_text "Tu as échangé", "le <honeycomb> contre l'Ananas <pineapple> .", "Il est juteux!"
@@ -248,7 +253,8 @@ Dialog1D4::
     dialog_text "Bonjour Marine! Tu vas bien?", "... ... ... ... Oh excuse-moi, je ne t'avais pas vu..."
 
 Dialog1D5::
-    dialog_ask "Oh #####,", "tu savais où", "me trouver!", "Veux-tu qu'on parle un peu?", "    Oui  Non"
+    dialog_string_wrapping "Oh #####,", "tu savais où", "me trouver!", "Veux-tu qu'on parle un peu?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog1D6::
     dialog_text "Peuh! Je regarderai", "la mer alors!"
@@ -263,7 +269,8 @@ Dialog1D9::
     dialog_text "... ... ... ... ... ... ... ... Si j'étais", "une mouette,", "je m'envolerais loin, très loin! Je visiterais des pays et chanterais", "pour tous!", "Si j'exprime", "un voeu au Poisson-Rêve, l'exaucera-t'il? "
 
 Dialog1DA::
-    dialog_ask "Hé, tu écoutes? #####, es-tu", "sûr que tu m'écoutes?", "    Oui  Non"
+    dialog_string_wrapping "Hé, tu écoutes? #####, es-tu", "sûr que tu m'écoutes?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog1DB::
     dialog_text "J'aimerais", "tant connaître ton pays,#####! Un jour mmm..."
@@ -284,7 +291,8 @@ Dialog1E0::
     dialog_text "ZZZ ZZZ ZZZ ZZZ", " ... <marin> ... <marin> ... "
 
 Dialog1E1::
-    dialog_ask "C'est ce", "gros lard", "de morse!", "On lui fait peur?", "    Oui  Non"
+    dialog_string_wrapping "C'est ce", "gros lard", "de morse!", "On lui fait peur?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog1E2::
     dialog_text "Ha ha ha !", "Ton réveil était plutôt brutal hein?..."
@@ -305,7 +313,8 @@ Dialog1E7::
     dialog_text "Je suis embêté car un poisson", "a emporté", "mon hameçon.", "Je ne pêche qu'avec un fil, et forcément... je ne peux rien attraper!!"
 
 Dialog1E8::
-    dialog_ask "Mais qu'est-ce que tu as", "dans la main? N'est-ce pas", "un Hameçon?", "Si tu me le donnes, je te ferai don de ma prochaine prise. D'accord?", "    Oui  Non"
+    dialog_string_wrapping "Mais qu'est-ce que tu as", "dans la main? N'est-ce pas", "un Hameçon?", "Si tu me le donnes, je te ferai don de ma prochaine prise. D'accord?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog1E9::
     dialog_text "Ouvre les yeux et mate le pro."
@@ -335,7 +344,8 @@ Dialog1F1::
     dialog_text "J'ai déjà cherché par là"
 
 Dialog1F2::
-    dialog_ask "Ahh!  Le voilà C'est mon collier!  Donne! Donne-le moi!", "Je t'offrirai une écaille!", "    Oui  Non"
+    dialog_string_wrapping "Ahh!  Le voilà C'est mon collier!  Donne! Donne-le moi!", "Je t'offrirai une écaille!"
+    dialog_ask_line "Oui", "Non"
 
 Dialog1F3::
     dialog_text "N'en prends qu' une seule!", "A-Ah! UNE SEULE! "
@@ -371,52 +381,62 @@ Dialog1FD::
     dialog_text "DRING DRING! DRING! Hello! Madonna", "à l'appaouïelle. No darling... CLIC!", "Tu as dû faire un faux numéro!"
 
 Dialog1FE::
-    dialog_ask "C'est un gros! Et en plus, il a un Fragment", "de Coeur!", "Je t'offre aussi 20 rubis.", "Un autre essai?", "    Oui  Non"
+    dialog_string_wrapping "C'est un gros! Et en plus, il a un Fragment", "de Coeur!", "Je t'offre aussi 20 rubis.", "Un autre essai?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog1FF::
-    dialog_ask "C'est un gros! Et en plus, il a un Fragment", "de Coeur! Maintenant,", "tu as un", "Coeur complet. Je t'offre aussi 20 rubis.", "Un autre essai?", "    Oui  Non"
+    dialog_string_wrapping "C'est un gros! Et en plus, il a un Fragment", "de Coeur! Maintenant,", "tu as un", "Coeur complet. Je t'offre aussi 20 rubis.", "Un autre essai?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog200::
-    dialog_ask "  DE LA BONNE", "  UTILISATION", " D'UN BOUCLIER Tu veux le lire?", "    Oui  Non"
+    dialog_string_wrapping "  DE LA BONNE", "  UTILISATION", " D'UN BOUCLIER Tu veux le lire?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog201::
     dialog_text "En maintenant", "A ou B enfoncé, tu peux parer les attaques", "et repousser", "les ennemis.", "En plus du bouclier standard,", "il y en a un", "qui te protège des lasers!"
 
 Dialog202::
-    dialog_ask "    CHOISIR", "  LE BON OBJET Tu veux le lire?", "    Oui  Non"
+    dialog_string_wrapping "    CHOISIR", "  LE BON OBJET Tu veux le lire?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog203::
     dialog_text "Choisis l'objet désiré dans", "le Sous-Ecran", "en appuyant", "sur A ou B. Certains objets remplacent", "une épée lors d'un combat. Essaie-les tous pour avoir le plus adéquat!"
 
 Dialog204::
-    dialog_ask "    CONSEILS", "    ET CARTE", "Tu veux le lire?", "    Oui  Non"
+    dialog_string_wrapping "    CONSEILS", "    ET CARTE", "Tu veux le lire?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog205::
     dialog_text "Appuie sur SELECT", "pour afficher la carte de l'île. Les parties sombres sont", "les endroits", "que tu n'as pas encore visités. Bouge le curseur et appuie sur A pour obtenir le nom du lieu et le message", "du hibou. Ainsi, tu n'auras pas", "à tout noter!"
 
 Dialog206::
-    dialog_ask "TOUT SUR L'EPEE", "  TOURNOYANTE! Tu veux le lire?", "    Oui  Non"
+    dialog_string_wrapping "TOUT SUR L'EPEE", "  TOURNOYANTE! Tu veux le lire?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog207::
     dialog_text "Cette technique spéciale", "se transmet", "de génération", "en génération. Maintiens enfoncé", "le bouton correspondant", "à l'épée", "pour augmenter ta force. Quand c'est suffisant, relâche-le. Crois-tu que tu peux le faire?"
 
 Dialog208::
-    dialog_ask " TELEPORTATION Tu veux le lire?", "    Oui  Non"
+    dialog_string_wrapping " TELEPORTATION Tu veux le lire?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog209::
     dialog_text "Sur Cocolint,", "il y a des", "trous Warp. Téléporte-toi", "en sautant dedans.", "Replonge dans", "le trou d'où", "tu sors pour être téléporté en succession. Tu ne peux pas te téléporter vers un trou", "qui n'est pas encore apparu", "à l'écran!"
 
 Dialog20A::
-    dialog_ask "   LES BOMBES", "Tu veux le lire?", "    Oui  Non"
+    dialog_string_wrapping "   LES BOMBES", "Tu veux le lire?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog20B::
     dialog_text "Pour reprendre une bombe", "au sol, appuie tout de suite sur le bouton", "la contrôlant. Puis jette-la", "en appuyant encore sur", "le même bouton. Connaissais-tu cette astuce?"
 
 Dialog20C::
-    dialog_ask "    ATLAS DE", "    COCOLINT Choisis un lieu grâce au curseur et appuie sur A pour afficher son nom. Veux-tu le consulter?", "    Oui  Non"
+    dialog_string_wrapping "    ATLAS DE", "    COCOLINT Choisis un lieu grâce au curseur et appuie sur A pour afficher son nom. Veux-tu le consulter?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog20D::
-    dialog_ask "    MYSTERES", "   ET SECRETS", "   DE COCOLINT Tu veux le lire?", "    Oui  Non"
+    dialog_string_wrapping "    MYSTERES", "   ET SECRETS", "   DE COCOLINT Tu veux le lire?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog20E::
     dialog_text "Impossible!", "Il te faut", "la Loupe", "pour lire", "les petits caractères..."
@@ -472,7 +492,8 @@ Dialog220::
     dialog_text "M'sieu!", "M'sieu!", "C'est terrible, c'est horrible! c'est c'est... Des Gogo...", "des Momo...", "des Moblins", "sont venus", "dans le village! Ils étaient", "une armée... Ils...ils...", "Ils sont sortis! Ils sont entrés! Oui, c'est ça! Il sont entrés là et ils ont pris le Minou, non non...", "Ils ont pris Toutou!!", "... ... ... ... ... ... ... ... Il vaudrait mieux que tu ailles voir ce qui s'est passé! "
 
 Dialog221::
-    dialog_ask "Sur la plage, j'ai ramassé", "une merveille. Je te l'échange contre l'objet qui est dans B.", "    Oui  Non"
+    dialog_string_wrapping "Sur la plage, j'ai ramassé", "une merveille. Je te l'échange contre l'objet qui est dans B."
+    dialog_ask_line "Oui", "Non"
 
 Dialog222::
     dialog_text "Marché conclu! Quand le Boomerang", "ne te sert plus, reviens ici!"
@@ -484,7 +505,8 @@ Dialog224::
     dialog_text "Tu as échangé ton objet contre le Boomerang."
 
 Dialog225::
-    dialog_ask "Rends-moi", "le Boomerang", "et je te rendrai ton objet!", "    Oui  Non"
+    dialog_string_wrapping "Rends-moi", "le Boomerang", "et je te rendrai ton objet!"
+    dialog_ask_line "Oui", "Non"
 
 Dialog226::
     dialog_text "Tu as récupéré ton objet.", "Tu as rendu", "le Boomerang."
@@ -502,7 +524,8 @@ Dialog22A::
     dialog_text "DRRING! DRRING! C'est moi! Pépé! Tu n'as pas trouvé les cinq feuilles d'Or? Va faire peur au corbeau près du château!", "CLIC!"
 
 Dialog22B::
-    dialog_ask "\"Les voyages de #####.\" Veux-tu regarder ton album?", "    Oui  Non"
+    dialog_string_wrapping "\"Les voyages de #####.\" Veux-tu regarder ton album?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog22C::
     dialog_text "Quelle photo veux-tu voir? Utilise <dpad>", "pour choisir et appuie sur A!"

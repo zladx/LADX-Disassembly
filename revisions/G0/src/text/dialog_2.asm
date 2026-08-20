@@ -146,7 +146,8 @@ Dialog0DB::
     dialog_text "Quaaaak! Servus, Alter! Man nennt mich Wart, den Musikfrosch. Und Du? Hm, ich sehe schon... Du hast keine Ahnung von Musik. Quaaaaak! Bring eine Flöte mit, wenn Du mal wieder kommst... ... und tschüß!! "
 
 Dialog0DC::
-    dialog_ask "Quaaaak! Ich bin Wart, der Musik- frosch! Aber das weißt Du ja..! Willst Du unsere neueste Kompo- sition hören? Es kostet Dich nur lächerliche 300 Rubine. Was ist, Alter???", "    Gut  Nein"
+    dialog_string_wrapping "Quaaaak! Ich bin Wart, der Musik- frosch! Aber das weißt Du ja..! Willst Du unsere neueste Kompo- sition hören? Es kostet Dich nur lächerliche 300 Rubine. Was ist, Alter???"
+    dialog_ask_line "Gut", "Nein"
 
 Dialog0DD::
     dialog_text "Danke! Vielen Dank! Quaaaak!"
@@ -164,13 +165,16 @@ Dialog0E1::
     dialog_text "Wer stört mich da wieder beim Schlafen? Du??? Na toll! Vielen Dank auch! Finde ich echt nett... Na warte... ... ... ... ... ..."
 
 Dialog0E2::
-    dialog_ask "Willst Du zur Strafe mehr Zauberpulver tragen können???", "    J-Ja Nein"
+    dialog_string_wrapping "Willst Du zur Strafe mehr Zauberpulver tragen können???"
+    dialog_ask_line "J-Ja", "Nein"
 
 Dialog0E3::
-    dialog_ask "Willst Du zur Strafe mehr Bomben tragen können? Hehehe!", "    J-Ja Nein"
+    dialog_string_wrapping "Willst Du zur Strafe mehr Bomben tragen können? Hehehe!"
+    dialog_ask_line "J-Ja", "Nein"
 
 Dialog0E4::
-    dialog_ask "Willst Du zur Strafe mehr Pfeile tragen können?? Hehehe!", "    J-Ja Nein"
+    dialog_string_wrapping "Willst Du zur Strafe mehr Pfeile tragen können?? Hehehe!"
+    dialog_ask_line "J-Ja", "Nein"
 
 Dialog0E5::
     dialog_text "Hehe! Jetzt mußt Du noch mehr Zeug mit Dir herumschleppen! Das geschieht Dir Recht... Bis dann! Tschö!"
@@ -202,7 +206,8 @@ Dialog0EF::
     dialog_text "Du hast eine Zaubermuschel gefunden... Wenn Du genug davon gesammelt hast, kannst Du etwas Feines bekommen! "
 
 Dialog0F0::
-    dialog_ask "Möchtest Du für 100 Rubine mit dem Floß fahren?", "    Ja   Nein"
+    dialog_string_wrapping "Möchtest Du für 100 Rubine mit dem Floß fahren?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog0F1::
     dialog_text "Okay, nimm Dir einfach das Floß da draußen! Viel Spaß damit!"
@@ -223,10 +228,12 @@ Dialog0F6::
     dialog_text "Die Insel löst sich auf... Unsere Welt ver- schwindet... Unsere Welt... Unsere... Welt.. "
 
 Dialog0F7::
-    dialog_ask "Ey super, #####! Kann ich es auch mal versuchen?", "    Jo!  Nein"
+    dialog_string_wrapping "Ey super, #####! Kann ich es auch mal versuchen?"
+    dialog_ask_line "Jo!", "Nein"
 
 Dialog0F8::
-    dialog_ask "Ach, komm schon! #####!!! Bitte!! Ich möchte gern!", "    Gut! Okay"
+    dialog_string_wrapping "Ach, komm schon! #####!!! Bitte!! Ich möchte gern!"
+    dialog_ask_line "Gut!", "Okay"
 
 Dialog0F9::
     dialog_text "Von wegen \"VER- SUCHEN\"! Du bist ja ein Profi..! ... ... ... ... Profis brauchen wir hier nicht!"

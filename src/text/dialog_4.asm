@@ -139,7 +139,8 @@ Dialog1BE:: ; Owl Statue
 
 Dialog1BF:: ; Tarin
 Dialog1C0:: ; Tarin
-    dialog_ask "Oh?!  #####, I see ya have a nice stick... Can I borrow it for a second?", "    Can  Can't"
+    dialog_string_wrapping "Oh?!  #####, I see ya have a nice stick... Can I borrow it for a second?"
+    dialog_ask_line "Can", "Can't"
 
 Dialog1C1:: ; Narrator
     dialog_text "<stick> became the honeycomb <honeycomb>! You're not sure how it happened, but take it!"
@@ -158,7 +159,8 @@ Dialog1C6:: ; Sale
     dialog_text "Welcome to Sale's House O' Bananas!  I'm Sale, this is my house! Actually, my hobby is col- lecting rare and unusual canned food. My brother is an artist, so I guess strange hobbies run in the family!"
 
 Dialog1C7:: ; Sale
-    dialog_ask "What's that you have?!  It's canned food! For heaven's sake, man, give that <dogfood> to ME!!  PLEASE! He's hysterical! What do you do?", "    Give Don't"
+    dialog_string_wrapping "What's that you have?!  It's canned food! For heaven's sake, man, give that <dogfood> to ME!!  PLEASE! He's hysterical! What do you do?"
+    dialog_ask_line "Give", "Don't"
 
 Dialog1C8:: ; Sale
     dialog_text "Oh thank you! I'll take that!"
@@ -182,7 +184,8 @@ Dialog1CE:: ; Chef Bear
     dialog_text "Rik'm rak'm! I ran out of ingredients!  If I had honey, I could make this fit for a king!"
 
 Dialog1CF:: ; Chef Bear
-    dialog_ask "Hi ho! Hey you! Is that possibly a <honeycomb> you have?", "I just ran out! Will you swap it for a pineapple?", "    Yes  No"
+    dialog_string_wrapping "Hi ho! Hey you! Is that possibly a <honeycomb> you have?", "I just ran out! Will you swap it for a pineapple?"
+    dialog_ask_line "Yes", "No"
 
 Dialog1D0:: ; Narrator
     dialog_text "You exchanged <honeycomb> for <pineapple>!  It's not as sweet, but it is delicious!   "
@@ -200,7 +203,8 @@ Dialog1D4:: ; Chef Bear
     dialog_text "HI HO!  Little Marin!  Welcome! ... ... ... ... Oh, shucks!  You are here too... Sorry..."
 
 Dialog1D5:: ; Marin
-    dialog_ask "Oh, #####, I'm glad you found this place.", "Will you stay and talk to me for a while?", "    Yes! No..."
+    dialog_string_wrapping "Oh, #####, I'm glad you found this place.", "Will you stay and talk to me for a while?"
+    dialog_ask_line "Yes!", "No..."
 
 Dialog1D6:: ; Marin
     dialog_text "Okay, I'll just watch the waves for a while..."
@@ -215,7 +219,8 @@ Dialog1D9:: ; Marin
     dialog_text "... ... ... ... ... ... ... ... If I was a sea gull, I would fly as far as I could!  I would fly to far away places and sing for many people! ...If I wish to the Wind Fish,", "I wonder if my dream will come true... ... ..."
 
 Dialog1DA:: ; Marin, Link
-    dialog_ask "Hey!  Are you listening? #####, are you listening to me?", "    Yeah No..."
+    dialog_string_wrapping "Hey!  Are you listening? #####, are you listening to me?"
+    dialog_ask_line "Yeah", "No..."
 
 Dialog1DB:: ; Marin
     dialog_text "I want to know everything about you...Err...Uhh, Ha ha ha ha!"
@@ -236,7 +241,8 @@ Dialog1E0:: ; Walrus
     dialog_text "ZZZ ZZZ ZZZ ZZZ", " ... <marin> ... <marin> ..."
 
 Dialog1E1:: ; Marin, Link
-    dialog_ask "Yes, it's that lazy walrus! Shall we give him a little surprise?", "    Yes  No..."
+    dialog_string_wrapping "Yes, it's that lazy walrus! Shall we give him a little surprise?"
+    dialog_ask_line "Yes", "No..."
 
 Dialog1E2:: ; Marin
     dialog_text "Aha ha ha!  Wow! He certainly woke with a start!"
@@ -257,7 +263,8 @@ Dialog1E7:: ; Fisherman
     dialog_text "It's no use, little buddy!  A fish took my hook... I keep casting my line into the water, but I haven't got a bite... I thought this would happen..."
 
 Dialog1E8:: ; Fisherman
-    dialog_ask "Oh! What is that you have in your hand?  It's not a fishing hook, is it?  You had better let me have it.  I'll give you my next catch if you let me have it...", "    Okay No"
+    dialog_string_wrapping "Oh! What is that you have in your hand?  It's not a fishing hook, is it?  You had better let me have it.  I'll give you my next catch if you let me have it..."
+    dialog_ask_line "Okay", "No"
 
 Dialog1E9:: ; Fisherman
     dialog_text "Keep your eyes open and watch", "a pro at work."
@@ -287,7 +294,8 @@ Dialog1F1:: ; Mermaid
     dialog_text "I have already looked around here!"
 
 Dialog1F2:: ; Mermaid
-    dialog_ask "Ahh!  That's it! That's my neck- lace!  Give it! Give it back!  I will give you a scale as I said!", "    Give Keep"
+    dialog_string_wrapping "Ahh!  That's it! That's my neck- lace!  Give it! Give it back!  I will give you a scale as I said!"
+    dialog_ask_line "Give", "Keep"
 
 Dialog1F3:: ; Mermaid
     dialog_text "Promise!  You'll only take one!"
@@ -323,52 +331,62 @@ Dialog1FD:: ; Bucket Mouse
     dialog_text "'BRRING! BRRING!  BRRING! CLICK! Yeees!  It's the Bucket Mouse! Thanks for call- ing! ...Well... CLICK!'  ??? ... You must have dialed a wrong number..."
 
 Dialog1FE:: ; Fisherman, Link
-    dialog_ask "Oh!  It's a big one!  And it has a Piece of Heart, too!  You get a 20 Rupee prize on top of that! Try again?", "    Yes  No"
+    dialog_string_wrapping "Oh!  It's a big one!  And it has a Piece of Heart, too!  You get a 20 Rupee prize on top of that! Try again?"
+    dialog_ask_line "Yes", "No"
 
 Dialog1FF:: ; Fisherman, Link
-    dialog_ask "Oh!  It's a big one!  And it has a Piece of Heart, too!  You have completed another Heart Container!  On top of that, you get a 20 Rupee prize! Want to try again?", "    Yes  No"
+    dialog_string_wrapping "Oh!  It's a big one!  And it has a Piece of Heart, too!  You have completed another Heart Container!  On top of that, you get a 20 Rupee prize! Want to try again?"
+    dialog_ask_line "Yes", "No"
 
 Dialog200:: ; Book, Narrator
-    dialog_ask " 'How To Handle", "   Your Shield", "   Like A Pro!' Read this book?", "    YES  NO"
+    dialog_string_wrapping " 'How To Handle", "   Your Shield", "   Like A Pro!' Read this book?"
+    dialog_ask_line "YES", "NO"
 
 Dialog201:: ; Book
     dialog_text "'If you hold the Button down, you can defend your- self from enemy attacks, and you can flip some enemies, too... Besides the standard shield there is also a mirrored variety which can defend against beams!'"
 
 Dialog202:: ; Book, Narrator
-    dialog_ask " 'Selecting The", "   Item That's", "  Right For You' Read this book?", "    YES  NO"
+    dialog_string_wrapping " 'Selecting The", "   Item That's", "  Right For You' Read this book?"
+    dialog_ask_line "YES", "NO"
 
 Dialog203:: ; Book
     dialog_text "'You can select your favorite item for the A and B Buttons on the Sub-Screen. Using different items, you can fight without a sword!  Try many different things to find what's right for you!'"
 
 Dialog204:: ; Book, Narrator
-    dialog_ask " 'Auto Map and Memo Guide Book' Read this book?", "    YES  NO"
+    dialog_string_wrapping " 'Auto Map and Memo Guide Book' Read this book?"
+    dialog_ask_line "YES", "NO"
 
 Dialog205:: ; Book, Narrator
     dialog_text "'You can see an island map by pressing the SELECT Button. The dark parts of the map are places you have not yet visited. Move the cursor and press the A Button to get more information about an area, or to replay the message you got there...'  Ahhh! How convenient!"
 
 Dialog206:: ; Book, Narrator
-    dialog_ask " 'Secrets Of The  Whirling Blade' Read this book?", "    YES  NO"
+    dialog_string_wrapping " 'Secrets Of The  Whirling Blade' Read this book?"
+    dialog_ask_line "YES", "NO"
 
 Dialog207:: ; Book
     dialog_text "'The Whirling Blade technique has been handed down from gener- ation to gener- ation by the family of the hero. To use it, hold down the Sword Button and build up your power.  When you have enough, you can release the Button!  Can you master this?'"
 
 Dialog208:: ; Book, Narrator
-    dialog_ask "'The Properties", "  Of Warp Holes' Read this book?", "    YES  NO"
+    dialog_string_wrapping "'The Properties", "  Of Warp Holes' Read this book?"
+    dialog_ask_line "YES", "NO"
 
 Dialog209:: ; Book
     dialog_text "'There are some Warp Holes on Koholint Island. You can warp to and fro using these holes.  If you jump into the Warp Hole", "at which you arrived, you will go to the next one in the sequence.  You can only warp to a hole you have seen with your own eyes...'"
 
 Dialog20A:: ; Book, Narrator
-    dialog_ask "'Fun With Bombs' Read this book?", "    YES  NO"
+    dialog_string_wrapping "'Fun With Bombs' Read this book?"
+    dialog_ask_line "YES", "NO"
 
 Dialog20B:: ; Book
     dialog_text "'After you put a Bomb down, you can pick it up by pressing the Button again. You can then throw it by pushing the Button one more time.  Did you know that?'"
 
 Dialog20C:: ; Book, Narrator
-    dialog_ask "   'Atlas Of Koholint Island' You can move the cursor and look up the name of a place...  Do you want to look at this map?", "    Look Don't"
+    dialog_string_wrapping "   'Atlas Of Koholint Island' You can move the cursor and look up the name of a place...  Do you want to look at this map?"
+    dialog_ask_line "Look", "Don't"
 
 Dialog20D:: ; Book, Narrator
-    dialog_ask " 'Dark Secrets", "  And Mysteries", "   Of Koholint' Do you really want to read it?", "    YES  NO"
+    dialog_string_wrapping " 'Dark Secrets", "  And Mysteries", "   Of Koholint' Do you really want to read it?"
+    dialog_ask_line "YES", "NO"
 
 Dialog20E:: ; Book, Narrator
     dialog_text "Gasp! Wha-What's this! ... ... You can't read the tiny print without the aid of a magnifying glass..."
@@ -424,7 +442,8 @@ Dialog220:: ; Kid
     dialog_text "Hey buddy!  It's serious!  Yeah, really serious!! Yeah, it is!", "The Moblins came to the village! Yeah, that's right!  A whole gang of Moblins! Then... It's for real!  They all went to the house...  Yeah, that house, and then they did something at Bow Wow's house!!", "It was a really bad scene, with the M-m-moblins! So, I mean, ahh! ... ... ... ... ... ... ... ... It might be faster to find out for yourself what happened!"
 
 Dialog221:: ; Secret Goriya
-    dialog_ask "I found a good item washed up on the beach... I'll trade it to you for what you have in your B Button...", "    Okay No"
+    dialog_string_wrapping "I found a good item washed up on the beach... I'll trade it to you for what you have in your B Button..."
+    dialog_ask_line "Okay", "No"
 
 Dialog222:: ; Secret Goriya
     dialog_text "Okay, let's do it!  When you don't want the Boomerang any more, come back!"
@@ -436,7 +455,8 @@ Dialog224:: ; Narrator
     dialog_text "You got the Boomerang in exchange for the item you had."
 
 Dialog225:: ; Secret Goriya, Link
-    dialog_ask "Give me back the Boomerang, I beg you! I'll return the item you gave to me!", "    Okay Not Now"
+    dialog_string_wrapping "Give me back the Boomerang, I beg you! I'll return the item you gave to me!"
+    dialog_ask_line "Okay", "Not Now"
 
 Dialog226:: ; Narrator
     dialog_text "The item came back to you. You returned the Boomerang."
@@ -454,7 +474,8 @@ Dialog22A:: ; Ulrira
     dialog_text "'BRRING! BRRING! Ya, it's Ulrira! You haven't found the 5 Golden Leaves? Go scare that crow by the castle and see if that helps! Bye!", "CLICK!'"
 
 Dialog22B:: ; Photo Album, Narrator
-    dialog_ask "'The Travels of #####' Do you want to look at your album?", "    Look Don't"
+    dialog_string_wrapping "'The Travels of #####' Do you want to look at your album?"
+    dialog_ask_line "Look", "Don't"
 
 Dialog22C:: ; Narrator
     dialog_text "Which picture would you like to see? Use <dpad> to select, then press the A Button!"

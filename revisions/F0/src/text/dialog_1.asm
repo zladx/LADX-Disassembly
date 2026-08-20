@@ -65,16 +65,19 @@ Dialog015::
     dialog_text "Je t'en prie! Apprends-la. C'est ma chanson préférée!!"
 
 Dialog016::
-    dialog_ask "Alors,comment", "tu la trouves? N'est-elle pas émouvante? Sauras-tu t'en souvenir?", "    Oui  Non"
+    dialog_string_wrapping "Alors,comment", "tu la trouves? N'est-elle pas émouvante? Sauras-tu t'en souvenir?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog017::
     dialog_text "Je suis Monique la Lunatique.", "Je vends des remèdes secrets qui te feront péter la forme!"
 
 Dialog018::
-    dialog_ask "Mon secret coûte 28 rubis.", "Tu es intéressé?", "    Oui  Non"
+    dialog_string_wrapping "Mon secret coûte 28 rubis.", "Tu es intéressé?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog019::
-    dialog_ask "Mon secret coûte 42 rubis.", "Tu es intéressé?", "    Oui  Non"
+    dialog_string_wrapping "Mon secret coûte 42 rubis.", "Tu es intéressé?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog01A::
     dialog_text "Merci bien! Voilà, je viens de l'appliquer sur toi!", "Ce remède agira si tu perds", "tes Coeurs! Reviens quand", "tu veux!!"
@@ -129,10 +132,12 @@ Dialog02A::
 
 Dialog02B::
 Dialog02C::
-    dialog_ask "Arc & Flèches :", "   980 rubis!", "    Oui  Non"
+    dialog_string_wrapping "Arc & Flèches :", "   980 rubis!"
+    dialog_ask_line "Oui", "Non"
 
 Dialog02D::
-    dialog_ask "   10 Flèches:", "   10 rubis!", "    Oui  Non"
+    dialog_string_wrapping "   10 Flèches:", "   10 rubis!"
+    dialog_ask_line "Oui", "Non"
 
 Dialog02E::
     dialog_text "Bienvenue! Apporte ici", "ce que tu", "veux acheter."
@@ -141,16 +146,20 @@ Dialog02F::
     dialog_text "Hé! Une minute! Tu dois payer!"
 
 Dialog030::
-    dialog_ask "Pelle de qualité    200 rubis! C'est pas donné!", "    Oui  Non"
+    dialog_string_wrapping "Pelle de qualité    200 rubis! C'est pas donné!"
+    dialog_ask_line "Oui", "Non"
 
 Dialog031::
-    dialog_ask " Trois Coeurs", "   10 rubis!", "    Oui  Non"
+    dialog_string_wrapping " Trois Coeurs", "   10 rubis!"
+    dialog_ask_line "Oui", "Non"
 
 Dialog032::
-    dialog_ask "Bouclier personnalisé.", "    20 rubis!", "    Oui  Non"
+    dialog_string_wrapping "Bouclier personnalisé.", "    20 rubis!"
+    dialog_ask_line "Oui", "Non"
 
 Dialog033::
-    dialog_ask "    10 Bombes", "    10 rubis!", "    Oui  Non"
+    dialog_string_wrapping "    10 Bombes", "    10 rubis!"
+    dialog_ask_line "Oui", "Non"
 
 Dialog034::
     dialog_text "Désolé petit!", "Tu n'as pas assez de rubis. Reviens donc plus tard."
@@ -170,7 +179,8 @@ Dialog039::
 
 Dialog03A::
 Dialog03B::
-    dialog_ask "JEU DE HASARD", "La partie : 10r", "    Oui  Non"
+    dialog_string_wrapping "JEU DE HASARD", "La partie : 10r"
+    dialog_ask_line "Oui", "Non"
 
 Dialog03C::
     dialog_text "A & B déplacent la grue. Après, tu dois calculer ton timing... Dirige-toi vers les boutons. Bonne chance!"
@@ -179,7 +189,8 @@ Dialog03D::
     dialog_text "Tu as gagné", "le Bouclier!", "Tu peux même y graver ton nom!"
 
 Dialog03E::
-    dialog_ask "Un autre essai?", "    Oui  Non"
+    dialog_string_wrapping "Un autre essai?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog03F::
     dialog_text "Bonne chance!"
@@ -200,7 +211,8 @@ Dialog044::
     dialog_text "Tu as gagné", "un Yoshi!", "On le voit", "dans tous les jeux, celui-là!"
 
 Dialog045::
-    dialog_ask "Une partie de pêche, mon gars? Ça ne te coûtera que 10 rubis...", "    Oui  Non"
+    dialog_string_wrapping "Une partie de pêche, mon gars? Ça ne te coûtera que 10 rubis..."
+    dialog_ask_line "Oui", "Non"
 
 Dialog046::
     dialog_text "Vis ta vie!", "Sois un peu", "plus motivé!"
@@ -209,22 +221,27 @@ Dialog047::
     dialog_text "Avec <left> et <right>", "de <dpad>, évalue", "la distance", "de ton lancer. Dès que le poisson est ferré, presse vite A/B pour", "le remonter!"
 
 Dialog048::
-    dialog_ask "Un autre essai?", "    Oui  Non"
+    dialog_string_wrapping "Un autre essai?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog049::
-    dialog_ask "Oh non! Le fil s'est cassé!", "Un autre essai?", "    Oui  Non"
+    dialog_string_wrapping "Oh non! Le fil s'est cassé!", "Un autre essai?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog04A::
-    dialog_ask "Il est énorme! En récompense, je t'offre", "20 rubis.", "Un autre essai?", "    Oui  Non"
+    dialog_string_wrapping "Il est énorme! En récompense, je t'offre", "20 rubis.", "Un autre essai?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog04B::
-    dialog_ask "Il n'y a plus de poissons!", "Veux-tu essayer la pêche en mer?", "    Oui  Non"
+    dialog_string_wrapping "Il n'y a plus de poissons!", "Veux-tu essayer la pêche en mer?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog04C::
     dialog_text "C'était pour rigoler... Allez, salut!"
 
 Dialog04D::
-    dialog_ask "Ce n'est que", "du fretin.", "Tu n'auras que", "5 rubis.", "Tu devrais encore essayer!", "    Oui  Non"
+    dialog_string_wrapping "Ce n'est que", "du fretin.", "Tu n'auras que", "5 rubis.", "Tu devrais encore essayer!"
+    dialog_ask_line "Oui", "Non"
 
 Dialog04E::
     dialog_text "Tu n'as pas assez de rubis. Reviens quand", "tu seras plus fortuné,", "petit gars!"

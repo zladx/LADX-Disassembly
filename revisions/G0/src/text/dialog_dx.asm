@@ -83,10 +83,12 @@ Dialog25B::
     dialog_text "Du trägst die Rote Rüstung!", "Du strotzt nun vor Kraft!"
 
 Dialog25C::
-    dialog_ask "Rot für Angriff, Blau zur Verteidigung. Deine Wahl?", "    Blau Rot"
+    dialog_string_wrapping "Rot für Angriff, Blau zur Verteidigung. Deine Wahl?"
+    dialog_ask_line "Blau", "Rot"
 
 Dialog25D::
-    dialog_ask "Sicher?", "    Ja   Nein"
+    dialog_string_wrapping "Sicher?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog25E::
     dialog_text "Die Fee", "erwartet", "Dich!"
@@ -95,7 +97,8 @@ Dialog25F::
     dialog_text "Hast Du das Zauberpulver dabei? Nein? Dann geh zurück! "
 
 Dialog260::
-    dialog_ask "Unsere Farben wechseln stets! Bin ich rot, so ist er blau! Ist er rot, bin ich blau! Welche Farbe trage ich?", "    Blau Rot"
+    dialog_string_wrapping "Unsere Farben wechseln stets! Bin ich rot, so ist er blau! Ist er rot, bin ich blau! Welche Farbe trage ich?"
+    dialog_ask_line "Blau", "Rot"
 
 Dialog261::
     dialog_text "Ich bin kein Schwächling! Dein mickriges Schwert ist", "ein Witz!"
@@ -113,13 +116,15 @@ Dialog265::
     dialog_text "Verrate es niemandem!"
 
 Dialog266::
-    dialog_ask "Willst Du das Buch lesen?", "    Ja   Nein"
+    dialog_string_wrapping "Willst Du das Buch lesen?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog267::
     dialog_text "Die bunte Welt, verborgen unter 5 Grabsteinen.", " ", "   3<up>  4<right>  5<up>", "   2<left>  1<down>", "Setze all Deine Kraft ein. Öffne einen neuen Weg! Wer auserwählt ist, erhält die Macht über die Farbe. Wie wohl die bunte Welt aussehen mag?"
 
 Dialog268::
-    dialog_ask "Hallo #####. Unglaublich, daß Du es bis hier geschafft hast. Ich gebe Dir die Macht der Farbe! Für den Angriff wähle Rot. Zur Verteidigung wähle Blau. Welche Farbe möchtest Du?", "    BLAU ROT"
+    dialog_string_wrapping "Hallo #####. Unglaublich, daß Du es bis hier geschafft hast. Ich gebe Dir die Macht der Farbe! Für den Angriff wähle Rot. Zur Verteidigung wähle Blau. Welche Farbe möchtest Du?"
+    dialog_ask_line "BLAU", "ROT"
 
 Dialog269::
     dialog_text "Du Narr! Dein Schwert versagt hier! Versuche etwas anderes!"

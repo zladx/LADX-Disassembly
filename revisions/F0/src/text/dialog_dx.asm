@@ -25,7 +25,8 @@ Dialog0EF::
     dialog_text "Tu as trouvé un Coquillage! Collectes-en beaucoup pour faire du troc... "
 
 Dialog0F0::
-    dialog_ask "Une balade", "en radeau", "pour 100 rubis?", "    Oui  Non"
+    dialog_string_wrapping "Une balade", "en radeau", "pour 100 rubis?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog0F1::
     dialog_text "Il y en a un", "à l'extérieur. Amuse-toi bien!"
@@ -46,10 +47,12 @@ Dialog0F6::
     dialog_text "Cette île va disparaître... Notre monde va disparaître... Notre monde... Notre... monde...!!      "
 
 Dialog0F7::
-    dialog_ask "Génial, #####! Je peux?", "Tu es d'accord?", "    Oui  Non"
+    dialog_string_wrapping "Génial, #####! Je peux?", "Tu es d'accord?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog0F8::
-    dialog_ask "Allez! Je veux essayer! Ça", "doit être fun!", "    Oui  Oui!"
+    dialog_string_wrapping "Allez! Je veux essayer! Ça", "doit être fun!"
+    dialog_ask_line "Oui", "Oui!"
 
 Dialog0F9::
     dialog_text "Tu es douée!", "Tu dois être", "une pro, hein? ... ... ... ... Zou du vent!", "On ne veut pas de pros ici..."
@@ -130,10 +133,12 @@ Dialog25B::
     dialog_text "Vous obtenez les habits rouges! Vous débordez d'énergie!"
 
 Dialog25C::
-    dialog_ask "Rouge pour l'attaque et bleu pour la défense. Lequel Désires-tu?", "    BLEU ROUGE"
+    dialog_string_wrapping "Rouge pour l'attaque et bleu pour la défense. Lequel Désires-tu?"
+    dialog_ask_line "BLEU", "ROUGE"
 
 Dialog25D::
-    dialog_ask "Es-tu sûr?", "    OUI  NON"
+    dialog_string_wrapping "Es-tu sûr?"
+    dialog_ask_line "OUI", "NON"
 
 Dialog25E::
     dialog_text "La fée t'attend. "
@@ -142,7 +147,8 @@ Dialog25F::
     dialog_text "As-tu la poudre? Va la chercher si tu ne l'as pas."
 
 Dialog260::
-    dialog_ask "Nos couleurs changent! Si je suis rouge, il sera bleu! Et inversement... De quelle couleur sont mes habits?", "    Bleu Rouge"
+    dialog_string_wrapping "Nos couleurs changent! Si je suis rouge, il sera bleu! Et inversement... De quelle couleur sont mes habits?"
+    dialog_ask_line "Bleu", "Rouge"
 
 Dialog261::
     dialog_text "BOU! Ta lame est pitoyable! Tu ne pourras jamais me battre!      "
@@ -160,13 +166,15 @@ Dialog265::
     dialog_text "N'en parle à personne."
 
 Dialog266::
-    dialog_ask "Voulez-vous lire ce livre?", "    Lire Non"
+    dialog_string_wrapping "Voulez-vous lire ce livre?"
+    dialog_ask_line "Lire", "Non"
 
 Dialog267::
     dialog_text "Un monde de couleur sous 5 pierres tombales ", " ", "   3<up>  4<right>  5<up>", "   2<left>  1<down>", "Teste ton courage. Ouvre un nouveau chemin!", "Le valeureux aura le pouvoir des couleurs. Quel est le mon- de de couleur?"
 
 Dialog268::
-    dialog_ask "Sois le bienvenu #####. Je te félicite d'être venu jusqu'ici. Je vais te remettre le pouvoir de la couleur. Choisis rouge pour l'attaque ou bleu pour la défense. Quel pouvoir veux-tu?", "    BLEU ROUGE"
+    dialog_string_wrapping "Sois le bienvenu #####. Je te félicite d'être venu jusqu'ici. Je vais te remettre le pouvoir de la couleur. Choisis rouge pour l'attaque ou bleu pour la défense. Quel pouvoir veux-tu?"
+    dialog_ask_line "BLEU", "ROUGE"
 
 Dialog269::
     dialog_text "Jeune sot! Ton épée ne marche pas! Essaie donc autre chose!    "

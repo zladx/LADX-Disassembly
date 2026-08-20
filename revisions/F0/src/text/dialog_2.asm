@@ -255,7 +255,8 @@ Dialog0DB::
     dialog_text "Croâ croâ!", "Je suis Wart,", "le chanteur.", "Tu es nul", "en musique! Reviens avec", "du matos, vieux! Croâ croâ!"
 
 Dialog0DC::
-    dialog_ask "Croâ croâ!", "Je suis Wart,", "le chanteur. Inutile de", "me présenter : je suis le roi du Rap...", "Tu veux rester et nous écouter? Pour 300 rubis, on te chante", "un méga morceau! Alors?...", "    Oui  Non"
+    dialog_string_wrapping "Croâ croâ!", "Je suis Wart,", "le chanteur. Inutile de", "me présenter : je suis le roi du Rap...", "Tu veux rester et nous écouter? Pour 300 rubis, on te chante", "un méga morceau! Alors?..."
+    dialog_ask_line "Oui", "Non"
 
 Dialog0DD::
     dialog_text "Merci...", "Je suis ému. Merci... Croâ!"
@@ -273,13 +274,16 @@ Dialog0E1::
     dialog_text "Dis donc toi! Merci de m'avoir dérangé pendant ma sieste! Tiens, j'ai un cadeau pour toi. Tu es prêt?     "
 
 Dialog0E2::
-    dialog_ask "Tu veux plus de Poudre Magique? Tu es prêt?", "    Oui  Non"
+    dialog_string_wrapping "Tu veux plus de Poudre Magique? Tu es prêt?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog0E3::
-    dialog_ask "Tu veux plus de Bombes?", "Tu es prêt?", "    Oui  Non"
+    dialog_string_wrapping "Tu veux plus de Bombes?", "Tu es prêt?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog0E4::
-    dialog_ask "Tu veux plus de Flèches?", "Tu es prêt?", "    Oui  Non"
+    dialog_string_wrapping "Tu veux plus de Flèches?", "Tu es prêt?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog0E5::
     dialog_text "Hi hi hi!", "C'est bien fait pour toi!", "Tu as vu tout", "ce que tu dois porter!!!", "Allez, salut!"
@@ -315,7 +319,8 @@ Dialog2AD::
     dialog_text "Reviens me voir quand tu seras seul!"
 
 Dialog2AE::
-    dialog_ask "Es-tu sûr?", "    OUI  NON"
+    dialog_string_wrapping "Es-tu sûr?"
+    dialog_ask_line "OUI", "NON"
 
 Dialog2AF::
     dialog_text "J'adore les photos! Hé, #####! Que fais- tu dans le coin? "

@@ -35,7 +35,8 @@ Dialog10B::
     dialog_text "Je vais la développer. Viens vite la voir!"
 
 Dialog10C::
-    dialog_ask "J'ADORE prendre les gens en photo. Puis-je te tirer le portrait?", "    OUI  NON"
+    dialog_string_wrapping "J'ADORE prendre les gens en photo. Puis-je te tirer le portrait?"
+    dialog_ask_line "OUI", "NON"
 
 Dialog10D::
     dialog_text "Va au fond de la salle et fais face à l'écran. "
@@ -128,7 +129,8 @@ Dialog12A::
     dialog_text "J'ai trop de bébés! Ils se ressemblent tous en plus! Au fait sais-tu où trouver un Yoshi? J'en ai vu un au jeu du hasard mais je n'ai pas pu l'avoir."
 
 Dialog12B::
-    dialog_ask "Tu offres", "ce Yoshi", "à mon bébé?", "    Oui  Non"
+    dialog_string_wrapping "Tu offres", "ce Yoshi", "à mon bébé?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog12C::
     dialog_text "Ces quatre là se ressemblent tant que moi-même,", "je m'y perds..."
@@ -158,13 +160,15 @@ Dialog134::
     dialog_text "Une lettre?", "Pour moi?", "Mais c'est formidable...", "Il y a même", "une photo!"
 
 Dialog135::
-    dialog_ask "Ohhh...", "Quelle beauté! J'aimerais", "te remercier mais je n'ai", "que ce balai", "à t'offrir...", "En veux-tu?", "    Oui  Non"
+    dialog_string_wrapping "Ohhh...", "Quelle beauté! J'aimerais", "te remercier mais je n'ai", "que ce balai", "à t'offrir...", "En veux-tu?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog136::
     dialog_text "Mr Wright t'a offert un <broom>. Mais...", "cette photo... ce n'est pas..."
 
 Dialog137::
-    dialog_ask "Vraiment, j'insiste... Prends ce <broom>!", "    Oui  Non"
+    dialog_string_wrapping "Vraiment, j'insiste... Prends ce <broom>!"
+    dialog_ask_line "Oui", "Non"
 
 Dialog138::
     dialog_text "L'écriture, c'est vraiment mon hobby!"
@@ -173,7 +177,8 @@ Dialog139::
     dialog_text "Bonjour! Je réponds à Christine!"
 
 Dialog13A::
-    dialog_ask "Cela semble incroyable,", "mais avant,", "je vivais dans un château.", "Je me suis enfui quand mes gardes ont été ensorcelés...", "Et toi, tu cherches la clé de La Prairie? Ecoute, j'ai", "un marché", "à te proposer : quand je me", "suis enfui, j'ai oublié mes Feuilles d'Or. Peux-tu me", "les ramener,", "mon cher ami?", "    Oui  Non"
+    dialog_string_wrapping "Cela semble incroyable,", "mais avant,", "je vivais dans un château.", "Je me suis enfui quand mes gardes ont été ensorcelés...", "Et toi, tu cherches la clé de La Prairie? Ecoute, j'ai", "un marché", "à te proposer : quand je me", "suis enfui, j'ai oublié mes Feuilles d'Or. Peux-tu me", "les ramener,", "mon cher ami?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog13B::
     dialog_text "Il existe en tout cinq feuilles d'Or. Souviens-toi d'acheter une pelle."
@@ -273,7 +278,8 @@ Dialog15B::
     dialog_text "YOUPI! J'ai", "trop travaillé et mon balai", "est tout usé!"
 
 Dialog15C::
-    dialog_ask "YOUPI YOUPI!!! Un balai neuf! Merci...", "C'est pour moi?", "    Oui  Non"
+    dialog_string_wrapping "YOUPI YOUPI!!! Un balai neuf! Merci...", "C'est pour moi?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog15D::
     dialog_text "En récompense, je te donne", "un Hameçon", "que j'ai trouvé au bord de", "la rivière."
@@ -300,13 +306,15 @@ Dialog164::
     dialog_text "Tu prends", "le bâton", "que le singe", "a laissé."
 
 Dialog165::
-    dialog_ask "<bananas>, <bananas> ...", "Miam Miam!", "Pour Kiki?", "    Oui  Non"
+    dialog_string_wrapping "<bananas>, <bananas> ...", "Miam Miam!", "Pour Kiki?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog166::
     dialog_text "Tu ne connais pas l'étiquette quand tu", "rends visite à une dame??", "Si tu m'avais apporté", "des fleurs, j'aurais été plus loquace. Personnellement, j'adore les hibiscus..."
 
 Dialog167::
-    dialog_ask "Oh, tu m'as apporté un <flower>! Comme", "c'est gentil! J'ai une faveur à te demander. Je peux?", "    Oui  Non"
+    dialog_string_wrapping "Oh, tu m'as apporté un <flower>! Comme", "c'est gentil! J'ai une faveur à te demander. Je peux?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog168::
     dialog_text "J'aimerais", "te confier", "une lettre", "pour Mr Wright, qui habite", "dans la Forêt. Merci d'avance! "
@@ -333,7 +341,8 @@ Dialog16F::
     dialog_text "Grand mère n'est pas ici. Elle est au Village des Animaux. C'est ce que le grand père a dit au téléphone!   "
 
 Dialog170::
-    dialog_ask "Je te l'avais prédit : je me suis perdu!", "J'ai trop faim pour faire un pas de plus.", "Me nourriras-tu?", "    Oui  Non"
+    dialog_string_wrapping "Je te l'avais prédit : je me suis perdu!", "J'ai trop faim pour faire un pas de plus.", "Me nourriras-tu?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog171::
     dialog_text "C'est pas sympa! "
@@ -354,7 +363,8 @@ Dialog176::
     dialog_text "Merci pour l'autre fois! "
 
 Dialog177::
-    dialog_ask "Je te l'avais prédit : je me suis perdu!", "J'ai trop faim pour faire un pas de plus.", "Me nourriras-tu?", "    Non! Non"
+    dialog_string_wrapping "Je te l'avais prédit : je me suis perdu!", "J'ai trop faim pour faire un pas de plus.", "Me nourriras-tu?"
+    dialog_ask_line "Non!", "Non"
 
 Dialog178::
     dialog_text "Il s'est passé une véritable tragédie chez ma voisine d'en face! Que faire? Moi, je ne sais que balayer!!"
@@ -408,10 +418,12 @@ Dialog293::
     dialog_text "Utilise l'arc sur une statue étrange."
 
 Dialog294::
-    dialog_ask "On prend une photo?", "    OUI  NON"
+    dialog_string_wrapping "On prend une photo?"
+    dialog_ask_line "OUI", "NON"
 
 Dialog295::
-    dialog_ask "Pas de photo?! Tu te fiches de moi?", "    Oui  Non"
+    dialog_string_wrapping "Pas de photo?! Tu te fiches de moi?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog296::
     dialog_text "Quel dommage!   "

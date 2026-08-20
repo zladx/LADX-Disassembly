@@ -35,7 +35,8 @@ Dialog10B::
     dialog_text "Ich entwickle es. Sieh es", "Dir später an!"
 
 Dialog10C::
-    dialog_ask "Ich LIEBE es zu fotografieren. Darf ich", "auch Dich fotografieren?", "    Ja   Nein"
+    dialog_string_wrapping "Ich LIEBE es zu fotografieren. Darf ich", "auch Dich fotografieren?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog10D::
     dialog_text "Stelle Dich", "auf den", "Teppich und lächle!"
@@ -128,7 +129,8 @@ Dialog12A::
     dialog_text "Sie sehen alle gleich aus. Auch ich kann sie manchmal nicht unterscheiden! Mein Sohn fragt zur Zeit immer nach der Yoshi- Puppe! Ich sah eine in der Spielhalle..."
 
 Dialog12B::
-    dialog_ask "Oh! Schenkst Du meinem Kind den <yoshi> ? Bitte!", "    Klar Nä"
+    dialog_string_wrapping "Oh! Schenkst Du meinem Kind den <yoshi> ? Bitte!"
+    dialog_ask_line "Klar", "Nä"
 
 Dialog12C::
     dialog_text "Ich kann meine Vierlinge immer noch nicht aus- einanderhalten."
@@ -158,13 +160,15 @@ Dialog134::
     dialog_text "Was ist das? Ein BRIEF? Für MICH? schnief... Das.. ist ja toll!.... Und sieh doch..! Mit einem FOTO!! "
 
 Dialog135::
-    dialog_ask "Mmm...Sie ist ja so hübsch... Warte, ich muß Dir irgendetwas für Deine Mühe geben... Moment! Dieser Besen ist alles, was ich habe... Okay?", "    Okay ...."
+    dialog_string_wrapping "Mmm...Sie ist ja so hübsch... Warte, ich muß Dir irgendetwas für Deine Mühe geben... Moment! Dieser Besen ist alles, was ich habe... Okay?"
+    dialog_ask_line "Okay", "...."
 
 Dialog136::
     dialog_text "Aus Dankbarkeit hast Du von Dr. Wright einen Besen erhalten. Wenn er wüßte, wie Christine WIRKLICH aussieht..."
 
 Dialog137::
-    dialog_ask "Bitte! Du mußt diesen <broom> von", "mir annehmen...", "    Okay Nein"
+    dialog_string_wrapping "Bitte! Du mußt diesen <broom> von", "mir annehmen..."
+    dialog_ask_line "Okay", "Nein"
 
 Dialog138::
     dialog_text "Ich habe es ja immer gesagt... Briefe schreiben lohnt sich..."
@@ -173,7 +177,8 @@ Dialog139::
     dialog_text "Habe keine Zeit! Schreibe gerade einen Brief an Christine..."
 
 Dialog13A::
-    dialog_ask "Er sei gegrüßt!! Vermutlich sieht Er es mir nicht an, aber einst lebte ich in ei- nem Schloß. Doch dann wurden die Diener von den Monstern verzau- bert und zwangen mich, das Schloß zu verlassen... Ich mußte in die Villa fliehen... Aber, Er möchte den Schlüssel zur Urunga- Steppe? Ich kann Ihm helfen... Für eine kleine Gegenleistung... Er möge mir erst die Goldenen Blätter bringen, die ich bei der Flucht verloren habe.", "    Jau  Nein"
+    dialog_string_wrapping "Er sei gegrüßt!! Vermutlich sieht Er es mir nicht an, aber einst lebte ich in ei- nem Schloß. Doch dann wurden die Diener von den Monstern verzau- bert und zwangen mich, das Schloß zu verlassen... Ich mußte in die Villa fliehen... Aber, Er möchte den Schlüssel zur Urunga- Steppe? Ich kann Ihm helfen... Für eine kleine Gegenleistung... Er möge mir erst die Goldenen Blätter bringen, die ich bei der Flucht verloren habe."
+    dialog_ask_line "Jau", "Nein"
 
 Dialog13B::
     dialog_text "Großartig! Finde Er alle fünf Blätter! Vergiß Er nicht, auch eine Schaufel mitzubringen!"
@@ -273,7 +278,8 @@ Dialog15B::
     dialog_text "Jaja, nach dem vielen Kehren ist mein Besen ganz kaputt..."
 
 Dialog15C::
-    dialog_ask "Oh... Ein neuer Besen? Für MICH? Er ist doch für mich, oder..?", "    Klar Nein"
+    dialog_string_wrapping "Oh... Ein neuer Besen? Für MICH? Er ist doch für mich, oder..?"
+    dialog_ask_line "Klar", "Nein"
 
 Dialog15D::
     dialog_text "Danke! Ich gebe Dir dafür den Angelhaken, den ich beim Kehren am Fluß gefunden habe."
@@ -300,13 +306,15 @@ Dialog164::
     dialog_text "Du hast einen Stock gefunden, den einer der Affen zurück- gelassen hat... Du nimmst ihn!"
 
 Dialog165::
-    dialog_ask "<bananas> ! <bananas> ! Ooooh! HABEN wollen!!! Du Kiki geben?", "    Kiki Nein"
+    dialog_string_wrapping "<bananas> ! <bananas> ! Ooooh! HABEN wollen!!! Du Kiki geben?"
+    dialog_ask_line "Kiki", "Nein"
 
 Dialog166::
     dialog_text "Hm! Du hast noch nicht gelernt, wie man sich bei einer Dame be- nimmt, oder? Wer mir nicht einmal Blumen oder so mitbringt, mit dem rede ich erst gar nicht.. Mmm! Über Hibis- kus würde ich mich schon freuen..."
 
 Dialog167::
-    dialog_ask "Oh, wie entzük- kend von Dir! Du hast mir einen Hibiskus mitge- bracht. Wenn Du so ein Gentleman bist... Könntest Du mir einen Ge- fallen tun?", "    Ja   Nie"
+    dialog_string_wrapping "Oh, wie entzük- kend von Dir! Du hast mir einen Hibiskus mitge- bracht. Wenn Du so ein Gentleman bist... Könntest Du mir einen Ge- fallen tun?"
+    dialog_ask_line "Ja", "Nie"
 
 Dialog168::
     dialog_text "Könntest Du für mich einen Brief zu Dr. Wright bringen? Er lebt am Rand vom Zau- berwald. Bitte!"
@@ -333,7 +341,8 @@ Dialog16F::
     dialog_text "Oma ist nicht hier. Sie ist ins Zoodorf gegangen! Das hat Opa Ulrira mir am Telefon erzählt!"
 
 Dialog170::
-    dialog_ask "Tja... Ich habe mich verlaufen, wie ich es vor- hergesagt habe.. Und jetzt bin ich so k.o., ich kann mich nicht mehr bewegen... Hast Du zufällig etwas Eßbares für mich?", "    Ja   Nein"
+    dialog_string_wrapping "Tja... Ich habe mich verlaufen, wie ich es vor- hergesagt habe.. Und jetzt bin ich so k.o., ich kann mich nicht mehr bewegen... Hast Du zufällig etwas Eßbares für mich?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog171::
     dialog_text "Du bist ja total herzlos!"
@@ -354,7 +363,8 @@ Dialog176::
     dialog_text "Vielen Dank noch einmal! Danke!"
 
 Dialog177::
-    dialog_ask "Tja, ich habe mich verlaufen, wie ich gesagt habe. Jetzt bin ich so k.o., ich kann mich nicht mehr bewegen... Hast Du zufällig etwas Eßbares für mich?", "    Ich? Nein"
+    dialog_string_wrapping "Tja, ich habe mich verlaufen, wie ich gesagt habe. Jetzt bin ich so k.o., ich kann mich nicht mehr bewegen... Hast Du zufällig etwas Eßbares für mich?"
+    dialog_ask_line "Ich?", "Nein"
 
 Dialog178::
     dialog_text "Jaja! SEUFZ! In Madame MiouMious Haus hat sich eine furchtbare Tragödie ereig- net! Es ist so schrecklich,... ...aber ich kann nichts weiter tun, als kehren. "

@@ -59,10 +59,12 @@ Dialog293::
     dialog_text "Kommt Dir eine Statue seltsam vor, setze Pfeil und Bogen ein."
 
 Dialog294::
-    dialog_ask "Laß mich ein Foto schießen!", "    Ja   Nein"
+    dialog_string_wrapping "Laß mich ein Foto schießen!"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog295::
-    dialog_ask "Du willst kein Foto? Ehrlich nicht?", "    Ja   Nein"
+    dialog_string_wrapping "Du willst kein Foto? Ehrlich nicht?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog296::
     dialog_text "Spaßbremse!"
@@ -138,7 +140,8 @@ Dialog2AD::
     dialog_text "Wir treffen uns später, wenn Du allein bist!"
 
 Dialog2AE::
-    dialog_ask "Sicher?", "    Ja   Nein"
+    dialog_string_wrapping "Sicher?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog2AF::
     dialog_text "Ich liebe Fotos! Hey, #####!", "Was machst Du hier?"

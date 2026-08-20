@@ -65,16 +65,19 @@ Dialog015::
     dialog_text "Schnief! Aber es ist doch mein Lieblingslied... Bitte lerne sie! "
 
 Dialog016::
-    dialog_ask "Und, wie gefällt sie Dir? Sie ist doch mitreißend, oder? Kannst Du Dir sie merken?", "    Ja   Nein"
+    dialog_string_wrapping "Und, wie gefällt sie Dir? Sie ist doch mitreißend, oder? Kannst Du Dir sie merken?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog017::
     dialog_text "Hallo, ich heiße Geierwally! Ich verkaufe Dir ein Geheimnis, das Dich sicher an- machen wird..."
 
 Dialog018::
-    dialog_ask "Zahlst Du mir 28 Rubine für mein Geheimnis? Hm???", "    Klar Nö"
+    dialog_string_wrapping "Zahlst Du mir 28 Rubine für mein Geheimnis? Hm???"
+    dialog_ask_line "Klar", "Nö"
 
 Dialog019::
-    dialog_ask "Zahlst Du mir 42 Rubine für mein Geheimnis? Hm???", "    Klar Nö"
+    dialog_string_wrapping "Zahlst Du mir 42 Rubine für mein Geheimnis? Hm???"
+    dialog_ask_line "Klar", "Nö"
 
 Dialog01A::
     dialog_text "Okay, Süßer! Du hast eine gute Wahl getroffen!! Hier... Ich gebe Dir meine gehei- me Medizin. Wenn all Deine Herzen leer sind, wirst Du mit der Medi- zin automatisch wieder gesund!!"
@@ -129,10 +132,12 @@ Dialog02A::
 
 Dialog02B::
 Dialog02C::
-    dialog_ask " Pfeil & Bogen Nur 980 Rubine!", "    Jaja Neee"
+    dialog_string_wrapping " Pfeil & Bogen Nur 980 Rubine!"
+    dialog_ask_line "Jaja", "Neee"
 
 Dialog02D::
-    dialog_ask "   10  Pfeile", "   10  Rubine", "    Ja   Nein"
+    dialog_string_wrapping "   10  Pfeile", "   10  Rubine"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog02E::
     dialog_text "Gude..! Hol Dir etwas vom Regal und bring es zur Kasse..."
@@ -141,16 +146,20 @@ Dialog02F::
     dialog_text "Ja, bist Du noch ganz sauber? Du mußt erst bezah- len. Zurück!"
 
 Dialog030::
-    dialog_ask " Luxus-Schaufel", "   200 Rubine", "    Ja   Nein"
+    dialog_string_wrapping " Luxus-Schaufel", "   200 Rubine"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog031::
-    dialog_ask "     3 Herzen", "    10 Rubine", "    Ja   Nein"
+    dialog_string_wrapping "     3 Herzen", "    10 Rubine"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog032::
-    dialog_ask "     Schild", "   20  Rubine", "    Ja   Nein"
+    dialog_string_wrapping "     Schild", "   20  Rubine"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog033::
-    dialog_ask "   10  Bomben", "   10  Rubine", "    Ja   Nein"
+    dialog_string_wrapping "   10  Bomben", "   10  Rubine"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog034::
     dialog_text "Ich fürchte, das kannst Du Dir im Moment nicht leisten. Tschüß! "
@@ -170,7 +179,8 @@ Dialog039::
 
 Dialog03A::
 Dialog03B::
-    dialog_ask " * WUNDERKRAN * 1 Sp.  10 Rubine", "    Zock Gähn"
+    dialog_string_wrapping " * WUNDERKRAN * 1 Sp.  10 Rubine"
+    dialog_ask_line "Zock", "Gähn"
 
 Dialog03C::
     dialog_text "Mit den A und B Knöpfen bewegst Du den Kran. Der Rest ist Timing! Gehe vor die Knöpfe.", "Viel Erfolg!"
@@ -179,7 +189,8 @@ Dialog03D::
     dialog_text "Du hast einen Schild gewonnen! "
 
 Dialog03E::
-    dialog_ask "Noch ein Spiel?", "    Jaaa Nein"
+    dialog_string_wrapping "Noch ein Spiel?"
+    dialog_ask_line "Jaaa", "Nein"
 
 Dialog03F::
     dialog_text "Viel Glück!"
@@ -200,7 +211,8 @@ Dialog044::
     dialog_text "Oh! Du hast eine Yoshi-Puppe be- kommen. Endlich! Du LIEBST Yoshi! "
 
 Dialog045::
-    dialog_ask "Möchtest Du eine Runde angeln? Es kostet Dich nur 10 Rubine pro Versuch!", "    Ja   Nein"
+    dialog_string_wrapping "Möchtest Du eine Runde angeln? Es kostet Dich nur 10 Rubine pro Versuch!"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog046::
     dialog_text "Das ist schade! Angeln macht so großen Spaß..."
@@ -209,22 +221,27 @@ Dialog047::
     dialog_text "Fein! Mit dem <dpad> (<right> & <left>) und den Knöpfen kannst Du bestimmen, wo die Schnur im Wasser landen soll...", "Mit den A und B Knöpfen kannst die Schnur dann im Wasser bewe- gen! Hat endlich ein Fisch ange- bissen, holst Du ihn raus, indem Du schnell die Knöpfe drückst."
 
 Dialog048::
-    dialog_ask "Möchtest Du es noch einmal ver- suchen?", "    Gern Nein"
+    dialog_string_wrapping "Möchtest Du es noch einmal ver- suchen?"
+    dialog_ask_line "Gern", "Nein"
 
 Dialog049::
-    dialog_ask "Die Schnur ist gerissen! Noch einen Versuch?", "    Ja   Nein"
+    dialog_string_wrapping "Die Schnur ist gerissen! Noch einen Versuch?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog04A::
-    dialog_ask "Wow! Das ist ja ein dicker Brok- ken! Dafür gebe ich Dir 20 Ru- bine. Noch mal?", "    Klar Nie"
+    dialog_string_wrapping "Wow! Das ist ja ein dicker Brok- ken! Dafür gebe ich Dir 20 Ru- bine. Noch mal?"
+    dialog_ask_line "Klar", "Nie"
 
 Dialog04B::
-    dialog_ask "Im Teich gibt es keine Fische mehr! Willst Du es jetzt am Meer versuchen?", "    Ja   Nein"
+    dialog_string_wrapping "Im Teich gibt es keine Fische mehr! Willst Du es jetzt am Meer versuchen?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog04C::
     dialog_text "Hab ich wirklich MEER gesagt? Das war wohl ein Versehen. Ciao!"
 
 Dialog04D::
-    dialog_ask "Das ist aber ein Kleiner! Für den bekommst Du nur 5 Rubine! Willst Du noch einmal?", "    Okay Nein"
+    dialog_string_wrapping "Das ist aber ein Kleiner! Für den bekommst Du nur 5 Rubine! Willst Du noch einmal?"
+    dialog_ask_line "Okay", "Nein"
 
 Dialog04E::
     dialog_text "Tut mir leid, Du hast nicht genug Rubine! Aber sei nicht traurig! Die Fische lau- fen Dir ja nicht weg! Bis später! "

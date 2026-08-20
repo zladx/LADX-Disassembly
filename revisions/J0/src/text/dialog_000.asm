@@ -65,16 +65,19 @@ Dialog015::
     dialog_text "え－っ！　ちゃんとおぼえてね！　 わたしのすきな　うたなんだから"
 
 Dialog016::
-    dialog_ask "どう？　ハ－トにしみるうたでしょ ちゃんと　おぼえた？　　　　　　", "　　　　うん　　　ちっとも"
+    dialog_string_wrapping "どう？　ハ－トにしみるうたでしょ ちゃんと　おぼえた？　　　　　　"
+    dialog_ask_line "うん", "ちっとも"
 
 Dialog017::
     dialog_text "わたし、きまぐれトレ－シ－！　　 げんきになるヒミツ　うってるの。 "
 
 Dialog018::
-    dialog_ask "　２８ルピ－で　ヒミツする？　　", "　　　　する　　　しない"
+    dialog_string_wrapping "　２８ルピ－で　ヒミツする？　　"
+    dialog_ask_line "する", "しない"
 
 Dialog019::
-    dialog_ask "　４２ルピ－で　ヒミツする？　　", "　　　　する　　　しない"
+    dialog_string_wrapping "　４２ルピ－で　ヒミツする？　　"
+    dialog_ask_line "する", "しない"
 
 Dialog01A::
     dialog_text "　ヌリ　ヌリ　ども　ありがとっ！ ヒミツのくすり　ぬっておいたわ！ ハ－トが０になったらきくわよ。　 また、よってらしてねえん．．．"
@@ -129,10 +132,12 @@ Dialog02A::
 
 Dialog02B::
 Dialog02C::
-    dialog_ask "ゆみ　や　セット　９８０ルピ－　 　　　　かう　　　たかすぎるよ！"
+    dialog_string_wrapping "ゆみ　や　セット　９８０ルピ－　 "
+    dialog_ask_line "かう", "たかすぎるよ！"
 
 Dialog02D::
-    dialog_ask "　や　１０ぽん　　１０ルピ－　　", "　　　　かう　　　いらないよ"
+    dialog_string_wrapping "　や　１０ぽん　　１０ルピ－　　"
+    dialog_ask_line "かう", "いらないよ"
 
 Dialog02E::
     dialog_text "いらっしゃい！　ほしいしなもんは ここへ、もってきてくだせえ。　　 "
@@ -141,16 +146,20 @@ Dialog02F::
     dialog_text "おお－っと！そいつはいけねえや！ ちゃんとカネはらってくだせえ。"
 
 Dialog030::
-    dialog_ask "いかしたスコップ　２００ルピ－　", "　　　　かう　　　いらないよ"
+    dialog_string_wrapping "いかしたスコップ　２００ルピ－　"
+    dialog_ask_line "かう", "いらないよ"
 
 Dialog031::
-    dialog_ask "ハ－ト　３こ　１０ルピ－　　　　", "　　　　かう　　　かわないよ！"
+    dialog_string_wrapping "ハ－ト　３こ　１０ルピ－　　　　"
+    dialog_ask_line "かう", "かわないよ！"
 
 Dialog032::
-    dialog_ask "タテ　２０ルピ－なまえもいれます", "　　　　かう　　　かわないよ"
+    dialog_string_wrapping "タテ　２０ルピ－なまえもいれます"
+    dialog_ask_line "かう", "かわないよ"
 
 Dialog033::
-    dialog_ask "バクダン　１０コ　　　１０ルピ－", "　　　　かう　　　かわないよ"
+    dialog_string_wrapping "バクダン　１０コ　　　１０ルピ－"
+    dialog_ask_line "かう", "かわないよ"
 
 Dialog034::
     dialog_text "おおっと、カネがたりないんじゃあ しかたね－。でなおしておくんな！ "
@@ -170,7 +179,8 @@ Dialog039::
 
 Dialog03A::
 Dialog03B::
-    dialog_ask "はやりのゲ－ム　１かい１０ルピ－", "　　　　やる　　　やめとく"
+    dialog_string_wrapping "はやりのゲ－ム　１かい１０ルピ－"
+    dialog_ask_line "やる", "やめとく"
 
 Dialog03C::
     dialog_text "ボタンをおしてクレ－ンをうごかす ．．あとは、そのタイミングだけ！ さあ、ボタンのまえへ、いっとくれ ガンバってね！"
@@ -179,7 +189,8 @@ Dialog03D::
     dialog_text "タテをてにいれた！　　　　　　　 うらになまえを　かいておこ－！"
 
 Dialog03E::
-    dialog_ask "もいちどやってみちゃ－どうだい？", "　　　　やる　　　もうやめる"
+    dialog_string_wrapping "もいちどやってみちゃ－どうだい？"
+    dialog_ask_line "やる", "もうやめる"
 
 Dialog03F::
     dialog_text "まっ、がんばっておくんな！　　　 　"
@@ -200,7 +211,8 @@ Dialog044::
     dialog_text "ヨッシ－だっ！　このごろいろんな ゲ－ムで、みかけるな－。"
 
 Dialog045::
-    dialog_ask "つりはどうかね？　１０ルピ－だよ", "　　　　します　　けっこうです"
+    dialog_string_wrapping "つりはどうかね？　１０ルピ－だよ"
+    dialog_ask_line "します", "けっこうです"
 
 Dialog046::
     dialog_text "もっと　じょうねつをもたないと　 だめだよ！"
@@ -209,22 +221,27 @@ Dialog047::
     dialog_text "そうか．．．では　<dpad2>　キ－の　　 <left><right>　でポイントがかわるから　　 あとはボタンを　れんしゃしなさい ガンバルのだよ！"
 
 Dialog048::
-    dialog_ask "まだ、するかね？　　　　　　　　", "　　　　もちろん　けっこうです"
+    dialog_string_wrapping "まだ、するかね？　　　　　　　　"
+    dialog_ask_line "もちろん", "けっこうです"
 
 Dialog049::
-    dialog_ask "あらら、いとがきれちゃったよ！　 またするかね？　　　　　　　　　", "　　　　もちろん　けっこうです"
+    dialog_string_wrapping "あらら、いとがきれちゃったよ！　 またするかね？　　　　　　　　　"
+    dialog_ask_line "もちろん", "けっこうです"
 
 Dialog04A::
-    dialog_ask "おっ　これはでかい！　よろしい　 しょうきん２０ルピ－あげよう！　 またするかね？　　　　　　　　　", "　　　　もちろん　けっこうです"
+    dialog_string_wrapping "おっ　これはでかい！　よろしい　 しょうきん２０ルピ－あげよう！　 またするかね？　　　　　　　　　"
+    dialog_ask_line "もちろん", "けっこうです"
 
 Dialog04B::
-    dialog_ask "もう、さかなはいないよ。　　　　 つぎは、うみでどうかね？　　　　", "　　　　もちろん　けっこうです"
+    dialog_string_wrapping "もう、さかなはいないよ。　　　　 つぎは、うみでどうかね？　　　　"
+    dialog_ask_line "もちろん", "けっこうです"
 
 Dialog04C::
     dialog_text "いや－、やっぱりそれはむりだよ。 　　では、ごきげんよう！"
 
 Dialog04D::
-    dialog_ask "もっと、おおきいのをつらないと　 だめだよ。しょうきん５ルピ－だな 　　またするかね？　　　　　　　", "　　　　もちろん　けっこうです"
+    dialog_string_wrapping "もっと、おおきいのをつらないと　 だめだよ。しょうきん５ルピ－だな 　　またするかね？　　　　　　　"
+    dialog_ask_line "もちろん", "けっこうです"
 
 Dialog04E::
     dialog_text "おかねが　ないのかね？　　　　　 おかねがたまったら、またきなさい "
@@ -631,7 +648,8 @@ Dialog0DB::
     dialog_text "ゲロゲロ！ボ－カルの　マム－だ！ あんた、ミュ－ジックの　イロハも しらねえツラだな。　チッチッチッ フエもって　でなおしてきなっ！"
 
 Dialog0DC::
-    dialog_ask "ゲロゲロ。ボ－カルの　マム－だ！ ここらじゃ　しらないヤツはいねえ オレっちの　たましいの　うたを　 ききたいのかい？　チッチッチッ　 オレっちバンドは、やすいしごとは おことわりだぜ　ベイビ－！　　　 まあ、１きょく　　　　　　　　　 ３００ルピ－って　とこだな。　　 どうすんだ？　　　　　　　　　　", "　　　　はらう　　さいなら"
+    dialog_string_wrapping "ゲロゲロ。ボ－カルの　マム－だ！ ここらじゃ　しらないヤツはいねえ オレっちの　たましいの　うたを　 ききたいのかい？　チッチッチッ　 オレっちバンドは、やすいしごとは おことわりだぜ　ベイビ－！　　　 まあ、１きょく　　　　　　　　　 ３００ルピ－って　とこだな。　　 どうすんだ？　　　　　　　　　　"
+    dialog_ask_line "はらう", "さいなら"
 
 Dialog0DD::
     dialog_text "センキュウ！！ありがとおっ！！！ ゲロッゲ－－－ロ！！　　　　　　 "
@@ -649,13 +667,16 @@ Dialog0E1::
     dialog_text "ヤイッ！こぞう、よくもオレサマを めざめさせてくれたなっ！　　　　 ．．．どうもありがとう　　　　　 おれいをしてやる、かくごしやがれ ．．．よろしいですか？　　　　　 "
 
 Dialog0E2::
-    dialog_ask "じゃあ、まほうのこなをもっと　　 もてるように　してやる！イヒヒッ よろしいですか？　　　　　　　　 　　　　いいぞ　　かんべんして！"
+    dialog_string_wrapping "じゃあ、まほうのこなをもっと　　 もてるように　してやる！イヒヒッ よろしいですか？　　　　　　　　 "
+    dialog_ask_line "いいぞ", "かんべんして！"
 
 Dialog0E3::
-    dialog_ask "じゃあ、バクダンをもっと　　　　 もてるように　してやる！イヒヒッ よろしいですか？　　　　　　　　 　　　　いいぞ　　かんべんして！"
+    dialog_string_wrapping "じゃあ、バクダンをもっと　　　　 もてるように　してやる！イヒヒッ よろしいですか？　　　　　　　　 "
+    dialog_ask_line "いいぞ", "かんべんして！"
 
 Dialog0E4::
-    dialog_ask "じゃあ、や　をもっともっと　　　 もてるように　してやる！イヒヒッ よろしいですか？　　　　　　　　 　　　　いいぞ　　かんべんして！"
+    dialog_string_wrapping "じゃあ、や　をもっともっと　　　 もてるように　してやる！イヒヒッ よろしいですか？　　　　　　　　 "
+    dialog_ask_line "いいぞ", "かんべんして！"
 
 Dialog0E5::
     dialog_text "イヒヒッ！ざまあみやがれ！　　　 もてるかずが、ふえてしまったぞ！ じゃあ、ゲンキでね．．．　　　　 また、あおうぞっ！"
@@ -687,7 +708,8 @@ Dialog0EF::
     dialog_text "ヒミツのカイがらをてにいれた！　 たくさんあつめていいものもらおう "
 
 Dialog0F0::
-    dialog_ask "１００ルピ－でイカダにのるかい？", "　　　　のる　　　いやだ"
+    dialog_string_wrapping "１００ルピ－でイカダにのるかい？"
+    dialog_ask_line "のる", "いやだ"
 
 Dialog0F1::
     dialog_text "よし！　おもてに　だしといたから ぞんぶんに　たのしんでチョ－ダイ "
@@ -708,10 +730,12 @@ Dialog0F6::
     dialog_text "きえてしまう．．．こわれてしまう われらのしまが　われらのせかいが ．．わ．れ．ら．の．し．ま．．． 　　　　　　　　　　　　　　　　 ．．．．わ．．．れ．．．ら．．． 　　　　　　　　　　　　　　　　 ．　．　．　．　．　．　．　．　 　　　　　　　　　　　　　　　　 "
 
 Dialog0F7::
-    dialog_ask "キャ－－ッ！　ねえねえ##### やっていい！？　やっていい！？　 どうしよう？　　　　　　　　　　 　　　　いいよ　　ダ－メ！　　　"
+    dialog_string_wrapping "キャ－－ッ！　ねえねえ##### やっていい！？　やっていい！？　 どうしよう？　　　　　　　　　　 "
+    dialog_ask_line "いいよ", "ダ－メ！　　　"
 
 Dialog0F8::
-    dialog_ask "やりたい！　やりたい！！　　　　 　　　　いいよ　　しょうがねえな"
+    dialog_string_wrapping "やりたい！　やりたい！！　　　　 "
+    dialog_ask_line "いいよ", "しょうがねえな"
 
 Dialog0F9::
     dialog_text "いいウデ　してんじゃね－か。　　 オメ－さては．．．プロだなっ！？ プロは　おことわりだよっ！！　　 け－－んなっ！！　　ケッ！　　　 "

@@ -2,7 +2,8 @@ Dialog180::
     dialog_text "Schöne Kleider, Make-Up und Ju- welen! Ich liebe dieses Zeug! Und wenn Du etwas anderes hast... Nur her damit..! "
 
 Dialog181::
-    dialog_ask "Schöne Kleider, Make-Up und Ju- welen! Ich liebe dieses Zeug! Und wenn Du etwas anderes... UPPS! Diese <ribbon> ! Oh, ich brauche sie sofort! Ich gebe Dir dafür auch eine Dose Hunde- futter...!", "    Okay Nein"
+    dialog_string_wrapping "Schöne Kleider, Make-Up und Ju- welen! Ich liebe dieses Zeug! Und wenn Du etwas anderes... UPPS! Diese <ribbon> ! Oh, ich brauche sie sofort! Ich gebe Dir dafür auch eine Dose Hunde- futter...!"
+    dialog_ask_line "Okay", "Nein"
 
 Dialog182::
     dialog_text "Du hast die <ribbon> gegen eine <dogfood>", "mit Hundefutter getauscht!"
@@ -14,7 +15,8 @@ Dialog184::
     dialog_text "Was? Du Egoist! Nicht zu fassen! "
 
 Dialog185::
-    dialog_ask "Ich bin Manbo, Kind des Sonnen- fischs. Hast Du schon eine Flöte bekommen?", "    Ja   Nein"
+    dialog_string_wrapping "Ich bin Manbo, Kind des Sonnen- fischs. Hast Du schon eine Flöte bekommen?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog186::
     dialog_text "Sehr schön... BLUBB! BLUBBER!"
@@ -187,7 +189,8 @@ Dialog1BE::
 
 Dialog1BF::
 Dialog1C0::
-    dialog_ask "Hi, #####..! Ein schöner Stock, den Du da hast.. Leihst Du ihn mir mal kurz?", "    Naja Nein"
+    dialog_string_wrapping "Hi, #####..! Ein schöner Stock, den Du da hast.. Leihst Du ihn mir mal kurz?"
+    dialog_ask_line "Naja", "Nein"
 
 Dialog1C1::
     dialog_text "Plötzlich hast Du statt eines", "<stick> eine <honeycomb> ... Tja..."
@@ -206,7 +209,8 @@ Dialog1C6::
     dialog_text "Willkommen im \"Bananenhimmel\"! Ich bin Erwin... Nebenbei sammele ich Dosenfutter aller Art. Naja, ein seltsames Hobby... Stimmt! Aber mein Bruder sammelt alte Zahnbürsten... Das liegt wohl an den Genen..."
 
 Dialog1C7::
-    dialog_ask "Was hast Du denn da in der Hand?? NEIN! Das ist... Genau DIESE Dose fehlt in meiner Sammlung! Bitte, gib mir die <dogfood> ! Bittebittebitte!", "    Gut  Nein"
+    dialog_string_wrapping "Was hast Du denn da in der Hand?? NEIN! Das ist... Genau DIESE Dose fehlt in meiner Sammlung! Bitte, gib mir die <dogfood> ! Bittebittebitte!"
+    dialog_ask_line "Gut", "Nein"
 
 Dialog1C8::
     dialog_text "Oh, danke! Gib sie sofort her!"
@@ -230,7 +234,8 @@ Dialog1CE::
     dialog_text "Mir fehlt noch etwas Honig für meinen Bärenein- topf. Aber wo soll ich DEN nun herbekommen?"
 
 Dialog1CF::
-    dialog_ask "Hallo! Ist das etwa eine Honig- wabe <honeycomb>, die Du da hast?", "Genau so eine bräuchte ich... Möchtest Du eine Ananas dafür?", "    Hmja Nööö"
+    dialog_string_wrapping "Hallo! Ist das etwa eine Honig- wabe <honeycomb>, die Du da hast?", "Genau so eine bräuchte ich... Möchtest Du eine Ananas dafür?"
+    dialog_ask_line "Hmja", "Nööö"
 
 Dialog1D0::
     dialog_text "Du hast die <honeycomb> gegen eine <pineapple> getauscht, die sehr saftig ist. "
@@ -248,7 +253,8 @@ Dialog1D4::
     dialog_text "Hyho, kleines Fräulein! Tag..! ... ... ... ... ... ... ... ... Oh... Du bist nicht alleine... "
 
 Dialog1D5::
-    dialog_ask "Oh #####! Schön, daß Du mich hier besuchen kommst! Willst Du Dich ein bißchen zu mir setzen und reden?", "    Okay Nein"
+    dialog_string_wrapping "Oh #####! Schön, daß Du mich hier besuchen kommst! Willst Du Dich ein bißchen zu mir setzen und reden?"
+    dialog_ask_line "Okay", "Nein"
 
 Dialog1D6::
     dialog_text "Okay! Ich bleibe noch ein bißchen hier und schaue in den Horizont. "
@@ -263,7 +269,8 @@ Dialog1D9::
     dialog_text "... ... ... ... ... ... ... ... Wenn ich eine Möve wäre,.. ich würde nach weit draußen fliegen und überall für die Menschen singen... Ich frage mich, ob der Windfisch mir diesen Wunsch erfüllen würde... ... ... "
 
 Dialog1DA::
-    dialog_ask "HALLO! #####!!! Hörst Du mir überhaupt zu???", "    Hmmm ...."
+    dialog_string_wrapping "HALLO! #####!!! Hörst Du mir überhaupt zu???"
+    dialog_ask_line "Hmmm", "...."
 
 Dialog1DB::
     dialog_text "#####, ich will alles über Dich wissen... Was Du denkst, was Du fühlst... was Du liebst.. kicher! "
@@ -284,7 +291,8 @@ Dialog1E0::
     dialog_text "SCHNARCH! Zzzzz! ... <marin> ... <marin>"
 
 Dialog1E1::
-    dialog_ask "Das ist also das Walroß?! Sollen wir es ein wenig erschrecken?", "    Jaja Nein"
+    dialog_string_wrapping "Das ist also das Walroß?! Sollen wir es ein wenig erschrecken?"
+    dialog_ask_line "Jaja", "Nein"
 
 Dialog1E2::
     dialog_text "Hahaha! Der hat sich jetzt aber erschrocken... Hihihi!"
@@ -305,7 +313,8 @@ Dialog1E7::
     dialog_text "Es ist seltsam!? Dieser Fisch ist mit dem Angel- haken auf und davon... Seitdem halte ich die Schnur ins Was- ser, aber keiner beißt mehr an... Könnte es sein, daß ich ohne den Angelhaken nicht angeln kann ???"
 
 Dialog1E8::
-    dialog_ask "Oh! Das ist doch nicht etwa ein Angelhaken, was Du da in der Hand hast, oder? Den solltest Du mir geben... Du bekommst dafür meinen ersten Fang...", "    Okay Nein"
+    dialog_string_wrapping "Oh! Das ist doch nicht etwa ein Angelhaken, was Du da in der Hand hast, oder? Den solltest Du mir geben... Du bekommst dafür meinen ersten Fang..."
+    dialog_ask_line "Okay", "Nein"
 
 Dialog1E9::
     dialog_text "Sperre Deine Augen auf und sieh genau hin!"
@@ -335,7 +344,8 @@ Dialog1F1::
     dialog_text "An dieser", "Stelle habe ich bereits gesucht! "
 
 Dialog1F2::
-    dialog_ask "Da IST ja meine Perlenkette! Hey, gib sie mir zurück! Ich gebe Dir auch eine Schuppe von mir!", "    Ja   Nein"
+    dialog_string_wrapping "Da IST ja meine Perlenkette! Hey, gib sie mir zurück! Ich gebe Dir auch eine Schuppe von mir!"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog1F3::
     dialog_text "Versprich mir, daß Du nur eine Schuppe nimmst! Aua! Nur eine!"
@@ -371,52 +381,66 @@ Dialog1FD::
     dialog_text "RRRRING RRRRING! RRRRING! KLACK! Hallo? Ist dort die Pizzeria \"Da Mario\"? Nun, ich hätte gerne die 4 mit Schinken, die 9 mit Mais, eine Lasagne und zwei Tiramisu! Wann können Sie kommen..?", "KLACK! TUTUTU... ... ... ... ... Äh! Der hat sich wohl verwählt..! "
 
 Dialog1FE::
-    dialog_ask "Oh, ein Großer! Und ein Herzteil hat er auch noch dabei! Außerdem bekommst Du noch 20 Rubine dafür! Noch einmal?", "    Ja   Nein"
+    dialog_string_wrapping "Oh, ein Großer! Und ein Herzteil hat er auch noch dabei! Außerdem bekommst Du noch 20 Rubine dafür! Noch einmal?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog1FF::
-    dialog_ask "Oh, ein Großer! Und ein Herzteil hat er auch noch dabei! Damit be- kommst Du einen neuen Herzcon- tainer! Außerdem bekommst Du noch 20 Rubine dafür! Noch einmal?", "    Ja   Nein"
+    dialog_string_wrapping "Oh, ein Großer! Und ein Herzteil hat er auch noch dabei! Damit be- kommst Du einen neuen Herzcon- tainer! Außerdem bekommst Du noch 20 Rubine dafür! Noch einmal?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog200::
-    dialog_ask " DIE  BENUTZUNG DES SCHILDES FÜR FORTGESCHRITTENE Das Buch lesen??", "    Ja   Nein"
+    dialog_string_wrapping " DIE  BENUTZUNG DES SCHILDES FÜR FORTGESCHRITTENE Das Buch lesen??"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog201::
     dialog_text "Hältst Du den Knopf gedrückt, kannst Du Dich vor gegnerischen Angriffen schüt- zen und manche Monster sogar wegstoßen. Den Schild gibt es auch als Sonder- modell \"SPIEGEL- SCHILD\", der vor Strahlen aller Art schützt."
 
 Dialog202::
-    dialog_ask " WIE  MAN EINEN", " GEGENSTAND AUS", " DEM MENÜ WÄHLT Das Buch lesen??", "    Ja   Nein"
+    dialog_string_wrapping " WIE  MAN EINEN", " GEGENSTAND AUS", " DEM MENÜ WÄHLT Das Buch lesen??"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog203::
     dialog_text "Wähle den Gegen- stand aus dem Untermenü aus, und belege damit die Knöpfe A und B. Man kann auch mit anderen Din- gen, als dem Schwert kämpfen! Finde es heraus! "
 
 Dialog204::
-    dialog_ask "  AUTOMATISCHE", " PLÄNE ZEICHNEN", "  UND MEMOBUCH Das Buch lesen??", "    Ja   Nein"
+    dialog_string_wrapping "  AUTOMATISCHE", " PLÄNE ZEICHNEN", "  UND MEMOBUCH Das Buch lesen??"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog205::
     dialog_text "Drücke SELECT, um die Karte der Insel zu sehen, die der Game Boy automatisch für Dich zeichnet... An den schwarzen Stellen dieser Karte, warst Du noch nicht. Be- wege den Cursor und drücke A, um Informationen über die Orte zu erhalten. Auch die Tips vom Uhu können noch mal gelesen werden!"
 
 Dialog206::
-    dialog_ask " DAS  GEHEIMNIS DER WIRBELKLINGE Das Buch lesen??", "    Ja   Nein"
+    dialog_string_wrapping " DAS  GEHEIMNIS DER WIRBELKLINGE Das Buch lesen??"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog207::
     dialog_text "Schon seit Gene- rationen ist die Familie des Hel- den mit dieser Technik gut ver- traut. Drücke den Schwertknopf und halte ihn gedrückt, bis das Schwert zu blinken beginnt! Laß den Knopf los, um dann mit dem Schwert zu wirbeln."
 
 Dialog208::
-    dialog_ask "DIE VORZÜGE  DER    TELEPORTER Das Buch lesen??", "    Ja   Nein"
+    dialog_string_wrapping "DIE VORZÜGE  DER    TELEPORTER Das Buch lesen??"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog209::
     dialog_text "Auf Cocolint gibt es einige Teleporter. Um sie benutzen zu können, mußt Du Dich in das Loch fallen lassen! Du landest auto- matisch an einem anderen Telepor- ter. Du kannst nur Teleporter benutzen, die Du mit Deinen ei- genen Augen gesehen hast."
 
 Dialog20A::
-    dialog_ask "   NICHT OHNE", "  MEINE BOMBE! Das Buch lesen??", "    Ja   Nein"
+    dialog_string_wrapping "   NICHT OHNE", "  MEINE BOMBE! Das Buch lesen??"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog20B::
     dialog_text "Nachdem Du die Bombe hingelegt hast, kannst Du sie wieder auf- heben, wenn Du den Knopf erneut drückst. Um sie jetzt zu werfen, mußt Du ein wei- teres Mal den Knopf drücken! Schon gewußt..?"
 
 Dialog20C::
-    dialog_ask " COCOLINT KARTE", " (Cursor bewegen und A drücken, um die Namen der Orte zu sehen) Möchtest Du die Karte sehen?", "    Ja   Nein"
+    dialog_string_wrapping " COCOLINT KARTE", " (Cursor bewegen und A drücken, um die Namen der Orte zu sehen) Möchtest Du die Karte sehen?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog20D::
-    dialog_ask "   DIE DUNKLEN", "  GEHEIMNISSE", "  VON COCOLINT Das Buch lesen??    WIRKLICH??", "    Yo!  N-Nein"
+    db "   DIE DUNKLEN  "
+    db "  GEHEIMNISSE   "
+    db "  VON COCOLINT  "
+    db "Das Buch lesen??"
+    db "   WIRKLICH??   "
+:   dialog_ask_line "Yo!", "N-Nein"
 
 Dialog20E::
     dialog_text "Was ist das??? ... ... ... ... Tja, ohne die magische Lupe wirst Du die kleinen Lettern in dem Buch wohl nicht lesen können..."
@@ -472,7 +496,8 @@ Dialog220::
     dialog_text "Hey, Du da! Es ist etwas ganz Schlimmes ge- schehen... Ja, ganz schlimm! Die Moblins sind ins Dorf gekom- men. Ja, ganz viele... Eine ganze Gruppe von Miblons, ähh... Moblins! Dann... sie sind zu dem Haus... Ja, das Haus von Struppi und der Frau... Sie haben etwas ganz Böses ge- tan. Oh ja, das war vielleicht böse...", "... ... ... ... ... ... ... ... Hm! Finde besser selbst heraus, was geschehen ist..."
 
 Dialog221::
-    dialog_ask "Letzte Nacht hat das Meer etwas wirklich Tolles angespült! Ich tausche es mit Dir gegen DAS, was Du auf dem", "B-Knopf hast...", "    Okay Nein"
+    dialog_string_wrapping "Letzte Nacht hat das Meer etwas wirklich Tolles angespült! Ich tausche es mit Dir gegen DAS, was Du auf dem", "B-Knopf hast..."
+    dialog_ask_line "Okay", "Nein"
 
 Dialog222::
     dialog_text "Okay, gebongt... Du kannst jeder- zeit wiederkom- men, wenn Du den Bumerang nicht mehr willst."
@@ -484,7 +509,8 @@ Dialog224::
     dialog_text "Für DAS, was Du in der Hand hattest, hast Du nun einen tollen Bumerang bekommen..."
 
 Dialog225::
-    dialog_ask "Gut, daß Du hier bist! Ich hab^s mir nämlich an- ders überlegt... Ich hätte gerne meinen Bumerang wieder! Bitte! Du bekommst auch Deinen alten Ge- genstand zurück!", "    Okay Nein"
+    dialog_string_wrapping "Gut, daß Du hier bist! Ich hab^s mir nämlich an- ders überlegt... Ich hätte gerne meinen Bumerang wieder! Bitte! Du bekommst auch Deinen alten Ge- genstand zurück!"
+    dialog_ask_line "Okay", "Nein"
 
 Dialog226::
     dialog_text "Du hast Deinen alten Gegenstand wieder - Für den Bumerang..."
@@ -502,7 +528,8 @@ Dialog22A::
     dialog_text "TUUUUT! TUUUUT! Ja? Hier Ulrira! Du hast die 5 Goldenen Blätter noch nicht alle? Erschrecke doch die Krähe in der Nähe des Schlosses... Tschüß!", "KLICK!"
 
 Dialog22B::
-    dialog_ask "\"Die Abenteuer des #####.\" Möchtest Du ins Album schauen?", "    Ja   Nein"
+    dialog_string_wrapping "\"Die Abenteuer des #####.\" Möchtest Du ins Album schauen?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog22C::
     dialog_text "Möchtest Du ein Foto anschauen? Wähle es mit", "<dpad> aus und", "drücke den", "A-Knopf!"

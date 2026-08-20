@@ -203,7 +203,13 @@ MACRO dialog_text
 	db "@"
 ENDM
 
-MACRO dialog_ask
-    dialog_string_wrapping \#
-	db "<ask>"
+MACRO dialog_ask_line
+    assert strlen(\1) <= 4, "First ask choice too long"
+    assert strlen(\2) <= 7, "Second ask choice too long"
+    ds (DIALOG_LINE_LEN - (@ - :-)) % DIALOG_LINE_LEN, ' '
+    db "    " ; Padding till the first choice
+    db \1     ; First choice
+    ds 5 - strlen(\1), ' '
+    db \2     ; Second choice
+    db "<ask>"
 ENDM

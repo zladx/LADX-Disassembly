@@ -11,7 +11,8 @@ Dialog10B:: ; Photographer
     dialog_text "I'll go develop this. Come see it later, OK?"
 
 Dialog10C:: ; Photographer
-    dialog_ask "I just LOVE to take pictures. Will you let me take your picture?", "    YES  NO"
+    dialog_string_wrapping "I just LOVE to take pictures. Will you let me take your picture?"
+    dialog_ask_line "YES", "NO"
 
 Dialog10D:: ; Photographer
     dialog_text "Go to the back of the room and stand in front of the screen."
@@ -104,7 +105,8 @@ Dialog12A:: ; Mamasha
     dialog_text "Because they all look alike, even I am sometimes confused. . .", "By the way, my baby wants a Yoshi Doll.", "I saw one at the Trendy Game,", "but I couldn't get it."
 
 Dialog12B:: ; Mamasha
-    dialog_ask "Oh!  Will you give that doll to my baby?!", "    Yes  No"
+    dialog_string_wrapping "Oh!  Will you give that doll to my baby?!"
+    dialog_ask_line "Yes", "No"
 
 Dialog12C:: ; Mamasha
     dialog_text "Because they all look alike, even I am sometimes confused...     "
@@ -134,13 +136,15 @@ Dialog134:: ; Weird Mr. Write
     dialog_text "What's this?!  A letter for me?! I'm so happy! ...And look! The letter came with a photograph!"
 
 Dialog135:: ; Weird Mr. Write
-    dialog_ask "Mmm... She's so beautiful...", "I must give you something for your trouble... Hmm...  Well, it looks like all I have is this broom... how'll that be?", "    Fine No..."
+    dialog_string_wrapping "Mmm... She's so beautiful...", "I must give you something for your trouble... Hmm...  Well, it looks like all I have is this broom... how'll that be?"
+    dialog_ask_line "Fine", "No..."
 
 Dialog136:: ; Narrator
     dialog_text "You got a Broom as your reward from Mr. Write! But that photo was not of..."
 
 Dialog137:: ; Weird Mr. Write
-    dialog_ask "Please! I really must insist you have this <broom>!", "    Okay No Way"
+    dialog_string_wrapping "Please! I really must insist you have this <broom>!"
+    dialog_ask_line "Okay", "No Way"
 
 Dialog138:: ; Weird Mr. Write
     dialog_text "Oh boy!  Letter writing is such a great hobby!"
@@ -149,7 +153,8 @@ Dialog139:: ; Weird Mr. Write
     dialog_text "Hello!  I'm writing back to Christine now!"
 
 Dialog13A:: ; Richard
-    dialog_ask "Salutations!", "You wouldn't know by the look of me, but I used to live in the castle! My servants went berserk and I was forced to flee to my villa... So, you want the key to Ukuku Prairie, do you?  I may be able to help you...  Let's make... a deal, shall we? I want you to retrieve the Golden Leaf I left behind in the castle when I fled...", "    Okay No Way"
+    dialog_string_wrapping "Salutations!", "You wouldn't know by the look of me, but I used to live in the castle! My servants went berserk and I was forced to flee to my villa... So, you want the key to Ukuku Prairie, do you?  I may be able to help you...  Let's make... a deal, shall we? I want you to retrieve the Golden Leaf I left behind in the castle when I fled..."
+    dialog_ask_line "Okay", "No Way"
 
 Dialog13B:: ; Richard
     dialog_text "I am impressed. There are five leaves in all. Remember to buy a shovel on your way back."
@@ -249,7 +254,8 @@ Dialog15B:: ; Grandma Yahoo
     dialog_text "YAHOO!  I worked too hard and now my broom is worn to the handle!"
 
 Dialog15C:: ; Grandma Yahoo
-    dialog_ask "YAHOO!  YAHOO!", "A new broom?! For me?  It is, isn't it?!", "    Yes  No"
+    dialog_string_wrapping "YAHOO!  YAHOO!", "A new broom?! For me?  It is, isn't it?!"
+    dialog_ask_line "Yes", "No"
 
 Dialog15D:: ; Grandma Yahoo
     dialog_text "Okay!  In return you can have this fishing hook I found when I swept by the river bank!"
@@ -276,13 +282,15 @@ Dialog164:: ; Narrator
     dialog_text "You found a stick a monkey left behind... You take it!"
 
 Dialog165:: ; Kiki, Narrator, Link
-    dialog_ask "    <bananas>!    <bananas>!", "  Oooh!  Oooh!", " Give to Kiki!?", "    Yes  No!"
+    dialog_string_wrapping "    <bananas>!    <bananas>!", "  Oooh!  Oooh!", " Give to Kiki!?"
+    dialog_ask_line "Yes", "No!"
 
 Dialog166:: ; Christine
     dialog_text "You don't know the proper etiquette when dealing with a lady, do you? You should have brought flowers or something, then I might be more inclined to talk with you... Oh yes, in my case, hibiscus are best..."
 
 Dialog167:: ; Christine
-    dialog_ask "Oh, you brought me a hibiscus! How sweet! Well, since you are such a gentleman I have a request to make of you. Will you listen?", "    Yes  No"
+    dialog_string_wrapping "Oh, you brought me a hibiscus! How sweet! Well, since you are such a gentleman I have a request to make of you. Will you listen?"
+    dialog_ask_line "Yes", "No"
 
 Dialog168:: ; Christine
     dialog_text "I would like you to take this letter to a Mr. Write who lives on the border of the Mysterious Forest, please!"
@@ -309,7 +317,8 @@ Dialog16F:: ; Kid, probably
     dialog_text "Grandma's not here. She's in the Animal Village. That's what Grandpa Ulrira said on the phone!"
 
 Dialog170:: ; Papahl
-    dialog_ask "Yep, Papahl got lost, just like he said!  Now, I am so famished I can't move!  Can you give me some vittles?", "    Yes  Nope"
+    dialog_string_wrapping "Yep, Papahl got lost, just like he said!  Now, I am so famished I can't move!  Can you give me some vittles?"
+    dialog_ask_line "Yes", "Nope"
 
 Dialog171:: ; Papahl
     dialog_text "You're one cold hombre..."
@@ -330,7 +339,8 @@ Dialog176:: ; Papahl, probably
     dialog_text "I've got to say, thanks again!"
 
 Dialog177:: ; Papahl
-    dialog_ask "Yep, Papahl got lost, just like he said!  Now, I am so famished I can't move!  Can you give me some vittles?", "    Nope Can't"
+    dialog_string_wrapping "Yep, Papahl got lost, just like he said!  Now, I am so famished I can't move!  Can you give me some vittles?"
+    dialog_ask_line "Nope", "Can't"
 
 Dialog178:: ; Grandma Yahoo
     dialog_text "She's had an awful tragedy", "in the house across the way! It's just awful, and all I can do is sweep!"
@@ -360,7 +370,8 @@ Dialog180:: ; CiaoCiao
     dialog_text "Make-up! Jewels! Dresses!  I want it all!  Sigh... And some new accessories would be nice..."
 
 Dialog181:: ; CiaoCiao, Link
-    dialog_ask "Make-up! Jewels! Dresses!  I want it all!  Sigh... And some new accessories would be nice... Oh! That Ribbon! I need it!  Will you trade for my dog food?", "    Yes  No!"
+    dialog_string_wrapping "Make-up! Jewels! Dresses!  I want it all!  Sigh... And some new accessories would be nice... Oh! That Ribbon! I need it!  Will you trade for my dog food?"
+    dialog_ask_line "Yes", "No!"
 
 Dialog182:: ; Narrator
     dialog_text "You exchanged <ribbon> for <dogfood>! It's full of juicy beef!"
@@ -372,7 +383,8 @@ Dialog184:: ; CiaoCiao
     dialog_text "Eh?!  I can't believe it!  You are the worst!!"
 
 Dialog185:: ; Manbo
-    dialog_ask "I am Manbo, child of the Sun Fish!  Have you got an Ocarina?", "    Yes  No"
+    dialog_string_wrapping "I am Manbo, child of the Sun Fish!  Have you got an Ocarina?"
+    dialog_ask_line "Yes", "No"
 
 Dialog186:: ; Manbo
     dialog_text "Very well... Glub Blub Bloop!"

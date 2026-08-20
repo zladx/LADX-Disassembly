@@ -1096,7 +1096,7 @@ SelectRoomTilesets::
     cp   W_TILESET_KEEP                           ;; 00:0D7C $FE $0F
     jr   z, .tilesetEnd                           ;; 00:0D7E $28 $11
 
-    ; If on prairie north, but not on the Camera Shoop room,
+    ; If on prairie north, but not on the Camera Shop room,
     ; treat the tileset as TILESET_KEEP: nothing to do.
     cp   W_TILESET_CAMERA_SHOP                    ;; 00:0D80 $FE $1A
     jr   nz, .cameraShopEnd                       ;; 00:0D82 $20 $07

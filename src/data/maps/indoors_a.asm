@@ -126,7 +126,7 @@ dw IndoorsA7A  ; $29E33
 dw IndoorsA7B  ; $29E6E
 dw IndoorsA7C  ; $29EA8
 dw IndoorsA7D  ; $29EE4
-dw IndoorsA7F  ; $29F18
+dw IndoorsA7E  ; $29F18
 dw IndoorsA7F  ; $29F18
 dw IndoorsA80  ; $29F1B
 dw IndoorsA81  ; $29F39
@@ -237,7 +237,7 @@ dw IndoorsAE9  ; $2B4EB
 dw IndoorsAEA  ; $2B538
 dw IndoorsAEB  ; $2B584
 dw IndoorsAEC  ; $2B5C6
-dw IndoorsAEE  ; $2B624
+dw IndoorsAED  ; $2B624
 dw IndoorsAEE  ; $2B624
 dw IndoorsAEF  ; $2B66F
 dw IndoorsAF0  ; $2B6B4

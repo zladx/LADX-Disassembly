@@ -2907,6 +2907,7 @@ Overworld50::
   db   $E1, $0A, $AB, $50, $7C ; object
   db   ROOM_END
 
+Overworld51::
 Overworld63::
   db   ANIMATED_TILES_VILLAGE ; animation id
   db   $04 ; floor tile

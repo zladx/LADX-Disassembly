@@ -149,6 +149,7 @@ endm
 
 def DIALOG_LINE_LEN equ 16
 
+; Main macro for dialog line wrapping. See dialog_text or dialog_ask_line for usage.
 MACRO dialog_string_wrapping
 	: ; Since each line pads for the previous one, pretend there is an empty line so the first line doesn't emit any padding.
 
@@ -198,11 +199,22 @@ MACRO dialog_string_wrapping
 	ENDR
 ENDM
 
+; Use this macro to auto line basic wrap dialog lines.
+; You can supply multiple strings to implement manual line breaks.
+; Example:
+;   dialog_text "Welcome #####, stay a while and listen."
+;   dialog_text ".", "..", "...", "Why are you here?"
 MACRO dialog_text
     dialog_string_wrapping \#
 	db "@"
 ENDM
 
+; Use this macro to end off a dialog with a question.
+; Should be used in combination with dialog_string_wrapping
+; Takes 2 arguments, for the first and second option
+; Example:
+;   dialog_string_wrapping "Do you want to buy the deluxe shovel?"
+;   dialog_ask_line "Yes", "Nah."
 MACRO dialog_ask_line
     assert strlen(\1) <= 4, "First ask choice too long"
     assert strlen(\2) <= 7, "Second ask choice too long"

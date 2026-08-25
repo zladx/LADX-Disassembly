@@ -1,1424 +1,578 @@
 Dialog190:: ; Moblin
-    db "Ennh?  Who's    "
-    db "this suspicious-"
-    db "looking runt?!  "
-    db "Okay boys, let's"
-    db "get ridda him!@"
+    dialog_text "Ennh?  Who's this suspicious- looking runt?! Okay boys, let's get ridda him!"
 
 Dialog191:: ; Moblin Chief
-    db "You must be an  "
-    db "assassin sent by"
-    db "Madam MeowMeow  "
-    db "to rescue the   "
-    db "mutt!  You came "
-    db "here to get me, "
-    db "but it is I who "
-    db "will get you!!@"
+    dialog_text "You must be an assassin sent by Madam MeowMeow to rescue the mutt!  You came here to get me, but it is I who will get you!!"
 
 Dialog192:: ; Marin
-    db "Oh, #####.  I   "
-    db "often come to   "
-    db "this village to "
-    db "sing, too!  It  "
-    db "seems that just "
-    db "about everyone  "
-    db "loves my 'Ballad"
-    db "of the Wind     "
-    db "Fish!'  #####,  "
-    db "what is your    "
-    db "favorite song?@"
+    dialog_text "Oh, #####.  I often come to this village to sing, too!  It seems that just about everyone loves my 'Ballad of the Wind Fish!'  #####, what is your favorite song?"
 
 Dialog193:: ; Marin
-    db "Please, don't   "
-    db "ever forget this"
-    db "song...or me...@"
+    dialog_text "Please, don't ever forget this song...or me..."
 
 Dialog194:: ; Marin
-    db "Thank you for   "
-    db "everything!     "
-    db "#####, you are  "
-    db "the kindest boy "
-    db "I know.  One day"
-    db "I made a wish to"
-    db "the Wind Fish..."
-    db "What was the    "
-    db "wish?  It was..."
-    db "No, it's secret!@"
+    dialog_text "Thank you for everything! #####, you are the kindest boy I know.  One day I made a wish to the Wind Fish... What was the wish?  It was... No, it's secret!"
 
 Dialog195:: ; Marin
-    db "#####, some day "
-    db "you will leave  "
-    db "this island...  "
-    db "I just know it  "
-    db "in my heart...  "
-    db "...Don't ever   "
-    db "forget me... If "
-    db "you do, I'll    "
-    db "never forgive   "
-    db "you!@"
+    dialog_text "#####, some day you will leave this island...", "I just know it in my heart... ...Don't ever forget me... If you do, I'll never forgive you!"
 
 Dialog196:: ; Mutt, narrator
-    db "... ... ... ... "
-    db "It seems to be  "
-    db "totally absorbed"
-    db "in Marin's song!@"
+    dialog_text "... ... ... ... It seems to be totally absorbed in Marin's song!"
 
 Dialog197:: ; Marin
-    db "They say the    "
-    db "'Ballad of the  "
-    db "Wind Fish' is a "
-    db "song of awaken- "
-    db "ing.  I wonder, "
-    db "if the Wind Fish"
-    db "wakes up, will  "
-    db "he make my wish "
-    db "come true?@"
+    dialog_text "They say the 'Ballad of the Wind Fish' is a song of awaken- ing.  I wonder, if the Wind Fish wakes up, will he make my wish come true?"
 
 Dialog198:: ; Marin
-    db "Eh?  You want me"
-    db "to go in there? "
-    db "No, I think I'll"
-    db "wait out here..."
-    db "Take care of    "
-    db "yourself, #####!@"
+    dialog_text "Eh?  You want me to go in there? No, I think I'll wait out here... Take care of yourself, #####!"
 
 Dialog199:: ; Marin
-    db "Ahhh!  Ahhh, you"
-    db "are a bad boy,  "
-    db "#####!@"
+    dialog_text "Ahhh!  Ahhh, you are a bad boy, #####!"
 
 Dialog19A:: ; Crazy Tracy
-    db "Here's some     "
-    db "bonus treatment!"
-    db "Behold!  Your   "
-    db "Hearts are full!@"
+    dialog_text "Here's some bonus treatment! Behold!  Your Hearts are full!"
 
 Dialog19B:: ; Schule Donavitch
-    db "Ya, I am Schule "
-    db "Donavitch!  Zee "
-    db "mermaid statue  "
-    db "by zee bay iz my"
-    db "masterpiece! ..."
-    db "To tell you zee "
-    db "truth, zis werk "
-    db "iz not complete!"
-    db "Zee art, it'z..."
-    db "difficult for   "
-    db "you to grasp, iz"
-    db "it not?@"
+    dialog_text "Ya, I am Schule Donavitch!  Zee mermaid statue by zee bay iz my masterpiece! ... To tell you zee truth, zis werk iz not complete! Zee art, it'z... difficult for you to grasp, iz it not?"
 
 Dialog19C:: ; Mermaid Statue, Narrator
-    db "  THE MOURNING  "
-    db "     MERMAID    "
-    db "    By SCHULE   "
-    db "? ...A scale is "
-    db "missing...@"
+    dialog_text "  THE MOURNING", "     MERMAID", "    By SCHULE", "? ...A scale is missing..."
 
 Dialog19D:: ; Signpost and maybe ; Map
-    db "Seashell Mansion@"
+    dialog_text "Seashell Mansion"
 
 Dialog19E:: ; Signpost, probably
-    db "Entrance to     "
-    db "  Yarna Desert <right>@"
+    dialog_text "Entrance to", "  Yarna Desert <right>"
 
 Dialog19F:: ; Signpost
 Dialog1A0:: ; Signpost
-    db "   Mysterious   "
-    db "     Forest     "
-    db " (It's a little "
-    db " bit mysterious)@"
+    dialog_text "   Mysterious", "     Forest", " (It's a little", " bit mysterious)"
 
 Dialog1A1:: ; Signpost, probably
-    db "Do you want to  "
-    db "challenge the   "
-    db "river rapids on "
-    db "a raft?  Proceed"
-    db "to the office at"
-    db "once, please!@"
+    dialog_text "Do you want to challenge the river rapids on a raft?  Proceed to the office at once, please!"
 
 Dialog1A2:: ; Signpost
-    db "East <right> Ukuku    "
-    db "       Prairie  "
-    db "Farther East    "
-    db "  Animal Village@"
+    dialog_text "East <right> Ukuku", "       Prairie Farther East", "  Animal Village"
 
 Dialog1A3:: ; Signpost and maybe ; Map
-    db "Mt. Tamaranch   @"
+    dialog_text "Mt. Tamaranch   "
 
 Dialog1A4:: ; Signpost
-    db "<right> Tail Cave     "
-    db "<down> Toronbo Shores@"
+    dialog_text "<right> Tail Cave", "<down> Toronbo Shores"
 
 Dialog1A5:: ; Signpost
-    db "<right> Gopongo Swamp "
-    db "<down> Mysterious    "
-    db "  Forest@"
+    dialog_text "<right> Gopongo Swamp <down> Mysterious", "  Forest"
 
 Dialog1A6:: ; Signpost
-    db "Beware of floors"
-    db "with cracks!  A "
-    db "heavy person    "
-    db "should not stand"
-    db "on them!@"
+    dialog_text "Beware of floors with cracks!  A heavy person should not stand on them!"
 
 Dialog1A7:: ; Signpost and maybe ; Map
-    db "Telephone Booth @"
+    dialog_text "Telephone Booth "
 
 Dialog1A8:: ; Signpost
-    db "     DANGER!    "
-    db "    Keep out!   "
-    db "(Except BowWow)@"
+    dialog_text "     DANGER!", "    Keep out! (Except BowWow)"
 
 Dialog1A9:: ; Signpost
-    db "<down> GO THIS WAY@"
+    dialog_text "<down> GO THIS WAY"
 
 Dialog1AA:: ; Signpost
-    db "<up> GO THIS WAY@"
+    dialog_text "<up> GO THIS WAY"
 
 Dialog1AB:: ; Signpost
-    db "<right> GO THIS WAY@"
+    dialog_text "<right> GO THIS WAY"
 
 Dialog1AC:: ; Signpost
-    db "<left> GO THIS WAY@"
+    dialog_text "<left> GO THIS WAY"
 
 Dialog1AD:: ; Signpost
-    db " TRY AGAIN FROM "
-    db "   THE START@"
+    dialog_text " TRY AGAIN FROM", "   THE START"
 
 Dialog1AE:: ; Signpost
-    db "GREAT!  YOU DID "
-    db "IT!  YOUR REWARD"
-    db "IS <right> THIS WAY!@"
+    dialog_text "GREAT!  YOU DID IT!  YOUR REWARD IS <right> THIS WAY!"
 
 Dialog1AF:: ; Signpost
-    db "GONE ON TOUR    "
-    db "         MAMU@"
+    dialog_text "GONE ON TOUR", "         MAMU"
 
 Dialog1B0:: ; Signpost
-    db "<right> Crazy Tracy   "
-    db "<down> Manbo's Pond@"
+    dialog_text "<right> Crazy Tracy", "<down> Manbo's Pond"
 
 Dialog1B1:: ; Signpost
-    db "<right> Animal Village"
-    db "<down> Martha's Bay@"
+    dialog_text "<right> Animal Village <down> Martha's Bay"
 
 Dialog1B2:: ; Signpost
-    db "<right> Welcome to the"
-    db " Animal Village!@"
+    dialog_text "<right> Welcome to the  Animal Village!"
 
 Dialog1B3:: ; Signpost
-    db "<right> Cemetery      "
-    db "<down> Ukuku Prairie @"
+    dialog_text "<right> Cemetery", "<down> Ukuku Prairie "
 
 Dialog1B4:: ; Signpost
-    db "You're close to "
-    db "Tal Tal Heights."
-    db "The Camera Shop "
-    db "is nearby.@"
+    dialog_text "You're close to Tal Tal Heights. The Camera Shop is nearby."
 
 Dialog1B5:: ; Signpost
-    db "<right> Tamaranch Mt. "
-    db "<left> Goponga Swamp @"
+    dialog_text "<right> Tamaranch Mt. <left> Goponga Swamp "
 
 Dialog1B6:: ; Owl Statue
-    db "MUSIC, THE FISH "
-    db "STIRS IN THE EGG"
-    db "YOU ARE THERE...@"
+    dialog_text "MUSIC, THE FISH STIRS IN THE EGG YOU ARE THERE..."
 
 Dialog1B7:: ; Owl Statue
-    db "THE WIND FISH IN"
-    db "NAME ONLY, FOR  "
-    db "IT IS NEITHER.@"
+    dialog_text "THE WIND FISH IN NAME ONLY, FOR IT IS NEITHER."
 
 Dialog1B8:: ; Owl Statue
-    db "IN SOIL SLEEPS  "
-    db "SECRETS, BENEATH"
-    db "YOUR SOLES...@"
+    dialog_text "IN SOIL SLEEPS SECRETS, BENEATH YOUR SOLES..."
 
 Dialog1B9:: ; Owl Statue
-    db "IN SOIL SLEEPS  "
-    db "SECRETS, BENEATH"
-    db "YOUR SOLES...@"
+    dialog_text "IN SOIL SLEEPS SECRETS, BENEATH YOUR SOLES..."
 
 Dialog1BA:: ; Owl Statue
-    db "AROUND HERE,    "
-    db "SECRETS ARE NIGH@"
+    dialog_text "AROUND HERE, SECRETS ARE NIGH"
 
 Dialog1BB:: ; Owl Statue
-    db "SECRETS ARE LIKE"
-    db "WATER WHEN IT   "
-    db "COMES TO BRIDGES@"
+    dialog_text "SECRETS ARE LIKE WATER WHEN IT COMES TO BRIDGES"
 
 Dialog1BC:: ; Owl Statue
-    db "NOW YOU NEED    "
-    db "LOOK FAR FOR    "
-    db "A SECRET...@"
+    dialog_text "NOW YOU NEED LOOK FAR FOR", "A SECRET..."
 
 Dialog1BD:: ; Owl Statue
-    db "THE WIND FISH   "
-    db "SLUMBERS LONG..."
-    db "THE HERO'S LIFE "
-    db "GONE...@"
+    dialog_text "THE WIND FISH SLUMBERS LONG... THE HERO'S LIFE GONE..."
 
 Dialog1BE:: ; Owl Statue
-    db "SEA BEARS FOAM, "
-    db "SLEEP BEARS     "
-    db "DREAMS. BOTH END"
-    db "IN THE SAME WAY "
-    db "CRASSSH!@"
+    dialog_text "SEA BEARS FOAM, SLEEP BEARS DREAMS. BOTH END IN THE SAME WAY CRASSSH!"
 
 Dialog1BF:: ; Tarin
 Dialog1C0:: ; Tarin
-    db "Oh?!  #####, I  "
-    db "see ya have a   "
-    db "nice stick...   "
-    db "Can I borrow it "
-    db "for a second?   "
-    db "    Can  Can't<ask>"
+    dialog_string_wrapping "Oh?!  #####, I see ya have a nice stick... Can I borrow it for a second?"
+    dialog_ask_line "Can", "Can't"
 
 Dialog1C1:: ; Narrator
-    db "<stick> became the    "
-    db "honeycomb <honeycomb>!    "
-    db "You're not sure "
-    db "how it happened,"
-    db "but take it!@"
+    dialog_text "<stick> became the honeycomb <honeycomb>! You're not sure how it happened, but take it!"
 
 Dialog1C2:: ; Marin, probably
-    db "Hmmm, #####, you"
-    db "are mean!@"
+    dialog_text "Hmmm, #####, you are mean!"
 
 Dialog1C3:: ; Signpost
-    db "Beware of Sea   "
-    db "Urchins!  Don't "
-    db "touch them with "
-    db "your bare hands!@"
+    dialog_text "Beware of Sea Urchins!  Don't touch them with your bare hands!"
 
 Dialog1C4:: ; Tarin
 Dialog1C5:: ; Tarin
-    db "I was hungry    "
-    db "somethin' fierce"
-    db "so I went and   "
-    db "got bananas at  "
-    db "the beach...    "
-    db "#####, if you   "
-    db "want some, you  "
-    db "should go and   "
-    db "get some!@"
+    dialog_text "I was hungry somethin' fierce so I went and got bananas at the beach... #####, if you want some, you should go and get some!"
 
 Dialog1C6:: ; Sale
-    db "Welcome to      "
-    db "Sale's House O' "
-    db "Bananas!  I'm   "
-    db "Sale, this is my"
-    db "house! Actually,"
-    db "my hobby is col-"
-    db "lecting rare and"
-    db "unusual canned  "
-    db "food. My brother"
-    db "is an artist, so"
-    db "I guess strange "
-    db "hobbies run in  "
-    db "the family!@"
+    dialog_text "Welcome to Sale's House O' Bananas!  I'm Sale, this is my house! Actually, my hobby is col- lecting rare and unusual canned food. My brother is an artist, so I guess strange hobbies run in the family!"
 
 Dialog1C7:: ; Sale
-    db "What's that you "
-    db "have?!  It's    "
-    db "canned food! For"
-    db "heaven's sake,  "
-    db "man, give that <dogfood>"
-    db "to ME!!  PLEASE!"
-    db "He's hysterical!"
-    db "What do you do? "
-    db "    Give Don't<ask>"
+    dialog_string_wrapping "What's that you have?!  It's canned food! For heaven's sake, man, give that <dogfood> to ME!!  PLEASE! He's hysterical! What do you do?"
+    dialog_ask_line "Give", "Don't"
 
 Dialog1C8:: ; Sale
-    db "Oh thank you!   "
-    db "I'll take that!@"
+    dialog_text "Oh thank you! I'll take that!"
 
 Dialog1C9:: ; Sale
-    db "I don't suppose "
-    db "it would do any "
-    db "good to beg?    "
-    db "Well, if you    "
-    db "change your     "
-    db "mind, tell me.@"
+    dialog_text "I don't suppose it would do any good to beg? Well, if you change your mind, tell me."
 
 Dialog1CA:: ; Sale
-    db "  MUNCH MUNCH!! "
-    db "... ... ... ... "
-    db "That was great! "
-    db "I know it's not "
-    db "a fair trade,   "
-    db "but here's some "
-    db "bananas! YUM...@"
+    dialog_text "  MUNCH MUNCH!! ... ... ... ... That was great! I know it's not a fair trade, but here's some bananas! YUM..."
 
 Dialog1CB:: ; Narrator
-    db "You gave him <dogfood>  "
-    db "and got bananas "
-    db "<bananas> in return!    "
-    db "Good deal!@"
+    dialog_text "You gave him <dogfood> and got bananas <bananas> in return! Good deal!"
 
 Dialog1CC:: ; Sale
-    db "Thank you again!"
-    db "That was yummy!@"
+    dialog_text "Thank you again! That was yummy!"
 
 Dialog1CD:: ; Sale
-    db "Hey friend! Have"
-    db "you ever ridden "
-    db "the rapids on a "
-    db "raft?  You can, "
-    db "near Tal Tal    "
-    db "Heights!  You   "
-    db "ought to try it!@"
+    dialog_text "Hey friend! Have you ever ridden the rapids on a raft?  You can, near Tal Tal Heights!  You ought to try it!"
 
 Dialog1CE:: ; Chef Bear
-    db "Rik'm rak'm! I  "
-    db "ran out of      "
-    db "ingredients!  If"
-    db "I had honey, I  "
-    db "could make this "
-    db "fit for a king!@"
+    dialog_text "Rik'm rak'm! I ran out of ingredients!  If I had honey, I could make this fit for a king!"
 
 Dialog1CF:: ; Chef Bear
-    db "Hi ho! Hey you! "
-    db "Is that possibly"
-    db "a <honeycomb> you have?   "
-    db "I just ran out! "
-    db "Will you swap it"
-    db "for a pineapple?"
-    db "    Yes  No<ask>"
+    dialog_string_wrapping "Hi ho! Hey you! Is that possibly a <honeycomb> you have?", "I just ran out! Will you swap it for a pineapple?"
+    dialog_ask_line "Yes", "No"
 
 Dialog1D0:: ; Narrator
-    db "You exchanged <honeycomb> "
-    db "for <pineapple>!  It's not"
-    db "as sweet, but it"
-    db "is delicious!   @"
+    dialog_text "You exchanged <honeycomb> for <pineapple>!  It's not as sweet, but it is delicious!   "
 
 Dialog1D1:: ; Chef Bear, probably
-    db "That's a crying "
-    db "shame, but I    "
-    db "realize those   "
-    db "are a rare      "
-    db "delicacy!@"
+    dialog_text "That's a crying shame, but I realize those are a rare delicacy!"
 
 Dialog1D2:: ; Chef Bear
-    db "Hi ho! Yeah, I  "
-    db "know, that tub  "
-    db "of goo is asleep"
-    db "right in the way"
-    db "to Yarna Desert!"
-    db "Once he's asleep"
-    db "he won't budge  "
-    db "for a loooooonng"
-    db "time.  But hey! "
-    db "Take Little     "
-    db "Marin and wake  "
-    db "him up with her "
-    db "song!  That slob"
-    db "would wake up   "
-    db "with a jump if  "
-    db "he heard her    "
-    db "sing, for sure! "
-    db "Heh heh heh!@"
+    dialog_text "Hi ho! Yeah, I know, that tub of goo is asleep right in the way to Yarna Desert! Once he's asleep he won't budge for a loooooonng time.  But hey! Take Little Marin and wake him up with her song!  That slob would wake up with a jump if he heard her sing, for sure! Heh heh heh!"
 
 Dialog1D3:: ; Chef Bear
-    db "My ultimate plan"
-    db "is to open a    "
-    db "branch in Mabe  "
-    db "Village!@"
+    dialog_text "My ultimate plan is to open a branch in Mabe Village!"
 
 Dialog1D4:: ; Chef Bear
-    db "HI HO!  Little  "
-    db "Marin!  Welcome!"
-    db "... ... ... ... "
-    db "Oh, shucks!  You"
-    db "are here too... "
-    db "Sorry...@"
+    dialog_text "HI HO!  Little Marin!  Welcome! ... ... ... ... Oh, shucks!  You are here too... Sorry..."
 
 Dialog1D5:: ; Marin
-    db "Oh, #####, I'm  "
-    db "glad you found  "
-    db "this place.     "
-    db "Will you stay   "
-    db "and talk to me  "
-    db "for a while?    "
-    db "    Yes! No...<ask>"
+    dialog_string_wrapping "Oh, #####, I'm glad you found this place.", "Will you stay and talk to me for a while?"
+    dialog_ask_line "Yes!", "No..."
 
 Dialog1D6:: ; Marin
-    db "Okay, I'll just "
-    db "watch the waves "
-    db "for a while...@"
+    dialog_text "Okay, I'll just watch the waves for a while..."
 
 Dialog1D7:: ; Marin
-    db "At the beach... "
-    db " Marin  <marin>@"
+    dialog_text "At the beach...", " Marin  <marin>"
 
 Dialog1D8:: ; Marin
-    db "I wonder where  "
-    db "these coconut   "
-    db "trees come from?"
-    db "...Tarin says   "
-    db "there is nothing"
-    db "beyond the sea, "
-    db "but I believe   "
-    db "there must be   "
-    db "something over  "
-    db "there...  When I"
-    db "discovered you, "
-    db "#####, my heart "
-    db "skipped a beat! "
-    db "I thought, this "
-    db "person has come "
-    db "to give us a    "
-    db "message...@"
+    dialog_text "I wonder where these coconut trees come from? ...Tarin says there is nothing beyond the sea, but I believe there must be something over there...  When I discovered you, #####, my heart skipped a beat! I thought, this person has come to give us a message..."
 
 Dialog1D9:: ; Marin
-    db "... ... ... ... "
-    db "... ... ... ... "
-    db "If I was a sea  "
-    db "gull, I would   "
-    db "fly as far as I "
-    db "could!  I would "
-    db "fly to far away "
-    db "places and sing "
-    db "for many people!"
-    db "...If I wish to "
-    db "the Wind Fish,  "
-    db "I wonder if my  "
-    db "dream will come "
-    db "true... ... ...@"
+    dialog_text "... ... ... ... ... ... ... ... If I was a sea gull, I would fly as far as I could!  I would fly to far away places and sing for many people! ...If I wish to the Wind Fish,", "I wonder if my dream will come true... ... ..."
 
 Dialog1DA:: ; Marin, Link
-    db "Hey!  Are you   "
-    db "listening?      "
-    db "#####, are you  "
-    db "listening to me?"
-    db "    Yeah No...<ask>"
+    dialog_string_wrapping "Hey!  Are you listening? #####, are you listening to me?"
+    dialog_ask_line "Yeah", "No..."
 
 Dialog1DB:: ; Marin
-    db "I want to know  "
-    db "everything about"
-    db "you...Err...Uhh,"
-    db "Ha ha ha ha!@"
+    dialog_text "I want to know everything about you...Err...Uhh, Ha ha ha ha!"
 
 Dialog1DC:: ; Marin
-    db "Hunh? The walrus"
-    db "wants me to go  "
-    db "to him?  It     "
-    db "doesn't matter, "
-    db "I will go with  "
-    db "you to him...@"
+    dialog_text "Hunh? The walrus wants me to go to him?  It doesn't matter, I will go with you to him..."
 
 Dialog1DD:: ; Tarin
-    db "Unnnngh! Owwwww!"
-    db "... ... ... ... "
-    db "I've sure lost  "
-    db "my taste for    "
-    db "honey!@"
+    dialog_text "Unnnngh! Owwwww! ... ... ... ... I've sure lost my taste for honey!"
 
 Dialog1DE:: ; Marin
-    db "Humph! Your head"
-    db "is always in the"
-    db "clouds! Will you"
-    db "please listen to"
-    db "me next time?!@"
+    dialog_text "Humph! Your head is always in the clouds! Will you please listen to me next time?!"
 
 Dialog1DF:: ; idk
-    db "Ha! That's all  "
-    db "you've got?!    "
-    db "Get ready for   "
-    db "THIS!@"
+    dialog_text "Ha! That's all you've got?!", "Get ready for THIS!"
 
 Dialog1E0:: ; Walrus
-    db "ZZZ ZZZ ZZZ ZZZ "
-    db " ... <marin> ... <marin> ...@"
+    dialog_text "ZZZ ZZZ ZZZ ZZZ", " ... <marin> ... <marin> ..."
 
 Dialog1E1:: ; Marin, Link
-    db "Yes, it's that  "
-    db "lazy walrus!    "
-    db "Shall we give   "
-    db "him a little    "
-    db "surprise?       "
-    db "    Yes  No...<ask>"
+    dialog_string_wrapping "Yes, it's that lazy walrus! Shall we give him a little surprise?"
+    dialog_ask_line "Yes", "No..."
 
 Dialog1E2:: ; Marin
-    db "Aha ha ha!  Wow!"
-    db "He certainly    "
-    db "woke with a     "
-    db "start!@"
+    dialog_text "Aha ha ha!  Wow! He certainly woke with a start!"
 
 Dialog1E3:: ; Marin
-    db "Hunh?  Oh, he's "
-    db "calling me...   "
-    db "It's the same as"
-    db "always... Ha ha!@"
+    dialog_text "Hunh?  Oh, he's calling me... It's the same as always... Ha ha!"
 
 Dialog1E4:: ; Marin
-    db "You're right, it"
-    db "would be mean to"
-    db "wake him up now!"
-    db "Let's let him   "
-    db "sleep some more!@"
+    dialog_text "You're right, it would be mean to wake him up now! Let's let him sleep some more!"
 
 Dialog1E5:: ; Marin, probably
-    db "#####, I'm going"
-    db "to the Animal   "
-    db "Village!  Please"
-    db "drop by, okay?@"
+    dialog_text "#####, I'm going to the Animal Village!  Please drop by, okay?"
 
 Dialog1E6:: ; idk
-    db "Arfh! Arfh! Arf!"
-    db " <marin>  <marin>!  <marin>   <marin>!  "
-    db "..... <link>?? @"
+    dialog_text "Arfh! Arfh! Arf!  <marin>  <marin>!  <marin>   <marin>! ..... <link>?? "
 
 Dialog1E7:: ; Fisherman
-    db "It's no use,    "
-    db "little buddy!  A"
-    db "fish took my    "
-    db "hook... I keep  "
-    db "casting my line "
-    db "into the water, "
-    db "but I haven't   "
-    db "got a bite... I "
-    db "thought this    "
-    db "would happen...@"
+    dialog_text "It's no use, little buddy!  A fish took my hook... I keep casting my line into the water, but I haven't got a bite... I thought this would happen..."
 
 Dialog1E8:: ; Fisherman
-    db "Oh! What is that"
-    db "you have in your"
-    db "hand?  It's not "
-    db "a fishing hook, "
-    db "is it?  You had "
-    db "better let me   "
-    db "have it.  I'll  "
-    db "give you my next"
-    db "catch if you let"
-    db "me have it...   "
-    db "    Okay No<ask>"
+    dialog_string_wrapping "Oh! What is that you have in your hand?  It's not a fishing hook, is it?  You had better let me have it.  I'll give you my next catch if you let me have it..."
+    dialog_ask_line "Okay", "No"
 
 Dialog1E9:: ; Fisherman
-    db "Keep your eyes  "
-    db "open and watch  "
-    db "a pro at work.@"
+    dialog_text "Keep your eyes open and watch", "a pro at work."
 
 Dialog1EA:: ; Fisherman
-    db "You should be   "
-    db "more kind to me!"
-    db "I thought we    "
-    db "were buddies!@"
+    dialog_text "You should be more kind to me! I thought we were buddies!"
 
 Dialog1EB:: ; Fisherman
-    db "My, that's a    "
-    db "BIIIIG one!@"
+    dialog_text "My, that's a BIIIIG one!"
 
 Dialog1EC:: ; Narrator
-    db "The <fishhook> became a  "
-    db "necklace <bra>!     "
-    db "L-l-lucky!@"
+    dialog_text "The <fishhook> became a necklace <bra>!", "L-l-lucky!"
 
 Dialog1ED:: ; Fisherman
-    db "I can't wait to "
-    db "see what I'll   "
-    db "catch next!@"
+    dialog_text "I can't wait to see what I'll catch next!"
 
 Dialog1EE:: ; Mamasha
-    db "My husband is   "
-    db "lost in the     "
-    db "woods! Please   "
-    db "go find him!@"
+    dialog_text "My husband is lost in the woods! Please", "go find him!"
 
 Dialog1EF:: ; Secret Zora
-    db "Hey, you can see"
-    db "me?! You must   "
-    db "have a magnify- "
-    db "ing glass. I'm  "
-    db "not a trouble   "
-    db "maker. I just   "
-    db "want to live in "
-    db "peace.@"
+    dialog_text "Hey, you can see me?! You must have a magnify- ing glass. I'm not a trouble maker. I just want to live in peace."
 
 Dialog1F0:: ; Mermaid
-    db "When I was swim-"
-    db "ming in the bay,"
-    db "the waves took a"
-    db "very important  "
-    db "necklace from   "
-    db "around my neck! "
-    db "If you find it, "
-    db "I will let you  "
-    db "take a scale    "
-    db "from my tail!   @"
+    dialog_text "When I was swim- ming in the bay, the waves took a very important necklace from around my neck! If you find it, I will let you take a scale from my tail!   "
 
 Dialog1F1:: ; Mermaid
-    db "I have already  "
-    db "looked around   "
-    db "here!@"
+    dialog_text "I have already looked around here!"
 
 Dialog1F2:: ; Mermaid
-    db "Ahh!  That's it!"
-    db "That's my neck- "
-    db "lace!  Give it! "
-    db "Give it back!  I"
-    db "will give you a "
-    db "scale as I said!"
-    db "    Give Keep<ask>"
+    dialog_string_wrapping "Ahh!  That's it! That's my neck- lace!  Give it! Give it back!  I will give you a scale as I said!"
+    dialog_ask_line "Give", "Keep"
 
 Dialog1F3:: ; Mermaid
-    db "Promise!  You'll"
-    db "only take one!@"
+    dialog_text "Promise!  You'll only take one!"
 
 Dialog1F4:: ; Mermaid
-    db "You are heart-  "
-    db "less and cruel!@"
+    dialog_text "You are heart- less and cruel!"
 
 Dialog1F5:: ; Narrator
-    db "You returned the"
-    db "necklace <bra> and  "
-    db "got a scale <scale> of"
-    db "the mermaid's   "
-    db "tail.  How will "
-    db "you use this?@"
+    dialog_text "You returned the necklace <bra> and got a scale <scale> of the mermaid's tail.  How will you use this?"
 
 Dialog1F6:: ; Photographer
-    db "I'll call this  "
-    db "'I Was Very     "
-    db "Afraid.' Smile!@"
+    dialog_text "I'll call this 'I Was Very Afraid.' Smile!"
 
 Dialog1F7:: ; Mermaid
-    db "An artist once  "
-    db "asked me to pose"
-    db "for him, and he "
-    db "wanted a scale, "
-    db "too...  Can the "
-    db "legend of the   "
-    db "Magnifying Lens "
-    db "be true...?@"
+    dialog_text "An artist once asked me to pose for him, and he wanted a scale, too...  Can the legend of the Magnifying Lens be true...?"
 
 Dialog1F8:: ; Photographer
-    db "Hi there! It's  "
-    db "me, the photo-  "
-    db "grapher! You say"
-    db "Zora is in the  "
-    db "house? I HAVE to"
-    db "take a picture  "
-    db "of that. I'll   "
-    db "call it 'I Found"
-    db "Zora.'@"
+    dialog_text "Hi there! It's me, the photo- grapher! You say Zora is in the house? I HAVE to take a picture of that. I'll call it 'I Found Zora.'"
 
 Dialog1F9:: ; Signpost maybe, and ; Map maybe
-    db "Richard's Villa @"
+    dialog_text "Richard's Villa "
 
 Dialog1FA:: ; Signpost
-    db "Kanalet Castle  "
-    db "10 Min. <right> <up>@"
+    dialog_text "Kanalet Castle 10 Min. <right> <up>"
 
 Dialog1FB:: ; Signpost
-    db "Kanalet Castle  "
-    db "5 Min. <right>@"
+    dialog_text "Kanalet Castle", "5 Min. <right>"
 
 Dialog1FC:: ; Signpost
-    db "Kanalet Castle  "
-    db "50 Paces <up>@"
+    dialog_text "Kanalet Castle 50 Paces <up>"
 
 Dialog1FD:: ; Bucket Mouse
-    db "'BRRING! BRRING!"
-    db " BRRING! CLICK! "
-    db "Yeees!  It's the"
-    db "Bucket Mouse!   "
-    db "Thanks for call-"
-    db "ing! ...Well... "
-    db "CLICK!'  ??? ..."
-    db "You must have   "
-    db "dialed a wrong  "
-    db "number...@"
+    dialog_text "'BRRING! BRRING!  BRRING! CLICK! Yeees!  It's the Bucket Mouse! Thanks for call- ing! ...Well... CLICK!'  ??? ... You must have dialed a wrong number..."
 
 Dialog1FE:: ; Fisherman, Link
-    db "Oh!  It's a big "
-    db "one!  And it has"
-    db "a Piece of      "
-    db "Heart, too!  You"
-    db "get a 20 Rupee  "
-    db "prize on top of "
-    db "that! Try again?"
-    db "    Yes  No<ask>"
+    dialog_string_wrapping "Oh!  It's a big one!  And it has a Piece of Heart, too!  You get a 20 Rupee prize on top of that! Try again?"
+    dialog_ask_line "Yes", "No"
 
 Dialog1FF:: ; Fisherman, Link
-    db "Oh!  It's a big "
-    db "one!  And it has"
-    db "a Piece of      "
-    db "Heart, too!  You"
-    db "have completed  "
-    db "another Heart   "
-    db "Container!  On  "
-    db "top of that, you"
-    db "get a 20 Rupee  "
-    db "prize! Want to  "
-    db "try again?      "
-    db "    Yes  No<ask>"
+    dialog_string_wrapping "Oh!  It's a big one!  And it has a Piece of Heart, too!  You have completed another Heart Container!  On top of that, you get a 20 Rupee prize! Want to try again?"
+    dialog_ask_line "Yes", "No"
 
 Dialog200:: ; Book, Narrator
-    db " 'How To Handle "
-    db "   Your Shield  "
-    db "   Like A Pro!' "
-    db "Read this book? "
-    db "    YES  NO<ask>"
+    dialog_string_wrapping " 'How To Handle", "   Your Shield", "   Like A Pro!' Read this book?"
+    dialog_ask_line "YES", "NO"
 
 Dialog201:: ; Book
-    db "'If you hold the"
-    db "Button down, you"
-    db "can defend your-"
-    db "self from enemy "
-    db "attacks, and you"
-    db "can flip some   "
-    db "enemies, too... "
-    db "Besides the     "
-    db "standard shield "
-    db "there is also a "
-    db "mirrored variety"
-    db "which can defend"
-    db "against beams!'@"
+    dialog_text "'If you hold the Button down, you can defend your- self from enemy attacks, and you can flip some enemies, too... Besides the standard shield there is also a mirrored variety which can defend against beams!'"
 
 Dialog202:: ; Book, Narrator
-    db " 'Selecting The "
-    db "   Item That's  "
-    db "  Right For You'"
-    db "Read this book? "
-    db "    YES  NO<ask>"
+    dialog_string_wrapping " 'Selecting The", "   Item That's", "  Right For You' Read this book?"
+    dialog_ask_line "YES", "NO"
 
 Dialog203:: ; Book
-    db "'You can select "
-    db "your favorite   "
-    db "item for the A  "
-    db "and B Buttons on"
-    db "the Sub-Screen. "
-    db "Using different "
-    db "items, you can  "
-    db "fight without a "
-    db "sword!  Try many"
-    db "different things"
-    db "to find what's  "
-    db "right for you!'@"
+    dialog_text "'You can select your favorite item for the A and B Buttons on the Sub-Screen. Using different items, you can fight without a sword!  Try many different things to find what's right for you!'"
 
 Dialog204:: ; Book, Narrator
-    db " 'Auto Map and  "
-    db "Memo Guide Book'"
-    db "Read this book? "
-    db "    YES  NO<ask>"
+    dialog_string_wrapping " 'Auto Map and Memo Guide Book' Read this book?"
+    dialog_ask_line "YES", "NO"
 
 Dialog205:: ; Book, Narrator
-    db "'You can see an "
-    db "island map by   "
-    db "pressing the    "
-    db "SELECT Button.  "
-    db "The dark parts  "
-    db "of the map are  "
-    db "places you have "
-    db "not yet visited."
-    db "Move the cursor "
-    db "and press the A "
-    db "Button to get   "
-    db "more information"
-    db "about an area,  "
-    db "or to replay the"
-    db "message you got "
-    db "there...'  Ahhh!"
-    db "How convenient!@"
+    dialog_text "'You can see an island map by pressing the SELECT Button. The dark parts of the map are places you have not yet visited. Move the cursor and press the A Button to get more information about an area, or to replay the message you got there...'  Ahhh! How convenient!"
 
 Dialog206:: ; Book, Narrator
-    db " 'Secrets Of The"
-    db " Whirling Blade'"
-    db "Read this book? "
-    db "    YES  NO<ask>"
+    dialog_string_wrapping " 'Secrets Of The  Whirling Blade' Read this book?"
+    dialog_ask_line "YES", "NO"
 
 Dialog207:: ; Book
-    db "'The Whirling   "
-    db "Blade technique "
-    db "has been handed "
-    db "down from gener-"
-    db "ation to gener- "
-    db "ation by the    "
-    db "family of the   "
-    db "hero. To use it,"
-    db "hold down the   "
-    db "Sword Button and"
-    db "build up your   "
-    db "power.  When you"
-    db "have enough, you"
-    db "can release the "
-    db "Button!  Can you"
-    db "master this?'@"
+    dialog_text "'The Whirling Blade technique has been handed down from gener- ation to gener- ation by the family of the hero. To use it, hold down the Sword Button and build up your power.  When you have enough, you can release the Button!  Can you master this?'"
 
 Dialog208:: ; Book, Narrator
-    db "'The Properties "
-    db "  Of Warp Holes'"
-    db "Read this book? "
-    db "    YES  NO<ask>"
+    dialog_string_wrapping "'The Properties", "  Of Warp Holes' Read this book?"
+    dialog_ask_line "YES", "NO"
 
 Dialog209:: ; Book
-    db "'There are some "
-    db "Warp Holes on   "
-    db "Koholint Island."
-    db "You can warp to "
-    db "and fro using   "
-    db "these holes.  If"
-    db "you jump into   "
-    db "the Warp Hole   "
-    db "at which you    "
-    db "arrived, you    "
-    db "will go to the  "
-    db "next one in the "
-    db "sequence.  You  "
-    db "can only warp to"
-    db "a hole you have "
-    db "seen with your  "
-    db "own eyes...'@"
+    dialog_text "'There are some Warp Holes on Koholint Island. You can warp to and fro using these holes.  If you jump into the Warp Hole", "at which you arrived, you will go to the next one in the sequence.  You can only warp to a hole you have seen with your own eyes...'"
 
 Dialog20A:: ; Book, Narrator
-    db "'Fun With Bombs'"
-    db "Read this book? "
-    db "    YES  NO<ask>"
+    dialog_string_wrapping "'Fun With Bombs' Read this book?"
+    dialog_ask_line "YES", "NO"
 
 Dialog20B:: ; Book
-    db "'After you put a"
-    db "Bomb down, you  "
-    db "can pick it up  "
-    db "by pressing the "
-    db "Button again.   "
-    db "You can then    "
-    db "throw it by     "
-    db "pushing the     "
-    db "Button one more "
-    db "time.  Did you  "
-    db "know that?'@"
+    dialog_text "'After you put a Bomb down, you can pick it up by pressing the Button again. You can then throw it by pushing the Button one more time.  Did you know that?'"
 
 Dialog20C:: ; Book, Narrator
-    db "   'Atlas Of    "
-    db "Koholint Island'"
-    db "You can move the"
-    db "cursor and look "
-    db "up the name of a"
-    db "place...  Do you"
-    db "want to look at "
-    db "this map?       "
-    db "    Look Don't<ask>"
+    dialog_string_wrapping "   'Atlas Of Koholint Island' You can move the cursor and look up the name of a place...  Do you want to look at this map?"
+    dialog_ask_line "Look", "Don't"
 
 Dialog20D:: ; Book, Narrator
-    db " 'Dark Secrets  "
-    db "  And Mysteries "
-    db "   Of Koholint' "
-    db "Do you really   "
-    db "want to read it?"
-    db "    YES  NO<ask>"
+    dialog_string_wrapping " 'Dark Secrets", "  And Mysteries", "   Of Koholint' Do you really want to read it?"
+    dialog_ask_line "YES", "NO"
 
 Dialog20E:: ; Book, Narrator
-    db "Gasp! Wha-What's"
-    db "this! ... ...   "
-    db "You can't read  "
-    db "the tiny print  "
-    db "without the aid "
-    db "of a magnifying "
-    db "glass...@"
+    dialog_text "Gasp! Wha-What's this! ... ... You can't read the tiny print without the aid of a magnifying glass..."
 
 Dialog20F:: ; Ghost
 Dialog210:: ; Ghost
-    db "...my grave...  "
-    db "...take me...   "
-    db "...my grave...@"
+    dialog_text "...my grave... ...take me... ...my grave..."
 
 Dialog211:: ; Ghost
-    db "...the house... "
-    db " ...take me...  "
-    db "...the house... "
-    db "...at the bay...@"
+    dialog_text "...the house...", " ...take me... ...the house... ...at the bay..."
 
 Dialog212:: ; Ghost
-    db "...N-N-No!...   "
-    db "...N-not there!@"
+    dialog_text "...N-N-No!... ...N-not there!"
 
 Dialog213:: ; Ghost
-    db "   ...Here!...  "
-    db "   ...enter...  "
-    db " ...my house...@"
+    dialog_text "   ...Here!...", "   ...enter...", " ...my house..."
 
 Dialog214:: ; Ghost
-    db " ...Nostalgia..."
-    db " ...unchanged..."
-    db " ...boo hoo...@"
+    dialog_text " ...Nostalgia...  ...unchanged...  ...boo hoo..."
 
 Dialog215:: ; Ghost
-    db "  ...Enough...  "
-    db " ...cemetery... "
-    db "  ...take me... "
-    db " ...my grave...@"
+    dialog_text "  ...Enough...", " ...cemetery...", "  ...take me...", " ...my grave..."
 
 Dialog216:: ; Ghost
-    db "...Thank you... "
-    db " ...a jar...    "
-    db "...in my home..."
-    db "...look inside.."
-    db "...bye...bye...@"
+    dialog_text "...Thank you...", " ...a jar... ...in my home... ...look inside.. ...bye...bye..."
 
 Dialog217:: ; Book, Narrator
-    db "Round and round,"
-    db "the passageways "
-    db "of the Egg...   "
-    db "<left> <left> <up> <right> <right> <up> <left> <up> "
-    db "??  ...Hmmmmmm, "
-    db "this book reeks "
-    db "of secrets...@"
+    dialog_text "Round and round, the passageways of the Egg...", "<left> <left> <up> <right> <right> <up> <left> <up> ??  ...Hmmmmmm, this book reeks of secrets..."
 
 Dialog218:: ; Book, Narrator
-    db "Round and round,"
-    db "the passageways "
-    db "of the Egg...   "
-    db "<right> <up> <up> <right> <up> <up> <right> <up> "
-    db "??  ...Hmmmmmm, "
-    db "this book reeks "
-    db "of secrets...@"
+    dialog_text "Round and round, the passageways of the Egg...", "<right> <up> <up> <right> <up> <up> <right> <up> ??  ...Hmmmmmm, this book reeks of secrets..."
 
 Dialog219:: ; Book, Narrator
-    db "Round and round,"
-    db "the passageways "
-    db "of the Egg...   "
-    db "<left> <up> <right> <up> <left> <up> <right> <up> "
-    db "??  ...Hmmmmmm, "
-    db "this book reeks "
-    db "of secrets...@"
+    dialog_text "Round and round, the passageways of the Egg...", "<left> <up> <right> <up> <left> <up> <right> <up> ??  ...Hmmmmmm, this book reeks of secrets..."
 
 Dialog21A:: ; Book, Narrator
-    db "Round and round,"
-    db "the passageways "
-    db "of the Egg...   "
-    db "<right> <right> <right> <right> <up> <up> <up> <up> "
-    db "??  ...Hmmmmmm, "
-    db "this book reeks "
-    db "of secrets...@"
+    dialog_text "Round and round, the passageways of the Egg...", "<right> <right> <right> <right> <up> <up> <up> <up> ??  ...Hmmmmmm, this book reeks of secrets..."
 
 Dialog21B:: ; Marin
-    db "...You're late! "
-    db "I thought you'd "
-    db "never come back!@"
+    dialog_text "...You're late! I thought you'd never come back!"
 
 Dialog21C:: ; Marin
-    db "...EEEK!  You're"
-    db "hurt!  Arrrgh!  "
-    db "Don't be so     "
-    db "reckless!@"
+    dialog_text "...EEEK!  You're hurt!  Arrrgh! Don't be so reckless!"
 
 Dialog21D:: ; Marin
-    db "#####! You're   "
-    db "back!  Are you  "
-    db "hurt?@"
+    dialog_text "#####! You're back!  Are you hurt?"
 
 Dialog21E:: ; Marin
-    db "...You idiot!   "
-    db "I told you this "
-    db "would happen... "
-    db "Eh?!  What?  I  "
-    db "didn't say any- "
-    db "thing, really!@"
+    dialog_text "...You idiot!", "I told you this would happen... Eh?!  What?  I didn't say any- thing, really!"
 
 Dialog21F:: ; Kid
 Dialog220:: ; Kid
-    db "Hey buddy!  It's"
-    db "serious!  Yeah, "
-    db "really serious!!"
-    db "Yeah, it is!    "
-    db "The Moblins came"
-    db "to the village! "
-    db "Yeah, that's    "
-    db "right!  A whole "
-    db "gang of Moblins!"
-    db "Then... It's for"
-    db "real!  They all "
-    db "went to the     "
-    db "house...  Yeah, "
-    db "that house, and "
-    db "then they did   "
-    db "something at Bow"
-    db "Wow's house!!   "
-    db "It was a really "
-    db "bad scene, with "
-    db "the M-m-moblins!"
-    db "So, I mean, ahh!"
-    db "... ... ... ... "
-    db "... ... ... ... "
-    db "It might be     "
-    db "faster to find  "
-    db "out for yourself"
-    db "what happened!@"
+    dialog_text "Hey buddy!  It's serious!  Yeah, really serious!! Yeah, it is!", "The Moblins came to the village! Yeah, that's right!  A whole gang of Moblins! Then... It's for real!  They all went to the house...  Yeah, that house, and then they did something at Bow Wow's house!!", "It was a really bad scene, with the M-m-moblins! So, I mean, ahh! ... ... ... ... ... ... ... ... It might be faster to find out for yourself what happened!"
 
 Dialog221:: ; Secret Goriya
-    db "I found a good  "
-    db "item washed up  "
-    db "on the beach... "
-    db "I'll trade it to"
-    db "you for what you"
-    db "have in your B  "
-    db "Button...       "
-    db "    Okay No<ask>"
+    dialog_string_wrapping "I found a good item washed up on the beach... I'll trade it to you for what you have in your B Button..."
+    dialog_ask_line "Okay", "No"
 
 Dialog222:: ; Secret Goriya
-    db "Okay, let's do  "
-    db "it!  When you   "
-    db "don't want the  "
-    db "Boomerang any   "
-    db "more, come back!@"
+    dialog_text "Okay, let's do it!  When you don't want the Boomerang any more, come back!"
 
 Dialog223:: ; Secret Goriya
-    db "Oh, yeah, uh... "
-    db "okay, whatever.@"
+    dialog_text "Oh, yeah, uh... okay, whatever."
 
 Dialog224:: ; Narrator
-    db "You got the     "
-    db "Boomerang in    "
-    db "exchange for the"
-    db "item you had.@"
+    dialog_text "You got the Boomerang in exchange for the item you had."
 
 Dialog225:: ; Secret Goriya, Link
-    db "Give me back the"
-    db "Boomerang, I beg"
-    db "you! I'll return"
-    db "the item you    "
-    db "gave to me!     "
-    db "    Okay Not Now"
-    db "<ask>"
+    dialog_string_wrapping "Give me back the Boomerang, I beg you! I'll return the item you gave to me!"
+    dialog_ask_line "Okay", "Not Now"
 
 Dialog226:: ; Narrator
-    db "The item came   "
-    db "back to you. You"
-    db "returned the    "
-    db "Boomerang.@"
+    dialog_text "The item came back to you. You returned the Boomerang."
 
 Dialog227:: ; Secret Goriya
-    db "Ah... Don't give"
-    db "me that item... "
-    db "How about some- "
-    db "thing else?@"
+    dialog_text "Ah... Don't give me that item... How about some- thing else?"
 
 Dialog228:: ; Ulrira
-    db "'BRRING! BRRING!"
-    db "Ya, it's Ulrira!"
-    db "You haven't     "
-    db "found the 5     "
-    db "Golden Leaves?  "
-    db "Keep an eye on  "
-    db "the ones you    "
-    db "have. Someone   "
-    db "might try and   "
-    db "take 'em! Bye!  "
-    db "CLICK!'@"
+    dialog_text "'BRRING! BRRING! Ya, it's Ulrira! You haven't found the 5 Golden Leaves? Keep an eye on the ones you have. Someone might try and take 'em! Bye! CLICK!'"
 
 Dialog229:: ; Ulrira
-    db "'BRRING! BRRING!"
-    db "Ya, it's Ulrira!"
-    db "You haven't     "
-    db "found the 5     "
-    db "Golden Leaves?  "
-    db "Try bombing sus-"
-    db "picious places. "
-    db "Hope that helps."
-    db "Bye!            "
-    db "CLICK!'@"
+    dialog_text "'BRRING! BRRING! Ya, it's Ulrira! You haven't found the 5 Golden Leaves? Try bombing sus- picious places. Hope that helps. Bye!", "CLICK!'"
 
 Dialog22A:: ; Ulrira
-    db "'BRRING! BRRING!"
-    db "Ya, it's Ulrira!"
-    db "You haven't     "
-    db "found the 5     "
-    db "Golden Leaves?  "
-    db "Go scare that   "
-    db "crow by the     "
-    db "castle and see  "
-    db "if that helps!  "
-    db "Bye!            "
-    db "CLICK!'@"
+    dialog_text "'BRRING! BRRING! Ya, it's Ulrira! You haven't found the 5 Golden Leaves? Go scare that crow by the castle and see if that helps! Bye!", "CLICK!'"
 
 Dialog22B:: ; Photo Album, Narrator
-    db "'The Travels of "
-    db "#####' Do you   "
-    db "want to look at "
-    db "your album?     "
-    db "    Look Don't<ask>"
+    dialog_string_wrapping "'The Travels of #####' Do you want to look at your album?"
+    dialog_ask_line "Look", "Don't"
 
 Dialog22C:: ; Narrator
-    db "Which picture   "
-    db "would you like  "
-    db "to see? Use <dpad> to"
-    db "select, then    "
-    db "press the A     "
-    db "Button!@"
+    dialog_text "Which picture would you like to see? Use <dpad> to select, then press the A Button!"
 
 Dialog22D:: ; Signpost, probably
-    db "You are near the"
-    db "Eagle's Tower.  "
-    db "Beware of the   "
-    db "bird!@"
+    dialog_text "You are near the Eagle's Tower. Beware of the bird!"
 
 Dialog22E:: ; Photographer
-    db "Hi, #####. You  "
-    db "know I love to  "
-    db "take pictures.  "
-    db "Wouldn't this   "
-    db "old castle make "
-    db "a great photo?@"
+    dialog_text "Hi, #####. You know I love to take pictures. Wouldn't this old castle make a great photo?"
 
 Dialog22F:: ; Narrator
 Dialog230:: ; Narrator
-    db "Hunh?  A keyhole"
-    db "here?  It says, "
-    db "'Tale Keyhole'@"
+    dialog_text "Hunh?  A keyhole here?  It says, 'Tale Keyhole'"
 
 Dialog231:: ; Narrator
-    db "Hunh?  A keyhole"
-    db "here?  It says, "
-    db "'Slime Keyhole'@"
+    dialog_text "Hunh?  A keyhole here?  It says, 'Slime Keyhole'"
 
 Dialog232:: ; Narrator
-    db "Hunh?  A keyhole"
-    db "here?  It says, "
-    db "'Angler Keyhole'@"
+    dialog_text "Hunh?  A keyhole here?  It says, 'Angler Keyhole'"
 
 Dialog233:: ; Narrator
-    db "Hunh?  A keyhole"
-    db "here?  It says, "
-    db "'Bird Keyhole'@"
+    dialog_text "Hunh?  A keyhole here?  It says, 'Bird Keyhole'"
 
 Dialog234:: ; Narrator
-    db "Hunh?  A keyhole"
-    db "here?  It says, "
-    db "'Face Keyhole'@"
+    dialog_text "Hunh?  A keyhole here?  It says, 'Face Keyhole'"
 
 Dialog235:: ; Marin
-    db "Somebody, HELP!@"
+    dialog_text "Somebody, HELP!"
 
 Dialog236:: ; Marin
-    db "Hey!  #####!    "
-    db "Some monsters   "
-    db "put me up here! "
-    db "What should I   "
-    db "do?!  I'm afraid"
-    db "of heights!!@"
+    dialog_text "Hey!  #####! Some monsters put me up here! What should I do?!  I'm afraid of heights!!"
 
 Dialog237:: ; Marin
-    db "Yow!  That was a"
-    db "surprise! #####,"
-    db "thank you!@"
+    dialog_text "Yow!  That was a surprise! #####, thank you!"
 
 Dialog238:: ; Marin
-    db "... ... ... ... "
-    db "... ... ... ... "
-    db "Say... #####... @"
+    dialog_text "... ... ... ... ... ... ... ... Say... #####... "
 
 Dialog239:: ; Marin
-    db "Uhh... I don't  "
-    db "know how to say "
-    db "this... but...@"
+    dialog_text "Uhh... I don't know how to say this... but..."
 
 Dialog23A:: ; Marin
-    db "Hunh?!  Tarin??!"
-    db "... ... ... ... "
-    db "Uh... Nevermind,"
-    db "I... I gotta go!@"
+    dialog_text "Hunh?!  Tarin??! ... ... ... ... Uh... Nevermind, I... I gotta go!"
 
 Dialog23B:: ; Tarin
-    db "MAAAAAAARINNNN!!@"
+    dialog_text "MAAAAAAARINNNN!!"
 
 Dialog23C:: ; Richard
-    db "Nothing yet?! I "
-    db "grow tired of   "
-    db "waiting. I want "
-    db "those Golden    "
-    db "Leaves delivered"
-    db "soon!           "
-    db "Courage like    "
-    db "this deserves a "
-    db "photo, don't you"
-    db "think?@"
+    dialog_text "Nothing yet?! I grow tired of waiting. I want those Golden Leaves delivered soon!", "Courage like this deserves a photo, don't you think?"
 
 Dialog23D:: ; Tarin
-    db "Hey, Marin and  "
-    db "#####! Are you  "
-    db "taking pictures?"
-    db "You should take "
-    db "pictures of     "
-    db "everyone,       "
-    db "including me.@"
+    dialog_text "Hey, Marin and #####! Are you taking pictures? You should take pictures of everyone, including me."
 
 Dialog23E:: ; Photographer, probably
-    db "I use this to   "
-    db "take pictures.  "
-    db "Are you ready?  "
-    db "Say 'mushroom!'@"
+    dialog_text "I use this to take pictures. Are you ready? Say 'mushroom!'"
 
 Dialog23F:: ; Photographer, probably
-    db "OK, I'm done.   "
-    db "I'll go home    "
-    db "now.@"
+    dialog_text "OK, I'm done. I'll go home now."
 
 Dialog240:: ; Ulrira
-    db "'BRRING! BRRING!"
-    db "This is Ulrira! "
-    db "Oh, I heard from"
-    db "grandma that    "
-    db "there is some-  "
-    db "thing hidden    "
-    db "behind the falls"
-    db "in the Tal Tal  "
-    db "Mountains.  Does"
-    db "that help?  Bye!"
-    db "CLICK!'@"
+    dialog_text "'BRRING! BRRING! This is Ulrira! Oh, I heard from grandma that there is some- thing hidden behind the falls in the Tal Tal Mountains.  Does that help?  Bye! CLICK!'"
 
 Dialog241:: ; Ulrira
-    db "'BRRING! BRRING!"
-    db "Ulrira here...  "
-    db "Yes, when I was "
-    db "just a lad, I   "
-    db "recall seeing a "
-    db "high tower in   "
-    db "the mountains!  "
-    db "You should go   "
-    db "there!  Is that "
-    db "helpful for you?"
-    db "Bye! CLICK!'@"
+    dialog_text "'BRRING! BRRING! Ulrira here... Yes, when I was just a lad, I recall seeing a high tower in the mountains! You should go there!  Is that helpful for you? Bye! CLICK!'"
 
 Dialog242:: ; Ulrira
-    db "'BRRING! BRRING!"
-    db "Hello, this is  "
-    db "Ulrira speaking!"
-    db "#####, it's time"
-    db "for you to face "
-    db "the Egg on Mt.  "
-    db "Tamaranch!  Be  "
-    db "careful, #####! "
-    db "Bye!  CLICK!'@"
+    dialog_text "'BRRING! BRRING! Hello, this is Ulrira speaking! #####, it's time for you to face the Egg on Mt. Tamaranch!  Be careful, #####! Bye!  CLICK!'"
 
 Dialog243:: ; Ulrira
-    db "'BRRING! BRRING!"
-    db "This is Ulrira! "
-    db "You're lost in  "
-    db "the Egg?  Hmmmm."
-    db "No sir, I can't "
-    db "help you on that"
-    db "one.  How about "
-    db "the library?    "
-    db "And hey, don't  "
-    db "stop calling me "
-    db "because I didn't"
-    db "know one little "
-    db "answer!  CLICK!'@"
+    dialog_text "'BRRING! BRRING! This is Ulrira! You're lost in the Egg?  Hmmmm. No sir, I can't help you on that one.  How about the library?", "And hey, don't stop calling me because I didn't know one little answer!  CLICK!'"
 
 Dialog244:: ; Ulrira
-    db "'BRRING! BRRING!"
-    db "Ulrira at your  "
-    db "service!  Oh?   "
-    db "You should take "
-    db "BowWow home now,"
-    db "Madam MeowMeow  "
-    db "would appreciate"
-    db "it! Bye! CLICK!'@"
+    dialog_text "'BRRING! BRRING! Ulrira at your service!  Oh? You should take BowWow home now, Madam MeowMeow would appreciate it! Bye! CLICK!'"
 
 Dialog245:: ; Ulrira
-    db "'BRRING! BRRING!"
-    db "Yeah, this is   "
-    db "Ulrira!  You are"
-    db "starting to like"
-    db "music, eh?      "
-    db "Well, a frog    "
-    db "named Mamu, who "
-    db "lives in the    "
-    db "Signpost Maze,  "
-    db "might know some "
-    db "new songs, but  "
-    db "he charges a lot"
-    db "to play them!   "
-    db "Bye!  CLICK!'@"
+    dialog_text "'BRRING! BRRING! Yeah, this is Ulrira!  You are starting to like music, eh?", "Well, a frog named Mamu, who lives in the Signpost Maze, might know some new songs, but he charges a lot to play them! Bye!  CLICK!'"
 
 Dialog246:: ; Ulrira
-    db "'BRRING! BRRING!"
-    db "Hi, it's Ulrira!"
-    db "You are doing   "
-    db "great!  Your    "
-    db "efforts will end"
-    db "soon... By the  "
-    db "way, have you   "
-    db "visited the Hen "
-    db "House on the    "
-    db "mountain?  There"
-    db "is a cave nearby"
-    db "with something  "
-    db "important in it."
-    db "Bye!  CLICK!'@"
+    dialog_text "'BRRING! BRRING! Hi, it's Ulrira! You are doing great!  Your efforts will end soon... By the way, have you visited the Hen House on the mountain?  There is a cave nearby with something important in it. Bye!  CLICK!'"
 
 Dialog247:: ; Ulrira
-    db "'BRRING! BRRING!"
-    db "Ulrira speaking!"
-    db "Are your enemies"
-    db "too strong for  "
-    db "you?  In that   "
-    db "case, you better"
-    db "collect all the "
-    db "Seashells...Just"
-    db "believe in your-"
-    db "self and do your"
-    db "best!  CLICK!'@"
+    dialog_text "'BRRING! BRRING! Ulrira speaking! Are your enemies too strong for you?  In that case, you better collect all the Seashells...Just believe in your- self and do your best!  CLICK!'"
 
 Dialog248:: ; Ulrira
-    db "'BRRING! BRRING!"
-    db "Ulrira here! ..."
-    db "Go for it!      "
-    db "You're almost   "
-    db "there! I'm pull-"
-    db "ing for you!    "
-    db "Bye!  CLICK!'@"
+    dialog_text "'BRRING! BRRING! Ulrira here! ... Go for it! You're almost there! I'm pull- ing for you! Bye!  CLICK!'"
 
 Dialog249:: ; idk
-    db "Go ahead and    "
-    db "take a picture  "
-    db "of me. Any angle"
-    db "you like!@"
+    dialog_text "Go ahead and take a picture of me. Any angle you like!"
 
 Dialog24A:: ; idk
-    db "Yarna Desert?   "
-    db "There's a way to"
-    db "get there to the"
-    db "south, but you  "
-    db "might not be    "
-    db "able to get     "
-    db "through if that "
-    db "lazy walrus is  "
-    db "in the way!@"
+    dialog_text "Yarna Desert? There's a way to get there to the south, but you might not be able to get through if that lazy walrus is in the way!"
 
 Dialog24B:: ; idk
-    db "Ahhh... Sigh... "
-    db "On such a nice  "
-    db "day, we need a  "
-    db "song from Marin!@"
+    dialog_text "Ahhh... Sigh... On such a nice day, we need a song from Marin!"
 
 Dialog24C:: ; idk
-    db "Hey! Did ya know"
-    db "Animal Village  "
-    db "and Mabe Village"
-    db "are sister      "
-    db "cities?  Yes,   "
-    db "even though they"
-    db "aren't large    "
-    db "enough to be    "
-    db "called cities..."
-    db "Anyway, I heard "
-    db "from a very good"
-    db "source that they"
-    db "have a Dream    "
-    db "Shrine in Mabe, "
-    db "and that it has "
-    db "something good  "
-    db "inside...  Is   "
-    db "that true?@"
+    dialog_text "Hey! Did ya know Animal Village and Mabe Village are sister cities?  Yes, even though they aren't large enough to be called cities... Anyway, I heard from a very good source that they have a Dream Shrine in Mabe, and that it has something good inside...  Is that true?"
 
 Dialog24D:: ; idk
-    db "I can't go to   "
-    db "Mabe Village    "
-    db "because of all  "
-    db "the monsters.   "
-    db "I hope Marin    "
-    db "is all right.@"
+    dialog_text "I can't go to Mabe Village because of all the monsters.", "I hope Marin", "is all right."

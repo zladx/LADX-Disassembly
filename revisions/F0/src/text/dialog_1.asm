@@ -1,748 +1,392 @@
 Dialog000::
-    db "Hé mon gars,    "
-    db "attends un peu! "
-    db "J'ai quêqu'     "
-    db "chose à te dire!"
-    db "@"
+    dialog_text "Hé mon gars, attends un peu! J'ai quêqu' chose à te dire! "
 
 Dialog001::
-    db "Ah! Enfin...    "
-    db "J'ai cru que tu "
-    db "n'allais jamais "
-    db "te réveiller.   "
-    db "Tu devais       "
-    db "cauchemarder.   "
-    db "Quoi? Zelda??   "
-    db "Tu dois être    "
-    db "encore patraque!"
-    db "Je suis Marine! "
-    db "Tu es sur l'île "
-    db "Cocolint!@"
+    dialog_text "Ah! Enfin... J'ai cru que tu n'allais jamais te réveiller.", "Tu devais cauchemarder. Quoi? Zelda??", "Tu dois être encore patraque! Je suis Marine! Tu es sur l'île Cocolint!"
 
 Dialog002::
-    db "Suis la route   "
-    db "du Sud, vers    "
-    db "la plage là où  "
-    db "je t'ai trouvé. "
-    db "Depuis que tu   "
-    db "as échoué ici,  "
-    db "des monstres    "
-    db "terribles rôdent"
-    db "dans le coin.   "
-    db "Sois prudent...@"
+    dialog_text "Suis la route", "du Sud, vers", "la plage là où je t'ai trouvé. Depuis que tu", "as échoué ici, des monstres terribles rôdent dans le coin. Sois prudent..."
 
 Dialog003::
-    db "Bonjour #####!  "
-    db "Tarkin est parti"
-    db "dans la forêt   "
-    db "chercher des    "
-    db "champignons.    "
-    db "Moi,je préfère  "
-    db "chanter.        "
-    db "Ecoute ceci:    "
-    db "c'est la Ballade"
-    db "du Poisson-Rêve."
-    db "@"
+    dialog_text "Bonjour #####! Tarkin est parti dans la forêt chercher des champignons. Moi,je préfère chanter.", "Ecoute ceci: c'est la Ballade du Poisson-Rêve. "
 
 Dialog004::
-    db "Mais c'est un   "
-    db "Ocarina         "
-    db "que tu as là!   "
-    db "Veux-tu en      "
-    db "jouer pendant   "
-    db "que je chante?@"
+    dialog_text "Mais c'est un Ocarina", "que tu as là! Veux-tu en", "jouer pendant que je chante?"
 
 Dialog005::
-    db "J'adore chanter!"
-    db "Et toi #####,   "
-    db "qu'est-ce que   "
-    db "tu aimes?@"
+    dialog_text "J'adore chanter! Et toi #####, qu'est-ce que", "tu aimes?"
 
 Dialog006::
-    db "#####, Tarkin   "
-    db "fait la sieste  "
-    db "à la maison.    "
-    db "Je préfère      "
-    db "chanter. Oui!   "
-    db "Pourquoi pas    "
-    db "la Ballade      "
-    db "du Poisson-Rêve?"
-    db "@"
+    dialog_text "#####, Tarkin fait la sieste", "à la maison.", "Je préfère chanter. Oui! Pourquoi pas", "la Ballade", "du Poisson-Rêve? "
 
 Dialog007::
-    db "Evidemment!     "
-    db "C'est fermé!    "
-    db "Tu dois trouver "
-    db "la clé du Boss.@"
+    dialog_text "Evidemment! C'est fermé!", "Tu dois trouver la clé du Boss."
 
 Dialog008::
-    db "Un Fragment     "
-    db "de Puissance!!! "
-    db "Tu peux sentir  "
-    db "l'énergie       "
-    db "envahir         "
-    db "ton corps!@"
+    dialog_text "Un Fragment", "de Puissance!!! Tu peux sentir l'énergie envahir", "ton corps!"
 
 Dialog009::
-    db "Tu m'apportes   "
-    db "le Champignon   "
-    db "qui endort. Bon!"
-    db "Dare dare!      "
-    db "Je te concocte  "
-    db "une mixture!!@"
+    dialog_text "Tu m'apportes", "le Champignon qui endort. Bon! Dare dare!", "Je te concocte une mixture!!"
 
 Dialog00A::
-    db "J'ai croqué dans"
-    db "un champignon.  "
-    db "Et j'suis devenu"
-    db "un raton-laveur!"
-    db "Après, j'sais   "
-    db "plus trop,      "
-    db "mais c'était    "
-    db "trop rigolo!!@"
+    dialog_text "J'ai croqué dans un champignon. Et j'suis devenu un raton-laveur! Après, j'sais plus trop,", "mais c'était trop rigolo!!"
 
 Dialog00B::
-    db "Oh là là!! J'me "
-    db "sens tout drôle!"
-    db "Faut m'reposer  "
-    db "avant d'rentrer."
-    db "@"
+    dialog_text "Oh là là!! J'me sens tout drôle! Faut m'reposer avant d'rentrer. "
 
 Dialog00C::
-    db "C'est une perte "
-    db "de temps!       "
-    db "Pour ma poudre, "
-    db "il me faut      "
-    db "le Champignon   "
-    db "de la forêt.@"
+    dialog_text "C'est une perte de temps!", "Pour ma poudre, il me faut", "le Champignon", "de la forêt."
 
 Dialog00D::
-    db "J'suis un raton-"
-    db "laveur espiègle."
-    db "Et j'aime pas   "
-    db "du tout c'qu'est"
-    db "poudreux...@"
+    dialog_text "J'suis un raton- laveur espiègle. Et j'aime pas", "du tout c'qu'est poudreux..."
 
 Dialog00E::
-    db "Si tu brandis   "
-    db "le Champignon,  "
-    db "un arôme subtil "
-    db "se répandra!@"
+    dialog_text "Si tu brandis", "le Champignon, un arôme subtil se répandra!"
 
 Dialog00F::
-    db "Tu as trouvé    "
-    db "le Champignon!  "
-    db "Un arôme subtil "
-    db "exalte ton sens "
-    db "de l'odorat.@"
+    dialog_text "Tu as trouvé", "le Champignon! Un arôme subtil exalte ton sens de l'odorat."
 
 Dialog010::
-    db "ZZZ...ZZZ...    "
-    db "Quêqu' chose    "
-    db "que t'as pas    "
-    db "compris?        "
-    db "Téléphone à     "
-    db "Pépé le Ramollo."
-    db "ZZZ...ZZZ...@"
+    dialog_text "ZZZ...ZZZ... Quêqu' chose", "que t'as pas compris? Téléphone à", "Pépé le Ramollo. ZZZ...ZZZ..."
 
 Dialog011::
-    db "Je suis éreinté!"
-    db "J'vais faire    "
-    db "un p'tit somme. "
-    db "ZZZ...ZZZ...@"
+    dialog_text "Je suis éreinté! J'vais faire", "un p'tit somme. ZZZ...ZZZ..."
 
 Dialog012::
-    db "Quelle surprise!"
-    db "Ecoute-moi bien,"
-    db "car je vais te  "
-    db "dire un secret: "
-    db "avec ton épée,  "
-    db "frappe les murs "
-    db "des labyrinthes."
-    db "Si le son est   "
-    db "creux, détruis  "
-    db "ce mur avec     "
-    db "une Bombe!@"
+    dialog_text "Quelle surprise! Ecoute-moi bien, car je vais te dire un secret: avec ton épée, frappe les murs des labyrinthes. Si le son est creux, détruis ce mur avec", "une Bombe!"
 
 Dialog013::
-    db "Tu as appris    "
-    db "la Ballade      "
-    db "du Poisson-Rêve."
-    db "La jolie chanson"
-    db "de Marine est   "
-    db "gravée en toi.@"
+    dialog_text "Tu as appris", "la Ballade", "du Poisson-Rêve. La jolie chanson de Marine est gravée en toi."
 
 Dialog014::
-    db "Tu fredonneras  "
-    db "cette chanson   "
-    db "de temps à autre"
-    db "pour ne pas     "
-    db "l'oublier!@"
+    dialog_text "Tu fredonneras cette chanson", "de temps à autre pour ne pas l'oublier!"
 
 Dialog015::
-    db "Je t'en prie!   "
-    db "Apprends-la.    "
-    db "C'est ma chanson"
-    db "préférée!!@"
+    dialog_text "Je t'en prie! Apprends-la. C'est ma chanson préférée!!"
 
 Dialog016::
-    db "Alors,comment   "
-    db "tu la trouves?  "
-    db "N'est-elle pas  "
-    db "émouvante?      "
-    db "Sauras-tu t'en  "
-    db "souvenir?       "
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "Alors,comment", "tu la trouves? N'est-elle pas émouvante? Sauras-tu t'en souvenir?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog017::
-    db "Je suis Monique "
-    db "la Lunatique.   "
-    db "Je vends des    "
-    db "remèdes secrets "
-    db "qui te feront   "
-    db "péter la forme!@"
+    dialog_text "Je suis Monique la Lunatique.", "Je vends des remèdes secrets qui te feront péter la forme!"
 
 Dialog018::
-    db "Mon secret coûte"
-    db "28 rubis.       "
-    db "Tu es intéressé?"
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "Mon secret coûte 28 rubis.", "Tu es intéressé?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog019::
-    db "Mon secret coûte"
-    db "42 rubis.       "
-    db "Tu es intéressé?"
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "Mon secret coûte 42 rubis.", "Tu es intéressé?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog01A::
-    db "Merci bien!     "
-    db "Voilà, je viens "
-    db "de l'appliquer  "
-    db "sur toi!        "
-    db "Ce remède agira "
-    db "si tu perds     "
-    db "tes Coeurs!     "
-    db "Reviens quand   "
-    db "tu veux!!@"
+    dialog_text "Merci bien! Voilà, je viens de l'appliquer sur toi!", "Ce remède agira si tu perds", "tes Coeurs! Reviens quand", "tu veux!!"
 
 Dialog01B::
-    db "Tu plaisantes?? "
-    db "Reviens plutôt  "
-    db "quand tu auras  "
-    db "de l'argent...@"
+    dialog_text "Tu plaisantes?? Reviens plutôt quand tu auras de l'argent..."
 
 Dialog01C::
-    db "... ... ... ... "
-    db "Non, je ne t'en "
-    db "vendrai pas!!@"
+    dialog_text "... ... ... ... Non, je ne t'en vendrai pas!!"
 
 Dialog01D::
-    db "Flûte, zut!!    "
-    db "Je voulais juste"
-    db "te rendre plus  "
-    db "puissant!       "
-    db "Tu n'es qu'une  "
-    db "poule mouillée!@"
+    dialog_text "Flûte, zut!!", "Je voulais juste te rendre plus puissant!", "Tu n'es qu'une poule mouillée!"
 
 Dialog01E::
-    db "Tu es un amour! "
-    db "Pour la peine,  "
-    db "tu ne paieras   "
-    db "que 7 rubis!@"
+    dialog_text "Tu es un amour! Pour la peine, tu ne paieras que 7 rubis!"
 
 Dialog01F::
-    db "Marine          "
-    db "se joint à toi! "
-    db "C'est la chance "
-    db "da ta vie!?@"
+    dialog_text "Marine", "se joint à toi! C'est la chance da ta vie!?"
 
 Dialog020::
-    db "GRRR...@"
+    dialog_text "GRRR..."
 
 Dialog021::
-    db "Hé hé! Tu vas   "
-    db "te perdre dans  "
-    db "la Forêt. Hi hi!"
-    db "Bien fait!!@"
+    dialog_text "Hé hé! Tu vas", "te perdre dans la Forêt. Hi hi! Bien fait!!"
 
 Dialog022::
-    db "Wouf Wouf!      "
-    db "Wouf Wouf!@"
+    dialog_text "Wouf Wouf!", "Wouf Wouf!"
 
 Dialog023::
-    db "Ouaf Ouaf!      "
-    db "Ouaf Ouaf!@"
+    dialog_text "Ouaf Ouaf!", "Ouaf Ouaf!"
 
 Dialog024::
-    db "Je vais panser  "
-    db "tes blessures   "
-    db "et remonter     "
-    db "ton énergie.    "
-    db "Ferme les yeux.@"
+    dialog_text "Je vais panser tes blessures", "et remonter", "ton énergie. Ferme les yeux."
 
 Dialog025::
-    db "Sale type! Tu as"
-    db "battu mes gars! "
-    db "Tu vas le payer!"
-    db "Je saurai te    "
-    db "retrouver!!@"
+    dialog_text "Sale type! Tu as battu mes gars! Tu vas le payer! Je saurai te retrouver!!"
 
 Dialog026::
-    db "Alors petit?    "
-    db "Tu cherches     "
-    db "la bagarre?     "
-    db "Allez les gars, "
-    db "débarrassez-moi "
-    db "de cet avorton!@"
+    dialog_text "Alors petit?", "Tu cherches", "la bagarre? Allez les gars, débarrassez-moi de cet avorton!"
 
 Dialog027::
-    db "Je suis Papounet"
-    db "le papa des     "
-    db "quadruplés.     "
-    db "Plus tard, je me"
-    db "perdrai dans les"
-    db "montagnes.      "
-    db "Tu viendras     "
-    db "m'aider, hein?@"
+    dialog_text "Je suis Papounet le papa des quadruplés.", "Plus tard, je me perdrai dans les montagnes.", "Tu viendras m'aider, hein?"
 
 Dialog028::
-    db "Oui, oui!!      "
-    db "Casse-les!      "
-    db "Casse tout!     "
-    db "... ... ... ... "
-    db "Quoi? Il y a    "
-    db "un problème?@"
+    dialog_text "Oui, oui!!", "Casse-les!", "Casse tout!", "... ... ... ... Quoi? Il y a", "un problème?"
 
 Dialog029::
-    db "Mama mia!       "
-    db "Tu n'es pas     "
-    db "encore rôdé...  "
-    db "Pourquoi acheter"
-    db "des choses      "
-    db "inutiles?@"
+    dialog_text "Mama mia!", "Tu n'es pas encore rôdé... Pourquoi acheter des choses inutiles?"
 
 Dialog02A::
-    db "Tu as gagné     "
-    db "un Coeur!       "
-    db "Toute ton       "
-    db "énergie         "
-    db "est restaurée!@"
+    dialog_text "Tu as gagné", "un Coeur!", "Toute ton énergie", "est restaurée!"
 
 Dialog02B::
 Dialog02C::
-    db "Arc & Flèches : "
-    db "   980 rubis!   "
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "Arc & Flèches :", "   980 rubis!"
+    dialog_ask_line "Oui", "Non"
 
 Dialog02D::
-    db "   10 Flèches:  "
-    db "   10 rubis!    "
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "   10 Flèches:", "   10 rubis!"
+    dialog_ask_line "Oui", "Non"
 
 Dialog02E::
-    db "Bienvenue!      "
-    db "Apporte ici     "
-    db "ce que tu       "
-    db "veux acheter.@"
+    dialog_text "Bienvenue! Apporte ici", "ce que tu", "veux acheter."
 
 Dialog02F::
-    db "Hé! Une minute! "
-    db "Tu dois payer!@"
+    dialog_text "Hé! Une minute! Tu dois payer!"
 
 Dialog030::
-    db "Pelle de qualité"
-    db "   200 rubis!   "
-    db "C'est pas donné!"
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "Pelle de qualité    200 rubis! C'est pas donné!"
+    dialog_ask_line "Oui", "Non"
 
 Dialog031::
-    db " Trois Coeurs   "
-    db "   10 rubis!    "
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping " Trois Coeurs", "   10 rubis!"
+    dialog_ask_line "Oui", "Non"
 
 Dialog032::
-    db "Bouclier        "
-    db "personnalisé.   "
-    db "    20 rubis!   "
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "Bouclier personnalisé.", "    20 rubis!"
+    dialog_ask_line "Oui", "Non"
 
 Dialog033::
-    db "    10 Bombes   "
-    db "    10 rubis!   "
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "    10 Bombes", "    10 rubis!"
+    dialog_ask_line "Oui", "Non"
 
 Dialog034::
-    db "Désolé petit!   "
-    db "Tu n'as pas     "
-    db "assez de rubis. "
-    db "Reviens donc    "
-    db "plus tard.@"
+    dialog_text "Désolé petit!", "Tu n'as pas assez de rubis. Reviens donc plus tard."
 
 Dialog035::
-    db "Merci beaucoup! "
-    db "Et au plaisir!@"
+    dialog_text "Merci beaucoup! Et au plaisir!"
 
 Dialog036::
-    db "Tu as pu sortir "
-    db "sans payer?     "
-    db "Tu n'as pas     "
-    db "honte, voyou?!@"
+    dialog_text "Tu as pu sortir sans payer?", "Tu n'as pas honte, voyou?!"
 
 Dialog037::
 Dialog038::
-    db "Je t'avais bien "
-    db "dit de me payer."
-    db "Tu vas le       "
-    db "regretter...@"
+    dialog_text "Je t'avais bien dit de me payer. Tu vas le regretter..."
 
 Dialog039::
-    db "La porte semble "
-    db "être ouverte.   "
-    db "Tu pourras donc "
-    db "sortir sans     "
-    db "aucun problème.@"
+    dialog_text "La porte semble être ouverte.", "Tu pourras donc sortir sans aucun problème."
 
 Dialog03A::
 Dialog03B::
-    db "JEU DE HASARD   "
-    db "La partie : 10r "
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "JEU DE HASARD", "La partie : 10r"
+    dialog_ask_line "Oui", "Non"
 
 Dialog03C::
-    db "A & B déplacent "
-    db "la grue. Après, "
-    db "tu dois calculer"
-    db "ton timing...   "
-    db "Dirige-toi vers "
-    db "les boutons.    "
-    db "Bonne chance!@"
+    dialog_text "A & B déplacent la grue. Après, tu dois calculer ton timing... Dirige-toi vers les boutons. Bonne chance!"
 
 Dialog03D::
-    db "Tu as gagné     "
-    db "le Bouclier!    "
-    db "Tu peux même y  "
-    db "graver ton nom!@"
+    dialog_text "Tu as gagné", "le Bouclier!", "Tu peux même y graver ton nom!"
 
 Dialog03E::
-    db "Un autre essai? "
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "Un autre essai?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog03F::
-    db "Bonne chance!@"
+    dialog_text "Bonne chance!"
 
 Dialog040::
-    db "Ça suffit pour  "
-    db "aujourd'hui...  "
-    db "Tu reviendras   "
-    db "un autre jour!@"
+    dialog_text "Ça suffit pour aujourd'hui... Tu reviendras", "un autre jour!"
 
 Dialog041::
-    db "Tu as gagné la  "
-    db "Poudre Magique! "
-    db "Tu peux la      "
-    db "saupoudrer sur  "
-    db "plein de trucs!@"
+    dialog_text "Tu as gagné la Poudre Magique! Tu peux la saupoudrer sur plein de trucs!"
 
 Dialog042::
-    db "Tu as gagné     "
-    db "30 rubis!       "
-    db "Tu peux jouer   "
-    db "encore 3 fois!@"
+    dialog_text "Tu as gagné", "30 rubis!", "Tu peux jouer encore 3 fois!"
 
 Dialog043::
-    db "Atchoum...      "
-    db "Retire donc     "
-    db "cette poudre... "
-    db "Sinon, je vais  "
-    db "te maudire...   "
-    db "Atchoum...      "
-    db "@"
+    dialog_text "Atchoum... Retire donc cette poudre... Sinon, je vais te maudire... Atchoum...      "
 
 Dialog044::
-    db "Tu as gagné     "
-    db "un Yoshi!       "
-    db "On le voit      "
-    db "dans tous les   "
-    db "jeux, celui-là!@"
+    dialog_text "Tu as gagné", "un Yoshi!", "On le voit", "dans tous les jeux, celui-là!"
 
 Dialog045::
-    db "Une partie de   "
-    db "pêche, mon gars?"
-    db "Ça ne te coûtera"
-    db "que 10 rubis... "
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "Une partie de pêche, mon gars? Ça ne te coûtera que 10 rubis..."
+    dialog_ask_line "Oui", "Non"
 
 Dialog046::
-    db "Vis ta vie!     "
-    db "Sois un peu     "
-    db "plus motivé!@"
+    dialog_text "Vis ta vie!", "Sois un peu", "plus motivé!"
 
 Dialog047::
-    db "Avec <left> et <right>     "
-    db "de <dpad>, évalue    "
-    db "la distance     "
-    db "de ton lancer.  "
-    db "Dès que le      "
-    db "poisson est     "
-    db "ferré, presse   "
-    db "vite A/B pour   "
-    db "le remonter!@"
+    dialog_text "Avec <left> et <right>", "de <dpad>, évalue", "la distance", "de ton lancer. Dès que le poisson est ferré, presse vite A/B pour", "le remonter!"
 
 Dialog048::
-    db "Un autre essai? "
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "Un autre essai?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog049::
-    db "Oh non! Le fil  "
-    db "s'est cassé!    "
-    db "Un autre essai? "
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "Oh non! Le fil s'est cassé!", "Un autre essai?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog04A::
-    db "Il est énorme!  "
-    db "En récompense,  "
-    db "je t'offre      "
-    db "20 rubis.       "
-    db "Un autre essai? "
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "Il est énorme! En récompense, je t'offre", "20 rubis.", "Un autre essai?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog04B::
-    db "Il n'y a plus de"
-    db "poissons!       "
-    db "Veux-tu essayer "
-    db "la pêche en mer?"
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "Il n'y a plus de poissons!", "Veux-tu essayer la pêche en mer?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog04C::
-    db "C'était pour    "
-    db "rigoler...      "
-    db "Allez, salut!@"
+    dialog_text "C'était pour rigoler... Allez, salut!"
 
 Dialog04D::
-    db "Ce n'est que    "
-    db "du fretin.      "
-    db "Tu n'auras que  "
-    db "5 rubis.        "
-    db "Tu devrais      "
-    db "encore essayer! "
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "Ce n'est que", "du fretin.", "Tu n'auras que", "5 rubis.", "Tu devrais encore essayer!"
+    dialog_ask_line "Oui", "Non"
 
 Dialog04E::
-    db "Tu n'as pas     "
-    db "assez de rubis. "
-    db "Reviens quand   "
-    db "tu seras plus   "
-    db "fortuné,        "
-    db "petit gars!@"
+    dialog_text "Tu n'as pas assez de rubis. Reviens quand", "tu seras plus fortuné,", "petit gars!"
 
 Dialog04F::
-    db "Un quart de     "
-    db "coeur!          "
-    db "Appuyez sur     "
-    db "SELECT sur le   "
-    db "sous-écran.     "
-    db "@"
+    dialog_text "Un quart de coeur!", "Appuyez sur SELECT sur le sous-écran.     "
 
 Dialog050::
-    db "Tu as collecté  "
-    db "4 Fragments     "
-    db "de Coeur. Tu as "
-    db "maintenant un   "
-    db "Coeur complet!@"
+    dialog_text "Tu as collecté", "4 Fragments", "de Coeur. Tu as maintenant un Coeur complet!"
 
 Dialog051::
-    db "Brrrr... Ce sont"
-    db "des blocs       "
-    db "de glace!!      "
-    db "Je suis gelé!@"
+    dialog_text "Brrrr... Ce sont des blocs", "de glace!!", "Je suis gelé!"
 
 Dialog052::
-    db "NANANA!!! Tu ne "
-    db "m'auras pas tant"
-    db "que j'aurai     "
-    db "ma jarre!@"
+    dialog_text "NANANA!!! Tu ne m'auras pas tant que j'aurai", "ma jarre!"
 
 Dialog053::
-    db "Quoi? Tu as osé?"
-    db "Tu as cassé ma  "
-    db "jarre. Alors là!"
-    db "Je suis furax!!@"
+    dialog_text "Quoi? Tu as osé? Tu as cassé ma jarre. Alors là! Je suis furax!!"
 
 Dialog054::
-    db "Salut #####!    "
-    db "T'es réveillé..."
-    db "J'suis Tarkin..."
-    db "Tu t'sens mieux?"
-    db "Quoi? Comment   "
-    db "j'sais ton nom? "
-    db "Ben, c'est gravé"
-    db "sur le Bouclier!"
-    db "Ben, d'ailleurs "
-    db "il est à toi!   "
-    db "J'te l'donne!@"
+    dialog_text "Salut #####! T'es réveillé... J'suis Tarkin... Tu t'sens mieux? Quoi? Comment j'sais ton nom? Ben, c'est gravé sur le Bouclier! Ben, d'ailleurs il est à toi! J'te l'donne!"
 
 Dialog055::
-    db "Au fait! Y'a    "
-    db "un autre bidule "
-    db "qui est resté   "
-    db "sur la plage.   "
-    db "Si tu y vas,    "
-    db "fais attention  "
-    db "aux monstres!   "
-    db "Car, depuis que "
-    db "t'es ici #####, "
-    db "des monstres,   "
-    db "y'en a partout!@"
+    dialog_text "Au fait! Y'a", "un autre bidule qui est resté sur la plage.", "Si tu y vas, fais attention aux monstres! Car, depuis que t'es ici #####, des monstres, y'en a partout!"
 
 Dialog056::
-    db "    NIVEAU 1    "
-    db " CAVE FLAGELLO@"
+    dialog_text "    NIVEAU 1", " CAVE FLAGELLO"
 
 Dialog057::
-    db "    NIVEAU 2    "
-    db "GROTTE DU GENIE@"
+    dialog_text "    NIVEAU 2 GROTTE DU GENIE"
 
 Dialog058::
-    db "    NIVEAU 3    "
-    db " CAVE AUX CLES@"
+    dialog_text "    NIVEAU 3", " CAVE AUX CLES"
 
 Dialog059::
-    db "    NIVEAU 4    "
-    db "ABIME DU POISSON"
-    db "@"
+    dialog_text "    NIVEAU 4 ABIME DU POISSON "
 
 Dialog05A::
-    db "    NIVEAU 5    "
-    db "  POISSON-CHAT@"
+    dialog_text "    NIVEAU 5", "  POISSON-CHAT"
 
 Dialog05B::
-    db "    NIVEAU 6    "
-    db "TEMPLE DU MASQUE"
-    db "@"
+    dialog_text "    NIVEAU 6 TEMPLE DU MASQUE "
 
 Dialog05C::
-    db "    NIVEAU 7    "
-    db "TOUR DU VAUTOUR@"
+    dialog_text "    NIVEAU 7 TOUR DU VAUTOUR"
 
 Dialog05D::
-    db "    NIVEAU 8    "
-    db "ROC DE LA TORTUE"
-    db "@"
+    dialog_text "    NIVEAU 8", "ROC DE LA TORTUE "
 
 Dialog05E::
-    db "   OEUF SACRÉ@"
+    dialog_text "   OEUF SACRÉ"
 
 Dialog05F::
 Dialog060::
-    db " Pont suspendu@"
+    dialog_text " Pont suspendu"
 
 Dialog061::
-    db "      Chez      "
-    db "  AlligoBanane@"
+    dialog_text "      Chez", "  AlligoBanane"
 
 Dialog062::
-    db "     Champ      "
-    db "   des Pièges@"
+    dialog_text "     Champ", "   des Pièges"
 
 Dialog063::
-    db "     Maison     "
-    db "   de la Baie@"
+    dialog_text "     Maison", "   de la Baie"
 
 Dialog064::
-    db " Jeu de hasard@"
+    dialog_text " Jeu de hasard"
 
 Dialog065::
-    db "Bazar du Centre@"
+    dialog_text "Bazar du Centre"
 
 Dialog066::
-    db "  Chez Marine   "
-    db "   et Tarkin@"
+    dialog_text "  Chez Marine", "   et Tarkin"
 
 Dialog067::
-    db "     Hutte      "
-    db " de la Sorcière@"
+    dialog_text "     Hutte", " de la Sorcière"
 
 Dialog068::
-    db " Dunes de Yarna "
-    db "@"
+    dialog_text " Dunes de Yarna "
 
 Dialog069::
-    db "  La Prairie@"
+    dialog_text "  La Prairie"
 
 Dialog06A::
-    db "Forêt Enchantée@"
+    dialog_text "Forêt Enchantée"
 
 Dialog06B::
-    db " Mt Tamaranch@"
+    dialog_text " Mt Tamaranch"
 
 Dialog06C::
-    db "   Cordillère   "
-    db "    Tartare@"
+    dialog_text "   Cordillère", "    Tartare"
 
 Dialog06D::
-    db "     Dédale     "
-    db "  des Panneaux@"
+    dialog_text "     Dédale", "  des Panneaux"
 
 Dialog06E::
-    db "     Village    "
-    db "  des Mouettes@"
+    dialog_text "     Village", "  des Mouettes"
 
 Dialog06F::
-    db "     Village    "
-    db "  des Animaux@"
+    dialog_text "     Village", "  des Animaux"
 
 Dialog070::
-    db "   Cimetière@"
+    dialog_text "   Cimetière"
 
 Dialog071::
-    db "    Descente    "
-    db "  des Rapides@"
+    dialog_text "    Descente", "  des Rapides"
 
 Dialog072::
-    db "Plaine Cocolint@"
+    dialog_text "Plaine Cocolint"
 
 Dialog073::
-    db "   Plage Coco@"
+    dialog_text "   Plage Coco"
 
 Dialog074::
-    db " Baie de Martha@"
+    dialog_text " Baie de Martha"
 
 Dialog075::
-    db " Est de la Baie@"
+    dialog_text " Est de la Baie"
 
 Dialog076::
-    db "     Marais     "
-    db "  des Anémones@"
+    dialog_text "     Marais", "  des Anémones"
 
 Dialog077::
-    db "Temple du Masque"
-    db "@"
+    dialog_text "Temple du Masque "
 
 Dialog078::
-    db "Château Canulet@"
+    dialog_text "Château Canulet"
 
 Dialog079::
-    db "Plateau Tartare@"
+    dialog_text "Plateau Tartare"
 
 Dialog07A::
-    db "  Morne Plaine@"
+    dialog_text "  Morne Plaine"
 
 Dialog07B::
-    db " Sud du Village@"
+    dialog_text " Sud du Village"
 
 Dialog07C::
-    db "     Etang@"
+    dialog_text "     Etang"
 
 Dialog07D::
-    db "      Chez      "
-    db "Mme Miaou Miaou "
-    db "                "
-    db " Chien méchant!@"
+    dialog_text "      Chez", "Mme Miaou Miaou", " ", " Chien méchant!"
 
 Dialog07E::
-    db "    Chez Pépé   "
-    db "   le Ramollo@"
+    dialog_text "    Chez Pépé", "   le Ramollo"
 
 Dialog07F::
-    db " Chez Mr Wright "
-    db "   le Loufoque@"
+    dialog_text " Chez Mr Wright", "   le Loufoque"

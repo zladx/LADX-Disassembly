@@ -1,290 +1,147 @@
 Dialog280::
-    db "Erst mußt Du die"
-    db "Stachis mit dem "
-    db "Schild berühren."
-    db "@"
+    dialog_text "Erst mußt Du die Stachis mit dem Schild berühren. "
 
 Dialog281::
-    db "Erst den einge- "
-    db "sperrten Hasen, "
-    db "zuletzt den Ske-"
-    db "lettritter...@"
+    dialog_text "Erst den einge- sperrten Hasen, zuletzt den Ske- lettritter..."
 
 Dialog282::
-    db "Über die großen "
-    db "Löcher mußt Du  "
-    db "mit viel Anlauf "
-    db "springen!@"
+    dialog_text "Über die großen Löcher mußt Du mit viel Anlauf springen!"
 
 Dialog283::
-    db "Die Reihenfolge,"
-    db "in der Du über  "
-    db "die blinkenden  "
-    db "Steine wandelst,"
-    db "ist des Rätsels "
-    db "Lösung!@"
+    dialog_text "Die Reihenfolge, in der Du über die blinkenden Steine wandelst, ist des Rätsels Lösung!"
 
 Dialog284::
-    db "Dort, wo sich   "
-    db "das Licht der 4 "
-    db "Fackeln kreuzt, "
-    db "mußt Du tauchen!"
-    db "@"
+    dialog_text "Dort, wo sich das Licht der 4 Fackeln kreuzt, mußt Du tauchen! "
 
 Dialog285::
-    db "Benutze Bomben, "
-    db "um in die Augen "
-    db "der Karte zu    "
-    db "gelangen!@"
+    dialog_text "Benutze Bomben, um in die Augen der Karte zu gelangen!"
 
 Dialog286::
-    db "Wenn die vier   "
-    db "Säulen gefallen "
-    db "sind, ist das   "
-    db "Rätsel gelöst!@"
+    dialog_text "Wenn die vier Säulen gefallen sind, ist das Rätsel gelöst!"
 
 Dialog287::
-    db "Du füllst alle  "
-    db "Löcher mit dem  "
-    db "Stein, der Boden"
-    db "erzeugt, wenn Du"
-    db "das <dpad> geschickt "
-    db "bewegst...@"
+    dialog_text "Du füllst alle Löcher mit dem Stein, der Boden erzeugt, wenn Du das <dpad> geschickt bewegst..."
 
 Dialog288::
-    db "Öffnet sich eine"
-    db "Tür nicht,      "
-    db "verschiebe einen"
-    db "Steinblock.@"
+    dialog_text "Öffnet sich eine Tür nicht, verschiebe einen Steinblock."
 
 Dialog289::
-    db "Verschiebe die  "
-    db "Blöcke, und ein "
-    db "neuer Weg wird  "
-    db "sich auftun.@"
+    dialog_text "Verschiebe die Blöcke, und ein neuer Weg wird sich auftun."
 
 Dialog28A::
-    db "Senke die Boden-"
-    db "platten, indem  "
-    db "Du den blauen   "
-    db "Schalter nutzt!@"
+    dialog_text "Senke die Boden- platten, indem Du den blauen Schalter nutzt!"
 
 Dialog28B::
-    db "Willst Du die   "
-    db "gepanzerte      "
-    db "schwarze Kreatur"
-    db "bezwingen, gib  "
-    db "ihr explosives  "
-    db "Futter!@"
+    dialog_text "Willst Du die gepanzerte schwarze Kreatur bezwingen, gib ihr explosives Futter!"
 
 Dialog28C::
-    db "Schlage mit dem "
-    db "Schwert auf die "
-    db "verräterischen  "
-    db "Wandstellen und "
-    db "achte auf das   "
-    db "Geräusch!@"
+    dialog_text "Schlage mit dem Schwert auf die verräterischen Wandstellen und achte auf das Geräusch!"
 
 Dialog28D::
-    db "Kannst Du ein   "
-    db "Skelett mit dem "
-    db "Schwert nicht   "
-    db "bezwingen, setze"
-    db "eine Bombe ein.@"
+    dialog_text "Kannst Du ein Skelett mit dem Schwert nicht bezwingen, setze eine Bombe ein."
 
 Dialog28E::
-    db "Willst Du eine  "
-    db "Truhe öffnen,   "
-    db "bewirf sie mit  "
-    db "einem Steinkrug."
-    db "@"
+    dialog_text "Willst Du eine Truhe öffnen, bewirf sie mit einem Steinkrug. "
 
 Dialog28F::
-    db "Springe auf die "
-    db "Kristalle, um   "
-    db "voranzukommen.@"
+    dialog_text "Springe auf die Kristalle, um voranzukommen."
 
 Dialog290::
-    db "Kannst Du die   "
-    db "Säulen nicht    "
-    db "überwinden,     "
-    db "versuche, mit   "
-    db "etwas zu werfen!"
-    db "@"
+    dialog_text "Kannst Du die Säulen nicht überwinden, versuche, mit etwas zu werfen! "
 
 Dialog291::
-    db "Springst Du vom "
-    db "oberen Stockwerk"
-    db "herunter, kommst"
-    db "Du zur Truhe!@"
+    dialog_text "Springst Du vom oberen Stockwerk herunter, kommst Du zur Truhe!"
 
 Dialog292::
-    db "Attackiere die  "
-    db "Kreaturen von   "
-    db "oben herab, um  "
-    db "den Schlüssel   "
-    db "zu erhalten.@"
+    dialog_text "Attackiere die Kreaturen von oben herab, um den Schlüssel", "zu erhalten."
 
 Dialog293::
-    db "Kommt Dir eine  "
-    db "Statue seltsam  "
-    db "vor, setze Pfeil"
-    db "und Bogen ein.@"
+    dialog_text "Kommt Dir eine Statue seltsam vor, setze Pfeil und Bogen ein."
 
 Dialog294::
-    db "Laß mich ein    "
-    db "Foto schießen!  "
-    db "    Ja   Nein<ask>"
+    dialog_string_wrapping "Laß mich ein Foto schießen!"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog295::
-    db "Du willst kein  "
-    db "Foto? Ehrlich   "
-    db "nicht?          "
-    db "    Ja   Nein<ask>"
+    dialog_string_wrapping "Du willst kein Foto? Ehrlich nicht?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog296::
-    db "Spaßbremse!@"
+    dialog_text "Spaßbremse!"
 
 Dialog297::
-    db "Super! Ich nenne"
-    db "es \"Schluß      "
-    db "mit lustig.\"@"
+    dialog_text "Super! Ich nenne es \"Schluß", "mit lustig.\""
 
 Dialog298::
-    db "Wie heißt Du,   "
-    db "mein Junge?     "
-    db "#####? Super!   "
-    db "Hier ist Dein   "
-    db "Album, #####.   "
-    db "Schau hinein,   "
-    db "bevor Du        "
-    db "gehst!@"
+    dialog_text "Wie heißt Du, mein Junge? #####? Super! Hier ist Dein Album, #####. Schau hinein, bevor Du", "gehst!"
 
 Dialog299::
-    db "Mal sehen, ob   "
-    db "das Album voll  "
-    db "wird!@"
+    dialog_text "Mal sehen, ob das Album voll wird!"
 
 Dialog29A::
-    db "11 Bilder passen"
-    db "noch ins Album! "
-    db "Was soll ich    "
-    db "fotografieren?@"
+    dialog_text "11 Bilder passen noch ins Album! Was soll ich fotografieren?"
 
 Dialog29B::
-    db "10 Bilder passen"
-    db "noch ins Album! "
-    db "Was soll ich    "
-    db "fotografieren?@"
+    dialog_text "10 Bilder passen noch ins Album! Was soll ich fotografieren?"
 
 Dialog29C::
-    db "9 Bilder passen "
-    db "noch ins Album! "
-    db "Was soll ich    "
-    db "fotografieren?@"
+    dialog_text "9 Bilder passen noch ins Album! Was soll ich fotografieren?"
 
 Dialog29D::
-    db "8 Bilder passen "
-    db "noch ins Album! "
-    db "Was soll ich    "
-    db "fotografieren?@"
+    dialog_text "8 Bilder passen noch ins Album! Was soll ich fotografieren?"
 
 Dialog29E::
-    db "7 Bilder passen "
-    db "noch ins Album! "
-    db "Was soll ich    "
-    db "fotografieren?@"
+    dialog_text "7 Bilder passen noch ins Album! Was soll ich fotografieren?"
 
 Dialog29F::
-    db "6 Bilder passen "
-    db "noch ins Album! "
-    db "Was soll ich    "
-    db "fotografieren?@"
+    dialog_text "6 Bilder passen noch ins Album! Was soll ich fotografieren?"
 
 Dialog2A0::
-    db "5 Bilder passen "
-    db "noch ins Album! "
-    db "Was soll ich    "
-    db "fotografieren?@"
+    dialog_text "5 Bilder passen noch ins Album! Was soll ich fotografieren?"
 
 Dialog2A1::
-    db "4 Bilder passen "
-    db "noch ins Album! "
-    db "Was soll ich    "
-    db "fotografieren?@"
+    dialog_text "4 Bilder passen noch ins Album! Was soll ich fotografieren?"
 
 Dialog2A2::
-    db "3 Bilder passen "
-    db "noch ins Album! "
-    db "Was soll ich    "
-    db "fotografieren?@"
+    dialog_text "3 Bilder passen noch ins Album! Was soll ich fotografieren?"
 
 Dialog2A3::
-    db "2 Bilder passen "
-    db "noch ins Album! "
-    db "Was soll ich    "
-    db "fotografieren?@"
+    dialog_text "2 Bilder passen noch ins Album! Was soll ich fotografieren?"
 
 Dialog2A4::
-    db "1 Bilder passen "
-    db "noch ins Album! "
-    db "Was soll ich    "
-    db "fotografieren?@"
+    dialog_text "1 Bilder passen noch ins Album! Was soll ich fotografieren?"
 
 Dialog2A5::
-    db "Du hast keinen  "
-    db "Film mehr. Dein "
-    db "Album ist jetzt "
-    db "voller schöner  "
-    db "Erinnerungs-    "
-    db "fotos!@"
+    dialog_text "Du hast keinen Film mehr. Dein Album ist jetzt voller schöner Erinnerungs- fotos!"
 
 Dialog2A6::
-    db "Hi! Ich bin es, "
-    db "der Fotograf!   "
-    db "Welch ein       "
-    db "schönes Bild!   "
-    db "Ich nenne es    "
-    db "\"Kopf hoch!\"@"
+    dialog_text "Hi! Ich bin es, der Fotograf! Welch ein schönes Bild! Ich nenne es \"Kopf hoch!\""
 
 Dialog2A7::
-    db "Hey, das ist    "
-    db "eine perfekte   "
-    db "Chronik Deiner  "
-    db "Abenteuer!@"
+    dialog_text "Hey, das ist eine perfekte Chronik Deiner Abenteuer!"
 
 Dialog2A8::
-    db "Ich nenne es    "
-    db "\"Nah dran.\"     "
-    db "Hmmm...@"
+    dialog_text "Ich nenne es \"Nah dran.\" Hmmm..."
 
 Dialog2A9::
-    db "Bin zu nah dran!"
-    db "@"
+    dialog_text "Bin zu nah dran! "
 
 Dialog2AA::
-    db "Ich muß etwas   "
-    db "zurücktreten...@"
+    dialog_text "Ich muß etwas zurücktreten..."
 
 Dialog2AB::
-    db "Aaaaaah!@"
+    dialog_text "Aaaaaah!"
 
 Dialog2AC::
-    db "Ich gehe zum    "
-    db "Laden zurück.   "
-    db "Tschüß!"
+    ; POI: This dialog lacks the end-of-dialog marker and flows into the next one.
+    dialog_string_wrapping "Ich gehe zum Laden zurück. Tschüß!"
 
 Dialog2AD::
-    db "Wir treffen uns "
-    db "später, wenn Du "
-    db "allein bist!@"
+    dialog_text "Wir treffen uns später, wenn Du allein bist!"
 
 Dialog2AE::
-    db "Sicher?         "
-    db "    Ja   Nein<ask>"
+    dialog_string_wrapping "Sicher?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog2AF::
-    db "Ich liebe Fotos!"
-    db "Hey, #####!     "
-    db "Was machst Du   "
-    db "hier?@"
+    dialog_text "Ich liebe Fotos! Hey, #####!", "Was machst Du hier?"

@@ -1,590 +1,302 @@
 Dialog24E:: ; idk
-    db "Have you heard  "
-    db "of the Flying   "
-    db "Rooster?  They  "
-    db "say it lived in "
-    db "Mabe Village a  "
-    db "long time ago..."
-    db "I wonder if it's"
-    db "true...@"
+    dialog_text "Have you heard of the Flying Rooster?  They say it lived in Mabe Village a long time ago... I wonder if it's true..."
 
 Dialog24F:: ; idk
-    db "Aaaah, Little   "
-    db "Marin... I want "
-    db "her to come back"
-    db "again...Her song"
-    db "is the best...@"
+    dialog_text "Aaaah, Little Marin... I want her to come back again...Her song is the best..."
 
 Dialog250:: ; idk
-    db "I dreamed that  "
-    db "I turned into a "
-    db "carrot last     "
-    db "night...  What  "
-    db "an odd dream...@"
+    dialog_text "I dreamed that", "I turned into a carrot last night...  What an odd dream..."
 
 Dialog251:: ; Rabbit
-    db "Eh?  How can an "
-    db "animal talk?    "
-    db "How?  Hey, I'm  "
-    db "just a rabbit,  "
-    db "so I don't know!@"
+    dialog_text "Eh?  How can an animal talk? How?  Hey, I'm just a rabbit, so I don't know!"
 
 Dialog252:: ; idk
-    db "Ahhh!  It's her!"
-    db "Little Marin!!@"
+    dialog_text "Ahhh!  It's her! Little Marin!!"
 
 Dialog253:: ; idk
-    db "If you have no  "
-    db "courage,then    "
-    db "you have no     "
-    db "strength.       "
-    db "Gravestones     "
-    db "won't move for  "
-    db "cowards.@"
+    dialog_text "If you have no courage,then", "you have no strength. Gravestones won't move for cowards."
 
 Dialog254:: ; idk
-    db "I'm not afraid. "
-    db "I just decided  "
-    db "to wait at home.@"
+    dialog_text "I'm not afraid. I just decided to wait at home."
 
 Dialog255:: ; Marin
-    db "This is my first"
-    db "walk with you,  "
-    db "#####.@"
+    dialog_text "This is my first walk with you, #####."
 
 Dialog256:: ; Marin
-    db ". . . . .@"
+    dialog_text ". . . . ."
 
 Dialog257:: ; Marin
-    db "This cliff will "
-    db "be our secret   "
-    db "place. @"
+    dialog_text "This cliff will be our secret place. "
 
 Dialog258:: ; Marin
-    db "Aren't you going"
-    db "to say anything?@"
+    dialog_text "Aren't you going to say anything?"
 
 Dialog259:: ; Photographer, maybe
-    db "Oh how I love   "
-    db "pictures! Why   "
-    db "don't you take  "
-    db "a picture when  "
-    db "no one is       "
-    db "around? You can "
-    db "call it . . .@"
+    dialog_text "Oh how I love pictures! Why don't you take", "a picture when no one is around? You can call it . . ."
 
 Dialog25A:: ; Narrator
-    db "You've got the  "
-    db "Blue Clothes!   "
-    db "Your damage will"
-    db "be reduced by   "
-    db "half!@"
+    dialog_text "You've got the Blue Clothes! Your damage will be reduced by half!"
 
 Dialog25B:: ; Narrator
-    db "You've got the  "
-    db "Red Clothes!    "
-    db "Your body is    "
-    db "full of energy! @"
+    dialog_text "You've got the Red Clothes! Your body is full of energy! "
 
 Dialog25C:: ; Fairy Queen (Color Dungeon)
-    db "Red for offense,"
-    db "blue for        "
-    db "defense. Which  "
-    db "do you choose?  "
-    db "    RED  BLUE<ask>"
+    dialog_string_wrapping "Red for offense, blue for defense. Which do you choose?"
+    dialog_ask_line "RED", "BLUE"
 
 Dialog25D:: ; Fairy Queen (Color Dungeon), Link
-    db "Are you sure?   "
-    db "    YES  NO<ask>"
+    dialog_string_wrapping "Are you sure?"
+    dialog_ask_line "YES", "NO"
 
 Dialog25E:: ; Dion (Color Dungeon)
-    db "The fairy queen "
-    db "is waiting for  "
-    db "you.@"
+    dialog_text "The fairy queen is waiting for you."
 
 Dialog25F:: ; Gar (Color Dungeon)
-    db "Do you have the "
-    db "powder? If not, "
-    db "you must go     "
-    db "back.@"
+    dialog_text "Do you have the powder? If not, you must go back."
 
 Dialog260:: ; Color Guard (Color Dungeon)
-    db "Our colors are  "
-    db "never the same! "
-    db "If I am red, he "
-    db "is blue! If he  "
-    db "is red, I am    "
-    db "blue! What color"
-    db "is my cloth?    "
-    db "    Red  Blue<ask>"
+    dialog_string_wrapping "Our colors are never the same! If I am red, he is blue! If he is red, I am blue! What color is my cloth?"
+    dialog_ask_line "Red", "Blue"
 
 Dialog261:: ; idk
-    db "BOO! I am no    "
-    db "weakling! Your  "
-    db "pitiful sword is"
-    db "no match for me!@"
+    dialog_text "BOO! I am no weakling! Your pitiful sword is no match for me!"
 
 Dialog262:: ; Color Guard (Color Dungeon)
-    db "I am sorry, but "
-    db "this is the     "
-    db "Color Dungeon.  "
-    db "Only those with "
-    db "the power of    "
-    db "color may enter."
-    db "If you can tell "
-    db "who wears red   "
-    db "and who wears   "
-    db "blue, you may   "
-    db "enter.          "
-    db "Farewell.@"
+    dialog_text "I am sorry, but this is the Color Dungeon. Only those with the power of color may enter. If you can tell who wears red and who wears blue, you may enter.", "Farewell."
 
 Dialog263:: ; idk (Color Dungeon)
-    db "Here is your    "
-    db "clue. Make      "
-    db "all the red     "
-    db "blue.@"
+    dialog_text "Here is your clue. Make", "all the red blue."
 
 Dialog264:: ; idk
-    db "No,  no. Take a "
-    db "closer look and "
-    db "try again.@"
+    dialog_text "No,  no. Take a closer look and try again."
 
 Dialog265:: ; idk
-    db "Don't tell      "
-    db "anyone.@"
+    dialog_text "Don't tell anyone."
 
 Dialog266:: ; Narrator
-    db "Do you want to  "
-    db "read this book? "
-    db "    YES  NO<ask>"
+    dialog_string_wrapping "Do you want to read this book?"
+    dialog_ask_line "YES", "NO"
 
 Dialog267:: ; Book, Narrator
-    db "New world of    "
-    db "color under the "
-    db "5 gravestones.  "
-    db "                "
-    db "   3<up>  4<right>  5<up>   "
-    db "   2<left>  1<down>       "
-    db "Try with all    "
-    db "your might. Open"
-    db "a new path!     "
-    db "Whoever is      "
-    db "worthy receives "
-    db "the power of    "
-    db "color. I wonder "
-    db "what the world  "
-    db "of color is?@"
+    dialog_text "New world of color under the 5 gravestones.", " ", "   3<up>  4<right>  5<up>", "   2<left>  1<down>", "Try with all your might. Open a new path! Whoever is worthy receives the power of color. I wonder what the world of color is?"
 
 Dialog268:: ; Fairy Queen (Color Dungeon)
-    db "Welcome, #####. "
-    db "I admire you for"
-    db "coming this far."
-    db "I will give you "
-    db "the power of    "
-    db "color. If you   "
-    db "want offense,   "
-    db "choose red. If  "
-    db "you want defense"
-    db "choose blue.    "
-    db "Which power do  "
-    db "you want?       "
-    db "    RED  BLUE<ask>"
+    dialog_string_wrapping "Welcome, #####. I admire you for coming this far. I will give you the power of color. If you want offense, choose red. If you want defense choose blue. Which power do you want?"
+    dialog_ask_line "RED", "BLUE"
 
 Dialog269:: ; idk
-    db "You fool! Your  "
-    db "sword won't     "
-    db "work! Try       "
-    db "something else!@"
+    dialog_text "You fool! Your sword won't work! Try something else!"
 
 Dialog26A:: ; idk
-    db "What a greedy   "
-    db "fool! You want  "
-    db "more power?! A  "
-    db "buffoon like you"
-    db "might as well   "
-    db "give up and     "
-    db "go home!@"
+    dialog_text "What a greedy fool! You want more power?! A buffoon like you might as well give up and", "go home!"
 
 Dialog26B:: ; Great Fairy
-    db "Relax and close "
-    db "your eyes.@"
+    dialog_text "Relax and close your eyes."
 
 Dialog26C:: ; idk (Color Dungeon)
-    db "I will now take "
-    db "you out.@"
+    dialog_text "I will now take you out."
 
 Dialog26D:: ; idk (Color Dungeon)
-    db "Blue is safe.   "
-    db "Yellow is       "
-    db "caution. Red is "
-    db "danger.@"
+    dialog_text "Blue is safe. Yellow is caution. Red is danger."
 
 Dialog26E:: ; idk (Color Dungeon)
-    db "Yellow is       "
-    db "caution. Red is "
-    db "danger,Take     "
-    db "your time.@"
+    dialog_text "Yellow is caution. Red is danger,Take", "your time."
 
 Dialog26F:: ; idk (Color Dungeon)
-    db "Blue. Start     "
-    db "over. Yellow is "
-    db "caution. Red is "
-    db "danger.@"
+    dialog_text "Blue. Start over. Yellow is caution. Red is danger."
 
 Dialog270:: ; Photographer
-    db "Hey, that looks "
-    db "great! I'll call"
-    db "it '##### Plays "
-    db "With BowWow!'   "
-    db "Now get closer  "
-    db "to BowWow!@"
+    dialog_text "Hey, that looks great! I'll call it '##### Plays With BowWow!' Now get closer to BowWow!"
 
 Dialog271:: ; BowWow
-    db "Grrrr!@"
+    dialog_text "Grrrr!"
 
 Dialog272:: ; Photographer
-    db "#####, get      "
-    db "closer!@"
+    dialog_text "#####, get closer!"
 
 Dialog273:: ; BowWow
-    db "Grrrr! Grrrr!!@"
+    dialog_text "Grrrr! Grrrr!!"
 
 Dialog274:: ; Photographer
-    db "Much closer! OK,"
-    db "I'm ready.      "
-    db "Smile!@"
+    dialog_text "Much closer! OK, I'm ready. Smile!"
 
 Dialog275:: ; BowWow
-    db "Grrrr! Grrrr!!  "
-    db "GRRRR!@"
+    dialog_text "Grrrr! Grrrr!! GRRRR!"
 
 Dialog276:: ; Marin
-    db "Ha ha ha! Do it!"
-    db "Do it!  Do it   "
-    db "moooore! ... ..."
-    db "Hunh?  No, it's "
-    db "nothing... I    "
-    db "didn't mean it.@"
+    dialog_text "Ha ha ha! Do it! Do it!  Do it moooore! ... ... Hunh?  No, it's nothing... I didn't mean it."
 
 Dialog277:: ; Marin
-    db "Not very good..."
-    db "Eh?  What?  Did "
-    db "I say something?"
-    db "No, you're hear-"
-    db "ing things...@"
+    dialog_text "Not very good... Eh?  What?  Did I say something? No, you're hear- ing things..."
 
 Dialog278:: ; Marin
-    db "#####, do you   "
-    db "always look in  "
-    db "other people's  "
-    db "drawers?@"
+    dialog_text "#####, do you always look in other people's drawers?"
 
 Dialog279:: ; Marin
-    db "Great!  Dig it! "
-    db "Dig it!  Dig to "
-    db "the center of   "
-    db "the earth!!@"
+    dialog_text "Great!  Dig it! Dig it!  Dig to the center of the earth!!"
 
 Dialog27A:: ; Marin, probably
-    db "Whew!  What a   "
-    db "surprise!@"
+    dialog_text "Whew!  What a surprise!"
 
 Dialog27B:: ; Marin, probably
-    db "Ohh!  I'm sorry!"
-    db "Are you okay?!  "
-    db "#####?@"
+    dialog_text "Ohh!  I'm sorry! Are you okay?! #####?"
 
 Dialog27C:: ; Cukeman
-    db "Hey Mon!@"
+    dialog_text "Hey Mon!"
 
 Dialog27D:: ; Cukeman
-    db "You know me, I  "
-    db "like short names"
-    db "the best...@"
+    dialog_text "You know me, I like short names the best..."
 
 Dialog27E:: ; Cukeman
-    db "It can display  "
-    db "millions of     "
-    db "polygons!@"
+    dialog_text "It can display millions of polygons!"
 
 Dialog27F:: ; Cukeman
-    db "I definitely    "
-    db "need it, as soon"
-    db "as possible!@"
+    dialog_text "I definitely need it, as soon as possible!"
 
 Dialog280:: ; Owl Statue
-    db "Turn aside the  "
-    db "spined ones with"
-    db "a shield...@"
+    dialog_text "Turn aside the spined ones with a shield..."
 
 Dialog281:: ; Owl Statue
-    db "First, defeat   "
-    db "the imprisoned  "
-    db "Pols Voice,     "
-    db "Last, Stalfos...@@"
+    dialog_text "First, defeat the imprisoned Pols Voice,", "Last, Stalfos..."
+    db "@" ; Extra string terminator for some reason
 
 Dialog282:: ; Owl Statue
-    db "Far away...     "
-    db "Do not fear,    "
-    db "dash and fly!@"
+    dialog_text "Far away...", "Do not fear, dash and fly!"
 
 Dialog283:: ; Owl Statue
-    db "The glint of the"
-    db "tile will be    "
-    db "your guide...@"
+    dialog_text "The glint of the tile will be your guide..."
 
 Dialog284:: ; Owl Statue
-    db "Dive under where"
-    db "torchlight beams"
-    db "do cross...@"
+    dialog_text "Dive under where torchlight beams do cross..."
 
 Dialog285:: ; Owl Statue
-    db "Enter the space "
-    db "where the eyes  "
-    db "have walls...@"
+    dialog_text "Enter the space where the eyes have walls..."
 
 Dialog286:: ; Owl Statue
-    db "The riddle is   "
-    db "solved when the "
-    db "pillars fall!@"
+    dialog_text "The riddle is solved when the pillars fall!"
 
 Dialog287:: ; Owl Statue
-    db "Fill all the    "
-    db "holes with the  "
-    db "rock that rolls,"
-    db "this (<dpad>) is the "
-    db "key!@"
+    dialog_text "Fill all the holes with the rock that rolls, this (<dpad>) is the key!"
 
 Dialog288:: ; Owl Statue
-    db "If there is a   "
-    db "door that you   "
-    db "can't open, move"
-    db "a stone block.@"
+    dialog_text "If there is a door that you can't open, move a stone block."
 
 Dialog289:: ; Owl Statue
-    db "Make every block"
-    db "design the same."
-    db "A new path will "
-    db "open.@"
+    dialog_text "Make every block design the same. A new path will open."
 
 Dialog28A:: ; Owl Statue
-    db "Part of the     "
-    db "floor is raised."
-    db "Tap the blue    "
-    db "crystal.@"
+    dialog_text "Part of the floor is raised. Tap the blue crystal."
 
 Dialog28B:: ; Owl Statue
-    db "To defeat the   "
-    db "black monster   "
-    db "with the hard   "
-    db "shell, feed him "
-    db "something ex-   "
-    db "plosive.@"
+    dialog_text "To defeat the black monster with the hard shell, feed him something ex- plosive."
 
 Dialog28C:: ; Owl Statue
-    db "Poke suspicious "
-    db "parts of the    "
-    db "wall with your  "
-    db "sword and listen"
-    db "to the sounds it"
-    db "makes.@"
+    dialog_text "Poke suspicious parts of the wall with your sword and listen to the sounds it makes."
 
 Dialog28D:: ; Owl Statue
-    db "If you can't    "
-    db "destroy a       "
-    db "skeleton with   "
-    db "your sword, try "
-    db "using a bomb.@"
+    dialog_text "If you can't destroy a skeleton with your sword, try using a bomb."
 
 Dialog28E:: ; Owl Statue
-    db "To open a       "
-    db "treasure chest, "
-    db "use the pots    "
-    db "around it.@"
+    dialog_text "To open a treasure chest, use the pots around it."
 
 Dialog28F:: ; Owl Statue
-    db "Hop on top of   "
-    db "the crystals to "
-    db "move forward.@"
+    dialog_text "Hop on top of the crystals to move forward."
 
 Dialog290:: ; Owl Statue
-    db "If you can't go "
-    db "over the poles, "
-    db "try throwing    "
-    db "things you have "
-    db "in your hands.@"
+    dialog_text "If you can't go over the poles, try throwing things you have in your hands."
 
 Dialog291:: ; Owl Statue
-    db "Jump off the    "
-    db "floor above to  "
-    db "reach the chest "
-    db "on the table.@"
+    dialog_text "Jump off the floor above to reach the chest on the table."
 
 Dialog292:: ; Owl Statue
-    db "To defeat the   "
-    db "monsters who    "
-    db "hold the key,   "
-    db "attack them from"
-    db "a higher place.@"
+    dialog_text "To defeat the monsters who hold the key, attack them from a higher place."
 
 Dialog293:: ; Owl Statue
-    db "If the statue   "
-    db "looks strange,  "
-    db "shoot it with   "
-    db "the bow.@"
+    dialog_text "If the statue looks strange, shoot it with the bow."
 
 Dialog294:: ; Photographer, Link
-    db "Let's take a    "
-    db "picture!        "
-    db "    YES  NO<ask>"
+    dialog_string_wrapping "Let's take a picture!"
+    dialog_ask_line "YES", "NO"
 
 Dialog295:: ; Photographer, Link
-    db "No picture?! Are"
-    db "you pullin' my  "
-    db "leg?            "
-    db "    Yes  No way<ask>"
+    dialog_string_wrapping "No picture?! Are you pullin' my leg?"
+    dialog_ask_line "Yes", "No way"
 
 Dialog296:: ; Photographer
-    db "What a bummer!@"
+    dialog_text "What a bummer!"
 
 Dialog297:: ; Photographer
-    db "Beautiful! I'll "
-    db "call this 'Game "
-    db "Over.'@"
+    dialog_text "Beautiful! I'll call this 'Game Over.'"
 
 Dialog298:: ; Photographer
-    db "What's your     "
-    db "name, young man?"
-    db "#####? Well     "
-    db "here's your     "
-    db "album, #####.   "
-    db "Give it a look  "
-    db "before you      "
-    db "leave!@"
+    dialog_text "What's your name, young man? #####? Well here's your album, #####. Give it a look before you leave!"
 
 Dialog299:: ; Photographer
-    db "Let's see if we "
-    db "can fill that   "
-    db "album!@"
+    dialog_text "Let's see if we can fill that album!"
 
 Dialog29A:: ; Photographer
-    db "11 shots left!  "
-    db "What kind of    "
-    db "picture should  "
-    db "I take?@"
+    dialog_text "11 shots left! What kind of picture should", "I take?"
 
 Dialog29B:: ; Photographer
-    db "10 shots left!  "
-    db "What kind of    "
-    db "picture should  "
-    db "I take?@"
+    dialog_text "10 shots left! What kind of picture should", "I take?"
 
 Dialog29C:: ; Photographer
-    db "9 shots left!   "
-    db "What kind of    "
-    db "picture should  "
-    db "I take?@"
+    dialog_text "9 shots left! What kind of picture should", "I take?"
 
 Dialog29D:: ; Photographer
-    db "8 shots left!   "
-    db "What kind of    "
-    db "picture should  "
-    db "I take?@"
+    dialog_text "8 shots left! What kind of picture should", "I take?"
 
 Dialog29E:: ; Photographer
-    db "7 shots left!   "
-    db "What kind of    "
-    db "picture should  "
-    db "I take?@"
+    dialog_text "7 shots left! What kind of picture should", "I take?"
 
 Dialog29F:: ; Photographer
-    db "6 shots left!   "
-    db "What kind of    "
-    db "picture should  "
-    db "I take?@"
+    dialog_text "6 shots left! What kind of picture should", "I take?"
 
 Dialog2A0:: ; Photographer
-    db "5 shots left!   "
-    db "What kind of    "
-    db "picture should  "
-    db "I take?@"
+    dialog_text "5 shots left! What kind of picture should", "I take?"
 
 Dialog2A1:: ; Photographer
-    db "4 shots left!   "
-    db "What kind of    "
-    db "picture should  "
-    db "I take?@"
+    dialog_text "4 shots left! What kind of picture should", "I take?"
 
 Dialog2A2:: ; Photographer
-    db "3 shots left!   "
-    db "What kind of    "
-    db "picture should  "
-    db "I take?@"
+    dialog_text "3 shots left! What kind of picture should", "I take?"
 
 Dialog2A3:: ; Photographer
-    db "2 shots left!   "
-    db "What kind of    "
-    db "picture should  "
-    db "I take?@"
+    dialog_text "2 shots left! What kind of picture should", "I take?"
 
 Dialog2A4:: ; Photographer
-    db "1 shots left!   "
-    db "What kind of    "
-    db "picture should  "
-    db "I take?@"
+    dialog_text "1 shots left! What kind of picture should", "I take?"
 
 Dialog2A5:: ; Photographer
-    db "Oh no! You're   "
-    db "out of film!    "
-    db "Don't forget to "
-    db "look at your    "
-    db "album!@"
+    dialog_text "Oh no! You're out of film! Don't forget to look at your album!"
 
 Dialog2A6:: ; Photographer
-    db "Hi! I'm the     "
-    db "photographer!   "
-    db "What a great    "
-    db "photo moment!   "
-    db "I'll call this  "
-    db "'Heads Up!'@"
+    dialog_text "Hi! I'm the photographer! What a great photo moment! I'll call this 'Heads Up!'"
 
 Dialog2A7:: ; Photographer
-    db "Hey, this       "
-    db "represents your "
-    db "adventures      "
-    db "perfectly!@"
+    dialog_text "Hey, this represents your adventures perfectly!"
 
 Dialog2A8:: ; Photographer
-    db "I'll call this  "
-    db "one 'Close      "
-    db "Call.' Hmm.@"
+    dialog_text "I'll call this one 'Close Call.' Hmm."
 
 Dialog2A9:: ; Photographer
-    db "I'm too close.@"
+    dialog_text "I'm too close."
 
 Dialog2AA:: ; Photographer
-    db "I should back up"
-    db ".@"
+    dialog_text "I should back up ."
 
 Dialog2AB:: ; Photographer
-    db "Aaaaaah!@"
+    dialog_text "Aaaaaah!"
 
 Dialog2AC:: ; Photographer, probably
-    db "I'm going back  "
-    db "to the store.   "
-    db "Bye!@"
+    dialog_text "I'm going back to the store. Bye!"
 
 Dialog2AD:: ; Photographer, probably
-    db "See me later,   "
-    db "when you're     "
-    db "alone!@"
+    dialog_text "See me later, when you're alone!"
 
 Dialog2AE:: ; Photographer, probably
-    db "Are you sure?   "
-    db "    YES  NO<ask>"
+    dialog_string_wrapping "Are you sure?"
+    dialog_ask_line "YES", "NO"
 
 Dialog2AF:: ; Photographer, probably
-    db "Ah how I love   "
-    db "pictures. Hey,  "
-    db "#####! What are "
-    db "you doing here? @"
+    dialog_text "Ah how I love pictures. Hey, #####! What are you doing here? "

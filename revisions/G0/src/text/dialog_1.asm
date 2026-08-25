@@ -1,971 +1,501 @@
 Dialog000::
-    db "Hey, Kleiner! Wo"
-    db "willst Du denn  "
-    db "so schnell hin? "
-    db "Ich habe hier   "
-    db "etwas für Dich.@"
+    dialog_text "Hey, Kleiner! Wo willst Du denn so schnell hin? Ich habe hier etwas für Dich."
 
 Dialog001::
-    db "Gott sei Dank!  "
-    db "Ich dachte, Du  "
-    db "wachst nie mehr "
-    db "auf...          "
-    db "Was..? Zelda..? "
-    db "Nein, ich heiße "
-    db "Marin! Du bist  "
-    db "auf der Insel   "
-    db "Cocolint! Bist  "
-    db "Du in Ordnung..?"
-    db "@"
+    dialog_text "Gott sei Dank! Ich dachte, Du wachst nie mehr auf...", "Was..? Zelda..? Nein, ich heiße Marin! Du bist auf der Insel Cocolint! Bist Du in Ordnung..? "
 
 Dialog002::
-    db "Am Strand unten,"
-    db "dort wo ich Dich"
-    db "gefunden habe,  "
-    db "wimmelt es von  "
-    db "Monstern. Viel- "
-    db "leicht solltest "
-    db "Du Dich dort mal"
-    db "umschauen?! Gehe"
-    db "den Weg entlang "
-    db "nach Süden!@"
+    dialog_text "Am Strand unten, dort wo ich Dich gefunden habe, wimmelt es von Monstern. Viel- leicht solltest Du Dich dort mal umschauen?! Gehe den Weg entlang nach Süden!"
 
 Dialog003::
-    db "Hi! Tarin ist in"
-    db "den Wald gegan- "
-    db "gen, um Pilze zu"
-    db "sammeln. Ich bin"
-    db "aber lieber hier"
-    db "geblieben, um zu"
-    db "singen. Es folgt"
-    db "die \"Ballade vom"
-    db "Windfisch\"...@"
+    dialog_text "Hi! Tarin ist in den Wald gegan- gen, um Pilze zu sammeln. Ich bin aber lieber hier geblieben, um zu singen. Es folgt die \"Ballade vom Windfisch\"..."
 
 Dialog004::
-    db "Mann, Du hast da"
-    db "ja eine tolle   "
-    db "Flöte! Willst Du"
-    db "mich beim Singen"
-    db "begleiten..?@"
+    dialog_text "Mann, Du hast da ja eine tolle Flöte! Willst Du mich beim Singen begleiten..?"
 
 Dialog005::
-    db "Ich liebe diese "
-    db "Melodie... Und  "
-    db "Du, #####? Was  "
-    db "liebst Du???@"
+    dialog_text "Ich liebe diese Melodie... Und Du, #####? Was liebst Du???"
 
 Dialog006::
-    db "Hi #####! Tarin "
-    db "ist zu Hause und"
-    db "schläft... Dabei"
-    db "scheint draußen "
-    db "doch die Sonne! "
-    db "Ich könnte das  "
-    db "nicht! Ich singe"
-    db "lieber. Und zwar"
-    db "die \"Ballade vom"
-    db "Windfisch\".@"
+    dialog_text "Hi #####! Tarin ist zu Hause und schläft... Dabei scheint draußen doch die Sonne! Ich könnte das nicht! Ich singe lieber. Und zwar die \"Ballade vom Windfisch\"."
 
 Dialog007::
-    db "Diese Tür läßt  "
-    db "sich nur mit dem"
-    db "Großen Schlüssel"
-    db "öffnen. Pech!@"
+    dialog_text "Diese Tür läßt sich nur mit dem Großen Schlüssel öffnen. Pech!"
 
 Dialog008::
-    db "Du hast ein Teil"
-    db "der MACHT erhal-"
-    db "ten. Spürst Du  "
-    db "die Energie???@"
+    dialog_text "Du hast ein Teil der MACHT erhal- ten. Spürst Du die Energie???"
 
 Dialog009::
-    db "Aah! Es hat eine"
-    db "Schlummermorchel"
-    db "dabei! Ich werde"
-    db "daraus etwas    "
-    db "Feines machen!  "
-    db "Hihihi...@"
+    dialog_text "Aah! Es hat eine Schlummermorchel dabei! Ich werde daraus etwas Feines machen! Hihihi..."
 
 Dialog00A::
-    db "Nachdem ich in  "
-    db "den seltsamen   "
-    db "Pilz gebissen   "
-    db "habe, muß ich   "
-    db "wohl eingeschla-"
-    db "fen sein. Im    "
-    db "Traum war ich   "
-    db "ein Waschbär.   "
-    db "Das war lustig, "
-    db "sage ich Dir... "
-    db "Du hältst mich  "
-    db "für verrückt???@"
+    dialog_text "Nachdem ich in den seltsamen Pilz gebissen habe, muß ich wohl eingeschla- fen sein. Im Traum war ich ein Waschbär. Das war lustig, sage ich Dir... Du hältst mich für verrückt???"
 
 Dialog00B::
-    db "Kinder, bin ich "
-    db "kaputt! Ich ruhe"
-    db "mich erst einmal"
-    db "aus, später gehe"
-    db "ich nach Hause!@"
+    dialog_text "Kinder, bin ich kaputt! Ich ruhe mich erst einmal aus, später gehe ich nach Hause!"
 
 Dialog00C::
-    db "BRAUCHE IHN BALD"
-    db "DEN PILZ IM WALD"
-    db "UND MACH DIR FIX"
-    db "EINEN ZAUBERMIX."
-    db "@"
+    dialog_text "BRAUCHE IHN BALD DEN PILZ IM WALD UND MACH DIR FIX EINEN ZAUBERMIX. "
 
 Dialog00D::
-    db "Meine Waschbär- "
-    db "nase ist äußerst"
-    db "sensibel, was   "
-    db "Staub betrifft.@"
+    dialog_text "Meine Waschbär- nase ist äußerst sensibel, was Staub betrifft."
 
 Dialog00E::
-    db "Du hältst die   "
-    db "Schlummermorchel"
-    db "nach oben, aber "
-    db "nichts passiert."
-    db "Stattdessen ver-"
-    db "breitet sich ein"
-    db "fauliger Geruch."
-    db "@"
+    dialog_text "Du hältst die Schlummermorchel nach oben, aber nichts passiert. Stattdessen ver- breitet sich ein fauliger Geruch. "
 
 Dialog00F::
-    db "Du hast eine    "
-    db "Schlummermorchel"
-    db "gepflückt! Beim "
-    db "Hochheben ver-  "
-    db "breitet sie ein "
-    db "fauliges Aroma.@"
+    dialog_text "Du hast eine Schlummermorchel gepflückt! Beim Hochheben ver- breitet sie ein fauliges Aroma."
 
 Dialog010::
-    db "Schnarch... Häh?"
-    db "Ruf doch Ulrira "
-    db "an, wenn Du eine"
-    db "Frage hast...Hm?"
-    db "Schnarch...@"
+    dialog_text "Schnarch... Häh? Ruf doch Ulrira an, wenn Du eine Frage hast...Hm? Schnarch..."
 
 Dialog011::
-    db "Ich bin müde... "
-    db "Ich... muß...   "
-    db "schlafen. Gähn!@"
+    dialog_text "Ich bin müde... Ich... muß... schlafen. Gähn!"
 
 Dialog012::
-    db "Komm mir nicht  "
-    db "zu nahe, Knirps!"
-    db "Ich verrate Dir "
-    db "auch ein Geheim-"
-    db "nis. Schlage mit"
-    db "dem Schwert an  "
-    db "die Wände! Hörst"
-    db "Du einen hohlen "
-    db "Klang, läßt sich"
-    db "die Wand mit ner"
-    db "Bombe sprengen.@"
+    dialog_text "Komm mir nicht zu nahe, Knirps! Ich verrate Dir auch ein Geheim- nis. Schlage mit dem Schwert an die Wände! Hörst Du einen hohlen Klang, läßt sich die Wand mit ner Bombe sprengen."
 
 Dialog013::
-    db "Endlich hast Du "
-    db "die \"Ballade vom"
-    db "Windfisch\" ge-  "
-    db "lernt. Sie wird "
-    db "in Deinem Herzen"
-    db "weiterleben.@"
+    dialog_text "Endlich hast Du die \"Ballade vom Windfisch\" ge- lernt. Sie wird in Deinem Herzen weiterleben."
 
 Dialog014::
-    db "Du solltest die "
-    db "Melodie öfters  "
-    db "mal spielen,    "
-    db "damit Du sie    "
-    db "nicht vergißt..@"
+    dialog_text "Du solltest die Melodie öfters mal spielen, damit Du sie nicht vergißt.."
 
 Dialog015::
-    db "Schnief! Aber es"
-    db "ist doch mein   "
-    db "Lieblingslied..."
-    db "Bitte lerne sie!"
-    db "@"
+    dialog_text "Schnief! Aber es ist doch mein Lieblingslied... Bitte lerne sie! "
 
 Dialog016::
-    db "Und, wie gefällt"
-    db "sie Dir? Sie ist"
-    db "doch mitreißend,"
-    db "oder? Kannst Du "
-    db "Dir sie merken? "
-    db "    Ja   Nein<ask>"
+    dialog_string_wrapping "Und, wie gefällt sie Dir? Sie ist doch mitreißend, oder? Kannst Du Dir sie merken?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog017::
-    db "Hallo, ich heiße"
-    db "Geierwally! Ich "
-    db "verkaufe Dir ein"
-    db "Geheimnis, das  "
-    db "Dich sicher an- "
-    db "machen wird...@"
+    dialog_text "Hallo, ich heiße Geierwally! Ich verkaufe Dir ein Geheimnis, das Dich sicher an- machen wird..."
 
 Dialog018::
-    db "Zahlst Du mir 28"
-    db "Rubine für mein "
-    db "Geheimnis? Hm???"
-    db "    Klar Nö<ask>"
+    dialog_string_wrapping "Zahlst Du mir 28 Rubine für mein Geheimnis? Hm???"
+    dialog_ask_line "Klar", "Nö"
 
 Dialog019::
-    db "Zahlst Du mir 42"
-    db "Rubine für mein "
-    db "Geheimnis? Hm???"
-    db "    Klar Nö<ask>"
+    dialog_string_wrapping "Zahlst Du mir 42 Rubine für mein Geheimnis? Hm???"
+    dialog_ask_line "Klar", "Nö"
 
 Dialog01A::
-    db "Okay, Süßer! Du "
-    db "hast eine gute  "
-    db "Wahl getroffen!!"
-    db "Hier... Ich gebe"
-    db "Dir meine gehei-"
-    db "me Medizin. Wenn"
-    db "all Deine Herzen"
-    db "leer sind, wirst"
-    db "Du mit der Medi-"
-    db "zin automatisch "
-    db "wieder gesund!!@"
+    dialog_text "Okay, Süßer! Du hast eine gute Wahl getroffen!! Hier... Ich gebe Dir meine gehei- me Medizin. Wenn all Deine Herzen leer sind, wirst Du mit der Medi- zin automatisch wieder gesund!!"
 
 Dialog01B::
-    db "Nicht mit mir!!!"
-    db "Komm wieder,    "
-    db "wenn Du genügend"
-    db "Geld dabei hast!"
-    db "@"
+    dialog_text "Nicht mit mir!!! Komm wieder, wenn Du genügend Geld dabei hast! "
 
 Dialog01C::
-    db "... oder lieber "
-    db "doch nicht... Du"
-    db "hast ja schon..@"
+    dialog_text "... oder lieber doch nicht... Du hast ja schon.."
 
 Dialog01D::
-    db "Dann eben nicht!"
-    db "Wer nicht will, "
-    db "der hat schon..."
-    db "Ich wollte Dir  "
-    db "nur etwas Gutes "
-    db "tun, Du Memme..."
-    db "@"
+    dialog_text "Dann eben nicht! Wer nicht will, der hat schon... Ich wollte Dir nur etwas Gutes tun, Du Memme... "
 
 Dialog01E::
-    db "Du gefällst mir,"
-    db "Kleiner! Deshalb"
-    db "kostet es Dich  "
-    db "nur 7 Rubine...@"
+    dialog_text "Du gefällst mir, Kleiner! Deshalb kostet es Dich nur 7 Rubine..."
 
 Dialog01F::
-    db "Marin kommt mit!"
-    db "Das ist DIE     "
-    db "Gelegenheit..!@"
+    dialog_text "Marin kommt mit! Das ist DIE Gelegenheit..!"
 
 Dialog020::
-    db "Grrrrrr...@"
+    dialog_text "Grrrrrr..."
 
 Dialog021::
-    db "Hehehe! Du wirst"
-    db "Dich verlaufen! "
-    db "Ich sorge dafür."
-    db "Hehe! Verlaufen!"
-    db "@"
+    dialog_text "Hehehe! Du wirst Dich verlaufen! Ich sorge dafür. Hehe! Verlaufen! "
 
 Dialog022::
-    db "WUFF! WUFF!@"
+    dialog_text "WUFF! WUFF!"
 
 Dialog023::
-    db "KLÄFF! KLÄFF!@"
+    dialog_text "KLÄFF! KLÄFF!"
 
 Dialog024::
-    db "Laß mich Deine  "
-    db "Wunden heilen..!"
-    db "Entspanne Dich  "
-    db "und schließe die"
-    db "Augen... Ommmm!@"
+    dialog_text "Laß mich Deine Wunden heilen..! Entspanne Dich und schließe die Augen... Ommmm!"
 
 Dialog025::
-    db "Du Miststück! Du"
-    db "hast eben meine "
-    db "Brüder besiegt. "
-    db "Dafür wirst Du  "
-    db "bezahlen. Das   "
-    db "schwöre ich Dir!"
-    db "@"
+    dialog_text "Du Miststück! Du hast eben meine Brüder besiegt. Dafür wirst Du bezahlen. Das schwöre ich Dir! "
 
 Dialog026::
-    db "Hey, Typ! Willst"
-    db "Du zu mir? Okay "
-    db "Jungs, kümmert  "
-    db "Euch um ihn...@"
+    dialog_text "Hey, Typ! Willst Du zu mir? Okay Jungs, kümmert Euch um ihn..."
 
 Dialog027::
-    db "Hast Du schon   "
-    db "meine Vierlinge "
-    db "getroffen..? Ich"
-    db "bin Papahl und  "
-    db "glaube, daß ich "
-    db "mich später im  "
-    db "Gebirge verirren"
-    db "werde. Suchst Du"
-    db "mich dort..?@"
+    dialog_text "Hast Du schon meine Vierlinge getroffen..? Ich bin Papahl und glaube, daß ich mich später im Gebirge verirren werde. Suchst Du mich dort..?"
 
 Dialog028::
-    db "Au ja! Mach sie "
-    db "kaputt! Schmeiß "
-    db "sie an die Wand!"
-    db "... ... ... ... "
-    db "Was ist los?@"
+    dialog_text "Au ja! Mach sie kaputt! Schmeiß sie an die Wand! ... ... ... ... Was ist los?"
 
 Dialog029::
-    db "Warum willst Du "
-    db "etwas kaufen,   "
-    db "was Du schon    "
-    db "besitzt? Du     "
-    db "dummer Kerl..!@"
+    dialog_text "Warum willst Du etwas kaufen, was Du schon besitzt? Du dummer Kerl..!"
 
 Dialog02A::
-    db "Du hast ein Herz"
-    db "gewonnen! Sofort"
-    db "wird einer der  "
-    db "Herzcontainer   "
-    db "aufgefüllt.@"
+    dialog_text "Du hast ein Herz gewonnen! Sofort wird einer der Herzcontainer aufgefüllt."
 
 Dialog02B::
 Dialog02C::
-    db " Pfeil & Bogen  "
-    db "Nur 980 Rubine! "
-    db "    Jaja Neee<ask>"
+    dialog_string_wrapping " Pfeil & Bogen Nur 980 Rubine!"
+    dialog_ask_line "Jaja", "Neee"
 
 Dialog02D::
-    db "   10  Pfeile   "
-    db "   10  Rubine   "
-    db "    Ja   Nein<ask>"
+    dialog_string_wrapping "   10  Pfeile", "   10  Rubine"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog02E::
-    db "Gude..! Hol Dir "
-    db "etwas vom Regal "
-    db "und bring es zur"
-    db "Kasse...@"
+    dialog_text "Gude..! Hol Dir etwas vom Regal und bring es zur Kasse..."
 
 Dialog02F::
-    db "Ja, bist Du noch"
-    db "ganz sauber? Du "
-    db "mußt erst bezah-"
-    db "len. Zurück!@"
+    dialog_text "Ja, bist Du noch ganz sauber? Du mußt erst bezah- len. Zurück!"
 
 Dialog030::
-    db " Luxus-Schaufel "
-    db "   200 Rubine   "
-    db "    Ja   Nein<ask>"
+    dialog_string_wrapping " Luxus-Schaufel", "   200 Rubine"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog031::
-    db "     3 Herzen   "
-    db "    10 Rubine   "
-    db "    Ja   Nein<ask>"
+    dialog_string_wrapping "     3 Herzen", "    10 Rubine"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog032::
-    db "     Schild     "
-    db "   20  Rubine   "
-    db "    Ja   Nein<ask>"
+    dialog_string_wrapping "     Schild", "   20  Rubine"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog033::
-    db "   10  Bomben   "
-    db "   10  Rubine   "
-    db "    Ja   Nein<ask>"
+    dialog_string_wrapping "   10  Bomben", "   10  Rubine"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog034::
-    db "Ich fürchte, das"
-    db "kannst Du Dir im"
-    db "Moment nicht    "
-    db "leisten. Tschüß!"
-    db "@"
+    dialog_text "Ich fürchte, das kannst Du Dir im Moment nicht leisten. Tschüß! "
 
 Dialog035::
-    db "Vielen Dank! Und"
-    db "bis bald..!@"
+    dialog_text "Vielen Dank! Und bis bald..!"
 
 Dialog036::
-    db "Wow! Er hat es  "
-    db "nicht gemerkt..."
-    db "Aber plagt Dich "
-    db "jetzt nicht Dein"
-    db "Gewissen??? Hm?@"
+    dialog_text "Wow! Er hat es nicht gemerkt... Aber plagt Dich jetzt nicht Dein Gewissen??? Hm?"
 
 Dialog037::
 Dialog038::
-    db "Ich habe gesagt:"
-    db "\"Du mußt erst   "
-    db "zahlen!\" Das war"
-    db "eine Warnung..! "
-    db "Jetzt zahlst Du "
-    db "mit dem Leben..."
-    db "@"
+    dialog_text "Ich habe gesagt: \"Du mußt erst zahlen!\" Das war eine Warnung..! Jetzt zahlst Du mit dem Leben... "
 
 Dialog039::
-    db "Äh? Das hat sich"
-    db "angehört, als   "
-    db "sei das Burgtor "
-    db "aufgegangen. Nun"
-    db "kommst Du leicht"
-    db "nach draußen!@"
+    dialog_text "Äh? Das hat sich angehört, als sei das Burgtor aufgegangen. Nun kommst Du leicht nach draußen!"
 
 Dialog03A::
 Dialog03B::
-    db " * WUNDERKRAN * "
-    db "1 Sp.  10 Rubine"
-    db "    Zock Gähn<ask>"
+    dialog_string_wrapping " * WUNDERKRAN * 1 Sp.  10 Rubine"
+    dialog_ask_line "Zock", "Gähn"
 
 Dialog03C::
-    db "Mit den A und B "
-    db "Knöpfen bewegst "
-    db "Du den Kran. Der"
-    db "Rest ist Timing!"
-    db "Gehe vor die    "
-    db "Knöpfe.         "
-    db "Viel Erfolg!@"
+    dialog_text "Mit den A und B Knöpfen bewegst Du den Kran. Der Rest ist Timing! Gehe vor die Knöpfe.", "Viel Erfolg!"
 
 Dialog03D::
-    db "Du hast einen   "
-    db "Schild gewonnen!"
-    db "@"
+    dialog_text "Du hast einen Schild gewonnen! "
 
 Dialog03E::
-    db "Noch ein Spiel? "
-    db "    Jaaa Nein<ask>"
+    dialog_string_wrapping "Noch ein Spiel?"
+    dialog_ask_line "Jaaa", "Nein"
 
 Dialog03F::
-    db "Viel Glück!@"
+    dialog_text "Viel Glück!"
 
 Dialog040::
-    db "Feierabend! Für "
-    db "heute ist erst  "
-    db "mal Schluß! Komm"
-    db "bald wieder!@"
+    dialog_text "Feierabend! Für heute ist erst mal Schluß! Komm bald wieder!"
 
 Dialog041::
-    db "Das Zauberpulver"
-    db "gehört nun Dir! "
-    db "Streue es auf   "
-    db "alles mögliche!@"
+    dialog_text "Das Zauberpulver gehört nun Dir! Streue es auf alles mögliche!"
 
 Dialog042::
-    db "Hey! 30 Rubine!!"
-    db "Damit kannst Du "
-    db "wieder dreimal  "
-    db "spielen!@"
+    dialog_text "Hey! 30 Rubine!! Damit kannst Du wieder dreimal spielen!"
 
 Dialog043::
-    db "Haaatschiiii!   "
-    db "... kein Pulver "
-    db "mehr! Sonst ver-"
-    db "fluche ich Dich!"
-    db "Haaatschiiii!@"
+    dialog_text "Haaatschiiii! ... kein Pulver mehr! Sonst ver- fluche ich Dich! Haaatschiiii!"
 
 Dialog044::
-    db "Oh! Du hast eine"
-    db "Yoshi-Puppe be- "
-    db "kommen. Endlich!"
-    db "Du LIEBST Yoshi!"
-    db "@"
+    dialog_text "Oh! Du hast eine Yoshi-Puppe be- kommen. Endlich! Du LIEBST Yoshi! "
 
 Dialog045::
-    db "Möchtest Du eine"
-    db "Runde angeln? Es"
-    db "kostet Dich nur "
-    db "10 Rubine pro   "
-    db "Versuch!        "
-    db "    Ja   Nein<ask>"
+    dialog_string_wrapping "Möchtest Du eine Runde angeln? Es kostet Dich nur 10 Rubine pro Versuch!"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog046::
-    db "Das ist schade! "
-    db "Angeln macht so "
-    db "großen Spaß...@"
+    dialog_text "Das ist schade! Angeln macht so großen Spaß..."
 
 Dialog047::
-    db "Fein! Mit dem <dpad> "
-    db "(<right> & <left>) und den "
-    db "Knöpfen kannst  "
-    db "Du bestimmen, wo"
-    db "die Schnur im   "
-    db "Wasser landen   "
-    db "soll...         "
-    db "Mit den A und B "
-    db "Knöpfen kannst  "
-    db "die Schnur dann "
-    db "im Wasser bewe- "
-    db "gen! Hat endlich"
-    db "ein Fisch ange- "
-    db "bissen, holst Du"
-    db "ihn raus, indem "
-    db "Du schnell die  "
-    db "Knöpfe drückst.@"
+    dialog_text "Fein! Mit dem <dpad> (<right> & <left>) und den Knöpfen kannst Du bestimmen, wo die Schnur im Wasser landen soll...", "Mit den A und B Knöpfen kannst die Schnur dann im Wasser bewe- gen! Hat endlich ein Fisch ange- bissen, holst Du ihn raus, indem Du schnell die Knöpfe drückst."
 
 Dialog048::
-    db "Möchtest Du es  "
-    db "noch einmal ver-"
-    db "suchen?         "
-    db "    Gern Nein<ask>"
+    dialog_string_wrapping "Möchtest Du es noch einmal ver- suchen?"
+    dialog_ask_line "Gern", "Nein"
 
 Dialog049::
-    db "Die Schnur ist  "
-    db "gerissen! Noch  "
-    db "einen Versuch?  "
-    db "    Ja   Nein<ask>"
+    dialog_string_wrapping "Die Schnur ist gerissen! Noch einen Versuch?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog04A::
-    db "Wow! Das ist ja "
-    db "ein dicker Brok-"
-    db "ken! Dafür gebe "
-    db "ich Dir 20 Ru-  "
-    db "bine. Noch mal? "
-    db "    Klar Nie<ask>"
+    dialog_string_wrapping "Wow! Das ist ja ein dicker Brok- ken! Dafür gebe ich Dir 20 Ru- bine. Noch mal?"
+    dialog_ask_line "Klar", "Nie"
 
 Dialog04B::
-    db "Im Teich gibt es"
-    db "keine Fische    "
-    db "mehr! Willst Du "
-    db "es jetzt am Meer"
-    db "versuchen?      "
-    db "    Ja   Nein<ask>"
+    dialog_string_wrapping "Im Teich gibt es keine Fische mehr! Willst Du es jetzt am Meer versuchen?"
+    dialog_ask_line "Ja", "Nein"
 
 Dialog04C::
-    db "Hab ich wirklich"
-    db "MEER gesagt? Das"
-    db "war wohl ein    "
-    db "Versehen. Ciao!@"
+    dialog_text "Hab ich wirklich MEER gesagt? Das war wohl ein Versehen. Ciao!"
 
 Dialog04D::
-    db "Das ist aber ein"
-    db "Kleiner! Für den"
-    db "bekommst Du nur "
-    db "5 Rubine! Willst"
-    db "Du noch einmal? "
-    db "    Okay Nein<ask>"
+    dialog_string_wrapping "Das ist aber ein Kleiner! Für den bekommst Du nur 5 Rubine! Willst Du noch einmal?"
+    dialog_ask_line "Okay", "Nein"
 
 Dialog04E::
-    db "Tut mir leid, Du"
-    db "hast nicht genug"
-    db "Rubine! Aber sei"
-    db "nicht traurig!  "
-    db "Die Fische lau- "
-    db "fen Dir ja nicht"
-    db "weg! Bis später!"
-    db "@"
+    dialog_text "Tut mir leid, Du hast nicht genug Rubine! Aber sei nicht traurig! Die Fische lau- fen Dir ja nicht weg! Bis später! "
 
 Dialog04F::
-    db "Ein Herzteil!   "
-    db "Drücke SELECT   "
-    db "im Untermenü,   "
-    db "um die Anzahl   "
-    db "festzustellen.@"
+    dialog_text "Ein Herzteil! Drücke SELECT", "im Untermenü,", "um die Anzahl festzustellen."
 
 Dialog050::
-    db "Du hast 4 Herz- "
-    db "teile gesammelt."
-    db "Jetzt bekommst  "
-    db "Du einen neuen  "
-    db "Herzcontainer!@"
+    dialog_text "Du hast 4 Herz- teile gesammelt. Jetzt bekommst Du einen neuen Herzcontainer!"
 
 Dialog051::
-    db "Brrrrr... Dieser"
-    db "Eisblock ist ja "
-    db "verdammt hart..."
-    db "Und kalt! Brrrr!"
-    db "@"
+    dialog_text "Brrrrr... Dieser Eisblock ist ja verdammt hart... Und kalt! Brrrr! "
 
 Dialog052::
-    db "Ätschi! Bätschi!"
-    db "Mit meiner Vase "
-    db "bin ich unver-  "
-    db "wundbar!@"
+    dialog_text "Ätschi! Bätschi! Mit meiner Vase bin ich unver- wundbar!"
 
 Dialog053::
-    db "Ooooohh! Du hast"
-    db "meine Vase zer- "
-    db "stört! Das wirst"
-    db "Du bereuen! Du.."
-    db "@"
+    dialog_text "Ooooohh! Du hast meine Vase zer- stört! Das wirst Du bereuen! Du.. "
 
 Dialog054::
-    db "Endlich bist Du "
-    db "wieder auf den  "
-    db "Beinen, #####..."
-    db "Heiße übrigens  "
-    db "Tarin... Bist Du"
-    db "okay? Was? Woher"
-    db "ich Deinen Namen"
-    db "weiß?? Der steht"
-    db "auf der Rücksei-"
-    db "te von diesem   "
-    db "Schild... Hier!@"
+    dialog_text "Endlich bist Du wieder auf den Beinen, #####... Heiße übrigens Tarin... Bist Du okay? Was? Woher ich Deinen Namen weiß?? Der steht auf der Rücksei- te von diesem Schild... Hier!"
 
 Dialog055::
-    db "Oh ja! Am Strand"
-    db "lag noch etwas.."
-    db "Ist wohl auch an"
-    db "Land gespült    "
-    db "worden... Achte "
-    db "auf die Monster!"
-    db "Sie treiben sich"
-    db "überall herum,  "
-    db "seit Du auf der "
-    db "Insel bist,     "
-    db "#####!@"
+    dialog_text "Oh ja! Am Strand lag noch etwas.. Ist wohl auch an Land gespült worden... Achte auf die Monster! Sie treiben sich überall herum, seit Du auf der Insel bist, #####!"
 
 Dialog056::
-    db "  * LEVEL  1 *  "
-    db "   Wurmpalast@"
+    dialog_text "  * LEVEL  1 *", "   Wurmpalast"
 
 Dialog057::
-    db "  * LEVEL  2 *  "
-    db "  Djinn Grotte@"
+    dialog_text "  * LEVEL  2 *", "  Djinn Grotte"
 
 Dialog058::
-    db "  * LEVEL  3 *  "
-    db "  Teufelsvilla@"
+    dialog_text "  * LEVEL  3 *", "  Teufelsvilla"
 
 Dialog059::
-    db "  * LEVEL  4 *  "
-    db "  Wundertunnel@"
+    dialog_text "  * LEVEL  4 *", "  Wundertunnel"
 
 Dialog05A::
-    db "  * LEVEL  5 *  "
-    db "   Fisch Maul@"
+    dialog_text "  * LEVEL  5 *", "   Fisch Maul"
 
 Dialog05B::
-    db "  * LEVEL  6 *  "
-    db "  Maskentempel@"
+    dialog_text "  * LEVEL  6 *", "  Maskentempel"
 
 Dialog05C::
-    db "  * LEVEL  7 *  "
-    db "  Adlerfestung@"
+    dialog_text "  * LEVEL  7 *", "  Adlerfestung"
 
 Dialog05D::
-    db "  * LEVEL  8 *  "
-    db "  Reptilfelsen@"
+    dialog_text "  * LEVEL  8 *", "  Reptilfelsen"
 
 Dialog05E::
-    db "  Windfisch Ei@"
+    dialog_text "  Windfisch Ei"
 
 Dialog05F::
 Dialog060::
-    db "  Hängebrücke@"
+    dialog_text "  Hängebrücke"
 
 Dialog061::
-    db " Bananenhändler@"
+    dialog_text " Bananenhändler"
 
 Dialog062::
-    db "Schicksalsacker@"
+    dialog_text "Schicksalsacker"
 
 Dialog063::
-    db "    Haus  an    "
-    db "   der  Bucht@"
+    dialog_text "    Haus  an", "   der  Bucht"
 
 Dialog064::
-    db "   Spielhalle@"
+    dialog_text "   Spielhalle"
 
 Dialog065::
-    db "Tante Emma Laden"
-    db "@"
+    dialog_text "Tante Emma Laden "
 
 Dialog066::
-    db " Marin & Tarins "
-    db "     Zuhause@"
+    dialog_text " Marin & Tarins", "     Zuhause"
 
 Dialog067::
-    db " Hexenhäuschen@"
+    dialog_text " Hexenhäuschen"
 
 Dialog068::
-    db "   Durstwüste@"
+    dialog_text "   Durstwüste"
 
 Dialog069::
-    db " Urunga  Steppe@"
+    dialog_text " Urunga  Steppe"
 
 Dialog06A::
-    db "   Zauberwald@"
+    dialog_text "   Zauberwald"
 
 Dialog06B::
-    db " Tamaranch Berg@"
+    dialog_text " Tamaranch Berg"
 
 Dialog06C::
-    db " Taltal Gebirge@"
+    dialog_text " Taltal Gebirge"
 
 Dialog06D::
-    db "  Schilderwald@"
+    dialog_text "  Schilderwald"
 
 Dialog06E::
-    db "   Mövendorf@"
+    dialog_text "   Mövendorf"
 
 Dialog06F::
-    db "    Zoodorf@"
+    dialog_text "    Zoodorf"
 
 Dialog070::
-    db "    Friedhof@"
+    dialog_text "    Friedhof"
 
 Dialog071::
-    db " Stromschnellen@"
+    dialog_text " Stromschnellen"
 
 Dialog072::
-    db "Cocolint  Steppe"
-    db "@"
+    dialog_text "Cocolint  Steppe "
 
 Dialog073::
-    db " Torongastrand@"
+    dialog_text " Torongastrand"
 
 Dialog074::
-    db "  Zwergenbucht@"
+    dialog_text "  Zwergenbucht"
 
 Dialog075::
-    db " Östliche Bucht@"
+    dialog_text " Östliche Bucht"
 
 Dialog076::
-    db "  Schleimsumpf@"
+    dialog_text "  Schleimsumpf"
 
 Dialog077::
-    db "  Maskentempel@"
+    dialog_text "  Maskentempel"
 
 Dialog078::
-    db " Schloß Kanalet@"
+    dialog_text " Schloß Kanalet"
 
 Dialog079::
-    db "Taltal  Erhöhung"
-    db "@"
+    dialog_text "Taltal  Erhöhung "
 
 Dialog07A::
-    db "  Fratzenwald@"
+    dialog_text "  Fratzenwald"
 
 Dialog07B::
-    db " Süd-Mövendorf@"
+    dialog_text " Süd-Mövendorf"
 
 Dialog07C::
-    db "   Angelteich@"
+    dialog_text "   Angelteich"
 
 Dialog07D::
-    db "Madame MiouMious"
-    db "      Haus      "
-    db " BISSIGER HUND!@"
+    dialog_text "Madame MiouMious       Haus", " BISSIGER HUND!"
 
 Dialog07E::
-    db " Ulriras  Hütte@"
+    dialog_text " Ulriras  Hütte"
 
 Dialog07F::
-    db "Dr. Wrights Haus"
-    db "@"
+    dialog_text "Dr. Wrights Haus "
 
 Dialog080::
-    db "  Geierwallies  "
-    db "   Reformhaus@"
+    dialog_text "  Geierwallies", "   Reformhaus"
 
 Dialog081::
-    db "   Haus  der    "
-    db "  Großfamilie@"
+    dialog_text "   Haus  der", "  Großfamilie"
 
 Dialog082::
-    db "  Traumschrein@"
+    dialog_text "  Traumschrein"
 
 Dialog083::
-    db "Telefonhäuschen@"
+    dialog_text "Telefonhäuschen"
 
 Dialog084::
-    db "  Muschelbasar@"
+    dialog_text "  Muschelbasar"
 
 Dialog085::
-    db " Richards Villa@"
+    dialog_text " Richards Villa"
 
 Dialog086::
-    db "  Hühnerstall@"
+    dialog_text "  Hühnerstall"
 
 Dialog087::
-    db "  Dorfbücherei@"
+    dialog_text "  Dorfbücherei"
 
 Dialog088::
-    db "  Floß Verleih@"
+    dialog_text "  Floß Verleih"
 
 Dialog089::
-    db "   Teleporter@"
+    dialog_text "   Teleporter"
 
 Dialog08A::
-    db "Dieser Fels ist "
-    db "äußerst brüchig!"
-    db "Vielleicht kann "
-    db "man ihn irgend- "
-    db "wie sprengen..?@"
+    dialog_text "Dieser Fels ist äußerst brüchig! Vielleicht kann man ihn irgend- wie sprengen..?"
 
 Dialog08B::
-    db "Das ist aber ein"
-    db "seltsamer Stein!"
-    db "Vielleicht kann "
-    db "man ihn einfach "
-    db "umrennen..?@"
+    dialog_text "Das ist aber ein seltsamer Stein! Vielleicht kann man ihn einfach umrennen..?"
 
 Dialog08C::
-    db "Der Stein hat ja"
-    db "ein Schlüssel-  "
-    db "loch! Vermutlich"
-    db "braucht man hier"
-    db "einen Schlüssel!"
-    db "@"
+    dialog_text "Der Stein hat ja ein Schlüssel- loch! Vermutlich braucht man hier einen Schlüssel! "
 
 Dialog08D::
-    db "Zu schwer! Mit  "
-    db "bloßen Händen   "
-    db "wirst Du DAS    "
-    db "nicht hochheben "
-    db "können!@"
+    dialog_text "Zu schwer! Mit bloßen Händen wirst Du DAS nicht hochheben können!"
 
 Dialog08E::
-    db "Hm! Es ist eine "
-    db "Flöte! Aber was "
-    db "sollst Du auf   "
-    db "ihr spielen???@"
+    dialog_text "Hm! Es ist eine Flöte! Aber was sollst Du auf ihr spielen???"
 
 Dialog08F::
-    db "Hey! Tierquäler!"
-    db "Die arme Henne!!"
-    db "@"
+    dialog_text "Hey! Tierquäler! Die arme Henne!! "
 
 Dialog090::
-    db "Suuuper! Du hast"
-    db "das Kraftarmband"
-    db "gefunden! Damit "
-    db "kannst Du Steine"
-    db "und Vasen heben."
-    db "@"
+    dialog_text "Suuuper! Du hast das Kraftarmband gefunden! Damit kannst Du Steine und Vasen heben. "
 
 Dialog091::
-    db "Du hast Deinen  "
-    db "Schild wieder!  "
-    db "Halte den Knopf "
-    db "zur Abwehr der  "
-    db "Gegner gedrückt!"
-    db "@"
+    dialog_text "Du hast Deinen Schild wieder! Halte den Knopf zur Abwehr der Gegner gedrückt! "
 
 Dialog092::
-    db "Ah! Vielen Dank!"
-    db "Dieser Staub war"
-    db "erfrischend...  "
-    db "Zum Dank gibt es"
-    db "einen Tip: Dort,"
-    db "wo der Sand Dich"
-    db "einsaugt, lasse "
-    db "Dich fallen! Mit"
-    db "einer Bombe mußt"
-    db "Du hier die Wand"
-    db "sprengen.@"
+    dialog_text "Ah! Vielen Dank! Dieser Staub war erfrischend... Zum Dank gibt es einen Tip: Dort, wo der Sand Dich einsaugt, lasse Dich fallen! Mit einer Bombe mußt Du hier die Wand sprengen."
 
 Dialog093::
-    db "Jetzt besitzt Du"
-    db "den Enterhaken! "
-    db "Damit kommst Du "
-    db "über Schluchten!"
-    db "@"
+    dialog_text "Jetzt besitzt Du den Enterhaken! Damit kommst Du über Schluchten! "
 
 Dialog094::
-    db "Jetzt besitzt Du"
-    db "den Somariastab!"
-    db "Damit feuerst Du"
-    db "einen glühenden "
-    db "Feuerstrahl ab.@"
+    dialog_text "Jetzt besitzt Du den Somariastab! Damit feuerst Du einen glühenden Feuerstrahl ab."
 
 Dialog095::
-    db "Du besitzt jetzt"
-    db "ein Paar neuer  "
-    db "Pegasusstiefel! "
-    db "Damit kannst Du "
-    db "nun rennen, wenn"
-    db "Du den Knopf ge-"
-    db "drückt hältst.@"
+    dialog_text "Du besitzt jetzt ein Paar neuer Pegasusstiefel! Damit kannst Du nun rennen, wenn Du den Knopf ge- drückt hältst."
 
 Dialog096::
-    db "Jetzt besitzt Du"
-    db "die Flöte! Musik"
-    db "ist Trumpf!!!@"
+    dialog_text "Jetzt besitzt Du die Flöte! Musik ist Trumpf!!!"
 
 Dialog097::
-    db "Die Greifenfeder"
-    db "erlaubt es Dir, "
-    db "große Sprünge zu"
-    db "machen.@"
+    dialog_text "Die Greifenfeder erlaubt es Dir, große Sprünge zu machen."
 
 Dialog098::
-    db "Du besitzt jetzt"
-    db "eine Schaufel.  "
-    db "Aber was willst "
-    db "Du nun angraben?"
-    db "@"
+    dialog_text "Du besitzt jetzt eine Schaufel. Aber was willst Du nun angraben? "
 
 Dialog099::
-    db "Das Zauberpulver"
-    db "gehört nun Dir! "
-    db "Probiere, was Du"
-    db "damit besprühen "
-    db "kannst...@"
+    dialog_text "Das Zauberpulver gehört nun Dir! Probiere, was Du damit besprühen kannst..."
 
 Dialog09A::
-    db "Du besitzt nun  "
-    db "eine Bombe.     "
-    db "Also los!@"
+    dialog_text "Du besitzt nun eine Bombe.", "Also los!"
 
 Dialog09B::
-    db "Nun hast Du Dein"
-    db "Schwert gefunden"
-    db "und bist froh,  "
-    db "den Namen ##### "
-    db "darauf zu lesen!"
-    db "@"
+    dialog_text "Nun hast Du Dein Schwert gefunden und bist froh, den Namen ##### darauf zu lesen! "
 
 Dialog09C::
-    db "Jetzt besitzt Du"
-    db "endlich ein Paar"
-    db "Schwimmflossen! "
-    db "Drückst Du beim "
-    db "Schwimmen den B-"
-    db "Knopf, kannst Du"
-    db "sogar tauchen!@"
+    dialog_text "Jetzt besitzt Du endlich ein Paar Schwimmflossen! Drückst Du beim Schwimmen den B- Knopf, kannst Du sogar tauchen!"
 
 Dialog09D::
-    db "Die Lupe!! Jetzt"
-    db "kannst Du Dinge "
-    db "sehen (& lesen),"
-    db "die vorher un-  "
-    db "sichtbar waren.@"
+    dialog_text "Die Lupe!! Jetzt kannst Du Dinge sehen (& lesen), die vorher un- sichtbar waren."
 
 Dialog09E::
 Dialog09F::
-    db "Du besitzt ein  "
-    db "neues Schwert!  "
-    db "Vielleicht wäre "
-    db "es gut, Deinen  "
-    db "Namen darauf zu "
-    db "schreiben..?!@"
+    dialog_text "Du besitzt ein neues Schwert! Vielleicht wäre es gut, Deinen Namen darauf zu schreiben..?!"
 
 Dialog0A0::
-    db "Geheimnisvolles "
-    db "Elixier!        "
-    db "Verwende es und "
-    db "warte ab, was   "
-    db "passieren wird!@"
+    dialog_text "Geheimnisvolles Elixier! Verwende es und warte ab, was passieren wird!"
 
 Dialog0A1::
-    db "Nun hast Du den "
-    db "Wurmschlüssel in"
-    db "der Hand! Sicher"
-    db "kannst Du damit "
-    db "den Wurmpalast  "
-    db "öffnen.@"
+    dialog_text "Nun hast Du den Wurmschlüssel in der Hand! Sicher kannst Du damit den Wurmpalast öffnen."
 
 Dialog0A2::
-    db "Coooool! Mit dem"
-    db "Schleimschlüssel"
-    db "öffnet sich das "
-    db "Tor in der      "
-    db "Urunga Steppe.@"
+    dialog_text "Coooool! Mit dem Schleimschlüssel öffnet sich das Tor in der Urunga Steppe."
 
 Dialog0A3::
-    db "Mit dem Wunder- "
-    db "schlüssel öffnet"
-    db "sich das Tor zum"
-    db "Wundertunnel!@"
+    dialog_text "Mit dem Wunder- schlüssel öffnet sich das Tor zum Wundertunnel!"
 
 Dialog0A4::
-    db "Der Masken-     "
-    db "schlüssel!!! Er "
-    db "gehört nun Dir!@"
+    dialog_text "Der Masken- schlüssel!!! Er gehört nun Dir!"

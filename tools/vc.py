@@ -39,10 +39,10 @@ def parse_sym_file(sym_file):
             bank, address = [int(part, 16) for part in value.split(':')]
             if address < 0x8000:
                 # ROM addresses are relative to their bank
-                offset = address + (bank - 1) * 0x4000 if bank > 0 else address
+                offset = (bank * 0x4000) + (address & 0x3fff)
             else:
                 # RAM addresses are relative to the start of all RAM
-                offset = address - 0x8000
+                offset = address & 0x7fff
         else:
             offset = int(value, 16)
 
@@ -63,8 +63,7 @@ def interpret_command(capture, symbols, rom):
     elif command == 'MIXEDCASELABEL':
         value = get_sym_value(args[0], symbols)
         formatted = f'x{value:X}'
-        formatted = formatted[:-3] + formatted[-3:-2].lower() + formatted[-2:]
-        return formatted
+        return formatted[:-3] + formatted[-3:-2].lower() + formatted[-2:]
 
     # {PATCH offset length} expands to a series of bytes from the patched ROM
     elif command == 'PATCH':

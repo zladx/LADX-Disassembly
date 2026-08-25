@@ -1,449 +1,124 @@
 Dialog0A4:: ; Narrator
-    db "You've got the  "
-    db "Face Key!@"
+    dialog_text "You've got the Face Key!"
 
 Dialog0A5:: ; Narrator
-    db "You've got the  "
-    db "Bird Key!@"
+    dialog_text "You've got the Bird Key!"
 
 Dialog0A6:: ; Narrator
-    db "At last, you got"
-    db "a Map!  Press   "
-    db "the START Button"
-    db "to look at it!@"
+    dialog_text "At last, you got a Map!  Press the START Button to look at it!"
 
 Dialog0A7:: ; Narrator
-    db "You've got the  "
-    db "Compass!  Now,  "
-    db "you can see     "
-    db "where the chests"
-    db "and Nightmare   "
-    db "are hidden! This"
-    db "Compass has a   "
-    db "new feature-- a "
-    db "tone will tell  "
-    db "you if a key is "
-    db "hidden in a room"
-    db "when you enter! @"
+    dialog_text "You've got the Compass!  Now, you can see where the chests and Nightmare are hidden! This Compass has a new feature-- a tone will tell you if a key is hidden in a room when you enter! "
 
 Dialog0A8:: ; Narrator
-    db "You found a     "
-    db "stone beak!     "
-    db "Let's find the  "
-    db "owl statue that "
-    db "belongs to it.@"
+    dialog_text "You found a stone beak! Let's find the owl statue that belongs to it."
 
 Dialog0A9:: ; Narrator
-    db "You've got the  "
-    db "Nightmare's Key!"
-    db "Now you can open"
-    db "the door to the "
-    db "Nightmare's     "
-    db "Lair!@"
+    dialog_text "You've got the Nightmare's Key! Now you can open the door to the Nightmare's Lair!"
 
 Dialog0AA:: ; Narrator
-    db "You got a Small "
-    db "Key!  You can   "
-    db "open a locked   "
-    db "door.@"
+    dialog_text "You got a Small Key!  You can open a locked door."
 
 Dialog0AB:: ; Narrator
-    db "   You got 20   "
-    db "     Rupees!    "
-    db "      JOY!@"
+    dialog_text "   You got 20", "     Rupees!", "      JOY!"
 
 Dialog0AC:: ; Narrator
-    db "    You got 50  "
-    db "      Rupees!   "
-    db "    Very Nice!@"
+    dialog_text "    You got 50", "      Rupees!", "    Very Nice!"
 
 Dialog0AD:: ; Narrator
-    db "   You got 100  "
-    db "     Rupees!    "
-    db "  You're Happy!@"
+    dialog_text "   You got 100", "     Rupees!", "  You're Happy!"
 
 Dialog0AE:: ; Narrator
-    db "   You got 200  "
-    db "     Rupees!    "
-    db "You're Ecstatic!@"
+    dialog_text "   You got 200", "     Rupees! You're Ecstatic!"
 
 Dialog0AF:: ; Hippo
-    db "Leave me alone! "
-    db "I'm trying to   "
-    db "sit still so    "
-    db "Schule can paint"
-    db "my portrait!@"
+    dialog_text "Leave me alone! I'm trying to sit still so Schule can paint my portrait!"
 
 Dialog0B0:: ; Moldorm (D1 Nightmare)
-    db "BUZZZZZ! BUZZZZ!"
-    db "   OUTZZZIDER!  @"
+    dialog_text "BUZZZZZ! BUZZZZ!    OUTZZZIDER!  "
 
 Dialog0B1:: ; Slime Eyes (D3 Nightmare)
-    db "NEENER NEENER!  "
-    db "You can't find  "
-    db "me!  NYAH NYAH!@"
+    dialog_text "NEENER NEENER! You can't find me!  NYAH NYAH!"
 
 Dialog0B2:: ; Angler Fish (D4 Nightmare)
-    db "BLOOOP! BLOOOP! "
-    db "  GLUB!  GLUB!  "
-    db "OGGGH!  FOOOOD! "
-    db "BLOOOOP!  GLUB!@"
+    dialog_text "BLOOOP! BLOOOP!", "  GLUB!  GLUB! OGGGH!  FOOOOD! BLOOOOP!  GLUB!"
 
 Dialog0B3:: ; Slime Eel (D5 Nightmare)
-    db "Ssso...you are  "
-    db "the outsssider, "
-    db "come to wake the"
-    db "Wind Fisssh...  "
-    db "KEEE-HEE-HEEEH! "
-    db "I shall eat you!@"
+    dialog_text "Ssso...you are the outsssider, come to wake the Wind Fisssh... KEEE-HEE-HEEEH! I shall eat you!"
 
 Dialog0B4:: ; Genie (D2 Nightmare)
-    db "HO HO HO!       "
-    db "I'm your bad guy"
-    db "this time!!     "
-    db "HO HO HO!@"
+    dialog_text "HO HO HO!", "I'm your bad guy this time!!", "HO HO HO!"
 
 Dialog0B5:: ; Slime Eel (D5 Nightmare)
-    db "TSSSK, TSSSK!   "
-    db "You don't ssseem"
-    db "to know what    "
-    db "kind of island  "
-    db "thisss iss...   "
-    db "KEEE-HEEE-HEEE! "
-    db "What a fool...  "
-    db "KEE-HEE-HEH!!@"
+    dialog_text "TSSSK, TSSSK! You don't ssseem to know what kind of island thisss iss... KEEE-HEEE-HEEE! What a fool... KEE-HEE-HEH!!"
 
 Dialog0B6:: ; Facade (D6 Nightmare)
-    db "Hey dummy! Need "
-    db "a hint?  My weak"
-    db "point is... !!  "
-    db "Whoops!  There I"
-    db "go, talking too "
-    db "much again...@"
+    dialog_text "Hey dummy! Need a hint?  My weak point is... !! Whoops!  There I go, talking too much again..."
 
 Dialog0B7:: ; Facade (D6 Nightmare)
-    db "Okay, listen up!"
-    db "If the Wind Fish"
-    db "wakes up, every-"
-    db "thing on this   "
-    db "island will be  "
-    db "gone forever!   "
-    db "And I do mean..."
-    db "EVERYTHING!@"
+    dialog_text "Okay, listen up! If the Wind Fish wakes up, every- thing on this island will be gone forever! And I do mean... EVERYTHING!"
 
 Dialog0B8:: ; Grim Creeper (D7 Nightmare)
 Dialog0B9:: ; Grim Creeper (D7 Nightmare)
-    db "My energy...    "
-    db "gone...I...lost!"
-    db "But you will be "
-    db "lost too, if the"
-    db "Wind Fish wakes!"
-    db "Same as me...you"
-    db "...are...in...  "
-    db "his...dream...@"
+    dialog_text "My energy... gone...I...lost! But you will be lost too, if the Wind Fish wakes! Same as me...you ...are...in... his...dream..."
 
 Dialog0BA:: ; Grim Creeper (D7 Nightmare)
-    db "BAH!  I'm not   "
-    db "going to hold   "
-    db "back!  I'm going"
-    db "to make you wish"
-    db "you were never  "
-    db "born!!@"
+    dialog_text "BAH!  I'm not going to hold back!  I'm going to make you wish you were never born!!"
 
 Dialog0BB:: ; Hot Head (D8 Nightmare)
 Dialog0BC:: ; Hot Head (D8 Nightmare)
-    db "CRACKLE-FWOOOSH!"
-    db "You're finished!"
-    db "I will never let"
-    db "you play the    "
-    db "Instruments of  "
-    db "the Sirens!!@"
+    dialog_text "CRACKLE-FWOOOSH! You're finished! I will never let you play the Instruments of the Sirens!!"
 
 Dialog0BD:: ; Hot Head (D8 Nightmare)
-    db "C-C-CRACKLE!    "
-    db "Why did you come"
-    db "here?  If it    "
-    db "weren't for you,"
-    db "nothing would   "
-    db "have to change! "
-    db "You cannot wake "
-    db "the Wind Fish!  "
-    db "Remember, you..."
-    db "too...are in... "
-    db "...the dream...@"
+    dialog_text "C-C-CRACKLE!", "Why did you come here?  If it weren't for you, nothing would have to change! You cannot wake the Wind Fish! Remember, you... too...are in... ...the dream..."
 
 Dialog0BE:: ; Owl
 Dialog0BF:: ; Owl
 Dialog0C0:: ; Owl
-    db "Hoot!  Ho, brave"
-    db "lad, on your    "
-    db "quest to wake   "
-    db "the dreamer!    "
-    db "Welcome to the  "
-    db "Mysterious Wood!"
-    db "Much of mystery "
-    db "you will find on"
-    db "this uncharted  "
-    db "Koholint island!"
-    db "I'm afraid you  "
-    db "may find it a   "
-    db "trifle difficult"
-    db "to leave the    "
-    db "island while the"
-    db "Wind Fish naps. "
-    db "...By the by,   "
-    db "have you ever   "
-    db "visited the Tail"
-    db "Cave, which is  "
-    db "south of the    "
-    db "village?  Go    "
-    db "there with the  "
-    db "key you find in "
-    db "this forest...  "
-    db "The Wind Fish is"
-    db "watching...Hoot!@"
+    dialog_text "Hoot!  Ho, brave lad, on your quest to wake the dreamer! Welcome to the Mysterious Wood! Much of mystery you will find on this uncharted Koholint island! I'm afraid you may find it a trifle difficult to leave the island while the Wind Fish naps. ...By the by, have you ever visited the Tail Cave, which is south of the village?  Go there with the key you find in this forest... The Wind Fish is watching...Hoot!"
 
 Dialog0C1:: ; Owl
-    db "Hoot!  Take the "
-    db "key and go to   "
-    db "the Tail Cave.  "
-    db "Retrieve the    "
-    db "Instrument that "
-    db "is hidden there!"
-    db "Go now!  The    "
-    db "Wind Fish is    "
-    db "waiting!  Hooot!@"
+    dialog_text "Hoot!  Take the key and go to the Tail Cave. Retrieve the Instrument that is hidden there! Go now!  The Wind Fish is waiting!  Hooot!"
 
 Dialog0C2:: ; Owl
-    db "Hoooot!  That is"
-    db "an 'Instrument  "
-    db "of the Sirens!' "
-    db "I have to admit,"
-    db "at first I did  "
-    db "not believe you "
-    db "were real...    "
-    db "That Instrument,"
-    db "along with the  "
-    db "seven others in "
-    db "the set, has the"
-    db "power to wake   "
-    db "the Wind Fish!  "
-    db "You must collect"
-    db "them all!  I was"
-    db "instructed to   "
-    db "give you direc- "
-    db "tions...  Your  "
-    db "next goal is    "
-    db "north, in       "
-    db "Goponga Swamp!! "
-    db "Hoot, indeed!@"
+    dialog_text "Hoooot!  That is an 'Instrument of the Sirens!' I have to admit, at first I did not believe you were real... That Instrument, along with the seven others in the set, has the power to wake the Wind Fish! You must collect them all!  I was instructed to give you direc- tions...  Your next goal is north, in Goponga Swamp!! Hoot, indeed!"
 
 Dialog0C3:: ; Owl
-    db "Hoot!  That is a"
-    db "fearsome looking"
-    db "animal you have "
-    db "there!  Do not  "
-    db "forget, the next"
-    db "Instrument is in"
-    db "Goponga Swamp!@"
+    dialog_text "Hoot!  That is a fearsome looking animal you have there!  Do not forget, the next Instrument is in Goponga Swamp!"
 
 Dialog0C4:: ; Owl
-    db "Hoooot! The Wind"
-    db "Fish sleeps long"
-    db "and dreamily in "
-    db "the Egg above..."
-    db "When you play   "
-    db "the eight Siren "
-    db "Instruments in  "
-    db "front of the Egg"
-    db "he will awaken. "
-    db "This, my friend,"
-    db "is the only way "
-    db "for you to leave"
-    db "the island! Hoo!@"
+    dialog_text "Hoooot! The Wind Fish sleeps long and dreamily in the Egg above... When you play the eight Siren Instruments in front of the Egg he will awaken. This, my friend, is the only way for you to leave the island! Hoo!"
 
 Dialog0C5:: ; Owl
-    db "Hoot!  How many "
-    db "Instruments     "
-    db "have you gotten "
-    db "so far?  When   "
-    db "you play the    "
-    db "Instruments in  "
-    db "front of the    "
-    db "Egg, the Wind   "
-    db "Fish will wake  "
-    db "and you will    "
-    db "leave this      "
-    db "island.  Now,   "
-    db "you must hasten "
-    db "to the Yarna    "
-    db "Desert!  The    "
-    db "dark, monstrous "
-    db "inhabitants of  "
-    db "the sand will   "
-    db "show you the    "
-    db "way! Hoot Hoot!@"
+    dialog_text "Hoot!  How many Instruments", "have you gotten so far?  When you play the Instruments in front of the Egg, the Wind Fish will wake and you will leave this island.  Now, you must hasten to the Yarna Desert!  The dark, monstrous inhabitants of the sand will show you the way! Hoot Hoot!"
 
 Dialog0C6:: ; Owl
-    db "Hoot!  The shape"
-    db "of the key shows"
-    db "a fish, swimming"
-    db "up a cascade of "
-    db "water!  Go now  "
-    db "to the mountain "
-    db "waterfall!  A   "
-    db "leap from the   "
-    db "top and you will"
-    db "reach your goal!@"
+    dialog_text "Hoot!  The shape of the key shows a fish, swimming up a cascade of water!  Go now to the mountain waterfall!  A leap from the top and you will reach your goal!"
 
 Dialog0C7:: ; Owl
-    db "Hoot!  There are"
-    db "two shrines, one"
-    db "to the north,   "
-    db "the other to the"
-    db "south.  First,  "
-    db "head south,     "
-    db "where ancient   "
-    db "ruins speak of  "
-    db "the Wind Fish..."
-    db "You will learn  "
-    db "much there...@"
+    dialog_text "Hoot!  There are two shrines, one to the north, the other to the south.  First, head south, where ancient ruins speak of the Wind Fish... You will learn much there..."
 
 Dialog0C8:: ; Owl
-    db "Hoot!  I see you"
-    db "have read the   "
-    db "relief...  While"
-    db "it does say the "
-    db "island is but a "
-    db "dream of the    "
-    db "Wind Fish, no   "
-    db "one is really   "
-    db "sure...  Just as"
-    db "you cannot know "
-    db "if a chest holds"
-    db "treasure until  "
-    db "you open it, so "
-    db "you cannot tell "
-    db "if this is a    "
-    db "dream until you "
-    db "awaken...  The  "
-    db "only one who    "
-    db "knows for sure  "
-    db "is the Wind     "
-    db "Fish...  Trust  "
-    db "your feelings..."
-    db "Someday you will"
-    db "know for sure...@"
+    dialog_text "Hoot!  I see you have read the relief...  While it does say the island is but a dream of the Wind Fish, no one is really sure...  Just as you cannot know if a chest holds treasure until you open it, so you cannot tell if this is a dream until you awaken...  The only one who knows for sure is the Wind Fish...  Trust your feelings... Someday you will know for sure..."
 
 Dialog0C9:: ; Owl
-    db "Hoot!  The many "
-    db "monsters of this"
-    db "island fear that"
-    db "the Wind Fish is"
-    db "about to awaken!"
-    db "The monsters'   "
-    db "power is real!  "
-    db "They may conquer"
-    db "the island and  "
-    db "destroy their   "
-    db "foes!  That day "
-    db "may come soon!  "
-    db "Now, go to the  "
-    db "mountain tower! "
-    db "Fly like a bird!"
-    db "Hoot! Hoot!@"
+    dialog_text "Hoot!  The many monsters of this island fear that the Wind Fish is about to awaken! The monsters' power is real! They may conquer the island and destroy their foes!  That day may come soon! Now, go to the mountain tower! Fly like a bird! Hoot! Hoot!"
 
 Dialog0CA:: ; Owl
-    db "Hoot hoot!      "
-    db "Your path is    "
-    db "not easy, but   "
-    db "you are almost  "
-    db "there. Go east. "
-    db "The Wind Fish   "
-    db "is getting      "
-    db " restless.@"
+    dialog_text "Hoot hoot!", "Your path is", "not easy, but you are almost there. Go east. The Wind Fish", "is getting", " restless."
 
 Dialog0CB:: ; Owl
-    db "Hoot!  It has   "
-    db "been some time  "
-    db "since our paths "
-    db "crossed, lad.   "
-    db "You must dive   "
-    db "into the waters "
-    db "of Martha's Bay "
-    db "to enter the    "
-    db "Catfish's Maw..."
-    db "The closer you  "
-    db "get to the Wind "
-    db "Fish, the more  "
-    db "restless he     "
-    db "sleeps.  Carry  "
-    db "onward!  Hoot!@"
+    dialog_text "Hoot!  It has been some time since our paths crossed, lad. You must dive into the waters of Martha's Bay to enter the Catfish's Maw... The closer you get to the Wind Fish, the more restless he sleeps.  Carry onward!  Hoot!"
 
 Dialog0CC:: ; Owl
-    db "Hoot!  That girl"
-    db "sang her song in"
-    db "front of the    "
-    db "Egg! Her 'Ballad"
-    db "of the Wind     "
-    db "Fish' is a song "
-    db "of awakening!   "
-    db "Did she actually"
-    db "intend to wake  "
-    db "the Wind Fish?! "
-    db "The next Sirens'"
-    db "Instrument is in"
-    db "the west.  Play "
-    db "your melodies so"
-    db "the unliving    "
-    db "stones might    "
-    db "hear!  Show your"
-    db "courage!  The   "
-    db "Wind Fish waits "
-    db "for you!  Hoot!@"
+    dialog_text "Hoot!  That girl sang her song in front of the Egg! Her 'Ballad of the Wind Fish' is a song of awakening! Did she actually intend to wake the Wind Fish?! The next Sirens' Instrument is in the west.  Play your melodies so the unliving stones might hear!  Show your courage!  The Wind Fish waits for you!  Hoot!"
 
 Dialog0CD:: ; Owl
-    db "The time has    "
-    db "come... The Wind"
-    db "Fish awaits...  "
-    db "Enter the Egg..."
-    db "Hoot! Hoot!@"
+    dialog_text "The time has come... The Wind Fish awaits... Enter the Egg... Hoot! Hoot!"
 
 Dialog0CE:: ; Owl
 Dialog0CF:: ; Owl
-    db "Hoot! Young lad,"
-    db "I mean... #####,"
-    db "the hero!  You  "
-    db "have defeated   "
-    db "the Nightmares! "
-    db "You have proven "
-    db "your wisdom,    "
-    db "courage and     "
-    db "power!          "
-    db "... ... ... ... "
-    db "As part of the  "
-    db "Wind Fish's     "
-    db "spirit, I am the"
-    db "guardian of his "
-    db "dream world...  "
-    db "But one day, the"
-    db "Nightmares      "
-    db "entered the     "
-    db "dream and began "
-    db "wreaking havoc. "
-    db "Then you, #####,"
-    db "came to rescue  "
-    db "the island...   "
-    db "I have always   "
-    db "trusted in your "
-    db "courage to turn "
-    db "back the Night- "
-    db "mares.  Thank   "
-    db "you, #####... My"
-    db "work is done... "
-    db "The Wind Fish   "
-    db "will wake soon. "
-    db "Good bye...Hoot!@"
+    dialog_text "Hoot! Young lad, I mean... #####, the hero!  You have defeated the Nightmares! You have proven your wisdom, courage and power!", "... ... ... ... As part of the Wind Fish's spirit, I am the guardian of his dream world... But one day, the Nightmares entered the dream and began wreaking havoc. Then you, #####, came to rescue the island...", "I have always trusted in your courage to turn back the Night- mares.  Thank you, #####... My work is done... The Wind Fish will wake soon. Good bye...Hoot!"
 
 Dialog0D0:: ; Wind Fish
     db "... ... ... ... "
@@ -484,368 +159,161 @@ Dialog0D0:: ; Wind Fish
 
 Dialog0D1:: ; Wind Fish
 Dialog0D2:: ; Wind Fish
-    db " PLAY THE EIGHT "
-    db "  INSTRUMENTS!  "
-    db "PLAY THE SONG OF"
-    db "   AWAKENING!!@"
+    dialog_text " PLAY THE EIGHT", "  INSTRUMENTS! PLAY THE SONG OF    AWAKENING!!"
 
 Dialog0D3:: ; Map, probably
 Dialog0D4:: ; Map, probably
 Dialog0D5:: ; Map, probably
-    db "Mermaid Statue  @"
+    dialog_text "Mermaid Statue  "
 
 Dialog0D6:: ; Owl
 Dialog0D7:: ; Owl
-    db "...#####, you   "
-    db "have beaten all "
-    db "the Nightmares! "
-    db "Climb the stairs"
-    db "before you!@"
+    dialog_text "...#####, you have beaten all the Nightmares! Climb the stairs before you!"
 
 Dialog0D8:: ; Schule Donavitch
-    db "Ach! Vat are you"
-    db "looking at vith "
-    db "zat magnifying  "
-    db "lens?  Stop it  "
-    db "at vonce!@"
+    dialog_text "Ach! Vat are you looking at vith zat magnifying lens?  Stop it at vonce!"
 
 Dialog0D9:: ; Owl
-    db "  Hoot!  Hoot!  "
-    db "So you are the  "
-    db "lad who owns the"
-    db "sword...  Now I "
-    db "understand why  "
-    db "the monsters are"
-    db "starting to act "
-    db "so violently... "
-    db "A courageous lad"
-    db "has come to wake"
-    db "the Wind Fish..."
-    db "It is said that "
-    db "you cannot leave"
-    db "the island      "
-    db "unless you wake "
-    db "the Wind Fish..."
-    db "You should now  "
-    db "go north, to the"
-    db "Mysterious      "
-    db "Forest.  I will "
-    db "wait for you    "
-    db "there!  Hoot!@"
+    dialog_text "  Hoot!  Hoot! So you are the lad who owns the sword...  Now I understand why the monsters are starting to act so violently... A courageous lad has come to wake the Wind Fish... It is said that you cannot leave the island unless you wake the Wind Fish... You should now go north, to the Mysterious Forest.  I will wait for you there!  Hoot!"
 
 Dialog0DA:: ; Lanmola
-    db "Annoyance!  You "
-    db "are only getting"
-    db "in the way!@"
+    dialog_text "Annoyance!  You are only getting in the way!"
 
 Dialog0DB:: ; Mamu
-    db "Ribbit!  Ribbit!"
-    db "Hey, man, I'm   "
-    db "Mamu, on vocals!"
-    db "Brother, you    "
-    db "look like you   "
-    db "don't know      "
-    db "squat about     "
-    db "music!  Ribbit!@"
+    dialog_text "Ribbit!  Ribbit! Hey, man, I'm Mamu, on vocals! Brother, you look like you don't know", "squat about music!  Ribbit!"
 
 Dialog0DC:: ; Mamu
-    db "Ribbit!  Ribbit!"
-    db "I'm Mamu, on    "
-    db "vocals!  But I  "
-    db "don't need to   "
-    db "tell you that,  "
-    db "do I?  Everybody"
-    db "knows me!  Want "
-    db "to hang out and "
-    db "listen to us    "
-    db "jam?  For 300   "
-    db "Rupees, we'll   "
-    db "let you listen  "
-    db "to a previously "
-    db "unreleased cut! "
-    db "What do you do? "
-    db "    Pay  Leave<ask>"
+    dialog_string_wrapping "Ribbit!  Ribbit! I'm Mamu, on vocals!  But I don't need to tell you that, do I?  Everybody knows me!  Want to hang out and listen to us jam?  For 300 Rupees, we'll let you listen to a previously unreleased cut! What do you do?"
+    dialog_ask_line "Pay", "Leave"
 
 Dialog0DD:: ; Mamu
-    db "Thank you...    "
-    db "Thank you very  "
-    db "much... Croak!@"
+    dialog_text "Thank you... Thank you very much... Croak!"
 
 Dialog0DE:: ; Mamu
-    db "Well, that's a  "
-    db "shame, but we   "
-    db "don't play for  "
-    db "free!@"
+    dialog_text "Well, that's a shame, but we don't play for free!"
 
 Dialog0DF:: ; Narrator
-    db "You've learned  "
-    db "The Frog's Song "
-    db "of Soul!  It's a"
-    db "very moving     "
-    db "tune... It can  "
-    db "even liven up   "
-    db "unliving things!@"
+    dialog_text "You've learned The Frog's Song of Soul!  It's a very moving tune... It can even liven up unliving things!"
 
 Dialog0E0:: ; Mamu
-    db "If you play this"
-    db "song, you'll    "
-    db "make everything "
-    db "around you feel "
-    db "more alive!@"
+    dialog_text "If you play this song, you'll make everything around you feel more alive!"
 
 Dialog0E1:: ; Li'l Devil
-    db "Hey, Kid!  You  "
-    db "woke me up from "
-    db "a fine nap!!    "
-    db "...Thanks a lot!"
-    db "But now, I'll   "
-    db "get my revenge! "
-    db "Are you ready?! "
-    db "    Yes  N-No<ask>"
+    dialog_string_wrapping "Hey, Kid!  You woke me up from a fine nap!! ...Thanks a lot! But now, I'll get my revenge! Are you ready?!"
+    dialog_ask_line "Yes", "N-No"
 
 Dialog0E2:: ; Li'l Devil
-    db "I'll let you    "
-    db "carry more Magic"
-    db "Powder!  He He! "
-    db "Are you ready?! "
-    db "    Yes  N-No<ask>"
+    dialog_string_wrapping "I'll let you carry more Magic Powder!  He He! Are you ready?!"
+    dialog_ask_line "Yes", "N-No"
 
 Dialog0E3:: ; Li'l Devil
-    db "Okay, I'll let  "
-    db "you carry more  "
-    db "Bombs! He He He!"
-    db "Are you ready?! "
-    db "    Yes  N-No<ask>"
+    dialog_string_wrapping "Okay, I'll let you carry more Bombs! He He He! Are you ready?!"
+    dialog_ask_line "Yes", "N-No"
 
 Dialog0E4:: ; Li'l Devil
-    db "Fine, I'll let  "
-    db "you have more   "
-    db "arrows! Heh Heh!"
-    db "Are you ready?! "
-    db "    Yes  N-No<ask>"
+    dialog_string_wrapping "Fine, I'll let you have more arrows! Heh Heh! Are you ready?!"
+    dialog_ask_line "Yes", "N-No"
 
 Dialog0E5:: ; Li'l Devil
-    db "Heh Heh Heh!    "
-    db "You deserve it! "
-    db "Now look at all "
-    db "that junk you   "
-    db "have to carry!  "
-    db "Hah!  Take care!"
-    db "See you again!@"
+    dialog_text "Heh Heh Heh!", "You deserve it! Now look at all that junk you have to carry! Hah!  Take care! See you again!"
 
 Dialog0E6:: ; Narrator
-    db "??  There is a  "
-    db "picture carved  "
-    db "on the wall, but"
-    db "you can't see it"
-    db "because it's too"
-    db "dark in here...@"
+    dialog_text "??  There is a picture carved on the wall, but you can't see it because it's too dark in here..."
 
 Dialog0E7:: ; Southern Face Shrine mural
-    db "TO THE FINDER..."
-    db "  THE ISLE OF   "
-    db "KOHOLINT, IS BUT"
-    db "  AN ILLUSION..."
-    db " HUMAN, MONSTER,"
-    db " SEA, SKY... A  "
-    db "SCENE ON THE LID"
-    db " OF A SLEEPER'S "
-    db "  EYE...  AWAKE "
-    db "THE DREAMER, AND"
-    db "  KOHOLINT WILL "
-    db "VANISH MUCH LIKE"
-    db "  A BUBBLE ON A "
-    db "NEEDLE... CAST- "
-    db "AWAY, YOU SHOULD"
-    db "KNOW THE TRUTH! "
-    db "... ... ... ... "
-    db "What?  Illusion?@"
+    dialog_text "TO THE FINDER...   THE ISLE OF KOHOLINT, IS BUT   AN ILLUSION...  HUMAN, MONSTER,  SEA, SKY... A SCENE ON THE LID  OF A SLEEPER'S", "  EYE...  AWAKE THE DREAMER, AND   KOHOLINT WILL VANISH MUCH LIKE   A BUBBLE ON A NEEDLE... CAST- AWAY, YOU SHOULD KNOW THE TRUTH! ... ... ... ... What?  Illusion?"
 
 Dialog0E8:: ; Narrator
-    db "You've found a  "
-    db "Gold Leaf! Press"
-    db "START to see    "
-    db "how many you've "
-    db "collected!@"
+    dialog_text "You've found a Gold Leaf! Press START to see", "how many you've collected!"
 
 Dialog0E9:: ; Narrator
-    db "At last!  You've"
-    db "got the final   "
-    db "Golden Leaf!    "
-    db "Now go and see  "
-    db "Richard about   "
-    db "that key...@"
+    dialog_text "At last!  You've got the final Golden Leaf!", "Now go and see Richard about that key..."
 
 Dialog0EA:: ; Narrator
 Dialog0EB:: ; Narrator
 Dialog0EC:: ; Narrator
-    db "You've got a    "
-    db "Guardian Acorn! "
-    db "It will reduce  "
-    db "the damage you  "
-    db "take by half!@"
+    dialog_text "You've got a Guardian Acorn! It will reduce the damage you take by half!"
 
 Dialog0ED:: ; Narrator
-    db "You've got the  "
-    db "Mirror Shield!  "
-    db "You can now turn"
-    db "back the beams  "
-    db "you couldn't    "
-    db "block before!@"
+    dialog_text "You've got the Mirror Shield! You can now turn back the beams you couldn't block before!"
 
 Dialog0EE:: ; Narrator
-    db "You've got a    "
-    db "more Powerful   "
-    db "Bracelet!  Now  "
-    db "you can almost  "
-    db "lift a whale!@"
+    dialog_text "You've got a more Powerful Bracelet!  Now you can almost lift a whale!"
 
 Dialog0EF:: ; Narrator
-    db "You found a     "
-    db "Secret Seashell!"
-    db "If you collect a"
-    db "lot of these,   "
-    db "something good  "
-    db "is bound to     "
-    db "happen!@"
+    dialog_text "You found a Secret Seashell! If you collect a lot of these, something good is bound to happen!"
 
 Dialog0F0:: ; Raft Guy
-    db "Want to go on a "
-    db "raft ride for a "
-    db "hundred Rupees? "
-    db "    Yes  No Way<ask>"
+    dialog_string_wrapping "Want to go on a raft ride for a hundred Rupees?"
+    dialog_ask_line "Yes", "No Way"
 
 Dialog0F1:: ; Raft Guy
-    db "Okay, the raft  "
-    db "is ready for you"
-    db "outside!  Enjoy!@"
+    dialog_text "Okay, the raft is ready for you outside!  Enjoy!"
 
 Dialog0F2:: ; Signpost, probably
-    db "Waterfall at the"
-    db "    Shrine@"
+    dialog_text "Waterfall at the     Shrine"
 
 Dialog0F3:: ; Signpost, probably
-    db " South of the   "
-    db "    Shrine@"
+    dialog_text " South of the", "    Shrine"
 
 Dialog0F4:: ; Signpost, probably
-    db "Entrance to the "
-    db " Animal Village@"
+    dialog_text "Entrance to the", " Animal Village"
 
 Dialog0F5:: ; Nightmare (final boss)
-    db "We were born of "
-    db "nightmares... To"
-    db "take over this  "
-    db "world, we made  "
-    db "the Wind Fish   "
-    db "sleep endlessly!"
-    db "If the Wind Fish"
-    db "doesn't wake up,"
-    db "this island will"
-    db "never disappear!"
-    db "We would have   "
-    db "been the masters"
-    db "of this place..."
-    db "But you had to  "
-    db "come here and   "
-    db "disrupt our     "
-    db "plans!  Heh heh!"
-    db "You can never   "
-    db "defeat us!!!    "
-    db "Let's rumble!@"
+    dialog_text "We were born of nightmares... To take over this world, we made the Wind Fish sleep endlessly! If the Wind Fish doesn't wake up, this island will never disappear! We would have been the masters of this place... But you had to come here and disrupt our plans!  Heh heh! You can never defeat us!!! Let's rumble!"
 
 Dialog0F6:: ; Nightmare (final boss)
-    db "This island is  "
-    db "going to dis-   "
-    db "appear...  Our  "
-    db "world is going  "
-    db "to disappear... "
-    db "Our world...    "
-    db "Our... world... @"
+    dialog_text "This island is going to dis- appear...  Our world is going to disappear... Our world... Our... world... "
 
 Dialog0F7:: ; Marin
-    db "Wow!  #####, can"
-    db "I try this?!    "
-    db "What do you say?"
-    db "    Okay No Way<ask>"
+    dialog_string_wrapping "Wow!  #####, can I try this?! What do you say?"
+    dialog_ask_line "Okay", "No Way"
 
 Dialog0F8:: ; Marin
-    db "C'mon!  I want  "
-    db "to do it! Can I?"
-    db "It looks so fun!"
-    db "    Yes  Okay<ask>"
+    dialog_string_wrapping "C'mon!  I want to do it! Can I? It looks so fun!"
+    dialog_ask_line "Yes", "Okay"
 
 Dialog0F9:: ; Trendy Gamester
-    db "You're good!    "
-    db "You're a pro,   "
-    db "aren't you?     "
-    db "... ... ... ... "
-    db "Well, beat it!  "
-    db "Pros aren't     "
-    db "allowed in here!@"
+    dialog_text "You're good! You're a pro, aren't you?", "... ... ... ... Well, beat it! Pros aren't allowed in here!"
 
 Dialog0FA:: ; Hippo
-    db "Go away!@"
+    dialog_text "Go away!"
 
 Dialog0FB:: ; idk
-    db "Quit it!@"
+    dialog_text "Quit it!"
 
 Dialog0FC:: ; Narrator
-    db "This is not a   "
-    db "chest...  What? "
-    db "You knew that?  "
-    db "Okay.@"
+    dialog_text "This is not a chest...  What? You knew that? Okay."
 
 Dialog0FD:: ; Narrator
-    db "##### checked   "
-    db "the chest.  Wow!"
-    db "This is a nice  "
-    db "chest!@"
+    dialog_text "##### checked the chest.  Wow! This is a nice chest!"
 
 Dialog0FE:: ; Witch
-    db "It's all ready, "
-    db "it is!  Take    "
-    db "care, as there's"
-    db "not much there! "
-    db "Why not try a   "
-    db "bit in my hut?@"
+    dialog_text "It's all ready, it is!  Take care, as there's not much there! Why not try a bit in my hut?"
 
 Dialog0FF:: ; Tarin
-    db "Hey!  What are  "
-    db "ya doin' in my  "
-    db "chest?!  Where'd"
-    db "you learn ta do "
-    db "such a thing?!@"
+    dialog_text "Hey!  What are ya doin' in my chest?!  Where'd you learn ta do such a thing?!"
 
 Dialog100:: ; Narrator
-    db "You've got the  "
-    db "Full Moon Cello!@"
+    dialog_text "You've got the Full Moon Cello!"
 
 Dialog101:: ; Narrator
-    db "You've got the  "
-    db "Conch Horn!@"
+    dialog_text "You've got the Conch Horn!"
 
 Dialog102:: ; Narrator
-    db "You've got the  "
-    db "Sea Lily's Bell!@"
+    dialog_text "You've got the Sea Lily's Bell!"
 
 Dialog103:: ; Narrator
-    db "You've got the  "
-    db "Surf Harp!@"
+    dialog_text "You've got the Surf Harp!"
 
 Dialog104:: ; Narrator
-    db "You've got the  "
-    db "Wind Marimba!@"
+    dialog_text "You've got the Wind Marimba!"
 
 Dialog105:: ; Narrator
-    db "You've got the  "
-    db "Coral Triangle!@"
+    dialog_text "You've got the Coral Triangle!"
 
 Dialog106:: ; Narrator
-    db "You've got the  "
-    db "Organ of        "
-    db "  Evening Calm!@"
+    dialog_text "You've got the Organ of", "  Evening Calm!"
 
 Dialog107:: ; Narrator
-    db "You've got the  "
-    db "Thunder Drum!@"
+    dialog_text "You've got the Thunder Drum!"

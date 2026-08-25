@@ -453,6 +453,7 @@ include "data/object_attributes/overworld_a.asm"
 
 section "bank23",romx[$4000],bank[$23]
 include "data/object_attributes/indoors_a.asm"
+include "data/backgrounds/credits.asm"
 include "code/bank23.asm"
 
 section "bank24",romx[$4000],bank[$24]

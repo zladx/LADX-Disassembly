@@ -81,7 +81,7 @@ dw Overworld4D  ; $25998
 dw Overworld4E  ; $259E9
 dw Overworld4F  ; $25A0E
 dw Overworld50  ; $25A3F
-dw Overworld63  ; $25A8F
+dw Overworld51  ; $25A8F
 dw Overworld52  ; $25AE2
 dw Overworld53  ; $25B35
 dw Overworld54  ; $25B82

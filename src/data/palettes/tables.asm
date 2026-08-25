@@ -58,7 +58,7 @@ OverworldPaletteMap::
 ; interior data
 
 ; Array indexed by hMapId
-DungeonPalettesA:: ; might be Nightmare palettes?
+DungeonPalettesA:: ; Main background palettes
                                  ; hMapId
     dw   TailCavePaletteA        ; $00 TAIL_CAVE            ; indoors A
     dw   BottleGrottoPaletteA    ; $01 BOTTLE_GROTTO
@@ -71,7 +71,7 @@ DungeonPalettesA:: ; might be Nightmare palettes?
     dw   WindFishsEggPalette     ; $08 WINDFISHS_EGG
 
 ; Array indexed by hMapId
-DungeonPalettesB::
+DungeonPalettesB:: ; Sidescroll background palettes
     dw   TailCavePaletteB        ; $00 TAIL_CAVE
     dw   BottleGrottoPaletteB    ; $01 BOTTLE_GROTTO
     dw   KeyCavernPaletteB       ; $02 KEY_CAVERN

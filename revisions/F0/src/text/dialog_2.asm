@@ -1,908 +1,326 @@
 Dialog080::
-    db "   Pharmacie    "
-    db "   de Monique@"
+    dialog_text "   Pharmacie", "   de Monique"
 
 Dialog081::
-    db "      Chez      "
-    db " les Quadruplés@"
+    dialog_text "      Chez", " les Quadruplés"
 
 Dialog082::
-    db "Gîte des Rêves@"
+    dialog_text "Gîte des Rêves"
 
 Dialog083::
-    db "     Cabine     "
-    db "  téléphonique@"
+    dialog_text "     Cabine", "  téléphonique"
 
 Dialog084::
-    db "     Maison     "
-    db "aux Coquillages@"
+    dialog_text "     Maison", "aux Coquillages"
 
 Dialog085::
-    db "Villa de Richard"
-    db "@"
+    dialog_text "Villa de Richard "
 
 Dialog086::
-    db "   Poulailler@"
+    dialog_text "   Poulailler"
 
 Dialog087::
-    db "  Bibliothèque@"
+    dialog_text "  Bibliothèque"
 
 Dialog088::
-    db "    Location    "
-    db "   de radeaux@"
+    dialog_text "    Location", "   de radeaux"
 
 Dialog089::
-    db "   Trou Warp@"
+    dialog_text "   Trou Warp"
 
 Dialog08A::
-    db "Ce rocher est   "
-    db "très fissuré... "
-    db "Il doit y avoir "
-    db "un moyen        "
-    db "de le casser...@"
+    dialog_text "Ce rocher est très fissuré... Il doit y avoir un moyen", "de le casser..."
 
 Dialog08B::
-    db "Oh! Quel        "
-    db "drôle d'objet!  "
-    db "Peut-être que tu"
-    db "peux le briser  "
-    db "en fonçant      "
-    db "dedans.@"
+    dialog_text "Oh! Quel", "drôle d'objet! Peut-être que tu peux le briser en fonçant dedans."
 
 Dialog08C::
-    db "Ce bloc a un    "
-    db "trou de serrure!"
-    db "Il te faudrait  "
-    db "une Clé!@"
+    dialog_text "Ce bloc a un trou de serrure! Il te faudrait une Clé!"
 
 Dialog08D::
-    db "Oh là... C'est  "
-    db "bien trop lourd!"
-    db "Tu n'y arriveras"
-    db "jamais rien que "
-    db "par la force    "
-    db "de tes bras!@"
+    dialog_text "Oh là... C'est bien trop lourd! Tu n'y arriveras jamais rien que par la force", "de tes bras!"
 
 Dialog08E::
-    db "C'est un Ocarina"
-    db "mais tu ne sais "
-    db "pas comment     "
-    db "en jouer...@"
+    dialog_text "C'est un Ocarina mais tu ne sais pas comment", "en jouer..."
 
 Dialog08F::
-    db "La pauvre poule!"
-    db "Arrête donc!@"
+    dialog_text "La pauvre poule! Arrête donc!"
 
 Dialog090::
-    db "Tu as trouvé    "
-    db "le Bracelet!    "
-    db "Génial! Tu peux "
-    db "soulever des    "
-    db "jarres et des   "
-    db "pierres!@"
+    dialog_text "Tu as trouvé", "le Bracelet! Génial! Tu peux soulever des jarres et des pierres!"
 
 Dialog091::
-    db "Vous récupérez  "
-    db "votre bouclier! "
-    db "Utilisez-le pour"
-    db "repousser vos   "
-    db "ennemis!@"
+    dialog_text "Vous récupérez votre bouclier! Utilisez-le pour repousser vos ennemis!"
 
 Dialog092::
-    db "Cette Poudre    "
-    db "est si fraîche! "
-    db "Pour ta peine,  "
-    db "voici un indice:"
-    db "si tu es avalé  "
-    db "par les sables  "
-    db "mouvants, place "
-    db "une Bombe là    "
-    db "où tu tombes.   "
-    db "De l'autre côté,"
-    db "une surprise    "
-    db "t'attend. Salut!"
-    db "@"
+    dialog_text "Cette Poudre", "est si fraîche! Pour ta peine, voici un indice: si tu es avalé par les sables mouvants, place une Bombe là", "où tu tombes.", "De l'autre côté, une surprise t'attend. Salut! "
 
 Dialog093::
-    db "Tu as le        "
-    db "Grappin!        "
-    db "Tu vas voir     "
-    db "comment la      "
-    db "chaîne s'étire!@"
+    dialog_text "Tu as le Grappin!", "Tu vas voir comment la chaîne s'étire!"
 
 Dialog094::
-    db "Tu as le Bâton  "
-    db "de Feu!         "
-    db "Brûle! Brûle!   "
-    db "Brûle tout      "
-    db "ce que tu veux!@"
+    dialog_text "Tu as le Bâton de Feu!", "Brûle! Brûle! Brûle tout", "ce que tu veux!"
 
 Dialog095::
-    db "Tu as les Bottes"
-    db "de Pégase!      "
-    db "Garde le bouton "
-    db "enfoncé et      "
-    db "tu fileras      "
-    db "comme le vent!@"
+    dialog_text "Tu as les Bottes de Pégase!", "Garde le bouton enfoncé et", "tu fileras", "comme le vent!"
 
 Dialog096::
-    db "Tu as l'Ocarina!"
-    db "J'espère que    "
-    db "tu pourras jouer"
-    db "plusieurs airs!@"
+    dialog_text "Tu as l'Ocarina! J'espère que", "tu pourras jouer plusieurs airs!"
 
 Dialog097::
-    db "Tu as la Plume! "
-    db "Soudain, tu es  "
-    db "plus léger      "
-    db "que l'air!@"
+    dialog_text "Tu as la Plume! Soudain, tu es plus léger", "que l'air!"
 
 Dialog098::
-    db "Tu as la Pelle! "
-    db "Maintenant,     "
-    db "tu peux creuser "
-    db "où tu veux!@"
+    dialog_text "Tu as la Pelle! Maintenant,", "tu peux creuser où tu veux!"
 
 Dialog099::
-    db "Tu as la        "
-    db "Poudre Magique! "
-    db "Essaie de la    "
-    db "saupoudrer sur  "
-    db "plein de choses!"
-    db "@"
+    dialog_text "Tu as la", "Poudre Magique! Essaie de la saupoudrer sur plein de choses! "
 
 Dialog09A::
-    db "Vous obtenez une"
-    db "bombe! Bien     "
-    db "joué!@"
+    dialog_text "Vous obtenez une bombe! Bien joué!"
 
 Dialog09B::
-    db "Tu as retrouvé  "
-    db "ton Epée!       "
-    db "C'est la tienne "
-    db "car il y a ton  "
-    db "nom dessus!@"
+    dialog_text "Tu as retrouvé ton Epée!", "C'est la tienne car il y a ton nom dessus!"
 
 Dialog09C::
-    db "Tu as           "
-    db "les Palmes!     "
-    db "Appuie sur B    "
-    db "quand tu nages: "
-    db "tu pourras alors"
-    db "plonger!@"
+    dialog_text "Tu as", "les Palmes! Appuie sur B quand tu nages: tu pourras alors plonger!"
 
 Dialog09D::
-    db "Tu as la Loupe! "
-    db "Elle te montrera"
-    db "ce que tu ne    "
-    db "pouvais pas voir"
-    db "auparavant!@"
+    dialog_text "Tu as la Loupe! Elle te montrera ce que tu ne pouvais pas voir auparavant!"
 
 Dialog09E::
 Dialog09F::
-    db "Tu as une       "
-    db "nouvelle Epée!  "
-    db "N'oublie pas de "
-    db "graver ton nom  "
-    db "dessus!@"
+    dialog_text "Tu as une nouvelle Epée! N'oublie pas de graver ton nom dessus!"
 
 Dialog0A0::
-    db "Vous trouvez le "
-    db "médicament      "
-    db "secret! A quoi  "
-    db "cela peut-il    "
-    db "servir?@"
+    dialog_text "Vous trouvez le médicament secret! A quoi cela peut-il servir?"
 
 Dialog0A1::
-    db "Tu as la        "
-    db "Clé Flagello!   "
-    db "Tu peux ouvrir  "
-    db "la porte de la  "
-    db "Cave Flagello!@"
+    dialog_text "Tu as la", "Clé Flagello!", "Tu peux ouvrir la porte de la Cave Flagello!"
 
 Dialog0A2::
-    db "Tu as la        "
-    db "Clé Cyclope!    "
-    db "Vite! Va vers   "
-    db "l'entrée de     "
-    db "La Prairie!@"
+    dialog_text "Tu as la", "Clé Cyclope! Vite! Va vers l'entrée de", "La Prairie!"
 
 Dialog0A3::
-    db "Tu as la        "
-    db "Clé Poisson!@"
+    dialog_text "Tu as la", "Clé Poisson!"
 
 Dialog0A4::
-    db "Tu as la        "
-    db "Clé Masque!@"
+    dialog_text "Tu as la", "Clé Masque!"
 
 Dialog0A5::
-    db "Tu as la        "
-    db "Clé Vautour!@"
+    dialog_text "Tu as la", "Clé Vautour!"
 
 Dialog0A6::
-    db "Tu as une Carte!"
-    db "Appuie sur      "
-    db "START pour      "
-    db "la consulter!@"
+    dialog_text "Tu as une Carte! Appuie sur", "START pour", "la consulter!"
 
 Dialog0A7::
-    db "Tu as la        "
-    db "Boussole!       "
-    db "Maintenant,     "
-    db "tu peux voir où "
-    db "sont cachés     "
-    db "les Coffres et  "
-    db "le Boss! Si une "
-    db "Clé est dans une"
-    db "salle, un son te"
-    db "préviendra!     "
-    db "C'est ça        "
-    db "le progrès...@"
+    dialog_text "Tu as la Boussole! Maintenant,", "tu peux voir où sont cachés", "les Coffres et le Boss! Si une Clé est dans une salle, un son te préviendra! C'est ça", "le progrès..."
 
 Dialog0A8::
-    db "Vous trouvez un "
-    db "bec de pierre!  "
-    db "Allez compléter "
-    db "une statue de   "
-    db "chouette.@"
+    dialog_text "Vous trouvez un bec de pierre! Allez compléter une statue de chouette."
 
 Dialog0A9::
-    db "Tu as la Clé    "
-    db "du Boss.        "
-    db "Tu peux ouvrir  "
-    db "la porte de     "
-    db "son repaire!@"
+    dialog_text "Tu as la Clé", "du Boss.", "Tu peux ouvrir la porte de", "son repaire!"
 
 Dialog0AA::
-    db "Tu as une Petite"
-    db "Clé. Tu peux    "
-    db "ouvrir une porte"
-    db "verrouillée!@"
+    dialog_text "Tu as une Petite Clé. Tu peux ouvrir une porte verrouillée!"
 
 Dialog0AB::
-    db "Tu as trouvé    "
-    db "20 rubis.       "
-    db "Ó joie!@"
+    dialog_text "Tu as trouvé", "20 rubis.", "Ó joie!"
 
 Dialog0AC::
-    db "Tu as trouvé    "
-    db "50 rubis.       "
-    db "Merveilleux!@"
+    dialog_text "Tu as trouvé", "50 rubis. Merveilleux!"
 
 Dialog0AD::
-    db "Tu as trouvé    "
-    db "100 rubis.      "
-    db "Fantastique!@"
+    dialog_text "Tu as trouvé", "100 rubis. Fantastique!"
 
 Dialog0AE::
-    db "Tu as trouvé    "
-    db "200 rubis.      "
-    db "Quelle extase!@"
+    dialog_text "Tu as trouvé", "200 rubis. Quelle extase!"
 
 Dialog0AF::
-    db "Va-t'en!        "
-    db "Tu vois pas que "
-    db "je pose? Le beau"
-    db "Sven doit faire "
-    db "mon portrait!@"
+    dialog_text "Va-t'en!", "Tu vois pas que je pose? Le beau Sven doit faire mon portrait!"
 
 Dialog0B0::
-    db "GRRR! GRR!      "
-    db "UN INTRRRUS!@"
+    dialog_text "GRRR! GRR!", "UN INTRRRUS!"
 
 Dialog0B1::
-    db "BONK! BONK!     "
-    db "Tu ne m'auras   "
-    db "pas! BONK!@"
+    dialog_text "BONK! BONK!", "Tu ne m'auras pas! BONK!"
 
 Dialog0B2::
-    db "GLOU GLOU!      "
-    db "GLOUP! GLOUP!   "
-    db "MIAM! A MANGER! "
-    db "GLOUP! GLOUP!@"
+    dialog_text "GLOU GLOU! GLOUP! GLOUP! MIAM! A MANGER! GLOUP! GLOUP!"
 
 Dialog0B3::
-    db "Ah Ah! Tu es    "
-    db "l'intrus venu   "
-    db "réveiller le    "
-    db "Poisson-Rêve... "
-    db "Tu vas me servir"
-    db "de déjeuner!@"
+    dialog_text "Ah Ah! Tu es l'intrus venu réveiller le Poisson-Rêve... Tu vas me servir de déjeuner!"
 
 Dialog0B4::
-    db "HI HI HI!!      "
-    db "Attends un peu, "
-    db "que je m'occupe "
-    db "de toi... HI HI!"
-    db "@"
+    dialog_text "HI HI HI!! Attends un peu, que je m'occupe de toi... HI HI! "
 
 Dialog0B5::
-    db "AHHH!           "
-    db "Tu ne connais   "
-    db "pas encore      "
-    db "cette île! Tu   "
-    db "es vraiment     "
-    db "naïf... AHHH!@"
+    dialog_text "AHHH!", "Tu ne connais pas encore", "cette île! Tu", "es vraiment naïf... AHHH!"
 
 Dialog0B6::
-    db "Hé petit! Besoin"
-    db "d'un indice?    "
-    db "Mon point faible"
-    db "c'est la...     "
-    db "Ouh, j'ai failli"
-    db "trop en dire...@"
+    dialog_text "Hé petit! Besoin d'un indice?", "Mon point faible c'est la...", "Ouh, j'ai failli trop en dire..."
 
 Dialog0B7::
-    db "Je parle trop..."
-    db "Mais si le      "
-    db "Poisson-Rêve    "
-    db "s'éveille, tout "
-    db "ce qui se trouve"
-    db "sur cette île   "
-    db "disparaîtra!    "
-    db "Oui... TOUT!@"
+    dialog_text "Je parle trop... Mais si le Poisson-Rêve s'éveille, tout ce qui se trouve sur cette île disparaîtra! Oui... TOUT!"
 
 Dialog0B8::
 Dialog0B9::
-    db "J'ai perdu...   "
-    db "Toi aussi, tu   "
-    db "vas perdre si   "
-    db "le Poisson-Rêve "
-    db "s'éveille...    "
-    db "Tout comme moi, "
-    db "tu es... dans   "
-    db "son rêve...@"
+    dialog_text "J'ai perdu... Toi aussi, tu vas perdre si", "le Poisson-Rêve s'éveille... Tout comme moi, tu es... dans son rêve..."
 
 Dialog0BA::
-    db "Cette fois-ci,  "
-    db "je vais t'avoir,"
-    db "c'est sûr... Je "
-    db "vais t'écraser  "
-    db "comme une       "
-    db "vulgaire fourmi!"
-    db "@"
+    dialog_text "Cette fois-ci, je vais t'avoir, c'est sûr... Je vais t'écraser comme une vulgaire fourmi! "
 
 Dialog0BB::
 Dialog0BC::
-    db "SPLASHHH!       "
-    db "Tu vas mourir!  "
-    db "Jamais, je ne te"
-    db "laisserai jouer "
-    db "des Instruments "
-    db "des Sirènes!@"
+    dialog_text "SPLASHHH!", "Tu vas mourir! Jamais, je ne te laisserai jouer des Instruments des Sirènes!"
 
 Dialog0BD::
-    db "NON!!!...       "
-    db "Si tu n'étais   "
-    db "pas venu ici,   "
-    db "rien n'aurait   "
-    db "changé.         "
-    db "Tu ne peux pas  "
-    db "réveiller le    "
-    db "Poisson-Rêve!   "
-    db "N'oublie pas... "
-    db "Nous faisons... "
-    db "tous partie...  "
-    db "de son rêve...@"
+    dialog_text "NON!!!...", "Si tu n'étais pas venu ici, rien n'aurait changé.", "Tu ne peux pas réveiller le Poisson-Rêve! N'oublie pas... Nous faisons... tous partie... de son rêve..."
 
 Dialog0BE::
 Dialog0BF::
 Dialog0C0::
-    db "Hou! Bienvenue  "
-    db "à la Forêt      "
-    db "Enchantée, mon  "
-    db "brave garçon!   "
-    db "L'île Cocolint  "
-    db "abonde en       "
-    db "mystères et     "
-    db "n'existe sur    "
-    db "aucune carte.   "
-    db "Son règlement   "
-    db "est unique!     "
-    db "Tu ne pourras   "
-    db "pas la quitter  "
-    db "tant que le     "
-    db "Poisson-Rêve    "
-    db "dormira.        "
-    db "A propos,       "
-    db "as-tu visité la "
-    db "Cave Flagello,  "
-    db "située au Sud   "
-    db "du village?     "
-    db "Vas-y avec la   "
-    db "Clé cachée      "
-    db "dans la Forêt.  "
-    db "Le Poisson-Rêve "
-    db "te regarde.Hou!@"
+    dialog_text "Hou! Bienvenue", "à la Forêt Enchantée, mon brave garçon! L'île Cocolint abonde en mystères et n'existe sur aucune carte. Son règlement est unique!", "Tu ne pourras pas la quitter tant que le Poisson-Rêve dormira.", "A propos,", "as-tu visité la Cave Flagello, située au Sud", "du village?", "Vas-y avec la Clé cachée", "dans la Forêt. Le Poisson-Rêve te regarde.Hou!"
 
 Dialog0C1::
-    db "Hou!            "
-    db "Avec cette clé, "
-    db "va à la Cave    "
-    db "Flagello.       "
-    db "Prends          "
-    db "l'Instrument qui"
-    db "y est dissimulé."
-    db "Dépêche-toi!    "
-    db "Le Poisson-Rêve "
-    db "attend! Hou!@"
+    dialog_text "Hou!", "Avec cette clé, va à la Cave Flagello.", "Prends l'Instrument qui y est dissimulé. Dépêche-toi!", "Le Poisson-Rêve attend! Hou!"
 
 Dialog0C2::
-    db "Hou! C'est un   "
-    db "des Instruments "
-    db "des Sirènes!    "
-    db "Tu es brave et  "
-    db "je t'avais      "
-    db "sous-estimé...  "
-    db "Cet Instrument  "
-    db "- utilisé avec  "
-    db "les 7 autres -  "
-    db "a le pouvoir    "
-    db "de réveiller    "
-    db "le Poisson-Rêve."
-    db "Collecte ces    "
-    db "8 Instruments!  "
-    db "Je suis ici pour"
-    db "t'indiquer le   "
-    db "chemin...       "
-    db "Maintenant,     "
-    db "va au Marais    "
-    db "des Anémones,   "
-    db "situé au Nord!  "
-    db "Hou!@"
+    dialog_text "Hou! C'est un des Instruments des Sirènes!", "Tu es brave et je t'avais", "sous-estimé... Cet Instrument", "- utilisé avec les 7 autres -", "a le pouvoir", "de réveiller", "le Poisson-Rêve. Collecte ces", "8 Instruments! Je suis ici pour t'indiquer le chemin... Maintenant,", "va au Marais", "des Anémones, situé au Nord! Hou!"
 
 Dialog0C3::
-    db "Hou! Ton        "
-    db "compagnon       "
-    db "a l'air féroce! "
-    db "N'oublie pas,le "
-    db "2ème Instrument "
-    db "se trouve dans  "
-    db "le Marais!@"
+    dialog_text "Hou! Ton compagnon", "a l'air féroce! N'oublie pas,le 2ème Instrument se trouve dans le Marais!"
 
 Dialog0C4::
-    db "Hou!            "
-    db "Le Poisson-Rêve "
-    db "sommeille dans  "
-    db "l'Oeuf, là haut."
-    db "Il rêve, rêve!  "
-    db "Il se réveillera"
-    db "si tu te tiens  "
-    db "face à I'Oeuf et"
-    db "que tu joues des"
-    db "8 Instruments.  "
-    db "Ainsi seulement,"
-    db "pourras-tu      "
-    db "quitter l'île..."
-    db "Hou!!@"
+    dialog_text "Hou!", "Le Poisson-Rêve sommeille dans l'Oeuf, là haut. Il rêve, rêve! Il se réveillera si tu te tiens face à I'Oeuf et que tu joues des 8 Instruments. Ainsi seulement, pourras-tu quitter l'île... Hou!!"
 
 Dialog0C5::
-    db "Hou! Combien    "
-    db "d'Instruments   "
-    db "as-tu collectés?"
-    db "Quand tu joueras"
-    db "des Instruments "
-    db "face à l'Oeuf,  "
-    db "le Poisson-Rêve "
-    db "se réveillera   "
-    db "et tu pourras   "
-    db "quitter l'île.  "
-    db "Va vite vers les"
-    db "Dunes de Yarna! "
-    db "L'horrible      "
-    db "monstre noir    "
-    db "des sables      "
-    db "t'indiquera     "
-    db "le chemin!      "
-    db "Hou hou!@"
+    dialog_text "Hou! Combien d'Instruments", "as-tu collectés? Quand tu joueras des Instruments face à l'Oeuf, le Poisson-Rêve se réveillera", "et tu pourras quitter l'île. Va vite vers les Dunes de Yarna! L'horrible monstre noir", "des sables t'indiquera", "le chemin!", "Hou hou!"
 
 Dialog0C6::
-    db "Hou! Cette clé  "
-    db "évoque          "
-    db "un poisson      "
-    db "remontant       "
-    db "une cascade. Va "
-    db "à cette cascade,"
-    db "fais disparaître"
-    db "l'eau et        "
-    db "saute du sommet."
-    db "@"
+    dialog_text "Hou! Cette clé évoque", "un poisson remontant", "une cascade. Va à cette cascade, fais disparaître l'eau et", "saute du sommet. "
 
 Dialog0C7::
-    db "Hou! Au Sud     "
-    db "et au Nord,     "
-    db "se trouvent     "
-    db "deux temples.   "
-    db "Va d'abord au   "
-    db "Sud, là où des  "
-    db "Ruines antiques "
-    db "parlent         "
-    db "du Poisson-Rêve."
-    db "Tu en sauras    "
-    db "sûrement plus..."
-    db "@"
+    dialog_text "Hou! Au Sud", "et au Nord,", "se trouvent", "deux temples.", "Va d'abord au Sud, là où des Ruines antiques parlent", "du Poisson-Rêve. Tu en sauras sûrement plus... "
 
 Dialog0C8::
-    db "Hou! Je vois que"
-    db "tu as lu ce     "
-    db "Marbre ancien.  "
-    db "Il dit que l'île"
-    db "est issue       "
-    db "des songes      "
-    db "du Poisson-Rêve,"
-    db "mais personne   "
-    db "n'en est sûr... "
-    db "Qui peut savoir "
-    db "ce que contient "
-    db "un coffre tant  "
-    db "qu'il n'a pas   "
-    db "été ouvert?     "
-    db "Qui peut deviner"
-    db "s'il rêve tant  "
-    db "qu'il ne s'est  "
-    db "pas réveillé?   "
-    db "Le Poisson-Rêve "
-    db "est le seul qui "
-    db "sait... Suis ton"
-    db "instinct. Ainsi,"
-    db "tu sauras...    "
-    db "Hou hou!@"
+    dialog_text "Hou! Je vois que tu as lu ce Marbre ancien. Il dit que l'île est issue", "des songes", "du Poisson-Rêve, mais personne n'en est sûr... Qui peut savoir ce que contient un coffre tant qu'il n'a pas été ouvert?", "Qui peut deviner s'il rêve tant qu'il ne s'est pas réveillé?", "Le Poisson-Rêve est le seul qui sait... Suis ton instinct. Ainsi, tu sauras...", "Hou hou!"
 
 Dialog0C9::
-    db "Hou! Les        "
-    db "monstres de     "
-    db "cette île ont   "
-    db "peur que le     "
-    db "Poisson-Rêve    "
-    db "ne s'éveille.   "
-    db "Leur pouvoir    "
-    db "est bien réel!  "
-    db "Ils pourraient  "
-    db "conquérir l'île "
-    db "et anéantir     "
-    db "leurs ennemis.  "
-    db "Va à la tour    "
-    db "de la montagne  "
-    db "en volant comme "
-    db "un oiseau! Hou!@"
+    dialog_text "Hou! Les monstres de cette île ont peur que le Poisson-Rêve", "ne s'éveille. Leur pouvoir", "est bien réel! Ils pourraient conquérir l'île et anéantir leurs ennemis. Va à la tour", "de la montagne en volant comme un oiseau! Hou!"
 
 Dialog0CA::
-    db "Hou hou!        "
-    db "Ton périple est "
-    db "ardu mais tu y  "
-    db "es presque...   "
-    db "Va vers l'Est.  "
-    db "Le Poisson du   "
-    db "Vent a besoin de"
-    db "sommeil.        "
-    db "@"
+    dialog_text "Hou hou!", "Ton périple est ardu mais tu y es presque...", "Va vers l'Est. Le Poisson du Vent a besoin de sommeil.        "
 
 Dialog0CB::
-    db "Hou! Cela       "
-    db "fait longtemps  "
-    db "qu'on ne s'est  "
-    db "rencontrés!     "
-    db "Plonge dans la  "
-    db "Baie de Martha  "
-    db "et entre        "
-    db "dans la gueule  "
-    db "du Poisson-Chat."
-    db "Plus tu es près "
-    db "du Poisson-Rêve,"
-    db "plus son sommeil"
-    db "est agité...    "
-    db "Tu es dans la   "
-    db "bonne voie. Hou!"
-    db "@"
+    dialog_text "Hou! Cela", "fait longtemps qu'on ne s'est rencontrés! Plonge dans la Baie de Martha et entre", "dans la gueule du Poisson-Chat. Plus tu es près du Poisson-Rêve, plus son sommeil est agité...", "Tu es dans la bonne voie. Hou! "
 
 Dialog0CC::
-    db "Hou! Cette fille"
-    db "a chanté en face"
-    db "de l'Oeuf sa    "
-    db "\"Ballade du     "
-    db "Poisson-Rêve\".  "
-    db "Mais c'est la   "
-    db "Chanson d'Eveil!"
-    db "Désirait-elle   "
-    db "vraiment        "
-    db "le réveiller?   "
-    db "Le prochain     "
-    db "Instrument est  "
-    db "dans le Roc     "
-    db "de la Tortue.   "
-    db "Anime ces rocs. "
-    db "Sois brave!     "
-    db "Le Poisson-Rêve "
-    db "attend...       "
-    db "Hou hou!@"
+    dialog_text "Hou! Cette fille a chanté en face de l'Oeuf sa \"Ballade du Poisson-Rêve\". Mais c'est la Chanson d'Eveil! Désirait-elle vraiment", "le réveiller?", "Le prochain Instrument est dans le Roc", "de la Tortue. Anime ces rocs. Sois brave!", "Le Poisson-Rêve attend...", "Hou hou!"
 
 Dialog0CD::
-    db "Hou hou!        "
-    db "Le Poisson-Rêve "
-    db "t'attend. Entre "
-    db "dans l'Oeuf...  "
-    db "Hou hou!@"
+    dialog_text "Hou hou!", "Le Poisson-Rêve t'attend. Entre dans l'Oeuf... Hou hou!"
 
 Dialog0CE::
 Dialog0CF::
-    db "Hou! Petit!     "
-    db "Heu pardon!     "
-    db "Maître #####,   "
-    db "tu as anéanti   "
-    db "les monstres!   "
-    db "Tu as fait      "
-    db "preuve de force,"
-    db "de sagesse      "
-    db "et de courage!  "
-    db "... ... ... ... "
-    db "Etant un des    "
-    db "esprits du      "
-    db "Poisson-Rêve,   "
-    db "je protégeais   "
-    db "son monde       "
-    db "onirique...     "
-    db "Hélas, un jour  "
-    db "le Cauchemar    "
-    db "envahit son rêve"
-    db "et menaça la    "
-    db "paix de l'île.  "
-    db "Mais toi #####, "
-    db "tu devins       "
-    db "notre espoir.   "
-    db "J'ai toujours   "
-    db "cru en toi!     "
-    db "Merci #####.    "
-    db "Ma tâche est    "
-    db "accomplie et je "
-    db "dois réintégrer "
-    db "le Poisson-Rêve."
-    db "Adieu... Hou!@"
+    dialog_text "Hou! Petit!", "Heu pardon! Maître #####,", "tu as anéanti les monstres!", "Tu as fait preuve de force, de sagesse", "et de courage! ... ... ... ... Etant un des esprits du Poisson-Rêve,", "je protégeais son monde onirique... Hélas, un jour le Cauchemar envahit son rêve et menaça la paix de l'île. Mais toi #####, tu devins", "notre espoir. J'ai toujours cru en toi! Merci #####.", "Ma tâche est accomplie et je dois réintégrer le Poisson-Rêve. Adieu... Hou!"
 
 Dialog0D0::
-    db "... ... ... ... "
-    db "... ... ... ... "
-    db "JE SUIS LE      "
-    db "POISSON-REVE!   "
-    db "LONG FUT        "
-    db "MON SOMMEIL...  "
-    db "DANS MES SONGES,"
-    db "UN OEUF APPARUT,"
-    db "PUIS UNE ILE    "
-    db "L'ENTOURA...    "
-    db "DES GENS... DES "
-    db "ANIMAUX... UN   "
-    db "MONDE ETAIT NE! "
-    db "... ... ... ... "
-    db "MAIS LE REVE    "
-    db "A TOUJOURS      "
-    db "UNE FIN, C'EST  "
-    db "LE DESTIN!      "
-    db "QUAND JE        "
-    db "M'EVEILLERAI,   "
-    db "COCOLINT        "
-    db "DISPARAITRA...  "
-    db "OR, LE SOUVENIR "
-    db "DE CETTE ILE    "
-    db "DOIT RESTER     "
-    db "DANS NOS COEURS "
-    db "EN TANT QUE     "
-    db "REALITE...      "
-    db "TOI AUSSI UN    "
-    db "JOUR, TU TE     "
-    db "SOUVIENDRAS.    "
-    db "CE SOUVENIR DOIT"
-    db "RESTER REEL     "
-    db "DANS UN MONDE   "
-    db "DE REVES...     "
-    db "VIENS #####,    "
-    db "EVEILLONS-NOUS  "
-    db "ENSEMBLE!!@"
+    dialog_text "... ... ... ... ... ... ... ... JE SUIS LE POISSON-REVE! LONG FUT", "MON SOMMEIL... DANS MES SONGES, UN OEUF APPARUT, PUIS UNE ILE L'ENTOURA...", "DES GENS... DES ANIMAUX... UN MONDE ETAIT NE! ... ... ... ... MAIS LE REVE", "A TOUJOURS", "UNE FIN, C'EST LE DESTIN!", "QUAND JE M'EVEILLERAI, COCOLINT DISPARAITRA... OR, LE SOUVENIR DE CETTE ILE DOIT RESTER", "DANS NOS COEURS EN TANT QUE REALITE...", "TOI AUSSI UN JOUR, TU TE SOUVIENDRAS.", "CE SOUVENIR DOIT RESTER REEL", "DANS UN MONDE", "DE REVES... VIENS #####, EVEILLONS-NOUS ENSEMBLE!!"
 
 Dialog0D1::
 Dialog0D2::
-    db "JOUE LA CHANSON "
-    db "DE L'EVEIL!!@"
+    dialog_text "JOUE LA CHANSON DE L'EVEIL!!"
 
 Dialog0D3::
 Dialog0D4::
 Dialog0D5::
-    db "La Petite Sirène"
-    db "@"
+    dialog_text "La Petite Sirène "
 
 Dialog0D6::
 Dialog0D7::
-    db "... #####,      "
-    db "tu as battu     "
-    db "Maléficio!      "
-    db "Va et monte     "
-    db "les escaliers!@"
+    dialog_text "... #####,", "tu as battu Maléficio!", "Va et monte", "les escaliers!"
 
 Dialog0D8::
-    db "Que pasa? Pero, "
-    db "qué fais-tu avec"
-    db "la Loupe?       "
-    db "Arrrrête!       "
-    db "Pobrecito...@"
+    dialog_text "Que pasa? Pero, qué fais-tu avec la Loupe? Arrrrête! Pobrecito..."
 
 Dialog0D9::
-    db "Hou hou!        "
-    db "Cette épée      "
-    db "est donc à toi! "
-    db "... Je comprends"
-    db "pourquoi        "
-    db "les monstres    "
-    db "s'agitent tant :"
-    db "celui qui doit  "
-    db "réveiller le    "
-    db "Poisson-Rêve    "
-    db "est arrivé!     "
-    db "On dit que pour "
-    db "quitter l'île,  "
-    db "cette personne  "
-    db "doit d'abord    "
-    db "le réveiller... "
-    db "Viens me voir   "
-    db "dans la Forêt   "
-    db "Enchantée, au   "
-    db "Nord du village."
-    db "Je t'y attends. "
-    db "Hou hou!@"
+    dialog_text "Hou hou!", "Cette épée", "est donc à toi! ... Je comprends pourquoi", "les monstres s'agitent tant : celui qui doit réveiller le Poisson-Rêve", "est arrivé!", "On dit que pour quitter l'île, cette personne doit d'abord", "le réveiller... Viens me voir dans la Forêt Enchantée, au Nord du village. Je t'y attends. Hou hou!"
 
 Dialog0DA::
-    db "Minable! Ne     "
-    db "vois-tu pas que "
-    db "tu me gênes!@"
+    dialog_text "Minable! Ne", "vois-tu pas que tu me gênes!"
 
 Dialog0DB::
-    db "Croâ croâ!      "
-    db "Je suis Wart,   "
-    db "le chanteur.    "
-    db "Tu es nul       "
-    db "en musique!     "
-    db "Reviens avec    "
-    db "du matos, vieux!"
-    db "Croâ croâ!@"
+    dialog_text "Croâ croâ!", "Je suis Wart,", "le chanteur.", "Tu es nul", "en musique! Reviens avec", "du matos, vieux! Croâ croâ!"
 
 Dialog0DC::
-    db "Croâ croâ!      "
-    db "Je suis Wart,   "
-    db "le chanteur.    "
-    db "Inutile de      "
-    db "me présenter :  "
-    db "je suis le roi  "
-    db "du Rap...       "
-    db "Tu veux rester  "
-    db "et nous écouter?"
-    db "Pour 300 rubis, "
-    db "on te chante    "
-    db "un méga morceau!"
-    db "Alors?...       "
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "Croâ croâ!", "Je suis Wart,", "le chanteur. Inutile de", "me présenter : je suis le roi du Rap...", "Tu veux rester et nous écouter? Pour 300 rubis, on te chante", "un méga morceau! Alors?..."
+    dialog_ask_line "Oui", "Non"
 
 Dialog0DD::
-    db "Merci...        "
-    db "Je suis ému.    "
-    db "Merci... Croâ!@"
+    dialog_text "Merci...", "Je suis ému. Merci... Croâ!"
 
 Dialog0DE::
-    db "De toute façon, "
-    db "on ne fait pas  "
-    db "dans le         "
-    db "bénévolat...@"
+    dialog_text "De toute façon, on ne fait pas dans le bénévolat..."
 
 Dialog0DF::
-    db "Tu as appris    "
-    db "la chanson des  "
-    db "Grenouilles.    "
-    db "C'est cool non? "
-    db "Tu peux donc    "
-    db "insuffler la vie"
-    db "dans les objets."
-    db "@"
+    dialog_text "Tu as appris", "la chanson des Grenouilles. C'est cool non? Tu peux donc insuffler la vie dans les objets. "
 
 Dialog0E0::
-    db "Si tu joues     "
-    db "cet air,        "
-    db "certains objets "
-    db "s'animeront!@"
+    dialog_text "Si tu joues", "cet air, certains objets s'animeront!"
 
 Dialog0E1::
-    db "Dis donc toi!   "
-    db "Merci de m'avoir"
-    db "dérangé pendant "
-    db "ma sieste!      "
-    db "Tiens, j'ai un  "
-    db "cadeau pour toi."
-    db "Tu es prêt?     "
-    db "@"
+    dialog_text "Dis donc toi! Merci de m'avoir dérangé pendant ma sieste! Tiens, j'ai un cadeau pour toi. Tu es prêt?     "
 
 Dialog0E2::
-    db "Tu veux plus de "
-    db "Poudre Magique? "
-    db "Tu es prêt?     "
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "Tu veux plus de Poudre Magique? Tu es prêt?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog0E3::
-    db "Tu veux plus de "
-    db "Bombes?         "
-    db "Tu es prêt?     "
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "Tu veux plus de Bombes?", "Tu es prêt?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog0E4::
-    db "Tu veux plus de "
-    db "Flèches?        "
-    db "Tu es prêt?     "
-    db "    Oui  Non<ask>"
+    dialog_string_wrapping "Tu veux plus de Flèches?", "Tu es prêt?"
+    dialog_ask_line "Oui", "Non"
 
 Dialog0E5::
-    db "Hi hi hi!       "
-    db "C'est bien fait "
-    db "pour toi!       "
-    db "Tu as vu tout   "
-    db "ce que tu dois  "
-    db "porter!!!       "
-    db "Allez, salut!@"
+    dialog_text "Hi hi hi!", "C'est bien fait pour toi!", "Tu as vu tout", "ce que tu dois porter!!!", "Allez, salut!"
 
 Dialog2A4::
-    db "1 photos à      "
-    db "prendre! Quel   "
-    db "type de photo   "
-    db "t'intéresse?@"
+    dialog_text "1 photos à prendre! Quel type de photo t'intéresse?"
 
 Dialog2A5::
-    db "Oh non! La      "
-    db "pellicule est   "
-    db "finie! Pense à  "
-    db "regarder ton    "
-    db "album!@"
+    dialog_text "Oh non! La pellicule est finie! Pense à regarder ton album!"
 
 Dialog2A6::
-    db "Bonjour! Je suis"
-    db "le photographe! "
-    db "Quel belle      "
-    db "occasion de     "
-    db "faire une photo!"
-    db "Appelons-la:    "
-    db "\"Belle tête!\"@"
+    dialog_text "Bonjour! Je suis le photographe! Quel belle occasion de faire une photo! Appelons-la: \"Belle tête!\""
 
 Dialog2A7::
-    db "Voilà qui       "
-    db "représente ton  "
-    db "aventure à la   "
-    db "perfection!@"
+    dialog_text "Voilà qui représente ton aventure à la perfection!"
 
 Dialog2A8::
-    db "Appelons ceci:  "
-    db "\"C'était juste.\""
-    db "@"
+    dialog_text "Appelons ceci: \"C'était juste.\" "
 
 Dialog2A9::
-    db "Je suis trop    "
-    db "près.@"
+    dialog_text "Je suis trop près."
 
 Dialog2AA::
-    db "Je dois reculer."
-    db "@"
+    dialog_text "Je dois reculer. "
 
 Dialog2AB::
-    db "Aaaaaah!@"
+    dialog_text "Aaaaaah!"
 
 Dialog2AC::
-    db "Je retourne à la"
-    db "boutique!@"
+    dialog_text "Je retourne à la boutique!"
 
 Dialog2AD::
-    db "Reviens me voir "
-    db "quand tu seras  "
-    db "seul!@"
+    dialog_text "Reviens me voir quand tu seras seul!"
 
 Dialog2AE::
-    db "Es-tu sûr?      "
-    db "    OUI  NON<ask>"
+    dialog_string_wrapping "Es-tu sûr?"
+    dialog_ask_line "OUI", "NON"
 
 Dialog2AF::
-    db "J'adore les     "
-    db "photos! Hé,     "
-    db "#####! Que fais-"
-    db "tu dans le coin?"
-    db "@"
+    dialog_text "J'adore les photos! Hé, #####! Que fais- tu dans le coin? "

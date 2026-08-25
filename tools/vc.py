@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# Output a Virtual Console patch by filling values into a template.
-
+# Generate a Virtual Console patch by filling values into a patch template.
+#
+# Usage:
+#     tools/vc.py --template src/vc/azle.patch.template --sym azle.sym --rom azle.gbc --out azle.patch
 
 import argparse
 import re
@@ -87,7 +89,7 @@ def fill_in_template(template_file, symbols, rom):
 
 
 def main():
-    ap = argparse.ArgumentParser(description='Output a VC patch by filling values into a template')
+    ap = argparse.ArgumentParser(description='Generate a VC patch by filling values into a patch template')
     ap.add_argument('--template', required=True, help='The .patch.template file to fill in')
     ap.add_argument('--out', required=True, help='The .patch file to output')
     ap.add_argument('--sym', required=True, help='The .sym file to read symbol values from')

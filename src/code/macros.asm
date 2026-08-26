@@ -151,52 +151,52 @@ def DIALOG_LINE_LEN equ 16
 
 ; Main macro for dialog line wrapping. See dialog_text or dialog_ask_line for usage.
 MACRO dialog_string_wrapping
-	: ; Since each line pads for the previous one, pretend there is an empty line so the first line doesn't emit any padding.
+    : ; Since each line pads for the previous one, pretend there is an empty line so the first line doesn't emit any padding.
 
-	REPT _NARG
-		def paragraph equs \1
-		shift ; Process the next argument on the next iteration.
+    REPT _NARG
+        def paragraph equs \1
+        shift ; Process the next argument on the next iteration.
 
-		REPT strlen(#paragraph) ; Not the real iteration count, but we need an upper bound since there is no `WHILE`.
-			; Pad from the last line's end.
-			ds (DIALOG_LINE_LEN - (@ - :-)) % DIALOG_LINE_LEN, ' '
-			: ; Mark the beginning of this line for the next one.
+        REPT strlen(#paragraph) ; Not the real iteration count, but we need an upper bound since there is no `WHILE`.
+            ; Pad from the last line's end.
+            ds (DIALOG_LINE_LEN - (@ - :-)) % DIALOG_LINE_LEN, ' '
+            : ; Mark the beginning of this line for the next one.
 
-			redef line equs ""
+            redef line equs ""
             redef unit equs ""
-			IF charlen(#paragraph) <= DIALOG_LINE_LEN ; If we are guaranteed to finish the line...
-				db #paragraph ; ...then emit whatever's left...
-				BREAK ; ...and stop!
-			ENDC
+            IF charlen(#paragraph) <= DIALOG_LINE_LEN ; If we are guaranteed to finish the line...
+                db #paragraph ; ...then emit whatever's left...
+                BREAK ; ...and stop!
+            ENDC
 
-			; Otherwise, build up the line from charmap units.
-			FOR i, DIALOG_LINE_LEN
-				redef unit equs strchar(#paragraph, i)
-				assert charsize(#unit) == 1, "'{unit}' maps to more than one byte!!"
+            ; Otherwise, build up the line from charmap units.
+            FOR i, DIALOG_LINE_LEN
+                redef unit equs strchar(#paragraph, i)
+                assert charsize(#unit) == 1, "'{unit}' maps to more than one byte!!"
 
-				IF #unit === " "
-					def line_len = strlen(#line) ; It is possible to break *before* this char.
-					def cut_at = line_len + 1 ; ...but then the next line begins *after* it!
-				ELIF #unit === "-"
-					def line_len = strlen(#line) + 1 ; It is possible to break *after* hyphens.
-					def cut_at = line_len ; ...and they thus don't get ignored.
-				ENDC
+                IF #unit === " "
+                    def line_len = strlen(#line) ; It is possible to break *before* this char.
+                    def cut_at = line_len + 1 ; ...but then the next line begins *after* it!
+                ELIF #unit === "-"
+                    def line_len = strlen(#line) + 1 ; It is possible to break *after* hyphens.
+                    def cut_at = line_len ; ...and they thus don't get ignored.
+                ENDC
 
-				redef line equs #line ++ #unit ; Append the unit.
-			ENDR
-			IF strchar(#paragraph, DIALOG_LINE_LEN) === " " ; Check if the *next* char is a space!
-				def line_len = strlen(#line)
-				def cut_at = line_len + 1 ; The space isn't going to be included in the line, so that's okay.
-			ENDC
-			assert def(line_len), "Line too long! (No breakable char found in \"{line}\")"
+                redef line equs #line ++ #unit ; Append the unit.
+            ENDR
+            IF strchar(#paragraph, DIALOG_LINE_LEN) === " " ; Check if the *next* char is a space!
+                def line_len = strlen(#line)
+                def cut_at = line_len + 1 ; The space isn't going to be included in the line, so that's okay.
+            ENDC
+            assert def(line_len), "Line too long! (No breakable char found in \"{line}\")"
 
-			db strslice(#line, 0, line_len) ; Emit the wrapped line...
-			redef paragraph equs strslice(#paragraph, cut_at)
-			purge line_len, cut_at ; So they aren't left over for the next iteration.
-		ENDR
+            db strslice(#line, 0, line_len) ; Emit the wrapped line...
+            redef paragraph equs strslice(#paragraph, cut_at)
+            purge line_len, cut_at ; So they aren't left over for the next iteration.
+        ENDR
 
-		purge paragraph, line, unit ; Delete temporaries.
-	ENDR
+        purge paragraph, line, unit ; Delete temporaries.
+    ENDR
 ENDM
 
 ; Use this macro to auto line basic wrap dialog lines.
@@ -206,7 +206,7 @@ ENDM
 ;   dialog_text ".", "..", "...", "Why are you here?"
 MACRO dialog_text
     dialog_string_wrapping \#
-	db "@"
+    db "@"
 ENDM
 
 ; Use this macro to end off a dialog with a question.

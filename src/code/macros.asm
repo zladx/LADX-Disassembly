@@ -216,12 +216,12 @@ ENDM
 ;   dialog_string_wrapping "Do you want to buy the deluxe shovel?"
 ;   dialog_ask_line "Yes", "Nah."
 MACRO dialog_ask_line
-    assert strlen(\1) <= 4, "First ask choice too long"
-    assert strlen(\2) <= 7, "Second ask choice too long"
+    assert charlen(\1) <= 4, "First ask choice too long"
+    assert charlen(\2) <= 7, "Second ask choice too long"
     ds (DIALOG_LINE_LEN - (@ - :-)) % DIALOG_LINE_LEN, ' '
-    db "    " ; Padding till the first choice
+    ds 4, ' ' ; Padding till the first choice
     db \1     ; First choice
-    ds 5 - strlen(\1), ' '
+    ds 5 - charlen(\1), ' '
     db \2     ; Second choice
     db "<ask>"
 ENDM

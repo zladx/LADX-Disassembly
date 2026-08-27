@@ -161,6 +161,7 @@ GameOverInteractiveHandler::
     ldh  a, [hJoypadState]                        ;; 01:42DC $F0 $CC
     and  J_A | J_B | J_START                      ;; 01:42DE $E6 $B0
     jr   z, ret_001_4335                          ;; 01:42E0 $28 $53
+.VCHookEndDisabledMenuHandler:
 
     ld   a, [wC13F]                               ;; 01:42E2 $FA $3F $C1
     cp   $01                                      ;; 01:42E5 $FE $01

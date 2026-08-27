@@ -378,7 +378,11 @@ Dialog1FC::
     dialog_text "Château Canulet 50 pas <up>"
 
 Dialog1FD::
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_text "DRING DRING! DRING! Hello! Madison", "à l'appaouïelle. No darling... CLIC!", "Tu as dû faire un faux numéro!"
+ELSE
     dialog_text "DRING DRING! DRING! Hello! Madonna", "à l'appaouïelle. No darling... CLIC!", "Tu as dû faire un faux numéro!"
+ENDC
 
 Dialog1FE::
     dialog_string_wrapping "C'est un gros! Et en plus, il a un Fragment", "de Coeur!", "Je t'offre aussi 20 rubis.", "Un autre essai?"

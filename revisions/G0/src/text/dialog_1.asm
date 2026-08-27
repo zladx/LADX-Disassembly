@@ -69,7 +69,11 @@ Dialog016::
     dialog_ask_line "Ja", "Nein"
 
 Dialog017::
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_text "Hallo, ich heiße Trantrudi! Ich verkaufe Dir ein Geheimnis, das Dich sicher an- machen wird..."
+ELSE
     dialog_text "Hallo, ich heiße Geierwally! Ich verkaufe Dir ein Geheimnis, das Dich sicher an- machen wird..."
+ENDC
 
 Dialog018::
     dialog_string_wrapping "Zahlst Du mir 28 Rubine für mein Geheimnis? Hm???"
@@ -392,7 +396,11 @@ Dialog07F::
     dialog_text "Dr. Wrights Haus "
 
 Dialog080::
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_text "   Trantrudis", "   Reformhaus"
+ELSE
     dialog_text "  Geierwallies", "   Reformhaus"
+ENDC
 
 Dialog081::
     dialog_text "   Haus  der", "  Großfamilie"

@@ -4,26 +4,37 @@ Disassembly of one of my favorite games. Taking it easy for now.
 
 It builds the following ROMs:
 
-- azlj.gbc (Japanese, v1.0) `
-md5: f75874e3654360094fc2b09bd1fed7e8`
-- azlj-r1.gbc (Japanese, v1.1) `
-md5: 6d8f9cd72201caabdfd0455a819af9ce`
-- azlj-r2.gbc (Japanese, v1.2) `
-md5: 2e2596c008d47df901394d28f5bd66ec`
-- azle.gbc (English, v1.0) `
-md5: 07c211479386825042efb4ad31bb525f`
-- azle-r1.gbc (English, v1.1) `
-md5: ccbb56212e3dbaa9007d389a17e9d075`
-- azle-r2.gbc (English, v1.2) `
-md5: 7351daa3c0a91d8f6fe2fbcca6182478`
-- azlg.gbc (German, v1.0) `
-md5: e91fd46e7092d32ca264f21853f09539`
-- azlg-r1.gbc (German, v1.1) `
-md5: b0080c2f1919a4bb0ea73b788f4a6786`
-- azlf.gbc (French, v1.0) `
-md5: 1043fd167d0ed9c4094e3c9d8e757f1e`
-- azlf-r1.gbc (French, v1.1) `
-md5: 68242187b65166b5f8225b20e2021659`
+- azlj.gbc (Japanese, v1.0)
+  `md5: f75874e3654360094fc2b09bd1fed7e8`
+- azlj-r1.gbc (Japanese, v1.1)
+  `md5: 6d8f9cd72201caabdfd0455a819af9ce`
+- azlj-r2.gbc (Japanese, v1.2)
+  `md5: 2e2596c008d47df901394d28f5bd66ec`
+- azle.gbc (English, v1.0)
+  `md5: 07c211479386825042efb4ad31bb525f`
+- azle-r1.gbc (English, v1.1)
+  `md5: ccbb56212e3dbaa9007d389a17e9d075`
+- azle-r2.gbc (English, v1.2)
+  `md5: 7351daa3c0a91d8f6fe2fbcca6182478`
+- azlg.gbc (German, v1.0)
+  `md5: e91fd46e7092d32ca264f21853f09539`
+- azlg-r1.gbc (German, v1.1)
+  `md5: b0080c2f1919a4bb0ea73b788f4a6786`
+- azlf.gbc (French, v1.0)
+  `md5: 1043fd167d0ed9c4094e3c9d8e757f1e`
+- azlf-r1.gbc (French, v1.1)
+  `md5: 68242187b65166b5f8225b20e2021659`
+
+It also builds the following Virtual Console patches:
+
+- azlj-r2.patch (Japanese, v1.2)
+  `md5: 9734a976cb5bf790e7e552e3083e4bb1`
+- azle-r2.patch (English, v1.2)
+  `md5: 853f10e9cee0e88238e4b7fce259a88a`
+- azlg-r1.patch (German, v1.1)
+  `md5: bd2e15b417d364d24a97404b179a2dce`
+- azlf-r1.patch (French, v1.1)
+  `md5: 68242187b65166b5f8225b20e2021659`
 
 Additionally, a wiki includes a [high-level overview of the game engine](https://github.com/zladx/LADX-Disassembly/wiki/Game-engine-documentation), and technical informations on the [data formats used](https://github.com/zladx/LADX-Disassembly/wiki/Maps-data-format) throughout the game.
 
@@ -73,5 +84,7 @@ Thanks to these people for contributing:
 * stephaneseng - https://github.com/stephaneseng
 * zelosos - https://gitlab.com/zelosos
 * tobiasvl - https://github.com/tobiasvl
+* BlinkingBerry - https://github.com/BlinkingBerry
+* Rangi42 - https://github.com/Rangi42
 
 ([See contribution details here](https://github.com/zladx/LADX-Disassembly/graphs/contributors))

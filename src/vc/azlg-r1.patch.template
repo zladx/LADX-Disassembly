@@ -1,0 +1,197 @@
+;Dmgazld1.f79: ZeldaYumeDX
+
+[PRINT]
+Mode = 1
+Address = {LABEL PhotoAlbumPictureInteractiveHandler.VCPatchPrintPhoto}
+Fixcode = {PATCH PhotoAlbumPictureInteractiveHandler.VCPatchPrintPhoto 1}
+
+[SoundDelayA]
+Mode = 2
+Type = 0
+Address = {LABEL RenderLoop.playAudioStep}
+Fixcode = 2
+
+[SoundDelayB]
+Mode = 2
+Type = 0
+Address = {LABEL RenderLoop.skipAudio}
+Fixcode = 2
+
+[SoundDelayC]
+Mode = 2
+Type = 1
+Address = {LABEL RenderLoop.VCHookSoundDelay}
+
+[STAFF_Begin]
+Mode = 5
+Type = 0
+Address = {LABEL CreditsLinkFaceCloseUp6Handler.VCHookBeginStaffCredits}
+
+[STAFF_End]
+Mode = 5
+Type = 1
+Address = {LABEL jr_017_466B.VCHookEndStaffCredits}
+
+[Geierwally_1]
+Mode = 1
+Address = {LABEL Dialog27F+16}
+Fixcode = {PATCH Dialog27F+16 10}
+
+[Geierwally_2]
+Mode = 1
+Address = {LABEL Dialog017+16}
+Fixcode = {PATCH Dialog017+16 15}
+
+[Geierwally_3]
+Mode = 1
+Address = {LABEL Dialog1B0+2}
+Fixcode = {PATCH Dialog1B0+2 10}
+
+[Geierwallies]
+Mode = 1
+Address = {LABEL Dialog080+2}
+Fixcode = {PATCH Dialog080+2 12}
+
+[Struppi_1]
+Mode = 1
+Address = {LABEL Dialog244+56}
+Fixcode = {PATCH Dialog244+56 7}
+
+[Struppi_2]
+Mode = 1
+Address = {LABEL Dialog270+48}
+Fixcode = {PATCH Dialog270+48 9}
+
+[Struppi_3]
+Mode = 1
+Address = {LABEL Dialog270+80}
+Fixcode = {PATCH Dialog270+80 8}
+
+[Struppi_4]
+Mode = 1
+Address = {LABEL Dialog12F+64}
+Fixcode = {PATCH Dialog12F+64 10}
+
+[Struppi_5]
+Mode = 1
+Address = {LABEL Dialog130+24}
+Fixcode = {PATCH Dialog130+24 7}
+
+[Struppi_6]
+Mode = 1
+Address = {LABEL Dialog131+55}
+Fixcode = {PATCH Dialog131+55 7}
+
+[Struppi_7]
+Mode = 1
+Address = {LABEL Dialog131+152}
+Fixcode = {PATCH Dialog131+152 8}
+
+[Struppi_8]
+Mode = 1
+Address = {LABEL Dialog132+40}
+Fixcode = {PATCH Dialog132+40 7}
+
+[Struppi_9]
+Mode = 1
+Address = {LABEL Dialog143+85}
+Fixcode = a8:4B 6F 6D 65 74 73 20 20
+
+[Struppi_10]
+Mode = 1
+Address = {LABEL Dialog16C+8}
+Fixcode = {PATCH Dialog16C+8 7}
+
+[Struppi_11]
+Mode = 1
+Address = {LABEL Dialog1A8+48}
+Fixcode = {PATCH Dialog1A8+48 16}
+
+[Struppi_12]
+Mode = 1
+Address = {LABEL Dialog220+233}
+Fixcode = {PATCH Dialog220+233 7}
+
+
+;[LIGHT_Begin]
+;Mode = 3
+;Type = 0
+;DarkEnable = 1
+;Dark = 4
+;Address = x610EF
+
+;[LIGHT_End]
+;Mode = 3
+;Type = 1
+;Address = x63F2D
+
+;4F: origin 57: 1/2  5F: 1/4  67: 1/8 
+[LIGHT_FREQ]
+Mode = 1
+Address = {MIXEDCASELABEL MadBatterReplaceScenePalettes.VCPatchFlashingEffect+1}
+Fixcode = {PATCH MadBatterReplaceScenePalettes.VCPatchFlashingEffect+1 1}
+
+
+;[LIGHT_COLOR_BLACK_75_0]
+;Mode = 1
+;Address = x93AA3
+;Fixcode = a16: 6B 19 6B 19 B5 32 00 00  00 00 6B 19 B5 32 FF 47
+
+;[LIGHT_COLOR_BLACK_75_1]
+;Mode = 1
+;Address = x93AB3
+;Fixcode = a16: 00 00 6B 19 B5 32 FF 47  00 00 6B 19 B5 32 FF 47
+
+;[LIGHT_COLOR_BLACK_75_2]
+;Mode = 1
+;Address = x93AC3
+;Fixcode = a16: 00 00 6B 19 B5 32 FF 47  6B 19 B5 32 00 00 FF 47
+
+;[LIGHT_COLOR_BLACK_75_3]
+;Mode = 1
+;Address = x93AD3
+;Fixcode = a16: 00 00 6B 19 B5 32 FF 47  6B 19 6B 19 B5 32 FF 47
+
+;[LIGHT_COLOR_WHITE_75]
+;Mode = 1
+;Address = x93B37
+;Fixcode = a16: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+;[LIGHT_COLOR_BLACK_74_0]
+;Mode = 1
+;Address = x93A63
+;Fixcode = a16: 00 00 6B 19 B5 32 FF 47 00 00 6B 19 B5 32 FF 47
+
+
+[LIGHT_COLOR_BLACK_74_1]
+Mode = 1
+Address = x93A73
+Fixcode = a16: 00 00 6B 19 B5 32 FF 47 00 00 6B 19 B5 32 FF 47
+
+
+;[LIGHT_COLOR_BLACK_74_2]
+;Mode = 1
+;Address = x93A83
+;Fixcode = a16: B5 32 00 00 B5 32 FF 47 FF 7F FF 7F FF 7F FF 7F
+
+;[LIGHT_COLOR_BLACK_74_3]
+;Mode = 1
+;Address = x93A93
+;Fixcode = a16: B5 32 6B 19 B5 32 FF 47 00 00 6B 19 B5 32 FF 47
+
+;[LIGHT_COLOR_WHITE_74_0]
+;Mode = 1
+;Address = x93AE3
+;Fixcode = a16: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+[Dead Menu Begin]
+Mode = 2
+Type = 3
+Address = {LABEL GameOverInteractiveHandler}
+Fixcode = 1343
+
+[Dead Menu End]
+Mode = 2
+Type = 4
+Address = {LABEL GameOverInteractiveHandler.VCHookEndDisabledMenuHandler}
+Fixcode = 1343

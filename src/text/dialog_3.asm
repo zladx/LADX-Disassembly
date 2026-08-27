@@ -248,13 +248,25 @@ Dialog159:: ; Grandma Yahoo
     dialog_text "Then YOU sweep the island!"
 
 Dialog15A:: ; Grandma Yahoo
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_text "HELLO!   I'm fine, and you?!"
+ELSE
     dialog_text "YAHOO!   I'm fine, and you?!"
+ENDC
 
 Dialog15B:: ; Grandma Yahoo
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_text "YIPPEE! I worked too hard and now my broom is worn to the handle!"
+ELSE
     dialog_text "YAHOO!  I worked too hard and now my broom is worn to the handle!"
+ENDC
 
 Dialog15C:: ; Grandma Yahoo
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_string_wrapping "YIPPEE! YIPPEE!", "A new broom?! For me?  It is, isn't it?!"
+ELSE
     dialog_string_wrapping "YAHOO!  YAHOO!", "A new broom?! For me?  It is, isn't it?!"
+ENDC
     dialog_ask_line "Yes", "No"
 
 Dialog15D:: ; Grandma Yahoo
@@ -264,7 +276,11 @@ Dialog15E:: ; Narrator
     dialog_text "You exchanged <broom> for the fishing hook <fishhook>!  What will the fishing hook become?"
 
 Dialog15F:: ; Grandma Yahoo
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_text "YIPPEE! A new broom!  Superb!"
+ELSE
     dialog_text "YAHOO!  A new broom!  Superb!"
+ENDC
 
 Dialog160:: ; Kiki
     dialog_text "Kiiiki!  What?! All right, mutt! Let's battle!!"

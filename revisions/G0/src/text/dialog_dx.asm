@@ -11,7 +11,11 @@ Dialog243::
     dialog_text "TUUUUT! TUUUUT! Ja? Hier Ulrira! Du hast Dich im Ei verlaufen? Hm, da kann ich Dir auch nicht helfen... Aber warst Du schon einmal in der Dorfbücherei..? Ruf mich wieder an, wenn Du eine Frage hast. KLICK! TUTUTU... "
 
 Dialog244::
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_text "TUUUUT! TUUUUT! Ja? Hier Ulrira! Du solltest den kleinen Komet jetzt nach Hause bringen! Madame MiouMiou wartet schon auf ihn... KLICK! TUTUTU.."
+ELSE
     dialog_text "TUUUUT! TUUUUT! Ja? Hier Ulrira! Du solltest den kleinen Struppi jetzt nach Hause bringen! Madame MiouMiou wartet schon auf ihn... KLICK! TUTUTU.."
+ENDC
 
 Dialog245::
     dialog_text "TUUUUT! TUUUUT! Ja? Hier Ulrira! Interessierst Du Dich neuerdings für Musik? Dann solltest Du den Frosch \"Wart\" im Schilderwald be- suchen. Für viel Geld bringt er Dir vielleicht einen neuen Song bei! Tschüß! KLICK! TUTUTU... "
@@ -148,7 +152,11 @@ Dialog26F::
     dialog_text "Blau... Versuche es erneut!", "Gelb: Vorsicht! Rot: Gefahr!"
 
 Dialog270::
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_text "Hey, ein tolles Motiv! Ich nenne es \"##### und Komet!\"", "Rücke näher zu Komet!  "
+ELSE
     dialog_text "Hey, ein tolles Motiv! Ich nenne es \"##### und Struppi!\"", "Rücke näher zu Struppi!"
+ENDC
 
 Dialog271::
     dialog_text "Grrrr!"
@@ -193,4 +201,8 @@ Dialog27E::
     dialog_text "Kleine Teufel schenken Tragkraft..."
 
 Dialog27F::
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_text "Hey! Hast Du Trantrudi", "schon besucht?"
+ELSE
     dialog_text "Hey! Hast Du Geierwally", "schon besucht?"
+ENDC

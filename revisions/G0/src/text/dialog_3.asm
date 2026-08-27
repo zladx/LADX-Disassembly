@@ -142,16 +142,32 @@ Dialog12E::
     dialog_text "Du willst etwas über das Gespenst wissen? Dank Dir fühlt es sich nun wohler!", "Bist Du bereit für ein Foto?"
 
 Dialog12F::
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_text "Danke! Daaaanke! Es war ja so süß von Dir, Dich um den kleinen Komet zu kümmern. Du bist ein ganz lieber Kerl. Wie kann ich Dir jemals danken..? Aaaah, ich weiß... ... SCHMMMMMMMMMATZ! ... ... ... ... ... ... ... ... Du hast einen Kuß von Madame MiouMiou erhal- ten. Zufrieden?"
+ELSE
     dialog_text "Danke! Daaaanke! Es war ja so süß von Dir, Dich um den kleinen Struppi zu kümmern. Du bist ein ganz lieber Kerl. Wie kann ich Dir jemals danken..? Aaaah, ich weiß... ... SCHMMMMMMMMMATZ! ... ... ... ... ... ... ... ... Du hast einen Kuß von Madame MiouMiou erhal- ten. Zufrieden?"
+ENDC
 
 Dialog130::
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_text "Bonjour..! Mein kleiner Komet sieht mit seiner neuen Frisur so süüüüß aus!"
+ELSE
     dialog_text "Bonjour..! Mein kleiner Struppi sieht mit seiner neuen Frisur so süüüüß aus!"
+ENDC
 
 Dialog131::
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_text "KREEEEIIIIIISCH! Es ist entsetz- lich! Sie haben meinen Komet entführt. Sie... die.. Mo.. Mob.. MOBLIIIIIIINS... Warum hilft denn keiner meinem kleinen Komet?   "
+ELSE
     dialog_text "KREEEEIIIIIISCH! Es ist entsetz- lich! Sie haben meinen Struppi entführt. Sie... die.. Mo.. Mob.. MOBLIIIIIIINS... Warum hilft denn keiner meinem kleinen Struppi? "
+ENDC
 
 Dialog132::
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_text "DANKE! DAAAANKE! Du hast mir den Kleinen Komet zurückgebracht. Aber könntest Du mit ihm kurz Gassi gehen? Ich bin gerade etwas unpäßlich...", "Du machst es? Vielen Dank!"
+ELSE
     dialog_text "DANKE! DAAAANKE! Du hast mir den Kleinen Struppi zurückgebracht. Aber könntest Du mit ihm kurz Gassi gehen? Ich bin gerade etwas unpäßlich...", "Du machst es? Vielen Dank!"
+ENDC
 
 Dialog133::
     dialog_text "Hallo, mein Name ist Dr. Wright! Tja, seit Wochen schreibe ich nun Liebesbriefe an Christine, aber bis heute habe ich keine Ant- wort bekommen!"
@@ -205,7 +221,11 @@ Dialog142::
     dialog_text "TUUUUT! TUUUUT! Ja? Hier Ulrira! Nun, die meisten Moblins leben im Zauberwald, aber einige leben in einer Höhle auf der Taltal Er- höhung! War es das, was Du wis- sen wolltest? KLICK! TUTUTU... "
 
 Dialog143::
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_text "TUUUUT! TUUUUT! Ja? Hier Ulrira! Die unzerstör- baren Blumen im Schleimsumpf sind Komets Lieblingsspeise! Warum führst Du ihn nicht einmal dort herum? KLICK! TUTUTU.."
+ELSE
     dialog_text "TUUUUT! TUUUUT! Ja? Hier Ulrira! Die unzerstör- baren Blumen im Schleimsumpf sind Struppis Lieblingsspeise! Warum führst Du ihn nicht einmal dort herum? KLICK! TUTUTU.."
+ENDC
 
 Dialog144::
     dialog_text "TUUUUT! TUUUUT! Ja? Hier Ulrira! Hast Du bereits mit jedem auf der Insel ge- sprochen? Im Südosten des Mövendorfs beim Schicksalsacker lebt ein Mann namens Richard. Warum besuchst Du ihn nicht einmal? Tschüß! KLICK! TUTUTU.."
@@ -329,7 +349,11 @@ Dialog16B::
     dialog_text "Manchmal habe ich Heißhunger auf ein leckeres Stück Papier. Dann esse ich sogar Briefe", "von meinem Lieb- ling Dr. Wright! Das ist mir echt peinlich..."
 
 Dialog16C::
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_text "Du hast Komet gerettet! Ein furchterregender Köter!"
+ELSE
     dialog_text "Du hast Struppi gerettet! Ein furchterregender Köter!"
+ENDC
 
 Dialog16D::
     dialog_text "Wow! Der Gockel lebt ja wieder! Und nett scheint er auch zu sein! "

@@ -119,7 +119,11 @@ Dialog1A7::
     dialog_text "Telefonhäuschen"
 
 Dialog1A8::
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_text " * GEFAHR!!!! *", "    BETRETEN", "    VERBOTEN", " (außer  Komet)  "
+ELSE
     dialog_text " * GEFAHR!!!! *", "    BETRETEN", "    VERBOTEN (außer  Struppi) "
+ENDC
 
 Dialog1A9::
     dialog_text "<down> HIER ENTLANG"
@@ -143,7 +147,11 @@ Dialog1AF::
     dialog_text "Bin zur Zeit auf Tour...     Wart "
 
 Dialog1B0::
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_text "<right> Trantrudi", "<down> Manbos Brunnen "
+ELSE
     dialog_text "<right> Geierwally", "<down> Manbos Brunnen "
+ENDC
 
 Dialog1B1::
     dialog_text "<right> Zoodorf", "<down> Zwergenbucht"
@@ -493,7 +501,11 @@ Dialog21E::
 
 Dialog21F::
 Dialog220::
+IF DEF(VIRTUAL_CONSOLE)
+    dialog_text "Hey, Du da! Es ist etwas ganz Schlimmes ge- schehen... Ja, ganz schlimm! Die Moblins sind ins Dorf gekom- men. Ja, ganz viele... Eine ganze Gruppe von Miblons, ähh... Moblins! Dann... sie sind zu dem Haus... Ja, das Haus von Komet und der Frau... Sie haben etwas ganz Böses ge- tan. Oh ja, das war vielleicht böse...", "... ... ... ... ... ... ... ... Hm! Finde besser selbst heraus, was geschehen ist..."
+ELSE
     dialog_text "Hey, Du da! Es ist etwas ganz Schlimmes ge- schehen... Ja, ganz schlimm! Die Moblins sind ins Dorf gekom- men. Ja, ganz viele... Eine ganze Gruppe von Miblons, ähh... Moblins! Dann... sie sind zu dem Haus... Ja, das Haus von Struppi und der Frau... Sie haben etwas ganz Böses ge- tan. Oh ja, das war vielleicht böse...", "... ... ... ... ... ... ... ... Hm! Finde besser selbst heraus, was geschehen ist..."
+ENDC
 
 Dialog221::
     dialog_string_wrapping "Letzte Nacht hat das Meer etwas wirklich Tolles angespült! Ich tausche es mit Dir gegen DAS, was Du auf dem", "B-Knopf hast..."

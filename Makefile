@@ -10,7 +10,8 @@ rwildcard = $(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(
 # Dev tools binaries and options
 #
 
-RGBDS   :=
+RGBDS   ?=
+PYTHON  ?= $(shell which python3)
 
 2BPP    := $(RGBDS)rgbgfx
 2BFLAGS := \
@@ -59,7 +60,7 @@ bin_files +=  $(wildcard src/data/backgrounds/*.attrmap.encoded)
 # Compile an PNG file for OAM memory to a 2BPP file
 # (inverting the palette and de-interleaving the tiles).
 oam_%.2bpp: oam_%.png
-	tools/gfx/gfx.py --invert --interleave --out $@ 2bpp $<
+	$(PYTHON) tools/gfx/gfx.py --invert --interleave --out $@ 2bpp $<
 
 # Compile a PNG file to a 2BPP file, without any special conversion.
 # (This uses `rgbgfx`, which is much faster than `tools/gfx/gfx.py`.)

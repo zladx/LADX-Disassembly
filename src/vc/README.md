@@ -1,8 +1,10 @@
-# Nintendo 2DS/3DS Virtual Console Patch
+# Nintendo 2DS/3DS Virtual Console Patches
 
 The Nintendo Virtual Console is an emulator on the 2DS and 3DS consoles. It can emulate the Game Boy Color (among other consoles), while applying enhancements or modifications to some games, such as changing text or disabling Game Boy Printer features.
 
-Game-specific enhancements are determined by a `.patch` file corresponding to the `.gbc` ROM file. These files are bundled together in a `.cia` file; creating such a file is outside the scope of this project.
+Game-specific enhancements are determined by a `.patch` file corresponding to the `.gbc` ROM file.
+
+(These files are bundled together in a `.cia` file; creating such a file is outside the scope of this project.)
 
 ## Building the patches
 

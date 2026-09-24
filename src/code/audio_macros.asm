@@ -6,39 +6,39 @@ macro rest
     db $01
 endm
 
-; Sets [wActiveMusicTableIndex] to 1.
+; Sets [wOpcode94Status] to 1.
 macro unknownop_94
     db $94
 endm
 
-; Sets [wD3CD] to 0.
+; Sets [wBlockActiveWaveSfx] to 0.
 macro disable_unknown1
     db $95
 endm
 
-; Sets [wD3CD] to 1.
+; Sets [wBlockActiveWaveSfx] to 1.
 macro enable_unknown1
     db $96
 endm
 
-; Sets [wD3B6 + channelIndex] to 1.
+; Sets [wOpcode97State + channelIndex] to 1.
 macro enable_unknown2
     db $97
 endm
 
-; Sets [wD3B6 + channelIndex] to 0.
+; Sets [wOpcode97State + channelIndex] to 0.
 macro disable_unknown2
     db $98
 endm
 
 ; This seems to enable some kind of mode that controls the volume, similar to
 ; the hardware envelope? (This name is just a guess and may need to be changed.)
-; Sets [wD39E] to 1.
+; Sets [wOpcode99Status] to 1.
 macro enable_software_envelope
     db $99
 endm
 
-; Ses [wD39E] to 0.
+; Ses [wOpcode99Status] to 0.
 macro disable_software_envelope
     db $9a
 endm

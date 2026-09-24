@@ -188,7 +188,7 @@ GetMusicDataPtr_1B::
 ;   hl:  Waveform (16 bytes to write to $FF30)
 SetWaveform_1B::
     push bc                                       ;; 1B:40E6 $C5
-    ld   c, $30 ; $FF30, Wave pattern RAM         ;; 1B:40E7 $0E $30
+    ld   c, LOW(_AUD3WAVERAM)                     ;; 1B:40E7 $0E $30
 
 .loop
     ld   a, [hl+]                                 ;; 1B:40E9 $2A
@@ -367,7 +367,7 @@ label_01B_42AB:
     ld   a, [wMusicChannel3.waveformPointerHigh]  ;; 1B:42BD $FA $37 $D3
     ld   h, a                                     ;; 1B:42C0 $67
     push bc                                       ;; 1B:42C1 $C5
-    ld   c, $30 ; $FF30, Wave pattern RAM         ;; 1B:42C2 $0E $30
+    ld   c, LOW(_AUD3WAVERAM)                     ;; 1B:42C2 $0E $30
 
 .loop_42C4
     ld   a, [hl+]                                 ;; 1B:42C4 $2A

@@ -92,7 +92,7 @@ Data_01B_4065::
 label_01B_406A:
 jr_01B_406A:
     ld   b, $04                                   ;; 1B:406A $06 $04
-    ld   c, $20 ; NR41                            ;; 1B:406C $0E $20
+    ld   c, LOW(rNR41)                            ;; 1B:406C $0E $20
 
 .loop_406E
     ld   a, [hl+]                                 ;; 1B:406E $2A

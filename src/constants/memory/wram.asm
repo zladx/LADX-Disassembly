@@ -2672,14 +2672,15 @@ wD396::
 wD398::
   ds 6 ; D398 - D39D
 
-; Unlabeled
-; Set to 1 by opcode 99, 0 by opcode 9A.
-; Enabled "envelope" behaviour of channel 3?
-wD39E::
+wOpcode99Status::
+  ; Set to 1 by opcode 99 to enable channel 3 bounce effect
+  ; Set to 2 when wOpcode99Counter reaches 13 
+  ; Set to 0 by opcode 9A to disable
+  ; compare wOpcode94
   ds 1 ; D39E
 
-; Unlabeled
-wD39F::
+wOpcode99Counter::
+  ; Increases from 0 to 13
   ds 1 ; D39F
 
 ; Unlabeled
@@ -2710,13 +2711,13 @@ wD3A6::
 wD3AF::
   ds 1 ; D3AF
 
-; Unlabeled
-wD3B0::
+wVibratoState::
+  ; 2 bytes per channels 1--3
   ds 6 ; D3B0 - D3B5
 
-; Unlabeled
-; music channel-specific data
-wD3B6::
+wOpcode97State::
+  ; 2 bytes per channels 1--3
+  ; Controls a rapid descending pitch-sweep effect.
   ds 6 ; D3A6 - D3BB
 
 ; Unlabeled
@@ -2789,16 +2790,18 @@ wPreviousMusicTrack::
 wD3CC::
   ds 1 ; D3CC
 
-; Unlabeled
-wD3CD::
+wBlockActiveWaveSfx::
+  ; Set to 1 by opcode 96
+  ; Set to 0 by opcode 95
+  ; If nonzero, causes PlayActiveWaveSfx to return prematurely.
   ds 1 ; D3CD
 
 ; TODO comment
 wActiveMusicTable::
   ds 2 ; D3CE - D3CF
 
-; Unlabeled
-wD3D0::
+wUnusedVibratoState::
+  ; 2 bytes per channels 1--3
   ds 6 ; D3D0 - D3D5
 
 ; Unlabeled
@@ -2809,12 +2812,16 @@ wD3D6::
 wD3D7::
   ds 2 ; D3D7
 
-wActiveMusicTableIndex:: ; D3D9
-  ; Set to 1 by opcode 94
-  ds 1
+wOpcode94Status::
+  ; Set to 1 by opcode 94 to enable channel 3 attack effect
+  ; Set to 2 when wOpcode94Counter reaches 6
+  ; Set to 0 to disable (should be opcode 93, never implemented)
+  ; compare wOpcode99
+  ds 1 ; D3D9
 
-; Unlabeled
-wD3DA::
+wOpcode94Counter::
+  ; Increases from 0 to 6
+  ; (D3DB appears unused)
   ds 2 ; D3DA - D3DB
 
 ; Unlabeled

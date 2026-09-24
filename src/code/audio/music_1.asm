@@ -92,12 +92,12 @@ Data_01B_4065::
 label_01B_406A:
 jr_01B_406A:
     ld   b, $04                                   ;; 1B:406A $06 $04
-    ld   c, $20                                   ;; 1B:406C $0E $20
+    ld   c, $20 ; NR41                            ;; 1B:406C $0E $20
 
 .loop_406E
     ld   a, [hl+]                                 ;; 1B:406E $2A
     ldh  [c], a                                   ;; 1B:406F $E2
-    inc  c                                        ;; 1B:4070 $0C
+    inc  c ; NR42, NR43, NR44                     ;; 1B:4070 $0C
     dec  b                                        ;; 1B:4071 $05
     jr   nz, .loop_406E                           ;; 1B:4072 $20 $FA
 
@@ -367,7 +367,7 @@ label_01B_42AB:
     ld   a, [wMusicChannel3.waveformPointerHigh]  ;; 1B:42BD $FA $37 $D3
     ld   h, a                                     ;; 1B:42C0 $67
     push bc                                       ;; 1B:42C1 $C5
-    ld   c, $30                                   ;; 1B:42C2 $0E $30
+    ld   c, $30 ; $FF30, Wave pattern RAM         ;; 1B:42C2 $0E $30
 
 .loop_42C4
     ld   a, [hl+]                                 ;; 1B:42C4 $2A
@@ -1010,13 +1010,13 @@ HandleNote::
     jr   z, .skippedForChannel4                   ;; 1B:45CD $28 $38
 
     push de                                       ;; 1B:45CF $D5
-    ld   de, wD3B0                                ;; 1B:45D0 $11 $B0 $D3
+    ld   de, wVibratoState                                ;; 1B:45D0 $11 $B0 $D3
     call IndexChannelArray                        ;; 1B:45D3 $CD $95 $48
     xor  a                                        ;; 1B:45D6 $AF
     ld   [de], a                                  ;; 1B:45D7 $12
     inc  e                                        ;; 1B:45D8 $1C
     ld   [de], a                                  ;; 1B:45D9 $12
-    ld   de, wD3B6                                ;; 1B:45DA $11 $B6 $D3
+    ld   de, wOpcode97State                                ;; 1B:45DA $11 $B6 $D3
     call IndexChannelArray                        ;; 1B:45DD $CD $95 $48
     inc  e                                        ;; 1B:45E0 $1C
     xor  a                                        ;; 1B:45E1 $AF
@@ -1026,7 +1026,7 @@ HandleNote::
     jr   nz, .doneChannel3Handler                 ;; 1B:45E8 $20 $1C
 
     ; Channel 3
-    ld   de, wD39E                                ;; 1B:45EA $11 $9E $D3
+    ld   de, wOpcode99Status                                ;; 1B:45EA $11 $9E $D3
     ld   a, [de]                                  ;; 1B:45ED $1A
     and  a                                        ;; 1B:45EE $A7
     jr   z, .jr_01B_45F8                          ;; 1B:45EF $28 $07
@@ -1034,10 +1034,10 @@ HandleNote::
     ld   a, $01                                   ;; 1B:45F1 $3E $01
     ld   [de], a                                  ;; 1B:45F3 $12
     xor  a                                        ;; 1B:45F4 $AF
-    ld   [wD39F], a                               ;; 1B:45F5 $EA $9F $D3
+    ld   [wOpcode99Counter], a                               ;; 1B:45F5 $EA $9F $D3
 
 .jr_01B_45F8
-    ld   de, wActiveMusicTableIndex               ;; 1B:45F8 $11 $D9 $D3
+    ld   de, wOpcode94Status               ;; 1B:45F8 $11 $D9 $D3
     ld   a, [de]                                  ;; 1B:45FB $1A
     and  a                                        ;; 1B:45FC $A7
     jr   z, .doneChannel3Handler                  ;; 1B:45FD $28 $07
@@ -1045,7 +1045,7 @@ HandleNote::
     ld   a, $01                                   ;; 1B:45FF $3E $01
     ld   [de], a                                  ;; 1B:4601 $12
     xor  a                                        ;; 1B:4602 $AF
-    ld   [wD3DA], a                               ;; 1B:4603 $EA $DA $D3
+    ld   [wOpcode94Counter], a                               ;; 1B:4603 $EA $DA $D3
 
 .doneChannel3Handler
     pop  de                                       ;; 1B:4606 $D1
@@ -1299,7 +1299,7 @@ HandleRemainingEffects:
     cp   $04                                      ;; 1B:4723 $FE $04
     jp   z, PopHLAndQuit                          ;; 1B:4725 $CA $FC $46
 
-    ld   de, wD3B6                                ;; 1B:4728 $11 $B6 $D3
+    ld   de, wOpcode97State                                ;; 1B:4728 $11 $B6 $D3
     call IndexChannelArray                        ;; 1B:472B $CD $95 $48
     ld   a, [de]                                  ;; 1B:472E $1A
     and  a                                        ;; 1B:472F $A7
@@ -1322,11 +1322,11 @@ EffectOpcode99Or94:
     cp   $03                                      ;; 1B:474C $FE $03
     jp   nz, PopHLAndQuit                         ;; 1B:474E $C2 $FC $46
 
-    ld   a, [wD39E]                               ;; 1B:4751 $FA $9E $D3
+    ld   a, [wOpcode99Status]                               ;; 1B:4751 $FA $9E $D3
     and  a                                        ;; 1B:4754 $A7
     jp   nz, EffectOpcode99                       ;; 1B:4755 $C2 $10 $48
 
-    ld   a, [wActiveMusicTableIndex]              ;; 1B:4758 $FA $D9 $D3
+    ld   a, [wOpcode94Status]              ;; 1B:4758 $FA $D9 $D3
     and  a                                        ;; 1B:475B $A7
     jp   nz, EffectOpcode94                       ;; 1B:475C $C2 $98 $49
 
@@ -1377,7 +1377,7 @@ HandleSoftwareEnvelopes::
     cp   [hl]                                     ;; 1B:479C $BE
     jr   nz, .channel2                             ;; 1B:479D $20 $0F
 
-    ld   c, $12                                   ;; 1B:479F $0E $12
+    ld   c, LOW(rNR12)                            ;; 1B:479F $0E $12
     ld   de, wMusicChannel1.noteBaseFrequencyHigh ;; 1B:47A1 $11 $1A $D3
     ld   a, [wMusicChannel1.loopCounter]          ;; 1B:47A4 $FA $1F $D3
     bit  7, a                                     ;; 1B:47A7 $CB $7F
@@ -1405,7 +1405,7 @@ HandleSoftwareEnvelopes::
     bit  7, a                                     ;; 1B:47C6 $CB $7F
     ret  nz                                       ;; 1B:47C8 $C0
 
-    ld   c, $17                                   ;; 1B:47C9 $0E $17
+    ld   c, LOW(rNR22)                            ;; 1B:47C9 $0E $17
     ld   de, wMusicChannel2.noteBaseFrequencyHigh ;; 1B:47CB $11 $2A $D3
     call EffectSoftwareEnvelope                   ;; 1B:47CE $CD $D2 $47
     ret                                           ;; 1B:47D1 $C9
@@ -1440,7 +1440,7 @@ soundOpcode96:
     ld   a, $01                                   ;; 1B:47F1 $3E $01
 
 .setD3CDAndParseNext:
-    ld   [wD3CD], a                               ;; 1B:47F3 $EA $CD $D3
+    ld   [wBlockActiveWaveSfx], a                               ;; 1B:47F3 $EA $CD $D3
     call IncChannelDefinitionPointer              ;; 1B:47F6 $CD $0B $44
     jp   ParseSoundOpcode                         ;; 1B:47F9 $C3 $31 $45
 
@@ -1452,13 +1452,13 @@ soundOpcode99:
     ld   a, $01                                   ;; 1B:47FF $3E $01
 
 .setD39EAndParseNext
-    ld   [wD39E], a                               ;; 1B:4801 $EA $9E $D3
+    ld   [wOpcode99Status], a                               ;; 1B:4801 $EA $9E $D3
     call IncChannelDefinitionPointer              ;; 1B:4804 $CD $0B $44
     jp   ParseSoundOpcode                         ;; 1B:4807 $C3 $31 $45
 
 soundOpcode9A:
     xor  a                                        ;; 1B:480A $AF
-    ld   [wD39E], a                               ;; 1B:480B $EA $9E $D3
+    ld   [wOpcode99Status], a                               ;; 1B:480B $EA $9E $D3
     jr   soundOpcode99.setD39EAndParseNext        ;; 1B:480E $18 $F1
 
 ; "bounce" envelope for channel 3
@@ -1472,9 +1472,9 @@ EffectOpcode99:
     cp   $02                                      ;; 1B:4810 $FE $02
     jp   z, PopHLAndQuit                          ;; 1B:4812 $CA $FC $46
 
-    ld   bc, wD39F                                ;; 1B:4815 $01 $9F $D3
+    ld   bc, wOpcode99Counter                                ;; 1B:4815 $01 $9F $D3
     call TickChannel3OpcodeCounter                ;; 1B:4818 $CD $42 $48
-    ld   c, $1C                                   ;; 1B:481B $0E $1C
+    ld   c, LOW(rNR32)                            ;; 1B:481B $0E $1C
     ld   b, $40                                   ;; 1B:481D $06 $40
     cp   $03                                      ;; 1B:481F $FE $03
     jr   z, WriteChannel3Volume                   ;; 1B:4821 $28 $1A
@@ -1494,7 +1494,7 @@ EffectOpcode99:
     jp   nz, PopHLAndQuit                         ;; 1B:4835 $C2 $FC $46
 
     ld   a, $02                                   ;; 1B:4838 $3E $02
-    ld   [wD39E], a                               ;; 1B:483A $EA $9E $D3
+    ld   [wOpcode99Status], a                               ;; 1B:483A $EA $9E $D3
 
 ; Input: 
 ;   c:  $1C (always) (LOW of NR32)
@@ -1506,7 +1506,7 @@ WriteChannel3Volume:
 
 ; only used by opcodes 99 and 94
 ; Input:
-;   bc:  wD39F or wD3DA
+;   bc:  wOpcode99Counter or wOpcode94Counter
 ; Output:
 ;   a:   ++[bc]
 TickChannel3OpcodeCounter::
@@ -1516,7 +1516,7 @@ TickChannel3OpcodeCounter::
     ret                                           ;; 1B:4845 $C9
 
 soundOpcode97:
-    ld   de, wD3B6                                ;; 1B:4846 $11 $B6 $D3
+    ld   de, wOpcode97State                                ;; 1B:4846 $11 $B6 $D3
     call IndexChannelArray                        ;; 1B:4849 $CD $95 $48
     ld   a, $01                                   ;; 1B:484C $3E $01
 
@@ -1526,7 +1526,7 @@ soundOpcode97:
     jp   ParseSoundOpcode                         ;; 1B:4852 $C3 $31 $45
 
 soundOpcode98:
-    ld   de, wD3B6                                ;; 1B:4855 $11 $B6 $D3
+    ld   de, wOpcode97State                                ;; 1B:4855 $11 $B6 $D3
     call IndexChannelArray                        ;; 1B:4858 $CD $95 $48
     xor  a                                        ;; 1B:485B $AF
     jr   soundOpcode97.setDeAndParseNext          ;; 1B:485C $18 $F0
@@ -1612,7 +1612,7 @@ GetCurrentFrequency::
 
 EffectVibrato:
     pop  de                                       ;; 1B:48AB $D1
-    ld   de, wD3B0                                ;; 1B:48AC $11 $B0 $D3
+    ld   de, wVibratoState                                ;; 1B:48AC $11 $B0 $D3
     call IndexChannelArray                        ;; 1B:48AF $CD $95 $48
     ld   a, [de]                                  ;; 1B:48B2 $1A
     inc  a                                        ;; 1B:48B3 $3C
@@ -1679,7 +1679,7 @@ VibratoTable::
 
 EffectUnusedVibrato:
     pop  de                                       ;; 1B:4918 $D1
-    ld   de, wD3D0                                ;; 1B:4919 $11 $D0 $D3
+    ld   de, wUnusedVibratoState                                ;; 1B:4919 $11 $D0 $D3
     call IndexChannelArray                        ;; 1B:491C $CD $95 $48
     ld   a, [de]                                  ;; 1B:491F $1A
     inc  a                                        ;; 1B:4920 $3C
@@ -1749,7 +1749,7 @@ UnusedVibratoTable::
 
 soundOpcode94:
     ld   a, $01                                   ;; 1B:498D $3E $01
-    ld   [wActiveMusicTableIndex], a              ;; 1B:498F $EA $D9 $D3
+    ld   [wOpcode94Status], a              ;; 1B:498F $EA $D9 $D3
     call IncChannelDefinitionPointer              ;; 1B:4992 $CD $0B $44
     jp   ParseSoundOpcode                         ;; 1B:4995 $C3 $31 $45
 
@@ -1764,7 +1764,7 @@ EffectOpcode94:
     cp   $02                                      ;; 1B:4998 $FE $02
     jp   z, PopHLAndQuit                          ;; 1B:499A $CA $FC $46
 
-    ld   bc, wD3DA                                ;; 1B:499D $01 $DA $D3
+    ld   bc, wOpcode94Counter                                ;; 1B:499D $01 $DA $D3
     call TickChannel3OpcodeCounter                ;; 1B:49A0 $CD $42 $48
     ld   c, LOW(rNR32)                             ;; 1B:49A3 $0E $1C
     ld   b, $60                                   ;; 1B:49A5 $06 $60
@@ -1780,7 +1780,7 @@ EffectOpcode94:
     jp   nz, PopHLAndQuit                         ;; 1B:49B7 $C2 $FC $46
 
     ld   a, $02                                   ;; 1B:49BA $3E $02
-    ld   [wActiveMusicTableIndex], a              ;; 1B:49BC $EA $D9 $D3
+    ld   [wOpcode94Status], a              ;; 1B:49BC $EA $D9 $D3
     jp   WriteChannel3Volume                      ;; 1B:49BF $C3 $3D $48
 
 
@@ -1852,16 +1852,16 @@ StopSquareAndWaveChannels_1B::
     ld   [wMusicChannel1.loopCounter], a          ;; 1B:4E5E $EA $1F $D3
     ld   [wMusicChannel2.loopCounter], a          ;; 1B:4E61 $EA $2F $D3
     ld   [wMusicChannel3.loopCounter], a          ;; 1B:4E64 $EA $3F $D3
-    ld   [wD39E], a                               ;; 1B:4E67 $EA $9E $D3
-    ld   [wD39F], a                               ;; 1B:4E6A $EA $9F $D3
-    ld   [wActiveMusicTableIndex], a              ;; 1B:4E6D $EA $D9 $D3
-    ld   [wD3DA], a                               ;; 1B:4E70 $EA $DA $D3
-    ld   [wD3B6], a                               ;; 1B:4E73 $EA $B6 $D3
-    ld   [wD3B6+1], a                             ;; 1B:4E76 $EA $B7 $D3
-    ld   [wD3B6+2], a                             ;; 1B:4E79 $EA $B8 $D3
-    ld   [wD3B6+3], a                             ;; 1B:4E7C $EA $B9 $D3
-    ld   [wD3B6+4], a                             ;; 1B:4E7F $EA $BA $D3
-    ld   [wD3B6+5], a                             ;; 1B:4E82 $EA $BB $D3
+    ld   [wOpcode99Status], a                               ;; 1B:4E67 $EA $9E $D3
+    ld   [wOpcode99Counter], a                               ;; 1B:4E6A $EA $9F $D3
+    ld   [wOpcode94Status], a              ;; 1B:4E6D $EA $D9 $D3
+    ld   [wOpcode94Counter], a                               ;; 1B:4E70 $EA $DA $D3
+    ld   [wOpcode97State], a                               ;; 1B:4E73 $EA $B6 $D3
+    ld   [wOpcode97State+1], a                             ;; 1B:4E76 $EA $B7 $D3
+    ld   [wOpcode97State+2], a                             ;; 1B:4E79 $EA $B8 $D3
+    ld   [wOpcode97State+3], a                             ;; 1B:4E7C $EA $B9 $D3
+    ld   [wOpcode97State+4], a                             ;; 1B:4E7F $EA $BA $D3
+    ld   [wOpcode97State+5], a                             ;; 1B:4E82 $EA $BB $D3
     ld   [wD394], a                               ;; 1B:4E85 $EA $94 $D3
     ld   [wD394+1], a                             ;; 1B:4E88 $EA $95 $D3
     ld   [wD396], a                               ;; 1B:4E8B $EA $96 $D3
@@ -1874,7 +1874,7 @@ StopSquareAndWaveChannels_1B::
     ld   [wD3A0], a                               ;; 1B:4EA0 $EA $A0 $D3
     ld   [wD3A1], a                               ;; 1B:4EA3 $EA $A1 $D3
     ld   [wD3A2], a                               ;; 1B:4EA6 $EA $A2 $D3
-    ld   [wD3CD], a                               ;; 1B:4EA9 $EA $CD $D3
+    ld   [wBlockActiveWaveSfx], a                               ;; 1B:4EA9 $EA $CD $D3
     ld   [wD3D6], a                               ;; 1B:4EAC $EA $D6 $D3
     ld   [wD3D7], a                               ;; 1B:4EAF $EA $D7 $D3
     ld   [wD3D7+1], a                             ;; 1B:4EB2 $EA $D8 $D3

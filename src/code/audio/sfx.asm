@@ -2706,7 +2706,7 @@ PlayActiveWaveSfx::
     call GetHandlerAddressInTable                 ;; 1F:540C $CD $64 $7A
     ld   de, wD392                                ;; 1F:540F $11 $92 $D3
     ld   bc, wD396                                ;; 1F:5412 $01 $96 $D3
-    ld   a, [wD3CD]                               ;; 1F:5415 $FA $CD $D3
+    ld   a, [wBlockActiveWaveSfx]                               ;; 1F:5415 $FA $CD $D3
     and  a                                        ;; 1F:5418 $A7
     ret  nz                                       ;; 1F:5419 $C0
 
@@ -8649,16 +8649,16 @@ func_01F_7B5C::
     ld   [wMusicChannel2.loopCounter], a          ;; 1F:7B76 $EA $2F $D3
     ld   [wMusicChannel3.loopCounter], a          ;; 1F:7B79 $EA $3F $D3
     ld   [wD34F], a                               ;; 1F:7B7C $EA $4F $D3
-    ld   [wD39E], a                               ;; 1F:7B7F $EA $9E $D3
-    ld   [wD39F], a                               ;; 1F:7B82 $EA $9F $D3
-    ld   [wActiveMusicTableIndex], a              ;; 1F:7B85 $EA $D9 $D3
-    ld   [wD3DA], a                               ;; 1F:7B88 $EA $DA $D3
-    ld   [wD3B6], a                               ;; 1F:7B8B $EA $B6 $D3
-    ld   [wD3B6+1], a                             ;; 1F:7B8E $EA $B7 $D3
-    ld   [wD3B6+2], a                             ;; 1F:7B91 $EA $B8 $D3
-    ld   [wD3B6+3], a                             ;; 1F:7B94 $EA $B9 $D3
-    ld   [wD3B6+4], a                             ;; 1F:7B97 $EA $BA $D3
-    ld   [wD3B6+5], a                             ;; 1F:7B9A $EA $BB $D3
+    ld   [wOpcode99Status], a                               ;; 1F:7B7F $EA $9E $D3
+    ld   [wOpcode99Counter], a                               ;; 1F:7B82 $EA $9F $D3
+    ld   [wOpcode94Status], a              ;; 1F:7B85 $EA $D9 $D3
+    ld   [wOpcode94Counter], a                               ;; 1F:7B88 $EA $DA $D3
+    ld   [wOpcode97State], a                               ;; 1F:7B8B $EA $B6 $D3
+    ld   [wOpcode97State+1], a                             ;; 1F:7B8E $EA $B7 $D3
+    ld   [wOpcode97State+2], a                             ;; 1F:7B91 $EA $B8 $D3
+    ld   [wOpcode97State+3], a                             ;; 1F:7B94 $EA $B9 $D3
+    ld   [wOpcode97State+4], a                             ;; 1F:7B97 $EA $BA $D3
+    ld   [wOpcode97State+5], a                             ;; 1F:7B9A $EA $BB $D3
     ld   [wD394], a                               ;; 1F:7B9D $EA $94 $D3
     ld   [wD394+1], a                             ;; 1F:7BA0 $EA $95 $D3
     ld   [wD396], a                               ;; 1F:7BA3 $EA $96 $D3
@@ -8675,7 +8675,7 @@ func_01F_7B5C::
     ld   [wD3A1], a                               ;; 1F:7BC4 $EA $A1 $D3
     ld   [wD3A2], a                               ;; 1F:7BC7 $EA $A2 $D3
     ld   [wD3A3], a                               ;; 1F:7BCA $EA $A3 $D3
-    ld   [wD3CD], a                               ;; 1F:7BCD $EA $CD $D3
+    ld   [wBlockActiveWaveSfx], a                               ;; 1F:7BCD $EA $CD $D3
     ld   [wD3D6], a                               ;; 1F:7BD0 $EA $D6 $D3
     ld   [wD3D7], a                               ;; 1F:7BD3 $EA $D7 $D3
     ld   [wD3D7+1], a                             ;; 1F:7BD6 $EA $D8 $D3

@@ -981,13 +981,13 @@ jr_01E_463C:
     jr   z, jr_01E_467B                           ;; 1E:4641 $28 $38
 
     push de                                       ;; 1E:4643 $D5
-    ld   de, wD3B0                                ;; 1E:4644 $11 $B0 $D3
+    ld   de, wVibratoState                                ;; 1E:4644 $11 $B0 $D3
     call func_01E_493C                            ;; 1E:4647 $CD $3C $49
     xor  a                                        ;; 1E:464A $AF
     ld   [de], a                                  ;; 1E:464B $12
     inc  e                                        ;; 1E:464C $1C
     ld   [de], a                                  ;; 1E:464D $12
-    ld   de, wD3B6                                ;; 1E:464E $11 $B6 $D3
+    ld   de, wOpcode97State                                ;; 1E:464E $11 $B6 $D3
     call func_01E_493C                            ;; 1E:4651 $CD $3C $49
     inc  e                                        ;; 1E:4654 $1C
     xor  a                                        ;; 1E:4655 $AF
@@ -996,7 +996,7 @@ jr_01E_463C:
     cp   $03                                      ;; 1E:465A $FE $03
     jr   nz, jr_01E_467A                          ;; 1E:465C $20 $1C
 
-    ld   de, wD39E                                ;; 1E:465E $11 $9E $D3
+    ld   de, wOpcode99Status                                ;; 1E:465E $11 $9E $D3
     ld   a, [de]                                  ;; 1E:4661 $1A
     and  a                                        ;; 1E:4662 $A7
     jr   z, .jr_466C                              ;; 1E:4663 $28 $07
@@ -1004,10 +1004,10 @@ jr_01E_463C:
     ld   a, $01                                   ;; 1E:4665 $3E $01
     ld   [de], a                                  ;; 1E:4667 $12
     xor  a                                        ;; 1E:4668 $AF
-    ld   [wD39F], a                               ;; 1E:4669 $EA $9F $D3
+    ld   [wOpcode99Counter], a                               ;; 1E:4669 $EA $9F $D3
 
 .jr_466C
-    ld   de, wActiveMusicTableIndex               ;; 1E:466C $11 $D9 $D3
+    ld   de, wOpcode94Status               ;; 1E:466C $11 $D9 $D3
     ld   a, [de]                                  ;; 1E:466F $1A
     and  a                                        ;; 1E:4670 $A7
     jr   z, jr_01E_467A                           ;; 1E:4671 $28 $07
@@ -1015,7 +1015,7 @@ jr_01E_463C:
     ld   a, $01                                   ;; 1E:4673 $3E $01
     ld   [de], a                                  ;; 1E:4675 $12
     xor  a                                        ;; 1E:4676 $AF
-    ld   [wD3DA], a                               ;; 1E:4677 $EA $DA $D3
+    ld   [wOpcode94Counter], a                               ;; 1E:4677 $EA $DA $D3
 
 jr_01E_467A:
     pop  de                                       ;; 1E:467A $D1
@@ -1257,7 +1257,7 @@ jr_01E_4794:
     cp   $04                                      ;; 1E:4797 $FE $04
     jp   z, label_01E_4770                        ;; 1E:4799 $CA $70 $47
 
-    ld   de, wD3B6                                ;; 1E:479C $11 $B6 $D3
+    ld   de, wOpcode97State                                ;; 1E:479C $11 $B6 $D3
     call func_01E_493C                            ;; 1E:479F $CD $3C $49
     ld   a, [de]                                  ;; 1E:47A2 $1A
     and  a                                        ;; 1E:47A3 $A7
@@ -1280,11 +1280,11 @@ label_01E_47BD:
     cp   $03                                      ;; 1E:47C0 $FE $03
     jp   nz, label_01E_4770                       ;; 1E:47C2 $C2 $70 $47
 
-    ld   a, [wD39E]                               ;; 1E:47C5 $FA $9E $D3
+    ld   a, [wOpcode99Status]                               ;; 1E:47C5 $FA $9E $D3
     and  a                                        ;; 1E:47C8 $A7
     jp   nz, label_01E_4882                       ;; 1E:47C9 $C2 $82 $48
 
-    ld   a, [wActiveMusicTableIndex]              ;; 1E:47CC $FA $D9 $D3
+    ld   a, [wOpcode94Status]              ;; 1E:47CC $FA $D9 $D3
     and  a                                        ;; 1E:47CF $A7
     jp   nz, label_01E_48C3                       ;; 1E:47D0 $C2 $C3 $48
 
@@ -1389,7 +1389,7 @@ label_01E_4860:
     ld   a, $01                                   ;; 1E:4860 $3E $01
 
 jr_01E_4862:
-    ld   [wD3CD], a                               ;; 1E:4862 $EA $CD $D3
+    ld   [wBlockActiveWaveSfx], a                               ;; 1E:4862 $EA $CD $D3
     call func_01E_4487                            ;; 1E:4865 $CD $87 $44
     jp   label_01E_45A5                           ;; 1E:4868 $C3 $A5 $45
 
@@ -1401,21 +1401,21 @@ label_01E_486E:
     ld   a, $01                                   ;; 1E:486E $3E $01
 
 jr_01E_4870:
-    ld   [wD39E], a                               ;; 1E:4870 $EA $9E $D3
+    ld   [wOpcode99Status], a                               ;; 1E:4870 $EA $9E $D3
     call func_01E_4487                            ;; 1E:4873 $CD $87 $44
     jp   label_01E_45A5                           ;; 1E:4876 $C3 $A5 $45
 
 label_01E_4879:
     xor  a                                        ;; 1E:4879 $AF
-    ld   [wActiveMusicTableIndex], a              ;; 1E:487A $EA $D9 $D3
-    ld   [wD3DA], a                               ;; 1E:487D $EA $DA $D3
+    ld   [wOpcode94Status], a              ;; 1E:487A $EA $D9 $D3
+    ld   [wOpcode94Counter], a                               ;; 1E:487D $EA $DA $D3
     jr   jr_01E_4870                              ;; 1E:4880 $18 $EE
 
 label_01E_4882:
     cp   $02                                      ;; 1E:4882 $FE $02
     jp   z, label_01E_4770                        ;; 1E:4884 $CA $70 $47
 
-    ld   bc, wD39F                                ;; 1E:4887 $01 $9F $D3
+    ld   bc, wOpcode99Counter                                ;; 1E:4887 $01 $9F $D3
     call func_01E_48B4                            ;; 1E:488A $CD $B4 $48
     ld   c, $1C                                   ;; 1E:488D $0E $1C
     ld   b, $40                                   ;; 1E:488F $06 $40
@@ -1437,7 +1437,7 @@ label_01E_4882:
     jp   nz, label_01E_4770                       ;; 1E:48A7 $C2 $70 $47
 
     ld   a, $02                                   ;; 1E:48AA $3E $02
-    ld   [wD39E], a                               ;; 1E:48AC $EA $9E $D3
+    ld   [wOpcode99Status], a                               ;; 1E:48AC $EA $9E $D3
 
 label_01E_48AF:
 jr_01E_48AF:
@@ -1453,7 +1453,7 @@ func_01E_48B4::
 
 label_01E_48B8:
     ld   a, $01                                   ;; 1E:48B8 $3E $01
-    ld   [wActiveMusicTableIndex], a              ;; 1E:48BA $EA $D9 $D3
+    ld   [wOpcode94Status], a              ;; 1E:48BA $EA $D9 $D3
     call func_01E_4487                            ;; 1E:48BD $CD $87 $44
     jp   label_01E_45A5                           ;; 1E:48C0 $C3 $A5 $45
 
@@ -1461,7 +1461,7 @@ label_01E_48C3:
     cp   $02                                      ;; 1E:48C3 $FE $02
     jp   z, label_01E_4770                        ;; 1E:48C5 $CA $70 $47
 
-    ld   bc, wD3DA                                ;; 1E:48C8 $01 $DA $D3
+    ld   bc, wOpcode94Counter                                ;; 1E:48C8 $01 $DA $D3
     call func_01E_48B4                            ;; 1E:48CB $CD $B4 $48
     ld   c, $1C                                   ;; 1E:48CE $0E $1C
     ld   b, $60                                   ;; 1E:48D0 $06 $60
@@ -1477,11 +1477,11 @@ label_01E_48C3:
     jp   nz, label_01E_4770                       ;; 1E:48E2 $C2 $70 $47
 
     ld   a, $02                                   ;; 1E:48E5 $3E $02
-    ld   [wActiveMusicTableIndex], a              ;; 1E:48E7 $EA $D9 $D3
+    ld   [wOpcode94Status], a              ;; 1E:48E7 $EA $D9 $D3
     jp   label_01E_48AF                           ;; 1E:48EA $C3 $AF $48
 
 label_01E_48ED:
-    ld   de, wD3B6                                ;; 1E:48ED $11 $B6 $D3
+    ld   de, wOpcode97State                                ;; 1E:48ED $11 $B6 $D3
     call func_01E_493C                            ;; 1E:48F0 $CD $3C $49
     ld   a, $01                                   ;; 1E:48F3 $3E $01
 
@@ -1491,7 +1491,7 @@ jr_01E_48F5:
     jp   label_01E_45A5                           ;; 1E:48F9 $C3 $A5 $45
 
 label_01E_48FC:
-    ld   de, wD3B6                                ;; 1E:48FC $11 $B6 $D3
+    ld   de, wOpcode97State                                ;; 1E:48FC $11 $B6 $D3
     call func_01E_493C                            ;; 1E:48FF $CD $3C $49
     xor  a                                        ;; 1E:4902 $AF
     jr   jr_01E_48F5                              ;; 1E:4903 $18 $F0
@@ -1564,7 +1564,7 @@ func_01E_4945::
 
 label_01E_4952:
     pop  de                                       ;; 1E:4952 $D1
-    ld   de, wD3B0                                ;; 1E:4953 $11 $B0 $D3
+    ld   de, wVibratoState                                ;; 1E:4953 $11 $B0 $D3
     call func_01E_493C                            ;; 1E:4956 $CD $3C $49
     ld   a, [de]                                  ;; 1E:4959 $1A
     inc  a                                        ;; 1E:495A $3C
@@ -1691,16 +1691,16 @@ func_01E_4D2A::
     ld   [wMusicChannel1.loopCounter], a          ;; 1E:4D31 $EA $1F $D3
     ld   [wMusicChannel2.loopCounter], a          ;; 1E:4D34 $EA $2F $D3
     ld   [wMusicChannel3.loopCounter], a          ;; 1E:4D37 $EA $3F $D3
-    ld   [wD39E], a                               ;; 1E:4D3A $EA $9E $D3
-    ld   [wD39F], a                               ;; 1E:4D3D $EA $9F $D3
-    ld   [wActiveMusicTableIndex], a              ;; 1E:4D40 $EA $D9 $D3
-    ld   [wD3DA], a                               ;; 1E:4D43 $EA $DA $D3
-    ld   [wD3B6], a                               ;; 1E:4D46 $EA $B6 $D3
-    ld   [wD3B6+1], a                             ;; 1E:4D49 $EA $B7 $D3
-    ld   [wD3B6+2], a                             ;; 1E:4D4C $EA $B8 $D3
-    ld   [wD3B6+3], a                             ;; 1E:4D4F $EA $B9 $D3
-    ld   [wD3B6+4], a                             ;; 1E:4D52 $EA $BA $D3
-    ld   [wD3B6+5], a                             ;; 1E:4D55 $EA $BB $D3
+    ld   [wOpcode99Status], a                               ;; 1E:4D3A $EA $9E $D3
+    ld   [wOpcode99Counter], a                               ;; 1E:4D3D $EA $9F $D3
+    ld   [wOpcode94Status], a              ;; 1E:4D40 $EA $D9 $D3
+    ld   [wOpcode94Counter], a                               ;; 1E:4D43 $EA $DA $D3
+    ld   [wOpcode97State], a                               ;; 1E:4D46 $EA $B6 $D3
+    ld   [wOpcode97State+1], a                             ;; 1E:4D49 $EA $B7 $D3
+    ld   [wOpcode97State+2], a                             ;; 1E:4D4C $EA $B8 $D3
+    ld   [wOpcode97State+3], a                             ;; 1E:4D4F $EA $B9 $D3
+    ld   [wOpcode97State+4], a                             ;; 1E:4D52 $EA $BA $D3
+    ld   [wOpcode97State+5], a                             ;; 1E:4D55 $EA $BB $D3
     ld   [wD394], a                               ;; 1E:4D58 $EA $94 $D3
     ld   [wD394+1], a                             ;; 1E:4D5B $EA $95 $D3
     ld   [wD396], a                               ;; 1E:4D5E $EA $96 $D3
@@ -1713,7 +1713,7 @@ func_01E_4D2A::
     ld   [wD3A0], a                               ;; 1E:4D73 $EA $A0 $D3
     ld   [wD3A1], a                               ;; 1E:4D76 $EA $A1 $D3
     ld   [wD3A2], a                               ;; 1E:4D79 $EA $A2 $D3
-    ld   [wD3CD], a                               ;; 1E:4D7C $EA $CD $D3
+    ld   [wBlockActiveWaveSfx], a                               ;; 1E:4D7C $EA $CD $D3
     ld   [wD3D6], a                               ;; 1E:4D7F $EA $D6 $D3
     ld   [wD3D7], a                               ;; 1E:4D82 $EA $D7 $D3
     ld   [wD3D7+1], a                             ;; 1E:4D85 $EA $D8 $D3
